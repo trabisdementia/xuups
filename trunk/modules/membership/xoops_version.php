@@ -23,14 +23,14 @@ $modversion['blocks'][1]['file'] 		= "membership_block.php";
 $modversion['blocks'][1]['show_func'] 	= "show_membership_block";
 $modversion['blocks'][1]['name'] 		= _MI_MEMBERSHIP_TITLE;
 $modversion['blocks'][1]['description'] = _MI_MEMBERSHIP_DESC;
-$modversion['blocks'][1]['edit_func'] = "membership_edit";
-$modversion['blocks'][1]['options'] = "1";
-$modversion['blocks'][1]['template'] = 'membership_block.html';
+$modversion['blocks'][1]['edit_func']   = "membership_edit";
+$modversion['blocks'][1]['options']     = "1";
+$modversion['blocks'][1]['template']    = 'membership_block.html';
 
 
 // Menu
 $modversion['hasMain'] = 1;
 $modversion['sub'][1]['name'] = _MI_MEMBERSHIP_SMNAME1;
-$modversion['sub'][1]['url'] = "rank.php";
+$modversion['sub'][1]['url']  = "rank.php";
 
 ?>
