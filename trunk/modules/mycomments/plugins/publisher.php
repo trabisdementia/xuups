@@ -14,19 +14,6 @@ function publisher_useritems($uid, $limit=0, $offset=0)
 	return $ret;
 }
 
-function publisher_useritems_num($uid)
-{
-	global $xoopsDB;
-
-	$sql = "SELECT count(*) FROM ".$xoopsDB->prefix("publisher_stories")." WHERE published>0 AND published<=".time()." AND uid=".$uid;
-	$array = $xoopsDB->fetchRow( $xoopsDB->query($sql) );
-	$ret = $array[0];
-	if (empty($ret)) $ret = 0;
-
-	return $ret;
-
-}
-
 function publisher_iteminfo($itemid, $limit=0, $offset=0)
 {
 	global $xoopsDB;

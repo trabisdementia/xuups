@@ -20,7 +20,7 @@ $modversion['hasMain'] = 1;
 //Search
 $modversion['hasSearch'] = 1;
 $modversion['search']['file'] = "include/search.inc.php";
-$modversion['search']['func'] = "comments_search";
+$modversion['search']['func'] = "mycomments_search";
 
 // Templates
 $i=0; $i++;
@@ -42,7 +42,7 @@ $modversion['blocks'][$i]['options'] = "10";
 $modversion['blocks'][$i]['template'] = "mycomments_comments.html";
 
 $i++;
-$modversion['blocks'][$i]['file'] = "comments_blocks.php";
+$modversion['blocks'][$i]['file'] = "mycomments_blocks.php";
 $modversion['blocks'][$i]['name'] = _MI_MYCOM_BNAME2;
 $modversion['blocks'][$i]['description'] = "";
 $modversion['blocks'][$i]['show_func'] = "b_mycomments2_show";
@@ -52,9 +52,10 @@ $modversion['blocks'][$i]['template'] = "mycomments_comments.html";
 
 
 //Menu
-$i = 1;
+$i = 0;
 global $xoopsUser;
 if (is_object($xoopsUser)) {
+    $i++;
 	$modversion['sub'][$i]['name'] = _MI_MYCOM_COM_RECIEVED;
 	$modversion['sub'][$i]['url'] = "index.php?view=0";
 
