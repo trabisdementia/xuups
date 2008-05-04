@@ -1,36 +1,14 @@
 <?php
-// $Id: xoops_version.php,v 1.13 2003/04/01 22:51:21 mvandam Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+//  Author: SMD & Trabis
+//  URL: http://www.xoopsmalaysia.org  & http://www.xuups.com
+//  E-Mail: webmaster@xoopsmalaysia.org  & lusopoemas@gmail.com
 
 $modversion['name']         = _MI_MEMBERSHIP_NAME;
 $modversion['dirname']      = "membership";
 $modversion['description']  = _MI_MEMBERSHIP_DESC;
-$modversion['version']      = "2.0b";
-$modversion['author']       = "SMD <webmaster@xoopsmalaysia.org><br />http://www.xoopsmalaysia.org";
-$modversion['credits']      = "SMD <webmaster@xoopsmalaysia.org><br />http://www.xoopsmalaysia.org";
+$modversion['version']      = "2.1";
+$modversion['author']       = "SMD <webmaster@xoopsmalaysia.org> http://www.xoopsmalaysia.org & Trabis<lusopoemas@gmail.com> http://www.xuups.com";
+$modversion['credits']      = "SMD <webmaster@xoopsmalaysia.org> http://www.xoopsmalaysia.org & Trabis<lusopoemas@gmail.com> http://www.xuups.com";
 $modversion['license']      = "GNU/GPL";
 $modversion['official']     = "No";
 $modversion['image']        = "images/membership_logo.gif";
