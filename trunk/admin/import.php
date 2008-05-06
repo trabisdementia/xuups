@@ -375,14 +375,14 @@ if (!$error && isset($_REQUEST["start"]) && isset($_REQUEST["foffset"]) && eregi
         $querylines++;
       
 // Stop if query contains more lines as defined by MAX_QUERY_LINES
-
+      /*
       if ($querylines>MAX_QUERY_LINES)
       {
         echo ("<p class=\"error\">Stopped at the line $linenumber. </p>");
         $error=true;
         break;
       }
-
+           */
 // Execute query if end of query detected (; as last character) AND NOT in parents
 
 
@@ -396,7 +396,7 @@ if (!$error && isset($_REQUEST["start"]) && isset($_REQUEST["foffset"]) && eregi
         $totalqueries++;
         $queries++;
         $query="";
-        $querylines=0;
+        //$querylines=0;
 
       }
       //$linenumber++;
