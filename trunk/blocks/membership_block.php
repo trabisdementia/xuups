@@ -138,7 +138,7 @@ function show_membership_block($options) {
 }
 
 function membership_edit($options) {
-	$form = _MB_MSHIP_LIST."&nbsp;";
+	$form = _MB_MSHIP_SHOWLIST."&nbsp;";
 	if ( $options[0] == 1 ) {
 		$chk = " checked='checked'";
 	}

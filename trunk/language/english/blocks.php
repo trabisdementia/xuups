@@ -11,6 +11,6 @@ define("_MB_MSHIP_LIST","Online List");
 define("_MB_MSHIP_POPUP","Popup");
 define("_MB_MSHIP_LATEST","Latest");
 define("_MB_MSHIP_HOME","Home");
-// admin settings
-define("_MB_MSHIP_LIST","Show Online List");
+// block settings
+define("_MB_MSHIP_SHOWLIST","Show Online List");
 ?>

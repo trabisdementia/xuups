@@ -11,6 +11,6 @@ define("_MB_MSHIP_LIST","Lista");
 define("_MB_MSHIP_POPUP","Abrir Janela");
 define("_MB_MSHIP_LATEST","Último");
 define("_MB_MSHIP_HOME","Página principal");
-// admin settings
-define("_MB_MSHIP_LIST","Mostra a lista de pessoas em linha");
+// block settings
+define("_MB_MSHIP_SHOWLIST","Mostra a lista de pessoas em linha");
 ?>

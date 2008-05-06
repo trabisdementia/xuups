@@ -29,8 +29,8 @@ $modversion['tables'][$i] = "mship_ips";
 // Blocks
 $modversion['blocks'][1]['file'] 		= "membership_block.php";
 $modversion['blocks'][1]['show_func'] 	= "show_membership_block";
-$modversion['blocks'][1]['name'] 		= _MI_MSHIP_TITLE;
-$modversion['blocks'][1]['description'] = _MI_MSHIP_DSC;
+$modversion['blocks'][1]['name'] 		= _MI_MSHIP_BLOCK_TITLE;
+$modversion['blocks'][1]['description'] = _MI_MSHIP_BLOCK_DSC;
 $modversion['blocks'][1]['edit_func'] = "membership_edit";
 $modversion['blocks'][1]['options'] = "1";
 $modversion['blocks'][1]['template'] = 'membership_block.html';
