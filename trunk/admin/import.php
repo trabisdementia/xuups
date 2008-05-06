@@ -264,7 +264,7 @@ if (!$error && isset($_REQUEST["start"]))
 // *******************************************************************************************
 // DROP AND CREATE TABLES HERE
 // *******************************************************************************************
-if (!$error && isset($_REQUEST["start"]) && isset($_REQUEST["foffset"]) && !isset($_REQUEST["tables"]) && eregi("(\.(gz|csv))$",$curfilename))
+if (!$error && isset($_REQUEST["start"]) && isset($_REQUEST["foffset"]) && ($_REQUEST["start"]==1) && eregi("(\.(gz|csv))$",$curfilename))
 {
 skin_open();
 //echo "Clearing Database ... <br><br>";
@@ -293,13 +293,13 @@ skin_open();
 		echo "<div class=\"successcentr\"><img src='img/yes.png'>Table '".$xoopsDB->prefix("mship_ips")."' Re-Created !</div>";
 	}
 skin_close();
-$_REQUEST["tables"]=1;
+$_REQUEST["tables"]=true;
 }
 // *******************************************************************************************
 // START IMPORT SESSION HERE
 // *******************************************************************************************
 
-if (!$error && isset($_REQUEST["tables"]) && isset($_REQUEST["start"]) && isset($_REQUEST["foffset"]) && eregi("(\.(gz|csv))$",$curfilename))
+if (!$error && isset($_REQUEST["start"]) && isset($_REQUEST["foffset"]) && eregi("(\.(gz|csv))$",$curfilename))
 {
 
 // Check start and foffset are numeric values
