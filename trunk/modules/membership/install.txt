@@ -1,0 +1,2 @@
+Install like any other module.
+Go to the membership administration page and run the importer IP-TO-COUNTRY script.
