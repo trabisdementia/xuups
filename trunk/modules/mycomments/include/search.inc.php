@@ -29,11 +29,11 @@ function mycomments_search($queryarray, $andor, $limit, $offset, $userid){
 	$i = 0;
  	while($myrow = $xoopsDB->fetchArray($result)){
 
-		$com_id = $myrow[com_id];
-		$com_modid=$myrow[com_modid];
-		$com_pid=$myrow[com_pid];
-		$com_rootid=$myrow[com_rootid];
-		$com_itemid=$myrow[com_itemid];
+		$com_id = $myrow['com_id'];
+		$com_modid=$myrow['com_modid'];
+		$com_pid=$myrow['com_pid'];
+		$com_rootid=$myrow['com_rootid'];
+		$com_itemid=$myrow['com_itemid'];
 
 		$comment_config = array();
 		$comment_config = $modules[$com_modid]->getInfo('comments'); 

@@ -50,13 +50,12 @@ function news_iteminfo($items, $limit=0, $offset=0)
         $ret[$i]['replies'] = $row['comments'];
         // description
         $myts =& MyTextSanitizer::getInstance();
-        $method = method_exists($myts,'displayTarea')?'displayTarea':'makeTareaData4Show';
         $html   = 1;
         $smiley = 1;
         $xcodes = 1;
         if ( $row['nohtml'] )   $html   = 0;
         if ( $row['nosmiley'] ) $smiley = 0;
-        $ret[$i]['description'] = $myts->$method($row['hometext'], $html, $smiley, $xcodes);
+        $ret[$i]['description'] = $myts->displayTarea($row['hometext'], $html, $smiley, $xcodes);
         $i++;
     }
 
