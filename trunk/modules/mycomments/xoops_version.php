@@ -4,7 +4,7 @@
 //  E-Mail: lusopoemas@gmail.com
 
 $modversion['name'] = _MI_MYCOM_NAME;
-$modversion['version'] = "1.00RC";
+$modversion['version'] = "1.00";
 $modversion['description'] = _MI_MYCOM_DSC;
 $modversion['author'] = "www.xuups.com";
 $modversion['credits'] = "Trabis";

@@ -23,7 +23,7 @@ function webshow_useritems($uid, $limit=0, $offset=0){
 	return $ret;
 }
 
-function mydownloads_iteminfo($items, $limit=0, $offset=0){
+function webshow_iteminfo($items, $limit=0, $offset=0){
 
     global $xoopsDB;
 	$ret = array();

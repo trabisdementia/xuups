@@ -80,6 +80,9 @@ foreach( $modules as $moduleid => $module ) {
             $$dirname = new CriteriaCompo(new Criteria('com_modid', $moduleid));
             $$dirname->add(new Criteria('com_itemid', $items, 'IN'), 'AND');
             $criteria->add($$dirname,'OR');
+        } else {
+            //ugly fix, sorry
+            $criteria->add(new CriteriaCompo(new Criteria('1', 2)),'OR');
         }
         unset($items);
     //for comments sent
@@ -90,6 +93,9 @@ foreach( $modules as $moduleid => $module ) {
             $dirname = $module->getVar('dirname');
             $$dirname = new Criteria('com_modid', $moduleid);
             $criteria2->add($$dirname,'OR');
+        } else {
+            //ugly fix, sorry
+            $criteria2->add(new CriteriaCompo(new Criteria('1', 2)),'OR');
         }
         unset($items);
     }
