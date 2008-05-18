@@ -17,4 +17,12 @@ define("_MA_MSHIP_FUNCTIONS","Funções");
 define("_MA_MSHIP_EDIT","Editar");
 define("_MA_MSHIP_DELETE","Eliminar");
 define("_MA_MSHIP_NOUSERFOUND","Não foi encontrado nenhum membro");
+
+//rank.php
+define("_MA_MSHIP_MRANK","Posição dos membros");
+define("_MA_MSHIP_RANK","Posição");
+define("_MA_MSHIP_SRANK","Posição especial");
+define("_MA_MSHIP_MINPOST","Mínimo de envios");
+define("_MA_MSHIP_MAXPOST","Máximo de envios");
+define("_MA_MSHIP_IMAGE","Imagem");
 ?>

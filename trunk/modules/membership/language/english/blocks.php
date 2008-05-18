@@ -13,4 +13,5 @@ define("_MB_MSHIP_LATEST","Latest");
 define("_MB_MSHIP_HOME","Home");
 // block settings
 define("_MB_MSHIP_SHOWLIST","Show Online List");
+define("_MB_MSHIP_BOTS","Bots");
 ?>

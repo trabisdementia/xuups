@@ -13,4 +13,5 @@ define("_MB_MSHIP_LATEST","Último");
 define("_MB_MSHIP_HOME","Página principal");
 // block settings
 define("_MB_MSHIP_SHOWLIST","Mostra a lista de pessoas em linha");
+define("_MB_MSHIP_BOTS","Bots");
 ?>

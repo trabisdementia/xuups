@@ -1,42 +1,32 @@
 <?php
-//  Author: SMD & Trabis
-//  URL: http://www.xoopsmalaysia.org  & http://www.xuups.com
-//  E-Mail: webmaster@xoopsmalaysia.org  & lusopoemas@gmail.com
+//  Author: Trabis
+//  URL: http://www.xuups.com
+//  E-Mail: lusopoemas@gmail.com
 
 include "../../mainfile.php";
-include "../../header.php";
+$xoopsOption['template_main'] = 'membership_rank.html';
+include XOOPS_ROOT_PATH . '/header.php';
 
 $db =& Database::getInstance();
-echo "<br><h4 style='text-align:center;'>Member Rank</h4><br><br>
-	  <table width='100%' class='head' cellpadding='4' cellspacing='1'>
-	  <tr align='center'>
-	  <td><font color=#666666>Rank</font></td>
-	  <td><font color=#666666>Minimum Post</td>
-	  <td><font color=#666666>Maximum Post</font></td>
-	  <td><font color=#666666>Image</font></td></tr>";
 
-$result = $db->query("SELECT * FROM ".$db->prefix("ranks")." where rank_special=0 ORDER BY rank_id");
-$count = 0;
+$result = $db->query("SELECT * FROM ".$db->prefix("ranks")." ORDER BY rank_id");
+$ranks = array();
+$sranks = array();
+
 while ( $rank = $db->fetchArray($result) ) {
-    if ($count % 2 == 0) {
-        $class = 'odd';
+    $i = $rank['rank_id'];
+    if ($rank['rank_special']==0){
+        $ranks[$i]['title'] = $rank['rank_title'];
+        $ranks[$i]['min'] = $rank['rank_min'];
+        $ranks[$i]['max'] = $rank['rank_max'];
+        $ranks[$i]['image'] = ($rank['rank_image'] > '')?'<img src="'.XOOPS_URL.'/uploads/'.$rank['rank_image'].'" alt="" />':'&nbsp;';
     } else {
-        $class = 'even';
+        $sranks[$i]['title'] = $rank['rank_title'];
+        $sranks[$i]['image'] = ($rank['rank_image'] > '')?'<img src="'.XOOPS_URL.'/uploads/'.$rank['rank_image'].'" alt="" />':'&nbsp;';
     }
-    echo "<tr class='$class' align='center'>
-          <td>".$rank['rank_title']."</td>
-          <td>".$rank['rank_min']."</td>
-          <td>".$rank['rank_max']."</td>
-          <td>";
-    if ( $rank['rank_image'] ) {
-        echo '<img src="'.XOOPS_URL.'/uploads/'.$rank['rank_image'].'" alt="" /></td>';
-    } else {
-        echo '&nbsp;';
-    }
-    echo"</tr>";
-    $count++;
 }
-echo '</table><br /><br />';
+$xoopsTpl->assign('ranks', $ranks);
+$xoopsTpl->assign('sranks', $sranks);
 
 include_once XOOPS_ROOT_PATH."/footer.php";
 ?>

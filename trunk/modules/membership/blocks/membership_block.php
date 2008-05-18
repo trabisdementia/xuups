@@ -37,10 +37,12 @@ function show_membership_block($options) {
 		$block = array();
 		$guests = 0;
 		$guess = '';
-		$bil = 1;
 		$members = '';
-		$rows = $list = array();
-		$alt = array();
+		$rows = $list = $alt = array();
+		//added bots by Rew-weR
+		$bots = 0;
+		$findbot  = 'crawl';
+		$findsearch = 'search';
 
         // lets get the listing
 		if ($options[0] == 1 ) {
@@ -57,7 +59,6 @@ function show_membership_block($options) {
             while ($row = $xoopsDB->fetchArray($result)){
                 $rows[] = $row;
             }
-            
 
             for ($i = 0; $i < $total; $i++) {
                 $onlineUsers[$i]['ip'] = $onlines[$i]['online_ip'];
@@ -80,13 +81,43 @@ function show_membership_block($options) {
                 $add4 = ($numbers[3]);
                 $censored = "$add1.$add2.$add3.***";
 
+                //if is a user
                 if ($onlines[$i]['online_uid'] > 0) {
                     $members .= '<table class="outer" cellspacing="0"><tr><td class="even" width="40%"><a href="'.XOOPS_URL.'/userinfo.php?uid='.$onlines[$i]['online_uid'].'">'.$onlines[$i]['online_uname'].'</td><td class="odd" align="center">'.$onlineUsers[$i]['module'].'</td><td class="even" align="center" width="10%"><img src="'.XOOPS_URL.'/modules/membership/images/flags/'.$country.'.gif" alt="'.$alt.'" title="'.$alt.'"></td></tr></table>';
-                    $bil++;
+                //if is not a user
                 } else {
-                    $guess .= '<table class="outer" cellspacing="0"><tr><td class="even" colspan="2">'.$censored.'</td><td class="odd" align="center">'.$onlineUsers[$i]['module'].'</td><td width="10%" align="center" class="odd"><img src="'.XOOPS_URL.'/modules/membership/images/flags/'.$country.'.gif" alt="'.$alt.'" title="'.$alt.'"></td></tr></table>';
+                    $hostname = strtolower(gethostbyaddr($onlines[$i]['online_ip']));
+                    $pos1 = strpos($hostname, $findbot);
+                    $pos2 = strpos($hostname, $findsearch);
+
+                    //if is bot
+                    if ($pos1 !== false || $pos2 !== false) {
+                        $alt = $hostname;
+                        $guess .= '<table class="outer" cellspacing="0"><tr><td class="even" colspan="2">'.$censored.'</td><td class="odd" align="center">'.$onlineUsers[$i]['module'].'</td><td width="10%" align="center" class="odd"><img src="'.XOOPS_URL.'/modules/membership/images/bots.gif" alt="'.$alt.'" title="'.$alt.'"></td></tr></table>';
+                        $bots++;
+                    } else {
+                        $guess .= '<table class="outer" cellspacing="0"><tr><td class="even" colspan="2">'.$censored.'</td><td class="odd" align="center">'.$onlineUsers[$i]['module'].'</td><td width="10%" align="center" class="odd"><img src="'.XOOPS_URL.'/modules/membership/images/flags/'.$country.'.gif" alt="'.$alt.'" title="'.$alt.'"></td></tr></table>';
+                    }
                     $guests++;
                 }
+            }
+        } else {
+            //no listing, lets get gots anyway
+            for ($i = 0; $i < $total; $i++) {
+                //if is not a user
+                //added bots by Rew-weR
+                if (!$onlines[$i]['online_uid'] > 0) {
+                    $hostname = strtolower(gethostbyaddr($onlines[$i]['online_ip']));
+                    $pos1 = strpos($hostname, $findbot);
+                    $pos2 = strpos($hostname, $findsearch);
+
+                    //if is bot
+                    if ($pos1 !== false || $pos2 !== false) {
+                         $bots++;
+                    }
+                    $guests++;
+                }
+
             }
         }
         $block['online_total'] = sprintf(_ONLINEPHRASE, $total);
@@ -97,11 +128,15 @@ function show_membership_block($options) {
         // statistik keahlian
         $member_handler =& xoops_gethandler('member');
         $hari_ini = formatTimestamp(time());
-        $total_active_users = $member_handler->getUserCount(new Criteria('level', 0, '>'));
-        $users_reg_today = $member_handler->getUserCount(new Criteria('user_regdate', mktime(0,0,0), '>='));
-        $users_reg2_today = $member_handler->getUserCount(new Criteria('user_regdate', (mktime(0,0,0)-(24*3600)), '>='));
-        $criteria = new CriteriaCompo(new Criteria('level', 0, '>'));
-        $limit = (!empty($options[0])) ? $options[0] : 10;
+        $level_criteria = new Criteria('level', 0, '>');
+        $criteria = new CriteriaCompo($level_criteria);
+        $criteria24 = new CriteriaCompo($level_criteria);
+        $criteria48 = new CriteriaCompo($level_criteria);
+        $total_active_users = $member_handler->getUserCount($level_criteria);
+        //Fixing stats for last 24 and 48 hours
+        $users_reg_24 = $member_handler->getUserCount($criteria24->add(new Criteria('user_regdate', (mktime(0,0,0)-(24*3600)), '>=')),'AND');
+        $users_reg_48 = $member_handler->getUserCount($criteria48->add(new Criteria('user_regdate', (mktime(0,0,0)-(48*3600)), '>=')),'AND');
+        $limit = 1;
         $criteria->setOrder('DESC');
         $criteria->setSort('user_regdate');
         $criteria->setLimit($limit);
@@ -110,12 +145,15 @@ function show_membership_block($options) {
         $lastid = $lastmembers[0]->getVar('uid');
         // penerimaan data
         $block['activeusers'] = $total_active_users;
-        $block['todayreg'] = $users_reg_today;
-        $block['yesterdayreg'] = $users_reg2_today - $users_reg_today;
+        $block['todayreg'] = $users_reg_24;
+        $block['yesterdayreg'] = $users_reg_48 - $users_reg_24;
         $block['online_names'] = $members;
         $block['online_guest'] = $guess;
         $block['online_members'] = $total - $guests;
-        $block['online_guests'] = $guests;
+        //added bots by Rew-weR
+        $block['online_guests'] = $guests - $bots;
+		$block['online_bots'] = $bots;
+
         $block['total_online'] = $total;
         $block['latest'] = $lastname;
         $block['latest_id'] = $lastid;
@@ -131,6 +169,8 @@ function show_membership_block($options) {
         $block['list_lang'] = _MB_MSHIP_LIST;
         $block['popup_lang'] = _MB_MSHIP_POPUP;
         $block['latest_lang'] = _MB_MSHIP_LATEST;
+        //added bots by Rew-weR
+        $block['bots_lang'] = _MB_MSHIP_BOTS;
         return $block;
 	} else {
 		return false;
