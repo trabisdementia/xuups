@@ -1,0 +1,46 @@
+<b><u>=> Version 2.0 Alpha3 (2008-06-05)</u></b> 
+- Removed : Old css files (by Mowaffak)
+- Added : New css files (by Mowaffak)
+
+<b><u>=> Version 2.0 Alpha2 (2008-06-04)</u></b> 
+- Fixed : Blocks not showing (The stupid bug wins again)
+- Fixed : division by zero if no blocks were set for a tab.
+
+<b><u>=> Version 2.0 Alpha (2008-06-03)</u></b> 
+- Added : Custom blocks to block selection
+- Added : Sides left, center and right for block placement inside tabs
+- Improved : Admin buttons displaying in Blocksadmin
+
+<b><u>=> Version 1.0 Final (2008-05-31)</u></b> 
+- Fixed : Blocks with multi selection options not working (by Mowaffak)
+- Fixed : Blank page when editing or creating tabs if debug mode is off (header() problem)
+- Fixed : removed tabcontent.css re-added in RC4 by mistake
+- Fixed : Admin buttons were not correctly fixing
+- Fixed : Fixes on some .css (by Mowaffak) 
+- Improved : Admin buttons displaying in Blocksadmin
+
+<b><u>=> Version 1.0 RC4 (2008-05-30)</u></b>
+- Fixed : Cloned blocks conflict if using diferent pages (this time for real!)
+- Fixed : .css inclusion for older versions of xoops
+
+<b><u>=> Version 1.0 RC3 (2008-05-29)</u></b>
+- Fixed : removed tabcontent.css
+- Fixed : bugs created in RC2 (blocks not showing, blank page on tab creation)
+- Added : Two options in block to hide page title and block titles
+
+<b><u>=> Version 1.0 RC2 (2008-05-27)</u></b>
+- Fixed : tabs order in blocks was not correct
+- Fixed : Cloned blocks conflict if using diferent pages
+- Altered : Default value for delay is 2000
+
+<b><u>=> Version 1.0 RC (2008-05-26)</u></b>
+- Added : Php 4 compatible
+- Added : Blocks and permissions administration (by Mowaffak)
+- Added : New css files
+
+<b><u>=> Version 1.0 Beta (2008-05-24)</u></b>
+- Improved : Administration area
+- Removed: Smartobject dependencie
+
+<b><u>=> Version 1.0 Alpha (2008-05-20)</u></b>
+- First public release of the module.
