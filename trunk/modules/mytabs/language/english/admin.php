@@ -4,17 +4,16 @@ define("_AM_MYTABS_CLOSE_ALL", "Close all");
 
 define("_AM_MYTABS_MODULES", "Modules");
 
-define("_AM_MYTABS_HOME", "Front Page");
+define("_AM_MYTABS_HOME", "Home");
 define("_AM_MYTABS_ACTION_SETPRIORITIES", "Set priorities");
-define("_AM_MYTABS_DELETE", "Delete Mytabs");
+define("_AM_MYTABS_ACTION_DELETE", "Delete selected items");
 define("_AM_MYTABS_CANCEL", "Cancel");
 define("_AM_MYTABS_COLOR_LEGEND", "Legend");
-define("_AM_MYTABS_COLOR_LEGEND_THISPAGE", "This page only");
-define("_AM_MYTABS_COLOR_LEGEND_THISPAGE_FALLDOWN", "This page and falls down on subpages");
-define("_AM_MYTABS_COLOR_LEGEND_FALLENDOWN", "Fallen down from parent");
-define("_AM_MYTABS_COLOR_LEGEND_NOT_VISIBLE", "Not visible");
+define("_AM_MYTABS_COLOR_LEGEND_VISIBLE", "Visible");
+define("_AM_MYTABS_COLOR_LEGEND_TIME_BASED", "Time based");
+define("_AM_MYTABS_COLOR_LEGEND_NOT_VISIBLE", "Not visible or expired");
 define("_AM_MYTABS_CREATE_BLOCK", "Create a new block");
-define("_AM_MYTABS_CONFIRM_DELETE", "Do you really want to delete this block?");
+define("_AM_MYTABS_CONFIRM_DELETE", "Do you really want to delete this items?");
 define("_AM_MYTABS_GO", "Go");
 
 define("_AM_MYTABS_LEFT", "Left");
@@ -49,4 +48,14 @@ define("_AM_MYTABS_GOTO_PAGE", "Go to page");
 
 define("_AM_MYTABS_RUSUREDEL", "Are you sure you want to delete %s ?");
 define("_AM_MYTABS_DELETEDSUCCESS", "Successfuly deleted!");
+define("_AM_MYTABS_SUCCESS", "Done!");
+
+define("_AM_MYTABS_MODULEADMIN", "module administration");
+define("_AM_MYTABS_GENERALSET", "General Settings");
+define("_AM_MYTABS_PREVIEW", "Preview your tabs");
+
+define("_AM_MYTABS_BLOCKSANDGROUPS","Blocks and groups");
+
+//added on version 2.0 alpha 03-06-2008
+define("_AM_MYTABS_BLOCK_PLACEMENT", "Side");
 ?>

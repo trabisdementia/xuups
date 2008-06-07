@@ -1,4 +1,7 @@
 <?php
+//  Author: Trabis
+//  URL: http://www.xuups.com
+//  E-Mail: lusopoemas@gmail.com
 
 if (!defined('XOOPS_ROOT_PATH')) {
 	exit();
@@ -15,8 +18,21 @@ class MytabsTab extends XoopsObject
         $this->initVar("tabid", XOBJ_DTYPE_INT);
         $this->initVar("tabpageid", XOBJ_DTYPE_INT);
         $this->initVar('tabtitle', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar("taborder", XOBJ_DTYPE_INT,0);
-        $this->initVar('tabgroups', XOBJ_DTYPE_ARRAY, array(XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS));
+        $this->initVar("tabpriority", XOBJ_DTYPE_INT,0);
+        $this->initVar('tabshowalways', XOBJ_DTYPE_TXTBOX, 'yes');
+        $this->initVar('tabfromdate', XOBJ_DTYPE_INT);
+        $this->initVar('tabtodate', XOBJ_DTYPE_INT);
+        $this->initVar('tabnote', XOBJ_DTYPE_TXTAREA, '');
+        $this->initVar('tabgroups', XOBJ_DTYPE_ARRAY, serialize(array(XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS)));
+    }
+
+    /**
+     * Return whether this block is visible now
+     *
+     * @return bool
+     */
+    function isVisible() {
+        return ($this->getVar('tabshowalways') == "yes" || ($this->getVar('tabshowalways') == "time" && $this->getVar('tabfromdate') <= time() && $this->getVar('tabtodate') >= time()));
     }
 
      /**
@@ -26,7 +42,7 @@ class MytabsTab extends XoopsObject
      */
     function getForm() {
         include_once(XOOPS_ROOT_PATH."/modules/mytabs/class/tabform.php");
-        $form = new MytabsTabForm('tabtitle', 'tabform', 'tab.php');
+        $form = new MytabsTabForm('Tab', 'tabform', 'tab.php');
         $form->createElements($this);
         return $form;
     }
@@ -78,9 +94,9 @@ class MytabsTabHandler extends XoopsObjectHandler
         }
         if ($tab->isNew()) {
             $tabid = $this->db->genId('mytabs_tab_tabid_seq');
-			$sql = sprintf("INSERT INTO %s (tabid, tabpageid, tabtitle, taborder, tabgroups) VALUES (%u, %u, %s, %u, %s)", $this->db->prefix('mytabs_tab'), $tabid, $tabpageid, $this->db->quoteString($tabtitle), $taborder, $this->db->quoteString($tabgroups));
+			$sql = sprintf("INSERT INTO %s (tabid, tabpageid, tabtitle, tabpriority, tabshowalways, tabfromdate, tabtodate, tabnote, tabgroups) VALUES (%u, %u, %s, %u, %s, %u, %u, %s, %s)", $this->db->prefix('mytabs_tab'), $tabid, $tabpageid, $this->db->quoteString($tabtitle), $tabpriority, $this->db->quoteString($tabshowalways), $tabfromdate, $tabtodate, $this->db->quoteString($tabnote), $this->db->quoteString($tabgroups));
 		} else {
-            $sql = sprintf("UPDATE %s SET tabpageid =%u, tabtitle = %s, taborder=%u, tabgroups = %s  WHERE tabid = %u", $this->db->prefix('mytabs_tab'), $tabpageid, $this->db->quoteString($tabtitle), $taborder, $this->db->quoteString($tabgroups), $tabid);
+            $sql = sprintf("UPDATE %s SET tabpageid = %u, tabtitle = %s, tabpriority = %u, tabshowalways = %s , tabfromdate = %u, tabtodate = %u, tabnote = %s , tabgroups = %s  WHERE tabid = %u", $this->db->prefix('mytabs_tab'), $tabpageid, $this->db->quoteString($tabtitle), $tabpriority, $this->db->quoteString($tabshowalways), $tabfromdate, $tabtodate, $this->db->quoteString($tabnote), $this->db->quoteString($tabgroups), $tabid);
         }
         if (!$result = $this->db->query($sql)) {
             return false;

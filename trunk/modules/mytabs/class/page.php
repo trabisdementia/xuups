@@ -1,4 +1,7 @@
 <?php
+//  Author: Trabis
+//  URL: http://www.xuups.com
+//  E-Mail: lusopoemas@gmail.com
 
 if (!defined('XOOPS_ROOT_PATH')) {
 	exit();
@@ -22,7 +25,7 @@ class MytabsPage extends XoopsObject
      */
     function getForm() {
         include_once(XOOPS_ROOT_PATH."/modules/mytabs/class/pageform.php");
-        $form = new MytabsPageForm('page', 'pageform', 'page.php');
+        $form = new MytabsPageForm('Page', 'pageform', 'page.php');
         $form->createElements($this);
         return $form;
     }

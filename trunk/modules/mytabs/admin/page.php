@@ -1,34 +1,32 @@
 <?php
+//  Author: Trabis
+//  URL: http://www.xuups.com
+//  E-Mail: lusopoemas@gmail.com
+
 require("header.php");
 
-$op = isset($_REQUEST['op']) ? $_REQUEST['op'] : "";
+if (isset($_REQUEST['op'])){
+    $op = $_REQUEST['op'];
+} else {
+    redirect_header('index.php', 1, _NOPERM);
+    exit;
+}
+
 $page_handler = xoops_getmodulehandler('page');
 
 switch ($op) {
     case "save":
-        $page = $page_handler->get($_POST['pageid']);
 
-        if (!$page) {
+        if (!isset($_POST['pageid'])){
             $page = $page_handler->create();
-        } else {
-            $page->setVar('pageid', $_POST['pageid']);
+        } elseif (! $page = $page_handler->get($_POST['pageid'])){
+            $page = $page_handler->create();
         }
+
         $page->setVar('pagetitle', $_POST['pagetitle']);
-        //$page->setVar('pageoptions', implode('|', $_REQUEST['pageoptions']));
-
-        //$page->setVar('pageid', $_POST['pageid']);
-        //$page->setVar('pageorder', $_POST['pageorder']);
-        //$page->setVar('showalways', $_POST['alwayson']);
-        //$page->setVar('fromdate', strtotime($_POST['fromdate']['date'])+$_POST['fromdate']['time']);
-        //$page->setVar('todate', strtotime($_POST['todate']['date'])+$_POST['todate']['time']);
-
-        //$page->setVar('pbcachetime', $_POST['pbcachetime']);
-        //$page->setVar('cachebyurl', $_POST['cachebyurl']);
-        //$page->setVar('note', $_POST['note']);
-        //$page->setVar('pagegroups', $_POST['pagegroups']);
 
         if ($page_handler->insert($page)) {
-            header("Location: ".XOOPS_URL."/modules/mytabs/admin/index.php?pageid=".$page->getVar('pageid'));
+            redirect_header('index.php?pageid='.$page->getVar('pageid'), 1, _AM_MYTABS_SUCCESS);
             exit;
         }
         break;
@@ -37,6 +35,7 @@ switch ($op) {
     case "edit":
 
         xoops_cp_header();
+        mytabs_adminmenu(0);
 
         if ($op == "new") {
             $page = $page_handler->create();
@@ -60,6 +59,16 @@ switch ($op) {
         $obj =& $page_handler->get($_REQUEST['pageid']);
         if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
             if ($page_handler->delete($obj)) {
+                $tab_handler = xoops_getmodulehandler('tab');
+                $tabs = $tab_handler->getObjects(new Criteria('tabpageid', $_REQUEST['pageid']));
+                foreach ($tabs as $tab){
+                    $tab_handler->delete($tab);
+                }
+                $pageblock_handler = xoops_getmodulehandler('pageblock');
+                $blocks = $pageblock_handler->getObjects(new Criteria('pageid', $_REQUEST['pageid']));
+                foreach ($blocks as $block){
+                    $pageblock_handler->delete($block);
+                }
                 redirect_header('index.php', 3, sprintf(_AM_MYTABS_DELETEDSUCCESS, $obj->getVar('pagetitle')));
             }
             else {

@@ -1,5 +1,6 @@
 <?php
 // $Id: blockform.php,v 1.1 2006/12/07 19:55:27 malanciault Exp $
+// modified by trabis in 25/05/2008
 ###############################################################################
 ##                    XOOPS - PHP Content Management System                  ##
 ##                       Copyright (c) 2000 XOOPS.org                        ##
@@ -27,7 +28,7 @@
 include_once(XOOPS_ROOT_PATH."/class/xoopsformloader.php");
 class MytabsBlockForm extends XoopsThemeForm {
     function createElements($target) {
-        //        $plugin->doConfig($form);
+    
         if ($target->isNew() ) {
             $this->addElement(new XoopsFormText(_AM_MYTABS_TITLE, 'title', 35, 255, $target->block->getVar('title', 'e')));
         } else {
@@ -47,18 +48,21 @@ class MytabsBlockForm extends XoopsThemeForm {
         $always_select->addOption("yes",_AM_MYTABS_ALWAYS);
         $always_select->addOption("time",_AM_MYTABS_TIMEBASED);
         $always_select->addOption("no",_AM_MYTABS_OFF);
-
         $this->addElement($always_select);
 
         $placement = new XoopsFormSelect(_AM_MYTABS_PLACEMENT.":","tabid",$target->getVar('tabid', 'e'));
-
         $tab_handler = xoops_getmodulehandler('tab');
         $tabs = $tab_handler->getObjects(new Criteria('tabpageid', $target->getVar('pageid')));
         foreach ($tabs as $tab){
             $placement->addOption($tab->getVar('tabid'),$tab->getVar('tabtitle'));
         }
-
         $this->addElement($placement);
+        
+        $block_placement = new XoopsFormSelect(_AM_MYTABS_BLOCK_PLACEMENT.":","placement",$target->getVar('placement', 'e'));
+        $block_placement->addOption("left",_AM_MYTABS_LEFT);
+        $block_placement->addOption("center",_AM_MYTABS_CENTER);
+        $block_placement->addOption("right",_AM_MYTABS_RIGHT);
+        $this->addElement($block_placement);
 
         $this->addElement(new XoopsFormText(_AM_MYTABS_PRIORITY.":","priority",4,5,$target->getVar('priority', 'e')));
         
@@ -83,18 +87,19 @@ class MytabsBlockForm extends XoopsThemeForm {
         
         $this->addElement(new XoopsFormSelectGroup(_AM_MYTABS_GROUPS, 'groups', true, $target->getVar('groups'), 8, true));
 
-        if ($target->isNew() ) {
-            $this->addElement(new XoopsFormHidden("blockid", $target->block->getVar('bid')));
+        if (!$target->isNew() ) {
+            $this->addElement(new XoopsFormHidden("pageblockid", $target->getVar('pageblockid')));
         }
+        
+        $this->addElement(new XoopsFormHidden("blockid", $target->getVar('blockid')));
         $this->addElement(new XoopsFormHidden("pageid", $target->getVar('pageid')));
-        $this->addElement(new XoopsFormHidden("pageblockid", $target->getVar('pageblockid')));
         $this->addElement(new XoopsFormHidden("op", "save"));
 
         $tray=&new XoopsFormElementTray("");
         $tray->addElement(new XoopsFormButton("", "submit", _AM_MYTABS_OK, "submit"));
 
         $cancel=&new XoopsFormButton("","cancel", _AM_MYTABS_CANCEL, "button");
-        $cancel->setExtra("onclick=\"self.location='page.php?pageid=".$target->getVar('pageid')."';\"");
+        $cancel->setExtra("onclick=\"self.location='index.php?pageid=".$target->getVar('pageid')."';\"");
         $tray->addElement($cancel);
 
         $this->addElement($tray);

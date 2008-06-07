@@ -1,42 +1,27 @@
 <?php
-// $Id: pageblock.php,v 1.1 2006/12/07 19:55:27 malanciault Exp $
-###############################################################################
-##                    XOOPS - PHP Content Management System                  ##
-##                       Copyright (c) 2000 XOOPS.org                        ##
-##                          <http://www.xoops.org/>                          ##
-###############################################################################
-##  This program is free software; you can redistribute it and/or modify     ##
-##  it under the terms of the GNU General Public License as published by     ##
-##  the Free Software Foundation; either version 2 of the License, or        ##
-##  (at your option) any later version.                                      ##
-##                                                                           ##
-##  You may not change or alter any portion of this comment or credits       ##
-##  of supporting developers from this source code or any supporting         ##
-##  source code which is considered copyrighted (c) material of the          ##
-##  original comment or credit authors.                                      ##
-##                                                                           ##
-##  This program is distributed in the hope that it will be useful,          ##
-##  but WITHOUT ANY WARRANTY; without even the implied warranty of           ##
-##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            ##
-##  GNU General Public License for more details.                             ##
-##                                                                           ##
-##  You should have received a copy of the GNU General Public License        ##
-##  along with this program; if not, write to the Free Software              ##
-##  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA ##
-###############################################################################
-include_once(XOOPS_ROOT_PATH."/modules/smartobject/include/common.php");
-include_once(XOOPS_ROOT_PATH."/modules/smartobject/class/smartobject.php");
-include_once(XOOPS_ROOT_PATH."/modules/smartobject/class/smartobjecthandler.php");
-class MytabsPageBlock extends SmartObject {
-    public $block;
+//  Author: Trabis
+//  URL: http://www.xuups.com
+//  E-Mail: lusopoemas@gmail.com
 
-    function __construct() {
+if (!defined('XOOPS_ROOT_PATH')) {
+	exit();
+}
+
+class MytabsPageBlock extends XoopsObject
+{
+    var $block;
+    /**
+     * constructor
+     */
+    function MytabsPageBlock() {
+        $this->XoopsObject();
         $this->initVar("pageblockid", XOBJ_DTYPE_INT);
         $this->initVar('blockid', XOBJ_DTYPE_INT);
         $this->initVar('pageid', XOBJ_DTYPE_INT);
         $this->initVar('tabid', XOBJ_DTYPE_INT);
-        $this->initVar('priority', XOBJ_DTYPE_INT, 10);
+        $this->initVar('priority', XOBJ_DTYPE_INT, 0);
         $this->initVar('showalways', XOBJ_DTYPE_TXTBOX, 'yes');
+        $this->initVar('placement', XOBJ_DTYPE_TXTBOX, 'center');
         $this->initVar('title', XOBJ_DTYPE_TXTBOX, '');
         $this->initVar('options', XOBJ_DTYPE_TXTBOX, '');
         $this->initVar('fromdate', XOBJ_DTYPE_INT);
@@ -44,7 +29,7 @@ class MytabsPageBlock extends SmartObject {
         $this->initVar('note', XOBJ_DTYPE_TXTAREA, '');
         $this->initVar('pbcachetime', XOBJ_DTYPE_INT, 0);
         $this->initVar('cachebyurl', XOBJ_DTYPE_INT, 0);
-        $this->initVar('groups', XOBJ_DTYPE_ARRAY, array(XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS));
+        $this->initVar('groups', XOBJ_DTYPE_ARRAY, serialize(array(XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS)));
     }
 
     /**
@@ -56,12 +41,14 @@ class MytabsPageBlock extends SmartObject {
         include_once(XOOPS_ROOT_PATH."/class/xoopsblock.php");
         if ($blockid == 0) {
             $this->block = new XoopsBlock($this->getVar('blockid'));
+            $this->block->assignVar('options', $this->getVar('options', 'n'));
+            $this->block->assignVar('title', $this->getVar('title', 'n'));
         }
         else {
             $this->block = new XoopsBlock($blockid);
+            $this->block->assignVar('options', $this->block->getVar('options', 'n'));
+            $this->block->assignVar('title', $this->block->getVar('title', 'n'));
         }
-        $this->block->assignVar('options', $this->getVar('options', 'n'));
-        $this->block->assignVar('title', $this->getVar('title', 'n'));
     }
 
     /**
@@ -80,7 +67,7 @@ class MytabsPageBlock extends SmartObject {
      */
     function getForm() {
         include_once(XOOPS_ROOT_PATH."/modules/mytabs/class/blockform.php");
-        $form = new MytabsBlockForm('title', 'blockform', 'block.php');
+        $form = new MytabsBlockForm('Block', 'blockform', 'block.php');
         $form->createElements($this);
         return $form;
     }
@@ -106,7 +93,19 @@ class MytabsPageBlock extends SmartObject {
         }
 
         // Special values
-        $ret['visible'] = $this->isVisible();
+        $showalways = $this->getVar('showalways');
+        if ($showalways == 'no'){
+            $ret['unvisible'] = true;
+        } elseif ($showalways == 'yes'){
+            $ret['visible'] = true;
+        } elseif ($showalways == 'time'){
+            $check = $this->isVisible();
+            if ($check){
+                $ret['timebased'] = true;
+            } else {
+                $ret['unvisible'] = true;
+            }
+        }
 
         return $ret;
     }
@@ -121,8 +120,10 @@ class MytabsPageBlock extends SmartObject {
     function render($template, $unique=0) {
         $block = array(
         'blockid'	=> $this->getVar( 'pageblockid' ),
+        'tabid'	    => $this->getVar( 'tabid' ),
         'module'	=> $this->block->getVar( 'dirname' ),
         'title'		=> $this->getVar( 'title' ),
+        'placement'	=> $this->getVar( 'placement' ),
         'weight'	=> $this->getVar( 'priority' )
         );
 
@@ -136,16 +137,16 @@ class MytabsPageBlock extends SmartObject {
             $template->cache_lifetime = $bcachetime;
         }
         $tplName = ( $tplName = $this->block->getVar('template') ) ? "db:$tplName" : "db:system_block_dummy.html";
+
         $cacheid = 'blk_' . $this->getVar('pageblockid');
 
         if ($this->getVar('cachebyurl')) {
             $cacheid .= "_".md5($_SERVER['REQUEST_URI']);
         }
-
         if ( !$bcachetime || !$template->is_cached( $tplName, $cacheid ) ) {
-            $xoopsLogger->addBlock( $this->block->getVar('name') );
+            $xoopsLogger->addBlock( $this->block->getVar('title') );
             if ( ! ( $bresult = $this->block->buildBlock() ) ) {
-                return false;
+               return false;
             }
             $template->assign( 'block', $bresult );
             $block['content'] = $template->fetch( $tplName, $cacheid );
@@ -157,11 +158,110 @@ class MytabsPageBlock extends SmartObject {
     }
 }
 
-class MytabsPageBlockHandler extends SmartPersistableObjectHandler {
-    private $blocks = array();
+class MytabsPageBlockHandler extends XoopsObjectHandler
+{
+    
+    function &create($isNew = true)
+    {
+        $pageblock = new MytabsPageBlock();
+        if ($isNew) {
+            $pageblock->setNew();
+        }
+        return $pageblock;
+    }
 
-    function __construct($db) {
-        parent::__construct($db, "pageblock", "pageblockid", "pageblock_title", "", "mytabs");
+    function &get($id)
+    {
+      $id = intval($id);
+      $pageblock = false;
+    	if ($id > 0) {
+            $sql = 'SELECT * FROM '.$this->db->prefix('mytabs_pageblock').' WHERE pageblockid='.$id;
+            if (!$result = $this->db->query($sql)) {
+                return $pageblock;
+            }
+            $numrows = $this->db->getRowsNum($result);
+            if ($numrows == 1) {
+                $pageblock = new MytabsPageBlock();
+                $pageblock->assignVars($this->db->fetchArray($result));
+            }
+        }
+        return $pageblock;
+    }
+
+    function insert(&$pageblock)
+    {
+        if (!is_a($pageblock, 'mytabspageblock')) {
+            return false;
+        }
+        if (!$pageblock->isDirty()) {
+            return true;
+        }
+        if (!$pageblock->cleanVars()) {
+            return false;
+        }
+        foreach ($pageblock->cleanVars as $k => $v) {
+            ${$k} = $v;
+        }
+        if ($pageblock->isNew()) {
+            $pageblockid = $this->db->genId('mytabs_pageblock_pageblockid_seq');
+			$sql = sprintf("INSERT INTO %s (pageblockid, blockid, pageid, tabid, priority, placement, showalways, title, options, fromdate, todate, note, pbcachetime, cachebyurl, groups)
+            VALUES (%u, %u, %u, %u, %u, %s, %s, %s, %s, %u, %u, %s, %u, %u, %s)",
+            $this->db->prefix('mytabs_pageblock'), $pageblockid, $blockid, $pageid, $tabid, $priority, $this->db->quoteString($placement), $this->db->quoteString($showalways), $this->db->quoteString($title), $this->db->quoteString($options), $fromdate, $todate, $this->db->quoteString($note), $pbcachetime, $cachebyurl, $this->db->quoteString($groups));
+		} else {
+            $sql = sprintf("UPDATE %s SET  blockid = %u, pageid = %u, tabid = %u, priority = %u, placement = %s, showalways = %s, title = %s, options = %s, fromdate = %u, todate = %u, note = %s, pbcachetime = %u, cachebyurl = %u, groups = %s
+            WHERE pageblockid = %u", $this->db->prefix('mytabs_pageblock'), $blockid, $pageid, $tabid, $priority, $this->db->quoteString($placement), $this->db->quoteString($showalways), $this->db->quoteString($title), $this->db->quoteString($options), $fromdate, $todate, $this->db->quoteString($note), $pbcachetime, $cachebyurl, $this->db->quoteString($groups), $pageblockid);
+        }
+        if (!$result = $this->db->query($sql)) {
+            return false;
+        }
+        if (empty($pageblockid)) {
+            $pageblockid = $this->db->getInsertId();
+        }
+        $pageblock->assignVar('pageblockid', $pageblockid);
+        return true;
+    }
+
+
+    function delete(&$pageblock)
+    {
+        if (!is_a($pageblock, 'mytabspageblock')) {
+            return false;
+        }
+        $sql = sprintf("DELETE FROM %s WHERE pageblockid = %u", $this->db->prefix('mytabs_pageblock'), $pageblock->getVar('pageblockid'));
+        if (!$result = $this->db->query($sql)) {
+            return false;
+        }
+        return true;
+    }
+
+    function getObjects($criteria = null, $id_as_key = false)
+    {
+        $ret = array();
+        $limit = $start = 0;
+        $sql = 'SELECT * FROM '.$this->db->prefix('mytabs_pageblock');
+        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+            $sql .= ' '.$criteria->renderWhere();
+            if ($criteria->getSort() != '') {
+                $sql .= ' ORDER BY '.$criteria->getSort().' '.$criteria->getOrder();
+            }
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
+        }
+        $result = $this->db->query($sql, $limit, $start);
+        if (!$result) {
+            return $ret;
+        }
+        while ($myrow = $this->db->fetchArray($result)) {
+            $pageblock = new MytabsPageBlock();
+            $pageblock->assignVars($myrow);
+			if (!$id_as_key) {
+            	$ret[] =& $pageblock;
+			} else {
+				$ret[$myrow['pageblockid']] =& $pageblock;
+			}
+            unset($pageblock);
+        }
+        return $ret;
     }
 
     /**
@@ -172,42 +272,50 @@ class MytabsPageBlockHandler extends SmartPersistableObjectHandler {
      * 
      * @return array
      */
-    function getBlocks($pageid = 0,  $not_invisible = true ) {
+    function getBlocks($pageid = 0, $tabid = 0, $placement = '', $not_invisible = true ) {
+        $blocks = array();
+        $sql = "SELECT *, pb.options, pb.title FROM ".$this->db->prefix('mytabs_pageblock')." pb LEFT JOIN ".$this->db->prefix("newblocks")." b
+        ON pb.blockid=b.bid
+        WHERE (pb.pageid = ".$pageid.")";
 
-        if (count($this->blocks) == 0) {
-            $sql = "SELECT *, pb.options, pb.title FROM ".$this->table." pb LEFT JOIN ".$this->db->prefix("newblocks")." b
-                  ON pb.blockid=b.bid
-		          WHERE (pb.pageid=".$pageid.")";
+        if($tabid  > 0) {
+             $sql.=" AND (pb.tabid = ".$tabid.")";
+        }
 
-            if ($not_invisible) {
-                // Only get blocks that can be visible
-                $sql .= " AND pb.showalways IN ('yes', 'time')";
-            }
+        if($placement != '') {
+            $sql .= " AND (pb.placement = '".$placement."')";
+        }
 
-            $sql .= " ORDER BY PRIORITY ASC";
-            $result = $this->db->query($sql);
+        if ($not_invisible) {
+            // Only get blocks that can be visible
+            $sql .= " AND (pb.showalways IN ('yes', 'time'))";
+        }
 
-            if (!$result) {
-                return array();
-            }
-            include_once(XOOPS_ROOT_PATH."/class/xoopsblock.php");
-            while ($row = $this->db->fetchArray($result) ) {
-                $pageblock = $this->create();
-                $vars = array_keys($pageblock->getVars());
-                foreach ($row as $name => $value) {
-                    if (in_array($name, $vars)) {
-                        $pageblock->assignVar($name, $value);
-                        if ($name != "options" && $name != "title") {
-                            // Title and options should be set on the block
-                            unset($vars[$name]);
-                        }
+        $sql .= " ORDER BY PLACEMENT, PRIORITY ASC";
+        $result = $this->db->query($sql);
+
+        if (!$result) {
+            return array();
+        }
+
+        include_once(XOOPS_ROOT_PATH."/class/xoopsblock.php");
+        while ($row = $this->db->fetchArray($result) ) {
+            $pageblock = $this->create();
+            $vars = array_keys($pageblock->getVars());
+            foreach ($row as $name => $value) {
+                if (in_array($name, $vars)) {
+                    $pageblock->assignVar($name, $value);
+                    if ($name != "options" && $name != "title") {
+                        // Title and options should be set on the block
+                        unset($vars[$name]);
                     }
                 }
-                $pageblock->block = new XoopsBlock($row);
-                $this->blocks[$pageblock->getVar('tabid')][] = $pageblock;
             }
+            $pageblock->block = new XoopsBlock($row);
+            $blocks[$pageblock->getVar('tabid')][] = $pageblock;
         }
-        return /*$pageid > 0 ? (isset($this->blocks[$pageid]) ? $this->blocks[$pageid] : array() ) :*/ $this->blocks;
+
+        return $blocks;
     }
 
     /**
@@ -248,7 +356,7 @@ class MytabsPageBlockHandler extends SmartPersistableObjectHandler {
      * @return int
      */
     function getMaxPriority($pageid, $tabid) {
-        $result = $this->db->query("SELECT MAX(priority) FROM ".$this->table."
+        $result = $this->db->query("SELECT MAX(priority) FROM ".$this->db->prefix('mytabs_pageblock')."
                 WHERE pageid=".(int)$pageid."
                 AND tabid=".intval($tabid));
 
@@ -262,15 +370,31 @@ class MytabsPageBlockHandler extends SmartPersistableObjectHandler {
         return $priority;
     }
     
+
     /**
      * Get all available blocks
      *
      * @return array
      */
     function getAllBlocks() {
-        $result = $this->db->query("SELECT bid, b.name as name, m.name as modname  FROM ".$this->db->prefix("newblocks")." b, ".$this->db->prefix("modules")." m WHERE b.mid=m.mid AND b.mid != ".$GLOBALS['xoopsModule']->getVar('mid')." ORDER BY name");
+        $ret = array();
+        $result = $this->db->query("SELECT bid, b.name as name, m.name as modname  FROM ".$this->db->prefix("newblocks")." b, ".$this->db->prefix("modules")." m WHERE (b.mid=m.mid) AND b.mid != ".$GLOBALS['xoopsModule']->getVar('mid')." ORDER BY modname, name");
         while (list($id, $name, $modname) = $this->db->fetchRow($result)) {
-            $ret[$id] = $name." (".$modname.")";
+            $ret[$id] = $modname." --> ".$name;
+        }
+        return $ret;
+    }
+    
+    /**
+     * Get all custom blocks
+     *
+     * @return array
+     */
+    function getAllCustomBlocks() {
+        $ret = array();
+        $result = $this->db->query("SELECT bid, name, title FROM ".$this->db->prefix("newblocks")."  WHERE  mid = 0 ORDER BY name");
+        while (list($id, $name, $title) = $this->db->fetchRow($result)) {
+            $ret[$id] = $name." --> ".$title;
         }
         return $ret;
     }
