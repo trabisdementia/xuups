@@ -1,0 +1,67 @@
+.mytabsdefault{
+width: 100%;
+padding: 0;
+background: transparent;
+voice-family: "\"}\"";
+voice-family: inherit;
+}
+#xo-canvas-content ul {
+margin: 0px;
+padding: 0px;
+}
+
+.mytabsdefault ul{
+margin:0;
+padding: 0;
+list-style: none;
+}
+
+.mytabsdefault li{
+display: inline;
+padding: 0;
+}
+
+.mytabsdefault a{
+float: left;
+display: block;
+text-decoration: none;
+margin: 0 2px 0 0; /*Margin between each menu item*/
+padding: 10px 15px 11px 15px;
+background-color: #C6C7C9 !important;
+font-weight: bold;
+border-bottom: 1px solid #ADB0B7;
+}
+
+.mytabsdefault a:hover{
+background-color: #F1F1F1 !important;
+border-bottom: 1px solid #F1F1F1;
+border-top: 1px solid #ADB0B7;
+}
+
+.mytabsdefault a.selected{ /*currently selected tab*/
+background-color: #F1F1F1 !important;;
+border-bottom: 1px solid #F1F1F1;
+border-top: 1px solid #ADB0B7;
+}
+
+.mytabs_title{
+	color: #2652BA;
+}
+
+.mytabs_content{
+  padding: 0px;
+  text-align: justify;
+}
+
+.tabcontent{
+display: none;
+background: #fff url(../images/mytabs_bg.jpg) top repeat-x;
+margin: 0px;
+padding: 5px;
+}
+
+@media print {
+.tabcontent {
+display:block !important;
+}
+}

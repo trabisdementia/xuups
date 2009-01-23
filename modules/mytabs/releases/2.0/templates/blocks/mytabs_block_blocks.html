@@ -1,0 +1,32 @@
+<div class="<{$block.class}>" id="tabscontents_<{$block.uniqueid}>"><{$block.tabsmenu}></div>
+
+<{foreach item=thistab from=$block.tabs}>
+  <div id="tab_<{$thistab.id}>_<{$block.uniqueid}>" style="<{if $block.width != 0}>width:<{$block.width}>px;<{/if}><{if $block.height != 0}>height: <{$block.height}>px;<{/if}>overflow-y: auto; overflow-x: hidden;" class="tabcontent">
+    <table cellspacing="0">
+      <tr>
+      <{foreach item=placement from=$block.placements}>
+        <{if $thistab.$placement}>
+          <td style="width:<{$thistab.width}>%; padding: 5px; vertical-align: top;">
+            <{foreach item=thisblock from=$thistab.$placement}>
+              <div class="myblock" style="padding: 5px;">
+                <{if $block.showblockstitle == 1}>
+                  <h2 class="myblocktitle"><{$thisblock.title}></h2>
+                <{/if}>
+                <div class="myblockcontent"><{$thisblock.content}></div>
+              </div>
+            <{/foreach}>
+          </td>
+        <{/if}>
+      <{/foreach}>
+      </tr>
+    </table>
+  </div>
+<{/foreach}>
+
+<script type="text/javascript">
+var tabc_<{$block.uniqueid}>=new ddtabcontent("tabscontents_<{$block.uniqueid}>")
+tabc_<{$block.uniqueid}>.setpersist(<{$block.persist}>)
+tabc_<{$block.uniqueid}>.setonmouseover(<{$block.onmouseover}>)
+tabc_<{$block.uniqueid}>.setselectedClassTarget("link")
+tabc_<{$block.uniqueid}>.init(<{$block.milisec}>)
+</script>

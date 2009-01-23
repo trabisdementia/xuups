@@ -1,0 +1,59 @@
+.indentmenu{
+padding: 0px;
+width: 100%; /*leave this value as is in most cases*/
+background: black url(../images/indentbg.gif) center center repeat-x;
+border-top: 1px solid navy; /*navy border*/
+}
+#xo-canvas-content ul {
+margin: 0px;
+padding: 0px;
+}
+.indentmenu ul{
+margin: 0px;
+padding: 0px;
+float: left;
+background: black url(../images/indentbg.gif) center center repeat-x;
+}
+
+.indentmenu ul li{
+display: inline;
+padding: 0px;
+}
+
+.indentmenu a{
+float: left;
+display: block;
+color: white; /*text color*/
+padding: 5px 11px;
+text-decoration: none;
+border-right: 1px solid navy; /*navy divider between menu items*/
+}
+
+.indentmenu a:hover{
+color: white;
+}
+
+.indentmenu ul li a.selected{
+color: white !important;
+background: black url(../images/indentbg2.gif) center center repeat-x;
+}
+
+.mytabs_title{
+	color: #7B6C93;
+}
+
+.mytabs_content{
+  padding: 0px;
+  text-align: justify;
+}
+
+.tabcontent{
+display:none;
+padding: 5px;
+}
+
+@media print {
+.tabcontent {
+display:block !important;
+}
+}
