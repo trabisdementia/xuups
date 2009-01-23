@@ -1,0 +1,28 @@
+<{if $block.display_type=='block'}>
+
+<{foreach item=item from=$block.items}>
+	<{include file="db:publisher_singleitem_block.html" item=$item}>
+<{/foreach}>
+ 
+<{else}>
+<{foreach item=item from=$block.items}>
+<{if $item.summary != ''}>
+<div style="padding-top: 5px; padding-left: 3px; clear: both">
+	<div class="itemText">
+	<div style="font-weight: bold; padding-left: 2px; padding-bottom: 5px; font-size: 18px; line-height: 18px;"><a style="color: #FF6600" href="<{$item.url}>"><{$item.title}></a></div>	
+	<{if $item.image_path}>
+	  <a href="<{$item.itemurl}>"><img style="margin-left: 10px; display: block; padding: 5px;" src="<{$item.image_path}>"  align="right" alt="<{$item.title}>" title="<{$item.title}>" /></a>
+	<{/if}>
+	<div style="padding-left: 3px;"><{$item.summary}></div>
+		<div style="clear: both; font-weight: bold; text-align: right; border-bottom: 1px dotted #000000;">
+		<img src="<{$xoops_url}>/themes/condolegal/title_icon4.gif" align="middle" height="17px" width="17px">
+		<a href="<{$xoops_url}>/modules/publisher/item.php?itemid=<{$item.id}>"><{$block.lang_readmore}></a>
+		<img src="<{$xoops_url}>/themes/condolegal/title_icon4.gif" align="middle" height="17px" width="17px">
+		</div>
+	</div>
+</div>
+<{/if}>
+  <{/foreach}>
+
+<{/if}>
+

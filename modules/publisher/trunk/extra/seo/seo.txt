@@ -1,0 +1,49 @@
+/*
+ * $Id: seo.txt,v 1.1 2007/08/25 14:37:47 marcan Exp $
+ * Module: Publisher
+ * Author: Sudhaker Raj <http://xoops.biz>
+ * Licence: GNU
+ */
+
+What is SEO for Publisher?
+=============================
+
+See following URL
+  http://smartfactory.ca/modules/publisher/item.php?itemid=62
+
+After SEO module, SEO-friendly URL (non-working example)
+  http://smartfactory.ca/publisher.item.62/holiday-time.html
+
+It is found that latter is more liked by search engines. It can significantly boost search engine traffic on your site. 
+
+Just try it!!!
+
+If you want some different name, like ss for publisher, change genUrl logic in publisher/include/seo_functions.php and make similar modification in <xoops_root>/.htaccess 
+  http://smartfactory.ca/ss.item.62/holiday-time.html
+
+
+How can I enable SEO for Publisher?
+======================================
+Core SEO functionality for this module lies in publisher/include/seo_functions.php. It expects a PHP constant named 'SEO_ENABLED' with possible values from 'rewrite' or 'path-info'. It should be defined in <xoops_root>/mainfile.php as followings. 
+
+[code]
+	define("XOOPS_GROUP_ADMIN", "1");
+	define("XOOPS_GROUP_USERS", "2");
+	define("XOOPS_GROUP_ANONYMOUS", "3");
+  
+  // enable SEO
+  define("PUBLISHER_SEO_ENABLED", "rewrite");
+  
+	if (!isset($xoopsOption['nocommon']) && XOOPS_ROOT_PATH != '') {
+		require XOOPS_ROOT_PATH."/include/common.php";
+	}
+[/code]
+
+You must copy (or merge) extra/seo/sample.htaccess to <xoops_root>/.htaccess (for rewrite). If your web server does not support rewrite then path-info should be used.
+
+Module was modified extensively for SEO but it can very well fall back to classic mode in absence of this constant. Do not define this constant if SEO functionality is not wanted.
+
+For any installation problem or bug report, browse http://smartfactory.ca/modules/newbb/viewforum.php?forum=5
+
+Cheers,
+Sudhaker

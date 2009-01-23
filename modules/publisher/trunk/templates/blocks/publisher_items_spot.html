@@ -1,0 +1,31 @@
+<{if $block.display_type=='block'}>
+
+	<{foreach item=item from=$block.items}>
+		<{include file="db:publisher_singleitem_block.html" item=$item}>
+	<{/foreach}>
+
+<{else}>
+	<{foreach item=item from=$block.items name=spotlight}>
+		<{if $item.summary != ''}>
+			<div class="itemText" style="padding-left: 5px; padding-top: 5px;">
+				<div>
+					<img style="vertical-align: middle;" src="<{$xoops_url}>/modules/publisher/images/icon/doc.png" alt="" />&nbsp;<{$item.titlelink}>
+				</div>
+
+				<div>
+				    <{if $item.image_path}>
+				    	<img class="publisher_item_image" src="<{$item.image_path}>"  align="right" alt="<{$item.clean_title}>" title="<{$item.clean_title}>" />
+				    <{/if}>
+				    <{$item.summary}>
+			    </div>
+			</div>
+			<div style="clear: both"> </div>
+				<{if $item.showline}>
+					<div style="font-size: 10px; text-align: right; border-bottom: 1px dotted #000000;">
+				<{/if}>
+				<div style="font-size: 10px; text-align: right;"><a href="<{$item.itemurl}>"><{$block.lang_readmore}></a></div>
+			</div>
+
+		<{/if}>
+	<{/foreach}>
+<{/if}>
