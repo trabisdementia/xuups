@@ -130,7 +130,7 @@ class PublisherFile extends XoopsObject
         }
 	}
 
-	function store(&$allowed_mimetypes, $force = true, $doupload =true)
+	function store($allowed_mimetypes = null, $force = true, $doupload = true)
 	{
 		if ($this->isNew()) {
 			$errors = array();

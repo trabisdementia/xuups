@@ -195,7 +195,8 @@ class PublisherCategory extends XoopsObject
 
 	function getCategoryPathForMetaTitle()
 	{
-		$parentid = $this->parentid();
+        $ret = '';
+        $parentid = $this->parentid();
 		$publisher_category_handler =& xoops_getmodulehandler('category', 'publisher');
 		if ($parentid != 0) {
 			$parentObj =& $publisher_category_handler->get($parentid);

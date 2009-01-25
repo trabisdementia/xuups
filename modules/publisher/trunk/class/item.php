@@ -532,7 +532,7 @@ class PublisherItem extends XoopsObject
 				}
 			}
 		}
-/*		if (PUBLISHER_LEVEL > 0) {
+		if (PUBLISHER_LEVEL > 0) {
 			// PDF button
 			$adminLinks .= "<a href='" . PUBLISHER_URL . "makepdf.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "images/links/pdf.gif' title='" . _MD_PUB_PDF . "' alt='" . _MD_PUB_PDF . "'/></a>";
 			$adminLinks .= " ";
@@ -541,7 +541,7 @@ class PublisherItem extends XoopsObject
 		// Print button
 		$adminLinks .= '<a href="' . publisher_seo_genUrl("print", $this->itemid(), $this->short_url()) . '"><img src="' . PUBLISHER_URL . 'images/links/print.gif" title="' . _MD_PUB_PRINT . '" alt="' . _MD_PUB_PRINT . '"/></a>';
 		$adminLinks .= " ";
-*/
+
 		// Email button
 		$maillink = "mailto:?subject=" . sprintf(_MD_PUB_INTITEM, $xoopsConfig['sitename']) . "&amp;body=" . sprintf(_MD_PUB_INTITEMFOUND, $xoopsConfig['sitename']) . ": " . $this->getItemUrl();
 		$adminLinks .= '<a href="' . $maillink . '"><img src="' . PUBLISHER_URL . 'images/links/friend.gif" title="' . _MD_PUB_MAIL . '" alt="' . _MD_PUB_MAIL . '"/></a>';

@@ -10,7 +10,6 @@
 <meta name="copyright" content="<{$xoops_meta_copyright}>" />
 <meta name="generator" content="XOOPS" />
 <title><{$printtitle}></title>
-<link rel="stylesheet" type="text/css" media="all" href="<{$xoops_url}>/modules/smartcontent/print.css" />
 </head>
 
 <body>
@@ -27,11 +26,16 @@
     <div style="text-align: right; margin-top: 10px; border: 1px solid; padding: 2px;"><{$printheader}></div>
 
 	<{if !$noTitle}>	
-	  <div id="title"><{$item.title}></div>
+	    <div style="padding-top: 5px; font-size: 14px; font-weight: bold"><{$item.title}></div>
 	<{/if}>
-     <{if $display_whowhen_link}>
+
+    <{if !$noCategory}>
+        <div style="padding-top: 2px; "><{$lang_category}> : <{$item.categoryname}></div>
+    <{/if}>
+
+    <{if $display_whowhen_link}>
         <div style="padding-top: 2px; "><{$lang_author_date}> </div>
-     <{/if}>
+    <{/if}>
      
 	<{if $item.summary && $item.display_summary}>
 	  	<div style="padding-top: 8px; text-align: justify"><{$item.summary}></div>

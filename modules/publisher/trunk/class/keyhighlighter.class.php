@@ -61,7 +61,7 @@ class PublisherKeyhighlighter {
 	* ?>
 	* </code>
 	*/
-	// public function __construct ()
+	// public function __construct () <?
 	function PublisherKeyhighlighter ($keywords, $singlewords = false, $replace_callback = null ) {
 		$this->keywords = $keywords;
 		$this->singlewords = $singlewords;
@@ -77,10 +77,10 @@ class PublisherKeyhighlighter {
 		if ($this->singlewords) {
 			$keywords = explode (' ', $this->preg_keywords);
 			foreach ($keywords as $keyword) {
-				$patterns[] = '/(?' . '>' . $keyword . '+)/si';
+				$patterns[] = '/(?' . '>' . preg_quote($keyword) . '+)/si';
 			}
 		} else {
-			$patterns[] = '/(?' . '>' . $this->preg_keywords . '+)/si';
+			$patterns[] = '/(?' . '>' . preg_quote($this->preg_keywords) . '+)/si';
 		}
 
 		$result = $replace_matches[0];
@@ -101,7 +101,11 @@ class PublisherKeyhighlighter {
 	*/
 	function highlight ($buffer) {
 		$buffer = '>' . $buffer . '<';
-		$this->preg_keywords = preg_replace ('/[^\w ]/si', '', $this->keywords);
+		if ( XOOPS_USE_MULTIBYTES ) {
+            $this->preg_keywords = trim($this->keywords);
+        } else {
+            $this->preg_keywords = preg_replace ('/[^w ]/si', '', $this->keywords);
+        }
 		$buffer = preg_replace_callback ("/(\>(((?" . ">[^><]+)|(?R))*)\<)/is", array (&$this, 'replace'), $buffer);
 		$buffer = substr ($buffer, 1, -1);
 		return $buffer;

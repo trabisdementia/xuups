@@ -32,7 +32,7 @@ if ($itemObj->notLoaded()) {
 $categoryObj =& $itemObj->category();
 
 // Check user permissions to access that category of the selected ITEM
-if (!(publisher_itemAccessGranted($itemObj) {
+if (!publisher_itemAccessGranted($itemObj)) {
 	redirect_header("javascript:history.go(-1)", 1, _NOPERM);
 	exit;
 }
@@ -51,6 +51,11 @@ $xoopsTpl->assign('printheader', $printheader);
 $xoopsTpl->assign('lang_category', _MD_PUB_CATEGORY);
 $xoopsTpl->assign('lang_author_date', $who_where);
 $xoopsTpl->assign('item', $item);
+
+$doNotStartPrint = false;
+$noTitle = false;
+$noCategory = false;
+$smartPopup = false;
 
 $xoopsTpl->assign('doNotStartPrint', $doNotStartPrint);
 $xoopsTpl->assign('noTitle', $noTitle);

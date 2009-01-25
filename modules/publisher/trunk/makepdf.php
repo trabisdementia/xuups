@@ -32,7 +32,7 @@
 error_reporting(0);
 include_once 'header.php';
 $myts =& MyTextSanitizer::getInstance();
-require_once XOOPS_ROOT_PATH.'/modules/smartobject/fpdf/fpdf.inc.php';
+require_once XOOPS_ROOT_PATH.'/modules/publisher/fpdf/fpdf.inc.php';
 
 global $publisher_item_handler, $publisher_category_handler, $xoopsUser, $xoopsConfig, $xoopsModuleConfig, $xoopsModule;
 
@@ -101,6 +101,9 @@ $pdf_config['slogan'] = $myts->displayTarea($pdf_config['slogan']);
 // End of ML Hack by marcan
 
 $pdf=new PDF();
+if(method_exists($pdf, 'encoding')){
+	$pdf->encoding($pdf_data, _CHARSET);
+}
 $pdf->SetCreator($pdf_config['creator']);
 $pdf->SetTitle($pdf_data['title']);
 $pdf->SetAuthor($pdf_config['url']);

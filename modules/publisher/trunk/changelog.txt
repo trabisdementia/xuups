@@ -1,7 +1,16 @@
 <b><u>=> Version 1.0 Beta (2008-07-05)</u></b>
-- Changed : article submission for admins using submit.php 
-- Added : text truncate option in spotlight block
-- Added : missing index.html files in some folders
-- Added : xoops 2.3 compatibility
-- Removed : Dependecie from smartobject
-- Imported : publisher Version 2.14 Final(trabis)
+- fixed : enable "Print" and "PDF" (ohwada/trabis)
+- fixed : Parse error and Notice in print (ohwada/trabis)
+- fixed : wrong style in print template file (ohwada/trabis)
+- fixed : Invalid argument when guest view (ohwada/trabis)
+- fixed : Undefined variable in admin's category (ohwada/trabis)
+- fixed : Missing argument when save file (ohwada/trabis)
+- fixed : many Notice when "Disable comments" (ohwada/trabis)
+- fixed : keyword "abc" match "abccccc" (ohwada/trabis)
+- fixed : cannot show keyword in Japanese and multibyte language (ohwada/trabis)
+- Changed : article submission for admins using submit.php (trabis/Mowaffak) 
+- Added : text truncate option in spotlight block (trabis/Mowaffak)
+- Added : missing index.html files in some folders (trabis)
+- Added : xoops 2.3 compatibility (trabis)
+- Removed : Dependecy from smartobject (trabis)
+- Imported : publisher Version 2.14 Final (trabis)
