@@ -44,9 +44,8 @@ function publisher_items_spot_show($options)
 				} else {
 					$item['showline'] = false;
 				}
-                if ($opt_truncate > 0 && strrpos($item['summary'], ' ')) {
-				    $last_letter_pos = strrpos(substr($item['summary'],0 , $opt_truncate), ' ');
-                    $item['summary'] = xoops_substr($item['summary'], 0, $last_letter_pos + 3);
+                if ($opt_truncate > 0) {
+                    $item['summary'] = publisher_truncate_tagsafe($item['summary'], $opt_truncate);
                 }
 				$block['items'][] = $item;
 				$i++;

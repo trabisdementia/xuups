@@ -211,6 +211,7 @@ function publisher_metagen_html2text($document)
 	return $text;
 }
 
+//<?php
 function publisher_getAllowedImagesTypes()
 {
 	return array('jpg/jpeg', 'image/bmp', 'image/gif', 'image/jpeg', 'image/jpg', 'image/x-png', 'image/png', 'image/pjpeg');
@@ -1209,6 +1210,7 @@ function publisher_makeURI($page, $vars = array(), $encodeAmp = true)
 	}
 	return $page . '?'. $qs;
 }
+
 function publisher_tag_module_included() {
 	static 	$publisher_tag_module_included;
 
@@ -1297,5 +1299,74 @@ function publisher_upload_file($another = false, $withRedirect=true, &$itemObj)
 function publisher_new_feature_tag() {
 	$ret = '<span style="padding-right: 4px; font-weight: bold; color: red;">' . _AM_PUB_NEW_FEATURE . '</span>';
 	return $ret;
+}
+
+/**
+ * @author   Monte Ohrt <monte at ohrt dot com>, modified by Amos Robinson
+ *           <amos dot robinson at gmail dot com>
+ */
+function publisher_close_tags($string)
+{
+	// match opened tags
+	if(preg_match_all('/<([a-z\:\-]+)[^\/]>/', $string, $start_tags)) {
+		$start_tags = $start_tags[1];
+		// match closed tags
+		if(preg_match_all('/<\/([a-z]+)>/', $string, $end_tags)) {
+			$complete_tags = array();
+   			$end_tags = $end_tags[1];
+
+   			foreach($start_tags as $key => $val) {
+        		$posb = array_search($val, $end_tags);
+       			if(is_integer($posb)) {
+          			unset($end_tags[$posb]);
+       			} else {
+					$complete_tags[] = $val;
+				}
+			}
+		} else {
+			$complete_tags = $start_tags;
+		}
+
+		$complete_tags = array_reverse($complete_tags);
+		for($i = 0; $i < count($complete_tags); $i++) {
+			$string .= '</' . $complete_tags[$i] . '>';
+		}
+	}
+	return $string;
+}
+
+/**
+ * Smarty truncate_tagsafe modifier plugin
+ *
+ * Type:     modifier<br>
+ * Name:     truncate_tagsafe<br>
+ * Purpose:  Truncate a string to a certain length if necessary,
+ *           optionally splitting in the middle of a word, and
+ *           appending the $etc string or inserting $etc into the middle.
+ *           Makes sure no tags are left half-open or half-closed
+ *           (e.g. "Banana in a <a...")
+ * @author   Monte Ohrt <monte at ohrt dot com>, modified by Amos Robinson
+ *           <amos dot robinson at gmail dot com>
+ * @param string
+ * @param integer
+ * @param string
+ * @param boolean
+ * @param boolean
+ * @return string
+ */
+function publisher_truncate_tagsafe($string, $length = 80, $etc = '...', $break_words = false)
+{
+	if ($length == 0) return '';
+	if (strlen($string) > $length) {
+		$length -= strlen($etc);
+		if (!$break_words) {
+			$string = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, $length+1));
+			$string = preg_replace('/<[^>]*$/', '', $string);
+			$string = publisher_close_tags($string);
+		}
+		return $string . $etc;
+	} else {
+		return $string;
+	}
 }
 ?>
