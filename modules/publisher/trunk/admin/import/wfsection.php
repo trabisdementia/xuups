@@ -9,9 +9,9 @@
 *
 */
 
-include_once("admin_header.php");
+include_once dirname(dirname(__FILE__)) . "/admin_header.php";
 
-$importFromModuleName = "WF-Section " . $_POST['wfs_version'];
+$importFromModuleName = "WF-Section " . @$_POST['wfs_version'];
 
 $scriptname = "wfsection.php";
 
@@ -49,7 +49,7 @@ if ($op == 'start')
 		} else {
 			echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . sprintf(_AM_PUB_IMPORT_MODULE_FOUND, $importFromModuleName, $totalArticles, $totalCat) . "</span>";
 
-			$form = new XoopsThemeForm (_AM_PUB_IMPORT_SETTINGS, 'import_form',  PUBLISHER_ADMIN_URL . "/$scriptname");
+			$form = new XoopsThemeForm (_AM_PUB_IMPORT_SETTINGS, 'import_form',  PUBLISHER_ADMIN_URL . "/import/$scriptname");
 
 			// Categories to be imported
 			$sql = "SELECT cat.id, cat.pid, cat.title, COUNT(art.articleid) FROM ".$xoopsDB->prefix("wfs_category") . " AS cat INNER JOIN ".$xoopsDB->prefix("wfs_article") . " AS art ON cat.id=art.categoryid GROUP BY art.categoryid";

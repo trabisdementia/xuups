@@ -1,4 +1,5 @@
 <b><u>=> Version 1.0 Beta (2008-07-05)</u></b>
+- Improved : Hide Read More link in spot block if no body and no truncate used (trabis/Mowaffak) 
 - fixed : enable "Print" and "PDF" (ohwada/trabis)
 - fixed : Parse error and Notice in print (ohwada/trabis)
 - fixed : wrong style in print template file (ohwada/trabis)

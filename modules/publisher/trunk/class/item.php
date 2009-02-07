@@ -7,7 +7,7 @@
 * Licence: GNU
 */
 if (!defined("XOOPS_ROOT_PATH")) {
-die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 include_once XOOPS_ROOT_PATH.'/modules/publisher/include/common.php';
@@ -83,24 +83,6 @@ class PublisherItem extends XoopsObject
 				$this->assignVar($k, $v['value']);
 			}
 			$this->assignOtherProperties();
-		} else {
-			// it's a new item
-			// Check to see if $smartlanguage_tag_handler is available
-
-			// Hack by marcan for condolegal.smartfactory.ca
-		/*	$this->setVar('title', "[fr]entrez le texte en français[/fr][en]entrez le texte en anglais[/en]");
-			$this->setVar('summary', "[fr]entrez le texte en français[/fr][en]entrez le texte en anglais[/en]");
-			$this->setVar('body', "[fr]entrez le texte en français[/fr][en]entrez le texte en anglais[/en]");
-			// End of Hack by marcan for condolegal.smartfactory.ca
-
-			global $smartlanguage_tag_handler;
-			if (isset($smartlanguage_tag_handler)) {
-				$theLanguageTags = $smartlanguage_tag_handler->getAllTagsForInput();
-				$this->setVar('title', $theLanguageTags);
-				$this->setVar('summary', $theLanguageTags);
-				$this->setVar('body', $theLanguageTags);
-			}
-			*/
 		}
 	}
 
@@ -261,15 +243,6 @@ class PublisherItem extends XoopsObject
 	    		$ret = str_replace("[pagewrap=$page]", $wrap_page_content, $ret);
 	    	}
     	}
-/*
-    	$flash_found_pos = strpos($ret, '[flash-');
-    	while ($flash_found_pos) {
-    		$end_of_tag = (strpos($ret, ']', strpos($ret, '[flash-')));
-    		$id_length = $end_of_tag - $flash_found_pos - 7;
-    		$file_id = substr($ret, $flash_found_pos + 7, $id_length);
-    		$flash_found_pos = false;
-    	}
-*/
 
         if ($maxLength != 0) {
         	if (!XOOPS_USE_MULTIBYTES) {
@@ -466,12 +439,7 @@ class PublisherItem extends XoopsObject
 		// include language file
 		global $xoopsConfig, $smartModule, $smartConfig, $xoopsUser;
 
-		$filePath = XOOPS_ROOT_PATH."/modules/publisher/language/".$xoopsConfig['language']."/main.php";
-		if (file_exists($filePath)) {
-			include_once(XOOPS_ROOT_PATH."/modules/publisher/language/".$xoopsConfig['language']."/main.php");
-		} else {
-			include_once(XOOPS_ROOT_PATH."/modules/publisher/language/english/main.php");
-		}
+        xoops_loadLanguage('main', 'publisher');
 
 		$adminLinks = '';
 
@@ -543,8 +511,13 @@ class PublisherItem extends XoopsObject
 		$adminLinks .= " ";
 
 		// Email button
-		$maillink = "mailto:?subject=" . sprintf(_MD_PUB_INTITEM, $xoopsConfig['sitename']) . "&amp;body=" . sprintf(_MD_PUB_INTITEMFOUND, $xoopsConfig['sitename']) . ": " . $this->getItemUrl();
-		$adminLinks .= '<a href="' . $maillink . '"><img src="' . PUBLISHER_URL . 'images/links/friend.gif" title="' . _MD_PUB_MAIL . '" alt="' . _MD_PUB_MAIL . '"/></a>';
+        $subject = sprintf(_MD_PUB_INTITEM, $xoopsConfig['sitename']);
+	    $body    = sprintf(_MD_PUB_INTITEMFOUND, $xoopsConfig['sitename']) . ": \n" . $this->getItemUrl();
+	    $subject = $this->_convert_for_japanese($subject);
+	    $body    = $this->_convert_for_japanese($body);
+	    $maillink = "mailto:?subject=" . $subject . "&amp;body=" . $body;
+
+        $adminLinks .= '<a href="' . $maillink . '"><img src="' . PUBLISHER_URL . 'images/links/friend.gif" title="' . _MD_PUB_MAIL . '" alt="' . _MD_PUB_MAIL . '"/></a>';
 		$adminLinks .= " ";
 
 		if (PUBLISHER_LEVEL > 0) {
@@ -821,6 +794,44 @@ class PublisherItem extends XoopsObject
 		$publisher_metagen = new PublisherMetagen($this->title(), $this->meta_keywords(), $this->meta_description(), $this->_category->_categoryPath);
 		$publisher_metagen->createMetaTags();
 	}
+	
+
+    function _convert_for_japanese($str) {
+
+        // no action, if not flag
+        if (!defined('_PUB_FLAG_JP_CONVERT')) {
+		   return $str;
+        }
+
+        // no action, if not Japanese
+	    global $xoopsConfig;
+	    if ($xoopsConfig['language'] != 'japanese') {
+		   return $str;
+	    }
+
+        // presume OS Browser
+        $agent   = $_SERVER["HTTP_USER_AGENT"];
+        $os      = '';
+        $browser = '';
+        if (preg_match("/Win/i", $agent)) {
+            $os = 'win';
+        }
+	    if (preg_match("/MSIE/i", $agent)) {
+            $browser = 'msie';
+        }
+
+        // if msie
+        if (($os == 'win') && ($browser == 'msie')) {
+
+            // if multibyte
+		    if (function_exists('mb_convert_encoding')) {
+                $str = mb_convert_encoding($str, 'SJIS', 'EUC-JP');
+                $str = rawurlencode($str);
+            }
+        }
+
+        return $str;
+    }
 
 }
 
@@ -833,17 +844,26 @@ class PublisherItem extends XoopsObject
 * @package Publisher
 */
 
-class PublisherItemHandler extends XoopsObjectHandler
+class PublisherItemHandler extends XoopsPersistableObjectHandler
 {
 
+    function MyprojectsItemHandler(&$db)
+    {
+        $this->__construct($db);
+    }
+
+    function __construct(&$db)
+    {
+        parent::__construct($db, "publisher_items", 'PublisherItem', "itemid", "title");
+    }
+    
 	function &create($isNew = true)
 	{
-		$item = new PublisherItem();
+        $obj = parent::create($isNew);
 		if ($isNew) {
-			$item->setDefaultPermissions();
-			$item->setNew();
+			$obj->setDefaultPermissions();
 		}
-		return $item;
+		return $obj;
 	}
 
 	/**
@@ -854,22 +874,11 @@ class PublisherItemHandler extends XoopsObjectHandler
 	*/
 	function &get($id)
 	{
-		if (intval($id) > 0) {
-			$sql = 'SELECT * FROM '.$this->db->prefix('publisher_items').' WHERE itemid='.$id;
-
-			if (!$result = $this->db->query($sql)) {
-				return false;
-			}
-
-			$numrows = $this->db->getRowsNum($result);
-			if ($numrows == 1) {
-				$item = new PublisherItem();
-				$item->assignVars($this->db->fetchArray($result));
-				$item->assignOtherProperties();
-				return $item;
-			}
+        $obj = parent::get($id);
+        if (is_object($obj)) {
+            $obj->assignOtherProperties();
 		}
-		return false;
+		return $obj;
 	}
 
 	/**
@@ -882,184 +891,24 @@ class PublisherItemHandler extends XoopsObjectHandler
 	function insert(&$item, $force = false)
 	{
 
-        if (strtolower(get_class($item)) != 'publisheritem') {
-        	$item->setErrors('Invalid class provided.');
-            return false;
-        }
-
 		if (!$item->meta_keywords() || !$item->meta_description() || !$item->short_url()) {
-			$smartobject_metagen = new PublisherMetagen($item->title(), $item->getVar('meta_keywords'), $item->getVar('summary'));
+			$publisher_metagen = new PublisherMetagen($item->title(), $item->getVar('meta_keywords'), $item->getVar('summary'));
 			// Auto create meta tags if empty
 			if (!$item->meta_keywords()) {
-				$item->setVar('meta_keywords', $smartobject_metagen->_keywords);
+				$item->setVar('meta_keywords', $publisher_metagen->_keywords);
 			}
 			if (!$item->meta_description()) {
-				$item->setVar('meta_description', $smartobject_metagen->_description);
+				$item->setVar('meta_description', $publisher_metagen->_description);
 			}
 			// Auto create short_url if empty
 			if (!$item->short_url()) {
-				$item->setVar('short_url', $smartobject_metagen->generateSeoTitle($item->getVar('title', 'n'), false));
+				$item->setVar('short_url', $publisher_metagen->generateSeoTitle($item->getVar('title', 'n'), false));
 			}
 		}
-
-		if (!$item->isDirty()) {
-			return true;
-		}
-
-		if (!$item->cleanVars()) {
-			$item->setErrors('Variables were not cleaned properly.');
-			return false;
-		}
-
-		foreach ($item->cleanVars as $k => $v) {
-            ${$k} = $v;
+		
+        if (!parent::insert($item, $force)) {
+            return false;
         }
-		if ($item->isNew()) {
-			$sql = sprintf("INSERT INTO %s (itemid,
-			categoryid,
-			title,
-			summary,
-			display_summary,
-			body,
-			uid,
-			datesub,
-			`status`,
-			image,
-			item_tag,
-			counter,
-			weight,
-			partial_view,
-			dohtml,
-			dosmiley,
-			doxcode,
-			doimage,
-			dobr,
-			cancomment,
-			comments,
-			notifypub,
-			meta_keywords,
-			meta_description,
-			short_url
-			)
-			VALUES (NULL,
-			%u,
-			%s,
-			%s,
-			%u,
-			%s,
-			%u,
-			%u,
-			%u,
-			%s,
-			%s,
-			%s,
-			%u,
-			%u,
-			%s,
-			%u,
-			%u,
-			%u,
-			%u,
-			%u,
-			%u,
-			%u,
-			%s,
-			%s,
-			%s
-			)",
-			$this->db->prefix('publisher_items'),
-			$categoryid, $this->db->quoteString($title),
-			$this->db->quoteString($summary), $display_summary,
-			$this->db->quoteString($body),
-			$uid,
-			$datesub,
-			$status,
-			$this->db->quoteString($image),
-			$this->db->quoteString($item_tag),
-			$counter,
-			$weight,
-			$this->db->quoteString($partial_view),
-			$dohtml,
-			$dosmiley,
-			$doxcode,
-			$doimage,
-			$dobr,
-			$cancomment,
-			$comments,
-			$notifypub,
-			$this->db->quoteString($meta_keywords),
-			$this->db->quoteString($meta_description),
-			$this->db->quoteString($short_url)
-			);
-		} else {
-			$sql = sprintf("UPDATE %s
-			SET categoryid = %u,
-			title = %s,
-			summary = %s,
-			display_summary = %u,
-			body = %s,
-			uid = %u,
-			datesub = %u,
-			`status` = %u,
-			image = %s,
-			item_tag = %s,
-			counter = %u,
-			weight = %u,
-			partial_view = %s,
-			dohtml = %u,
-			dosmiley = %u,
-			doxcode = %u,
-			doimage = %u,
-			dobr = %u,
-			cancomment = %u,
-			comments = %u,
-			notifypub = %u,
-			meta_keywords = %s,
-			meta_description = %s,
-			short_url = %s
-			WHERE itemid = %u",
-			$this->db->prefix('publisher_items'),
-			$categoryid, $this->db->quoteString($title),
-			$this->db->quoteString($summary),
-			$display_summary,
-			$this->db->quoteString($body),
-			$uid,
-			$datesub,
-			$status,
-			$this->db->quoteString($image),
-			$this->db->quoteString($item_tag),
-			$counter,
-			$weight,
-			$this->db->quoteString($partial_view),
-			$dohtml,
-			$dosmiley,
-			$doxcode,
-			$doimage,
-			$dobr,
-			$cancomment,
-			$comments,
-			$notifypub,
-			$this->db->quoteString($meta_keywords),
-			$this->db->quoteString($meta_description),
-			$this->db->quoteString($short_url),
-			$itemid);
-		}
-
-		//echo "<br />" . $sql . "<br />";exit;
-
-		if (false != $force) {
-			$result = $this->db->queryF($sql);
-		} else {
-			$result = $this->db->query($sql);
-		}
-
-		if (!$result) {
-			$item->setErrors('The query returned an error. ' . $this->db->error());
-			return false;
-		}
-		if ($item->isNew()) {
-			$item->assignVar('itemid', $this->db->getInsertId());
-		}
 
 		if (publisher_tag_module_included()) {
 			// Storing tags information
@@ -1086,24 +935,13 @@ class PublisherItemHandler extends XoopsObjectHandler
     	$smartModule =& $hModule->getByDirname('publisher');
     	$module_id = $smartModule->getVar('mid');
 
-		if (strtolower(get_class($item)) != 'publisheritem') {
-			return false;
-		}
-
 		// Deleting the files
 		global $publisher_file_handler;
 		if (!$publisher_file_handler->deleteItemFiles($item)) {
 			$item->setErrors('An error while deleting a file.');
 		}
 
-		$sql = sprintf("DELETE FROM %s WHERE itemid = %u", $this->db->prefix("publisher_items"), $item->itemid());
-
-		if (false != $force) {
-			$result = $this->db->queryF($sql);
-		} else {
-			$result = $this->db->query($sql);
-		}
-		if (!$result) {
+        if (!parent::delete($item, $force)) {
 			$item->setErrors('An error while deleting.');
 			return false;
 		}
@@ -1194,41 +1032,6 @@ class PublisherItemHandler extends XoopsObjectHandler
 
 		return $ret;
 	}
-	function &getSimpleItemsList($criteria = null)
-	{
-		$ret = false;
-		$limit = $start = 0;
-		$sql = 'SELECT itemid, title FROM '.$this->db->prefix('publisher_items');
-
-		if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-			$whereClause = $criteria->renderWhere();
-
-			if ($whereClause != 'WHERE ()') {
-				$sql .= ' '.$criteria->renderWhere();
-			}
-			if ($criteria->getSort() != '') {
-				$sql .= ' ORDER BY '.$criteria->getSort().' '.$criteria->getOrder();
-			}
-			$limit = $criteria->getLimit();
-			$start = $criteria->getStart();
-		}
-
-		$result = $this->db->query($sql, $limit, $start);
-		if (!$result) {
-			return $ret;
-		}
-
-		if (count($result) == 0) {
-			return $ret;
-		}
-
-		$aItems = array();
-
-		while ($myrow = $this->db->fetchArray($result)) {
-			$aItems[$myrow['itemid']] = $myrow['title'];
-		}
-		return $aItems;
-	}
 
 	/**
 	* count items matching a condition
@@ -1253,7 +1056,6 @@ class PublisherItemHandler extends XoopsObjectHandler
 			$sql .= " WHERE " . $this->NotNullFieldClause($notNullFields);
 		}
 
-		//echo "<br />" . $sql . "<br />";
 		$result = $this->db->query($sql);
 		if (!$result) {
 			return 0;
@@ -1465,36 +1267,10 @@ class PublisherItemHandler extends XoopsObjectHandler
 	*/
 	function deleteAll($criteria = null)
 	{
-		$sql = 'DELETE FROM '.$this->db->prefix('publisher_items');
-		if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-			$sql .= ' '.$criteria->renderWhere();
-		}
-		if (!$result = $this->db->query($sql)) {
-			return false;
-			// TODO : Also delete the permissions related to each ITEM
-		}
-		return true;
-	}
-
-	/**
-	* Change a value for Item with a certain criteria
-	*
-	* @param   string  $fieldname  Name of the field
-	* @param   string  $fieldvalue Value to write
-	* @param   object  $criteria   {@link CriteriaElement}
-	*
-	* @return  bool
-	**/
-	function updateAll($fieldname, $fieldvalue, $criteria = null)
-	{
-		$set_clause = is_numeric($fieldvalue) ? $fieldname.' = '.$fieldvalue : $fieldname.' = '.$this->db->quoteString($fieldvalue);
-		$sql = 'UPDATE '.$this->db->prefix('publisher_items').' SET '.$set_clause;
-		if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-			$sql .= ' '.$criteria->renderWhere();
-		}
-		if (!$result = $this->db->queryF($sql)) {
-			return false;
-		}
+	    $items = $this->getObjects($criteria);
+	    foreach ($items as $item) {
+            $this->delete($item);
+        }
 		return true;
 	}
 
@@ -1622,8 +1398,6 @@ class PublisherItemHandler extends XoopsObjectHandler
 		}
 	}
 
-	//echo "<br />" . $sql . "<br />";
-
 	$result = $this->db->query($sql, $limit, $start);
 	if (!$result) {
 		return $ret;
@@ -1727,6 +1501,7 @@ class PublisherItemHandler extends XoopsObjectHandler
 	}
 
 	function getCountsByCat($cat_id = 0, $status, $inSubCat=false) {
+	    global $publisher_isAdmin;
 	    $ret = array();
 	    $sql = 'SELECT c.parentid, i.categoryid, COUNT(*) AS count FROM '.$this->db->prefix('publisher_items') . ' AS i INNER JOIN '.$this->db->prefix('publisher_categories') . ' AS c ON i.categoryid=c.categoryid';
 	    if (intval($cat_id) > 0) {
@@ -1735,15 +1510,13 @@ class PublisherItemHandler extends XoopsObjectHandler
 	    }
 	    else {
 	        $sql .= ' WHERE i.status IN ('.implode(',', $status).')';
-	        if (!publisher_userIsAdmin()) {
+	        if (!$publisher_isAdmin) {
 	            $publisherPermHandler =& xoops_getmodulehandler('permission', 'publisher');
 	            $items = $publisherPermHandler->getGrantedItems('item_read');
 	            $sql .= ' AND i.itemid IN ('.implode(',', $items).')';
 	        }
 	    }
 	    $sql .= ' GROUP BY i.categoryid ORDER BY c.parentid ASC, i.categoryid ASC';
-
-	    //echo "<br />$sql<br />";
 
 		$result = $this->db->query($sql);
 		if (!$result) {

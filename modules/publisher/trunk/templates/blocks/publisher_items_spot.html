@@ -23,8 +23,10 @@
 				<{if $item.showline}>
 					<div style="font-size: 10px; text-align: right; border-bottom: 1px dotted #000000;">
 				<{/if}>
+				<{if $item.body != '' || $block.truncate}>
 				<div style="font-size: 10px; text-align: right;"><a href="<{$item.itemurl}>"><{$block.lang_readmore}></a></div>
-			</div>
+                <{/if}>
+            </div>
 
 		<{/if}>
 	<{/foreach}>

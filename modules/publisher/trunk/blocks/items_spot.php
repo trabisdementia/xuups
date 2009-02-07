@@ -45,6 +45,7 @@ function publisher_items_spot_show($options)
 					$item['showline'] = false;
 				}
                 if ($opt_truncate > 0) {
+                    $block['truncate'] = true;
                     $item['summary'] = publisher_truncate_tagsafe($item['summary'], $opt_truncate);
                 }
 				$block['items'][] = $item;
@@ -66,9 +67,9 @@ function publisher_items_spot_show($options)
 				} else {
 					$item['showline'] = false;
 				}
-				if ($opt_truncate > 0 && strrpos($item['summary'], ' ')) {
-				    $last_letter_pos = strrpos(substr($item['summary'],0 , $opt_truncate), ' ');
-                    $item['summary'] = xoops_substr($item['summary'], 0, $last_letter_pos + 3);
+				if ($opt_truncate > 0) {
+                    $block['truncate'] = true;
+                    $item['summary'] = publisher_truncate_tagsafe($item['summary'], $opt_truncate);
                 }
 				$block['items'][] = $item;
 				$i++;
@@ -123,7 +124,7 @@ function publisher_items_spot_edit($options)
 	$criteria = new CriteriaCompo();
 	$criteria->setSort('datesub');
 	$criteria->setOrder('DESC');
-	$itemsObj = $publisher_item_handler->getSimpleItemsList($criteria);
+	$itemsObj = $publisher_item_handler->getList($criteria);
 	unset($criteria);
 
 	if (empty($options[3]) || ($options[3] == 0)) {

@@ -1357,16 +1357,35 @@ function _putinfo()
 {
 	$this->_out('/Producer '.$this->_textstring('FPDF '.FPDF_VERSION));
 	if(!empty($this->title))
-		$this->_out('/Title '.$this->_textstring($this->title));
+		$this->_out('/Title '. $this->_jp_putinfohexstring($this->title) );
 	if(!empty($this->subject))
-		$this->_out('/Subject '.$this->_textstring($this->subject));
+		$this->_out('/Subject '.$this->_jp_putinfohexstring($this->subject));
 	if(!empty($this->author))
-		$this->_out('/Author '.$this->_textstring($this->author));
+		$this->_out('/Author '.$this->_jp_putinfohexstring($this->author));
 	if(!empty($this->keywords))
-		$this->_out('/Keywords '.$this->_textstring($this->keywords));
+		$this->_out('/Keywords '.$this->_jp_putinfohexstring($this->keywords));
 	if(!empty($this->creator))
-		$this->_out('/Creator '.$this->_textstring($this->creator));
+		$this->_out('/Creator '.$this->_jp_putinfohexstring($this->creator));
 	$this->_out('/CreationDate '.$this->_textstring('D:'.date('YmdHis')));
+}
+
+function _jp_putinfohexstring($s)
+{
+	//Format a text string
+	//for infomation properties hex
+	$s = $this->_jp_encoding($s , 'UTF-16BE', 'EUC-JP') ;
+	$s = '<' . 'FEFF' . strtoupper(bin2hex($s)) . '>'; // FEFF is BOM
+	return $s ;
+}
+
+function _jp_encoding(&$text, $out_charset, $in_charset)
+{
+	if ( function_exists('mb_convert_encoding') ) {
+		$text = mb_convert_encoding($text, $out_charset, $in_charset);
+	} elseif( function_exists('iconv') ) {
+		$text = iconv($in_charset, $out_charset . "//TRANSLIT", $text);
+	}
+	return $text;
 }
 
 function _putcatalog()

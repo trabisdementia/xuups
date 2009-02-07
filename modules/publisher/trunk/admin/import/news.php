@@ -8,10 +8,9 @@
 * Import script from WF-Section 1.5 to Publisher 1.0.x.
 *
 */
+include_once dirname(dirname(__FILE__)) . "/admin_header.php";
 
-include_once("admin_header.php");
-
-$importFromModuleName = "News " . $_POST['news_version'];
+$importFromModuleName = "News " . @$_POST['news_version'];
 
 $scriptname = "news.php";
 
@@ -49,7 +48,7 @@ if ($op == 'start')
 		} else {
 			echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . sprintf(_AM_PUB_IMPORT_MODULE_FOUND, $importFromModuleName, $totalArticles, $totalCat) . "</span>";
 
-			$form = new XoopsThemeForm (_AM_PUB_IMPORT_SETTINGS, 'import_form',  PUBLISHER_ADMIN_URL . "/$scriptname");
+			$form = new XoopsThemeForm (_AM_PUB_IMPORT_SETTINGS, 'import_form',  PUBLISHER_ADMIN_URL . "/import/$scriptname");
 
 			// Categories to be imported
 			$sql = "SELECT cat.topic_id, cat.topic_pid, cat.topic_title, COUNT(art.storyid) FROM ".$xoopsDB->prefix("topics") . " AS cat INNER JOIN ".$xoopsDB->prefix("stories") . " AS art ON cat.topic_id=art.topicid GROUP BY art.topicid";
@@ -65,7 +64,7 @@ if ($op == 'start')
 			$cat_label->setDescription(_AM_PUB_IMPORT_CATEGORIES_DSC);
 			$form->addElement ($cat_label);
 
-			// SmartFAQ parent category
+			// Publisher parent category
 			$mytree = new XoopsTree($xoopsDB->prefix("publisher_categories"), "categoryid", "parentid");
 			ob_start();
 			$mytree->makeMySelBox("name", "weight", $preset_id=0, $none=1, $sel_name="parent_category");
@@ -84,7 +83,7 @@ if ($op == 'start')
 		}
 	}
 
-	publisher_close_collapsable('wfsectionimport', 'wfsectionimporticon');
+	publisher_close_collapsable('newsimport', 'newsimporticon');
 
 	exit ();
 }
@@ -107,23 +106,16 @@ if ($op == 'go')
 	$newCatArray = array();
 	$newArticleArray = array();
 
+    $oldToNew = array();
 	while ($arrCat = $xoopsDB->fetchArray ($resultCat))
 	{
-		// insert category into SmartFAQ
-		$categoryObj = $publisher_category_handler->create();
 
-		$newCat = array();
-
-		$newCat['oldid'] = $arrCat['topic_id'];
-		$newCat['oldpid'] = $arrCat['topic_pid'];
+        $categoryObj =& $publisher_category_handler->create();
 
 		$categoryObj->setVar ('parentid', $arrCat['topic_pid']);
-
 		$categoryObj->setVar ('weight', 0);
-		//$categoryObj->setGroups_read (explode (" ", trim ($arrCat['groupid'])));
-		//$categoryObj->setGroups_submit (explode (" ", trim ($arrCat['editaccess'])));
 		$categoryObj->setVar ('name', $arrCat['topic_title']);
-		//$categoryObj->setVar ('description', $arrCat['description']);
+		$categoryObj->setVar ('description', $arrCat['topic_description']);
 
 		// Category image
 		/*if (($arrCat['imgurl'] != 'blank.gif') && ($arrCat['imgurl'])) {
@@ -132,13 +124,12 @@ if ($op == 'go')
 			}
 		}*/
 
-		if (!$categoryObj->store(false))
+		if (!$publisher_category_handler->insert($categoryObj))
 		{
 			echo sprintf(_AM_PUB_IMPORT_CATEGORY_ERROR, $arrCat['topic_title']) . "<br/>";
 			continue;
 		}
 
-		$newCat['newid'] = $categoryObj->categoryid();
 
 		// Saving category permissions
 		//publisher_saveCategory_Permissions($categoryObj->getGroups_read(), $categoryObj->categoryid(), 'category_read');

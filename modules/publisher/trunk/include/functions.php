@@ -430,10 +430,10 @@ function &publisher_admin_getPathStatus($item, $getStatus=false)
 		$path_status = _AM_PUB_AVAILABLE;
 	}elseif(!@is_dir($thePath)){
 		$pathCheckResult = -1;
-		$path_status = _AM_PUB_NOTAVAILABLE." <a href=index.php?op=createdir&amp;path=$item>"._AM_PUB_CREATETHEDIR.'</a>';
+		$path_status = _AM_PUB_NOTAVAILABLE." <a href='" . PUBLISHER_ADMIN_URL . "/index.php?op=createdir&amp;path={$item}'>"._AM_PUB_CREATETHEDIR."</a>";
 	}else{
 		$pathCheckResult = -2;
-		$path_status = _AM_PUB_NOTWRITABLE." <a href=index.php?op=setperm&amp;path=$item>"._AM_SCS_SETMPERM.'</a>';
+		$path_status = _AM_PUB_NOTWRITABLE." <a href='" . PUBLISHER_ADMIN_URL . "/index.php?op=setperm&amp;path={$item}'>"._AM_SCS_SETMPERM."</a>";
 	}
 	if (!$getStatus) {
 		return $path_status;
@@ -984,20 +984,14 @@ function publisher_adminMenu ($currentoption = 0, $breadcrumb = '' ) {
 	// global $xoopsDB, $xoopsModule, $xoopsConfig, $xoopsModuleConfig;
 	global $xoopsModule, $xoopsConfig;
 
-	if (file_exists(PUBLISHER_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-		include_once PUBLISHER_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/modinfo.php';
-	} else {
-		include_once PUBLISHER_ROOT_PATH . 'language/english/modinfo.php';
-	}
-	if (file_exists(PUBLISHER_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/admin.php')) {
-		include_once PUBLISHER_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/admin.php';
-	} else {
-		include_once PUBLISHER_ROOT_PATH . 'language/english/admin.php';
-	}
+    xoops_loadLanguage('admin', 'publisher');
+    xoops_loadLanguage('modinfo', 'publisher');
+    
 	include PUBLISHER_ROOT_PATH . 'admin/menu.php';
 
 	$tpl =& new XoopsTpl();
 	$tpl->assign( array(
+    'modurl'	=> PUBLISHER_URL,
 	'headermenu'	=> $headermenu,
 	'adminmenu'		=> $adminmenu,
 	'current'		=> $currentoption,

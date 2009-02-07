@@ -44,13 +44,13 @@ if (!file_exists($common_lang_file)) {
 }
 include_once($common_lang_file);
 
-include_once(PUBLISHER_ROOT_PATH . "include/functions.php");
+include_once PUBLISHER_ROOT_PATH . "include/functions.php";
 
 // Check XOOPS version to see if we are on XOOPS 2.2.x plateform
 $xoops22 = publisher_isXoops22();
 
-include_once(PUBLISHER_ROOT_PATH . "include/seo_functions.php");
-include_once(PUBLISHER_ROOT_PATH . "class/keyhighlighter.class.php");
+include_once PUBLISHER_ROOT_PATH . "include/seo_functions.php";
+include_once PUBLISHER_ROOT_PATH . "class/keyhighlighter.class.php";
 
 // Creating the SmartModule object
 $smartModule =& publisher_getModuleInfo();
