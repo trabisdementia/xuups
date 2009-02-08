@@ -26,8 +26,8 @@ $isAdmin = publisher_userIsAdmin();
 
 $uid = is_object($xoopsUser) ? $xoopsUser->uid() : 0;
 
-$groups = ($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-$gperm_handler = &xoops_gethandler('groupperm');
+$groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+$gperm_handler = &xoops_getmodulehandler('groupperm');
 $hModConfig = &xoops_gethandler('config');
 $module_id = $publisher_handler->getVar('mid');
 

@@ -31,11 +31,16 @@ else{
 $sform = new XoopsThemeForm($title , "form", xoops_getenv('PHP_SELF'));
 $sform->setExtra('enctype="multipart/form-data"');
 
-// Category
-$category_select = new XoopsFormSelect(_MD_PUB_CATEGORY, 'categoryid', $categoryid);
-$category_select->setDescription(_MD_PUB_CATEGORY_DSC);
-$category_select->addOptionArray($categoriesArray);
-$sform->addElement($category_select);
+if ($gperm_handler->checkRight('form_view2', 1, $groups, $module_id)) {
+    // Category
+
+    $category_select = new XoopsFormSelect(_MD_PUB_CATEGORY, 'categoryid', $categoryid);
+    $category_select->setDescription(_MD_PUB_CATEGORY_DSC);
+    $category_select->addOptionArray($categoriesArray);
+    $sform->addElement($category_select);
+}  else {
+    $sform->addElement(new XoopsFormHidden('categoryid', $categoryid));
+}
 
 // ITEM TITLE
 $sform->addElement(new XoopsFormText(_MD_PUB_TITLE, 'title', 50, 255, $itemObj->title('e')), true);
