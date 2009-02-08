@@ -4,7 +4,10 @@
  * @package publisher
  * @author Harry Fuecks (PHP Anthology Volume II)
  */
-
+ 
+if (!defined("XOOPS_ROOT_PATH")) {
+    die("XOOPS root path not defined");
+}
 
 class PublisherSession {
      

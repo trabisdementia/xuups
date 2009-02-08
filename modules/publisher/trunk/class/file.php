@@ -8,7 +8,7 @@
 */
 
 if (!defined("XOOPS_ROOT_PATH")) {
-die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 include_once XOOPS_ROOT_PATH.'/modules/publisher/include/common.php';
@@ -49,7 +49,7 @@ class PublisherFile extends XoopsObject
 
 	function checkUpload($post_field, &$allowed_mimetypes, &$errors)
 	{
-		include_once (PUBLISHER_ROOT_PATH.'class/uploader.php');
+		include_once (PUBLISHER_ROOT_PATH . '/class/uploader.php');
 	    $config =& publisher_getModuleConfig();
 
 	   /* $maxfilesize = $config['uploadSize'];
@@ -83,7 +83,7 @@ class PublisherFile extends XoopsObject
 	function storeUpload($post_field, $allowed_mimetypes = null, &$errors)
 	{
 	    global $xoopsUser, $xoopsDB, $xoopsModule;
-        include_once (PUBLISHER_ROOT_PATH.'class/uploader.php');
+        include_once (PUBLISHER_ROOT_PATH . '/class/uploader.php');
 
         $config =& publisher_getModuleConfig();
 
@@ -96,10 +96,6 @@ class PublisherFile extends XoopsObject
                 return false;
             }
         }
-
-        /*$maxfilesize = $config['xhelp_uploadSize'];
-        $maxfilewidth = $config['xhelp_uploadWidth'];
-        $maxfileheight = $config['xhelp_uploadHeight'];*/
 
 	   	$maxfilesize = $config['maximum_filesize'];
 		$maxfilewidth = $config['maximum_image_width'];
@@ -161,22 +157,22 @@ class PublisherFile extends XoopsObject
         return $this->getVar("itemid");
     }
 
-    function name($format="S")
+    function name($format = "S")
     {
         return $this->getVar("name", $format);
     }
 
-    function description($format="S")
+    function description($format = "S")
     {
         return $this->getVar("description", $format);
     }
 
-    function filename($format="S")
+    function filename($format = "S")
     {
         return $this->getVar("filename", $format);
     }
 
-    function mimetype($format="S")
+    function mimetype($format = "S")
     {
         return $this->getVar("mimetype", $format);
     }
@@ -186,7 +182,7 @@ class PublisherFile extends XoopsObject
         return $this->getVar("uid");
     }
 
-	function datesub($dateFormat='s', $format="S")
+	function datesub($dateFormat = 's', $format = "S")
 	{
 		return formatTimestamp($this->getVar('datesub', $format), $dateFormat);
 	}
@@ -208,7 +204,7 @@ class PublisherFile extends XoopsObject
 
 	function notLoaded()
 	{
-	   return ($this->getVar('itemid')== 0);
+	   return ($this->getVar('itemid') == 0);
 	}
 
 	function getFileUrl()
@@ -245,9 +241,10 @@ class PublisherFile extends XoopsObject
 	  	$this->store();
 	}
 
-	function displayFlash() {
+	function displayFlash()
+    {
 		if (!defined('MYTEXTSANITIZER_EXTENDED_MEDIA')) {
-			include_once(PUBLISHER_ROOT_PATH . 'include/media.textsanitizer.php');
+			include_once(PUBLISHER_ROOT_PATH . '/include/media.textsanitizer.php');
 		}
 		$media_ts = MyTextSanitizerExtension::getInstance();
 		return $media_ts->_displayFlash($this->getFileUrl());
@@ -256,7 +253,7 @@ class PublisherFile extends XoopsObject
 	function getNameFromFilename() {
 		$ret = $this->filename();
 		$sep_pos = strpos($ret, '_');
-		$ret = substr($ret, $sep_pos+1, strlen($ret) - $sep_pos);
+		$ret = substr($ret, $sep_pos + 1, strlen($ret) - $sep_pos);
 		return $ret;
 	}
 }
@@ -270,97 +267,18 @@ class PublisherFile extends XoopsObject
 * @package Publisher
 */
 
-class PublisherFileHandler extends XoopsObjectHandler
+class PublisherFileHandler extends XoopsPersistableObjectHandler
 {
 
-	/**
-	* create a new file
-	*
-	* @param bool $isNew flag the new objects as "new"?
-	* @return object PublisherFile
-	*/
-	function &create($isNew = true)
-	{
-		$file = new PublisherFile();
-		if ($isNew) {
-			$file->setNew();
-		}
-		return $file;
-	}
+    function PublisherFileHandler(&$db)
+    {
+        $this->__construct($db);
+    }
 
-	/**
-	* retrieve an file
-	*
-	* @param int $id fileid of the file
-	* @return mixed reference to the {@link PublisherFile} object, FALSE if failed
-	*/
-	function &get($id)
-	{
-		if (intval($id) > 0) {
-			$sql = 'SELECT * FROM '.$this->db->prefix('publisher_files').' WHERE fileid='.$id;
-			if (!$result = $this->db->query($sql)) {
-				return false;
-			}
-
-			$numrows = $this->db->getRowsNum($result);
-			if ($numrows == 1) {
-				$file = new PublisherFile();
-				$file->assignVars($this->db->fetchArray($result));
-				return $file;
-			}
-		}
-		return false;
-	}
-
-	/**
-	* insert a new file in the database
-	*
-	* @param object $file reference to the {@link PublisherFile} object
-	* @param bool $force
-	* @return bool FALSE if failed, TRUE if already present and unchanged or successful
-	*/
-	function insert(&$fileObj, $force = false)
-	{
-		if (strtolower(get_class($fileObj)) != 'publisherfile') {
-            return false;
-        }
-        if (!$fileObj->isDirty()) {
-            return true;
-        }
-        if (!$fileObj->cleanVars()) {
-            return false;
-        }
-
-        foreach ($fileObj->cleanVars as $k => $v) {
-            ${$k} = $v;
-        }
-
-		if ($fileObj->isNew()) {
-			$sql = sprintf("INSERT INTO %s (fileid, itemid, name, description, filename, mimetype, uid, datesub, `status`, notifypub, counter) VALUES (NULL, %u, %s, %s, %s, %s, %u, %u, %u, %u, %u)", $this->db->prefix('publisher_files'), $itemid,  $this->db->quoteString($name), $this->db->quoteString($description), $this->db->quoteString($filename), $this->db->quoteString($mimetype), $uid, time(), $status, $notifypub, $counter);
-		} else {
-			$sql = sprintf("UPDATE %s SET itemid = %u, name = %s, description = %s, filename = %s, mimetype = %s, uid = %u, datesub = %u, status = %u, notifypub = %u, counter = %u WHERE fileid = %u", $this->db->prefix('publisher_files'), $itemid, $this->db->quoteString($name), $this->db->quoteString($description), $this->db->quoteString($filename), $this->db->quoteString($mimetype), $uid, $datesub, $status, $notifypub, $counter, $fileid);
-		}
-
-		//echo "<br />$sql<br />";
-
-		if (false != $force) {
-			$result = $this->db->queryF($sql);
-		} else {
-			$result = $this->db->query($sql);
-		}
-
-		if (!$result) {
-			$fileObj->setErrors('The query returned an error. ' . $this->db->error());
-			return false;
-		}
-
-		if ($fileObj->isNew()) {
-			$fileObj->assignVar('fileid', $this->db->getInsertId());
-		}
-
-		$fileObj->assignVar('fileid', $fileid);
-		return true;
-	}
+    function __construct(&$db)
+    {
+        parent::__construct($db, "publisher_files", 'PublisherFile', "fileid", "name");
+    }
 
 	/**
 	* delete a file from the database
@@ -371,30 +289,13 @@ class PublisherFileHandler extends XoopsObjectHandler
 	*/
 	function delete(&$file, $force = false)
 	{
-		if (strtolower(get_class($file)) != 'publisherfile') {
-
-			return false;
-		}
 		// Delete the actual file
-		if (!publisher_deleteFile($file->getFilePath())){
-
+		if (!publisher_deleteFile($file->getFilePath())) {
 			return false;
 		}
-		// Delete the record in the table
-		$sql = sprintf("DELETE FROM %s WHERE fileid = %u", $this->db->prefix("publisher_files"), $file->getVar('fileid'));
 
-		if (false != $force) {
-
-			$result = $this->db->queryF($sql);
-		} else {
-
-			$result = $this->db->query($sql);
-
-		}
-		if (!$result) {
-			return false;
-		}
-		return true;
+        $ret = parent::delete($file, $force);
+        return $ret;
 	}
 
 	/**
@@ -418,51 +319,13 @@ class PublisherFileHandler extends XoopsObjectHandler
 	}
 
 	/**
-	* retrieve files from the database
-	*
-	* @param object $criteria {@link CriteriaElement} conditions to be met
-	* @param bool $id_as_key use the fileid as key for the array?
-	* @return array array of {@link PublisherFile} objects
-	*/
-	function &getObjects($criteria = null, $id_as_key = false)
-	{
-		$ret = array();
-		$limit = $start = 0;
-		$sql = 'SELECT * FROM '.$this->db->prefix('publisher_files');
-		if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-			$sql .= ' '.$criteria->renderWhere();
-			if ($criteria->getSort() != '') {
-				$sql .= ' ORDER BY '.$criteria->getSort().' '.$criteria->getOrder();
-			}
-			$limit = $criteria->getLimit();
-			$start = $criteria->getStart();
-		}
-		//echo "<br />" . $sql . "<br />";
-		$result = $this->db->query($sql, $limit, $start);
-		if (!$result) {
-			return $ret;
-		}
-		while ($myrow = $this->db->fetchArray($result)) {
-			$file = new PublisherFile();
-			$file->assignVars($myrow);
-			if (!$id_as_key) {
-				$ret[] =& $file;
-			} else {
-				$ret[$myrow['fileid']] =& $file;
-			}
-			unset($file);
-		}
-		return $ret;
-	}
-
-	/**
 	* retrieve all files
 	*
 	* @param object $criteria {@link CriteriaElement} conditions to be met
 	* @param int $itemid
 	* @return array array of {@link PublisherFile} objects
 	*/
-	function &getAllFiles($itemid=0, $status = -1, $limit = 0, $start = 0, $sort = 'datesub', $order = 'DESC')
+	function &getAllFiles($itemid = 0, $status = -1, $limit = 0, $start = 0, $sort = 'datesub', $order = 'DESC')
 	{
 		$hasStatusCriteria = false;
 		$criteriaStatus = new CriteriaCompo();
@@ -495,67 +358,6 @@ class PublisherFileHandler extends XoopsObjectHandler
 
 		return $files;
 	}
-
-	/**
-	* count files matching a condition
-	*
-	* @param object $criteria {@link CriteriaElement} to match
-	* @return int count of files
-	*/
-	function getCount($criteria = null)
-	{
-		$sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('publisher_files');
-		if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-			$sql .= ' '.$criteria->renderWhere();
-		}
-		$result = $this->db->query($sql);
-		if (!$result) {
-			return 0;
-		}
-		list($count) = $this->db->fetchRow($result);
-		return $count;
-	}
-
-	/**
-	* delete files matching a set of conditions
-	*
-	* @param object $criteria {@link CriteriaElement}
-	* @return bool FALSE if deletion failed
-	*/
-	function deleteAll($criteria = null)
-	{
-		$sql = 'DELETE FROM '.$this->db->prefix('publisher_files');
-		if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-			$sql .= ' '.$criteria->renderWhere();
-		}
-		if (!$result = $this->db->query($sql)) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	* Change a value for files with a certain criteria
-	*
-	* @param   string  $fieldname  Name of the field
-	* @param   string  $fieldvalue Value to write
-	* @param   object  $criteria   {@link CriteriaElement}
-	*
-	* @return  bool
-	**/
-	function updateAll($fieldname, $fieldvalue, $criteria = null)
-	{
-		$set_clause = is_numeric($fieldvalue) ? $fieldname.' = '.$fieldvalue : $fieldname.' = '.$this->db->quoteString($fieldvalue);
-		$sql = 'UPDATE '.$this->db->prefix('publisher_files').' SET '.$set_clause;
-		if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-			$sql .= ' '.$criteria->renderWhere();
-		}
-		//echo "<br />" . $sql . "<br />";
-		if (!$result = $this->db->queryF($sql)) {
-			return false;
-		}
-		return true;
-	}
-
+	
 }
 ?>

@@ -16,7 +16,7 @@ function publisher_items_recent_show($options)
 
 	$myts = &MyTextSanitizer::getInstance();
 
-   	$smartModule =& publisher_getModuleInfo();
+   	$publisher_handler =& publisher_getModuleInfo();
 
 	$block = array();
 
@@ -62,7 +62,7 @@ function publisher_items_recent_show($options)
 		$block['lang_category'] = _MB_PUB_CATEGORY;
 		$block['lang_poster'] = _MB_PUB_POSTEDBY;
 		$block['lang_date'] = _MB_PUB_DATE;
-		$modulename = $myts->makeTboxData4Show($smartModule->getVar('name'));
+		$modulename = $myts->makeTboxData4Show($publisher_handler->getVar('name'));
 		$block['lang_visitItem'] = _MB_PUB_VISITITEM . " " . $modulename;
 	}
 

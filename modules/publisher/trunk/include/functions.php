@@ -133,8 +133,8 @@ function publisher_SetMeta($key, $value)
 
 function publisher_highlighter ($matches) {
 
-	$smartConfig =& publisher_getModuleConfig();
-	$color = $smartConfig['highlight_color'];
+	$publisher_config =& publisher_getModuleConfig();
+	$color = $publisher_config['highlight_color'];
 	if(substr($color,0,1)!='#') {
 		$color='#'.$color;
 	}
@@ -227,7 +227,7 @@ function publisher_module_home($withLink=true)
 	if (!$withLink)	{
 		return $publisher_moduleName;
 	} else {
-		return '<a href="' . PUBLISHER_URL . '">' . $publisher_moduleName . '</a>';
+		return '<a href="' . PUBLISHER_URL . '/">' . $publisher_moduleName . '</a>';
 	}
 }
 
@@ -275,7 +275,7 @@ function publisher_copyr($source, $dest)
 
 function publisher_getEditor($caption, $name, $value, $dhtml = true)
 {
-	$smartConfig =& publisher_getModuleConfig();
+	$publisher_config =& publisher_getModuleConfig();
 
 	global $xoops22;
 	if (!isset($xoops22)) {
@@ -291,7 +291,7 @@ function publisher_getEditor($caption, $name, $value, $dhtml = true)
     $editor_configs["width"] = "100%";
     $editor_configs["height"] = "400px";
 
-	switch ($smartConfig['use_wysiwyg']) {
+	switch ($publisher_config['use_wysiwyg']) {
 		case 'tiny' :
 		if (!$xoops22) {
 
@@ -539,8 +539,8 @@ function publisher_imageResize($src, $maxWidth, $maxHeight)
 
 function publisher_getHelpPath()
 {
-	$smartConfig =& publisher_getModuleConfig();
-	switch ($smartConfig['helppath_select'])
+	$publisher_config =& publisher_getModuleConfig();
+	switch ($publisher_config['helppath_select'])
 	{
 		case 'docs.xoops.org' :
 		return 'http://docs.xoops.org/help/ssectionh/index.htm';
@@ -551,43 +551,43 @@ function publisher_getHelpPath()
 		break;
 
 		case 'custom' :
-		return $smartConfig['helppath_custom'];
+		return $publisher_config['helppath_custom'];
 		break;
 	}
 }
 
 function &publisher_getModuleInfo()
 {
-	static $smartModule;
-	if (!isset($smartModule)) {
+	static $publisher_handler;
+	if (!isset($publisher_handler)) {
 		global $xoopsModule;
 		if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'publisher') {
-			$smartModule =& $xoopsModule;
+			$publisher_handler =& $xoopsModule;
 		}
 		else {
 			$hModule = &xoops_gethandler('module');
-			$smartModule = $hModule->getByDirname('publisher');
+			$publisher_handler = $hModule->getByDirname('publisher');
 		}
 	}
-	return $smartModule;
+	return $publisher_handler;
 }
 
 function &publisher_getModuleConfig()
 {
-	static $smartConfig;
-	if (!$smartConfig) {
+	static $publisher_config;
+	if (!$publisher_config) {
 		global $xoopsModule;
 		if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'publisher') {
 			global $xoopsModuleConfig;
-			$smartConfig =& $xoopsModuleConfig;
+			$publisher_config =& $xoopsModuleConfig;
 		}
 		else {
-			$smartModule =& publisher_getModuleInfo();
+			$publisher_handler =& publisher_getModuleInfo();
 			$hModConfig = &xoops_gethandler('config');
-			$smartConfig = $hModConfig->getConfigsByCat(0, $smartModule->getVar('mid'));
+			$publisher_config = $hModConfig->getConfigsByCat(0, $publisher_handler->getVar('mid'));
 		}
 	}
-	return $smartConfig;
+	return $publisher_config;
 }
 
 
@@ -679,12 +679,12 @@ function publisher_moderator ()
 		$hModule = &xoops_gethandler('module');
 		$hModConfig = &xoops_gethandler('config');
 
-		if ($smartModule = &$hModule->getByDirname('publisher')) {
-			$module_id = $smartModule->getVar('mid');
+		if ($publisher_handler = &$hModule->getByDirname('publisher')) {
+			$module_id = $publisher_handler->getVar('mid');
 		}
 
-		$module_name = $smartModule->getVar('dirname');
-		$smartConfig = &$hModConfig->getConfigsByCat(0, $smartModule->getVar('mid'));
+		$module_name = $publisher_handler->getVar('dirname');
+		$publisher_config = &$hModConfig->getConfigsByCat(0, $publisher_handler->getVar('mid'));
 
 		$gperm_handler = &xoops_gethandler('groupperm');
 
@@ -727,8 +727,8 @@ function publisher_userIsAdmin()
 
 	$publisher_isAdmin = false;
 
-	$smartModule = publisher_getModuleInfo();
-	$module_id = $smartModule->getVar('mid');
+	$publisher_handler = publisher_getModuleInfo();
+	$module_id = $publisher_handler->getVar('mid');
 	$publisher_isAdmin = $xoopsUser->isAdmin($module_id);
 
 	return $publisher_isAdmin;
@@ -770,9 +770,9 @@ function publisher_itemAccessGranted(&$itemObj)
 		$hModule = &xoops_gethandler('module');
 		$hModConfig = &xoops_gethandler('config');
 
-		$smartModule = &$hModule->getByDirname('publisher');
+		$publisher_handler = &$hModule->getByDirname('publisher');
 
-		$module_id = $smartModule->getVar('mid');
+		$module_id = $publisher_handler->getVar('mid');
 		// Do we have access to the parent category
 		if ($gperm_handler->checkRight('category_read', $categoryid, $groups, $module_id)) {
 			// Do we have access to the item ?
@@ -804,9 +804,9 @@ function publisher_overrideItemsPermissions($groups, $categoryid)
 
 	$result = true;
 	$hModule = &xoops_gethandler('module');
-	$smartModule = &$hModule->getByDirname('publisher');
+	$publisher_handler = &$hModule->getByDirname('publisher');
 
-	$module_id = $smartModule->getVar('mid');
+	$module_id = $publisher_handler->getVar('mid');
 	$gperm_handler = &xoops_gethandler('groupperm');
 
 	$sql = "SELECT itemid FROM " . $xoopsDB->prefix("publisher_items") . " WHERE categoryid = '$categoryid' ";
@@ -842,9 +842,9 @@ function publisher_saveItemPermissions($groups, $itemID)
 {
 	$result = true;
 	$hModule = &xoops_gethandler('module');
-	$smartModule = &$hModule->getByDirname('publisher');
+	$publisher_handler = &$hModule->getByDirname('publisher');
 
-	$module_id = $smartModule->getVar('mid');
+	$module_id = $publisher_handler->getVar('mid');
 	$gperm_handler = &xoops_gethandler('groupperm');
 	// First, if the permissions are already there, delete them
 	$gperm_handler->deleteByModule($module_id, 'item_read', $itemID);
@@ -872,9 +872,9 @@ function publisher_saveCategory_Permissions($groups, $categoryid, $perm_name)
 {
 	$result = true;
 	$hModule = &xoops_gethandler('module');
-	$smartModule = &$hModule->getByDirname('publisher');
+	$publisher_handler = &$hModule->getByDirname('publisher');
 
-	$module_id = $smartModule->getVar('mid');
+	$module_id = $publisher_handler->getVar('mid');
 	$gperm_handler = &xoops_gethandler('groupperm');
 	// First, if the permissions are already there, delete them
 	$gperm_handler->deleteByModule($module_id, $perm_name, $categoryid);
@@ -902,8 +902,8 @@ function publisher_saveModerators($moderators, $categoryid)
 {
 	$result = true;
 	$hModule = &xoops_gethandler('module');
-	$smartModule = &$hModule->getByDirname('publisher');
-	$module_id = $smartModule->getVar('mid');
+	$publisher_handler = &$hModule->getByDirname('publisher');
+	$module_id = $publisher_handler->getVar('mid');
 	$gperm_handler = &xoops_gethandler('groupperm');
 	// First, if the permissions are already there, delete them
 	$gperm_handler->deleteByModule($module_id, 'category_moderation', $categoryid);
@@ -987,7 +987,7 @@ function publisher_adminMenu ($currentoption = 0, $breadcrumb = '' ) {
     xoops_loadLanguage('admin', 'publisher');
     xoops_loadLanguage('modinfo', 'publisher');
     
-	include PUBLISHER_ROOT_PATH . 'admin/menu.php';
+	include PUBLISHER_ROOT_PATH . '/admin/menu.php';
 
 	$tpl =& new XoopsTpl();
 	$tpl->assign( array(
@@ -1155,7 +1155,7 @@ function publisher_renderErrors(&$err_arr, $reseturl = '')
 {
 
 	if (is_array($err_arr) && count($err_arr) > 0) {
-		echo '<div id="readOnly" class="errorMsg" style="border:1px solid #D24D00; background:#FEFECC url('. PUBLISHER_URL.'images/important-32.png) no-repeat 7px 50%;color:#333;padding-left:45px;">';
+		echo '<div id="readOnly" class="errorMsg" style="border:1px solid #D24D00; background:#FEFECC url('. PUBLISHER_URL . '/images/important-32.png) no-repeat 7px 50%;color:#333;padding-left:45px;">';
 
 		echo '<h4 style="text-align:left;margin:0; padding-top:0">'._AM_PUB_MSG_SUBMISSION_ERR;
 
@@ -1222,7 +1222,7 @@ function publisher_tag_module_included() {
 
 function publisher_upload_file($another = false, $withRedirect=true, &$itemObj)
 {
-	include_once(PUBLISHER_ROOT_PATH . "class/uploader.php");
+	include_once(PUBLISHER_ROOT_PATH ."/class/uploader.php");
 
 	global $publisher_isAdmin, $xoopsModuleConfig, $publisher_item_handler, $publisher_file_handler, $xoopsUser;
 

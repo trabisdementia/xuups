@@ -8,10 +8,10 @@
 * Licence: GNU
 */
 if (!defined("XOOPS_ROOT_PATH")) {
-die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
-include_once XOOPS_ROOT_PATH.'/modules/publisher/include/common.php';
+include_once XOOPS_ROOT_PATH . '/modules/publisher/include/common.php';
 
 class PublisherPermissionHandler extends XoopsObjectHandler
 {
@@ -28,12 +28,12 @@ class PublisherPermissionHandler extends XoopsObjectHandler
 		static $groups;
 
 		if (!isset($groups[$gperm_name]) || ($id != null && !isset($groups[$gperm_name][$id]))) {
-			$smartModule =& publisher_getModuleInfo();
+			$publisher_handler =& publisher_getModuleInfo();
 			//Get group permissions handler
 			$gperm_handler =& xoops_gethandler('groupperm');
 
 			//Get groups allowed for an item id
-			$allowedgroups = $gperm_handler->getGroupIds($gperm_name, $id, $smartModule->getVar('mid'));
+			$allowedgroups = $gperm_handler->getGroupIds($gperm_name, $id, $publisher_handler->getVar('mid'));
 			$groups[$gperm_name][$id] = $allowedgroups;
 		}
 		//Return the permission array
@@ -59,10 +59,10 @@ class PublisherPermissionHandler extends XoopsObjectHandler
 			}
 		}
 
-		$smartModule =& publisher_getModuleInfo();
+		$publisher_handler =& publisher_getModuleInfo();
 
 		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('gperm_modid', $smartModule->getVar('mid')));
+		$criteria->add(new Criteria('gperm_modid', $publisher_handler->getVar('mid')));
 
 		if ($gperm_name) {
 			$criteria->add(new Criteria('gperm_name', $gperm_name));
@@ -99,7 +99,7 @@ class PublisherPermissionHandler extends XoopsObjectHandler
 
 		if (!isset($permissions[$gperm_name]) || ($id != null && !isset($permissions[$gperm_name][$id]))) {
 
-			$smartModule =& publisher_getModuleInfo();
+			$publisher_handler =& publisher_getModuleInfo();
 
 			//Get group permissions handler
 			$gperm_handler =& xoops_gethandler('groupperm');
@@ -108,7 +108,7 @@ class PublisherPermissionHandler extends XoopsObjectHandler
 			$groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
 
 			//Get all allowed item ids in this module and for this user's groups
-			$userpermissions =& $gperm_handler->getItemIds($gperm_name, $groups, $smartModule->getVar('mid'));
+			$userpermissions =& $gperm_handler->getItemIds($gperm_name, $groups, $publisher_handler->getVar('mid'));
 			$permissions[$gperm_name] = $userpermissions;
 		}
 		//Return the permission array
@@ -128,10 +128,10 @@ class PublisherPermissionHandler extends XoopsObjectHandler
 
 	function saveItem_Permissions($groups, $itemid, $perm_name)
 	{
-		$smartModule =& publisher_getModuleInfo();
+		$publisher_handler =& publisher_getModuleInfo();
 
 		$result = true;
-		$module_id = $smartModule->getVar('mid')   ;
+		$module_id = $publisher_handler->getVar('mid')   ;
 		$gperm_handler =& xoops_gethandler('groupperm');
 
 		// First, if the permissions are already there, delete them
@@ -162,10 +162,10 @@ class PublisherPermissionHandler extends XoopsObjectHandler
 	{
 		global $xoopsModule;
 
-		$smartModule =& publisher_getModuleInfo();
+		$publisher_handler =& publisher_getModuleInfo();
 
 		$result = true;
-		$module_id = $smartModule->getVar('mid')   ;
+		$module_id = $publisher_handler->getVar('mid')   ;
 		$gperm_handler =& xoops_gethandler('groupperm');
 
 

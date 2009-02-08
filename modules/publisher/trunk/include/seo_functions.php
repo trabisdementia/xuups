@@ -64,7 +64,7 @@ function publisher_seo_title($title='', $withExt=true)
 
 function publisher_seo_genUrl($op, $id, $short_url="")
 {
-    $smartModuleConfig = publisher_getModuleConfig();
+    $publisher_config = publisher_getModuleConfig();
     if (defined('PUBLISHER_SEO_ENABLED'))
     {
     	if (! empty($short_url)) $short_url = $short_url . '.html';
@@ -72,7 +72,7 @@ function publisher_seo_genUrl($op, $id, $short_url="")
         if (PUBLISHER_SEO_ENABLED == 'rewrite')
         {
             // generate SEO url using htaccess
-            return XOOPS_URL."/" . $smartModuleConfig['module_seo_modulename'] . ".${op}.${id}/${short_url}";
+            return XOOPS_URL."/" . $publisher_config['module_seo_modulename'] . ".${op}.${id}/${short_url}";
         }
         else if (PUBLISHER_SEO_ENABLED == 'path-info')
         {

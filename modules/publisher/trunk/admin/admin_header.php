@@ -11,7 +11,7 @@ include_once dirname(dirname(dirname(dirname(__FILE__)))) . "/mainfile.php";
 include XOOPS_ROOT_PATH.'/modules/publisher/include/common.php';
 
 if( !defined("PUBLISHER_ADMIN_URL") ){
-	define('PUBLISHER_ADMIN_URL', PUBLISHER_URL . "admin");
+	define('PUBLISHER_ADMIN_URL', PUBLISHER_URL . "/admin");
 }
 
 if (!defined("PUBLISHER_NOCPFUNC")) {

@@ -219,7 +219,7 @@ class PublisherAbout
 		
 			
 	    // For changelog thanks to 3Dev
-	    $filename = PUBLISHER_ROOT_PATH . "changelog.txt";
+	    $filename = PUBLISHER_ROOT_PATH ."/changelog.txt";
 	    if(is_file($filename)){
 	    	
 			echo "<br />\n";

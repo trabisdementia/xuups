@@ -46,7 +46,7 @@ $thePath = publisher_getUploadDir();
 		$res = publisher_admin_mkdir($thePath);
 
 		if ($res) {
-			$source = PUBLISHER_ROOT_PATH . "images/blank.png";
+			$source = PUBLISHER_ROOT_PATH ."/images/blank.png";
 			$dest = $thePath . "blank.png";
 			publisher_copyr($source, $dest);
 		}
@@ -58,7 +58,7 @@ $thePath = publisher_getUploadDir();
 		$res = publisher_admin_mkdir($thePath);
 
 		if ($res) {
-			$source = PUBLISHER_ROOT_PATH . "images/blank.png";
+			$source = PUBLISHER_ROOT_PATH ."/images/blank.png";
 			$dest = $thePath . "blank.png";
 			publisher_copyr($source, $dest);
 		}
@@ -70,7 +70,7 @@ $thePath = publisher_getUploadDir();
 		$res = publisher_admin_mkdir($thePath);
 
 		if ($res) {
-			$source = PUBLISHER_ROOT_PATH . "images/blank.png";
+			$source = PUBLISHER_ROOT_PATH ."/images/blank.png";
 			$dest = $thePath . "blank.png";
 			publisher_copyr($source, $dest);
 		}

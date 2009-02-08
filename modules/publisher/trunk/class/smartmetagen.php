@@ -153,6 +153,7 @@ class PublisherMetaGen
 		return $text;
 	}
 
+    //<?
 	function setTitle($title)
 	{
 		global $xoopsModule;

@@ -9,13 +9,9 @@
 
 include_once("header.php");
 
-if (file_exists(XOOPS_ROOT_PATH.'/modules/publisher/language/'.$xoopsConfig['language'].'/admin.php')) {
-    include_once XOOPS_ROOT_PATH.'/modules/publisher/language/'.$xoopsConfig['language'].'/admin.php';
-}else{
-    include_once XOOPS_ROOT_PATH.'/modules/publisher/language/english/admin.php';
-}
+xoops_loadLanguage('admin', 'publisher');
 
-Global $publisher_category_handler, $publisher_item_handler, $xoopsUser, $xoopsConfig, $xoopsModuleConfig, $xoopsModule;
+global $publisher_category_handler, $publisher_item_handler, $xoopsUser, $xoopsConfig, $xoopsModuleConfig, $xoopsModule;
 
 // Get the total number of categories
 $categoriesArray = $publisher_category_handler->getCategoriesForSubmit();
@@ -28,37 +24,27 @@ if (!$categoriesArray) {
 // Find if the user is admin of the module
 $isAdmin = publisher_userIsAdmin();
 
-
 $uid = is_object($xoopsUser) ? $xoopsUser->uid() : 0;
 
 $groups = ($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $gperm_handler = &xoops_gethandler('groupperm');
 $hModConfig = &xoops_gethandler('config');
-$module_id = $smartModule->getVar('mid');
+$module_id = $publisher_handler->getVar('mid');
 
 $itemid = (isset($_GET['itemid'])) ? $_GET['itemid'] : 0;
 $itemid = (isset($_POST['itemid'])) ? $_POST['itemid'] : $itemid;
 if ($itemid != 0) {
 	// We are editing an article
 	$itemObj = $publisher_item_handler->get($itemid);
-	if (!($isAdmin ||
-			(is_object($xoopsUser) &&
-				($itemObj) &&
-				(($xoopsUser->uid() == $itemObj->uid())
-				)
-			)
-		  )
-		)	{
-	redirect_header("index.php", 1, _NOPERM);
-	exit();
+	if (!($isAdmin || (is_object($xoopsUser) && $itemObj && ($xoopsUser->uid() == $itemObj->uid())))) {
+	   redirect_header("index.php", 1, _NOPERM);
+	   exit();
 	}
 	$categoryObj = $itemObj->category();
 } else {
 	// we are submitting a new article
 	// if the user is not admin AND we don't allow user submission, exit
-	if (!($isAdmin ||
-		(isset($xoopsModuleConfig['allowsubmit']) && $xoopsModuleConfig['allowsubmit'] == 1 && (is_object($xoopsUser) || (isset($xoopsModuleConfig['anonpost']) && $xoopsModuleConfig['anonpost'] == 1))))
-		) {
+	if (!($isAdmin || (isset($xoopsModuleConfig['allowsubmit']) && $xoopsModuleConfig['allowsubmit'] == 1 && (is_object($xoopsUser) || (isset($xoopsModuleConfig['anonpost']) && $xoopsModuleConfig['anonpost'] == 1))))) {
 		redirect_header("index.php", 1, _NOPERM);
 		exit();
 	}
@@ -79,7 +65,7 @@ if (isset($_POST['post'])) {
 switch ($op) {
 	case 'preview':
 
-	Global $xoopsUser, $xoopsConfig, $xoopsModule, $xoopsModuleConfig, $xoopsDB;
+	global $xoopsUser, $xoopsConfig, $xoopsModule, $xoopsModuleConfig, $xoopsDB;
 	// Putting the values about the ITEM in the ITEM object
     $itemObj->setVar('uid', $_POST['uid']);
     $itemObj->setVar('categoryid', $_POST['categoryid']);
@@ -133,10 +119,10 @@ switch ($op) {
 	global $xoopsUser, $myts;
 
 	$xoopsOption['template_main'] = 'publisher_submit.html';
-	include_once(XOOPS_ROOT_PATH . "/header.php");
-	include_once("footer.php");
+	include_once XOOPS_ROOT_PATH . "/header.php";
+	include_once "footer.php";
 
-	$name = ($xoopsUser) ? (ucwords($xoopsUser->getVar("uname"))) : 'Anonymous';
+	$name = $xoopsUser ? ucwords($xoopsUser->getVar("uname")) : 'Anonymous';
 
 	$categoryObj = $publisher_category_handler->get($_POST['categoryid']);
 
@@ -167,7 +153,7 @@ switch ($op) {
 
 	}
 
-	include_once PUBLISHER_ROOT_PATH . 'include/submit.inc.php';
+	include_once PUBLISHER_ROOT_PATH . '/include/submit.inc.php';
 
 	include_once XOOPS_ROOT_PATH . '/footer.php';
 
@@ -313,7 +299,7 @@ switch ($op) {
 
 	}
 
-	include_once PUBLISHER_ROOT_PATH . 'include/submit.inc.php';
+	include_once PUBLISHER_ROOT_PATH . '/include/submit.inc.php';
 
 	include_once XOOPS_ROOT_PATH . '/footer.php';
 	break;

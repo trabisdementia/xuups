@@ -353,8 +353,8 @@ class PublisherItem extends XoopsObject
 	{
 		if ($realName == -1) {
 			global $xoopsModuleConfig;
-			$smartConfig =& publisher_getModuleConfig();
-			$realName = $smartConfig['userealname'];
+			$publisher_config =& publisher_getModuleConfig();
+			$realName = $publisher_config['userealname'];
 		}
 		return publisher_getLinkedUnameFromId($this->uid(), $realName);
 	}
@@ -437,7 +437,7 @@ class PublisherItem extends XoopsObject
 	function getAdminLinks()
 	{
 		// include language file
-		global $xoopsConfig, $smartModule, $smartConfig, $xoopsUser;
+		global $xoopsConfig, $publisher_handler, $publisher_config, $xoopsUser;
 
         xoops_loadLanguage('main', 'publisher');
 
@@ -448,8 +448,8 @@ class PublisherItem extends XoopsObject
 
 		$groups = ($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 		$gperm_handler = &xoops_gethandler('groupperm');
-		$smartModule = publisher_getModuleInfo();
-		$module_id = $smartModule->getVar('mid');
+		$publisher_handler = publisher_getModuleInfo();
+		$module_id = $publisher_handler->getVar('mid');
 
 		$uploadLink = '';
 
@@ -459,55 +459,55 @@ class PublisherItem extends XoopsObject
 			if (!$isAdmin) {
 				if ($xoopsUser->uid() == $this->uid()) {
 					// Edit button
-					$adminLinks .= "<a href='" . PUBLISHER_URL . "submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "images/links/edit.gif'" . " title='" . _MD_PUB_EDIT . "' alt='" . _MD_PUB_EDIT . "'/></a>";
+					$adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _MD_PUB_EDIT . "' alt='" . _MD_PUB_EDIT . "'/></a>";
 					$adminLinks .= " ";
 				}
 				if (PUBLISHER_LEVEL > 0) {
-					if ($smartConfig['allowclone']) {
+					if ($publisher_config['allowclone']) {
 						// Dupplicate button
-						$adminLinks .= "<a href='" . PUBLISHER_URL . "submit.php?op=clone&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "images/links/clone.gif'" . " title='" . _MD_PUB_CLONE . "' alt='" . _MD_PUB_CLONE . "'/></a>";
+						$adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?op=clone&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/clone.gif'" . " title='" . _MD_PUB_CLONE . "' alt='" . _MD_PUB_CLONE . "'/></a>";
 						$adminLinks .= " ";
 					}
 
 
 					// upload a file linked this article
-					if ($smartConfig['allowupload']) {
-						$uploadLink = "<a href='" . PUBLISHER_URL . "addfile.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "images/icon/file.gif' title='" . _MD_PUB_ADD_FILE . "' alt='" . _MD_PUB_ADD_FILE . "'/></a>";
+					if ($publisher_config['allowupload']) {
+						$uploadLink = "<a href='" . PUBLISHER_URL . "/addfile.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/file.gif' title='" . _MD_PUB_ADD_FILE . "' alt='" . _MD_PUB_ADD_FILE . "'/></a>";
 					}
 				}
 
 			} else {
 				// Edit button
-				//$adminLinks .= "<a href='" . PUBLISHER_URL . "admin/item.php?op=mod&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "images/links/edit.gif'" . " title='" . _MD_PUB_EDIT . "' alt='" . _MD_PUB_EDIT . "'/></a>";
+				//$adminLinks .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=mod&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _MD_PUB_EDIT . "' alt='" . _MD_PUB_EDIT . "'/></a>";
                 //HACK BY TRABIS
-                $adminLinks .= "<a href='" . PUBLISHER_URL . "submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "images/links/edit.gif'" . " title='" . _MD_PUB_EDIT . "' alt='" . _MD_PUB_EDIT . "'/></a>";
+                $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _MD_PUB_EDIT . "' alt='" . _MD_PUB_EDIT . "'/></a>";
 
                 $adminLinks .= " ";
 
 				if (PUBLISHER_LEVEL > 0) {
 					// Dupplicate button
-					$adminLinks .= "<a href='" . PUBLISHER_URL . "admin/item.php?op=clone&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "images/links/clone.gif'" . " title='" . _MD_PUB_CLONE . "' alt='" . _MD_PUB_CLONE . "'/></a>";
+					$adminLinks .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=clone&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/clone.gif'" . " title='" . _MD_PUB_CLONE . "' alt='" . _MD_PUB_CLONE . "'/></a>";
 					$adminLinks .= " ";
 				}
 
 				// Delete button
-				$adminLinks .= "<a href='" . PUBLISHER_URL . "admin/item.php?op=del&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "images/links/delete.gif'" . " title='" . _MD_PUB_DELETE . "' alt='" . _MD_PUB_DELETE . "'/></a>";
+				$adminLinks .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=del&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/delete.gif'" . " title='" . _MD_PUB_DELETE . "' alt='" . _MD_PUB_DELETE . "'/></a>";
 				$adminLinks .= " ";
 
 				if (PUBLISHER_LEVEL > 0) {
 					// upload a file linked this article
-					$uploadLink = "<a href='" . PUBLISHER_URL . "addfile.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "images/icon/file.gif' title='" . _MD_PUB_ADD_FILE . "' alt='" . _MD_PUB_ADD_FILE . "'/></a>";
+					$uploadLink = "<a href='" . PUBLISHER_URL . "/addfile.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/file.gif' title='" . _MD_PUB_ADD_FILE . "' alt='" . _MD_PUB_ADD_FILE . "'/></a>";
 				}
 			}
 		}
 		if (PUBLISHER_LEVEL > 0) {
 			// PDF button
-			$adminLinks .= "<a href='" . PUBLISHER_URL . "makepdf.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "images/links/pdf.gif' title='" . _MD_PUB_PDF . "' alt='" . _MD_PUB_PDF . "'/></a>";
+			$adminLinks .= "<a href='" . PUBLISHER_URL . "/makepdf.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/pdf.gif' title='" . _MD_PUB_PDF . "' alt='" . _MD_PUB_PDF . "'/></a>";
 			$adminLinks .= " ";
 		}
 
 		// Print button
-		$adminLinks .= '<a href="' . publisher_seo_genUrl("print", $this->itemid(), $this->short_url()) . '"><img src="' . PUBLISHER_URL . 'images/links/print.gif" title="' . _MD_PUB_PRINT . '" alt="' . _MD_PUB_PRINT . '"/></a>';
+		$adminLinks .= '<a href="' . publisher_seo_genUrl("print", $this->itemid(), $this->short_url()) . '"><img src="' . PUBLISHER_URL . '/images/links/print.gif" title="' . _MD_PUB_PRINT . '" alt="' . _MD_PUB_PRINT . '"/></a>';
 		$adminLinks .= " ";
 
 		// Email button
@@ -517,7 +517,7 @@ class PublisherItem extends XoopsObject
 	    $body    = $this->_convert_for_japanese($body);
 	    $maillink = "mailto:?subject=" . $subject . "&amp;body=" . $body;
 
-        $adminLinks .= '<a href="' . $maillink . '"><img src="' . PUBLISHER_URL . 'images/links/friend.gif" title="' . _MD_PUB_MAIL . '" alt="' . _MD_PUB_MAIL . '"/></a>';
+        $adminLinks .= '<a href="' . $maillink . '"><img src="' . PUBLISHER_URL . '/images/links/friend.gif" title="' . _MD_PUB_MAIL . '" alt="' . _MD_PUB_MAIL . '"/></a>';
 		$adminLinks .= " ";
 
 		if (PUBLISHER_LEVEL > 0) {
@@ -536,8 +536,8 @@ class PublisherItem extends XoopsObject
 		global $publisher_moduleName;
 
 		$hModule =& xoops_gethandler('module');
-    	$smartModule =& $hModule->getByDirname('publisher');
-    	$module_id = $smartModule->getVar('mid');
+    	$publisher_handler =& $hModule->getByDirname('publisher');
+    	$module_id = $publisher_handler->getVar('mid');
 
 		$notification_handler = &xoops_gethandler('notification');
 		$categoryObj = $this->category();
@@ -546,28 +546,28 @@ class PublisherItem extends XoopsObject
 		$tags['MODULE_NAME'] = $publisher_moduleName;
 		$tags['ITEM_NAME'] = $this->title();
 		$tags['CATEGORY_NAME'] = $this->getCategoryName();
-		$tags['CATEGORY_URL'] = XOOPS_URL . '/modules/' . $smartModule->getVar('dirname') . '/category.php?categoryid=' . $this->categoryid();
+		$tags['CATEGORY_URL'] = XOOPS_URL . '/modules/' . $publisher_handler->getVar('dirname') . '/category.php?categoryid=' . $this->categoryid();
 		$tags['ITEM_BODY'] = $this->body();
 
 		$tags['DATESUB'] = $this->datesub();
 		foreach ( $notifications as $notification ) {
 			switch ($notification) {
 				case _PUB_NOT_ITEM_PUBLISHED :
-				$tags['ITEM_URL'] = XOOPS_URL . '/modules/' . $smartModule->getVar('dirname') . '/item.php?itemid=' . $this->itemid();
+				$tags['ITEM_URL'] = XOOPS_URL . '/modules/' . $publisher_handler->getVar('dirname') . '/item.php?itemid=' . $this->itemid();
 
-				$notification_handler->triggerEvent('global_item', 0, 'published', $tags, array(), $smartModule->getVar('mid'));
-				$notification_handler->triggerEvent('category_item', $this->categoryid(), 'published', $tags, array(), $smartModule->getVar('mid'));
-				$notification_handler->triggerEvent('item', $this->itemid(), 'approved', $tags, array(), $smartModule->getVar('mid'));
+				$notification_handler->triggerEvent('global_item', 0, 'published', $tags, array(), $publisher_handler->getVar('mid'));
+				$notification_handler->triggerEvent('category_item', $this->categoryid(), 'published', $tags, array(), $publisher_handler->getVar('mid'));
+				$notification_handler->triggerEvent('item', $this->itemid(), 'approved', $tags, array(), $publisher_handler->getVar('mid'));
 				break;
 
 				case _PUB_NOT_ITEM_SUBMITTED :
-				$tags['WAITINGFILES_URL'] = XOOPS_URL . '/modules/' . $smartModule->getVar('dirname') . '/admin/item.php?itemid=' . $this->itemid();
-				$notification_handler->triggerEvent('global_item', 0, 'submitted', $tags, array(), $smartModule->getVar('mid'));
-				$notification_handler->triggerEvent('category_item',  $this->categoryid(), 'submitted', $tags, array(), $smartModule->getVar('mid'));
+				$tags['WAITINGFILES_URL'] = XOOPS_URL . '/modules/' . $publisher_handler->getVar('dirname') . '/admin/item.php?itemid=' . $this->itemid();
+				$notification_handler->triggerEvent('global_item', 0, 'submitted', $tags, array(), $publisher_handler->getVar('mid'));
+				$notification_handler->triggerEvent('category_item',  $this->categoryid(), 'submitted', $tags, array(), $publisher_handler->getVar('mid'));
 				break;
 
 				case _PUB_NOT_ITEM_REJECTED :
-				$notification_handler->triggerEvent('item', $this->itemid(), 'rejected', $tags, array(), $smartModule->getVar('mid'));
+				$notification_handler->triggerEvent('item', $this->itemid(), 'rejected', $tags, array(), $publisher_handler->getVar('mid'));
 				break;
 
 				case -1 :
@@ -649,8 +649,8 @@ class PublisherItem extends XoopsObject
 			//determine if these groups can view the full article
 			$gperm_handler = &xoops_gethandler('groupperm');
 			$hModule = &xoops_gethandler('module');
-			$smartModule = &$hModule->getByDirname('publisher');
-			$module_id = $smartModule->getVar('mid');
+			$publisher_handler = &$hModule->getByDirname('publisher');
+			$module_id = $publisher_handler->getVar('mid');
 
 			$allowed = $gperm_handler->checkRight('item_read', $this->itemid(), $gr_with_no_pview, $module_id);
 		}
@@ -676,9 +676,9 @@ class PublisherItem extends XoopsObject
 
 	function getWhoAndWhen($users = array())
 	{
-	    $smartModuleConfig =& publisher_getModuleConfig();
+	    $publisher_config =& publisher_getModuleConfig();
 
-		$posterName = publisher_getLinkedUnameFromId($this->uid(), $smartModuleConfig['userealname'], $users);
+		$posterName = publisher_getLinkedUnameFromId($this->uid(), $publisher_config['userealname'], $users);
 		$postdate = $this->datesub();
 		return sprintf(_MD_PUB_POSTEDBY, $posterName, $postdate);
 	}
@@ -932,8 +932,8 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
 	function delete(&$item, $force = false)
 	{
 	    $hModule =& xoops_gethandler('module');
-    	$smartModule =& $hModule->getByDirname('publisher');
-    	$module_id = $smartModule->getVar('mid');
+    	$publisher_handler =& $hModule->getByDirname('publisher');
+    	$module_id = $publisher_handler->getVar('mid');
 
 		// Deleting the files
 		global $publisher_file_handler;
@@ -1075,8 +1075,8 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
 
 	    $hModule =& xoops_gethandler('module');
 	    $hModConfig =& xoops_gethandler('config');
-    	$smartModule =& $hModule->getByDirname('publisher');
-    	$module_id = $smartModule->getVar('mid');
+    	$publisher_handler =& $hModule->getByDirname('publisher');
+    	$module_id = $publisher_handler->getVar('mid');
 
 		$gperm_handler = &xoops_gethandler('groupperm');
 		$groups = ($xoopsUser) ? ($xoopsUser->getGroups()) : XOOPS_GROUP_ANONYMOUS;
@@ -1309,8 +1309,8 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
 
 	$hModule =& xoops_gethandler('module');
 	$hModConfig =& xoops_gethandler('config');
-	$smartModule =& $hModule->getByDirname('publisher');
-	$module_id = $smartModule->getVar('mid');
+	$publisher_handler =& $hModule->getByDirname('publisher');
+	$module_id = $publisher_handler->getVar('mid');
 
 	$gperm_handler = &xoops_gethandler('groupperm');
 	$groups = ($xoopsUser) ? ($xoopsUser->getGroups()) : XOOPS_GROUP_ANONYMOUS;

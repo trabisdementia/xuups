@@ -9,7 +9,7 @@
 //
 include_once("admin_header.php");
 
-include_once(PUBLISHER_ROOT_PATH . "class/about.php");
+include_once(PUBLISHER_ROOT_PATH ."/class/about.php");
 $aboutObj = new PublisherAbout(_AM_PUB_ABOUT);
 $aboutObj->render();
 

@@ -9,7 +9,7 @@
 */
 
 include_once('admin_header.php');
-include_once(PUBLISHER_ROOT_PATH . "class/dbupdater.php");
+include_once(PUBLISHER_ROOT_PATH ."/class/dbupdater.php");
 
 $dbupdater = new PublisherDbupdater();
 
@@ -34,7 +34,7 @@ switch ( $op )
         break;
 
     default:
-        header("Location: ".PUBLISHER_URL."admin/index.php");
+        header("Location: ".PUBLISHER_URL . "/admin/index.php");
         break;
 }
 

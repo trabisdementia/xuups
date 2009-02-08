@@ -12,10 +12,10 @@ include_once('admin_header.php');
 
 function publisher_pagewrap_upload(&$errors)
 {
-	include_once(PUBLISHER_ROOT_PATH . "class/uploader.php");
+	include_once(PUBLISHER_ROOT_PATH ."/class/uploader.php");
 
 	global $xoopsUser, $xoopsDB, $xoopsModule, $xoopsModule, $xoopsModuleConfig;
-    include_once (PUBLISHER_ROOT_PATH.'class/uploader.php');
+    include_once (PUBLISHER_ROOT_PATH . '/class/uploader.php');
 
     $config =& publisher_getModuleConfig();
 

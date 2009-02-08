@@ -6,10 +6,11 @@
 //                       <http://www.xoops.org/>                             //
 //  ------------------------------------------------------------------------ //
 if (!defined("XOOPS_ROOT_PATH")) {
-die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
-include_once XOOPS_ROOT_PATH.'/modules/publisher/include/common.php';
-require_once(PUBLISHER_ROOT_PATH.'class/baseObjectHandler.php');
+
+include_once XOOPS_ROOT_PATH . '/modules/publisher/include/common.php';
+require_once PUBLISHER_ROOT_PATH . '/class/baseObjectHandler.php';
 
 /**
  * publisherMimetype class

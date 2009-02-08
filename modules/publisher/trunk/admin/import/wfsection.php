@@ -270,7 +270,7 @@ if ($op == 'go')
 	echo "<br/><br/>Done.<br/>";
 	echo sprintf(_AM_PUB_IMPORTED_CATEGORIES, $cnt_imported_cat) . "<br/>";
 	echo sprintf(_AM_PUB_IMPORTED_ARTICLES, $cnt_imported_articles) . "<br/>";
-	echo "<br/><a href='" . PUBLISHER_URL . "'>" . _AM_PUB_IMPORT_GOTOMODULE . "</a><br/>";
+	echo "<br/><a href='" . PUBLISHER_URL . "/'>" . _AM_PUB_IMPORT_GOTOMODULE . "</a><br/>";
 
 	publisher_close_collapsable('wfsectionimportgo', 'wfsectionimportgoicon');
 

@@ -273,8 +273,8 @@ class PublisherCategory extends XoopsObject
 		global $publisher_moduleName;
 
 		$hModule =& xoops_gethandler('module');
-    	$smartModule =& $hModule->getByDirname('publisher');
-    	$module_id = $smartModule->getVar('mid');
+    	$publisher_handler =& $hModule->getByDirname('publisher');
+    	$module_id = $publisher_handler->getVar('mid');
 
 		$notification_handler = &xoops_gethandler('notification');
 
@@ -420,8 +420,8 @@ class PublisherCategoryHandler extends XoopsPersistableObjectHandler
 		}
 
 		$hModule =& xoops_gethandler('module');
-    	$smartModule =& $hModule->getByDirname('publisher');
-    	$module_id = $smartModule->getVar('mid');
+    	$publisher_handler =& $hModule->getByDirname('publisher');
+    	$module_id = $publisher_handler->getVar('mid');
 		xoops_groupperm_deletebymoditem ($module_id, "category_read", $category->categoryid());
 		xoops_groupperm_deletebymoditem ($module_id, "item_submit", $category->categoryid());
 		//xoops_groupperm_deletebymoditem ($module_id, "category_admin", $categoryObj->categoryid());

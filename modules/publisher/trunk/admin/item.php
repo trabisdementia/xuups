@@ -89,7 +89,7 @@ function edititem($showmenu = false, $itemid = 0, $clone = false)
 	global $publisher_current_page, $publisher_file_handler, $publisher_item_handler, $publisher_category_handler, $xoopsUser, $xoopsModule, $xoopsConfig, $xoopsDB;
 
 	include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-	include_once PUBLISHER_ROOT_PATH . '/class/formdatetime.php';
+	include_once PUBLISHER_ROOT_PATH . '//class/formdatetime.php';
 	// if there is a parameter, and the id exists, retrieve data: we're editing a item
 
 	if ($itemid != 0) {

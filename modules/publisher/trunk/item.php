@@ -213,7 +213,7 @@ if (file_exists(XOOPS_ROOT_PATH . '/modules/smartobject/include/rating.rate.php'
 if ((($itemObj->cancomment() == 1) || !$xoopsModuleConfig['commentatarticlelevel']) && (publisher_getConfig('com_rule') <> 0)) {
     include_once XOOPS_ROOT_PATH . "/include/comment_view.php";
     // Problem with url_rewrite and posting comments :
-    $xoopsTpl->assign(array('editcomment_link' => PUBLISHER_URL . 'comment_edit.php?com_itemid='.$com_itemid.'&amp;com_order='.$com_order.'&amp;com_mode='.$com_mode.''.$link_extra, 'deletecomment_link' => PUBLISHER_URL . 'comment_delete.php?com_itemid='.$com_itemid.'&amp;com_order='.$com_order.'&amp;com_mode='.$com_mode.''.$link_extra, 'replycomment_link' => PUBLISHER_URL . 'comment_reply.php?com_itemid='.$com_itemid.'&amp;com_order='.$com_order.'&amp;com_mode='.$com_mode.''.$link_extra));
+    $xoopsTpl->assign(array('editcomment_link' => PUBLISHER_URL . '/comment_edit.php?com_itemid='.$com_itemid.'&amp;com_order='.$com_order.'&amp;com_mode='.$com_mode.''.$link_extra, 'deletecomment_link' => PUBLISHER_URL . '/comment_delete.php?com_itemid='.$com_itemid.'&amp;com_order='.$com_order.'&amp;com_mode='.$com_mode.''.$link_extra, 'replycomment_link' => PUBLISHER_URL . '/comment_reply.php?com_itemid='.$com_itemid.'&amp;com_order='.$com_order.'&amp;com_mode='.$com_mode.''.$link_extra));
     $xoopsTpl->_tpl_vars['commentsnav'] = str_replace("self.location.href='", "self.location.href='" . PUBLISHER_URL, $xoopsTpl->_tpl_vars['commentsnav']);
 }
 

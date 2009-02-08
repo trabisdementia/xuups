@@ -18,7 +18,7 @@ $xoopsTpl->assign("isAdmin", $publisher_isAdmin);
 $xoopsTpl->assign('publisher_url', PUBLISHER_URL);
 $xoopsTpl->assign('publisher_images_url', PUBLISHER_IMAGES_URL);
 
-$xoopsTpl->assign("xoops_module_header", '<link rel="stylesheet" type="text/css" href="' . PUBLISHER_URL . 'module.css" />' .
+$xoopsTpl->assign("xoops_module_header", '<link rel="stylesheet" type="text/css" href="' . PUBLISHER_URL . '/module.css" />' .
 		'<link rel="alternate" type="application/rss+xml" title="'.$xoopsModule->getVar("name").'" href="' . PUBLISHER_URL . '/backend.php" />');
 
 $xoopsTpl->assign('lang_total', _MD_PUB_TOTAL_SMARTITEMS);

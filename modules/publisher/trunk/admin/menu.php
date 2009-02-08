@@ -45,11 +45,11 @@ if (isset($xoopsModule)) {
 
 	if (PUBLISHER_LEVEL > 0 ) {
 		$headermenu[$i]['title'] = _AM_PUB_IMPORT;
-		$headermenu[$i]['link'] = PUBLISHER_URL . "admin/import.php";
+		$headermenu[$i]['link'] = PUBLISHER_URL . "/admin/import.php";
 		$i++;
 	}
 
 	$headermenu[$i]['title'] = _AM_PUB_ABOUT;
-	$headermenu[$i]['link'] = PUBLISHER_URL . "admin/about.php";
+	$headermenu[$i]['link'] = PUBLISHER_URL . "/admin/about.php";
 }
 ?>

@@ -24,6 +24,7 @@ switch ($op) {
 
 		publisher_xoops_cp_header();
         publisher_adminMenu(3, _AM_PUB_PERMISSIONS);
+
         // View Categories permissions
         $item_list_view = array();
         $block_view = array();
@@ -31,43 +32,71 @@ switch ($op) {
 
         $result_view = $xoopsDB->query("SELECT categoryid, name FROM " . $xoopsDB->prefix("publisher_categories") . " ");
         if ($xoopsDB->getRowsNum($result_view)) {
+            $form_submit = new XoopsGroupPermForm("", $xoopsModule->getVar('mid'), "item_submit", "", 'admin/permissions.php');
             while ($myrow_view = $xoopsDB->fetcharray($result_view)) {
-                $item_list_view['cid'] = $myrow_view['categoryid'];
-                $item_list_view['title'] = $myrow_view['name'];
-                $form_view = new XoopsGroupPermForm("", $xoopsModule->getVar('mid'), "category_read", "");
-                $block_view[] = $item_list_view;
-                foreach ($block_view as $itemlists) {
-                    $form_view->addItem($itemlists['cid'], $myts->displayTarea($itemlists['title']));
-                }
+                $form_submit->addItem($myrow_view['categoryid'], $myts->displayTarea($myrow_view['name']));
             }
-            echo $form_view->render();
+            echo $form_submit->render();
         } else {
 			echo "<img id='toptableicon' src=" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/close12.gif alt='' /></a>&nbsp;" . _AM_PUB_PERMISSIONSVIEWMAN . "</h3><div id='toptable'><span style=\"color: #567; margin: 3px 0 0 0; font-size: small; display: block; \">" . _AM_PUB_NOPERMSSET . "</span>";
 
         }
         publisher_close_collapsable('permissionstable', 'permissionsicon');
-
-
         echo "<br />\n";
+
+         
+        // Submit Categories permissions
         publisher_collapsableBar('permissionstable_submit', 'permissions_tableicon', _AM_PUB_PERMISSIONS_CAT_SUBMIT, _AM_PUB_PERMISSIONS_CAT_SUBMIT_DSC);
 
-        $result_view2 = $xoopsDB->query("SELECT categoryid, name FROM " . $xoopsDB->prefix("publisher_categories") . " ");
-        if ($xoopsDB->getRowsNum($result_view2)) {
-            while ($myrow_view = $xoopsDB->fetcharray($result_view2)) {
-                $item_list_view['cid'] = $myrow_view['categoryid'];
-                $item_list_view['title'] = $myts->displayTarea($myrow_view['name']);
-                $form_sumit = new XoopsGroupPermForm("", $xoopsModule->getVar('mid'), "item_submit", "");
-                $block_submit[] = $item_list_view;
-                foreach ($block_submit as $itemlists) {
-                    $form_sumit->addItem($itemlists['cid'], $itemlists['title']);
-                }
+        $result_view = $xoopsDB->query("SELECT categoryid, name FROM " . $xoopsDB->prefix("publisher_categories") . " ");
+        if ($xoopsDB->getRowsNum($result_view)) {
+            $form_submit = new XoopsGroupPermForm("", $xoopsModule->getVar('mid'), "item_submit", "", 'admin/permissions.php');
+            while ($myrow_view = $xoopsDB->fetcharray($result_view)) {
+                $form_submit->addItem($myrow_view['categoryid'], $myts->displayTarea($myrow_view['name']));
             }
-            echo $form_sumit->render();
+            echo $form_submit->render();
         } else {
 			echo "<img id='toptableicon' src=" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/close12.gif alt='' /></a>&nbsp;" . _AM_PUB_PERMISSIONSVIEWMAN . "</h3><div id='toptable'><span style=\"color: #567; margin: 3px 0 0 0; font-size: small; display: block; \">" . _AM_PUB_NOPERMSSET . "</span>";
-
         }
-        publisher_close_collapsable('permissionstable_submit', 'permissions_tableicon');
+        publisher_close_collapsable('permissionstable_form', 'permissions_tableicon');
+        echo "<br />\n";
+
+        // Form permissions
+        publisher_collapsableBar('permissionstable_form', 'permissions_tableicon', _AM_PUB_PERMISSIONS_FORM, _AM_PUB_PERMISSIONS_FORM_DSC);
+
+        $form_options = array(
+        '1' => _AM_PUB_CATEGORY,
+        '2' => _AM_PUB_SUMMARY,
+        '3' => _AM_PUB_DISPLAY_SUMMARY,
+        '4' => _AM_PUB_BODY,
+        '5' => _AM_PUB_AVAILABLE_PAGE_WRAP,
+        '6' => _AM_PUB_ITEM_TAGS,
+        '7' => _AM_PUB_IMAGE_ITEM,
+        '8' => _AM_PUB_IMAGE_UPLOAD,
+        '9' => _AM_PUB_ITEM_UPLOAD_FILE,
+        '10' => _AM_PUB_UID,
+        '11' => _AM_PUB_DATESUB,
+        '12' => _AM_PUB_STATUS,
+        '13' => _AM_PUB_ITEM_SHORT_URL,
+        '14' => _AM_PUB_ITEM_META_KEYWORDS,
+        '15' => _AM_PUB_ITEM_META_DESCRIPTION,
+        '16' => _AM_PUB_WEIGHT,
+        '17'=> _AM_PUB_ALLOWCOMMENTS,
+        '18' => _AM_PUB_PERMISSIONS_ITEM,
+        '19' => _AM_PUB_PARTIAL_VIEW,
+        '20' => _AM_PUB_DOHTML,
+        '21' => _AM_PUB_DOSMILEY,
+        '22' => _AM_PUB_DOXCODE,
+        '23' => _AM_PUB_DOIMAGE,
+        '24' => _AM_PUB_DOLINEBREAK);
+
+        $form_submit = new XoopsGroupPermForm("", $xoopsModule->getVar('mid'), "form_view", "", 'admin/permissions.php');
+        foreach ($form_options as $key => $value) {
+            $form_submit->addItem($key, $value);
+        }
+        echo $form_submit->render();
+        
+        publisher_close_collapsable('permissionstable_form', 'permissions_tableicon');
 
 }
 xoops_cp_footer();

@@ -8,7 +8,7 @@
 */
 
 if (!defined("XOOPS_ROOT_PATH")) {
-die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 /**
@@ -28,7 +28,7 @@ class PublisherMetagen
 	var $_description;
 	var $_minChar = 4;
 	
-	function PublisherMetagen($title, $keywords, $description, $categoryPath=false)
+	function PublisherMetagen($title, $keywords, $description, $categoryPath = false)
 	{
 		$this->_myts = MyTextSanitizer::GetInstance();
 		
@@ -52,28 +52,29 @@ class PublisherMetagen
 		$moduleName = '';
 		$titleTag = array();
 		
-		If (isset($publisher_moduleName)) {
+		if (isset($publisher_moduleName)) {
 			$titleTag['module'] = $publisher_moduleName;
 		}
 
-		If (isset($this->_title) && ($this->_title != '') && (strtoupper($this->_title) != strtoupper($publisher_moduleName))) {
+		if (isset($this->_title) && ($this->_title != '') && (strtoupper($this->_title) != strtoupper($publisher_moduleName))) {
 			$titleTag['title'] = $this->_title;
 		}
 
-		If (isset($this->_categoryPath) && ($this->_categoryPath != '')) {
+		if (isset($this->_categoryPath) && ($this->_categoryPath != '')) {
 			$titleTag['category'] = $this->_categoryPath;
 		}
 
 		$ret = isset($titleTag['title']) ? $titleTag['title'] : '';
 	
-		If (isset($titleTag['category']) && $titleTag['category'] != '') {
-			If ($ret != '') {
+		if (isset($titleTag['category']) && $titleTag['category'] != '') {
+			if ($ret != '') {
 				$ret .= ' - ';
 			}
 			$ret .= $titleTag['category'];
 		}
-		If (isset($titleTag['module']) && $titleTag['module'] != '') {
-			If ($ret != '') {
+
+        if (isset($titleTag['module']) && $titleTag['module'] != '') {
+			if ($ret != '') {
 				$ret .= ' - ';
 			}
 			$ret .= $titleTag['module'];
@@ -173,7 +174,7 @@ class PublisherMetagen
 		global $xoopsModuleConfig;
 		$keywords = $this->findMetaKeywords($this->_original_title . " " . $this->_description, $this->_minChar);
 
-		If (isset($xoopsModuleConfig) && isset($xoopsModuleConfig['moduleMetaKeywords']) && $xoopsModuleConfig['moduleMetaKeywords'] != '') {
+		if (isset($xoopsModuleConfig) && isset($xoopsModuleConfig['moduleMetaKeywords']) && $xoopsModuleConfig['moduleMetaKeywords'] != '') {
 			$moduleKeywords = explode(",", $xoopsModuleConfig['moduleMetaKeywords']);
 			$keywords = array_merge($keywords, $moduleKeywords);
 		}
@@ -183,7 +184,7 @@ class PublisherMetagen
 		
 		// Cleaning for duplicate keywords
 		foreach ($keywords as $keyword) {
-			If (!in_array($keyword, $keywords)) {
+			if (!in_array($keyword, $keywords)) {
 				$return_keywords[] = trim($keyword);
 			}
 		}*/

@@ -13,16 +13,16 @@ include_once("admin_header.php");
 include_once XOOPS_ROOT_PATH."/kernel/module.php";
 $xoopsModule = XoopsModule::getByDirname("publisher");
 
-if (file_exists(PUBLISHER_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-	include_once PUBLISHER_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/modinfo.php';
+if (file_exists(PUBLISHER_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
+	include_once PUBLISHER_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/modinfo.php';
 } else {
-	include_once PUBLISHER_ROOT_PATH . 'language/english/modinfo.php';
+	include_once PUBLISHER_ROOT_PATH . '/language/english/modinfo.php';
 }
 
-if (file_exists(PUBLISHER_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/admin.php')) {
-	include_once PUBLISHER_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/admin.php';
+if (file_exists(PUBLISHER_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/admin.php')) {
+	include_once PUBLISHER_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/admin.php';
 } else {
-	include_once PUBLISHER_ROOT_PATH . 'language/english/admin.php';
+	include_once PUBLISHER_ROOT_PATH . '/language/english/admin.php';
 }
 
 

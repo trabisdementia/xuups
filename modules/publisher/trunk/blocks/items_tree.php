@@ -29,12 +29,12 @@ function publisher_items_tree_show($options)
 	{
 		case -1:
 			global $xoopsModule;
-			$smartModule =& publisher_getModuleInfo();
+			$publisher_handler =& publisher_getModuleInfo();
 			
 			echo $xoopsModule->dirname() . "<br>";
-			echo $smartModule->dirname();
+			echo $publisher_handler->dirname();
 			
-			if($xoopsModule->dirname() == $smartModule->dirname())
+			if($xoopsModule->dirname() == $publisher_handler->dirname())
 			{
 				if(isset($_GET['categoryid']))
 				{

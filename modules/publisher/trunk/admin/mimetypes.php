@@ -588,7 +588,7 @@ function search()
         $mimetypes =& $hMime->getObjects($crit);
         $nav = new XoopsPageNav($mime_count, $limit, $start, 'start', "op=search&amp;limit=$limit&amp;order=$order&amp;sort=$sort&amp;mime_search=1&amp;search_by=$search_field&amp;search_text=$search_text");
         // Display results
-        echo '<script type="text/javascript" src="'.PUBLISHER_URL.'/include/functions.js"></script>';
+        echo '<script type="text/javascript" src="'.PUBLISHER_URL . '//include/functions.js"></script>';
         
         echo "<table width='100%' cellspacing='1' class='outer'>";
             echo "<tr><td colspan='6' align='right'>";
