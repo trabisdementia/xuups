@@ -7,8 +7,9 @@
 * Licence: GNU
 */
 
-include_once("admin_header.php");
+include_once dirname(__FILE__) . '/admin_header.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+include_once PUBLISHER_ROOT_PATH . '/include/form_constants.php';
 
 if (!$publisher_isAdmin) {
     redirect_header("javascript:history.go(-1)", 1, _NOPERM);
@@ -65,30 +66,30 @@ switch ($op) {
         publisher_collapsableBar('permissionstable_form', 'permissions_tableicon', _AM_PUB_PERMISSIONS_FORM, _AM_PUB_PERMISSIONS_FORM_DSC);
 
         $form_options = array(
-        '1' => _AM_PUB_CATEGORY,
-        '2' => _AM_PUB_SUMMARY,
-        '3' => _AM_PUB_DISPLAY_SUMMARY,
-        '4' => _AM_PUB_BODY,
-        '5' => _AM_PUB_AVAILABLE_PAGE_WRAP,
-        '6' => _AM_PUB_ITEM_TAGS,
-        '7' => _AM_PUB_IMAGE_ITEM,
-        '8' => _AM_PUB_IMAGE_UPLOAD,
-        '9' => _AM_PUB_ITEM_UPLOAD_FILE,
-        '10' => _AM_PUB_UID,
-        '11' => _AM_PUB_DATESUB,
-        '12' => _AM_PUB_STATUS,
-        '13' => _AM_PUB_ITEM_SHORT_URL,
-        '14' => _AM_PUB_ITEM_META_KEYWORDS,
-        '15' => _AM_PUB_ITEM_META_DESCRIPTION,
-        '16' => _AM_PUB_WEIGHT,
-        '17'=> _AM_PUB_ALLOWCOMMENTS,
-        '18' => _AM_PUB_PERMISSIONS_ITEM,
-        '19' => _AM_PUB_PARTIAL_VIEW,
-        '20' => _AM_PUB_DOHTML,
-        '21' => _AM_PUB_DOSMILEY,
-        '22' => _AM_PUB_DOXCODE,
-        '23' => _AM_PUB_DOIMAGE,
-        '24' => _AM_PUB_DOLINEBREAK);
+            _PUB_SUMMARY                => _AM_PUB_SUMMARY,
+            _PUB_DISPLAY_SUMMARY        => _AM_PUB_DISPLAY_SUMMARY,
+            _PUB_AVAILABLE_PAGE_WRAP    => _AM_PUB_AVAILABLE_PAGE_WRAP,
+            _PUB_ITEM_TAGS              => _AM_PUB_ITEM_TAGS,
+            _PUB_IMAGE_ITEM             => _AM_PUB_IMAGE_ITEM,
+            _PUB_IMAGE_UPLOAD           => _AM_PUB_IMAGE_UPLOAD,
+            _PUB_ITEM_UPLOAD_FILE       => _AM_PUB_ITEM_UPLOAD_FILE,
+            _PUB_UID                    => _AM_PUB_UID,
+            _PUB_DATESUB                => _AM_PUB_DATESUB,
+            _PUB_STATUS                 => _AM_PUB_STATUS,
+            _PUB_ITEM_SHORT_URL         => _AM_PUB_ITEM_SHORT_URL,
+            _PUB_ITEM_META_KEYWORDS     => _AM_PUB_ITEM_META_KEYWORDS,
+            _PUB_ITEM_META_DESCRIPTION  => _AM_PUB_ITEM_META_DESCRIPTION,
+            _PUB_WEIGHT                 => _AM_PUB_WEIGHT,
+            _PUB_ALLOWCOMMENTS          => _AM_PUB_ALLOWCOMMENTS,
+            _PUB_PERMISSIONS_ITEM       => _AM_PUB_PERMISSIONS_ITEM,
+            _PUB_PARTIAL_VIEW           => _AM_PUB_PARTIAL_VIEW,
+            _PUB_DOHTML                 => _AM_PUB_DOHTML,
+            _PUB_DOSMILEY               => _AM_PUB_DOSMILEY,
+            _PUB_DOXCODE                => _AM_PUB_DOXCODE,
+            _PUB_DOIMAGE                => _AM_PUB_DOIMAGE,
+            _PUB_DOLINEBREAK            => _AM_PUB_DOLINEBREAK,
+            _PUB_NOTIFY                 => _AM_PUB_NOTIFY
+        );
 
         $form_submit = new XoopsGroupPermForm("", $xoopsModule->getVar('mid'), "form_view", "", 'admin/permissions.php');
         foreach ($form_options as $key => $value) {

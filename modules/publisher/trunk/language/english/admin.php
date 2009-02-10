@@ -424,5 +424,6 @@ define("_AM_PUB_NEW_FEATURE", "New feature !!!");
 //added in publisher
 define("_AM_PUB_PERMISSIONS_FORM", "Fields available in articles submission forms");
 define("_AM_PUB_PERMISSIONS_FORM_DSC", "You can select wich optionable fields will be present in the article submission forms. You can set default values for this fields in preferences.");
+define("_AM_PUB_NOTIFY", "Notify on publish?");
 
 ?>
