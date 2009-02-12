@@ -47,7 +47,7 @@ class PublisherItem extends XoopsObject
 	function PublisherItem($id = null)
 	{
 		$this->db =& Database::getInstance();
-		$this->initVar("itemid", XOBJ_DTYPE_INT, -1, false);
+		$this->initVar("itemid", XOBJ_DTYPE_INT);
 		$this->initVar("categoryid", XOBJ_DTYPE_INT, 0, false);
 		$this->initVar("title", XOBJ_DTYPE_TXTBOX, null, true, 255);
 		$this->initVar("summary", XOBJ_DTYPE_TXTAREA, null, false);
@@ -906,7 +906,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
 			}
 		}
 		
-        if (parent::insert(&$item, $force)) {
+        if (!parent::insert(&$item, $force)) {
             return false;
         }
 
