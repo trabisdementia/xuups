@@ -115,7 +115,6 @@ $allowcomments = (isset($_POST['allowcomments'])&& $allow_allowcomments) ? intva
 
 $allow_permissions_item = $gperm_handler->checkRight('form_view', _PUB_PERMISSIONS_ITEM, $groups, $module_id);
 $permissions_item = (isset($_POST['permissions_item']) && $allow_permissions_item) ? $_POST['permissions_item'] : array('0');
-print_r($permissions_item);
 
 $allow_partial_view = $gperm_handler->checkRight('form_view', _PUB_PARTIAL_VIEW, $groups, $module_id);
 $partial_view = (isset($_POST['partial_view']) && $allow_partial_view) ? $_POST['partial_view'] : false;
