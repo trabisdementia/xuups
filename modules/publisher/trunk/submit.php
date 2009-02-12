@@ -63,44 +63,80 @@ if (isset($_POST['post'])) {
 	$op = 'add';
 }
 
-$allow_summary                  = $gperm_handler->checkRight('form_view', _PUB_SUMMARY, $groups, $module_id);
-$allow_display_summmary         = $gperm_handler->checkRight('form_view', _PUB_DISPLAY_SUMMARY, $groups, $module_id);
-$allow_available_page_wrap      = $gperm_handler->checkRight('form_view', _PUB_AVAILABLE_PAGE_WRAP, $groups, $module_id);
-$allow_item_tags                = $gperm_handler->checkRight('form_view', _PUB_ITEM_TAGS, $groups, $module_id);
-$allow_image_item               = $gperm_handler->checkRight('form_view', _PUB_IMAGE_ITEM, $groups, $module_id);
-$allow_image_upload             = $gperm_handler->checkRight('form_view', _PUB_IMAGE_UPLOAD, $groups, $module_id);
-$allow_item_upload_file         = $gperm_handler->checkRight('form_view', _PUB_ITEM_UPLOAD_FILE, $groups, $module_id);
-$allow_uid                      = $gperm_handler->checkRight('form_view', _PUB_UID, $groups, $module_id);
-$allow_datesub                  = $gperm_handler->checkRight('form_view', _PUB_DATESUB, $groups, $module_id);
-$allow_status                   = $gperm_handler->checkRight('form_view', _PUB_STATUS, $groups, $module_id);
-$allow_item_short_url           = $gperm_handler->checkRight('form_view', _PUB_ITEM_SHORT_URL, $groups, $module_id);
-$allow_item_meta_keywords       = $gperm_handler->checkRight('form_view', _PUB_ITEM_META_KEYWORDS, $groups, $module_id);
-$allow_item_meta_description    = $gperm_handler->checkRight('form_view', _PUB_ITEM_META_DESCRIPTION, $groups, $module_id);
-$allow_weight                   = $gperm_handler->checkRight('form_view', _PUB_WEIGHT, $groups, $module_id);
-$allow_allowcomments            = $gperm_handler->checkRight('form_view', _PUB_ALLOWCOMMENTS, $groups, $module_id);
-$allow_permissions_item         = $gperm_handler->checkRight('form_view', _PUB_PERMISSIONS_ITEM, $groups, $module_id);
-$allow_partial_view             = $gperm_handler->checkRight('form_view', _PUB_PARTIAL_VIEW, $groups, $module_id);
-$allow_dohtml                   = $gperm_handler->checkRight('form_view', _PUB_DOHTML, $groups, $module_id);
-$allow_dosmiley                 = $gperm_handler->checkRight('form_view', _PUB_DOSMILEY, $groups, $module_id);
-$allow_doxcode                  = $gperm_handler->checkRight('form_view', _PUB_DOXCODE, $groups, $module_id);
-$allow_doimage                  = $gperm_handler->checkRight('form_view', _PUB_DOIMAGE, $groups, $module_id);
-$allow_dolinebreak              = $gperm_handler->checkRight('form_view', _PUB_DOLINEBREAK, $groups, $module_id);
-$allow_notify                   = $gperm_handler->checkRight('form_view', _PUB_NOTIFY, $groups, $module_id);
-
+//Required fields
 $categoryid = isset($_POST['categoryid']) ? $_POST['categoryid'] : 0;
 $title = isset($_POST['title']) ? $_POST['title'] : '';
 $body = isset($_POST['body']) ? $_POST['body'] : '';
 
-$uid = (isset($_POST['uid']) && $allow_uid) ? $_POST['uid'] : $uid;
+//Not required fields, we are going to double check permissions and set default values
+$allow_summary = $gperm_handler->checkRight('form_view', _PUB_SUMMARY, $groups, $module_id);
 $summary = (isset($_POST['summary']) && $allow_summary) ? $_POST['summary'] : '';
-$notify = (isset($_POST['notify']) && $allow_notify) ? $_POST['notify'] : 0;
 
+$allow_display_summary = $gperm_handler->checkRight('form_view', _PUB_DISPLAY_SUMMARY, $groups, $module_id);
+$display_summmary = (isset($_POST['display_summmary'])&& $allow_display_summmary) ? intval($_POST['display_summmary']) : 0;
+
+$allow_available_page_wrap = $gperm_handler->checkRight('form_view', _PUB_AVAILABLE_PAGE_WRAP, $groups, $module_id);
+
+$allow_item_tags = $gperm_handler->checkRight('form_view', _PUB_ITEM_TAGS, $groups, $module_id);
+$item_tags = (isset($_POST['item_tags']) && $allow_item_tags) ? $_POST['item_tags'] : false;
+
+$allow_image_item = $gperm_handler->checkRight('form_view', _PUB_IMAGE_ITEM, $groups, $module_id);
+$image_item = (isset($_POST['image_item']) && $allow_image_item) ? $_POST['image_item'] : '';
+
+$allow_image_upload = $gperm_handler->checkRight('form_view', _PUB_IMAGE_UPLOAD, $groups, $module_id);
+$image_upload = (isset($_FILES['image_upload']) && $allow_image_upload) ? $_FILES['image_upload'] : false;
+
+$allow_item_upload_file  = $gperm_handler->checkRight('form_view', _PUB_ITEM_UPLOAD_FILE, $groups, $module_id);
+$item_upload_file = (isset($_FILES['item_upload_file']) && $allow_item_upload_file) ? $_FILES['item_upload_file'] : '';
+
+$allow_uid = $gperm_handler->checkRight('form_view', _PUB_UID, $groups, $module_id);
+$uid = (isset($_POST['uid']) && $allow_uid) ? intval($_POST['uid']) : $uid;
+
+$allow_datesub = $gperm_handler->checkRight('form_view', _PUB_DATESUB, $groups, $module_id);
+$datesub = (isset($_POST['datesub']) && $allow_datesub) ? strtotime($_POST['datesub']['date']) + $_POST['datesub']['time'] : time();
+
+$allow_status = $gperm_handler->checkRight('form_view', _PUB_STATUS, $groups, $module_id);
+$status = (isset($_POST['status']) && $allow_status) ? intval($_POST['status']) : _PUB_STATUS_SUBMITTED;
+
+$allow_item_short_url = $gperm_handler->checkRight('form_view', _PUB_ITEM_SHORT_URL, $groups, $module_id);
+$item_short_url = (isset($_POST['item_short_url']) && $allow_item_short_url) ? $_POST['item_short_url'] : '';
+
+$allow_item_meta_keywords = $gperm_handler->checkRight('form_view', _PUB_ITEM_META_KEYWORDS, $groups, $module_id);
+$item_meta_keywords = (isset($_POST['item_meta_keywords']) && $allow_item_meta_keywords) ? $_POST['item_meta_keywords'] : '';
+
+$allow_item_meta_description = $gperm_handler->checkRight('form_view', _PUB_ITEM_META_DESCRIPTION, $groups, $module_id);
+$item_meta_description = (isset($_POST['item_meta_description']) && $allow_item_meta_description) ? $_POST['item_meta_description'] : '';
+
+$allow_weight = $gperm_handler->checkRight('form_view', _PUB_WEIGHT, $groups, $module_id);
+$weight = (isset($_POST['weight'])&& $allow_weight) ? intval($_POST['weight']) : 0;
+
+$allow_allowcomments = $gperm_handler->checkRight('form_view', _PUB_ALLOWCOMMENTS, $groups, $module_id);
+$allowcomments = (isset($_POST['allowcomments'])&& $allow_allowcomments) ? intval($_POST['allowcomments']) : 1;
+
+$allow_permissions_item = $gperm_handler->checkRight('form_view', _PUB_PERMISSIONS_ITEM, $groups, $module_id);
+$permissions_item = (isset($_POST['permissions_item']) && $allow_permissions_item) ? $_POST['permissions_item'] : array('0');
+print_r($permissions_item);
+
+$allow_partial_view = $gperm_handler->checkRight('form_view', _PUB_PARTIAL_VIEW, $groups, $module_id);
+$partial_view = (isset($_POST['partial_view']) && $allow_partial_view) ? $_POST['partial_view'] : false;
+
+$allow_dohtml = $gperm_handler->checkRight('form_view', _PUB_DOHTML, $groups, $module_id);
 $dohtml = (isset($_POST['dohtml'])&& $allow_dohtml) ? intval($_POST['dohtml']) : 0;
+
+$allow_dosmiley = $gperm_handler->checkRight('form_view', _PUB_DOSMILEY, $groups, $module_id);
 $dosmiley = (isset($_POST['dosmiley'])&& $allow_dosmiley) ? intval($_POST['dosmiley']) : 0;
+
+$allow_doxcode = $gperm_handler->checkRight('form_view', _PUB_DOXCODE, $groups, $module_id);
 $doxcode = (isset($_POST['doxcode'])&& $allow_doxcode) ? intval($_POST['doxcode']) : 0;
+
+$allow_doimage = $gperm_handler->checkRight('form_view', _PUB_DOIMAGE, $groups, $module_id);
 $doimage = (isset($_POST['doimage'])&& $allow_doimage) ? intval($_POST['doimage']) : 0;
+
+$allow_dolinebreak = $gperm_handler->checkRight('form_view', _PUB_DOLINEBREAK, $groups, $module_id);
 $dolinebreak = (isset($_POST['dolinebreak'])&& $allow_dolinebreak) ? intval($_POST['dolinebreak']) : 0;
 
+$allow_notify = $gperm_handler->checkRight('form_view', _PUB_NOTIFY, $groups, $module_id);
+$notify = (isset($_POST['notify']) && $allow_notify) ? $_POST['notify'] : 0;
 
 //stripcslashes
 switch ($op) {
@@ -108,11 +144,11 @@ switch ($op) {
 
 	global $xoopsUser, $xoopsConfig, $xoopsModule, $xoopsModuleConfig, $xoopsDB;
 	// Putting the values about the ITEM in the ITEM object
-
+    //stripcslashes?
     $itemObj->setVar('uid', $uid);
     $itemObj->setVar('categoryid', $categoryid);
-	$itemObj->setVar('title', stripcslashes($title));
-	$itemObj->setVar('summary', stripcslashes($summary));
+	$itemObj->setVar('title', $title);
+	$itemObj->setVar('summary', $summary);
 	$itemObj->setVar('body', $body);
 	$itemObj->setVar('notifypub', $notify);
 
@@ -121,6 +157,7 @@ switch ($op) {
 	$itemObj->setVar('doxcode', $doxcode);
 	$itemObj->setVar('doimage', $doimage);
 	$itemObj->setVar('dobr', $dolinebreak);
+
 
 	// Uploading the image, if any
 	// Retreive the filename to be uploaded
@@ -206,23 +243,20 @@ switch ($op) {
 	global $xoopsUser, $xoopsConfig, $xoopsModule, $xoopsModuleConfig, $xoopsDB;
 
 	// Putting the values about the ITEM in the ITEM object
-	$itemObj->setVar('uid', $uid);
     $itemObj->setVar('categoryid', $categoryid);
 	$itemObj->setVar('title', $title);
-	$itemObj->setVar('summary', $summary);
 	$itemObj->setVar('body', $body);
-	$itemObj->setVar('notifypub', $notify);
 
-	$itemObj->setVar('dohtml', $dohtml);
-	$itemObj->setVar('dosmiley', $dosmiley);
-	$itemObj->setVar('doxcode', $doxcode);
-	$itemObj->setVar('doimage', $doimage);
-	$itemObj->setVar('dobr', $dolinebreak);
+    $itemObj->setVar('summary', $summary);
+    $itemObj->setVar('display_summary', $display_summary);
 
+$allow_available_page_wrap = $gperm_handler->checkRight('form_view', _PUB_AVAILABLE_PAGE_WRAP, $groups, $module_id);
 
-	// Uploading the image, if any
+    $itemObj->setVar('item_tag', $item_tags);
+    
+    // Uploading the image, if any
 	// Retreive the filename to be uploaded
-	if ( isset($_FILES['image_file']) && $_FILES['image_file']['name'] != "" ) {
+	if ( $image_upload && $image_upload['name'] != "" ) {
 		$filename = $_POST["xoops_upload_file"][0] ;
 		if( !empty( $filename ) || $filename != "" ) {
 			global $xoopsModuleConfig;
@@ -242,19 +276,42 @@ switch ($op) {
 
 			$uploader = new XoopsMediaUploader(publisher_getImageDir('item'), $allowed_mimetypes, $max_size, $max_imgwidth, $max_imgheight);
 
-			if( $uploader->fetchMedia( $filename ) && $uploader->upload() ) {
-
+			if ($uploader->fetchMedia( $filename ) && $uploader->upload()) {
 				$itemObj->setVar('image', $uploader->getSavedFileName());
-
 			} else {
-				redirect_header( 'javascript:history.go(-1)' , 2, _AM_PUB_FILEUPLOAD_ERROR . $uploader->getErrors() ) ;
-				exit ;
+				redirect_header( 'javascript:history.go(-1)' , 2, _AM_PUB_FILEUPLOAD_ERROR . $uploader->getErrors());
+				exit;
 			}
 		}
 	} else {
-		$itemObj->setVar('image', $_POST['image']);
+		$itemObj->setVar('image', $image_item);
 	}
 
+    // attach file if any
+	if ($item_upload_file && $item_upload_file['name'] != "" ) {
+		$file_upload_result = publisher_upload_file(false, false, $itemObj);
+		if ($file_upload_result !== true) {
+			redirect_header("javascript:history.go(-1)", 3, $file_upload_result);
+			exit;
+		}
+	}
+	
+    $itemObj->setVar('uid', $uid);
+    $itemObj->setVar('datesub', $datesub);
+    $itemObj->setVar('status', $status);
+    $itemObj->setVar('short_url', $item_short_url);
+    $itemObj->setVar('meta_keywords', $item_meta_keywords);
+    $itemObj->setVar('meta_description', $item_meta_description);
+    $itemObj->setVar('weight', $weight);
+   	$itemObj->setVar('cancomment', $allowcomments);
+    $itemObj->setGroups_read($permissions_item);
+    $itemObj->setPartial_view($partial_view);
+    $itemObj->setVar('dohtml', $dohtml);
+	$itemObj->setVar('dosmiley', $dosmiley);
+	$itemObj->setVar('doxcode', $doxcode);
+	$itemObj->setVar('doimage', $doimage);
+	$itemObj->setVar('dobr', $dolinebreak);
+	$itemObj->setVar('notifypub', $notify);
 
 	// if we are editing an article, we don't change the uid and datesub values
 	if (!$itemid) {
@@ -262,11 +319,11 @@ switch ($op) {
     }
     
 	// Setting the status of the item
-	if ( $itemid || ($xoopsModuleConfig['autoapprove_submitted'] ==  1)) {
+	/*if ( $itemid || ($xoopsModuleConfig['autoapprove_submitted'] ==  1)) {
 		$itemObj->setVar('status', _PUB_STATUS_PUBLISHED);
 	} else {
 		$itemObj->setVar('status', _PUB_STATUS_SUBMITTED);
-	}
+	}   */
 
 	// Storing the item object in the database
 	if ( !$itemObj->store() ) {
@@ -279,7 +336,7 @@ switch ($op) {
 
 	// if autoapprove_submitted. This does not apply if we are editing an article
 	if (!$itemid) {
-		if ( $xoopsModuleConfig['autoapprove_submitted'] ==  1) {
+		if ($itemObj->getVar('status') == _PUB_STATUS_PUBLISHED/*$xoopsModuleConfig['autoapprove_submitted'] ==  1*/) {
 			// We do not not subscribe user to notification on publish since we publish it right away
 
 			// Send notifications
@@ -288,7 +345,7 @@ switch ($op) {
 			$redirect_msg = _MD_PUB_ITEM_RECEIVED_AND_PUBLISHED;
 		} else {
 			// Subscribe the user to On Published notification, if requested
-			if ($notifypub) {
+			if ($notify) {
 				include_once XOOPS_ROOT_PATH . '/include/notification_constants.php';
 				$notification_handler = &xoops_gethandler('notification');
 				$notification_handler->subscribe('item', $itemObj->itemid(), 'approved', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE);

@@ -906,7 +906,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
 			}
 		}
 		
-        if (!parent::insert($item, $force)) {
+        if (parent::insert(&$item, $force)) {
             return false;
         }
 

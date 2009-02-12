@@ -52,7 +52,7 @@ if ($allow_summary) {
 }
 
 // DISPLAY_SUMMARY
-if ($allow_summary) {
+if ($allow_display_summary) {
     $display_summary_radio = new XoopsFormRadioYN(_AM_PUB_DISPLAY_SUMMARY, 'display_summary', $itemObj->display_summary(), ' ' . _AM_PUB_YES . '', ' ' . _AM_PUB_NO . '');
     $sform->addElement($display_summary_radio);
 }
@@ -76,40 +76,42 @@ if ($allow_available_page_wrap) {
 
 // Tags
 if ($allow_item_tags && publisher_tag_module_included()) {
-    include_once XOOPS_ROOT_PATH."/modules/tag/include/formtag.php";
+    include_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
     $text_tags = new XoopsFormTag("item_tag", 60, 255, $itemObj->getVar('item_tag', 'e'), 0);
     $sform->addElement($text_tags);
 }
 
 // IMAGE
 if ($allow_image_item) {
-    $image_array = & XoopsLists :: getImgListAsArray( publisher_getImageDir('item') );
-    $image_select = new XoopsFormSelect( '', 'image', $itemObj->image() );
+    $image_array = & XoopsLists::getImgListAsArray(publisher_getImageDir('item'));
+    $image_select = new XoopsFormSelect('', 'image_item', $itemObj->image());
     //$image_select -> addOption ('-1', '---------------');
-    $image_select -> addOptionArray( $image_array );
-    $image_select -> setExtra( "onchange='showImgSelected(\"image3\", \"image\", \"" . 'uploads/publisher/images/item/' . "\", \"\", \"" . XOOPS_URL . "\")'" );
-    $image_tray = new XoopsFormElementTray( _MD_PUB_IMAGE_ITEM, '&nbsp;' );
-    $image_tray -> addElement( $image_select );
-    $image_tray -> addElement( new XoopsFormLabel( '', "<br /><br /><img src='" . publisher_getImageDir('item', false) .$itemObj->image() . "' name='image3' id='image3' alt='' />" ) );
+    $image_select->addOptionArray($image_array);
+    $image_select->setExtra( "onchange='showImgSelected(\"image3\", \"image\", \"" . 'uploads/publisher/images/item/' . "\", \"\", \"" . XOOPS_URL . "\")'");
+    $image_tray = new XoopsFormElementTray( _MD_PUB_IMAGE_ITEM, '&nbsp;');
+    $image_tray->addElement($image_select);
+    $image_tray->addElement(new XoopsFormLabel('', "<br /><br /><img src='" . publisher_getImageDir('item', false) . $itemObj->image() . "' name='image3' id='image3' alt='' />" ));
     $image_tray->setDescription(_MD_PUB_IMAGE_ITEM_DSC);
-    $sform -> addElement( $image_tray );
+    $sform->addElement($image_tray);
 }
 
 // IMAGE UPLOAD
 if ($allow_image_upload) {
     $max_size = 5000000;
-    $file_box = new XoopsFormFile(_MD_PUB_IMAGE_UPLOAD, "image_file", $max_size);
-    $file_box->setExtra( "size ='45'") ;
+    $file_box = new XoopsFormFile(_MD_PUB_IMAGE_UPLOAD, "image_upload", $max_size);
+    $file_box->setExtra("size ='45'");
     $file_box->setDescription(_MD_PUB_IMAGE_UPLOAD_ITEM_DSC);
     $sform->addElement($file_box);
+    unset($file_box);
 }
 
 // File upload UPLOAD
 if ($allow_item_upload_file) {
-	$file_box = new XoopsFormFile(publisher_new_feature_tag() . _AM_PUB_ITEM_UPLOAD_FILE, "userfile", 0);
+	$file_box = new XoopsFormFile(publisher_new_feature_tag() . _AM_PUB_ITEM_UPLOAD_FILE, "item_upload_file", 0);
 	$file_box->setDescription(_AM_PUB_ITEM_UPLOAD_FILE_DSC . publisher_new_feature_tag());
-	$file_box->setExtra( "size ='50'") ;
+	$file_box->setExtra("size ='50'");
 	$sform->addElement($file_box);
+	unset($file_box);
 }
 
 // Uid
@@ -137,7 +139,7 @@ if ($allow_datesub) {
 	$datesub = ($itemObj->getVar('datesub') == 0) ? time() : $itemObj->getVar('datesub');
 	$datesub_datetime = new PublisherFormDateTime(_AM_PUB_DATESUB, 'datesub', $size = 15, $datesub);
 	$datesub_datetime->setDescription(_AM_PUB_DATESUB_DSC);
-	$sform -> addElement( $datesub_datetime );
+	$sform->addElement($datesub_datetime);
 }
 
 // STATUS
@@ -146,26 +148,26 @@ if ($allow_status) {
 	$status_select = new XoopsFormSelect(_AM_PUB_STATUS, 'status', $itemObj->getVar('status'));
 	$status_select->addOptionArray($options);
 	$status_select->setDescription(_AM_PUB_STATUS_DSC);
-	$sform -> addElement( $status_select );
+	$sform->addElement($status_select);
 }
 
 // Short url
 if ($allow_item_short_url) {
-    $text_short_url = new XoopsFormText(_AM_PUB_ITEM_SHORT_URL, 'short_url', 50, 255, $itemObj->short_url('e'));
+    $text_short_url = new XoopsFormText(_AM_PUB_ITEM_SHORT_URL, 'item_short_url', 50, 255, $itemObj->short_url('e'));
     $text_short_url->setDescription(_AM_PUB_ITEM_SHORT_URL_DSC);
     $sform->addElement($text_short_url);
 }
 
 // Meta Keywords
 if ($allow_item_meta_keywords) {
-    $text_meta_keywords = new XoopsFormTextArea(_AM_PUB_ITEM_META_KEYWORDS, 'meta_keywords', $itemObj->meta_keywords('e'), 7, 60);
+    $text_meta_keywords = new XoopsFormTextArea(_AM_PUB_ITEM_META_KEYWORDS, 'item_meta_keywords', $itemObj->meta_keywords('e'), 7, 60);
     $text_meta_keywords->setDescription(_AM_PUB_ITEM_META_KEYWORDS_DSC);
     $sform->addElement($text_meta_keywords);
 }
 
 // Meta Description
 if ($allow_item_meta_description) {
-    $text_meta_description = new XoopsFormTextArea(_AM_PUB_ITEM_META_DESCRIPTION, 'meta_description', $itemObj->meta_description('e'), 7, 60);
+    $text_meta_description = new XoopsFormTextArea(_AM_PUB_ITEM_META_DESCRIPTION, 'item_meta_description', $itemObj->meta_description('e'), 7, 60);
     $text_meta_description->setDescription(_AM_PUB_ITEM_META_DESCRIPTION_DSC);
     $sform->addElement($text_meta_description);
 }
@@ -177,7 +179,7 @@ if ($allow_weight) {
 
 // COMMENTS
 if ($allow_allowcomments) {
-    $addcomments_radio = new XoopsFormRadioYN(_AM_PUB_ALLOWCOMMENTS, 'cancomment', $itemObj->cancomment(), ' ' . _AM_PUB_YES . '', ' ' . _AM_PUB_NO . '');
+    $addcomments_radio = new XoopsFormRadioYN(_AM_PUB_ALLOWCOMMENTS, 'allowcomments', $itemObj->cancomment(), ' ' . _AM_PUB_YES . '', ' ' . _AM_PUB_NO . '');
     $sform->addElement($addcomments_radio);
 }
 
@@ -185,7 +187,7 @@ if ($allow_allowcomments) {
 if ($allow_permissions_item) {
 	$member_handler = &xoops_gethandler('member');
 	$group_list = $member_handler->getGroupList();
-	$groups_checkbox = new XoopsFormCheckBox(_AM_PUB_PERMISSIONS_ITEM, 'groups[]', $itemObj->getGroups_read());
+	$groups_checkbox = new XoopsFormCheckBox(_AM_PUB_PERMISSIONS_ITEM, 'permissions_item[]', $itemObj->getGroups_read());
 	$groups_checkbox->setDescription(_AM_PUB_PERMISSIONS_ITEM_DSC);
 	foreach ($group_list as $group_id => $group_name) {
 		if ($group_id != XOOPS_GROUP_ADMIN) {

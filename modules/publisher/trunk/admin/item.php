@@ -9,18 +9,6 @@
 
 include_once dirname(__FILE__) . '/admin_header.php';
 
-/*
-	$member_handler = xoops_gethandler('member');
-	$criteria = new CriteriaCompo();
-	$criteria->setSort('uname');
-	$criteria->setOrder('ASC');
-	$users = $member_handler->getUserList($criteria);
-
-	var_dump($users);
-	exit;
-
-*/
-
 global $publisher_item_handler, $publisher_category_handler, $publisher_file_handler;
 
 $op = '';
