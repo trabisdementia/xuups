@@ -8,7 +8,6 @@
 */
 
 include_once dirname(__FILE__).'/header.php';
-include_once PUBLISHER_ROOT_PATH . '/include/form_constants.php';
 
 xoops_loadLanguage('admin', 'publisher');
 
@@ -96,7 +95,7 @@ $allow_datesub = $gperm_handler->checkRight('form_view', _PUB_DATESUB, $groups, 
 $datesub = (isset($_POST['datesub']) && $allow_datesub) ? strtotime($_POST['datesub']['date']) + $_POST['datesub']['time'] : time();
 
 $allow_status = $gperm_handler->checkRight('form_view', _PUB_STATUS, $groups, $module_id);
-$status = (isset($_POST['status']) && $allow_status) ? intval($_POST['status']) : _PUB_STATUS_SUBMITTED;
+$status = (isset($_POST['status']) && $allow_status) ? intval($_POST['status']) : publisher_getConfig('form_status');
 
 $allow_item_short_url = $gperm_handler->checkRight('form_view', _PUB_ITEM_SHORT_URL, $groups, $module_id);
 $item_short_url = (isset($_POST['item_short_url']) && $allow_item_short_url) ? $_POST['item_short_url'] : '';
@@ -111,7 +110,7 @@ $allow_weight = $gperm_handler->checkRight('form_view', _PUB_WEIGHT, $groups, $m
 $weight = (isset($_POST['weight'])&& $allow_weight) ? intval($_POST['weight']) : 0;
 
 $allow_allowcomments = $gperm_handler->checkRight('form_view', _PUB_ALLOWCOMMENTS, $groups, $module_id);
-$allowcomments = (isset($_POST['allowcomments'])&& $allow_allowcomments) ? intval($_POST['allowcomments']) : 1;
+$allowcomments = (isset($_POST['allowcomments'])&& $allow_allowcomments) ? intval($_POST['allowcomments']) : publisher_getConfig('form_allowcomments');
 
 $allow_permissions_item = $gperm_handler->checkRight('form_view', _PUB_PERMISSIONS_ITEM, $groups, $module_id);
 $permissions_item = (isset($_POST['permissions_item']) && $allow_permissions_item) ? $_POST['permissions_item'] : array('0');
@@ -120,19 +119,19 @@ $allow_partial_view = $gperm_handler->checkRight('form_view', _PUB_PARTIAL_VIEW,
 $partial_view = (isset($_POST['partial_view']) && $allow_partial_view) ? $_POST['partial_view'] : false;
 
 $allow_dohtml = $gperm_handler->checkRight('form_view', _PUB_DOHTML, $groups, $module_id);
-$dohtml = (isset($_POST['dohtml'])&& $allow_dohtml) ? intval($_POST['dohtml']) : 0;
+$dohtml = (isset($_POST['dohtml'])&& $allow_dohtml) ? intval($_POST['dohtml']) : publisher_getConfig('form_dohtml');
 
 $allow_dosmiley = $gperm_handler->checkRight('form_view', _PUB_DOSMILEY, $groups, $module_id);
-$dosmiley = (isset($_POST['dosmiley'])&& $allow_dosmiley) ? intval($_POST['dosmiley']) : 0;
+$dosmiley = (isset($_POST['dosmiley'])&& $allow_dosmiley) ? intval($_POST['dosmiley']) : publisher_getConfig('form_dosmiley');
 
 $allow_doxcode = $gperm_handler->checkRight('form_view', _PUB_DOXCODE, $groups, $module_id);
-$doxcode = (isset($_POST['doxcode'])&& $allow_doxcode) ? intval($_POST['doxcode']) : 0;
+$doxcode = (isset($_POST['doxcode'])&& $allow_doxcode) ? intval($_POST['doxcode']) : publisher_getConfig('form_doxcode');
 
 $allow_doimage = $gperm_handler->checkRight('form_view', _PUB_DOIMAGE, $groups, $module_id);
-$doimage = (isset($_POST['doimage'])&& $allow_doimage) ? intval($_POST['doimage']) : 0;
+$doimage = (isset($_POST['doimage'])&& $allow_doimage) ? intval($_POST['doimage']) : publisher_getConfig('form_doimage');
 
 $allow_dolinebreak = $gperm_handler->checkRight('form_view', _PUB_DOLINEBREAK, $groups, $module_id);
-$dolinebreak = (isset($_POST['dolinebreak'])&& $allow_dolinebreak) ? intval($_POST['dolinebreak']) : 0;
+$dolinebreak = (isset($_POST['dolinebreak'])&& $allow_dolinebreak) ? intval($_POST['dolinebreak']) : publisher_getConfig('form_dobr');
 
 $allow_notify = $gperm_handler->checkRight('form_view', _PUB_NOTIFY, $groups, $module_id);
 $notify = (isset($_POST['notify']) && $allow_notify) ? $_POST['notify'] : 0;
@@ -268,7 +267,7 @@ $allow_available_page_wrap = $gperm_handler->checkRight('form_view', _PUB_AVAILA
 
 			include_once(XOOPS_ROOT_PATH."/class/uploader.php");
 
-			if( $_FILES[$filename]['tmp_name'] == "" || ! is_readable( $_FILES[$filename]['tmp_name'] ) ) {
+			if  ($_FILES[$filename]['tmp_name'] == "" || !is_readable($_FILES[$filename]['tmp_name'])) {
 				redirect_header( 'javascript:history.go(-1)' , 2, _AM_PUB_FILEUPLOAD_ERROR ) ;
 				exit ;
 			}
@@ -286,15 +285,6 @@ $allow_available_page_wrap = $gperm_handler->checkRight('form_view', _PUB_AVAILA
 		$itemObj->setVar('image', $image_item);
 	}
 
-    // attach file if any
-	if ($item_upload_file && $item_upload_file['name'] != "" ) {
-		$file_upload_result = publisher_upload_file(false, false, $itemObj);
-		if ($file_upload_result !== true) {
-			redirect_header("javascript:history.go(-1)", 3, $file_upload_result);
-			exit;
-		}
-	}
-	
     $itemObj->setVar('uid', $uid);
     $itemObj->setVar('datesub', $datesub);
     $itemObj->setVar('status', $status);
@@ -328,6 +318,15 @@ $allow_available_page_wrap = $gperm_handler->checkRight('form_view', _PUB_AVAILA
 	if ( !$itemObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 2, _MD_PUB_SUBMIT_ERROR);
 		exit();
+	}
+
+    // attach file if any
+	if ($item_upload_file && $item_upload_file['name'] != "" ) {
+		$file_upload_result = publisher_upload_file(false, false, $itemObj);
+		if ($file_upload_result !== true) {
+			redirect_header("javascript:history.go(-1)", 3, $file_upload_result);
+			exit;
+		}
 	}
 
 	// Get the cateopry object related to that item
@@ -376,7 +375,8 @@ $allow_available_page_wrap = $gperm_handler->checkRight('form_view', _PUB_AVAILA
 
     //default values
     $itemObj->setVar('uid', $uid);
-    
+    $itemObj->setVar('status', $status);
+    $itemObj->setVar('cancomment', $allowcomments);
 	$itemObj->setVar('dohtml', $dohtml);
 	$itemObj->setVar('dosmiley', $dosmiley);
 	$itemObj->setVar('doxcode', $doxcode);

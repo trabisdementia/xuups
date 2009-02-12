@@ -6,7 +6,7 @@
 * Author: The SmartFactory <www.smartfactory.ca>
 * Licence: GNU
 */
-include_once("header.php");
+include_once dirname(__FILE__) . '/header.php';
 
 global $publisher_category_handler, $publisher_item_handler, $xoopsUser, $xoopsModuleConfig;
 
@@ -26,9 +26,9 @@ if ($totalCategories  == 0 ) {
 }
 $xoopsOption['template_main'] = 'publisher_display' . '_' . $xoopsModuleConfig['displaytype'] . '.html';
 
-include_once(XOOPS_ROOT_PATH . "/header.php");
+include_once XOOPS_ROOT_PATH . '/header.php';
 
-include_once("footer.php");
+include_once PUBLISHER_ROOT_PATH . '/footer.php';
 
 $gperm_handler = &xoops_gethandler('groupperm');
 
@@ -231,6 +231,6 @@ if($xoopsModuleConfig['show_rss_link'] == 1){
 	$link=sprintf("<a href='%s' title='%s'><img src='%s' border=0 alt='%s'></a>",XOOPS_URL."/modules/publisher/backend.php", _MD_PUB_RSSFEED, XOOPS_URL."/modules/publisher/images/rss.gif",_MD_PUB_RSSFEED);
 	$xoopsTpl->assign('rssfeed_link',$link);
 }
-include_once(XOOPS_ROOT_PATH . "/footer.php");
+include_once XOOPS_ROOT_PATH . '/footer.php';
 
 ?>

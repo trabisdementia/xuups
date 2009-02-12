@@ -285,9 +285,9 @@ function edititem($showmenu = false, $itemid = 0, $clone = false)
 	}
 
 	// File upload UPLOAD
-	$file_box = new XoopsFormFile(publisher_new_feature_tag() . _AM_PUB_ITEM_UPLOAD_FILE, "userfile", 0);
+	$file_box = new XoopsFormFile(publisher_new_feature_tag() . _AM_PUB_ITEM_UPLOAD_FILE, "item_upload_file", 0);
 	$file_box->setDescription(_AM_PUB_ITEM_UPLOAD_FILE_DSC . publisher_new_feature_tag());
-	$file_box->setExtra( "size ='50'") ;
+	$file_box->setExtra("size ='50'");
 	$sform->addElement($file_box);
 
 	// Uid
@@ -685,7 +685,7 @@ switch ($op) {
 	}
 
 	// attach file if any
-	if ( $_FILES['userfile']['name'] != "" ) {
+	if ( $_FILES['item_upload_file']['name'] != "" ) {
 		$file_upload_result = publisher_upload_file(false, false, $itemObj);
 		if ($file_upload_result !== true) {
 			redirect_header("javascript:history.go(-1)", 3, $file_upload_result);

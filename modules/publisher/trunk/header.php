@@ -7,15 +7,9 @@
 * Licence: GNU
 */
 
-include_once "../../mainfile.php";
+include_once dirname(dirname(dirname(__FILE__))) . '/mainfile.php';
+include_once dirname(__FILE__) . '/include/common.php';
+include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 
-if( !defined("PUBLISHER_DIRNAME") ){
-	define("PUBLISHER_DIRNAME", 'publisher');
-}
-
-include_once XOOPS_ROOT_PATH.'/modules/' . PUBLISHER_DIRNAME . '/include/common.php';
-
-include_once XOOPS_ROOT_PATH."/class/pagenav.php";
 $myts = MyTextSanitizer::getInstance();
-
 ?>

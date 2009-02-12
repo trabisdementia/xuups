@@ -234,5 +234,27 @@ define("_MI_PUB_RATING_ENABLEDDSC", "This features requires the SmartObject Fram
 define("_MI_PUB_DISPBREAD", "Display the breadcrumb");
 define("_MI_PUB_DISPBREADDSC", "Breadcrumb navigation displays the current page's context within the site structure.");
 
-define('_MI_PUB_DATE_TO_DATE', 'Articles from date to date')
+define("_MI_PUB_DATE_TO_DATE", "Articles from date to date");
+
+//added in publisher
+define("_MI_PUB_FORM_STATUS", "[FORM DEFAULT OPTIONS] Select default status for submited article");
+define("_MI_PUB_FORM_STATUS_DSC", "");
+define("_MI_PUB_PUBLISHED", "Published");
+define("_MI_PUB_OFFLINE", "Offline");
+define("_MI_PUB_SUBMITTED", "Submited");
+define("_MI_PUB_REJECTED", "Rejected");
+
+define("_MI_PUB_FORM_ALLOWCOMMENTS", "[FORM DEFAULT OPTIONS] 'Allow comments' set to TRUE");
+define("_MI_PUB_FORM_ALLOWCOMMENTS_DSC", "");
+define("_MI_PUB_FORM_DOHTML", "[FORM DEFAULT OPTIONS] 'Enable HTML tags ' set to TRUE");
+define("_MI_PUB_FORM_DOHTML_DSC", "");
+define("_MI_PUB_FORM_DOSMILEY", "[FORM DEFAULT OPTIONS] 'Enable smiley icons' set to TRUE");
+define("_MI_PUB_FORM_DOSMILEY_DSC", "");
+define("_MI_PUB_FORM_DOXCODE", "[FORM DEFAULT OPTIONS] 'Enable XOOPS codes' set to TRUE");
+define("_MI_PUB_FORM_DOXCODE_DSC", "");
+define("_MI_PUB_FORM_DOIMAGE", "[FORM DEFAULT OPTIONS] 'Enable images' set to TRUE");
+define("_MI_PUB_FORM_DOIMAGE_DSC", "");
+define("_MI_PUB_FORM_DOBR", "[FORM DEFAULT OPTIONS] 'Enable linebreak' set to TRUE");
+define("_MI_PUB_FORM_DOBR_DSC", "");
+
 ?>

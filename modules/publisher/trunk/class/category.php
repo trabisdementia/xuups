@@ -388,7 +388,7 @@ class PublisherCategoryHandler extends XoopsPersistableObjectHandler
 			$category->setVar('short_url', $smartobject_metagen->generateSeoTitle($category->name('n'), false));
 		}
 
-        $ret = parent::insert($category, $force);
+        $ret = parent::insert(&$category, $force);
         return $ret;
 	}
 
@@ -414,7 +414,7 @@ class PublisherCategoryHandler extends XoopsPersistableObjectHandler
 			$this->delete($subcat);
 		}
 
-        if (!parent::delete($category, $force)) {
+        if (!parent::delete(&$category, $force)) {
 			$category->setErrors('An error while deleting.');
 			return false;
 		}

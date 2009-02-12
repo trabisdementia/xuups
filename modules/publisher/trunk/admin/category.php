@@ -7,7 +7,7 @@
 * Licence: GNU
 */
 
-include_once("admin_header.php");
+include_once dirname(__FILE__) . '/admin_header.php';
 
 global $publisher_category_handler;
 

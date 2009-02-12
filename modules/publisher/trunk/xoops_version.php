@@ -19,10 +19,11 @@ $modversion['credits'] = "w4z004, hsalazar, Mithrandir, fx2024, Ackbarr, Mariuss
 $modversion['help'] = "";
 $modversion['license'] = "GNU General Public License (GPL)";
 $modversion['official'] = 0;
-$modversion['dirname'] = "publisher";
+$modversion['dirname'] = basename(dirname(__FILE__));
 $modversion['iconsmall'] = "images/icon_small.gif";
 $modversion['iconbig'] = "images/icon_big.gif";
 
+include_once XOOPS_ROOT_PATH . "/modules/" . $modversion['dirname'] ."/include/constants.php";
 
 // Settting InBox module image if it is present
 $logo_filename = $modversion['dirname'] . "_logo.png";
@@ -608,7 +609,7 @@ $modversion['config'][$i]['title'] = '_MI_PUB_SEOMODNAME';
 $modversion['config'][$i]['description'] = '_MI_PUB_SEOMODNAMEDSC';
 $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'text';
-$modversion['config'][$i]['default'] = 'publisher';
+$modversion['config'][$i]['default'] = basename(dirname(__FILE__));
 
 $i++;
 $modversion['config'][$i]['name'] = 'allowsubmit';
@@ -684,6 +685,68 @@ $modversion['config'][$i]['description'] = '_MI_PUB_AUTOAPPDSC';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 0;
+
+//default values for submit form
+$i++;
+$modversion['config'][$i]['name'] = 'form_status';
+$modversion['config'][$i]['title'] = '_MI_PUB_FORM_STATUS';
+$modversion['config'][$i]['description'] = '_MI_PUB_FORM_STATUS_DSC';
+$modversion['config'][$i]['formtype'] = 'select';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['options'] = array(_MI_PUB_PUBLISHED => _PUB_STATUS_PUBLISHED,
+                                             _MI_PUB_OFFLINE   => _PUB_STATUS_OFFLINE,
+                                             _MI_PUB_SUBMITTED => _PUB_STATUS_SUBMITTED,
+                                             _MI_PUB_REJECTED  => _PUB_STATUS_REJECTED);
+$modversion['config'][$i]['default'] = _PUB_STATUS_SUBMITTED;
+
+$i++;
+$modversion['config'][$i]['name'] = 'form_allowcomments';
+$modversion['config'][$i]['title'] = '_MI_PUB_FORM_ALLOWCOMMENTS';
+$modversion['config'][$i]['description'] = '_MI_PUB_FORM_ALLOWCOMMENTS_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 1;
+
+$i++;
+$modversion['config'][$i]['name'] = 'form_dohtml';
+$modversion['config'][$i]['title'] = '_MI_PUB_FORM_DOHTML';
+$modversion['config'][$i]['description'] = '_MI_PUB_FORM_DOHTML_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 1;
+
+$i++;
+$modversion['config'][$i]['name'] = 'form_dosmiley';
+$modversion['config'][$i]['title'] = '_MI_PUB_FORM_DOSMILEY';
+$modversion['config'][$i]['description'] = '_MI_PUB_FORM_DOSMILEY_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 1;
+
+$i++;
+$modversion['config'][$i]['name'] = 'form_doxcode';
+$modversion['config'][$i]['title'] = '_MI_PUB_FORM_DOXCODE';
+$modversion['config'][$i]['description'] = '_MI_PUB_FORM_DOXCODE_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 1;
+
+$i++;
+$modversion['config'][$i]['name'] = 'form_doimage';
+$modversion['config'][$i]['title'] = '_MI_PUB_FORM_DOIMAGE';
+$modversion['config'][$i]['description'] = '_MI_PUB_FORM_DOIMAGE_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 1;
+
+$i++;
+$modversion['config'][$i]['name'] = 'form_dobr';
+$modversion['config'][$i]['title'] = '_MI_PUB_FORM_DOBR';
+$modversion['config'][$i]['description'] = '_MI_PUB_FORM_DOBR_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 1;
+
 
 // Comments
 $modversion['hasComments'] = 1;

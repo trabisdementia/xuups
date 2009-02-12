@@ -49,7 +49,7 @@ class PublisherFile extends XoopsObject
 
 	function checkUpload($post_field, &$allowed_mimetypes, &$errors)
 	{
-		include_once (PUBLISHER_ROOT_PATH . '/class/uploader.php');
+		include_once PUBLISHER_ROOT_PATH . '/class/uploader.php';
 	    $config =& publisher_getModuleConfig();
 
 	   /* $maxfilesize = $config['uploadSize'];
@@ -83,7 +83,7 @@ class PublisherFile extends XoopsObject
 	function storeUpload($post_field, $allowed_mimetypes = null, &$errors)
 	{
 	    global $xoopsUser, $xoopsDB, $xoopsModule;
-        include_once (PUBLISHER_ROOT_PATH . '/class/uploader.php');
+        include_once PUBLISHER_ROOT_PATH . '/class/uploader.php';
 
         $config =& publisher_getModuleConfig();
 
@@ -131,7 +131,7 @@ class PublisherFile extends XoopsObject
 		if ($this->isNew()) {
 			$errors = array();
 			if ($doupload) {
-				$ret = $this->storeUpload('userfile', $allowed_mimetypes, $errors);
+				$ret = $this->storeUpload('item_upload_file', $allowed_mimetypes, $errors);
 			} else {
 				$ret = true;
 			}

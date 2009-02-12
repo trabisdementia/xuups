@@ -481,10 +481,10 @@ function publisher_admin_chmod($target, $mode = 0777)
 }
 
 
-function publisher_getUploadDir($local=true, $item=false)
+function publisher_getUploadDir($local = true, $item = false)
 {
 	if ($item) {
-		if ($item=='root') {
+		if ($item == 'root') {
 			$item = '';
 		} else {
 			$item = $item . '/';
@@ -1222,7 +1222,7 @@ function publisher_tag_module_included() {
 
 function publisher_upload_file($another = false, $withRedirect=true, &$itemObj)
 {
-	include_once(PUBLISHER_ROOT_PATH ."/class/uploader.php");
+	include_once PUBLISHER_ROOT_PATH . '/class/uploader.php';
 
 	global $publisher_isAdmin, $xoopsModuleConfig, $publisher_item_handler, $publisher_file_handler, $xoopsUser;
 
@@ -1249,6 +1249,7 @@ function publisher_upload_file($another = false, $withRedirect=true, &$itemObj)
 	$fileObj->setVar('status', isset($_POST['file_status']) ? intval($_POST['file_status']) : 1);
 	$fileObj->setVar('uid', $uid);
 	$fileObj->setVar('itemid', $itemObj->getVar('itemid'));
+	$fileObj->setVar('datesub', time());
 
     // Get available mimetypes for file uploading
 /*    $hMime =& xoops_getmodulehandler('mimetype');
@@ -1260,8 +1261,8 @@ function publisher_upload_file($another = false, $withRedirect=true, &$itemObj)
     $mimetypes =& $hMime->getObjects($crit);
     // TODO : display the available mimetypes to the user
 	*/
-    if($xoopsModuleConfig['allowupload'] && is_uploaded_file($_FILES['userfile']['tmp_name'])){
-        if (!$ret = $fileObj->checkUpload('userfile', $allowed_mimetypes, $errors)) {
+    if($xoopsModuleConfig['allowupload'] && is_uploaded_file($_FILES['item_upload_file']['tmp_name'])){
+        if (!$ret = $fileObj->checkUpload('item_upload_file', $allowed_mimetypes, $errors)) {
             $errorstxt = implode('<br />', $errors);
 
             $message = sprintf(_PUBLISHER_MESSAGE_FILE_ERROR, $errorstxt);

@@ -9,7 +9,6 @@
 
 include_once dirname(__FILE__) . '/admin_header.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-include_once PUBLISHER_ROOT_PATH . '/include/form_constants.php';
 
 if (!$publisher_isAdmin) {
     redirect_header("javascript:history.go(-1)", 1, _NOPERM);

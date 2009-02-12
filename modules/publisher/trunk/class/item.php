@@ -12,20 +12,6 @@ if (!defined("XOOPS_ROOT_PATH")) {
 
 include_once XOOPS_ROOT_PATH.'/modules/publisher/include/common.php';
 
-// ITEM status
-define("_PUB_STATUS_NOTSET", -1);
-define("_PUB_STATUS_ALL", 0);
-define("_PUB_STATUS_SUBMITTED", 1);
-define("_PUB_STATUS_PUBLISHED", 2);
-define("_PUB_STATUS_OFFLINE", 3);
-define("_PUB_STATUS_REJECTED", 4);
-
-// Notification Events
-define("_PUB_NOT_CATEGORY_CREATED", 1);
-define("_PUB_NOT_ITEM_SUBMITTED", 2);
-define("_PUB_NOT_ITEM_PUBLISHED", 3);
-define("_PUB_NOT_ITEM_REJECTED", 4);
-
 class PublisherItem extends XoopsObject
 {
 
