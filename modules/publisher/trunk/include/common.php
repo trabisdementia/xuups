@@ -1,0 +1,70 @@
+<?php
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ *  Publisher class
+ *
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Include
+ * @subpackage      Functions
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: common.php 0 2009-06-11 18:47:04Z trabis $
+ */
+
+if (!defined("XOOPS_ROOT_PATH")) {
+ 	die("XOOPS root path not defined");
+}
+
+define("PUBLISHER_DIRNAME", basename(dirname(dirname(__FILE__))));
+define("PUBLISHER_URL", XOOPS_URL . '/modules/' . PUBLISHER_DIRNAME);
+define("PUBLISHER_IMAGES_URL", PUBLISHER_URL . '/images');
+define("PUBLISHER_ADMIN_URL", PUBLISHER_URL . '/admin');
+define("PUBLISHER_UPLOADS_URL", XOOPS_URL . '/uploads/' . PUBLISHER_DIRNAME);
+
+define("PUBLISHER_ROOT_PATH", XOOPS_ROOT_PATH . '/modules/' . PUBLISHER_DIRNAME);
+define("PUBLISHER_UPLOADS_PATH", XOOPS_ROOT_PATH . '/uploads/' . PUBLISHER_DIRNAME);
+
+define("PUBLISHER_LEVEL", 10);
+
+xoops_loadLanguage('common', PUBLISHER_DIRNAME);
+
+include_once PUBLISHER_ROOT_PATH . '/include/functions.php';
+include_once PUBLISHER_ROOT_PATH . '/include/constants.php';
+include_once PUBLISHER_ROOT_PATH . '/include/seo_functions.php';
+include_once PUBLISHER_ROOT_PATH . '/class/metagen.php';
+include_once PUBLISHER_ROOT_PATH . '/class/session.php';
+include_once PUBLISHER_ROOT_PATH . '/class/registry.php';
+include_once PUBLISHER_ROOT_PATH . '/class/publisher.php';
+
+$debug = true;
+$publisher =& PublisherPublisher::getInstance($debug);
+
+//This is need or it will not work in blocks.
+global $xoops22, $publisher_isAdmin;
+
+// Check XOOPS version to see if we are on XOOPS 2.2.x plateform
+$xoops22 = publisher_isXoops22();
+
+// Creating the Publisher object
+//$publisher_handler = $publisher->getModule();
+
+// Load only if module is installed
+if (is_object($publisher->getModule())) {
+
+    // Find if the user is admin of the module
+    $publisher_isAdmin = publisher_userIsAdmin();
+
+    // get current page
+    $publisher_current_page = publisher_getCurrentPage();
+}
+?>
