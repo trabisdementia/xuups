@@ -1,243 +1,235 @@
 <?php
-//  Author: The ImpressCMS Project & TheRplima & Trabis
-//  URL: http://www.impresscms.org/ & http://www.xuups.com
-//  E-Mail: therplima@impresscms.org & lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-require 'admin_header.php';
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
-if (!empty($_POST)) foreach ($_POST as $k => $v) ${$k} = $v;
-if (!empty($_GET)) foreach ($_GET as $k => $v) ${$k} = $v;
-$op = (isset($_GET['op']))?trim($_GET['op']):((isset($_POST['op']))?trim($_POST['op']):'list');
-$permission_id = (isset($_GET['permission_id']))?intval($_GET['permission_id']):(isset($_POST['permission_id'])?intval($_POST['permission_id']):0);
-$limit = (isset($_GET['limit']))?intval($_GET['limit']):(isset($_POST['limit'])?intval($_POST['limit']):15);
-$start = (isset($_GET['start']))?intval($_GET['start']):(isset($_POST['start'])?intval($_POST['start']):0);
-$redir = (isset($_GET['redir']))?$_GET['redir']:(isset($_POST['redir'])?$_POST['redir']:null);
+/**
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Defacer
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: admin_permission.php 0 2009-06-11 18:47:04Z trabis $
+ */
 
-switch ($op){
+require dirname(__FILE__) . '/admin_header.php';
+
+$actions = array('list', 'add', 'edit', 'editok', 'del', 'delok');
+$op = isset($_REQUEST['op']) && in_array($_REQUEST['op'], $actions) ?  $_REQUEST['op'] : 'list';
+
+$itemid = isset($_REQUEST['itemid']) ? intval($_REQUEST['itemid']) : 0;
+$limit  = isset($_REQUEST['limit'])  ? intval($_REQUEST['limit'])  : 15;
+$start  = isset($_REQUEST['start'])  ? intval($_REQUEST['start'])  : 0;
+
+$itemid = isset($_REQUEST['permission_id']) ? intval($_REQUEST['permission_id']) : $itemid;
+
+switch ($op) {
     case 'list':
         xoops_cp_header();
-        defacer_adminmenu(3);
-        echo permissions_index($start);
+        defacer_adminMenu(1);
+        echo defacer_index($start, $limit);
         xoops_cp_footer();
         break;
-    case 'addpermission':
-        permissions_addpermission();
+    case 'add':
+        defacer_add();
         break;
-    case 'editpermission':
+    case 'edit':
         xoops_cp_header();
-        defacer_adminmenu(3);
-        echo permissionform($permission_id);
+        defacer_adminMenu(1);
+        echo defacer_form($itemid);
         xoops_cp_footer();
         break;
-    case 'editpermissionok':
-        permissions_editpermission($permission_id);
+    case 'editok':
+        defacer_edit($itemid);
         break;
-    case 'delpermission':
-        permissions_confirmdelpermission($permission_id,$redir);
+    case 'del':
+        defacer_confirmdel($itemid);
         break;
-    case 'delpermissionok':
-        permissions_delpermission($permission_id,$redir);
+    case 'delok':
+        defacer_del($itemid);
         break;
 }
 
-function permissions_index($start=0){
-	global $xoopsTpl,$xoopsUser,$xoopsConfig,$limit;
+function defacer_index($start = 0, $limit = 0)
+{
+    global $xoopsTpl;
 
-	include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-	
-	$grouplist_handler = xoops_gethandler('group');
+    $defacer =& DefacerDefacer::getInstance();
+
+    $grouplist_handler =& xoops_gethandler('group');
     $grouplist = $grouplist_handler->getObjects(null, true);
     foreach (array_keys($grouplist) as $i) {
         $groups[$i] = $grouplist[$i]->getVar('name');
     }
     $xoopsTpl->assign('groups', $groups);
 
-	$permission_handler =& xoops_getmodulehandler('permission','defacer');
-	$page_handler =& xoops_getmodulehandler('page','defacer');
-	$module_handler =& xoops_gethandler('module');
+    $count = $defacer->getHandler('permission')->getCount();
+    $xoopsTpl->assign('count', $count);
 
-	$permissioncount = $permission_handler->getCount();
-	$xoopsTpl->assign('permissioncount',$permissioncount);
     $criteria = new CriteriaCompo();
     $criteria->setStart($start);
-	$criteria->setLimit($limit);
-	$permissions = $permission_handler->getObjects($criteria);
+    $criteria->setLimit($limit);
+    $objs = $defacer->getHandler('permission')->getObjects($criteria);
 
-	if ($permissioncount > 0){
-		if ($permissioncount > $limit) {
-			include_once XOOPS_ROOT_PATH.'/class/permissionnav.php';
-			$nav = new XoopspermissionNav($permissioncount, $limit, $start, 'start', 'op=list');
-			$xoopsTpl->assign('pag','<div style="float:left; padding-top:2px;" align="center">'.$nav->renderNav().'</div>');
-		}else{
-			$xoopsTpl->assign('pag','');
-		}
-	}else{
-		$xoopsTpl->assign('pag','');
-	}
-
-	foreach ($permissions as $permission){
-		$pag = array();
-		
-		$pag['permission_id'] = $permission->getVar('permission_id');
-		$pag['permission_groups'] = $permission->getVar('permission_groups');
-		$page = $page_handler->get($permission->getVar('permission_id'));
-        $mod = $module_handler->get($page->getVar('page_moduleid'));
-        if (!is_object($mod)) continue;
-		$pag['module'] = $mod->getVar('name');
-		$pag['permission_title'] = $page->getVar('page_title');
-		$pag['permission_url'] = $page->getVar('page_url');
-		if (substr($page->getVar('page_url'),-1) == '*'){
-			$pag['permission_vurl'] = 0;
-		}else{
-			if (substr($page->getVar('page_url'),0,7) == 'http://'){
-				$pag['permission_vurl'] = $page->getVar('page_url');
-			}else{
-				$pag['permission_vurl'] = XOOPS_URL.'/'.$page->getVar('page_url');
-			}
-		}
-		$pag['permission_status'] = $page->getVar('page_status');
-		$xoopsTpl->append('permissions',$pag);
-	}
-	$xoopsTpl->assign('addpermissionform',permissionform());
-
-	return $xoopsTpl->fetch('db:defacer_admin_permission.html');
-}
-
-function permissions_addpermission() {
-	if (!$GLOBALS['xoopsSecurity']->check()) {
-		redirect_header('admin_permission.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-	}
-
-	$permission_handler =& xoops_getmodulehandler('permission','defacer');
-	$criteria =  new Criteria('permission_id', $_POST['permission_id']);
-	$permissioncount = $permission_handler->getCount($criteria);
-	if ($permissioncount > 0) {
-        $permission = $permission_handler->get($_POST['permission_id']);
-    }  else {
-        $permission = $permission_handler->create();
+    if ($count > $limit) {
+        include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+        $nav = new XoopsPageNav($count, $limit, $start, 'start', 'op=list');
+        $xoopsTpl->assign('pagenav', '<div style="float:left; padding-top:2px;" align="center">' . $nav->renderNav() . '</div>');
     }
-    $permission->setVars($_POST);
-	if (!$permission_handler->insert($permission)){
-		$msg = _AM_DEFACER_ERROR;
-	}else{
-		$msg = _AM_DEFACER_DBUPDATED;
-	}
 
-	redirect_header('admin_permission.php?op=list',2,$msg);
+    foreach ($objs as $obj) {
+        $item = $obj->getValues();
+
+        $page = $defacer->getHandler('page')->get($obj->getVar('permission_id'));
+        $item['module']     = $page->getVar('name');
+        $item['permission_title'] = $page->getVar('page_title');
+        $item['permission_url']   = $page->getVar('page_url');
+        $item['permission_status'] = $page->getVar('page_status');
+
+        if (substr($page->getVar('page_url'), -1) == '*') {
+            $item['permission_vurl'] = 0;
+        } else {
+            if ($page->getVar('page_moduleid') == 1){
+                $item['permission_vurl'] = XOOPS_URL . '/' . $page->getVar('page_url');
+            } else {
+                $item['permission_vurl'] = XOOPS_URL . '/modules/' . $page->getVar('dirname') . '/' . $page->getVar('page_url');
+            }
+        }
+
+        $xoopsTpl->append('items', $item);
+    }
+
+    $xoopsTpl->assign('form', defacer_form());
+
+    return $xoopsTpl->fetch('db:defacer_admin_permission.html');
 }
 
-function permissions_editpermission($permission_id) {
-	if (!$GLOBALS['xoopsSecurity']->check()) {
-		redirect_header('admin_permission.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-	}
-	$permission_handler =& xoops_getmodulehandler('permission','defacer');
-	$permission = $permission_handler->get($permission_id);
+function defacer_add()
+{
+    $defacer =& DefacerDefacer::getInstance();
 
-	$permission->setVars($_POST);
-	if (!$permission_handler->insert($permission)){
-		$msg = _AM_DEFACER_ERROR;
-	}else{
-		$msg = _AM_DEFACER_DBUPDATED;
-	}
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header(basename(__FILE__), 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+    }
 
-	redirect_header('admin_permission.php?op=list',2,$msg);
+    $obj = $defacer->getHandler('permission')->create();
+    $obj->setVars($_POST);
+
+    if (!$defacer->getHandler('permission')->insert($obj)) {
+        $msg = _AM_DEFACER_ERROR;
+    } else {
+        $msg = _AM_DEFACER_DBUPDATED;
+    }
+
+    redirect_header(basename(__FILE__) , 2, $msg);
 }
 
-function permissions_delpermission($permission_id,$redir=null) {
-	if (!$GLOBALS['xoopsSecurity']->check()) {
-		redirect_header('admin_permission.php',1, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-	}
-	if ($permission_id <= 0) {
-		redirect_header('admin_permission.php',1);
-	}
-	$permission_handler =& xoops_getmodulehandler('permission','defacer');
-	$permission = $permission_handler->get($permission_id);
-	if (!is_object($permission)) {
-		redirect_header('admin_permission.php',1);
-	}
+function defacer_edit($itemid)
+{
+    $defacer =& DefacerDefacer::getInstance();
 
-	if (!$permission_handler->delete($permission)) {
-		xoops_cp_header();
-		xoops_error(sprintf(_AM_DEFACER_ERROR, $permission->getVar('permission_id')));
-		xoops_cp_footer();
-		exit();
-	}
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header(basename(__FILE__), 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+    }
 
-	redirect_header((!is_null($redir))?base64_decode($redir):'admin_permission.php',2,_AM_DEFACER_DBUPDATED);
+    $obj = $defacer->getHandler('permission')->get($itemid);
+    $obj->setVars($_POST);
+
+    if (!$defacer->getHandler('permission')->insert($obj)) {
+        $msg = _AM_DEFACER_ERROR;
+    } else {
+        $msg = _AM_DEFACER_DBUPDATED;
+    }
+
+    redirect_header(basename(__FILE__), 2, $msg);
 }
 
-function permissions_confirmdelpermission($permission_id,$redir=null){
-	global $xoopsConfig;
+function defacer_del($itemid)
+{
+    $defacer =& DefacerDefacer::getInstance();
 
-	$permission_handler =& xoops_getmodulehandler('permission','defacer');
-	$permission = $permission_handler->get($permission_id);
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header(basename(__FILE__),1 , implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+    }
 
-	/*if ($xoopsConfig['startpermission'] == $permission->getVar('permission_moduleid').'-'.$permission->getVar('permission_id')){ //Selected permission is the start permission of the site
-		redirect_header((!is_null($redir))?base64_decode($redir).'&canceled=1':'admin_permission.php?op=list',5,_AM_DEFACER_DELSTARTPERMISSION);
-	}else{      */
-		xoops_cp_header();
-		$arr = array();
-		$arr['op'] = 'delpermissionok';
-		$arr['permission_id'] = $permission_id;
-		$arr['fct'] = 'permissions';
-		if (!is_null($redir)){
-			$arr['redir'] = $redir;
-		}
-		xoops_confirm($arr, 'admin_permission.php', _AM_DEFACER_RUDELPERMISSION);
-		xoops_cp_footer();
-	//}
+    if ($itemid <= 0) {
+        redirect_header(basename(__FILE__), 1);
+    }
+
+    $obj = $defacer->getHandler('permission')->get($itemid);
+    if (!is_object($obj)) {
+        redirect_header(basename(__FILE__), 1);
+    }
+
+    if (!$defacer->getHandler('permission')->delete($obj)) {
+        xoops_cp_header();
+        xoops_error(sprintf(_AM_DEFACER_ERROR, $obj->getVar('permission_id')));
+        xoops_cp_footer();
+        exit();
+    }
+
+    redirect_header(basename(__FILE__), 2, _AM_DEFACER_DBUPDATED);
 }
 
-function permissionform($id=null){
-	global $xoopsUser, $xoopsConfig, $permission_id;
-	include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
+function defacer_confirmdel($itemid)
+{
+    xoops_cp_header();
+    xoops_confirm(array('op' => 'delok', 'itemid' => $itemid), basename(__FILE__), _AM_DEFACER_RUDEL);
+    xoops_cp_footer();
+}
 
-    $permission_handler =& xoops_getmodulehandler('permission','defacer');
-	$page_handler =& xoops_getmodulehandler('page','defacer');
+function defacer_form($itemid = 0)
+{
+    $defacer =& DefacerDefacer::getInstance();
+    $obj = $defacer->getHandler('permission')->get($itemid);
 
-    if (isset($id)) $permission = $permission_handler->get($id);
-	if (@is_object($permission)){
-		$ftitle = _EDIT;
-        $permission_id = $permission->getVar('permission_id');
-        $permission_groups = $permission->getVar('permission_groups');
-	}else{
-		$ftitle = _ADD;
-		$permission_groups = array(XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS);
-	}
+    if ($obj->isNew()) {
+        $ftitle = _EDIT;
+    } else {
+        $ftitle = _ADD;
+    }
 
-	$form = new XoopsThemeForm($ftitle, 'permission_form', 'admin_permission.php', "post", true);
+    $form = new XoopsThemeForm($ftitle, 'permission_form', basename(__FILE__), 'post', true);
 
-	$page_select = new XoopsFormSelect(_AM_DEFACER_PAGE, 'permission_id', $permission_id);
-	$page_select->customValidationCode[] = 'var value = document.getElementById(\'permission_id\').value; if (value == 0){alert("'._AM_DEFACER_SELECTPAGE_ERR.'"); return false;}';
+    $page_select = new XoopsFormSelect(_AM_DEFACER_PAGE, 'permission_id', $obj->getVar('permission_id', 'e'));
+    $page_select->customValidationCode[] = 'var value = document.getElementById(\'permission_id\').value; if (value == 0){alert("' . _AM_DEFACER_SELECTPAGE_ERR . '"); return false;}';
 
-	$criteria = new CriteriaCompo(new Criteria('page_status', 1));
-	$pageslist = $page_handler->getList($criteria);
-    $list = array('0'=>'--------------------------');
-	$pageslist = $list+$pageslist;
-	$page_select->addOptionArray($pageslist);
-	$form->addElement($page_select,true);
-	
-    $form->addElement(new XoopsFormSelectGroup(_AM_DEFACER_PERMISSION_GROUPS, 'permission_groups', true, $permission_groups, 8, true));
+    $criteria = new CriteriaCompo(new Criteria('page_status', 1));
+    $criteria->setSort('name');
+    $criteria->setOrder('ASC');
+    $pageslist = $defacer->getHandler('page')->getList($criteria);
+    $list = array('0' => '--------------------------');
+    $pageslist = $list + $pageslist;
+    $page_select->addOptionArray($pageslist);
+    $form->addElement($page_select, true);
 
-	$tray = new XoopsFormElementTray('' ,'');
-	$tray->addElement(new XoopsFormButton('', 'permission_button', _SUBMIT, 'submit'));
+    $form->addElement(new XoopsFormSelectGroup(_AM_DEFACER_PERMISSION_GROUPS, 'permission_groups', true, $obj->getVar('permission_groups', 'e'), 8, true));
 
-	$btn = new XoopsFormButton('', 'reset', _CANCEL, 'button');
-	if (@is_object($permission)){
-		$btn->setExtra('onclick="document.location.href=\'admin_permission.php?op=list\'"');
-	}else{
-		$btn->setExtra('onclick="document.getElementById(\'addpermissionform\').style.display = \'none\'; return false;"');
-	}
-	$tray->addElement($btn);
-	$form->addElement($tray);
+    $tray = new XoopsFormElementTray('' ,'');
+    $tray->addElement(new XoopsFormButton('', 'defacer_button', _SUBMIT, 'submit'));
 
-	if (@is_object($permission)){
-		$form->addElement(new XoopsFormHidden('op', 'editpermissionok'));
-		$form->addElement(new XoopsFormHidden('permission_id', $id));
-	}else{
-		$form->addElement(new XoopsFormHidden('op', 'addpermission'));
-	}
+    $btn = new XoopsFormButton('', 'reset', _CANCEL, 'button');
+    if (!$obj->isNew()) {
+        $btn->setExtra('onclick="document.location.href=\'' . basename(__FILE__) . '\'"');
+    } else {
+        $btn->setExtra('onclick="document.getElementById(\'form\').style.display = \'none\'; return false;"');
+    }
+    $tray->addElement($btn);
+    $form->addElement($tray);
 
-	return $form->render();
+    if (!$obj->isNew()) {
+        $form->addElement(new XoopsFormHidden('op', 'editok'));
+        $form->addElement(new XoopsFormHidden('itemid', $itemid));
+    } else {
+        $form->addElement(new XoopsFormHidden('op', 'add'));
+    }
+
+    return $form->render();
 }
 ?>

@@ -1,254 +1,233 @@
 <?php
-//  Author: The ImpressCMS Project & TheRplima & Trabis
-//  URL: http://www.impresscms.org/ & http://www.xuups.com
-//  E-Mail: therplima@impresscms.org & lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-require 'admin_header.php';
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
-if (!empty($_POST)) foreach ($_POST as $k => $v) ${$k} = $v;
-if (!empty($_GET)) foreach ($_GET as $k => $v) ${$k} = $v;
-$op = (isset($_GET['op']))?trim($_GET['op']):((isset($_POST['op']))?trim($_POST['op']):'list');
-$meta_id = (isset($_GET['meta_id']))?intval($_GET['meta_id']):(isset($_POST['meta_id'])?intval($_POST['meta_id']):0);
-$limit = (isset($_GET['limit']))?intval($_GET['limit']):(isset($_POST['limit'])?intval($_POST['limit']):15);
-$start = (isset($_GET['start']))?intval($_GET['start']):(isset($_POST['start'])?intval($_POST['start']):0);
-$redir = (isset($_GET['redir']))?$_GET['redir']:(isset($_POST['redir'])?$_POST['redir']:null);
+/**
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Defacer
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: admin_meta.php 0 2009-06-11 18:47:04Z trabis $
+ */
 
-switch ($op){
+require dirname(__FILE__) . '/admin_header.php';
+
+$actions = array('list', 'add', 'edit', 'editok', 'del', 'delok');
+$op = isset($_REQUEST['op']) && in_array($_REQUEST['op'], $actions) ?  $_REQUEST['op'] : 'list';
+
+$itemid = isset($_REQUEST['itemid']) ? intval($_REQUEST['itemid']) : 0;
+$limit  = isset($_REQUEST['limit'])  ? intval($_REQUEST['limit'])  : 15;
+$start  = isset($_REQUEST['start'])  ? intval($_REQUEST['start'])  : 0;
+
+$itemid = isset($_REQUEST['meta_id']) ? intval($_REQUEST['meta_id']) : $itemid;
+
+switch ($op) {
     case 'list':
         xoops_cp_header();
-        defacer_adminmenu(2);
-        echo metas_index($start);
+        defacer_adminMenu(2);
+        echo defacer_index($start, $limit);
         xoops_cp_footer();
         break;
-    case 'addmeta':
-        metas_addmeta();
+    case 'add':
+        defacer_add();
         break;
-    case 'editmeta':
+    case 'edit':
         xoops_cp_header();
-        defacer_adminmenu(2);
-        echo metaform($meta_id);
+        defacer_adminMenu(2);
+        echo defacer_form($itemid);
         xoops_cp_footer();
         break;
-    case 'editmetaok':
-        metas_editmeta($meta_id);
+    case 'editok':
+        defacer_edit($itemid);
         break;
-    case 'delmeta':
-        metas_confirmdelmeta($meta_id,$redir);
+    case 'del':
+        defacer_confirmdel($itemid);
         break;
-    case 'delmetaok':
-        metas_delmeta($meta_id,$redir);
+    case 'delok':
+        defacer_del($itemid);
         break;
 }
 
-function metas_index($start=0){
-	global $xoopsTpl,$xoopsUser,$xoopsConfig,$limit;
+function defacer_index($start = 0, $limit = 0)
+{
+    global $xoopsTpl;
 
-	include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
+    $defacer =& DefacerDefacer::getInstance();
 
-	$meta_handler =& xoops_getmodulehandler('meta','defacer');
-	$page_handler =& xoops_getmodulehandler('page','defacer');
-	$module_handler =& xoops_gethandler('module');
+    $count = $defacer->getHandler('meta')->getCount();
+    $xoopsTpl->assign('count', $count);
 
-	$metacount = $meta_handler->getCount();
-	$xoopsTpl->assign('metacount',$metacount);
-	$criteria = new CriteriaCompo();
-	$criteria->setStart($start);
-	$criteria->setLimit($limit);
-	$metas = $meta_handler->getObjects($criteria);
+    $criteria = new CriteriaCompo();
+    $criteria->setStart($start);
+    $criteria->setLimit($limit);
+    $objs = $defacer->getHandler('meta')->getObjects($criteria);
 
-	if ($metacount > 0){
-		if ($metacount > $limit) {
-			include_once XOOPS_ROOT_PATH.'/class/metanav.php';
-			$nav = new XoopsmetaNav($metacount, $limit, $start, 'start', 'op=list');
-			$xoopsTpl->assign('pag','<div style="float:left; padding-top:2px;" align="center">'.$nav->renderNav().'</div>');
-		}else{
-			$xoopsTpl->assign('pag','');
-		}
-	}else{
-		$xoopsTpl->assign('pag','');
-	}
-
-	foreach ($metas as $meta){
-		$pag = array();
-
-		$pag['meta_id'] = $meta->getVar('meta_id');
-		$pag['meta_sitename'] = $meta->getVar('meta_sitename');
-		$pag['meta_pagetitle'] = $meta->getVar('meta_pagetitle');
-		$pag['meta_slogan'] = $meta->getVar('meta_slogan');
-		$pag['meta_keywords'] = $meta->getVar('meta_keywords');
-		$pag['meta_description'] = $meta->getVar('meta_description');
-		
-		$page = $page_handler->get($meta->getVar('meta_id'));
-        $mod = $module_handler->get($page->getVar('page_moduleid'));
-        if (!is_object($mod)) continue;
-		$pag['module'] = $mod->getVar('name');
-		$pag['meta_title'] = $page->getVar('page_title');
-		$pag['meta_url'] = $page->getVar('page_url');
-		if (substr($page->getVar('page_url'),-1) == '*'){
-			$pag['meta_vurl'] = 0;
-		}else{
-			if (substr($page->getVar('page_url'),0,7) == 'http://'){
-				$pag['meta_vurl'] = $page->getVar('page_url');
-			}else{
-				$pag['meta_vurl'] = XOOPS_URL.'/'.$page->getVar('page_url');
-			}
-		}
-		$pag['meta_status'] = $page->getVar('page_status');
-		$xoopsTpl->append('metas',$pag);
-	}
-	$xoopsTpl->assign('addmetaform',metaform());
-
-	return $xoopsTpl->fetch('db:defacer_admin_meta.html');
-}
-
-function metas_addmeta() {
-	if (!$GLOBALS['xoopsSecurity']->check()) {
-		redirect_header('admin_meta.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-	}
-
-	$meta_handler =& xoops_getmodulehandler('meta','defacer');
-	$criteria =  new Criteria('meta_id', $_POST['meta_id']);
-	$metacount = $meta_handler->getCount($criteria);
-	if ($metacount > 0) {
-        $meta = $meta_handler->get($_POST['meta_id']);
-    }  else {
-        $meta = $meta_handler->create();
+    if ($count > $limit) {
+        include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+        $nav = new XoopsPageNav($count, $limit, $start, 'start', 'op=list');
+        $xoopsTpl->assign('pagenav', '<div style="float:left; padding-top:2px;" align="center">' . $nav->renderNav() . '</div>');
     }
-    $meta->setVars($_POST);
-	if (!$meta_handler->insert($meta)){
-		$msg = _AM_DEFACER_ERROR;
-	}else{
-		$msg = _AM_DEFACER_DBUPDATED;
-	}
 
-	redirect_header('admin_meta.php?op=list',2,$msg);
+    foreach ($objs as $obj) {
+        $item = $obj->getValues();
+
+        $page = $defacer->getHandler('page')->get($obj->getVar('meta_id'));
+        $item['module']     = $page->getVar('name');
+        $item['meta_title'] = $page->getVar('page_title');
+        $item['meta_url']   = $page->getVar('page_url');
+        $item['meta_status'] = $page->getVar('page_status');
+
+        if (substr($page->getVar('page_url'), -1) == '*') {
+            $item['meta_vurl'] = 0;
+        } else {
+            if ($page->getVar('page_moduleid') == 1){
+                $item['meta_vurl'] = XOOPS_URL . '/' . $page->getVar('page_url');
+            } else {
+                $item['meta_vurl'] = XOOPS_URL . '/modules/' . $page->getVar('dirname') . '/' . $page->getVar('page_url');
+            }
+        }
+
+        $xoopsTpl->append('items', $item);
+    }
+
+    $xoopsTpl->assign('form', defacer_form());
+
+    return $xoopsTpl->fetch('db:defacer_admin_meta.html');
 }
 
-function metas_editmeta($meta_id) {
-	if (!$GLOBALS['xoopsSecurity']->check()) {
-		redirect_header('admin_meta.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-	}
-	$meta_handler =& xoops_getmodulehandler('meta','defacer');
-	$meta = $meta_handler->get($meta_id);
+function defacer_add()
+{
+    $defacer =& DefacerDefacer::getInstance();
 
-	$meta->setVars($_POST);
-	if (!$meta_handler->insert($meta)){
-		$msg = _AM_DEFACER_ERROR;
-	}else{
-		$msg = _AM_DEFACER_DBUPDATED;
-	}
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header(basename(__FILE__), 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+    }
 
-	redirect_header('admin_meta.php?op=list',2,$msg);
+    $obj = $defacer->getHandler('meta')->create();
+    $obj->setVars($_POST);
+
+    if (!$defacer->getHandler('meta')->insert($obj)) {
+        $msg = _AM_DEFACER_ERROR;
+    } else {
+        $msg = _AM_DEFACER_DBUPDATED;
+    }
+
+    redirect_header(basename(__FILE__) , 2, $msg);
 }
 
-function metas_delmeta($meta_id,$redir=null) {
-	if (!$GLOBALS['xoopsSecurity']->check()) {
-		redirect_header('admin_meta.php',1, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-	}
-	if ($meta_id <= 0) {
-		redirect_header('admin_meta.php',1);
-	}
-	$meta_handler =& xoops_getmodulehandler('meta','defacer');
-	$meta = $meta_handler->get($meta_id);
-	if (!is_object($meta)) {
-		redirect_header('admin_meta.php',1);
-	}
+function defacer_edit($itemid)
+{
+    $defacer =& DefacerDefacer::getInstance();
 
-	if (!$meta_handler->delete($meta)) {
-		xoops_cp_header();
-		xoops_error(sprintf(_AM_DEFACER_ERROR, $meta->getVar('meta_id')));
-		xoops_cp_footer();
-		exit();
-	}
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header(basename(__FILE__), 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+    }
 
-	redirect_header((!is_null($redir))?base64_decode($redir):'admin_meta.php',2,_AM_DEFACER_DBUPDATED);
+    $obj = $defacer->getHandler('meta')->get($itemid);
+    $obj->setVars($_POST);
+
+    if (!$defacer->getHandler('meta')->insert($obj)) {
+        $msg = _AM_DEFACER_ERROR;
+    } else {
+        $msg = _AM_DEFACER_DBUPDATED;
+    }
+
+    redirect_header(basename(__FILE__), 2, $msg);
 }
 
-function metas_confirmdelmeta($meta_id,$redir=null){
-	global $xoopsConfig;
+function defacer_del($itemid)
+{
+    $defacer =& DefacerDefacer::getInstance();
 
-	$meta_handler =& xoops_getmodulehandler('meta','defacer');
-	$meta = $meta_handler->get($meta_id);
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header(basename(__FILE__),1 , implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+    }
 
-/*	if ($xoopsConfig['startmeta'] == $meta->getVar('meta_moduleid').'-'.$meta->getVar('meta_id')){ //Selected meta is the start meta of the site
-		redirect_header((!is_null($redir))?base64_decode($redir).'&canceled=1':'admin_meta.php?op=list',5,_AM_DEFACER_DELSTARTMETA);
-	}else{  */
-		xoops_cp_header();
-		$arr = array();
-		$arr['op'] = 'delmetaok';
-		$arr['meta_id'] = $meta_id;
-		$arr['fct'] = 'metas';
-		if (!is_null($redir)){
-			$arr['redir'] = $redir;
-		}
-		xoops_confirm($arr, 'admin_meta.php', _AM_DEFACER_RUDEL);
-		xoops_cp_footer();
-//	}
+    if ($itemid <= 0) {
+        redirect_header(basename(__FILE__), 1);
+    }
+
+    $obj = $defacer->getHandler('meta')->get($itemid);
+    if (!is_object($obj)) {
+        redirect_header(basename(__FILE__), 1);
+    }
+
+    if (!$defacer->getHandler('meta')->delete($obj)) {
+        xoops_cp_header();
+        xoops_error(sprintf(_AM_DEFACER_ERROR, $obj->getVar('meta_id')));
+        xoops_cp_footer();
+        exit();
+    }
+
+    redirect_header(basename(__FILE__), 2, _AM_DEFACER_DBUPDATED);
 }
 
-function metaform($id=null){
-	global $xoopsUser, $xoopsConfig, $meta_id;
-	include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
+function defacer_confirmdel($itemid)
+{
+    xoops_cp_header();
+    xoops_confirm(array('op' => 'delok', 'itemid' => $itemid), basename(__FILE__), _AM_DEFACER_RUDEL);
+    xoops_cp_footer();
+}
 
-    $meta_handler =& xoops_getmodulehandler('meta','defacer');
-	$page_handler =& xoops_getmodulehandler('page','defacer');
-	
- if (isset($id)) $meta = $meta_handler->get($id);
-	if (@is_object($meta)){
-		$ftitle = _EDIT;
-        $meta_id = $meta->getVar('meta_id');
-        $meta_sitename = $meta->getVar('meta_sitename');
-        $meta_pagetitle = $meta->getVar('meta_pagetitle');
-        $meta_slogan = $meta->getVar('meta_slogan');
-        $meta_keywords = $meta->getVar('meta_keywords');
-        $meta_description = $meta->getVar('meta_description');
-	}else{
-		$ftitle = _ADD;
-        $meta_sitename = '';
-        $meta_pagetitle = '';
-        $meta_slogan = '';
-        $meta_keywords = '';
-        $meta_description = '';
-	}
+function defacer_form($itemid = 0)
+{
+    $defacer =& DefacerDefacer::getInstance();
+    $obj = $defacer->getHandler('meta')->get($itemid);
 
-	$form = new XoopsThemeForm($ftitle, 'meta_form', 'admin_meta.php', "post", true);
+    if ($obj->isNew()) {
+        $ftitle = _EDIT;
+    } else {
+        $ftitle = _ADD;
+    }
 
-	$page_select = new XoopsFormSelect(_AM_DEFACER_PAGE, 'meta_id', $meta_id);
-	$page_select->customValidationCode[] = 'var value = document.getElementById(\'meta_id\').value; if (value == 0){alert("'._AM_DEFACER_SELECTPAGE_ERR.'"); return false;}';
+    $form = new XoopsThemeForm($ftitle, 'meta_form', basename(__FILE__), 'post', true);
 
-	$criteria = new CriteriaCompo(new Criteria('page_status', 1));
-	$pageslist = $page_handler->getList($criteria);
-	$list = array('0'=>'--------------------------');
-	$pageslist = $list+$pageslist;
-	$page_select->addOptionArray($pageslist);
-	$form->addElement($page_select,true);
+    $page_select = new XoopsFormSelect(_AM_DEFACER_PAGE, 'meta_id', $obj->getVar('meta_id', 'e'));
+    $page_select->customValidationCode[] = 'var value = document.getElementById(\'meta_id\').value; if (value == 0){alert("' . _AM_DEFACER_SELECTPAGE_ERR . '"); return false;}';
 
-    $form->addElement(new XoopsFormText(_AM_DEFACER_META_SITENAME,'meta_sitename', 50, 50, $meta_sitename));
-	$form->addElement(new XoopsFormText(_AM_DEFACER_META_SLOGAN,'meta_slogan', 50, 50, $meta_slogan));
-	$form->addElement(new XoopsFormText(_AM_DEFACER_META_PAGETITLE,'meta_pagetitle', 50, 50, $meta_pagetitle));
-	$form->addElement(new XoopsFormTextArea(_AM_DEFACER_META_KEYWORDS,'meta_keywords' , $meta_keywords));
-	$form->addElement(new XoopsFormTextArea(_AM_DEFACER_META_DESCRIPTION,'meta_description' , $meta_description));
+    $criteria = new CriteriaCompo(new Criteria('page_status', 1));
+    $criteria->setSort('name');
+    $criteria->setOrder('ASC');
+    $pageslist = $defacer->getHandler('page')->getList($criteria);
+    $list = array('0' => '--------------------------');
+    $pageslist = $list + $pageslist;
+    $page_select->addOptionArray($pageslist);
+    $form->addElement($page_select, true);
 
-	$tray = new XoopsFormElementTray('' ,'');
-	$tray->addElement(new XoopsFormButton('', 'meta_button', _SUBMIT, 'submit'));
+    $form->addElement(new XoopsFormText(_AM_DEFACER_META_SITENAME, 'meta_sitename', 50, 50, $obj->getVar('meta_sitename', 'e')));
+    $form->addElement(new XoopsFormText(_AM_DEFACER_META_SLOGAN, 'meta_slogan', 50, 50, $obj->getVar('meta_slogan', 'e')));
+    $form->addElement(new XoopsFormText(_AM_DEFACER_META_PAGETITLE, 'meta_pagetitle', 50, 50, $obj->getVar('meta_pagetitle', 'e')));
+    $form->addElement(new XoopsFormTextArea(_AM_DEFACER_META_KEYWORDS, 'meta_keywords' , $obj->getVar('meta_keywords', 'e')));
+    $form->addElement(new XoopsFormTextArea(_AM_DEFACER_META_DESCRIPTION, 'meta_description' , $obj->getVar('meta_description', 'e')));
 
-	$btn = new XoopsFormButton('', 'reset', _CANCEL, 'button');
-	if (@is_object($meta)){
-		$btn->setExtra('onclick="document.location.href=\'admin_meta.php?op=list\'"');
-	}else{
-		$btn->setExtra('onclick="document.getElementById(\'addmetaform\').style.display = \'none\'; return false;"');
-	}
-	$tray->addElement($btn);
-	$form->addElement($tray);
+    $tray = new XoopsFormElementTray('' ,'');
+    $tray->addElement(new XoopsFormButton('', 'defacer_button', _SUBMIT, 'submit'));
 
-	if (@is_object($meta)){
-		$form->addElement(new XoopsFormHidden('op', 'editmetaok'));
-		$form->addElement(new XoopsFormHidden('meta_id', $id));
-	}else{
-		$form->addElement(new XoopsFormHidden('op', 'addmeta'));
-	}
+    $btn = new XoopsFormButton('', 'reset', _CANCEL, 'button');
+    if (!$obj->isNew()) {
+        $btn->setExtra('onclick="document.location.href=\'' . basename(__FILE__) . '\'"');
+    } else {
+        $btn->setExtra('onclick="document.getElementById(\'form\').style.display = \'none\'; return false;"');
+    }
+    $tray->addElement($btn);
+    $form->addElement($tray);
 
-	return $form->render();
+    if (!$obj->isNew()) {
+        $form->addElement(new XoopsFormHidden('op', 'editok'));
+        $form->addElement(new XoopsFormHidden('itemid', $itemid));
+    } else {
+        $form->addElement(new XoopsFormHidden('op', 'add'));
+    }
+
+    return $form->render();
 }
 
 ?>
