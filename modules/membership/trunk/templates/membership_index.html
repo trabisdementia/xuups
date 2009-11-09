@@ -1,0 +1,69 @@
+<table>
+<div align='center'>
+<b><{$lang_welcome}></b>
+<br /><br />
+<{$lang_greetings}>
+</div>
+<br /><br />
+
+<table align='center'>
+    <tr>
+        <td align='right' width=58%>
+            <{$form_submit}>
+        </td>
+        <td>
+            <{$form_reset}>
+        </td>
+    </tr>
+</table>
+
+<div align='center'>
+    <{$form_letters}>
+</div>
+
+<br /><br />
+
+
+<{if $users}>
+<{$pagenav}>
+<table border='0' cellpadding='4' cellspacing='1' valign='top' width='100%' class='head'>
+
+            <tr>
+                <td align='center'><span ><b><{$sort_avatar}></b></span></td>
+                <td align='center'><span ><b><{$sort_nickname}></b></span></td>
+                <td align='center'><span ><b><{$sort_regdate}></b></span></td>
+                <td align='center'><span ><b><{$sort_email}></b></span></td>
+                <td align='center'><span ><b><{$sort_pm}></b></span></td>
+                <td align='center'><span ><b><{$sort_url}></b></span></td>
+
+                <{if $can_edit}>
+                <td align='center'><span ><b><{$functions}></b></span></td>
+                <{/if}>
+            </tr>
+            <{foreach item=user from=$users}>
+            <tr class="<{cycle values="even,odd"}>">
+<!-- $smarty.const._MA_PUB_All_TOPICS} -->
+                <td align='center'><{$user.avatar}></td>
+                <td align='center'><{$user.nickname}></td>
+                <td align='center'><{$user.regdate}></td>
+                <td align='center'><{$user.email}></td>
+                <td align='center'><{$user.pm}></td>
+                <td align='center'><{$user.url}></td>
+                <{if $can_edit}>
+                <td align='center'><{$user.functions}></td>
+                <{/if}>
+                
+            </tr>
+            <{/foreach}>
+        </table>
+
+<{$pagenav}>
+<{else}>
+<table border='0' cellpadding='0' cellspacing='0' valign='top' width='100%' class='head'>
+<tr><td class='bg3' align='center'>
+    <b><{$no_results}></b>
+</td></tr>
+</table>
+<{/if}>
+
+
