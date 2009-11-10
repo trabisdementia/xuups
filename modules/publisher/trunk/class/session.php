@@ -4,15 +4,15 @@
  * @package publisher
  * @author Harry Fuecks (PHP Anthology Volume II)
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-class PublisherSession {
-     
+class PublisherSession
+{
     /**
      * Session constructor<br />
      * Starts the session with session_start()
@@ -24,7 +24,7 @@ class PublisherSession {
     {
         @session_start();
     }
-    
+
     /**
      * Sets a session variable
      * @param string name of variable
@@ -32,11 +32,11 @@ class PublisherSession {
      * @return void
      * @access public
      */
-    function set($name, $value) 
+    function set($name, $value)
     {
         $_SESSION[$name] = $value;
     }
-    
+
     /**
      * Fetches a session variable
      * @param string name of variable
@@ -51,7 +51,7 @@ class PublisherSession {
             return false;
         }
     }
-    
+
     /**
      * Deletes a session variable
      * @param string name of variable
@@ -62,8 +62,8 @@ class PublisherSession {
     {
         unset($_SESSION[$name]);
     }
-    
-    
+
+
     /**
      * Destroys the whole session
      * @return void
@@ -74,13 +74,13 @@ class PublisherSession {
         $_SESSION = array();
         session_destroy();
     }
-    
+
     function singleton()
     {
         static $_sess;
-        
+
         if (!isset($_sess)) {
-            $_sess =& new PublisherSession();
+            $_sess = new PublisherSession();
         }
         return $_sess;
     }

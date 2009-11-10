@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -26,10 +26,10 @@ publisher_cpHeader();
 publisher_adminMenu(-1, _AM_PUBLISHER_ITEMS . " > " . _AM_PUBLISHER_PAGEWRAP);
 
 publisher_openCollapsableBar('pagewraptable', 'pagewrapicon', _AM_PUBLISHER_PAGEWRAP, _AM_PUBLISHER_PAGEWRAPDSC);
-	
+
 $dir = publisher_getUploadDir(true, 'content');
 
-if(!eregi("777",decoct(fileperms($dir)))) {
+if (!preg_match('/777/i', decoct(fileperms($dir)))) {
     echo "<font color='FF0000'><h4>" . _AM_PUBLISHER_PERMERROR . "</h4></font>";
 }
 
@@ -47,7 +47,7 @@ $form = new XoopsThemeForm(_AM_PUBLISHER_DELETEFILE, "form_name", "pw_delete_fil
 
 $pWrap_select = new XoopsFormSelect(publisher_getUploadDir(true, 'content'), "address");
 $folder = dir($dir);
-while($file = $folder->read()) {
+while ($file = $folder->read()) {
     if ($file != "." && $file != "..") {
         $pWrap_select->addOption($file, $file);
     }
