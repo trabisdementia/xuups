@@ -1,0 +1,46 @@
+<div style="margin-bottom:5px; float: left;" >
+  <form action="admin_waiting.php" method="POST">
+    <strong><{$smarty.const._AM_MYINV_RESULTS_FOUND}></strong> <{$count}> <strong><{$smarty.const._AM_MYINV_EMAILS_SENT}></strong><{$sent}>
+    <input type="submit" name="reset" value="<{$smarty.const._AM_MYINV_RESET_COUNTER}>" />
+  </form>
+</div>
+
+<{if $count > 0}>
+<div style="margin-bottom:5px; float: right;" align="right">
+  <form action="admin_waiting.php" method="POST">
+    <input type="submit" name="sendpack" value="<{$smarty.const._AM_MYINV_SEND_PACK}>" />
+    <input type="submit" name="delall" value="<{$smarty.const._AM_MYINV_DELETE_ALL}>" />
+  </form>
+</div>
+<{/if}>
+
+  <table width="100%" cellspacing="1" cellpadding="0" class="outer">
+    <tr align="center">
+      <th><{$smarty.const._AM_MYINV_NAME}></th>
+      <th><{$smarty.const._AM_MYINV_EMAIL}></th>
+      <th><{$smarty.const._AM_MYINV_UID}></th>
+      <th><{$smarty.const._AM_MYINV_DATE}></th>
+      <th width="15%"><{$smarty.const._OPTIONS}></th>
+    </tr>
+    <{if $count > 0}>
+      <{foreach item=obj key=key from=$objs}>
+      <tr class="<{cycle values="even,odd"}>" align="center">
+        <td align="left"><{$obj.wt_name}></td>
+        <td align="left"><{$obj.wt_email}></td>
+        <td align="left"><{$obj.wt_userid}></td>
+        <td align="left"><{$obj.wt_date}></td>
+        <td>
+          <a href="admin_waiting.php?op=send&amp;id=<{$obj.wt_id}>"><img src="<{$xoops_url}>/modules/myinviter/images/send_big.png" title="<{$smarty.const._AM_MYINV_SEND}>" alt="<{$smarty.const._AM_MYINV_SEND}>" /></a>
+          <a href="admin_waiting.php?op=del&amp;id=<{$obj.wt_id}>"><img src="<{$xoops_url}>/modules/myinviter/images/delete_big.png" title="<{$smarty.const._DELETE}>" alt="<{$smarty.const._DELETE}>" /></a>
+        </td>
+      </tr>
+      <{/foreach}>
+    <{else}>
+      <tr><td class="head" colspan="5" align="center"><{$smarty.const._AM_MYINV_NOTFOUND}></td></tr>
+    <{/if}>
+    <tr>
+      <td class="head" colspan="5" align="right">
+        <{$pag}>
+      </td>
+   </tr>
+  </table>

@@ -1,0 +1,36 @@
+<{if $block.latestnews_scroll }>
+<marquee behavior='scroll' align='center'  direction='up'  height='<{$block.scrollheight}>' scrollamount='3' scrolldelay='<{$block.scrollspeed}>' onmouseover='this.stop()' onmouseout='this.start()' >
+<{/if}>
+
+<table width='100%' border='0'>
+<tr>
+<{section name=i loop=$block.columns}>
+	<td width="<{$block.spec.columnwidth}>%">
+	<{foreach item=item from=$block.columns[i]}>
+
+  <div class="itemHead"><{$item.admin}> <span class="itemTitle"><{$item.topic_title}><{$item.title}></span></div>
+<{if $block.poster or $item.posttime or $item.read }>
+  <div class="itemInfo">
+    <span class="itemPoster"><{$item.poster}></span>
+    <span class="itemPostDate"><{$item.posttime}><{$item.read}></span>
+  </div>
+<{/if}>
+  <div style="text-align:justify; padding:5px">
+    <{$item.text}>
+    <div style="clear:both;"></div>
+  </div>
+  <div class="itemFoot">
+    <span class="itemPermaLink"><{$item.more}><{$item.comment}><{$item.print}><{$item.pdf}><{$item.email}></span>
+  </div>
+
+<{/foreach}>
+	</td>
+<{/section}>
+</tr>
+</table>
+
+<{if $block.latestnews_scroll }>
+</marquee>
+<{/if}>
+
+<div><{$block.morelink}><{$block.topiclink}><{$block.archivelink}><{$block.submitlink}></div>

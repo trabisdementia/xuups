@@ -1,0 +1,176 @@
+<{include file='db:publisher_header.html'}>
+
+<div class="item">
+  <h2><{$item.title}></h2>
+  <{if $item.subtitle}>
+  <h3><{$item.subtitle}></h3>
+  <{/if}>
+  <{if $display_whowhen_link}>
+  <small><{$item.who_when}> (<{$item.counter}> <{$lang_reads}>)</small>
+  <{/if}>
+	<div class="itemBody">
+<!--
+    <{if $item.posterAvatar != 'blank.gif'}>
+    <img class="publisher_item_image" src="<{$xoops_url}>/uploads/<{$item.posterAvatar}>"  align="right" alt="<{$item.posterName}>" title="<{$item.posterName}>" />
+    <{/if}>
+-->
+    <{if $pagenav}>
+    <div class="publisher_pagenav_top"><{$lang_page}>: <{$pagenav}></div>
+    <{/if}>
+      <div class="itemText">
+        <{if $item.image_path || $item.images}>
+        <div id="popeye1" class="popeye">
+          <ul>
+            <{if $item.image_path}>
+            <li>
+              <a href="<{$item.image_path}>" rel="item-lightbox">
+                <img src="<{$item.image_path}>" alt="<{$item.image_name}>" width="<{$item.image_width}>" height="<{$item.image_height}>"/>
+              </a>
+            </li>
+            <{/if}>
+            <{foreach item=image from=$item.images}>
+            <li>
+              <a href="<{$image.path}>" rel="item-lightbox">
+                <img src="<{$image.path}>" alt="<{$image.name}>" width="<{$image.width}>" height="<{$image.height}>"/>
+              </a>
+            </li>
+            <{/foreach}>
+          </ul>
+        </div>
+        <{/if}>
+	  	  <{$item.maintext}>
+      </div>
+      <div style="clear:both;"></div>
+      <{if $item.embeded_files}>
+	    <div id="publisher_embeded_files">
+			  <{foreach item=file from=$item.embeded_files}>
+				<div><{$file.content}></div>
+			  <{/foreach}>
+			</div>
+		  <{/if}>
+	    <{if $pagenav}>
+	    <div class="publisher_pagenav_bottom"><{$lang_page}>: <{$pagenav}></div>
+	  	<{/if}>
+	  	<{if $tagbar}>
+		  <p><{include file="db:tag_bar.html"}></p>
+		  <{/if}>
+    </div>
+    <{if $itemfooter}>
+		<div class="publisher_itemfooter"><{$itemfooter}></div>
+	  <{/if}>
+    <div class="publisher_pre_itemInfo">
+		  <div class="itemInfo" style="height: 14px;">
+	  		<{if $display_comment_link && $item.cancomment}>
+				<span style="float: left;">
+          <a href="<{$item.itemurl}>"><{$item.comments}> <{$lang_comments}></a>
+        </span>
+	  	  <{else}>
+				<span style="float: left;">&nbsp;</span>
+	  	  <{/if}>
+	  	  <{if $perm_author_items && $item.uid != 0}>
+        <span style="float: left; margin-left: 5px;">
+          <a href="<{$publisher_url}>/author_items.php?uid=<{$item.uid}>"><{$smarty.const._MD_PUBLISHER_ITEMS_SAME_AUTHOR}></a>
+        </span>
+	  	  <{/if}>
+	  	  <span style="float: right; text-align: right;"><{$item.adminlink}></span>
+	  	  <div style="height: 0; display: inline; clear: both;"></div>
+      </div>
+    </div>
+</div>
+<br />
+
+<{if $item.files}>
+<table border="0" width="90%" cellspacing="1" cellpadding="0" align="center" class = "outer">
+	<tr>
+		<td colspan="4" class="itemHead"><b><{$lang_files_linked}></b></td>
+	</tr>
+	<tr class="even">
+		<td align="left" class="itemTitle"><b><{$lang_file_name}></b></td>
+	  <td align="center" width="100" class="itemTitle"><b><{$lang_datesub}></b></td>
+	  <td align="center" width="50" class="itemTitle"><b><{$lang_hits}></b></td>
+	</tr>
+
+	<!-- BEGIN DYNAMIC BLOCK -->
+  <{foreach item=file from=$item.files}>
+  <tr>
+ 		<td class="odd" align="left">
+		  <a href="<{$publisher_url}>/visit.php?fileid=<{$file.fileid}>" target="_blank">
+		    <img src="<{$publisher_url}>/images/icon/file.gif" title="<{$lang_download_file}>" alt="<{$lang_download_file}>"/>&nbsp;<b><{$file.name}></b>
+      </a>
+		  <div><{$file.description}></div>
+    </td>
+ 		<td class="odd" align="center"><{$file.datesub}></td>
+ 		<td class="odd" align="center"><{$file.hits}></td>
+ 	</tr>
+  <{/foreach}>
+	<!-- END DYNAMIC BLOCK -->
+</table>
+<br />
+<{/if}>
+
+<{if $other_items == "previous_next"}>
+<{if $previous_item_link || $next_item_link}>
+<table class="outer">
+  <tr>
+    <td class="itemHead" colspan="2"><b><{$lang_items_links}></b></td>
+  </tr>
+  <tr style="vertical-align: middle;">
+    <td class="odd" width="50%" align="left">
+      <{if $previous_item_link}>
+      <a href="<{$previous_item_url}>">
+        <img style="vertical-align: middle;" src="<{$publisher_images_url}>/links/previous.gif" title="<{$lang_previous_item}>" alt="<{$lang_previous_item}>"/>
+      </a> 
+      <{$previous_item_link}>
+      <{/if}>
+    </td>
+    <td class="odd" width="50%" align="right">
+      <{if $next_item_link}>
+      <{$next_item_link}>
+      <a href="<{$next_item_url}>"><img style="vertical-align: middle;" src="<{$publisher_images_url}>/links/next.gif" title="<{$lang_next_item}>" alt="<{$lang_next_item}>"/></a>
+      <{/if}>
+    </td>
+  </tr>
+</table>
+<{/if}>
+<{elseif $other_items == 'all'}>
+  <table border="0" width="90%" cellspacing="1" cellpadding="3" align="center" class= "outer">
+	<tr>
+	  <td align="left" class="itemHead" width='65%'><b><{$lang_item}></b></td>
+		<{if $display_date_col == 1}>
+	  <td align="center" class="itemHead" width="25%"><b><{$lang_datesub}></b></td>
+	  <{/if}>
+		<{if $display_hits_col == 1}>
+	  <td align="center" class="itemHead" width="10%"><b><{$lang_hits}></b></td>
+	  <{/if}>
+	</tr>
+  <!-- Start item loop -->
+  <{foreach item=item from=$items}>
+  <tr>
+    <td class="even" align="left"><{$item.titlelink}></td>
+	  <{if $display_date_col == 1}>
+  	<td class="odd" align="left"><div align="center"><{$item.datesub}></div></td>
+	  <{/if}>
+    <{if $display_hits_col == 1}>
+		<td class="odd" align="left"><div align="center"><{$item.counter}></div></td>
+	  <{/if}>
+  </tr>
+  <{/foreach}>
+	<!-- End item loop -->
+</table>
+<{/if}>
+<{if $rating_enabled}>
+<small><{$item.ratingbar}></small>
+<{/if}>
+<{include file='db:publisher_footer.html'}>
+<script type="text/javascript">
+  <!--//<![CDATA[
+    var options = {
+      easing:     'easeInOutCirc',
+      direction:  'left',
+      duration:   230,
+      stageW:     '200',
+	    stageH:     '150'
+    }
+    $publisher('.popeye').popeye(options);
+  //]]>-->
+</script>

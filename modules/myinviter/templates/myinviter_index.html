@@ -1,0 +1,106 @@
+<{foreach item=error from=$errors}>
+<p class="errorMsg"><{$error}></p>
+<{/foreach}>
+
+<{foreach item=ok from=$oks}>
+<p class="successMsg"><{$ok}></p>
+<{/foreach}>
+
+
+<{if !$contacts_array}>
+
+<form method="post" action="<{$xoops_url}>/modules/myinviter/index.php">
+<div style="text-align:center;">
+
+    <div style="padding:5px;">
+        <h2><{$smarty.const._MA_MYINV_INVITE}></h2>
+    </div>
+    
+    <div style="padding:5px;">
+        <strong><{$smarty.const._MA_MYINV_ENTER_EMAIL}></strong>
+        <input name="email_box" type="text" maxlength="100" size="30" value="<{$email_box}>">
+    </div>
+
+    <div style="padding:5px;">
+        <strong><{$smarty.const._MA_MYINV_ENTER_PASSWORD}></strong>
+        <input type="password" name="password_box" maxlength="100" size="30" value="<{$password_box}>">
+    </div>
+
+    <div style="padding:5px;">
+        <strong><{$smarty.const._MA_MYINV_ENTER_PROVIDER}></strong>
+        <select name="provider_box" size="1" width="190" style="width:190px;">
+
+        <{foreach item=service key=skey from=$services}>
+            <option disabled><{$service}></option>
+            <{foreach item=provider key=pkey from=$providers.$skey}>
+                <option value="<{$pkey}>"<{if $pkey == $selected}> selected="selected"<{/if}>><{$provider}></option>
+            <{/foreach}>
+        <{/foreach}>
+        
+        </select>
+    </div>
+    
+    <div style="padding:5px;">
+        <input type="submit" name="import" value="<{$smarty.const._MA_MYINV_GETFRIENDS}>">
+		<input type="hidden" name="step" value="get_contacts">
+    </div>
+    
+    </div>
+</div>
+</form>
+<{/if}>
+
+<div id='target'></div>
+
+<{if $contacts_array}>
+<div style="align: center;">
+  <table border="0" cellpadding="0" cellspacing="0" width="500" id="table3" style="border: 1px solid #D8D8D8">
+    <form name="form_results" action="index.php" method="post">
+      <tr>
+        <td bgcolor="#F2F2F2" height="27" width="27%">
+          <b><font face="Arial" color="#3366CC">
+          <font face="Arial" style="font-size: 9pt"><a href="javascript:checkall(true)">
+          <font color="#333333"><{$smarty.const._MA_MYINV_CHECKALL}></font></a></font></font><font face="Arial" style="font-size: 9pt"><font face="Arial" color="#333333"> | </font><font face="Arial" color="#3366CC">
+          <a href="javascript:checkall(false)"><font color="#333333"><{$smarty.const._MA_MYINV_UNCHECKALL}></font></a></font></font><font face="Arial" size="1" color="#333333">&nbsp; </font></b>
+        </td>
+        <td bgcolor="#F2F2F2" height="27" width="73%">
+          <b><font face="Arial" size="2" color="#333333">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<{$smarty.const._MA_MYINV_YOURCONTACTS}></font></b>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div align="center">
+            <table cellpadding="0" cellspacing="1" class="outer">
+<{foreach item=contacts from=$contacts_array key=id}>
+              <tr class="<{cycle values="even,odd"}>">
+                <{if !$contacts.disabled}>
+                <td bgcolor="#FFFFFF" style="border-left-width: 1px; border-right: 1px solid #D8D8D8; border-top-width: 1px; border-bottom-width: 1px; width:10%;">
+                  <input type="checkbox" name="list[]" value="<{$contacts.name}>:<{$contacts.email}>" checked></td>
+                <{else}>
+                <td bgcolor="#FFFFFF" style="border-left-width: 1px; border-right: 1px solid #D8D8D8; border-top-width: 1px; border-bottom-width: 1px; width:10%;">
+                </td>
+                <{/if}>
+                <td bgcolor="#FFFFFF" style="border-left-width: 1px; border-right: 1px solid #D8D8D8; border-top-width: 1px; border-bottom-width: 1px; width:30%;">
+                  <font face="Arial" size="2" color="#333333"><{$contacts.name}></font></td>
+                <td bgcolor="#FFFFFF" style="width:30%;">
+                  <font face="Arial" size="2" color="#333333"><{$contacts.email}></font></td>
+                <td bgcolor="#FFFFFF" style="width:30%;">
+                  <{if $contacts.disabled}><font face="Arial" size="2" color="#333333"><{$contacts.disabled}></font></td>
+                  <{else}><{$smarty.const._MA_MYINV_READYTOINVITE}>
+                  <{/if}>
+              </tr>
+<{/foreach}>
+            </table>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td height="42" style="border-left-width: 1px; border-right-width: 1px; border-top: 1px solid #D8D8D8; border-bottom-width: 1px" bgcolor="#F2F2F2" colspan="2">
+          <input type="submit" value="<{$smarty.const._MA_MYINV_INVITEFRIENDS}>" name="B1" style="font-family: Arial; font-size: 10pt; font-weight: bold; color: #5B5B5B; border: 1px solid #D8D8D8; background-color: #FFFFFF">
+          <input type='hidden' name='step' value='send_invites'>
+        </td>
+      </tr>
+    </form>
+	</table>
+</div>
+<{/if}>

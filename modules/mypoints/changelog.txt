@@ -1,0 +1,10 @@
+<b><u>=> Version 1.0 RC (2009-06-05)</u></b>
+- Fixed : Points were not auto updating
+- Added : Plugin for publisher module
+
+<b><u>=> Version 1.0 Beta (2008-10-11)</u></b>
+- Added : Templates
+- Added : mypoints.php
+
+<b><u>=> Version 1.0 Alpha (2008-06-11)</u></b>
+- First public release of the module.

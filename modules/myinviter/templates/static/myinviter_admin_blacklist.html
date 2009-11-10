@@ -1,0 +1,29 @@
+<div style="margin-bottom:5px; float: left;" >
+    <strong><{$smarty.const._AM_MYINV_RESULTS_FOUND}></strong> <{$count}>
+</div>
+
+  <table width="100%" cellspacing="1" cellpadding="0" class="outer">
+    <tr align="center">
+      <th><{$smarty.const._AM_MYINV_EMAIL}></th>
+      <th><{$smarty.const._AM_MYINV_DATE}></th>
+      <th width="15%"><{$smarty.const._OPTIONS}></th>
+    </tr>
+    <{if $count > 0}>
+      <{foreach item=obj key=key from=$objs}>
+      <tr class="<{cycle values="even,odd"}>" align="center">
+        <td align="left"><{$obj.bl_email}></td>
+        <td align="left"><{$obj.bl_date}></td>
+        <td>
+          <a href="admin_blacklist.php?op=del&amp;id=<{$obj.bl_id}>"><img src="<{$xoops_url}>/modules/myinviter/images/delete_big.png" title="<{$smarty.const._DELETE}>" alt="<{$smarty.const._DELETE}>" /></a>
+        </td>
+      </tr>
+      <{/foreach}>
+    <{else}>
+      <tr><td class="head" colspan="3" align="center"><{$smarty.const._AM_MYINV_NOTFOUND}></td></tr>
+    <{/if}>
+    <tr>
+      <td class="head" colspan="3" align="right">
+        <{$pag}>
+      </td>
+   </tr>
+  </table>
