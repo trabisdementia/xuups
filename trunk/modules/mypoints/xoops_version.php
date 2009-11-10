@@ -1,0 +1,123 @@
+<?php
+//  Author: Trabis
+//  URL: http://www.xuups.com
+//  E-Mail: lusopoemas@gmail.com
+
+$modversion['name'] = _MI_MYPOINTS_NAME;
+$modversion['version'] = "1.00";
+$modversion['description'] = _MI_MYPOINTS_DSC;
+$modversion['author'] = "Xuups";
+$modversion['credits'] = "Trabis";
+$modversion['help'] = "";
+$modversion['license'] = "GPL see LICENSE";
+$modversion['official'] = 0;
+$modversion['image'] = "images/slogo.png";
+$modversion['dirname'] = "mypoints";
+
+$modversion['sqlfile']['mysql'] = "sql/mysql.sql";
+
+// Tables created by sql file (without prefix!)
+$i=0;
+$modversion['tables'][$i] = "mypoints_user";
+$i++;
+$modversion['tables'][$i] = "mypoints_plugin";
+$i++;
+$modversion['tables'][$i] = "mypoints_relation";
+
+// Admin things
+$modversion['hasAdmin'] = 1;
+$modversion['adminindex'] = "admin/index.php";
+$modversion['adminmenu'] = "admin/menu.php";
+
+// Menu
+$modversion['hasMain'] = 1;
+
+// Templates
+$i=0; $i++;
+$modversion['templates'][$i]['file'] = "mypoints_showall.html";
+$modversion['templates'][$i]['description'] = '';
+$i++;
+$modversion['templates'][$i]['file'] = "mypoints_mypoints.html";
+$modversion['templates'][$i]['description'] = '';
+$i++;
+$modversion['templates'][$i]['file'] = "mypoints_about.html";
+$modversion['templates'][$i]['description'] = '';
+
+//Menu
+$i = 0;
+global $xoopsUser;
+if (is_object($xoopsUser) && $xoopsUser->getVar('uid') > 0) {
+    $i++;
+    $modversion['sub'][$i]['name'] = _MI_MYPOINTS_MYPOINTS;
+	$modversion['sub'][$i]['url'] = "mypoints.php";
+}
+
+
+//Configs
+$i=0;
+$i++;
+$modversion['config'][$i]['name'] = 'displayname';
+$modversion['config'][$i]['title'] = '_MI_MYPOINTS_NAMEDISPLAY';
+$modversion['config'][$i]['description'] = '_MI_MYPOINTS_NAMEDISPLAY_DSC';
+$modversion['config'][$i]['formtype'] = 'select';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 1;
+$modversion['config'][$i]['options']	= array('_MI_MYPOINTS_DISPLAYNAME1' => 1, '_MI_MYPOINTS_DISPLAYNAME2' => 2);
+
+$i++;
+$modversion['config'][$i]['name'] = 'refreshtime';
+$modversion['config'][$i]['title'] = '_MI_MYPOINTS_REFRESHTIME';
+$modversion['config'][$i]['description'] = '_MI_MYPOINTS_REFRESHTIME_DSC';
+$modversion['config'][$i]['formtype'] = 'textbox';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 3600;
+
+$i++;
+$modversion['config'][$i]['name'] = 'memberstoshow';
+$modversion['config'][$i]['title'] = '_MI_MYPOINTS_MEMBERSTOSHOW';
+$modversion['config'][$i]['description'] = '_MI_MYPOINTS_MEMBERSTOSHOW_DSC';
+$modversion['config'][$i]['formtype'] = 'textbox';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 50;
+
+$i++;
+$modversion['config'][$i]['name'] = 'countadmin';
+$modversion['config'][$i]['title'] = '_MI_MYPOINTS_COUNTADMIN';
+$modversion['config'][$i]['description'] = '_MI_MYPOINTS_COUNTADMIN_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 1;
+
+$i++;
+$modversion['config'][$i]['name'] = 'countsince';
+$modversion['config'][$i]['title'] = '_MI_MYPOINTS_COUNTSINCE';
+$modversion['config'][$i]['description'] = '_MI_MYPOINTS_COUNTSINCE_DSC';
+$modversion['config'][$i]['formtype'] = 'textbox';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] =  date("Y-m-d", time());
+
+
+// About stuff
+$modversion['status_version'] = "RC";
+$modversion['developer_website_url'] = "http://www.xuups.com";
+$modversion['developer_website_name'] = "Xuups";
+$modversion['developer_email'] = "lusopoemas@gmail.com";
+$modversion['status'] = "Release Candidate";
+$modversion['date'] = "05/06/2009";
+
+$modversion['people']['developers'][] = "Trabis";
+//$modversion['people']['testers'][] = "";
+//$modversion['people']['translaters'][] = "";
+//$modversion['people']['documenters'][] = "";
+//$modversion['people']['other'][] = "";
+
+$modversion['demo_site_url'] = "http://www.xuups.com";
+$modversion['demo_site_name'] = "Xuups.com";
+$modversion['support_site_url'] = "http://www.xuups.com/modules/newbb";
+$modversion['support_site_name'] = "Xuups Support Forums";
+$modversion['submit_bug'] = "http://www.xuups.com/modules/newbb/viewforum.php?forum=26";
+$modversion['submit_feature'] = "http://www.xuups.com/modules/newbb/viewforum.php?forum=26";
+
+//$modversion['author_word'] = "";
+//$modversion['warning'] = "";
+?>

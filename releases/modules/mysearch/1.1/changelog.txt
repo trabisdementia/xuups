@@ -1,0 +1,15 @@
+<b><u>=> Version 1.1 Final (2008-11-01)</u></b>
+- added: 2.2.x compatibility
+- fixed: ajax block not working well when in the search page
+- fixed: 
+
+
+<b><u>=> Version 1.0 Final (2008-05-10)</u></b>
+- added: imported module isearch 1.6 from instantzero
+- added: ajax block and search page.
+
+
+
+
+
+
