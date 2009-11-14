@@ -1,34 +1,45 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright       The XUUPS Project http://www.xuups.com
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         MyPoints
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: index.php 0 2009-11-14 18:47:04Z trabis $
+ */
 include_once dirname(__FILE__) . '/header.php';
 
 $choice = isset($_REQUEST['op']) ? $_REQUEST['op'] : '';
 
-function mypoints_index() {
-
+function mypoints_index()
+{
     global $xoopsUser, $xoopsModule, $xoopsModuleConfig;
-    if (!is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin($xoopsModule->mid())) {
-        exit("Access Denied");
-    }
 
-    $plugin_handler =& xoops_getmodulehandler('plugin');
+    $plugin_handler = xoops_getmodulehandler('plugin');
 
     xoops_cp_header();
     mypoints_adminmenu(0);
-    $module_handler =& xoops_gethandler('module');
+    $module_handler = xoops_gethandler('module');
     $since = $xoopsModuleConfig['countsince'];
 
     $criteria = new CriteriaCompo(new Criteria('isactive', 1));
-    $modules =& $module_handler->getObjects($criteria, true);
+    $modules = $module_handler->getObjects($criteria, true);
     unset($criteria);
     //get list of useritems_count plugins
     $items_plugins = array();
-    foreach ($modules as $moduleid=>$module) {
+    foreach ($modules as $moduleid => $module) {
         $info = array();
-        $info = mypoints_get_plugin_info( $module->getVar('dirname') , 'useritems_count');
+        $info = mypoints_getPluginInfo( $module->getVar('dirname') , 'useritems_count');
         if (is_array($info) && count($info) > 0) {
             include_once $info['plugin_path'];
             if (function_exists(@$info['func'])) {
@@ -42,7 +53,7 @@ function mypoints_index() {
     $votes_plugins = array();
     foreach ($modules as $moduleid=>$module) {
         $info = array();
-        $info = mypoints_get_plugin_info( $module->getVar('dirname') , 'uservotes_count');
+        $info = mypoints_getPluginInfo( $module->getVar('dirname') , 'uservotes_count');
         if (is_array($info) && count($info) > 0) {
             include_once $info['plugin_path'];
             if (function_exists(@$info['func'])) {
@@ -61,54 +72,63 @@ function mypoints_index() {
         . _AM_MYPOINTS_STATUS . "</td><td>&nbsp;</td><td>"
         . _AM_MYPOINTS_POINTS . "</td></tr>";
 
-    foreach ($items_plugins as $moduleid=>$module) {
-        $plugin =& $plugin_handler->getByModuleType($moduleid, 'items');
+    foreach ($items_plugins as $moduleid => $module) {
+        $plugin = $plugin_handler->getByModuleType($moduleid, 'items');
         $actif  = is_object($plugin) ? $plugin->getVar('pluginisactive') : 0;
         $multi  = is_object($plugin) ? $plugin->getVar('pluginmulti') : 1;
         $name   = is_object($plugin) ? $plugin->getVar('pluginname') : $module->getVar('name');
         unset($plugin);
-        
+
         echo "<tr>";
-    	echo "<td class = head>" . $module->getVar('name') . "</td>";
-    	echo "<td class = head>" . _AM_MYPOINTS_PLUGINITEMS . "</td>";
+        echo "<td class = head>" . $module->getVar('name') . "</td>";
+        echo "<td class = head>" . _AM_MYPOINTS_PLUGINITEMS . "</td>";
         echo "<td class = 'even'><input type='text' name='items_name[" . $module->getVar('mid') . "]' size=20 value='" . $name . "'></td>";
         echo "<td class = 'even'><select name=items_actif[" . $module->getVar('mid') . "]>";
-        if ($actif == "1") $sel = "SELECTED";
-            else $sel = "";
+
+        $sel = "";
+        if ($actif == "1") {
+            $sel = "SELECTED";
+        }
         echo "<option " . $sel . " value=\"1\">" . _AM_MYPOINTS_ACTIVE . "\n</option>\n";
-        if ($actif == "0") $sel = "SELECTED";
-            else $sel = "";
+        $sel = "";
+        if ($actif == "0") {
+            $sel = "SELECTED";
+        }
         echo "<option " . $sel . " value=\"0\">" . _AM_MYPOINTS_INACTIVE . "\n</option>\n";
         echo "</select></td>";
         echo "<td class = 'even'>" . _AM_MYPOINTS_MULTI . "</td>";
         echo "<td class = 'even'><input type='text' name='items_multi[" . $module->getVar('mid')."]' size=2 value='" . $multi . "'></td>";
         echo "</tr>";
     }
-    
-    foreach ($votes_plugins as $moduleid=>$module) {
-        $plugin =& $plugin_handler->getByModuleType($moduleid, 'votes');
+
+    foreach ($votes_plugins as $moduleid => $module) {
+        $plugin = $plugin_handler->getByModuleType($moduleid, 'votes');
         $actif  = is_object($plugin) ? $plugin->getVar('pluginisactive') : 0;
         $multi  = is_object($plugin) ? $plugin->getVar('pluginmulti') : 1;
-        $name   =  is_object($plugin) ? $plugin->getVar('pluginname') : $module->getVar('name');
+        $name   = is_object($plugin) ? $plugin->getVar('pluginname') : $module->getVar('name');
         unset($plugin);
 
         echo "<tr>";
-    	echo "<td class = head>" . $module->getVar('name') . "</td>";
-    	echo "<td class = head>" . _AM_MYPOINTS_PLUGINVOTES . "</td>";
+        echo "<td class = head>" . $module->getVar('name') . "</td>";
+        echo "<td class = head>" . _AM_MYPOINTS_PLUGINVOTES . "</td>";
         echo "<td class = 'even'><input type='text' name='votes_name[" . $module->getVar('mid') . "]' size=20 value='" . $name . "'></td>";
         echo "<td class = 'even'><select name=votes_actif[" . $module->getVar('mid') . "]>";
-        if ($actif == "1") $sel = "SELECTED";
-            else $sel = "";
+        $sel = "";
+        if ($actif == "1") {
+            $sel = "SELECTED";
+        }
         echo "<option " . $sel . " value=\"1\">" . _AM_MYPOINTS_ACTIVE . "\n</option>\n";
-        if ($actif == "0") $sel = "SELECTED";
-            else $sel = "";
+        $sel = "";
+        if ($actif == "0") {
+            $sel = "SELECTED";
+        }
         echo "<option " . $sel . " value=\"0\">" . _AM_MYPOINTS_INACTIVE . "\n</option>\n";
         echo "</select></td>";
         echo "<td class = 'even'>" . _AM_MYPOINTS_MULTI . "</td>";
         echo "<td class = 'even'><input type='text' name='votes_multi[" . $module->getVar('mid') . "]' size=2 value='" . $multi . "'></td>";
         echo "</tr>";
     }
-    
+
     echo "</table><p>";
     echo "<input type='hidden' name='ok' VALUE='1'>";
     echo "<input type='submit' value='" . _AM_MYPOINTS_GO . "'>";
@@ -117,13 +137,14 @@ function mypoints_index() {
     xoops_cp_footer();
 }
 
-function mypoints_update_plugins() {
+function mypoints_update_plugins()
+{
     global $xoopsUser, $xoopsDB;
-    $plugin_handler =& xoops_getmodulehandler('plugin');
+    $plugin_handler = xoops_getmodulehandler('plugin');
     if (sizeof($_POST) > 0) {
         $plugin_handler->deleteAll();
-        if (isset ($_POST['items_actif'])) {
-            foreach ($_POST['items_actif'] as $moduleid=>$value) {
+        if (isset($_POST['items_actif'])) {
+            foreach ($_POST['items_actif'] as $moduleid => $value) {
                 $criteria = new CriteriaCompo(new Criteria('pluginmid', $moduleid));
                 $criteria->add(new Criteria('plugintype', 'items'), 'AND');
                 $criteria->setLimit(1);
@@ -144,12 +165,12 @@ function mypoints_update_plugins() {
             }
         }
         if (isset($_POST['votes_actif'])) {
-            foreach($_POST['votes_actif'] as $moduleid=>$value) {
+            foreach($_POST['votes_actif'] as $moduleid => $value) {
                 $criteria = new CriteriaCompo(new Criteria('pluginmid', $moduleid));
                 $criteria->add(new Criteria('plugintype', 'votes'), 'AND');
                 $criteria->setLimit(1);
-                $plugins =& $plugin_handler->getObjects($criteria);
-                unset ($criteria);
+                $plugins = $plugin_handler->getObjects($criteria);
+                unset($criteria);
                 $plugin = !empty($plugins) ? $plugins[0] : $plugin_handler->create();
                 $plugin->setVar('plugintype', 'votes');
                 $plugin->setVar('pluginmid', $moduleid);
@@ -161,24 +182,24 @@ function mypoints_update_plugins() {
                     $plugin->setVar('pluginname', $_POST['votes_name'][$moduleid]);
                 }
                 $plugin_handler->insert($plugin);
-                unset ($plugin);
+                unset($plugin);
             }
         }
     }
 
-    mypoints_update_points(1);
+    mypoints_updatePoints(1);
     redirect_header('index.php', 1, _AM_MYPOINTS_DONE);
     exit;
 }
 
 switch ($choice) {
-	case "submit":
-		mypoints_update_plugins();
-		break;
+    case "submit":
+        mypoints_update_plugins();
+        break;
 
-	default:
-		mypoints_index();
-		break;
+    default:
+        mypoints_index();
+        break;
 }
 
 ?>

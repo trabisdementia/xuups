@@ -1,7 +1,22 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright       The XUUPS Project http://www.xuups.com
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Mypoints
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: about.php 0 2009-11-14 18:47:04Z trabis $
+ */
 
 $modversion['name'] = _MI_MYPOINTS_NAME;
 $modversion['version'] = "1.00";
@@ -33,7 +48,8 @@ $modversion['adminmenu'] = "admin/menu.php";
 $modversion['hasMain'] = 1;
 
 // Templates
-$i=0; $i++;
+$i=0;
+$i++;
 $modversion['templates'][$i]['file'] = "mypoints_showall.html";
 $modversion['templates'][$i]['description'] = '';
 $i++;
@@ -49,9 +65,8 @@ global $xoopsUser;
 if (is_object($xoopsUser) && $xoopsUser->getVar('uid') > 0) {
     $i++;
     $modversion['sub'][$i]['name'] = _MI_MYPOINTS_MYPOINTS;
-	$modversion['sub'][$i]['url'] = "mypoints.php";
+    $modversion['sub'][$i]['url'] = "mypoints.php";
 }
-
 
 //Configs
 $i=0;
@@ -62,7 +77,7 @@ $modversion['config'][$i]['description'] = '_MI_MYPOINTS_NAMEDISPLAY_DSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 1;
-$modversion['config'][$i]['options']	= array('_MI_MYPOINTS_DISPLAYNAME1' => 1, '_MI_MYPOINTS_DISPLAYNAME2' => 2);
+$modversion['config'][$i]['options'] = array('_MI_MYPOINTS_DISPLAYNAME1' => 1, '_MI_MYPOINTS_DISPLAYNAME2' => 2);
 
 $i++;
 $modversion['config'][$i]['name'] = 'refreshtime';
@@ -98,12 +113,12 @@ $modversion['config'][$i]['default'] =  date("Y-m-d", time());
 
 
 // About stuff
-$modversion['status_version'] = "RC";
+$modversion['status_version'] = "Final";
 $modversion['developer_website_url'] = "http://www.xuups.com";
 $modversion['developer_website_name'] = "Xuups";
 $modversion['developer_email'] = "lusopoemas@gmail.com";
-$modversion['status'] = "Release Candidate";
-$modversion['date'] = "05/06/2009";
+$modversion['status'] = "Final";
+$modversion['date'] = "14/11/2009";
 
 $modversion['people']['developers'][] = "Trabis";
 //$modversion['people']['testers'][] = "";

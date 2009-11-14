@@ -1,8 +1,22 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright       The XUUPS Project http://www.xuups.com
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Mypoints
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: index.php 0 2009-11-14 18:47:04Z trabis $
+ */
 
 include_once dirname(dirname(dirname(__FILE__))) . '/mainfile.php';
 
@@ -13,10 +27,10 @@ include_once XOOPS_ROOT_PATH . '/header.php';
 
 $details = isset($_GET['det']) ? intval($_GET['det']) : 0;
 
-$plugin_handler =& xoops_getmodulehandler('plugin');
-$relation_handler =& xoops_getmodulehandler('relation');
-$user_handler =& xoops_getmodulehandler('user');
-    
+$plugin_handler = xoops_getmodulehandler('plugin');
+$relation_handler = xoops_getmodulehandler('relation');
+$user_handler = xoops_getmodulehandler('user');
+
 $refreshtime = $xoopsModuleConfig['refreshtime'];
 $since = strtotime($xoopsModuleConfig['countsince']);
 $countwebm = $xoopsModuleConfig['countadmin'];
@@ -26,16 +40,16 @@ $xoopsTpl->assign('topmessage', sprintf(_MA_MYPOINTS_TOPMESSAGE, $limit, $xoopsC
 
 if ($refreshtime < 60) {
     $refreshtimes = $refreshtime ;
-    $message = ( $refreshtimes == 1) ? _MA_MYPOINTS_LSECOND : _MA_MYPOINTS_LSECONDS;
-} elseif ($refreshtime < 3600) {
+    $message = $refreshtimes == 1 ? _MA_MYPOINTS_LSECOND : _MA_MYPOINTS_LSECONDS;
+} else if ($refreshtime < 3600) {
     $refreshtimes = intval($refreshtime / 60);
-    $message = ( $refreshtimes == 1) ? _MA_MYPOINTS_LMINUTE : _MA_MYPOINTS_LMINUTES;
-} elseif ($refreshtime < 86400) {
+    $message = $refreshtimes == 1 ? _MA_MYPOINTS_LMINUTE : _MA_MYPOINTS_LMINUTES;
+} else if ($refreshtime < 86400) {
     $refreshtimes = intval($refreshtime / 3600);
-    $message = ( $refreshtimes == 1) ? _MA_MYPOINTS_LHOUR : _MA_MYPOINTS_LHOURS;
+    $message = $refreshtimes == 1 ? _MA_MYPOINTS_LHOUR : _MA_MYPOINTS_LHOURS;
 } else {
     $refreshtimes = intval($refreshtime / 86400);
-    $message = ( $refreshtimes == 1) ? _MA_MYPOINTS_LDAY : _MA_MYPOINTS_LDAYS;
+    $message = $refreshtimes == 1 ? _MA_MYPOINTS_LDAY : _MA_MYPOINTS_LDAYS;
 }
 
 $xoopsTpl->assign('updatemessage', sprintf(_MA_MYPOINTS_UPDATEMESSAGE, $refreshtimes, $message));
@@ -48,7 +62,7 @@ $criteria->setSort('pluginmulti');
 $criteria->setOrder('DESC');
 $plugins = $plugin_handler->getObjects($criteria);
 unset($criteria);
-	
+
 if ($details == 1) {
     foreach ($plugins as $plugin) {
         $myplugins[]['pluginname'] = $plugin->getVar('pluginname');
@@ -56,7 +70,7 @@ if ($details == 1) {
     $xoopsTpl->assign('plugins', $myplugins);
 }
 
-$criteria = new Criteria(null);
+$criteria = new CriteriaCompo();
 $criteria->setSort('userpoints');
 $criteria->setOrder('DESC');
 $criteria->setLimit($limit);
@@ -70,9 +84,9 @@ foreach ($users as $user) {
         $myusers[$i]['rank'] = $i;
         $myusers[$i]['link'] = "<a href='" . XOOPS_URL . "/userinfo.php?uid=" . $user->getVar('useruid') . "'>" . $user->getVar('useruname') . "</a>";
         if ($details == 1) {
-            foreach($plugins as $plugin){
+            foreach ($plugins as $plugin){
                 $relation = $relation_handler->getByPluginUid($plugin->getVar('pluginid'), $user->getVar('useruid'));
-                $points = (is_object($relation)) ? $relation->getVar('relationpoints') : 0;
+                $points = is_object($relation) ? $relation->getVar('relationpoints') : 0;
                 $myusers[$i]['pluginpoints'][] = $points;
             }
         }
@@ -94,12 +108,12 @@ $xoopsTpl->assign('detailslink', $detailslink);
 $message = '';
 foreach ($plugins as $plugin) {
     $message .= $plugin->getVar('pluginname').' : ';
-    $points   = ( $plugin->getVar('pluginmulti') == 1) ? _MA_MYPOINTS_LPOINT : _MA_MYPOINTS_LPOINTS;
+    $points   = $plugin->getVar('pluginmulti') == 1 ? _MA_MYPOINTS_LPOINT : _MA_MYPOINTS_LPOINTS;
     $message .= $plugin->getVar('pluginmulti'). ' ' . $points . '<br />';
 }
-   
+
 $xoopsTpl->assign('howtoearnmessage', $message);
-mypoints_update_points();
+mypoints_updatePoints();
 
 include_once XOOPS_ROOT_PATH . '/footer.php';
 ?>

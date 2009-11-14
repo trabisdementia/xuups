@@ -1,3 +1,6 @@
+<b><u>=> Version 1.0 (2009-11-14)</u></b>
+- Xoops 2.4 compatible only
+
 <b><u>=> Version 1.0 RC (2009-06-05)</u></b>
 - Fixed : Points were not auto updating
 - Added : Plugin for publisher module
