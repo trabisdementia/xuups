@@ -1,33 +1,48 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
-}
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
-function mytabsblock_show($pageid, $tabid, $placement = '', $remove = '') {
+/**
+ * @copyright       The XUUPS Project http://www.xuups.com
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Mytabs
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: functions.php 0 2009-11-14 18:47:04Z trabis $
+ */
+defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
+
+function mytabs_blockShow($pageid, $tabid, $placement = '', $remove = '')
+{
     $block = array();
     $visblocks = array();
 
     $blocks_handler = xoops_getmodulehandler('pageblock', 'mytabs');
     $blocks = $blocks_handler->getBlocks($pageid, $tabid, $placement, $remove);
-    
+
     $groups = $GLOBALS['xoopsUser'] ? $GLOBALS['xoopsUser']->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
 
     foreach (array_keys($blocks) as $key) {
         foreach ($blocks[$key] as $thisblock) {
-            if($thisblock->isVisible() && array_intersect($thisblock->getVar('groups'), $groups)) {
+            if ($thisblock->isVisible() && array_intersect($thisblock->getVar('groups'), $groups)) {
                 $visblocks[] = $thisblock;
             }
         }
     }
-    
-    for($i=0; $i < count($visblocks); $i++) {
-        $logger_name = $visblocks[$i]->getVar('title')."(".$visblocks[$i]->getVar('pageblockid').")";
+
+    $count = count($visblocks);
+
+    for ($i = 0; $i < $count; $i++) {
+        $logger_name = $visblocks[$i]->getVar('title') . "(" . $visblocks[$i]->getVar('pageblockid') . ")";
         $GLOBALS['xoopsLogger']->startTime($logger_name);
-        $thisblock = $visblocks[$i]->render($GLOBALS['xoopsTpl'], $tabid.'_'.$visblocks[$i]->getVar('pageblockid'));
+        $thisblock = $visblocks[$i]->render($GLOBALS['xoopsTpl'], $tabid . '_' . $visblocks[$i]->getVar('pageblockid'));
         if ($thisblock != false) {
             if (strlen($thisblock['title']) > 0){
                 if ($thisblock['title'][0] == '-') {
@@ -41,24 +56,4 @@ function mytabsblock_show($pageid, $tabid, $placement = '', $remove = '') {
     }
     return $block;
 }
-
-function mytabs_getcms() {
-    static $version = '';
-
-    if ($version  == '') {
-        if (defined("ICMS_VERSION_NAME")) {
-            $version = 'ICMS';
-        } elseif (substr( XOOPS_VERSION , 10 , 2 ) < 15  && substr( XOOPS_VERSION , 8 , 1 ) == 1 ) {
-            $version = 'OLDXOOPS';
-        }  elseif (strstr(XOOPS_VERSION, "XOOPS 2.2")) {
-            $version = 'XOOPS22';
-        }  else {
-            $version = 'XOOPS';
-        }
-        
-    }
-    
-    return $version;
-}
-
 ?>

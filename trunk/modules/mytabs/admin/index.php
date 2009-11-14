@@ -1,20 +1,35 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-require("header.php");
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
-$pageblock_handler =& xoops_getmodulehandler('pageblock');
-$tab_handler =& xoops_getmodulehandler('tab');
-$page_handler =& xoops_getmodulehandler('page');
+/**
+ * @copyright       The XUUPS Project http://www.xuups.com
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Mytabs
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: header.php 0 2009-11-14 18:47:04Z trabis $
+ */
 
-$module_handler =& xoops_gethandler('module');
+require dirname(__FILE__) . '/header.php';
 
-if ( isset($_REQUEST['pageid'])){
+$pageblock_handler = xoops_getmodulehandler('pageblock');
+$tab_handler = xoops_getmodulehandler('tab');
+$page_handler = xoops_getmodulehandler('page');
+
+$module_handler = xoops_gethandler('module');
+
+if (isset($_REQUEST['pageid'])){
     $pageid = intval($_REQUEST['pageid']);
 } else {
-    $criteria = new Criteria(1,1); //fix for xcl, xcl does not handle null Criteria
+    $criteria = new CriteriaCompo();
     $criteria->setSort('pagetitle');
     $criteria->setOrder('DESC');
     $criteria->setLimit(1);
@@ -24,50 +39,45 @@ if ( isset($_REQUEST['pageid'])){
 
 $page = $page_handler->get($pageid);
 
-if(sizeof($_POST)>0)
+if (sizeof($_POST)>0)
 {
     switch($_POST['doaction']) {
         case 'setpriorities':
-            if (isset ($_POST['pri'])){
-                foreach($_POST['pri'] as $id=>$priority)
-                {
-                    $block=& $pageblock_handler->get($id);
+            if (isset($_POST['pri'])) {
+                foreach ($_POST['pri'] as $id => $priority) {
+                    $block = $pageblock_handler->get($id);
                     $block->setVar('priority', $priority);
                     $pageblock_handler->insert($block);
                 }
             }
-            if (isset ($_POST['tabpri'])){
-                foreach($_POST['tabpri'] as $id=>$priority)
-                {
-                    $tab=& $tab_handler->get($id);
+            if (isset($_POST['tabpri'])) {
+                foreach ($_POST['tabpri'] as $id => $priority) {
+                    $tab = $tab_handler->get($id);
                     $tab->setVar('tabpriority', $priority);
                     $tab_handler->insert($tab);
                 }
             }
-            if (isset ($_POST['place'])){
-                foreach($_POST['place'] as $id=>$placement)
-                {
-                    $block=& $pageblock_handler->get($id);
+            if (isset($_POST['place'])) {
+                foreach ($_POST['place'] as $id => $placement) {
+                    $block = $pageblock_handler->get($id);
                     $block->setVar('placement', $placement);
                     $pageblock_handler->insert($block);
                 }
             }
             break;
         case 'delete':
-            if (isset ($_POST['markedblocks'])){
-                foreach($_POST['markedblocks'] as $id)
-                {
-                    $block=& $pageblock_handler->get($id);
+            if (isset($_POST['markedblocks'])){
+                foreach ($_POST['markedblocks'] as $id) {
+                    $block = $pageblock_handler->get($id);
                     $pageblock_handler->delete($block);
                 }
             }
-            if (isset ($_POST['markedtabs'])){
-                foreach($_POST['markedtabs'] as $id)
-                {
-                    $tab=& $tab_handler->get($id);
+            if (isset($_POST['markedtabs'])){
+                foreach ($_POST['markedtabs'] as $id) {
+                    $tab = $tab_handler->get($id);
                     $tab_handler->delete($tab);
                     $blocks = $pageblock_handler->getObjects(new Criteria('tabid', $id));
-                    foreach ($blocks as $block){
+                    foreach ($blocks as $block) {
                         $pageblock_handler->delete($block);
                     }
                 }
@@ -84,29 +94,28 @@ $allblocks = $pageblock_handler->getAllBlocks();
 $allcustomblocks = $pageblock_handler->getAllCustomBlocks();
 $allblocks = $allblocks + $allcustomblocks;
 
-
 $has_tabs = false;
-$tabs_array =array();
+$tabs_array = array();
 $criteria = new Criteria('tabpageid', $pageid);
 $criteria->setSort('tabpriority');
 $criteria->setOrder('ASC');
 $tabs = $tab_handler->getObjects($criteria);
-foreach ($tabs as $tab){
+foreach ($tabs as $tab) {
     $tabs_array[$tab->getVar('tabid')]['title'] = $tab->getVar('tabtitle');
     $tabs_array[$tab->getVar('tabid')]['priority'] = $tab->getVar('tabpriority');
     $tabs_array[$tab->getVar('tabid')]['groups'] = $tab->getVar('tabgroups');
     $tabs_array[$tab->getVar('tabid')]['note'] = $tab->getVar('tabnote');
     $tabs_array[$tab->getVar('tabid')]['link'] = $tab->getVar('tablink');
     $tabs_array[$tab->getVar('tabid')]['rev'] = $tab->getVar('tabrev');
-    
+
     $showalways = $tab->getVar('tabshowalways');
-    if ($showalways == 'no'){
+    if ($showalways == 'no') {
         $tabs_array[$tab->getVar('tabid')]['unvisible'] = true;
-    } elseif ($showalways == 'yes'){
+    } else if ($showalways == 'yes') {
         $tabs_array[$tab->getVar('tabid')]['visible'] = true;
-    } elseif ($showalways == 'time'){
+    } else if ($showalways == 'time') {
         $check = $tab->isVisible();
-        if ($check){
+        if ($check) {
             $tabs_array[$tab->getVar('tabid')]['timebased'] = true;
         } else {
             $tabs_array[$tab->getVar('tabid')]['unvisible'] = true;
@@ -114,7 +123,6 @@ foreach ($tabs as $tab){
     }
     $has_tabs = true;
 }
-
 
 $has_blocks = false;
 $has_left_blocks = false;
@@ -132,7 +140,7 @@ foreach (array_keys($blocks) as $tabid) {
 }
 
 $has_pages = false;
-$criteria = new Criteria(1,1);  //fixed for xcl
+$criteria = new CriteriaCompo();
 $criteria->setSort('pagetitle');
 $criteria->setOrder('ASC');
 $pagelist = $page_handler->getObjects($criteria, true);
@@ -141,12 +149,11 @@ foreach (array_keys($pagelist) as $i) {
     $has_pages = true;
 }
 
-
 $has_placements = false;
 $placement = '<select name="tabid">';
 $tabs = $tab_handler->getObjects(new Criteria('tabpageid', $pageid), false);
-foreach ($tabs as $tab){
-    $placement .='<option value="'.$tab->getVar('tabid').'">'.$tab->getVar('tabtitle').'</option>';
+foreach ($tabs as $tab) {
+    $placement .='<option value="' . $tab->getVar('tabid') . '">' . $tab->getVar('tabtitle') . '</option>';
     $has_placements = true;
 }
 $placement .='</select>&nbsp;';
@@ -158,26 +165,26 @@ foreach (array_keys($grouplist) as $i) {
     $groups[$i] = $grouplist[$i]->getVar('name');
 }
 
-if ($page){
+if ($page) {
     $xoopsTpl->assign('pagename', $page->getVar('pagetitle'));
 }
 
-if ($has_blocks){
+if ($has_blocks) {
     $xoopsTpl->assign('blocks', $blocks_array);
     $xoopsTpl->assign('left_blocks',$has_left_blocks);
     $xoopsTpl->assign('center_blocks',$has_center_blocks);
     $xoopsTpl->assign('right_blocks',$has_right_blocks);
 }
 
-if ($has_tabs){
+if ($has_tabs) {
     $xoopsTpl->assign('tabs', $tabs_array);
 }
 
-if ($has_placements){
+if ($has_placements) {
     $xoopsTpl->assign('placement', $placement);
 }
 
-if ($has_pages){
+if ($has_pages) {
     $xoopsTpl->assign('pagelist', $pages);
 }
 

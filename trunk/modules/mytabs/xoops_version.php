@@ -1,29 +1,34 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
-if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
-}
-include_once XOOPS_ROOT_PATH . '/modules/mytabs/include/functions.php';
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright       The XUUPS Project http://www.xuups.com
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Mytabs
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: xoops_version.php 0 2009-11-14 18:47:04Z trabis $
+ */
+
+defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
 $modversion['name'] = _MI_MYTABS_NAME;
-$modversion['version'] = '2.1';
 $modversion['description'] = _MI_MYTABS_DSC;
+$modversion['version'] = '2.2';
 $modversion['author'] = "Xuups";
 $modversion['credits'] = "Michael Wulff Nielsen <naish@klanen.net>(www.smartfactory.ca),  Jan Keller Pedersen <jkp@cusix.dk>(www.smartfactory.ca), Tab Content script v2.2- © Dynamic Drive DHTML code library (www.dynamicdrive.com), Menus from 13Styles (www.13styles.com)";
 $modversion['help'] = "";
 $modversion['license'] = "GPL see LICENSE";
 $modversion['official'] = 0;
-if (mytabs_getcms() == 'ICMS') {
-    $modversion['image'] = "images/mytabs_ilogo.gif";
-} else {
-    $modversion['image'] = "images/mytabs_slogo.png";     // for backwards compatibility
-}
-
-$modversion['iconsmall'] = "images/mytabs_iconsmall.gif";
-$modversion['iconbig'] = "images/mytabs_iconbig.gif";
-
+$modversion['image'] = "images/mytabs_slogo.png";
 $modversion['dirname'] = "mytabs";
 
 //Database
@@ -49,7 +54,7 @@ $modversion['templates'][] = array('file' => "mytabs_index.html",
                                    'description' => "");
 $modversion['templates'][] = array('file' => "mytabs_about.html",
                                    'description' => "");
-                                   
+
 //Blocks
 $modversion['blocks'][1]['file'] = "mytabs_block.php";
 $modversion['blocks'][1]['name'] = _MI_MYATBS_BNAME1;
@@ -58,8 +63,6 @@ $modversion['blocks'][1]['show_func'] = "b_mytabs_block_show";
 $modversion['blocks'][1]['edit_func'] = "b_mytabs_block_edit";
 $modversion['blocks'][1]['options'] = "|0|400|mytabsdefault|true|2000||1|0|false";
 $modversion['blocks'][1]['template'] = 'mytabs_block_blocks.html';
-$modversion['blocks'][1]['show_all_module'] = true;
-$modversion['blocks'][1]['can_clone'] = true ;
 
 // About stuff
 $modversion['status_version'] = "Final";
@@ -67,7 +70,7 @@ $modversion['developer_website_url'] = "http://www.xuups.com";
 $modversion['developer_website_name'] = "Xuups";
 $modversion['developer_email'] = "lusopoemas@gmail.com";
 $modversion['status'] = "Final";
-$modversion['date'] = "04/09/2008";
+$modversion['date'] = "14/11/2009";
 
 $modversion['people']['developers'][] = "Trabis, Mowaffak, Gopala, Beduíno";
 
@@ -94,8 +97,4 @@ $modversion['submit_feature'] = "http://www.xuups.com/modules/newbb";
 $modversion['author_word'] = "I want to dedicated this module to Gopala, the owner of this idea and first lines of code.";
 $modversion['warning'] = "";
 
-// On Update
-if( ! empty( $_POST['fct'] ) && ! empty( $_POST['op'] ) && $_POST['fct'] == 'modulesadmin' && $_POST['op'] == 'update_ok' && $_POST['dirname'] == $modversion['dirname'] ) {
-	include dirname( __FILE__ ) . "/include/onupdate.inc.php" ;
-}
 ?>

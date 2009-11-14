@@ -1,9 +1,24 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-require("header.php");
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright       The XUUPS Project http://www.xuups.com
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Mytabs
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: block.php 0 2009-11-14 18:47:04Z trabis $
+ */
+
+require dirname(__FILE__) . '/header.php';
 
 if (isset($_REQUEST['op'])){
     $op = $_REQUEST['op'];
@@ -17,30 +32,29 @@ $pageblock_handler = xoops_getmodulehandler('pageblock');
 switch ($op) {
     case "save":
 
-        if (!isset($_POST['pageblockid'])){
+        if (!isset($_POST['pageblockid'])) {
             $block = $pageblock_handler->create();
-        } elseif (! $block = $pageblock_handler->get($_POST['pageblockid'])){
+        } else if (!$block = $pageblock_handler->get($_POST['pageblockid'])){
             $block = $pageblock_handler->create();
         }
-        
+
         $block->setVar('pageid', $_POST['pageid']);
         $block->setVar('blockid', $_POST['blockid']);
         $block->setVar('title', $_POST['title']);
 
-        if ( isset($_POST['options']) && (count($_POST['options']) > 0) ) {
+        if (isset($_POST['options']) && (count($_POST['options']) > 0)) {
             $options = $_POST['options'];
-            if (mytabs_getcms() != 'XOOPS22') {
-                for ( $i = 0; $i < count($options); $i++ ) {
-                    if (is_array($options[$i])) {
-                        $options[$i] = implode(',', $options[$i]);
-                    }
+            $count = count($options);
+            for ($i = 0; $i < $count; $i++ ) {
+                if (is_array($options[$i])) {
+                    $options[$i] = implode(',', $options[$i]);
                 }
-                $block->setVar('options', implode('|', $options));
-            } else {
-                $block->setVar('options', $options);
             }
+
+        } else {
+            $block->setVar('options', '');
         }
-        
+
         $block->setVar('tabid', $_POST['tabid']);
         $block->setVar('priority', $_POST['priority']);
         $block->setVar('showalways', $_POST['alwayson']);
@@ -72,44 +86,41 @@ switch ($op) {
             $block->setVar('fromdate', time());
             $block->setVar('todate', time());
             $block->setBlock($_POST['blockid']);
-        }
-        else {
+        } else {
             $block = $pageblock_handler->get($_REQUEST['pageblockid']);
             $block->setBlock();
         }
         $pageid = $block->getVar('pageid');
 
-        echo "<a href=\"index.php\">"._AM_MYTABS_HOME."</a>&nbsp;";
+        echo "<a href=\"index.php\">" . _AM_MYTABS_HOME . "</a>&nbsp;";
 
         if ($pageid > 0) {
-            $page_handler =& xoops_getmodulehandler('page');
+            $page_handler = xoops_getmodulehandler('page');
             $page = $page_handler->get($pageid);
             echo "&raquo;&nbsp;";
             echo "<a href=\"index.php?pageid=".$pageid."\">".$page->getVar("pagetitle")."</a>";
         }
 
         $form = $block->getForm();
-
         echo $form->render();
 
         xoops_cp_footer();
         break;
 
     case "delete":
-        $obj =& $pageblock_handler->get($_REQUEST['pageblockid']);
+        $obj = $pageblock_handler->get($_REQUEST['pageblockid']);
         if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
             if ($pageblock_handler->delete($obj)) {
                 redirect_header('index.php?pageid='.$obj->getVar('pageid'), 3, sprintf(_AM_MYTABS_DELETEDSUCCESS, $obj->getVar('title')));
-            }
-            else {
+            } else {
                 xoops_cp_header();
                 echo implode('<br />', $obj->getErrors());
+                xoops_cp_footer();
             }
-        }
-        else {
-
+        } else {
             xoops_cp_header();
             xoops_confirm(array('ok' => 1, 'pageblockid' => $_REQUEST['pageblockid'], 'op' => 'delete'), 'block.php', sprintf(_AM_MYTABS_RUSUREDEL, $obj->getVar('title')));
+            xoops_cp_footer();
         }
         break;
 }
