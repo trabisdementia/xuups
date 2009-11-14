@@ -683,7 +683,6 @@ function edititem($showmenu = false, $itemid = 0, $clone = false)
 
     publisher_closeCollapsableBar('pagewraptable', 'pagewrapicon');
 
-    unset($hidden);
     if ($itemObj->getVar('itemid') != 0) {
         showfiles($itemObj);
     }
