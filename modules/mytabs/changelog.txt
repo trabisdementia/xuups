@@ -1,6 +1,9 @@
+<b><u>=> Version 2.2 Final (2009-11-14)</u></b>
+- Making module compatible with php5.3 and Xoops 2.4
+- Improved : coding standards, move to blue.
+
 <b><u>=> Version 2.1 Final (2008-09-04)</u></b>
 - Improved: Css margins and paddings, bottom border added in jquery.css and shadetabs.css as in original files.
-
 
 <b><u>=> Version 2.1 RC2 (2008-09-02)</u></b>
 - Fixed: Some css were fixed to look alike in IE and Mozilla.

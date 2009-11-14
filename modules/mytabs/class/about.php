@@ -82,17 +82,8 @@ class MytabsAbout
     function render()
     {
         global $xoopsModule;
-
-        /**
-         * @todo move the output to a template
-         * @todo make the output XHTML compliant
-         */
-
         $module_handler =& xoops_gethandler('module');
         $versioninfo =& $module_handler->get($xoopsModule->getVar('mid'));
-
-        xoops_cp_header();
-        mytabs_adminmenu(2);
 
         $this->_tpl = new XoopsTpl();
         $this->_tpl->assign('module_url', XOOPS_URL . "/modules/" . $xoopsModule->getVar('dirname') . "/");
@@ -145,7 +136,6 @@ class MytabsAbout
         $this->_tpl->assign('module_author_word', $versioninfo->getInfo('author_word'));
 
         // For changelog thanks to 3Dev
-
         if (file_exists($file = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/changelog.txt')) {
             $filesize = filesize($file);
             $handle = fopen($file, 'r');
@@ -154,8 +144,6 @@ class MytabsAbout
         }
 
         $this->_tpl->display('db:mytabs_about.html');
-
-        xoops_cp_footer();
     }
 }
 
