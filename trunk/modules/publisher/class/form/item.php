@@ -20,10 +20,8 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: item.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
-if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
-}
+
+defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
 include_once dirname(dirname(dirname(__FILE__))) . '/include/common.php';
 
@@ -43,8 +41,9 @@ class PublisherItemForm extends XoopsThemeTabForm {
         $this->checkperm = (bool) $checkperm;
     }
 
-    function createElements($obj) {
-        
+    function createElements($obj)
+    {
+
         global $xoopsConfig, $xoopsUser;
         $publisher =& PublisherPublisher::getInstance();
         $checkperm = $this->checkperm;
@@ -76,7 +75,7 @@ class PublisherItemForm extends XoopsThemeTabForm {
             $this->addElement(new XoopsFormText(_CO_PUBLISHER_SUBTITLE, 'subtitle', 50, 255, $obj->getVar('subtitle', 'e')));
         }
 
-         // SHORT URL
+        // SHORT URL
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_ITEM_SHORT_URL)) {
             $text_short_url = new XoopsFormText(_CO_PUBLISHER_ITEM_SHORT_URL, 'item_short_url', 50, 255, $obj->short_url('e'));
             $text_short_url->setDescription(_CO_PUBLISHER_ITEM_SHORT_URL_DSC);
@@ -93,10 +92,10 @@ class PublisherItemForm extends XoopsThemeTabForm {
         // SUMMARY
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_SUMMARY)) {
             // Description
-		    $summary_text = new XoopsFormTextArea(_CO_PUBLISHER_SUMMARY, 'summary', $obj->getVar('summary', 'e'), 7, 60);
+            $summary_text = new XoopsFormTextArea(_CO_PUBLISHER_SUMMARY, 'summary', $obj->getVar('summary', 'e'), 7, 60);
             /*$editor_configs["name"] = "summary";
-            $editor_configs["value"] = $obj->getVar('summary', 'e');
-            $summary_text = new XoopsFormEditor(_CO_PUBLISHER_SUMMARY, $editor, $editor_configs, $nohtml, $onfailure = null);   */
+             $editor_configs["value"] = $obj->getVar('summary', 'e');
+             $summary_text = new XoopsFormEditor(_CO_PUBLISHER_SUMMARY, $editor, $editor_configs, $nohtml, $onfailure = null);   */
             $summary_text->setDescription(_CO_PUBLISHER_SUMMARY_DSC);
             $this->addElement($summary_text);
         }
@@ -136,10 +135,10 @@ class PublisherItemForm extends XoopsThemeTabForm {
 
         // VARIOUS OPTIONS
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOHTML)
-                        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOSMILEY)
-                        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOXCODE)
-                        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOIMAGE)
-                        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOLINEBREAK)) {
+                || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOSMILEY)
+                || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOXCODE)
+                || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOIMAGE)
+                || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOLINEBREAK)) {
 
             $options_tray = new XoopsFormElementTray(_CO_PUBLISHER_OPTIONS, '<br />');
 
@@ -176,7 +175,7 @@ class PublisherItemForm extends XoopsThemeTabForm {
             $this->addElement($options_tray);
 
         }
-        
+
         // Available pages to wrap
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_AVAILABLE_PAGE_WRAP)) {
             $wrap_pages = XoopsLists::getHtmlListAsArray(publisher_getUploadDir(true, 'content'));
@@ -188,11 +187,11 @@ class PublisherItemForm extends XoopsThemeTabForm {
             $available_wrap_pages->setDescription(_CO_PUBLISHER_AVAILABLE_PAGE_WRAP_DSC);
             $this->addElement($available_wrap_pages);
         }
-        
+
         // Uid
         /*  We need to retreive the users manually because for some reason, on the frxoops.org server,
-            the method users::getobjects encounters a memory error
-        */
+         the method users::getobjects encounters a memory error
+         */
         // Trabis : well, maybe is because you are getting 6000 objects into memory , no??? LOL
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_UID)) {
             $uid_select = new XoopsFormSelect(_CO_PUBLISHER_UID, 'uid', $obj->uid(), 1, false);
@@ -206,6 +205,10 @@ class PublisherItemForm extends XoopsThemeTabForm {
             }
             $uid_select->addOptionArray($users_array);
             $this->addElement($uid_select);
+        } else {
+            $hidden = new XoopsFormHidden('uid', $obj->uid());
+            $this->addElement($hidden);
+            unset($hidden);
         }
 
         // Author ALias
@@ -218,29 +221,29 @@ class PublisherItemForm extends XoopsThemeTabForm {
 
         // STATUS
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_STATUS)) {
-	       $options = array(_PUBLISHER_STATUS_PUBLISHED => _CO_PUBLISHER_PUBLISHED,
-                            _PUBLISHER_STATUS_OFFLINE   => _CO_PUBLISHER_OFFLINE,
-                            _PUBLISHER_STATUS_SUBMITTED =>_CO_PUBLISHER_SUBMITTED,
-                            _PUBLISHER_STATUS_REJECTED  =>_CO_PUBLISHER_REJECTED);
-	       $status_select = new XoopsFormSelect(_CO_PUBLISHER_STATUS, 'status', $obj->getVar('status'));
-	       $status_select->addOptionArray($options);
-	       $status_select->setDescription(_CO_PUBLISHER_STATUS_DSC);
-	       $this->addElement($status_select);
+            $options = array(_PUBLISHER_STATUS_PUBLISHED => _CO_PUBLISHER_PUBLISHED,
+                _PUBLISHER_STATUS_OFFLINE   => _CO_PUBLISHER_OFFLINE,
+                _PUBLISHER_STATUS_SUBMITTED =>_CO_PUBLISHER_SUBMITTED,
+                _PUBLISHER_STATUS_REJECTED  =>_CO_PUBLISHER_REJECTED);
+            $status_select = new XoopsFormSelect(_CO_PUBLISHER_STATUS, 'status', $obj->getVar('status'));
+            $status_select->addOptionArray($options);
+            $status_select->setDescription(_CO_PUBLISHER_STATUS_DSC);
+            $this->addElement($status_select);
         }
-        
+
         // Datesub
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DATESUB)) {
-	       $datesub = ($obj->getVar('datesub') == 0) ? time() : $obj->getVar('datesub');
-	       $datesub_datetime = new PublisherFormDateTime(_CO_PUBLISHER_DATESUB, 'datesub', $size = 15, $datesub);
-	       $datesub_datetime->setDescription(_CO_PUBLISHER_DATESUB_DSC);
-	       $this->addElement($datesub_datetime);
+            $datesub = ($obj->getVar('datesub') == 0) ? time() : $obj->getVar('datesub');
+            $datesub_datetime = new PublisherFormDateTime(_CO_PUBLISHER_DATESUB, 'datesub', $size = 15, $datesub);
+            $datesub_datetime->setDescription(_CO_PUBLISHER_DATESUB_DSC);
+            $this->addElement($datesub_datetime);
         }
-        
+
         // NOTIFY ON PUBLISH
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_NOTIFY)) {
             $notify_checkbox = new XoopsFormCheckBox('', 'notify', $obj->notifypub());
             $notify_checkbox->addOption(1, _CO_PUBLISHER_NOTIFY);
-	        $this->addElement($notify_checkbox);
+            $this->addElement($notify_checkbox);
         }
 
         $this->startTab(_CO_PUBLISHER_TAB_IMAGES);
@@ -292,43 +295,35 @@ class PublisherItemForm extends XoopsThemeTabForm {
             $addcol = new XoopsFormLabel('', "</td><td>" );
             $addbreak = new XoopsFormLabel('', "<br />" );
             $closetable = new XoopsFormLabel('', "</td></tr></table>");
-            
+
             $js_data = new XoopsFormLabel('', '
 <script type= "text/javascript">/*<![CDATA[*/
 $publisher(document).ready(function(){
-
-	/* example 1 */
-	var button = $publisher("#publisher_upload_button"), interval;
-	new AjaxUpload(button,{
-		action: "' . PUBLISHER_URL . '/include/ajax_upload.php", // I disabled uploads in this example for security reasons
-		responseType: "text/html",
-		name: "publisher_upload_file",
-		onSubmit : function(file, ext){
-			// change button text, when user selects file
+    var button = $publisher("#publisher_upload_button"), interval;
+    new AjaxUpload(button,{
+        action: "' . PUBLISHER_URL . '/include/ajax_upload.php", // I disabled uploads in this example for security reasons
+        responseType: "text/html",
+        name: "publisher_upload_file",
+        onSubmit : function(file, ext){
+            // change button text, when user selects file
             $publisher("#publisher_upload_message").html(" ");
             button.html("<img src=\'' . PUBLISHER_URL . '/images/loadingbar.gif\'/>"); this.setData({
-					"image_nicename": $publisher("#image_nicename").val(),
-					"imgcat_id" : $publisher("#imgcat_id").val()
-				});
-
-			// If you want to allow uploading only 1 file at time,
-			// you can disable upload button
-			this.disable();
-
-			interval = window.setInterval(function(){
-
-			}, 200);
-		},
-		onComplete: function(file, response){
-			button.text("' . _CO_PUBLISHER_IMAGE_UPLOAD_NEW . '");
-
-			window.clearInterval(interval);
-
-			// enable upload button
-			this.enable();
-
-			// add file to the list
-			var result = eval(response);
+                "image_nicename": $publisher("#image_nicename").val(),
+                "imgcat_id" : $publisher("#imgcat_id").val()
+            });
+            // If you want to allow uploading only 1 file at time,
+            // you can disable upload button
+            this.disable();
+            interval = window.setInterval(function(){
+            }, 200);
+        },
+        onComplete: function(file, response){
+            button.text("' . _CO_PUBLISHER_IMAGE_UPLOAD_NEW . '");
+            window.clearInterval(interval);
+            // enable upload button
+            this.enable();
+            // add file to the list
+            var result = eval(response);
             if (result[0] == "success") {
                  $publisher("#image_item").append("<option value=\'" + result[1] + "\' selected=\'selected\'>" + result[2] + "</option>");
                  publisher_updateSelectOption(\'image_item\', \'image_featured\');
@@ -336,11 +331,10 @@ $publisher(document).ready(function(){
             } else {
                  $publisher("#publisher_upload_message").html("<div class=\'errorMsg\'>" + result[1] + "</div>");
             }
-
-		}
-	});
-
-});/*]]>*/</script>
+        }
+    });
+});
+/*]]>*/</script>
 ');
             $messages = new XoopsFormLabel('', "<div id='publisher_upload_message'></div>");
             $button   = new XoopsFormLabel('', "<div id='publisher_upload_button' style='text-decoration: underline; font-weight: bold;'>" . _CO_PUBLISHER_IMAGE_UPLOAD_NEW . "</div>");
@@ -355,7 +349,7 @@ $publisher(document).ready(function(){
             $image_upload_tray->addElement($js_data);
             $image_upload_tray->addElement($messages);
             $image_upload_tray->addElement($opentable);
-            
+
             $image_upload_tray->addElement($imagecat);
 
             $image_upload_tray->addElement($addbreak);
@@ -363,12 +357,12 @@ $publisher(document).ready(function(){
             $image_upload_tray->addElement($nicename);
 
             $image_upload_tray->addElement($addbreak);
-            
+
             $image_upload_tray->addElement($button);
-            
+
             $image_upload_tray->addElement($closetable);
             $this->addElement($image_upload_tray);
-            
+
 
             $image_tray = new XoopsFormElementTray( _CO_PUBLISHER_IMAGE_ITEMS, '');
             $image_tray->addElement($opentable);
@@ -426,11 +420,11 @@ $publisher(document).ready(function(){
 
         // PER ITEM PERMISSIONS
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_PERMISSIONS_ITEM)) {
-	        $member_handler = &xoops_gethandler('member');
-	        $group_list = $member_handler->getGroupList();
-	        $groups_checkbox = new XoopsFormCheckBox(_CO_PUBLISHER_PERMISSIONS_ITEM, 'permissions_item[]', $obj->getGroups_read());
-	        $groups_checkbox->setDescription(_CO_PUBLISHER_PERMISSIONS_ITEM_DSC);
-	        foreach ($group_list as $group_id => $group_name) {
+            $member_handler = &xoops_gethandler('member');
+            $group_list = $member_handler->getGroupList();
+            $groups_checkbox = new XoopsFormCheckBox(_CO_PUBLISHER_PERMISSIONS_ITEM, 'permissions_item[]', $obj->getGroups_read());
+            $groups_checkbox->setDescription(_CO_PUBLISHER_PERMISSIONS_ITEM_DSC);
+            foreach ($group_list as $group_id => $group_name) {
                 //if ($group_id != XOOPS_GROUP_ADMIN) {
                     $groups_checkbox->addOption($group_id, $group_name);
                 //}
@@ -452,16 +446,16 @@ $publisher(document).ready(function(){
 
         // File upload UPLOAD
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_ITEM_UPLOAD_FILE)) {
-	       $file_box = new XoopsFormFile(publisher_newFeatureTag() . _CO_PUBLISHER_ITEM_UPLOAD_FILE, "item_upload_file", 0);
-    	   $file_box->setDescription(_CO_PUBLISHER_ITEM_UPLOAD_FILE_DSC . publisher_newFeatureTag());
-	       $file_box->setExtra("size ='50'");
-	       $this->addElement($file_box);
-	       unset($file_box);
+            $file_box = new XoopsFormFile(publisher_newFeatureTag() . _CO_PUBLISHER_ITEM_UPLOAD_FILE, "item_upload_file", 0);
+            $file_box->setDescription(_CO_PUBLISHER_ITEM_UPLOAD_FILE_DSC . publisher_newFeatureTag());
+            $file_box->setExtra("size ='50'");
+            $this->addElement($file_box);
+            unset($file_box);
         }
 
         // WEIGHT
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_WEIGHT)) {
-	       $this->addElement(new XoopsFormText(_CO_PUBLISHER_WEIGHT, 'weight', 5, 5, $obj->weight()));
+            $this->addElement(new XoopsFormText(_CO_PUBLISHER_WEIGHT, 'weight', 5, 5, $obj->weight()));
         }
 
         $this->endTabs();
@@ -471,18 +465,18 @@ $publisher(document).ready(function(){
         $button_tray = new XoopsFormElementTray('', '');
 
         if (!$obj->isNew()) {
-	       $button_tray->addElement(new XoopsFormButton('', 'additem', _CO_PUBLISHER_EDIT, 'submit')); //orclone
+            $button_tray->addElement(new XoopsFormButton('', 'additem', _CO_PUBLISHER_EDIT, 'submit')); //orclone
 
         } else {
-	        $button_tray->addElement(new XoopsFormButton('', 'additem', _CO_PUBLISHER_CREATE, 'submit'));
+            $button_tray->addElement(new XoopsFormButton('', 'additem', _CO_PUBLISHER_CREATE, 'submit'));
             $button_tray->addElement(new XoopsFormButton('', '', _CO_PUBLISHER_CLEAR, 'reset'));
         }
 
         $button_tray->addElement(new XoopsFormButton('', 'preview', _CO_PUBLISHER_PREVIEW, 'submit'));
 
-		$butt_cancel = new XoopsFormButton('', '', _CO_PUBLISHER_CANCEL, 'button');
-		$butt_cancel->setExtra('onclick="history.go(-1)"');
-		$button_tray->addElement($butt_cancel);
+        $butt_cancel = new XoopsFormButton('', '', _CO_PUBLISHER_CANCEL, 'button');
+        $butt_cancel->setExtra('onclick="history.go(-1)"');
+        $button_tray->addElement($butt_cancel);
 
         $this->addElement($button_tray);
 
@@ -492,3 +486,4 @@ $publisher(document).ready(function(){
         return $this;
     }
 }
+?>
