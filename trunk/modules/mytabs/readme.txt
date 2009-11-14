@@ -1,4 +1,4 @@
-What is mytabs Module (v2.1) ?
+What is mytabs Module (v2.2) ?
 ======================
 
 With this Xoops module, your can create blocks with several tabs an blocks inside.
@@ -16,25 +16,10 @@ The module can :
 . Many other goodies like cache, position, scroll, width, Show/hide other divs, link tab to url, onmouseover selection, etc
 
 
-
 Requirements
 ====================
 
-Works in xoops 2.3.0, xoops 2.0.16 and > , xoops 2.2.x, impresscms, and Xcl
-
-Tested with php5 and php4.
-
-
-
-Bugs
-====================
-
-Blocksadmin does not work correctly under iCms, please use your system blocksadmin.
-
-Blocksadmin does not work correctly under xcl. (I don´t know if xcl provides a cloning block function).
-
-Be careful when selecting time based tabs/blocks. Displayed hour is not always correct. Have that in mind when selecting time.
-
+Requires xoops 2.4.x and php5
 
 
 How to install mytabs
@@ -46,22 +31,10 @@ icon in the list of uninstalled modules and click in the install icon.
 Follow the directions in the screen and you'll be ready to go.
 
 
-
-Upgrading from 2.0
+Upgrading from 2.1
 ====================
 
-Remove all mytabs files.
-Clean templates_c folder
-Upload new files.
-Go to System Admin > Modules, look for the mytabs
-icon in the list of installed modules and click in the update icon.
-
-Very important: You may have to CLEAR YOUR BROWSER CACHE (and inform your users about that).
-
-Also: If you have made your custom css you need to replace all '_' occurrences by '-' in it.
-For consistence with IE and Firefox when using zetagenesis consider adding (in your custom css) '!important' to elements like:
-color, background-colour, padding, margin and text-decoration
-
+Remove all mytabs files and upload new ones. You do not need to remove or update menus folder. 
 
 
 Tips
@@ -76,12 +49,6 @@ The 'slate' menu is available in other colors. Check it out.
 ------
 
 To avoid tabs from scrolling set delay to 0 inside your block.
-
-------
-
-Clone My Tabs Block using 'blocks and permissions' in mytabs administration page. If you use iCms or xoops 
-
-2.3.0 alpha you can also clone it from System Admin > Blocks Admin.
 
 ------
 
@@ -153,7 +120,6 @@ Then you get the index of the tab you want to display. First tab = 0, second tab
 Making the link is as simple as this:
 
 http://www.xoops.org/index.php?tabscontents_1215070896=5
-
 
 
 Limitations

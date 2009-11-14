@@ -44,8 +44,8 @@ function mytabs_adminmenu($currentoption = 0, $breadcrumb = '')
     ";
     global $xoopsModule, $xoopsConfig;
 
-    $tblColors = array('','','');
-    if($currentoption>=0) {
+    $tblColors = array('', '', '');
+    if ($currentoption >= 0) {
         $tblColors[$currentoption] = 'current';
     }
 
@@ -60,8 +60,8 @@ function mytabs_adminmenu($currentoption = 0, $breadcrumb = '')
 
     echo "<div id='buttonbar'>";
     echo "<ul>";
-    echo "<li id='" . $tblColors[0] . "'><a href=\"index.php\"\"><span>"._MI_MYTABS_ADMMENU1 ."</span></a></li>\n";
-    echo "<li id='" . $tblColors[2] . "'><a href=\"about.php\"\"><span>"._MI_MYTABS_ADMMENU2 ."</span></a></li>\n";
+    echo "<li id='" . $tblColors[0] . "'><a href=\"index.php\"\"><span>" . _MI_MYTABS_ADMMENU1 . "</span></a></li>\n";
+    echo "<li id='" . $tblColors[2] . "'><a href=\"about.php\"\"><span>" . _MI_MYTABS_ADMMENU2 . "</span></a></li>\n";
     echo "</ul></div><div>&nbsp;</div>";
     }
 ?>
