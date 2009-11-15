@@ -1,85 +1,99 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-if (!defined("XOOPS_ROOT_PATH")) {
- 	die("XOOPS root path not defined");
-}
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+/**
+ * @copyright       The XUUPS Project http://www.xuups.com
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Myinviter
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: functions.php 0 2009-11-14 18:47:04Z trabis $
+ */
+
+defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
 function myinviter_adminMenu($currentoption = 0, $breadcrumb = '')
 {
-	include_once XOOPS_ROOT_PATH . '/class/template.php';
-	include XOOPS_ROOT_PATH . '/modules/myinviter/admin/menu.php';
+    include XOOPS_ROOT_PATH . '/modules/myinviter/admin/menu.php';
 
     xoops_loadLanguage('admin', 'myinviter');
     xoops_loadLanguage('modinfo', 'myinviter');
 
-	$tpl =& new XoopsTpl();
-	$tpl->assign(array('modurl'	    => XOOPS_URL . '/modules/myinviter',
-	                   'headermenu'	=> $myinviter_headermenu,
-                       'adminmenu'	=> $myinviter_adminmenu,
-	                   'current'	=> $currentoption,
-	                   'breadcrumb'	=> $breadcrumb,
-	                   'headermenucount' => count($myinviter_headermenu)));
-	$tpl->display(XOOPS_ROOT_PATH . '/modules/myinviter/templates/static/myinviter_admin_menu.html');
+    $tpl = new XoopsTpl();
+    $tpl->assign(array(
+        'modurl'          => XOOPS_URL . '/modules/myinviter',
+        'headermenu'      => $myinviter_headermenu,
+        'adminmenu'       => $myinviter_adminmenu,
+        'current'         => $currentoption,
+        'breadcrumb'      => $breadcrumb,
+        'headermenucount' => count($myinviter_headermenu)));
+    $tpl->display(XOOPS_ROOT_PATH . '/modules/myinviter/templates/static/myinviter_admin_menu.html');
 }
 
-function &myinviter_getModuleHandler()
+function myinviter_getModuleHandler()
 {
-	static $handler;
+    static $handler;
 
-	if (!isset($handler)) {
-		global $xoopsModule;
-		if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'myinviter') {
-			$handler =& $xoopsModule;
-		} else {
-			$hModule =& xoops_gethandler('module');
-			$handler = $hModule->getByDirname('myinviter');
-		}
-	}
-	return $handler;
+    if (!isset($handler)) {
+        global $xoopsModule;
+        if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'myinviter') {
+            $handler = $xoopsModule;
+        } else {
+            $hModule = xoops_gethandler('module');
+            $handler = $hModule->getByDirname('myinviter');
+        }
+    }
+    return $handler;
 }
 
-function &myinviter_getModuleConfig()
+function myinviter_getModuleConfig()
 {
-	static $config;
+    static $config;
 
-	if (!$config) {
-		global $xoopsModule;
-		if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'myinviter') {
-			$config =& $GLOBALS['xoopsModuleConfig'];
-		} else {
-			$handler =& myinviter_getModuleHandler();
-			$hModConfig =& xoops_gethandler('config');
-			$config = $hModConfig->getConfigsByCat(0, $handler->getVar('mid'));
-		}
-	}
-	return $config;
+    if (!$config) {
+        global $xoopsModule;
+        if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'myinviter') {
+            $config = $GLOBALS['xoopsModuleConfig'];
+        } else {
+            $handler = myinviter_getModuleHandler();
+            $hModConfig = xoops_gethandler('config');
+            $config = $hModConfig->getConfigsByCat(0, $handler->getVar('mid'));
+        }
+    }
+    return $config;
 }
 
 function myinviter_sendEmails($id = null, $force = false)
 {
     global $xoopsConfig;
-    
-    $thisConfigs =& myinviter_getModuleConfig();
+
+    $thisConfigs = myinviter_getModuleConfig();
     $errors = array();
-    
+
     $emailsperpack = intval($thisConfigs['emailsperpack']);
     if ($emailsperpack == 0 && $id == null) {
         $errors[] = 'No id or no pack number';
         return $errors;
     }
-    
+
     $timebpacks = intval($thisConfigs['timebpacks']);
-    
+
     $now = time();
     $last = myinviter_getLastTime();
+
     if ((($now - $last) <= $timebpacks) && !$force) {
         $errors[] = 'Not enough time';
         return $errors;
     }
-    
+
     $from = $thisConfigs['from']; //custom, system, user
     $html = $thisConfigs['html'];
     $sandbox = $thisConfigs['sandbox'];
@@ -97,41 +111,42 @@ function myinviter_sendEmails($id = null, $force = false)
             $from = 'system';
         }
     }
-    
+
     if ($from == 'system') {
-            $fromname = $xoopsConfig['sitename'];
-            $fromemail = $xoopsConfig['adminmail'];
+        $fromname = $xoopsConfig['sitename'];
+        $fromemail = $xoopsConfig['adminmail'];
     }
 
-    $this_handler =& xoops_getModuleHandler('waiting', 'myinviter');
+    $this_handler = xoops_getModuleHandler('waiting', 'myinviter');
 
     if ($id != null) {
         $id = new Criteria('wt_id', $id);
     }
-    
-	$criteria = new CriteriaCompo($id);
-	$criteria->setSort('wt_date');
-	$criteria->setOrder('ASC');
-	$criteria->setLimit($emailsperpack);
+
+    $criteria = new CriteriaCompo($id);
+    $criteria->setSort('wt_date');
+    $criteria->setOrder('ASC');
+    $criteria->setLimit($emailsperpack);
     $objs = $this_handler->getObjects($criteria);
     $count = count($objs);
     unset ($criteria);
 
     if ($count == 0) {
+        myinviter_setLastTime($now);
         $errors[] = 'No waiting emails';
         return $errors;
     }
 
-    $member_handler =& xoops_gethandler('member');
-    $myts =& MyTextSanitizer::getInstance();
-    
+    $member_handler = xoops_gethandler('member');
+    $myts = MyTextSanitizer::getInstance();
+
     $obj_delete = array();
     foreach ($objs as $obj) {
-        $thisUser =& $member_handler->getUser($obj->getVar('wt_userid'));
+        $thisUser = $member_handler->getUser($obj->getVar('wt_userid'));
 
         //Was this user removed? Then get the default one!
         if (!is_object($thisUser)) {
-            $thisUser =& $member_handler->getUser($defaultuid);
+            $thisUser = $member_handler->getUser($defaultuid);
         }
 
         if (!is_object($thisUser)) {
@@ -139,7 +154,7 @@ function myinviter_sendEmails($id = null, $force = false)
             return $errors;
         }
 
-        $xoopsMailer =& xoops_getMailer();
+        $xoopsMailer = xoops_getMailer();
         $xoopsMailer->useMail();
         $xoopsMailer->setTemplateDir(XOOPS_ROOT_PATH . '/modules/myinviter/language/' . $xoopsConfig['language'] . '/mail_template/');
 
@@ -156,7 +171,7 @@ function myinviter_sendEmails($id = null, $force = false)
         } else {
             $xoopsMailer->setTemplate('myinviter_invitation.tpl');
         }
-        
+
         if ($sandbox == 1) {
             $xoopsMailer->setToEmails(array($sandboxemail));
         } else {
@@ -167,10 +182,10 @@ function myinviter_sendEmails($id = null, $force = false)
             $fromname = $thisUser->getVar('uname' , 'n');
             $fromemail = $thisUser->getVar('email' , 'n');
         }
-        
+
         $xoopsMailer->setFromEmail($fromemail);
         $xoopsMailer->setFromName($fromname);
-        
+
         xoops_loadLanguage('main' , 'myinviter');
         $xoopsMailer->setSubject(sprintf(_MA_MYINV_EMAIL_SUBJECT,  $thisUser->getVar('uname')));
 
@@ -186,13 +201,13 @@ function myinviter_sendEmails($id = null, $force = false)
             $errors[] = $xoopsMailer->getErrors(false); // do not use html in error message
         } else {
             //All Ok? Set log
-           /* $log_handler =& xoops_getmodulehandler('log', 'myinviter');
-            $log = $log_handler->create();
-            $log->setVar('log_userid',$thisUser->getVar('uid'));
-            $log->setVar('log_date', time());
-            $log_handler->insert($log);  */
+            /* $log_handler =& xoops_getmodulehandler('log', 'myinviter');
+             $log = $log_handler->create();
+             $log->setVar('log_userid',$thisUser->getVar('uid'));
+             $log->setVar('log_date', time());
+             $log_handler->insert($log);  */
         }
-        
+
         unset($xoopsMailer);
         $obj_delete[] = $obj->getVar('wt_id');
     }
@@ -209,55 +224,44 @@ function myinviter_sendEmails($id = null, $force = false)
 
 function myinviter_getLastTime()
 {
-    $fileName = dirname(dirname(__FILE__)) . '/cookies/myinviter_lasttime.txt';
-
-    if (!file_exists($fileName)) {
-        myinviter_setLastTime(time());
+    xoops_load('cache');
+    $ret = XoopsCache::read('myinviter_lasttime');
+    if ($ret == false) {
+        $ret = time();
+        myinviter_setLastTime($ret);
     }
-
-    $ret = intval(file_get_contents($fileName));
     return $ret;
 }
 
 function myinviter_setLastTime($value = 0)
 {
-    $ret = myinviter_writeFile($value, 'myinviter_lasttime.txt');
+    xoops_load('cache');
+    $ret = XoopsCache::write('myinviter_lasttime', $value);
     return $ret;
 }
 
 function myinviter_getEmailsSent()
 {
-    $fileName = dirname(dirname(__FILE__)) . '/cookies/myinviter_emailssent.txt';
-
-    if (!file_exists($fileName)) {
-        myinviter_setEmailsSent(0);
+    xoops_load('cache');
+    $ret = XoopsCache::read('myinviter_emailssent');
+    if ($ret == false) {
+        $ret = 0;
+        myinviter_setEmailsSent($ret);
     }
-
-    $ret = intval(file_get_contents($fileName));
     return $ret;
 }
 
 function myinviter_setEmailsSent($value)
 {
-    $ret = myinviter_writeFile($value, 'myinviter_emailssent.txt');
+    xoops_load('cache');
+    $ret = XoopsCache::write('myinviter_emailssent', $value);
     return $ret;
 }
 
-
-function myinviter_writeFile($number = 0, $file = 'myinviter_lasttime.txt')
+function myinviter_filterRegistered($contacts)
 {
-    $default = 0;
-    $fileName = dirname(dirname(__FILE__)) . '/cookies/' . $file;
-    $fileHandler = fopen($fileName, 'w');
-    if (!$fileHandler) return $default;
-    fwrite($fileHandler, $number);
-    fclose($fileHandler);
-    return $number;
-}
-
-function myinviter_filterRegistered($contacts) {
     $reg_emails = array();
-    $user_handler =& xoops_gethandler('user');
+    $user_handler = xoops_gethandler('user');
     $users = $user_handler->getAll(null, array('email', 'uname'), false, false);
     foreach ($users as $user) {
         $reg_emails[$user['email']] = $user;
@@ -271,8 +275,9 @@ function myinviter_filterRegistered($contacts) {
     return $contacts;
 }
 
-function myinviter_filterWaiting($contacts) {
-    $waiting_handler =& xoops_getmodulehandler('waiting');
+function myinviter_filterWaiting($contacts)
+{
+    $waiting_handler = xoops_getmodulehandler('waiting');
     $waiting_emails = $waiting_handler->getList();
     foreach ($contacts as $key => $contact) {
         if (in_array($contact['email'], $waiting_emails)) {
@@ -283,8 +288,9 @@ function myinviter_filterWaiting($contacts) {
     return $contacts;
 }
 
-function myinviter_filterBlacklisted($contacts) {
-    $blacklist_handler =& xoops_getmodulehandler('blacklist');
+function myinviter_filterBlacklisted($contacts)
+{
+    $blacklist_handler = xoops_getmodulehandler('blacklist');
     $blacklisted_emails = $blacklist_handler->getList();
     foreach ($contacts as $key => $contact) {
         if (in_array($contact['email'], $blacklisted_emails)) {

@@ -1,7 +1,22 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+/**
+ * @copyright       The XUUPS Project http://www.xuups.com
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Myinviter
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: admin_blacklist.php 0 2009-11-14 18:47:04Z trabis $
+ */
 
 require dirname(__FILE__) . '/admin_header.php';
 
@@ -12,7 +27,7 @@ $limit = isset($_GET['limit']) ? intval($_GET['limit']) : (isset($_POST['limit']
 $start = isset($_GET['start']) ? intval($_GET['start']) : (isset($_POST['start']) ? intval($_POST['start']) : 0);
 $redir = isset($_GET['redir']) ? $_GET['redir'] : (isset($_POST['redir']) ? $_POST['redir'] : null);
 
-switch ($op){
+switch ($op) {
     case 'list':
         xoops_cp_header();
         myinviter_adminMenu(2, _MI_MYINV_ADMENU_BLACKLIST);
@@ -29,79 +44,75 @@ switch ($op){
 
 function blacklist_index($start = 0)
 {
-	global $xoopsTpl, $xoopsUser, $xoopsConfig, $limit;
+    global $xoopsTpl, $limit;
 
-	include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
     include_once XOOPS_ROOT_PATH . '/modules/myinviter/include/functions.php';
 
-	$this_handler =& xoops_getModuleHandler('blacklist', 'myinviter');
+    $this_handler = xoops_getModuleHandler('blacklist', 'myinviter');
 
     $count = $this_handler->getCount();
-	$xoopsTpl->assign('count', $count);
+    $xoopsTpl->assign('count', $count);
 
-	if ($count > 0) {
-		if ($count > $limit) {
-			include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-			$nav = new XoopsPageNav($count, $limit, $start, 'start', 'op=list');
-			$xoopsTpl->assign('pag', '<div style="float:left; padding-top:2px;" align="center">' . $nav->renderNav() . '</div>');
-		} else {
-			$xoopsTpl->assign('pag', '');
-		}
-		
-		$criteria = new CriteriaCompo();
+    if ($count > 0) {
+        if ($count > $limit) {
+            include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+            $nav = new XoopsPageNav($count, $limit, $start, 'start', 'op=list');
+            $xoopsTpl->assign('pag', '<div style="float:left; padding-top:2px;" align="center">' . $nav->renderNav() . '</div>');
+        } else {
+            $xoopsTpl->assign('pag', '');
+        }
+
+        $criteria = new CriteriaCompo();
         $criteria->setSort('bl_date');
         $criteria->setOrder('DESC');
         $criteria->setStart($start);
         $criteria->setLimit($limit);
         $objs = $this_handler->getObjects($criteria);
-        foreach ($objs as $obj){
+        foreach ($objs as $obj) {
             $objArray = $obj->getValues();
             $objArray['bl_date'] = formatTimestamp($objArray['bl_date']);
             $xoopsTpl->append('objs', $objArray);
             unset($objArray);
         }
         unset($criteria, $objs);
-	} else {
-		$xoopsTpl->assign('pag', '');
-	}
+    } else {
+        $xoopsTpl->assign('pag', '');
+    }
 
-	return $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/myinviter/templates/static/myinviter_admin_blacklist.html');
+    return $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/myinviter/templates/static/myinviter_admin_blacklist.html');
 }
 
 function blacklist_del($id, $redir = null)
 {
-	if (!$GLOBALS['xoopsSecurity']->check()) {
-		redirect_header('admin_blacklist.php',1, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-	}
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header('admin_blacklist.php',1, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+    }
 
-	if ($id <= 0) {
-		redirect_header('admin_blacklist.php',1);
-	}
+    if ($id <= 0) {
+        redirect_header('admin_blacklist.php',1);
+    }
 
-    $this_handler =& xoops_getModuleHandler('blacklist' , 'myinviter');
-	$obj = $this_handler->get($id);
-	if (!is_object($obj)) {
-		redirect_header('admin_blacklist.php', 1);
-	}
+    $this_handler = xoops_getModuleHandler('blacklist' , 'myinviter');
+    $obj = $this_handler->get($id);
+    if (!is_object($obj)) {
+        redirect_header('admin_blacklist.php', 1);
+    }
 
-	if (!$this_handler->delete($obj)) {
-		xoops_cp_header();
-		xoops_error(_AM_MYINV_ERROR, $obj->getVar('id'));
-		xoops_cp_footer();
-		exit();
-	}
+    if (!$this_handler->delete($obj)) {
+        xoops_cp_header();
+        xoops_error(_AM_MYINV_ERROR, $obj->getVar('id'));
+        xoops_cp_footer();
+        exit();
+    }
 
-	redirect_header(!is_null($redir) ? base64_decode($redir) : 'admin_blacklist.php' , 2, _AM_MYINV_SUCCESS);
+    redirect_header(!is_null($redir) ? base64_decode($redir) : 'admin_blacklist.php' , 2, _AM_MYINV_SUCCESS);
 }
 
 function blacklist_confirmdel($id, $redir = null)
 {
-	global $xoopsConfig;
-
-    $this_handler =& xoops_getModuleHandler('blacklist' , 'myinviter');
-	$obj = $this_handler->get($id);
-
-    xoops_cp_header();
+    $this_handler = xoops_getModuleHandler('blacklist' , 'myinviter');
+    $obj = $this_handler->get($id);
 
     $arr = array();
     $arr['op'] = 'delok';
@@ -110,8 +121,8 @@ function blacklist_confirmdel($id, $redir = null)
         $arr['redir'] = $redir;
     }
 
+    xoops_cp_header();
     xoops_confirm($arr, 'admin_blacklist.php', _AM_MYINV_AYS);
-
     xoops_cp_footer();
 }
 ?>

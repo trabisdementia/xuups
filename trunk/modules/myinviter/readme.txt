@@ -18,7 +18,7 @@ The module can :
 Requirements
 ====================
 
-XOOPS 2.3.x only
+XOOPS 2.4.x only
 Php5
 Curl php extension
 
@@ -41,7 +41,7 @@ Go to myinviter preferences and set them as you wish.
 
 Place a myinviter block in your front page if possible.
 
-Very important: Emails sending routine is activated when someone visits myinviter index page or when the block is rendered.
+Very important: Emails sending routine is activated when someone visits your site.
 You must set your preferences accordingly to your site traffic.
 Setting 100 emails per hour will not work as expected if you do not have at least one visitor per hour!!!
 
@@ -49,10 +49,7 @@ Setting 100 emails per hour will not work as expected if you do not have at leas
 Tips
 ====================
 
-You can set a cron Job to hit myinviter index.php page to assure the emails are sent.
-
-You can also use "blocks anywhere" smarty plugin to render myinviter block without displaying it.
-http://www.xuups.com/modules/publisher/item.php?itemid=10
+Visit http://openinviter.com/ and get the plugins you need to update
 
 If you have a limit of 600 emails per hour you can use this settings:
 600 emails for 3600 seconds period (60 minutes)
