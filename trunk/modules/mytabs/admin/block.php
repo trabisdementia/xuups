@@ -45,12 +45,12 @@ switch ($op) {
         if (isset($_POST['options']) && (count($_POST['options']) > 0)) {
             $options = $_POST['options'];
             $count = count($options);
-            for ($i = 0; $i < $count; $i++ ) {
+            for ($i = 0; $i < $count; $i++) {
                 if (is_array($options[$i])) {
                     $options[$i] = implode(',', $options[$i]);
                 }
             }
-
+            $block->setVar('options', implode('|', $options));
         } else {
             $block->setVar('options', '');
         }
@@ -59,8 +59,8 @@ switch ($op) {
         $block->setVar('priority', $_POST['priority']);
         $block->setVar('showalways', $_POST['alwayson']);
         $block->setVar('placement', $_POST['placement']);
-        $block->setVar('fromdate', strtotime($_POST['fromdate']['date'])+$_POST['fromdate']['time']);
-        $block->setVar('todate', strtotime($_POST['todate']['date'])+$_POST['todate']['time']);
+        $block->setVar('fromdate', strtotime($_POST['fromdate']['date']) + $_POST['fromdate']['time']);
+        $block->setVar('todate', strtotime($_POST['todate']['date']) + $_POST['todate']['time']);
         $block->setVar('pbcachetime', $_POST['pbcachetime']);
         $block->setVar('cachebyurl', $_POST['cachebyurl']);
         $block->setVar('note', $_POST['note']);
@@ -98,7 +98,7 @@ switch ($op) {
             $page_handler = xoops_getmodulehandler('page');
             $page = $page_handler->get($pageid);
             echo "&raquo;&nbsp;";
-            echo "<a href=\"index.php?pageid=".$pageid."\">".$page->getVar("pagetitle")."</a>";
+            echo "<a href=\"index.php?pageid=" . $pageid . "\">" . $page->getVar("pagetitle") . "</a>";
         }
 
         $form = $block->getForm();
@@ -111,7 +111,7 @@ switch ($op) {
         $obj = $pageblock_handler->get($_REQUEST['pageblockid']);
         if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
             if ($pageblock_handler->delete($obj)) {
-                redirect_header('index.php?pageid='.$obj->getVar('pageid'), 3, sprintf(_AM_MYTABS_DELETEDSUCCESS, $obj->getVar('title')));
+                redirect_header('index.php?pageid=' . $obj->getVar('pageid'), 3, sprintf(_AM_MYTABS_DELETEDSUCCESS, $obj->getVar('title')));
             } else {
                 xoops_cp_header();
                 echo implode('<br />', $obj->getErrors());
