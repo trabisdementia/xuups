@@ -251,6 +251,7 @@ define("_MI_PUBLISHER_DISPLAY_SUMMARY_DSC", "Display index and category with sum
 define("_MI_PUBLISHER_DISPLAY_FULL_DSC", "Display index and category with full display type");
 define("_MI_PUBLISHER_DISPLAY_WFSECTION_DSC", "Display index and category in a WF-Section like style");
 define("_MI_PUBLISHER_ITEM_DSC", "Display item");
+define('_MI_PUBLISHER_ARCHIVE__DSC', "Article Archives");
 define("_MI_PUBLISHER_SUBMIT_DSC", "Form to submit an item");
 define("_MI_PUBLISHER_SINGLEITEM_BLOCK_DSC", "Display a single item in a block");
 define("_MI_PUBLISHER_PRINT_DSC", "Print page template");
@@ -315,6 +316,7 @@ define("_MI_PUBLISHER_CONFCAT_SEARCH_DSC", "");
 define("_MI_PUBLISHER_SEO_METAKEYWORDS", "Meta Keywords");
 define("_MI_PUBLISHER_SEO_METAKEYWORDS_DSC", "This keywords will be merged with the keywords set by articles. Use ',' to separate them.");
 
+define("_MI_PUBLISHER_SUB_ARCHIVE", "Archive");
 
 define("_MI_PUBLISHER_ALLOW_AUTHOR_ITEMS", "Allow author items feature");
 define("_MI_PUBLISHER_ALLOW_AUTHOR_ITEMS_DSC", "");

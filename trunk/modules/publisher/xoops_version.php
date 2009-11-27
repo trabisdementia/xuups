@@ -123,6 +123,9 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
         $modversion['sub'][2]['url'] = "search.php";
     }
 }
+// Add the Archive button
+$modversion['sub'][3]['name'] = _MI_PUBLISHER_SUB_ARCHIVE;
+$modversion['sub'][3]['url'] = "archive.php";
 
 $i = 0;
 
@@ -300,6 +303,9 @@ $i++;
 $modversion['templates'][$i]['file'] = 'publisher_author_items.html';
 $modversion['templates'][$i]['description'] = _MI_PUBLISHER_AUTHOR_ITEMS_DSC;
 
+$i++;
+$modversion['templates'][$i]['file'] = 'publisher_archive.html';
+$modversion['templates'][$i]['description'] = _MI_PUBLISHER_ARCHIVE__DSC;
 
 // Config categories
 $i = 0;
