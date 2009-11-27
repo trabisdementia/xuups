@@ -105,5 +105,6 @@ define('_MD_PUBLISHER_ITEMS_SAME_AUTHOR', "Items by the same author");
 define('_MD_PUBLISHER_TOTAL_ITEMS', "Total items : ");
 define('_MD_PUBLISHER_TOTAL_HITS', "Total hits : ");
 define('_MD_PUBLISHER_NO_AUTHOR_ITEMS', "There is no items by this author");
-
+define('_MD_PUBLISHER_ARCHIVES', "Article Archives");
+define('_MD_PUBLISHER_ACTIONS', "Actions");
 ?>
