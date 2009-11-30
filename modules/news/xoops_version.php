@@ -25,11 +25,11 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
+    die('XOOPS root path not defined');
 }
 
 $modversion['name'] = _MI_NEWS_NAME;
-$modversion['version'] = 1.64;
+$modversion['version'] = 1.65;
 $modversion['description'] = _MI_NEWS_DESC;
 $modversion['credits'] = "The XOOPS Project, Christian, Pilou, Marco, ALL the members of the Newbb Team, GIJOE, Zoullou, Mithrandir, Setec Astronomy, Marcan, 5vision, Anne";
 $modversion['author'] = "The XOOPS Project Module Dev Team & Instant Zero";
@@ -73,7 +73,6 @@ $modversion['templates'][9]['file'] = 'news_whos_who.html';
 $modversion['templates'][9]['description'] = "Who's who";
 $modversion['templates'][10]['file'] = 'news_topics_directory.html';
 $modversion['templates'][10]['description'] = "Topics Directory";
-
 
 // Blocks
 $modversion['blocks'][1]['file'] = "news_topics.php";
@@ -171,7 +170,7 @@ if ($module) {
     }
     $gperm_handler =& xoops_gethandler('groupperm');
     if ($gperm_handler->checkRight("news_submit", 0, $groups, $module->getVar('mid'))) {
-          $cansubmit = 1;
+        $cansubmit = 1;
     }
 }
 
@@ -181,50 +180,50 @@ global $xoopsDB, $xoopsUser, $xoopsConfig, $xoopsModule, $xoopsModuleConfig;
 // We try to "win" some time
 // 1)  Check to see it the module is the current module
 if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['dirname'] && $xoopsModule->getVar('isactive')) {
-	// 2) If there's no topics to display as sub menus we can go on
-	if(!isset($_SESSION['items_count']) || $_SESSION['items_count']== -1) {
-		$sql = "SELECT COUNT(*) as cpt FROM ".$xoopsDB->prefix("topics")." WHERE menu=1";
-		$result = $xoopsDB->query($sql);
-		list($count) = $xoopsDB->fetchRow($result);
-		$_SESSION['items_count'] = $count;
-	} else {
-		$count = $_SESSION['items_count'];
-	}
-	if($count>0) {
-		include_once XOOPS_ROOT_PATH.'/class/tree.php';
-		include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
-		include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
-		$xt = new NewsTopic();
-		$allTopics = $xt->getAllTopics(news_getmoduleoption('restrictindex'));
-		$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
-		$topics_arr = $topic_tree->getAllChild(0);
-		if ($module) {
-			foreach ($topics_arr as $onetopic) {
-				if ($gperm_handler->checkRight('news_view', $onetopic->topic_id(), $groups, $xoopsModule->getVar('mid')) && $onetopic->menu()) {
-	            	$modversion['sub'][$i]['name'] = $onetopic->topic_title();
-  					$modversion['sub'][$i]['url'] = "index.php?storytopic=" . $onetopic->topic_id();
-   				}
-       			$i++;
-   			}
-		}
-		unset($xt);
-	}
+    // 2) If there's no topics to display as sub menus we can go on
+    if (!isset($_SESSION['items_count']) || $_SESSION['items_count']== -1) {
+        $sql = "SELECT COUNT(*) as cpt FROM ".$xoopsDB->prefix("topics")." WHERE menu=1";
+        $result = $xoopsDB->query($sql);
+        list($count) = $xoopsDB->fetchRow($result);
+        $_SESSION['items_count'] = $count;
+    } else {
+        $count = $_SESSION['items_count'];
+    }
+    if ($count > 0) {
+        include_once XOOPS_ROOT_PATH . '/class/tree.php';
+        include_once XOOPS_ROOT_PATH . '/modules/news/class/class.newstopic.php';
+        include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
+        $xt = new NewsTopic();
+        $allTopics = $xt->getAllTopics(news_getmoduleoption('restrictindex'));
+        $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+        $topics_arr = $topic_tree->getAllChild(0);
+        if ($module) {
+            foreach ($topics_arr as $onetopic) {
+                if ($gperm_handler->checkRight('news_view', $onetopic->topic_id(), $groups, $xoopsModule->getVar('mid')) && $onetopic->menu()) {
+                    $modversion['sub'][$i]['name'] = $onetopic->topic_title();
+                    $modversion['sub'][$i]['url'] = "index.php?storytopic=" . $onetopic->topic_id();
+                }
+                $i++;
+            }
+        }
+        unset($xt);
+    }
 }
 
 $modversion['sub'][$i]['name'] = _MI_NEWS_SMNAME2;
 $modversion['sub'][$i]['url'] = "archive.php";
 if ($cansubmit) {
-	$i++;
+    $i++;
     $modversion['sub'][$i]['name'] = _MI_NEWS_SMNAME1;
     $modversion['sub'][$i]['url'] = "submit.php";
 }
 unset($cansubmit);
 
-include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
-if(news_getmoduleoption('newsbythisauthor')) {
-	$i++;
-	$modversion['sub'][$i]['name'] = _MI_NEWS_WHOS_WHO;
-	$modversion['sub'][$i]['url'] = "whoswho.php";
+include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
+if (news_getmoduleoption('newsbythisauthor')) {
+    $i++;
+    $modversion['sub'][$i]['name'] = _MI_NEWS_WHOS_WHO;
+    $modversion['sub'][$i]['url'] = "whoswho.php";
 }
 
 $i++;
@@ -279,13 +278,13 @@ $modversion['config'][3]['valuetype'] = 'int';
 $modversion['config'][3]['default'] = 1;
 
 /*
-$modversion['config'][4]['name'] = 'anonpost';
-$modversion['config'][4]['title'] = '_MI_ANONPOST';
-$modversion['config'][4]['description'] = '';
-$modversion['config'][4]['formtype'] = 'yesno';
-$modversion['config'][4]['valuetype'] = 'int';
-$modversion['config'][4]['default'] = 0;
-*/
+ $modversion['config'][4]['name'] = 'anonpost';
+ $modversion['config'][4]['title'] = '_MI_ANONPOST';
+ $modversion['config'][4]['description'] = '';
+ $modversion['config'][4]['formtype'] = 'yesno';
+ $modversion['config'][4]['valuetype'] = 'int';
+ $modversion['config'][4]['default'] = 0;
+ */
 
 /**
  * Auto approuve submited stories
@@ -521,17 +520,16 @@ $modversion['config'][25]['description'] = "_MI_NEWS_TABS_SKIN_DESC";
 $modversion['config'][25]['formtype'] = 'select';
 $modversion['config'][25]['valuetype'] = 'int';
 $modversion['config'][25]['options'] = array(
-											_MI_NEWS_SKIN_1=>1,
-											_MI_NEWS_SKIN_2=>2,
-											_MI_NEWS_SKIN_3=>3,
-											_MI_NEWS_SKIN_4=>4,
-											_MI_NEWS_SKIN_5=>5,
-											_MI_NEWS_SKIN_6=>6,
-											_MI_NEWS_SKIN_7=>7,
-											_MI_NEWS_SKIN_8=>8
-											);
+    _MI_NEWS_SKIN_1 => 1,
+    _MI_NEWS_SKIN_2 => 2,
+    _MI_NEWS_SKIN_3 => 3,
+    _MI_NEWS_SKIN_4 => 4,
+    _MI_NEWS_SKIN_5 => 5,
+    _MI_NEWS_SKIN_6 => 6,
+    _MI_NEWS_SKIN_7 => 7,
+    _MI_NEWS_SKIN_8 => 8
+);
 $modversion['config'][25]['default'] = 6;
-
 
 /**
  * Display a navigation's box on the pages ?
@@ -544,7 +542,6 @@ $modversion['config'][26]['formtype'] = 'yesno';
 $modversion['config'][26]['valuetype'] = 'int';
 $modversion['config'][26]['default'] = 1;
 
-
 /**
  * Activate Dublin Core Metadata ?
  */
@@ -554,7 +551,6 @@ $modversion['config'][27]['description'] = '_MI_NEWS_DUBLINCORE_DSC';
 $modversion['config'][27]['formtype'] = 'yesno';
 $modversion['config'][27]['valuetype'] = 'int';
 $modversion['config'][27]['default'] = 0;
-
 
 /**
  * Display a "Bookmark this article at these sites" block ?
@@ -649,7 +645,6 @@ $modversion['config'][36]['description'] = '';
 $modversion['config'][36]['formtype'] = 'textbox';
 $modversion['config'][36]['valuetype'] = 'int';
 $modversion['config'][36]['default'] = 480;
-
 
 // Notification
 $modversion['hasNotification'] = 1;
