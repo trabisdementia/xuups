@@ -264,7 +264,7 @@ function PruneManager()
 {
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     xoops_cp_header();
-    adminmenu(3);
+    news_adminmenu(3);
     echo '<br /><br /><br />';
 	$sform = new XoopsThemeForm(_AM_NEWS_PRUNENEWS, 'pruneform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new XoopsFormTextDateSelect(_AM_NEWS_PRUNE_BEFORE, 'prune_date',15,time()), true);
@@ -357,7 +357,7 @@ function Newsletter()
 {
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     xoops_cp_header();
-    adminmenu(5);
+    news_adminmenu(5);
     echo '<br /><br /><br />';
 	$sform = new XoopsThemeForm(_AM_NEWS_NEWSLETTER, 'newsletterform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$dates_tray = new XoopsFormElementTray(_AM_NEWS_NEWSLETTER_BETWEEN);
@@ -400,7 +400,7 @@ function LaunchNewsletter()
 {
 	global $xoopsConfig, $dateformat;
 	xoops_cp_header();
-	adminmenu(5);
+	news_adminmenu(5);
 	$newslettertemplate = '';
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/newsletter.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/newsletter.php';
@@ -472,7 +472,7 @@ function NewsExport()
 {
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     xoops_cp_header();
-    adminmenu(4);
+    news_adminmenu(4);
     echo '<br /><br /><br />';
 	$sform = new XoopsThemeForm(_AM_NEWS_EXPORT_NEWS, 'exportform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$dates_tray = new XoopsFormElementTray(_AM_NEWS_EXPORT_BETWEEN);
@@ -514,7 +514,7 @@ function news_utf8_encode($text)
 function LaunchExport()
 {
 	xoops_cp_header();
-	adminmenu(4);
+	news_adminmenu(4);
 	echo '<br />';
 	$story = new NewsStory();
 	$topic= new NewsTopic();
@@ -620,7 +620,7 @@ function topicsmanager()
     global $xoopsDB, $xoopsConfig, $xoopsModule, $myts;
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     xoops_cp_header();
-    adminmenu(0);
+    news_adminmenu(0);
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->dirname().'/images/topics');
     $uploadirectory='/modules/' . $xoopsModule -> dirname().'/images/topics';
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
@@ -1085,7 +1085,7 @@ function Stats()
 	} else {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
 	}
-    adminmenu(6);
+    news_adminmenu(6);
     $news = new NewsStory();
     $stats = array();
     $stats=$news->GetStats(news_getmoduleoption('storycountadmin'));
@@ -1229,7 +1229,7 @@ function Metagen()
 	} else {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
 	}
-    adminmenu(8);
+    news_adminmenu(8);
     echo "<h1>"._AM_NEWS_METAGEN."</h1>";
 	echo _AM_NEWS_METAGEN_DESC."<br /><br />";
 
@@ -1369,7 +1369,7 @@ switch ($op) {
 
     case 'newarticle':
         xoops_cp_header();
-        adminmenu(1);
+        news_adminmenu(1);
         echo '<h4>' . _AM_CONFIG . '</h4>';
         include_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
         newSubmissions();
@@ -1516,7 +1516,7 @@ switch ($op) {
 
     case 'verifydb':
     	xoops_cp_header();
-    	adminmenu();
+    	news_adminmenu();
 		$tbllist = $xoopsDB->prefix('stories').','.$xoopsDB->prefix('topics').','.$xoopsDB->prefix('stories_files').','.$xoopsDB->prefix('stories_votedata');
 		$xoopsDB->queryF("OPTIMIZE TABLE ".$tbllist);
 		$xoopsDB->queryF("CHECK TABLE ".$tbllist);
@@ -1528,7 +1528,7 @@ switch ($op) {
     case 'default':
     default:
         xoops_cp_header();
-        adminmenu(-1);
+        news_adminmenu(-1);
         if(!news_TableExists($xoopsDB->prefix('stories_votedata')) || !news_TableExists($xoopsDB->prefix('stories_files')) ) {
         	echo "<div align='center'>"._AM_NEWS_PLEASE_UPGRADE.'</div><br/><br />';
         }
