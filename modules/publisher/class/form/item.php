@@ -45,6 +45,7 @@ class PublisherItemForm extends XoopsThemeTabForm {
     {
 
         global $xoopsConfig, $xoopsUser;
+
         $publisher =& PublisherPublisher::getInstance();
         $checkperm = $this->checkperm;
 
@@ -83,7 +84,7 @@ class PublisherItemForm extends XoopsThemeTabForm {
         }
 
         // TAGS
-        if (publisher_isActive('tag') && (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_ITEM_TAGS))) {
+        if (xoops_isActiveModule('tag') && (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_ITEM_TAGS))) {
             include_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
             $text_tags = new XoopsFormTag('item_tag', 60, 255, $obj->getVar('item_tag', 'e'), 0);
             $this->addElement($text_tags);
@@ -139,41 +140,26 @@ class PublisherItemForm extends XoopsThemeTabForm {
                 || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOXCODE)
                 || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOIMAGE)
                 || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOLINEBREAK)) {
-
-            $options_tray = new XoopsFormElementTray(_CO_PUBLISHER_OPTIONS, '<br />');
-
             if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOHTML)) {
-                $html_checkbox = new XoopsFormCheckBox('', 'dohtml', $obj->dohtml());
-                $html_checkbox->addOption(1, _CO_PUBLISHER_DOHTML);
-                $options_tray->addElement($html_checkbox);
+                $html_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOHTML, 'dohtml', $obj->dohtml(), _YES , _NO);
+                $this->addElement($html_radio);
             }
-
             if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOSMILEY)) {
-                $smiley_checkbox = new XoopsFormCheckBox('', 'dosmiley', $obj->dosmiley());
-                $smiley_checkbox->addOption(1, _CO_PUBLISHER_DOSMILEY);
-                $options_tray->addElement($smiley_checkbox);
+                $smiley_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOSMILEY, 'dosmiley', $obj->dosmiley(), _YES , _NO);
+                $this->addElement($smiley_radio);
             }
-
             if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOXCODE)) {
-                $xcodes_checkbox = new XoopsFormCheckBox('', 'doxcode', $obj->doxcode());
-                $xcodes_checkbox->addOption(1, _CO_PUBLISHER_DOXCODE);
-                $options_tray->addElement($xcodes_checkbox);
+                $xcode_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOXCODE, 'doxcode', $obj->doxcode(), _YES , _NO);
+                $this->addElement($xcode_radio);
             }
-
             if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOIMAGE)) {
-                $images_checkbox = new XoopsFormCheckBox('', 'doimage', $obj->doimage());
-                $images_checkbox->addOption(1, _CO_PUBLISHER_DOIMAGE);
-                $options_tray->addElement($images_checkbox);
+                $image_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOIMAGE, 'doimage', $obj->doimage(), _YES , _NO);
+                $this->addElement($image_radio);
             }
-
             if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOLINEBREAK)) {
-                $linebreak_checkbox = new XoopsFormCheckBox('', 'dolinebreak', $obj->dobr());
-                $linebreak_checkbox->addOption(1, _CO_PUBLISHER_DOLINEBREAK);
-                $options_tray->addElement($linebreak_checkbox);
+                $linebreak_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOLINEBREAK, 'dolinebreak', $obj->dobr(), _YES , _NO);
+                $this->addElement($linebreak_radio);
             }
-
-            $this->addElement($options_tray);
-
         }
 
         // Available pages to wrap
@@ -241,9 +227,8 @@ class PublisherItemForm extends XoopsThemeTabForm {
 
         // NOTIFY ON PUBLISH
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_NOTIFY)) {
-            $notify_checkbox = new XoopsFormCheckBox('', 'notify', $obj->notifypub());
-            $notify_checkbox->addOption(1, _CO_PUBLISHER_NOTIFY);
-            $this->addElement($notify_checkbox);
+            $notify_radio = new XoopsFormRadioYN(_CO_PUBLISHER_NOTIFY, 'notify', $obj->notifypub(), _YES , _NO);
+            $this->addElement($notify_radio);
         }
 
         $this->startTab(_CO_PUBLISHER_TAB_IMAGES);
@@ -296,6 +281,7 @@ class PublisherItemForm extends XoopsThemeTabForm {
             $addbreak = new XoopsFormLabel('', "<br />" );
             $closetable = new XoopsFormLabel('', "</td></tr></table>");
 
+            $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/ajaxupload.3.5.js');
             $js_data = new XoopsFormLabel('', '
 <script type= "text/javascript">/*<![CDATA[*/
 $publisher(document).ready(function(){

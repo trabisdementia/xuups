@@ -19,23 +19,19 @@
  * @author          The SmartFactory <www.smartfactory.ca>
  * @version         $Id: footer.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
-if (!defined("XOOPS_ROOT_PATH")) {
- 	die("XOOPS root path not defined");
-}
+
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 $xoTheme->addStylesheet(PUBLISHER_URL . '/css/publisher.css');
-$xoTheme->addStylesheet(PUBLISHER_URL . '/css/jquery-ui-1.7.1.custom.css');
 
-$xoTheme->addScript(PUBLISHER_URL . '/js/jquery-1.3.2.min.js');
+$xoTheme->addScript(XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js');
 $xoTheme->addScript(PUBLISHER_URL . '/js/jquery-easing-1.3.pack.js');
 $xoTheme->addScript(PUBLISHER_URL . '/js/jquery.lightbox-0.5.js');
 $xoTheme->addScript(PUBLISHER_URL . '/js/jquery.popeye-0.2.1.js');
-$xoTheme->addScript(PUBLISHER_URL . '/js/ui.core.js');
-$xoTheme->addScript(PUBLISHER_URL . '/js/ui.tabs.js');
 $xoTheme->addScript(PUBLISHER_URL . '/js/publisher.js');
 
-$xoopsTpl->assign("xoops_module_header", '<link rel="alternate" type="application/rss+xml" title="' . $publisher->getModule()->name() . '" href="' . PUBLISHER_URL . '/backend.php" />'
+$xoopsTpl->assign("xoops_module_header", '<link rel="alternate" type="application/rss+xml" title="'
+                                       . $publisher->getModule()->name() . '" href="' . PUBLISHER_URL . '/backend.php" />'
                                        . @$xoopsTpl->get_template_vars("xoops_module_header"));
 
 $xoopsTpl->assign("publisher_adminpage", "<a href='" . PUBLISHER_URL . "/admin/index.php'>" ._MD_PUBLISHER_ADMIN_PAGE . "</a>");

@@ -18,10 +18,10 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: author_items.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
+
 include_once dirname(__FILE__) . '/header.php';
 
-$uid = isset($_GET['uid']) ? intval($_GET['uid']) : 0;
+$uid = PublisherRequest::getInt('uid');
 if (empty($uid)) {
     redirect_header('index.php', 2, _CO_PUBLISHER_ERROR);
     exit();
@@ -55,7 +55,7 @@ $count = count($items);
 $xoopsTpl->assign('total_items', $count);
 $xoopsTpl->assign('rating', $publisher->getConfig('perm_rating'));
 
-xoops_load('userutility');
+xoops_load('XoopsUserUtility');
 $author_name = XoopsUserUtility::getUnameFromId($uid, $publisher->getConfig('format_realname'), true);
 $xoopsTpl->assign('author_name_with_link', $author_name);
 
@@ -63,9 +63,9 @@ $xoopsTpl->assign('user_avatarurl', XOOPS_URL . '/uploads/' . $thisuser->getVar(
 
 $categories = array();
 if ($count > 0) {
-	foreach ($items as $item) {
-	    $catid = $item->categoryid();
-		if (!isset($categories[$catid])) {
+    foreach ($items as $item) {
+        $catid = $item->categoryid();
+        if (!isset($categories[$catid])) {
             $categories[$catid] = array(
                 'count_items' => 0,
                 'count_hits' => 0,
@@ -73,15 +73,16 @@ if ($count > 0) {
                 'link'  => $item->getCategoryLink()
             );
         }
-		
-		$categories[$catid]['count_items']++;
-		$categories[$catid]['count_hits'] += $item->counter();
-        $categories[$catid]['items'][] = array('title'     => $item->title(),
-			                                   'hits'      => $item->counter(),
-			                                   'link'      => $item->getItemLink(),
-			                                   'published' => $item->datesub(),
-			                                   'rating'    => $item->rating());
-	}
+
+        $categories[$catid]['count_items']++;
+        $categories[$catid]['count_hits'] += $item->counter();
+        $categories[$catid]['items'][] = array(
+            'title'     => $item->title(),
+            'hits'      => $item->counter(),
+            'link'      => $item->getItemLink(),
+            'published' => $item->datesub(),
+            'rating'    => $item->rating());
+    }
 }
 
 $xoopsTpl->assign('categories', $categories);

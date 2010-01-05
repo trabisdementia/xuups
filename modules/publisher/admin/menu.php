@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -52,33 +52,33 @@ $adminmenu[$i]['link'] = "admin/preferences.php";
 $publisher_adminmenu = $adminmenu;
 
 if (isset($xoopsModule) && $xoopsModule->getVar('dirname') == basename(dirname(dirname(__FILE__)))) {
-	$i = 0;
+    $i = 0;
 
-	$publisher_headermenu[$i]['title'] = _AM_PUBLISHER_BLOCKS;
-	$publisher_headermenu[$i]['link'] = '../../system/admin.php?fct=blocksadmin&amp;selvis=-1&amp;selmod=-2&amp;selgrp=-1&amp;selgen=' . $xoopsModule->getVar('mid');
-	$i++;
+    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_BLOCKS;
+    $publisher_headermenu[$i]['link'] = '../../system/admin.php?fct=blocksadmin&amp;selvis=-1&amp;selmod=-2&amp;selgrp=-1&amp;selgen=' . $xoopsModule->getVar('mid');
+    $i++;
 
     $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_COMMENTS;
-	$publisher_headermenu[$i]['link'] = '../../system/admin.php?fct=comments&amp;module=' . $xoopsModule->getVar('mid');
-	$i++;
+    $publisher_headermenu[$i]['link'] = '../../system/admin.php?fct=comments&amp;module=' . $xoopsModule->getVar('mid');
+    $i++;
 
-	$publisher_headermenu[$i]['title'] = _AM_PUBLISHER_GOMOD;
-	$publisher_headermenu[$i]['link'] = PUBLISHER_URL;
-	$i++;
+    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_GOMOD;
+    $publisher_headermenu[$i]['link'] = PUBLISHER_URL;
+    $i++;
 
-	$publisher_headermenu[$i]['title'] = _AM_PUBLISHER_UPDATE_MODULE;
-	$publisher_headermenu[$i]['link'] = XOOPS_URL . "/modules/system/admin.php?fct=modulesadmin&op=update&module=" . $xoopsModule->getVar('dirname');
-	$i++;
+    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_UPDATE_MODULE;
+    $publisher_headermenu[$i]['link'] = XOOPS_URL . "/modules/system/admin.php?fct=modulesadmin&op=update&module=" . $xoopsModule->getVar('dirname');
+    $i++;
 
     $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_IMPORT;
     $publisher_headermenu[$i]['link'] = PUBLISHER_URL . "/admin/import.php";
-	$i++;
-	
-	$publisher_headermenu[$i]['title'] = _AM_PUBLISHER_CLONE;
-    $publisher_headermenu[$i]['link'] = PUBLISHER_URL . "/admin/clone.php";
-	$i++;
+    $i++;
 
-	$publisher_headermenu[$i]['title'] = _AM_PUBLISHER_ABOUT;
-	$publisher_headermenu[$i]['link'] = PUBLISHER_URL . "/admin/about.php";
+    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_CLONE;
+    $publisher_headermenu[$i]['link'] = PUBLISHER_URL . "/admin/clone.php";
+    $i++;
+
+    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_ABOUT;
+    $publisher_headermenu[$i]['link'] = PUBLISHER_URL . "/admin/about.php";
 }
 ?>

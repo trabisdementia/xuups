@@ -18,7 +18,7 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: search.inc.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
  	die("XOOPS root path not defined");
 }
@@ -77,12 +77,12 @@ function publisher_search($queryarray, $andor, $limit, $offset, $userid, $catego
         $item['author'] = $obj->author_alias();
         $item['datesub'] = $obj->datesub($publisher->getConfig('format_date'));
         $usersIds[$obj->uid()] = $obj->uid();
-		
+
 		$ret[] = $item;
 		unset($item, $sanitized_text);
 	}
 
-    xoops_load('userutility');
+    xoops_load('XoopsUserUtility');
 	$usersNames = XoopsUserUtility::getUnameFromIds($usersIds, $publisher->getConfig('format_realname'), true);
     foreach ($ret as $key => $item) {
         if ($item["author"] == '') {

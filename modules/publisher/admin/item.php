@@ -235,7 +235,7 @@ switch ($op) {
             }
 
             // Removing tags information
-            if (publisher_isActive('tag')) {
+            if (xoops_isActiveModule('tag')) {
                 $tag_handler =& xoops_getmodulehandler('tag', 'tag');
                 $tag_handler->updateByItem('', $itemid, PUBLISHER_DIRNAME, 0);
             }

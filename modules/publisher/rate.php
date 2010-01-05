@@ -22,8 +22,8 @@
 include_once dirname(__FILE__) . '/header.php';
 
 //getting the values
-$rating = intval($_REQUEST['rating']);
-$itemid = intval($_REQUEST['itemid']);
+$rating = PublisherRequest::getInt('rating');
+$itemid = PublisherRequest::getInt('itemid');
 
 $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $gperm_handler =& xoops_getmodulehandler('groupperm');
