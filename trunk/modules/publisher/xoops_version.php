@@ -20,9 +20,7 @@
  * @version         $Id: xoops_version.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-if (!defined("XOOPS_ROOT_PATH")) {
- 	die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 $modversion['name'] = _MI_PUBLISHER_MD_NAME;
 $modversion['version'] = 1.0;
@@ -191,7 +189,7 @@ $modversion['blocks'][$i]['template'] = "publisher_date_to_date.html";
 
 /* We need to comment this out has it require a smarty plugin not present in the core...
  * We will find a solution later...
- 
+
 $i++;
 $modversion['blocks'][6]['file'] = "items_tree.php";
 $modversion['blocks'][6]['name'] = _MI_PUBLISHER_ITEMSTREE;
@@ -927,7 +925,7 @@ $modversion['config'][$i]['title'] = '_MI_PUBLISHER_ALLOWRATING';
 $modversion['config'][$i]['description'] = '_MI_PUBLISHER_ALLOWRATING_DSC';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
-$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['default'] = 1;
 $modversion['config'][$i]['category'] = 'permissions';
 
 $i++;
@@ -936,7 +934,7 @@ $modversion['config'][$i]['title'] = '_MI_PUBLISHER_ALLOWSEARCH';
 $modversion['config'][$i]['description'] = '_MI_PUBLISHER_ALLOWSEARCH_DSC';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
-$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['default'] = 1;
 $modversion['config'][$i]['category'] = 'permissions';
 
 $i++;
@@ -945,7 +943,7 @@ $modversion['config'][$i]['title'] = '_MI_PUBLISHER_ALLOW_AUTHOR_ITEMS';
 $modversion['config'][$i]['description'] = '_MI_PUBLISHER_ALLOW_AUTHOR_ITEMS_DSC';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
-$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['default'] = 1;
 $modversion['config'][$i]['category'] = 'permissions';
 
 $i++;

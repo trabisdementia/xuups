@@ -299,7 +299,7 @@ class PublisherItem extends XoopsObject
     function posterName($realName = -1)
     {
         $myts =& MyTextSanitizer::getInstance();
-        xoops_load('userutility');
+        xoops_load('XoopsUserUtility');
 
         if ($realName == -1) {
             $realName = $this->publisher->getConfig('format_realname');
@@ -327,7 +327,7 @@ class PublisherItem extends XoopsObject
 
     function linkedPosterName()
     {
-        xoops_load('userutility');
+        xoops_load('XoopsUserUtility');
 
         $ret = $this->author_alias();
         if ($ret == '') {
@@ -458,7 +458,7 @@ class PublisherItem extends XoopsObject
         $adminLinks .= " ";
 
         // Email button
-        if (publisher_isActive('tellafriend')) {
+        if (xoops_isActiveModule('tellafriend')) {
             $subject = sprintf(_CO_PUBLISHER_INTITEMFOUND, $xoopsConfig['sitename']);
             $subject = $this->_convert_for_japanese($subject);
 
@@ -1008,7 +1008,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
             return false;
         }
 
-        if (publisher_isActive('tag')) {
+        if (xoops_isActiveModule('tag')) {
             // Storing tags information
             $tag_handler =& xoops_getmodulehandler('tag', 'tag');
             $tag_handler->updateByItem($item->getVar('item_tag'), $item->getVar('itemid'), PUBLISHER_DIRNAME, 0);

@@ -21,9 +21,7 @@
  * @version         $Id: common.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-if (!defined("XOOPS_ROOT_PATH")) {
- 	die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 define("PUBLISHER_DIRNAME", basename(dirname(dirname(__FILE__))));
 define("PUBLISHER_URL", XOOPS_URL . '/modules/' . PUBLISHER_DIRNAME);
@@ -45,6 +43,7 @@ include_once PUBLISHER_ROOT_PATH . '/class/metagen.php';
 include_once PUBLISHER_ROOT_PATH . '/class/session.php';
 include_once PUBLISHER_ROOT_PATH . '/class/registry.php';
 include_once PUBLISHER_ROOT_PATH . '/class/publisher.php';
+include_once PUBLISHER_ROOT_PATH . '/class/request.php';
 
 $debug = true;
 $publisher =& PublisherPublisher::getInstance($debug);

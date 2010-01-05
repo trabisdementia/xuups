@@ -19,22 +19,22 @@
  * @author          The SmartFactory <www.smartfactory.ca>
  * @version         $Id: item.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
+
 include_once dirname(__FILE__) . '/header.php';
 
 // At which record shall we start for the Categories
-$catstart = isset($_GET['catstart']) ? intval($_GET['catstart']) : 0;
+$catstart = PublisherRequest::getInt('catstart');
 
 // At which record shall we start for the ITEM
-$start = isset($_GET['start']) ? intval($_GET['start']) : 0;
+$start = PublisherRequest::getInt('start');
 
 // Number of categories at the top level
 $totalCategories = $publisher->getHandler('category')->getCategoriesCount(0);
 
 // if there ain't no category to display, let's get out of here
 if ($totalCategories == 0 ) {
-	redirect_header(XOOPS_URL, 2, _MD_PUBLISHER_NO_TOP_PERMISSIONS);
-	exit;
+    redirect_header(XOOPS_URL, 2, _MD_PUBLISHER_NO_TOP_PERMISSIONS);
+    exit;
 }
 
 $xoopsOption['template_main'] = 'publisher_display' . '_' . $publisher->getConfig('idxcat_items_display_type') . '.html';
@@ -49,8 +49,8 @@ $categoriesObj = $publisher->getHandler('category')->getCategories($publisher->g
 // if no categories are found, exit
 $totalCategoriesOnPage = count($categoriesObj);
 if ($totalCategoriesOnPage == 0) {
-	redirect_header("javascript:history.go(-1)", 2, _MD_PUBLISHER_NO_CAT_EXISTS);
-	exit;
+    redirect_header("javascript:history.go(-1)", 2, _MD_PUBLISHER_NO_CAT_EXISTS);
+    exit;
 }
 
 // Get subcats of the top categories
@@ -63,8 +63,8 @@ $totalItems = $publisher->getHandler('category')->publishedItemsCount();
 $real_total_items = $publisher->getHandler('item')->getItemsCount(-1, array(_PUBLISHER_STATUS_PUBLISHED));
 
 if ($publisher->getConfig('idxcat_display_last_item') == 1) {
-	// Get the last item in each category
-	$last_itemObj = $publisher->getHandler('item')->getLastPublishedByCat();
+    // Get the last item in each category
+    $last_itemObj = $publisher->getHandler('item')->getLastPublishedByCat();
 }
 
 // Max size of the title in the last item column
@@ -72,99 +72,99 @@ $lastitemsize = intval($publisher->getConfig('idxcat_last_item_size'));
 
 // Hide sub categories in main page only - hacked by Mowaffak
 if ($publisher->getConfig('idxcat_show_subcats') == 'nomain' ) {
-	$publisher->setConfig('idxcat_show_subcats', 'no');
+    $publisher->setConfig('idxcat_show_subcats', 'no');
 }
 
 $categories = array();
 foreach ($categoriesObj as $cat_id => $category) {
 
-	$total = 0;
-	// Do we display sub categories ?
-	if ($publisher->getConfig('idxcat_show_subcats') != 'no' ) {
-		// if this category has subcats
-		if (isset($subcats[$cat_id])) {
-			foreach ($subcats[$cat_id] as $key => $subcat) {
-				// Get the items count of this very category
-				$subcat_total_items = isset($totalItems[$key]) ? $totalItems[$key] : 0;
-				// Do we display empty sub-cats ?
-				if (($subcat_total_items > 0) || ($publisher->getConfig('idxcat_show_subcats') == 'all' )) {
-					$subcat_id = $subcat->getVar('categoryid');
-					// if we retrieved the last item object for this category
-					if (isset($last_itemObj[$subcat_id])) {
-						$subcat->setVar('last_itemid', $last_itemObj[$subcat_id]->itemid());
-						$subcat->setVar('last_title_link', $last_itemObj[$subcat_id]->getItemLink(false, $lastitemsize));
-					}
+    $total = 0;
+    // Do we display sub categories ?
+    if ($publisher->getConfig('idxcat_show_subcats') != 'no') {
+        // if this category has subcats
+        if (isset($subcats[$cat_id])) {
+            foreach ($subcats[$cat_id] as $key => $subcat) {
+                // Get the items count of this very category
+                $subcat_total_items = isset($totalItems[$key]) ? $totalItems[$key] : 0;
+                // Do we display empty sub-cats ?
+                if (($subcat_total_items > 0) || ($publisher->getConfig('idxcat_show_subcats') == 'all' )) {
+                    $subcat_id = $subcat->getVar('categoryid');
+                    // if we retrieved the last item object for this category
+                    if (isset($last_itemObj[$subcat_id])) {
+                        $subcat->setVar('last_itemid', $last_itemObj[$subcat_id]->itemid());
+                        $subcat->setVar('last_title_link', $last_itemObj[$subcat_id]->getItemLink(false, $lastitemsize));
+                    }
 
-					$numItems= isset($totalItems[$subcat_id])? $totalItems[$key] : 0;
-					$subcat->setVar('itemcount', $numItems);
-					// Put this subcat in the smarty variable
-					$categories[$cat_id]['subcats'][$key] = $subcat->toArrayTable();
-					//$total += $numItems;
-				}
-			}
-		}
-	}
+                    $numItems= isset($totalItems[$subcat_id])? $totalItems[$key] : 0;
+                    $subcat->setVar('itemcount', $numItems);
+                    // Put this subcat in the smarty variable
+                    $categories[$cat_id]['subcats'][$key] = $subcat->toArrayTable();
+                    //$total += $numItems;
+                }
+            }
+        }
+    }
 
-	$categories[$cat_id]['subcatscount'] = isset($subcats[$cat_id]) ? count($subcats[$cat_id]) : 0;
+    $categories[$cat_id]['subcatscount'] = isset($subcats[$cat_id]) ? count($subcats[$cat_id]) : 0;
 
-	// Get the items count of this very category
-	if (isset($totalItems[$cat_id]) && $totalItems[$cat_id] > 0) {
-		$total += $totalItems[$cat_id];
-	}
-	// I'm commenting out this to also display empty categories...
-	//if ($total > 0) {
-	if (isset($last_itemObj[$cat_id])) {
-		$category->setVar('last_itemid', $last_itemObj[$cat_id]->getVar('itemid'));
-		$category->setVar('last_title_link', $last_itemObj[$cat_id]->getItemLink(false, $lastitemsize));
-	}
-	$category->setVar('itemcount', $total);
+    // Get the items count of this very category
+    if (isset($totalItems[$cat_id]) && $totalItems[$cat_id] > 0) {
+        $total += $totalItems[$cat_id];
+    }
+    // I'm commenting out this to also display empty categories...
+    //if ($total > 0) {
+    if (isset($last_itemObj[$cat_id])) {
+        $category->setVar('last_itemid', $last_itemObj[$cat_id]->getVar('itemid'));
+        $category->setVar('last_title_link', $last_itemObj[$cat_id]->getItemLink(false, $lastitemsize));
+    }
+    $category->setVar('itemcount', $total);
 
     if (!isset($categories[$cat_id])) {
-		$categories[$cat_id] = array();
-	}
-	
-	$categories[$cat_id] = $category->toArrayTable($categories[$cat_id]);
+        $categories[$cat_id] = array();
+    }
+
+    $categories[$cat_id] = $category->toArrayTable($categories[$cat_id]);
 }
 unset($categoriesObj);
 
 if (isset($categories[$cat_id])) {
-	$categories[$cat_id] = $category->toArray($categories[$cat_id]);
-	$categories[$cat_id]['categoryPath'] = $category->getCategoryPath($publisher->getConfig('format_linked_path'));
+    $categories[$cat_id] = $category->toArray($categories[$cat_id]);
+    $categories[$cat_id]['categoryPath'] = $category->getCategoryPath($publisher->getConfig('format_linked_path'));
 }
 
 $xoopsTpl->assign('categories', $categories);
 
 if ($publisher->getConfig('index_display_last_items')) {
-	// creating the Item objects that belong to the selected category
-	switch ($publisher->getConfig('format_order_by')) {
-		case 'title' :
-			$sort = 'title';
-			$order = 'ASC';
-			break;
+    // creating the Item objects that belong to the selected category
+    switch ($publisher->getConfig('format_order_by')) {
+        case 'title' :
+            $sort = 'title';
+            $order = 'ASC';
+            break;
 
-		case 'date' :
-			$sort = 'datesub';
-			$order = 'DESC';
-			break;
+        case 'date' :
+            $sort = 'datesub';
+            $order = 'DESC';
+            break;
 
-		default :
-			$sort = 'weight';
-			$order = 'ASC';
-			break;
-	}
+        default :
+            $sort = 'weight';
+        $order = 'ASC';
+        break;
+    }
 
-	// Creating the last ITEMs
-	$itemsObj = $publisher->getHandler('item')->getAllPublished($publisher->getConfig('idxcat_index_perpage'), $start, -1, $sort, $order);
-	$itemsCount = count($itemsObj);
+    // Creating the last ITEMs
+    $itemsObj = $publisher->getHandler('item')->getAllPublished($publisher->getConfig('idxcat_index_perpage'), $start, -1, $sort, $order);
+    $itemsCount = count($itemsObj);
 
     //todo: make config for summary size
     if ($itemsCount > 0) {
         foreach ($itemsObj as $itemObj) {
             $xoopsTpl->append('items', $itemObj->toArray($publisher->getConfig('idxcat_items_display_type'), $publisher->getConfig('item_title_size'), 300, true));  //if no summary truncate body to 300
-		}
+        }
         unset($allcategories);
     }
-	unset($itemsObj);
+    unset($itemsObj);
 
 }
 
@@ -187,17 +187,17 @@ $xoopsTpl->assign('index_page', true);
 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 $pagenav = new XoopsPageNav($totalCategories, $publisher->getConfig('idxcat_cat_perpage'), $catstart, 'catstart', '');
 if ($publisher->getConfig('format_image_nav') == 1) {
-	$xoopsTpl->assign('catnavbar', '<div style="text-align:right;">' . $pagenav->renderImageNav() . '</div>');
+    $xoopsTpl->assign('catnavbar', '<div style="text-align:right;">' . $pagenav->renderImageNav() . '</div>');
 } else {
-	$xoopsTpl->assign('catnavbar', '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>');
+    $xoopsTpl->assign('catnavbar', '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>');
 }
 
 // ITEM Navigation Bar
 $pagenav = new XoopsPageNav($real_total_items, $publisher->getConfig('idxcat_index_perpage'), $start, 'start', '');
 if ($publisher->getConfig('format_image_nav') == 1) {
-	$xoopsTpl->assign('navbar', '<div style="text-align:right;">' . $pagenav->renderImageNav() . '</div>');
+    $xoopsTpl->assign('navbar', '<div style="text-align:right;">' . $pagenav->renderImageNav() . '</div>');
 } else {
-	$xoopsTpl->assign('navbar', '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>');
+    $xoopsTpl->assign('navbar', '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>');
 }
 //show subcategories
 $xoopsTpl->assign('show_subcats', $publisher->getConfig('idxcat_show_subcats'));
@@ -214,8 +214,8 @@ $xoopsTpl->assign('indexpage', true);
 
 // RSS Link
 if($publisher->getConfig('idxcat_show_rss_link') == 1) {
-	$link = sprintf("<a href='%s' title='%s'><img src='%s' border=0 alt='%s'></a>", PUBLISHER_URL . "/backend.php", _MD_PUBLISHER_RSSFEED, PUBLISHER_URL . "/images/rss.gif", _MD_PUBLISHER_RSSFEED);
-	$xoopsTpl->assign('rssfeed_link', $link); 
+    $link = sprintf("<a href='%s' title='%s'><img src='%s' border=0 alt='%s'></a>", PUBLISHER_URL . "/backend.php", _MD_PUBLISHER_RSSFEED, PUBLISHER_URL . "/images/rss.gif", _MD_PUBLISHER_RSSFEED);
+    $xoopsTpl->assign('rssfeed_link', $link);
 }
 
 include_once XOOPS_ROOT_PATH . '/footer.php';

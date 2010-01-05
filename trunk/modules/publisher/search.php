@@ -51,13 +51,13 @@ include_once PUBLISHER_ROOT_PATH . "/" . $module_info_search["file"];
 $limit    = 10;//$publisher->getConfig('idxcat_perpage');
 $uid      = 0;
 $queries  = array();
-$andor    = isset($_POST["andor"]) ? $_POST["andor"] : (isset($_GET["andor"]) ? $_GET["andor"] : "");
-$start    = isset($_GET["start"]) ? $_GET["start"] : 0;
-$category = isset($_POST["category"]) ? $_POST["category"] : (isset($_GET["category"]) ? $_GET["category"] : null);
-$username = isset($_POST["uname"]) ? $_POST["uname"] : (isset($_GET["uname"]) ? $_GET["uname"] : null);
-$searchin = isset($_POST["searchin"]) ? $_POST["searchin"] : (isset($_GET["searchin"]) ? explode("|", $_GET["searchin"]) : array());
-$sortby   = isset($_POST["sortby"]) ? $_POST["sortby"] : (isset($_GET["sortby"]) ? $_GET["sortby"] : null);
-$term     = isset($_POST["term"]) ? $_POST["term"] : (isset($_GET["term"]) ? $_GET["term"] : "");
+$andor    = PublisherRequest::getString('andor');
+$start    = PublisherRequest::getInt('start');
+$category = PublisherRequest::getArray('category');
+$username = PublisherRequest::getString('uname');
+$searchin = PublisherRequest::getArray('searchin');
+$sortby   = PublisherRequest::getString('sortby');
+$term     = PublisherRequest::getString('term');
 
 if (empty($category) || (is_array($category) && in_array("all", $category))) {
     $category = array();
@@ -69,7 +69,7 @@ if (empty($category) || (is_array($category) && in_array("all", $category))) {
 $andor  = (in_array(strtoupper($andor), array("OR", "AND", "EXACT"))) ? strtoupper($andor) : "OR";
 $sortby = (in_array(strtolower($sortby), array("itemid", "datesub", "title", "categoryid"))) ? strtolower($sortby) :  "itemid";
 
-if (!( empty($_POST["submit"]) && empty($_GET["term"]))) {
+if (!(empty($_POST["submit"]) && empty($term))) {
 
     $next_search["category"] = implode(",", $category);
     $next_search["andor"] = $andor;
@@ -119,7 +119,7 @@ if (!( empty($_POST["submit"]) && empty($_GET["term"]))) {
 
     $next_search["sortby"] = $sortby;
     $next_search["searchin"] = implode("|", $searchin);
-    
+
     if (!empty($time)) {
         $extra = "";
     } else {
@@ -181,7 +181,7 @@ $type_select .= "<option value=\"AND\"";
 if ("AND" == $andor) $type_select .= " selected=\"selected\"";
 $type_select .= ">" . _SR_ALL . "</option>";
 $type_select .= "<option value=\"EXACT\"";
-if ("exact" == $andor) $type_select .= " selected=\"selected\"";
+if ("EXACT" == $andor) $type_select .= " selected=\"selected\"";
 $type_select .= ">" . _SR_EXACT . "</option>";
 $type_select .= "</select>";
 

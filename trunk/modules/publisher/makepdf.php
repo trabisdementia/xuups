@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -23,12 +23,12 @@
 error_reporting(0);
 include_once dirname(__FILE__) . '/header.php';
 
-$itemid = isset($_GET['itemid']) ? intval($_GET['itemid']) : 0;
-$item_page_id = isset($_GET['page']) ? intval($_GET['page']) : -1;
+$itemid = PublisherRequest::getInt('itemid');
+$item_page_id = $itemid = PublisherRequest::getInt('page', -1);
 
 if ($itemid == 0) {
-	redirect_header("javascript:history.go(-1)", 1, _MD_PUBLISHER_NOITEMSELECTED);
-	exit();
+    redirect_header("javascript:history.go(-1)", 1, _MD_PUBLISHER_NOITEMSELECTED);
+    exit();
 }
 
 // Creating the item object for the selected item
@@ -36,8 +36,8 @@ $itemObj = $publisher->getHandler('item')->get($itemid);
 
 // if the selected item was not found, exit
 if (!$itemObj) {
-	redirect_header("javascript:history.go(-1)", 1, _MD_PUBLISHER_NOITEMSELECTED);
-	exit();
+    redirect_header("javascript:history.go(-1)", 1, _MD_PUBLISHER_NOITEMSELECTED);
+    exit();
 }
 
 // Creating the category object that holds the selected item
@@ -45,8 +45,8 @@ $categoryObj =& $publisher->getHandler('category')->get($itemObj->categoryid());
 
 // Check user permissions to access that category of the selected item
 if (!$itemObj->accessGranted()) {
-	redirect_header("javascript:history.go(-1)", 1, _NOPERM);
-	exit();
+    redirect_header("javascript:history.go(-1)", 1, _NOPERM);
+    exit();
 }
 
 require_once PUBLISHER_ROOT_PATH . '/tcpdf/tcpdf.php';
@@ -62,7 +62,7 @@ if ($mainImage['image_path'] != '') {
 }
 $content .= '<b><i><u><a href="' . PUBLISHER_URL . '/item.php?itemid=' . $itemid . '" title="' . $myts->undoHtmlSpecialChars($itemObj->title()) . '">' . $myts->undoHtmlSpecialChars($itemObj->title()) . '</a></u></i></b>';
 $content .= '<br />';
-$content .= '<b>'._CO_PUBLISHER_CATEGORY.' : <a href="' . PUBLISHER_URL . '/category.php?categoryid=' . $itemObj->categoryid() . '" title="' . $myts->undoHtmlSpecialChars($categoryObj->name()) . '">' . $myts->undoHtmlSpecialChars($categoryObj->name()) . '</a></b>';
+$content .= '<b>' . _CO_PUBLISHER_CATEGORY . ' : <a href="' . PUBLISHER_URL . '/category.php?categoryid=' . $itemObj->categoryid() . '" title="' . $myts->undoHtmlSpecialChars($categoryObj->name()) . '">' . $myts->undoHtmlSpecialChars($categoryObj->name()) . '</a></b>';
 $content .= '<br />';
 $content .= '<b>' . $sender_inform . '</b>';
 $content .= '<br /><br />';
@@ -99,9 +99,9 @@ $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
 $filename = PUBLISHER_ROOT_PATH . '/tcpdf/config/lang/' . _LANGCODE . '.php';
 if (file_exists($filename)) {
-	include_once $filename;
+    include_once $filename;
 } else {
-	include_once PUBLISHER_ROOT_PATH . '/tcpdf/config/lang/en.php';
+    include_once PUBLISHER_ROOT_PATH . '/tcpdf/config/lang/en.php';
 }
 
 $pdf->setLanguageArray($l); //set language items

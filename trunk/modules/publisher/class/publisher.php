@@ -21,9 +21,7 @@
  * @version         $Id: publisher.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 class PublisherPublisher
 {
@@ -58,29 +56,31 @@ class PublisherPublisher
         return $this->module;
     }
 
-    function getConfig($name = null) {
+    function getConfig($name = null)
+    {
         if ($this->config == null) {
             $this->initConfig();
         }
         if (!$name) {
-            $this->addLog("getting all config");
+            $this->addLog("Getting all config");
             return $this->config;
         }
-        
+
         if (!isset($this->config[$name])) {
             $this->addLog("ERROR :: CONFIG '{$name}' does not exist");
             return null;
         }
-        
+
         $this->addLog("Getting config '{$name}' : " .$this->config[$name]);
         return $this->config[$name];
     }
-    
-    function setConfig($name = null, $value = null) {
+
+    function setConfig($name = null, $value = null)
+    {
         if ($this->config == null) {
             $this->initConfig();
         }
-        
+
         $this->config[$name] = $value;
 
         $this->addLog("Setting config '{$name}' : " . $this->config[$name]);
@@ -95,7 +95,7 @@ class PublisherPublisher
         $this->addLog("Getting handler '{$name}'");
         return $this->handler[$name . '_handler'];
     }
-    
+
     function initModule()
     {
         global $xoopsModule;
@@ -120,13 +120,13 @@ class PublisherPublisher
             $this->config =& $hModConfig->getConfigsByCat(0, $this->getModule()->getVar('mid'));
         }
     }
-    
+
     function initHandler($name)
     {
         $this->addLog('INIT ' . $name . ' HANDLER');
         $this->handler[$name . '_handler'] = xoops_getModuleHandler($name, $this->registry->getEntry('dirname'));
     }
-    
+
     function addLog($log)
     {
         if ($this->debug) {
@@ -136,7 +136,7 @@ class PublisherPublisher
             }
         }
     }
-    
+
     /*
     function __destruct()
     {
@@ -149,3 +149,4 @@ class PublisherPublisher
         }
     } */
 }
+?>

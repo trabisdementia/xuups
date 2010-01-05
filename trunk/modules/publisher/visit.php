@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -22,21 +22,21 @@
 
 include_once dirname(__FILE__) . '/header.php';
 
-$fileid = isset($_GET['fileid']) ? intval($_GET['fileid']) : 0;
+$fileid = PublisherRequest::getInt('fileid');
 
 // Creating the item object for the selected item
 $fileObj = $publisher->getHandler('file')->get($fileid);
 
 if ($fileObj->getVar('status' != _PUBLISHER_STATUS_FILE_ACTIVE)) {
-	redirect_header("javascript:history.go(-1)", 1, _NOPERM);
+    redirect_header("javascript:history.go(-1)", 1, _NOPERM);
 }
 
 $itemObj = $publisher->getHandler('item')->get($fileObj->getVar('itemid'));
 
 // Check user permissions to access this file
 if (!$itemObj->accessGranted()) {
-	redirect_header("javascript:history.go(-1)", 1, _NOPERM);
-	exit();
+    redirect_header("javascript:history.go(-1)", 1, _NOPERM);
+    exit();
 }
 // Creating the category object that holds the selected ITEM
 $categoryObj =& $itemObj->category();
@@ -44,9 +44,9 @@ $categoryObj =& $itemObj->category();
 $fileObj->updateCounter();
 
 if (!preg_match("/^ed2k*:\/\//i", $fileObj->getFileUrl())) {
-	Header("Location: " . $fileObj->getFileUrl());
+    header("Location: " . $fileObj->getFileUrl());
 }
 
-echo "<html><head><meta http-equiv=\"Refresh\" content=\"0; URL=".$myts->oopsHtmlSpecialChars($fileObj->getFileUrl())."\"></meta></head><body></body></html>";
+echo "<html><head><meta http-equiv=\"Refresh\" content=\"0; URL=" . $myts->oopsHtmlSpecialChars($fileObj->getFileUrl()) . "\"></meta></head><body></body></html>";
 exit();
 ?>

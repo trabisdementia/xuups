@@ -1020,20 +1020,6 @@ function publisher_makeURI($page, $vars = array(), $encodeAmp = true)
     return $page . '?'. $qs;
 }
 
-function publisher_isActive($module = 'tag')
-{
-    static 	$publisher_activeModules;
-
-    if (!isset($publisher_activeModules)) {
-        $modules_handler =& xoops_gethandler('module');
-        $criteria = new Criteria('isactive', 1);
-        $publisher_activeModules = $modules_handler->getList($criteria, true);
-        unset($criteria);
-    }
-
-    return in_array($module, array_keys($publisher_activeModules));
-}
-
 function publisher_tellafriend($subject = '')
 {
     if (stristr($subject , '%' )) $subject = rawurldecode($subject) ;

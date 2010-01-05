@@ -48,16 +48,16 @@ function publisher_latest_news_show($options)
     $imgheight = $options[10];
     $border = $options[11];
     $bordercolor = $options[12];
-	
+
 	$block['spec']['columnwidth'] = intval(1 / $column_count * 100);
-	
+
 	$selectedcatids = explode(',', $options[26]);
 
     $allcats = false;
 	if (in_array(0, $selectedcatids)) {
 		$allcats = true;
 	}
-	
+
 	// creating the ITEM objects that belong to the selected category
 	if ($allcats) {
 		$criteria = null;
@@ -65,7 +65,7 @@ function publisher_latest_news_show($options)
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('categoryid', '(' . $options[26] . ')', 'IN'));
 	}
-	
+
 	// Use specific ITEMS
 	if ($selected_stories != 0) {
         unset($criteria); //removes category option
@@ -76,11 +76,11 @@ function publisher_latest_news_show($options)
     $itemsObj = $publisher->getHandler('item')->getItems($limit, $start, array(_PUBLISHER_STATUS_PUBLISHED), -1, $sort, $order, '', true, $criteria, 'itemid');
 
     $scount = count($itemsObj);
-    
+
     if ($scount == 0) {
 	   return false;
 	}
-    
+
     $k = 0;
     $columns = array();
     $storieslist=array();
@@ -95,14 +95,14 @@ function publisher_latest_news_show($options)
         $item['itemurl'] = $itemObj->getItemUrl();
         $item['title']   = $itemObj->getItemLink();
         $item['text']    = $itemObj->getBlockSummary($letters);
-        
+
         $item            = $itemObj->getMainImage($item);  //returns an array
 
         $ls_height = '';
         if ($options[10] != 0) {
             $ls_height = 'height="' . $imgheight . '" ';
         } // set height = 0 in block option for auto height
-			
+
         if ($options[13] == 'LEFT' ) {
             $imgposition = "float: left";
             $ls_margin = '-right';
@@ -135,7 +135,7 @@ function publisher_latest_news_show($options)
 		} else {
             $item['admin'] = '';
         }
-        
+
         $block['topiclink'] = '';
         /*
         if ($options[14] == 1) {
@@ -205,7 +205,7 @@ function publisher_latest_news_show($options)
    	    }
 
         $item['email'] = '';
-        if ($options[24] == 1 && publisher_isActive('tellafriend')) {
+        if ($options[24] == 1 && xoops_isActiveModule('tellafriend')) {
             $subject  = sprintf(_CO_PUBLISHER_INTITEMFOUND, $xoopsConfig['sitename']);
 	        $subject  = $itemObj->_convert_for_japanese($subject);
 	        $maillink = publisher_tellafriend($subject);
@@ -222,7 +222,7 @@ function publisher_latest_news_show($options)
         if ($options[4] == 1) {
 		    $block['latestnews_scroll'] = true;
         }
-			
+
         $block['scrollheight'] = $options[5];
         $block['scrollspeed'] = $options[6];
 
@@ -245,7 +245,7 @@ function publisher_latest_news_edit($options)
     $tabletag2 = '</td><td style="padding:3px">';
     $tabletag3 = '<tr><td style="padding-top:20px;border-bottom:1px solid #000" colspan="2">';
     $tabletag4 = '</td></tr>';
- 
+
     $form  = "<table border='0' cellpadding='0' cellspacing='0'>";
 	$form .= $tabletag3 . _MB_PUBLISHER_GENERALCONFIG . $tabletag4; // General Options
 	$form .= $tabletag1 . _MB_PUBLISHER_DISP . $tabletag2;
@@ -284,7 +284,7 @@ function publisher_latest_news_edit($options)
     $form .= ">" . _MB_PUBLISHER_WEIGHT . "</option>";
 
     $form .= "</select></td></tr>";
-	
+
 	$form .= $tabletag3 . _MB_PUBLISHER_PHOTOSCONFIG . $tabletag4; // Photos Options
     $form .= $tabletag1 . _MB_PUBLISHER_IMGDISPLAY . $tabletag2;
     $form .= publisher_mk_chkbox($options, 8);
@@ -316,7 +316,7 @@ function publisher_latest_news_edit($options)
     }
     $form .= '>' . _RIGHT . '</option>';
     $form .= "</select></td></tr>";
-	
+
 	$form .= $tabletag3 . _MB_PUBLISHER_LINKSCONFIG . $tabletag4; // Links Options
     $form .= $tabletag1 . _MB_PUBLISHER_DISPLAY_TOPICLINK . $tabletag2;
     $form .= publisher_mk_chkbox($options, 14);

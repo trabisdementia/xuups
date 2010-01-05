@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -23,11 +23,11 @@
 include_once dirname(__FILE__) . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/template.php';
 
-$itemid = isset($_GET['itemid']) ? intval($_GET['itemid']) : 0;
+$itemid = PublisherRequest::getInt('itemid');
 
 if ($itemid == 0) {
-	redirect_header("javascript:history.go(-1)", 1, _MD_PUBLISHER_NOITEMSELECTED);
-	exit();
+    redirect_header("javascript:history.go(-1)", 1, _MD_PUBLISHER_NOITEMSELECTED);
+    exit();
 }
 
 // Creating the ITEM object for the selected ITEM
@@ -35,14 +35,14 @@ $itemObj = $publisher->getHandler('item')->get($itemid);
 
 // if the selected ITEM was not found, exit
 if ($itemObj->notLoaded()) {
-	redirect_header("javascript:history.go(-1)", 1, _MD_PUBLISHER_NOITEMSELECTED);
-	exit();
+    redirect_header("javascript:history.go(-1)", 1, _MD_PUBLISHER_NOITEMSELECTED);
+    exit();
 }
 
 // Check user permissions to access that category of the selected ITEM
 if (!$itemObj->accessGranted()) {
-	redirect_header("javascript:history.go(-1)", 1, _NOPERM);
-	exit;
+    redirect_header("javascript:history.go(-1)", 1, _NOPERM);
+    exit;
 }
 
 // Creating the category object that holds the selected ITEM
@@ -77,10 +77,10 @@ $xoopsTpl->assign('smartPopup', $smartPopup);
 $xoopsTpl->assign('current_language', $xoopsConfig['language']);
 
 if($publisher->getConfig('print_footer')== 'item footer' || $publisher->getConfig('print_footer')== 'both'){
-	$xoopsTpl->assign('itemfooter', $myts->displayTarea($publisher->getConfig('item_footer'), 1));
+    $xoopsTpl->assign('itemfooter', $myts->displayTarea($publisher->getConfig('item_footer'), 1));
 }
 if($publisher->getConfig('print_footer')== 'index footer' || $publisher->getConfig('print_footer')== 'both'){
-	$xoopsTpl->assign('indexfooter', $myts->displayTarea($publisher->getConfig('index_footer'), 1));
+    $xoopsTpl->assign('indexfooter', $myts->displayTarea($publisher->getConfig('index_footer'), 1));
 }
 
 $xoopsTpl->assign('display_whowhen_link', $publisher->getConfig('item_disp_whowhen_link'));
