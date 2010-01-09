@@ -84,7 +84,7 @@ news_CreateMetaDatas($article);
 
 $xoopsTpl->assign('xoops_pagetitle', _AM_NEWS_WHOS_WHO);
 $myts =& MyTextSanitizer::getInstance();
-$meta_description = _AM_NEWS_WHOS_WHO . ' - '.$myts->htmlSpecialChars($xoopsModule->name());
+$meta_description = _AM_NEWS_WHOS_WHO . ' - ' . $xoopsModule->name('s');
 if(isset($xoTheme) && is_object($xoTheme)) {
 	$xoTheme->addMeta( 'meta', 'description', $meta_description);
 } else {	// Compatibility for old Xoops versions

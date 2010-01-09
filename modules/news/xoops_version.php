@@ -29,7 +29,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 }
 
 $modversion['name'] = _MI_NEWS_NAME;
-$modversion['version'] = 1.65;
+$modversion['version'] = 1.66;
 $modversion['description'] = _MI_NEWS_DESC;
 $modversion['credits'] = "The XOOPS Project, Christian, Pilou, Marco, ALL the members of the Newbb Team, GIJOE, Zoullou, Mithrandir, Setec Astronomy, Marcan, 5vision, Anne";
 $modversion['author'] = "The XOOPS Project Module Dev Team & Instant Zero";

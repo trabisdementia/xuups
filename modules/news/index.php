@@ -202,7 +202,7 @@ if ($showclassic) {
         	$story['topic_title'] = $thisstory->textlink();
         	$story['topic_color'] = '#'.$myts->displayTarea($thisstory->topic_color);
 	       	if($firsttitle=='') {
-       			$firsttitle=$myts->htmlSpecialChars($thisstory->topic_title()) . ' - ' .  $myts->htmlSpecialChars($thisstory->title());
+       			$firsttitle=$thisstory->topic_title() . ' - ' .  $thisstory->title();
        		}
         	$columns[$k][] = $story;
         	$k++;
@@ -309,12 +309,12 @@ if($xoopsModuleConfig['topicsrss'] && $xoopsOption['storytopic']) {
  * Assign page's title
  */
 if($firsttitle!='') {
-	$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($firsttitle) . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
+	$xoopsTpl->assign('xoops_pagetitle', $firsttitle . ' - ' . $xoopsModule->name('s'));
 } else {
 	if($topictitle!='') {
-		$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($topictitle));
+		$xoopsTpl->assign('xoops_pagetitle', $topictitle);
 	} else {
-		$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($xoopsModule->name()));
+		$xoopsTpl->assign('xoops_pagetitle', $xoopsModule->name('s'));
 	}
 }
 

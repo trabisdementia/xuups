@@ -327,7 +327,7 @@ $complement = '';
 if(news_getmoduleoption('enhanced_pagenav') && (isset($arr_titles) && is_array($arr_titles) && isset($arr_titles,$storypage) && $storypage>0)) {
 	$complement = ' - '.$arr_titles[$storypage];
 }
-$xoopsTpl->assign('xoops_pagetitle', $article->title() . $complement. ' - ' . $article->topic_title() . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
+$xoopsTpl->assign('xoops_pagetitle', $article->title() . $complement. ' - ' . $article->topic_title() . ' - ' . $xoopsModule->name('s'));
 
 if(news_getmoduleoption('newsbythisauthor')) {
 	$xoopsTpl->assign('news_by_the_same_author_link',sprintf("<a href='%s?uid=%d'>%s</a>",XOOPS_URL.'/modules/news/newsbythisauthor.php',$article->uid(),_NW_NEWSSAMEAUTHORLINK));
