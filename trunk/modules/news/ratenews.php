@@ -208,7 +208,7 @@ if(!empty($_POST['submit'])) {			// The form was submited
     $xoopsTpl->assign('lang_donotvote', _NW_DONOTVOTE);
     $xoopsTpl->assign('lang_rateit', _NW_RATEIT);
     $xoopsTpl->assign('lang_cancel', _CANCEL);
-    $xoopsTpl->assign('xoops_pagetitle',$title . ' - ' . _NW_RATETHISNEWS . ' - ' .  $myts->htmlSpecialChars($xoopsModule->name()));
+    $xoopsTpl->assign('xoops_pagetitle',$title . ' - ' . _NW_RATETHISNEWS . ' - ' . $xoopsModule->name('s'));
 	news_CreateMetaDatas();
     include_once XOOPS_ROOT_PATH.'/footer.php';
 }

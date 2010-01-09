@@ -100,7 +100,7 @@ if($dateformat == '') {
 	$dateformat='m';
 }
 $myts =& MyTextSanitizer::getInstance();
-$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
+$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . $xoopsModule->name('s'));
 
 $useroffset = '';
 if(is_object($xoopsUser)) {

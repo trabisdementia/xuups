@@ -42,6 +42,9 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 
+error_reporting(0);
+$GLOBALS['xoopsLogger']->activated = false;
+
 if(!news_getmoduleoption('topicsrss')) {
 	exit();
 }
@@ -77,7 +80,7 @@ if (!$tpl->is_cached('db:news_rss.html', $topicid)) {
 		$tpl->assign('channel_lastbuild', formatTimestamp(time(), 'rss'));
 		$tpl->assign('channel_webmaster', checkEmail($xoopsConfig['adminmail'],true));	// Fed up with spam
 		$tpl->assign('channel_editor', checkEmail($xoopsConfig['adminmail'],true));	// Fed up with spam
-		$tpl->assign('channel_category', htmlspecialchars($xt->topic_title(), ENT_QUOTES));
+		$tpl->assign('channel_category', $xt->topic_title());
 		$tpl->assign('channel_generator', 'XOOPS');
 		$tpl->assign('channel_language', _LANGCODE);
 		$tpl->assign('image_url', XOOPS_URL.'/images/logo.gif');
@@ -96,8 +99,9 @@ if (!$tpl->is_cached('db:news_rss.html', $topicid)) {
 		$tpl->assign('image_height', $height);
 		$count = $sarray;
 		foreach ($sarray as $story) {
-			$storytitle = htmlspecialchars($story->title(), ENT_QUOTES);
-			$description = htmlspecialchars($story->hometext(), ENT_QUOTES);
+			$storytitle = $story->title();
+            //if we are allowing html, we need to use htmlspecialchars or any bug will break the output
+			$description = htmlspecialchars($story->hometext());
 			$tpl->append('items', array('title' => xoops_utf8_encode($storytitle), 'link' => XOOPS_URL.'/modules/news/article.php?storyid='.$story->storyid(), 'guid' => XOOPS_URL.'/modules/news/article.php?storyid='.$story->storyid(), 'pubdate' => formatTimestamp($story->published(), 'rss'), 'description' => xoops_utf8_encode($description)));
 		}
 	}

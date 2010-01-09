@@ -184,7 +184,7 @@ $xoopsTpl->assign('advertisement', news_getmoduleoption('advertisement'));
  */
 news_CreateMetaDatas();
 
-$meta_description = _MI_NEWSBYTHISAUTHOR . ' - ' .$authname . ' - ' . $myts->htmlSpecialChars($xoopsModule->name());
+$meta_description = _MI_NEWSBYTHISAUTHOR . ' - ' .$authname . ' - ' . $xoopsModule->name('s');
 if(isset($xoTheme) && is_object($xoTheme)) {
 	$xoTheme->addMeta( 'meta', 'description', $meta_description);
 } else {	// Compatibility for old Xoops versions
