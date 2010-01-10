@@ -1,0 +1,21 @@
+<!-- phppp (D.J.): http://xoopsforge.com; http://xoops.org.cn -->
+<{assign var="num_column" value=3}> <{* Set the column number *}>
+<{assign var="ful_width" value=95}>  <{* Set the full width for multiple columns *}>
+<{assign var="col_width" value=$ful_width/$num_column|@floor}>  <{* calculate column width *}>
+
+<div>
+
+<{foreachq item=topic name=topic from=$topics}>
+	<div class="article-list-column topic-list" style="width: <{$col_width}>%; float: left; margin: 5px;">
+		<div class="article-list">
+			<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.topic.php<{$smarty.const.URL_DELIMITER}><{$topic.id}>"><{$topic.title}></a>
+		</div>
+	</div>
+
+<{if $smarty.foreach.topic.iteration % $num_column eq 0}>
+</div>
+<br style="clear:both;" />
+<div>
+<{/if}>
+<{/foreach}>
+</div>

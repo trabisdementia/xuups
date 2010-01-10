@@ -1,0 +1,356 @@
+<!-- phppp (D.J.): http://xoopsforge.com; http://xoops.org.cn -->
+<{* $xoTheme->addStylesheet("modules/`$xoops_dirname`/templates/style.css") *}>
+
+<div class="article-breadcrumbs head">
+	<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/"><{$modulename}></a>
+	<{foreachq item=track from=$tracks}>
+		 :: <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.category.php<{$smarty.const.URL_DELIMITER}><{$track.id}>"><{$track.title}></a>
+	<{/foreach}>
+</div>
+
+<div class="article-section article-header">
+
+	<h2 class="article-title"><{$article.title}></h2>
+	
+	<div class="article-section-container" style="margin-bottom: 10px; clear: right;">
+		<div class="article-meta" style="padding: 0 20px;">
+			<span class="article-subject"><{php}>echo art_constant("MD_SUBMITTER");<{/php}>:</span>
+			<span class="article-term"><{$article.author}></span>
+				
+			<span class="article-subject"><{php}>echo art_constant("MD_DATE");<{/php}>:</span>
+			<span class="article-term"><{$article.time}></span>
+			
+			<{if $do_counter>0}>
+			<span class="article-subject"><{php}>echo art_constant("MD_VIEWS");<{/php}>:</span>
+			<span class="article-term"><{$article.counter}></span>
+			<{/if}>
+			
+			<{if $article.rates}>
+			<span class="article-subject"><{php}>echo art_constant("MD_RATE");<{/php}>:</span>
+			<span class="article-term"><a href="#article-rate"><{$article.rating}>/<{$article.rates}></a></span>
+			<{/if}>
+		
+		</div>
+	</div>
+	<br style="clear:both;" />
+	
+	<{if $page eq 0}>
+	<div class="article-section-container" style="padding: 0 20px;">
+	
+		<{if $article.image}>
+			<div class="article-header-image"><img src="<{$article.image.url}>" alt="<{$article.title}>" /><br /><{$article.image.caption}></div>
+		<{/if}>
+		
+		<div class="article-list">
+		<{if $article.writer}>
+			<div>
+				<span class="article-label"><{php}>echo art_constant("MD_AUTHOR");<{/php}>:</span><span class="article-content"><a href="#article-writer"><{$article.writer.name}></a></span>
+			</div>
+		<{/if}>
+		
+		<{if $article.source}>
+			<div>
+				<span class="article-label"><{php}>echo art_constant("MD_SOURCE");<{/php}>:</span><span class="article-content"><{$article.source}></span>
+			</div>
+		<{/if}>
+		
+		<{if $article.summary}>
+			<div class="article-summary"><span class="article-label"><{php}>echo art_constant("MD_SUMMARY");<{/php}>:</span><span class="article-content"><{$article.summary}></span></div>
+		<{/if}>
+
+		<{if $tagbar}>
+			<!-- 
+				There are two ways to render tags:
+				1. Simply use the tag_bar.html template
+				2. Use customized template but with tagbar variables
+			-->
+			<!-- Select your way -->
+			<{assign var=mode_tagbar value=2}>
+			<!-- Way 1 -->
+			<{if $mode_tagbar eq 1}>
+				<div class="taglist" style="padding: 5px;">
+				<{includeq file="tag_bar.html"}>
+				</div>
+			<!-- Way 2 -->
+			<{else}>
+			<div>
+				<span class="article-label"><{$tagbar.title}>:</span>
+				<{foreachq item=keyword from=$tagbar.tags}>
+				<span class="article-content"><{$keyword}></span>
+				<{/foreach}>
+			</div>
+			<{/if}>
+		<{/if}>
+		
+		</div>
+		
+	</div>
+	<{/if}>
+
+	<div class="clear"></div>
+</div>
+
+<div class="article-section article-body">
+
+	<div class="article-title"><{$article.text.title}></div>
+	
+	<{if $article.headings}>
+	<div class="article-headings">
+		<div class="article-section-title"><span>
+		<{php}>echo art_constant("MD_HEADINGS");<{/php}>
+		</span></div>
+		
+		<div class="article-section-container">
+		<ol>
+		<{foreachq item=heading from=$article.headings}>
+			<li><{$heading}></li>
+		<{/foreach}>
+		</ol>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<{/if}>
+	
+	<{if $article.writer.profile}>
+	<div id="article-writer" class="article-writer">
+		<div class="article-title"><{php}>echo art_constant("MD_PROFILE");<{/php}>: <{$article.writer.name}></div>
+		<{if $article.writer.avatar}>
+		<div class="avatar"><{$article.writer.avatar}></div>
+		<{/if}>
+		<div class="profile"><{$article.writer.profile}></div>
+	</div>
+	<{/if}>
+	
+	<div class="article-text"><{$article.text.body}></div>
+	
+	<{if $article.notes}>
+	<div class="article-footnotes">
+		<div class="article-section-title"><span>
+		<{php}>echo art_constant("MD_NOTES");<{/php}>
+		</span></div>
+		
+		<div class="article-section-container">
+		<ol>
+		<{foreachq item=note from=$article.notes}>
+			<li><{$note}></li>
+		<{/foreach}>
+		</ol>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<{/if}>
+	
+	<{if $article.subtitles}>
+	<div class="article-subtitle">
+		<div class="article-title" style="padding-top: 5px;">
+			<{php}>echo art_constant("MD_SUBTITLES");<{/php}>
+		</div>
+		
+		<div class="article-section-container">
+		<ol>
+			<{foreachq item=subtitle from=$article.subtitles}>
+			<li><a href="<{$subtitle.url}>"><{$subtitle.title}></a></li>
+			<{/foreach}>
+		</ol>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<{/if}>
+	
+	<{if $article.pages}>
+	<div class="article-pages">
+		<span class="article-subject">
+		<{php}>echo art_constant("MD_PAGES");<{/php}>:
+		</span>
+		<span class="article-term"><{$article.pages}></span>
+	</div>
+	<div class="clear"></div>
+	<{/if}>
+
+</div>
+
+<{if $sibling}>
+<div class="article-section article-sibling">
+
+	<{if $sibling.previous}>
+	<span class="previous">
+		<a href="<{$sibling.previous.url}>"><{php}>echo art_constant("MD_PREVIOUS");<{/php}> <{$sibling.previous.title}></a>
+	</span>
+	<{/if}>
+	
+	<{if $sibling.next}>
+	<span class="next">
+		<a href="<{$sibling.next.url}>"><{$sibling.next.title}> <{php}>echo art_constant("MD_NEXT");<{/php}></a>
+	</span>
+	<{/if}>
+	
+	<div class="clear"></div>
+</div>
+<{/if}>
+
+
+<!-- external links -->
+<{if $links}>
+<div class="article-section article-links">
+	<div class="article-section-title">
+		<span class="subject"><{php}>echo art_constant("MD_ELINKS");<{/php}></span>
+		<span class="navigation"></span>
+	</div>
+	
+	<div class="article-section-container">
+	<ul>
+	<{foreachq item=link from=$links}>
+		<li><a href="<{$link.url}>" target="_blank"><{$link.title}></a></li>
+	<{/foreach}>
+	</ul>
+	</div>
+
+<div class="clear"></div>
+</div>
+<{/if}>
+
+<!-- Categories -->
+<{if $categories}>
+<div id="category" class="article-section article-category">
+	<div class="article-section-title">
+		<span class="subject"><{php}>echo art_constant("MD_CATEGORIES");<{/php}></span>
+		<span class="navigation"></span>
+	</div>
+
+	<div class="article-section-container">
+	<{foreachq item=cat name=cat from=$categories}>
+		<span class="article-term">
+			<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.category.php<{$smarty.const.URL_DELIMITER}><{$cat.id}>"><{$cat.title}></a>
+		</span>
+	<{/foreach}>
+	</div>
+
+</div>
+<br style="clear:both;" />
+<{/if}>
+
+
+<!-- Topics -->
+<{if $topics}>
+<div class="article-section article-topic">
+	<div class="article-section-title">
+		<span class="subject"><{php}>echo art_constant("MD_TOPICS");<{/php}></span>
+		<span class="navigation"></span>
+	</div>
+
+	<div class="article-section-container">
+	<{foreachq item=topic name=topic from=$topics}>
+		<span class="article-term">
+			<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.topic.php<{$smarty.const.URL_DELIMITER}>/<{$topic.id}>"><{$topic.title}></a>
+		</span>
+	<{/foreach}>
+	</div>
+
+</div>
+<br style="clear:both;" />
+<{/if}>
+
+<!-- Trackback template -->
+<{if $do_trackback}>
+<div class="article-section article-sponsor">
+	<div class="article-section-title">
+		<span class="subject"><{php}>echo art_constant("MD_TRACKBACKS");<{/php}></span>
+		<span class="navigation"></span>
+	</div>
+	
+	<div class="article-section-container">
+		<{includeq file="db:`$xoops_dirname`_trackback.html"}>
+	</div>
+</div>
+<{/if}>
+
+<!-- Sponsors -->
+<{if $sponsors}>
+<div class="article-section article-sponsor">
+	<div class="article-section-title">
+		<span class="subject"><{php}>echo art_constant("MD_SPONSORS");<{/php}></span>
+		<span class="navigation"></span>
+	</div>
+	
+	<div class="article-section-container">
+		<{includeq file="db:`$xoops_dirname`_inc_sponsor.html"}>
+	</div>
+</div>
+<{/if}>
+
+<!-- Rating form -->
+<{if $canRate}>
+<div id="article-rate" class="article-section article-rate">
+	<div class="article-section-title">
+		<span class="subject"><{php}>echo art_constant("MD_RATE");<{/php}></span>
+		<span class="navigation"></span>
+	</div>
+	
+	<div class="article-section-container">
+	<form action="<{$xoops_url}>/modules/<{$xoops_dirname}>/action.rate.php" method="post">
+	<div class="rate-item">
+		<{php}>
+		for($i=10;$i>0;$i--) echo'<span><input type="radio" name="rate" id="rate'.$i.'" value="'.$i.'" />'.$i.'</span>';
+		<{/php}>
+		<span>
+		<input type="hidden" name="category" value="<{$article.category}>" />
+		<input type="hidden" name="article" value="<{$article.id}>" />
+		<input type="submit" class="article-button" value="<{php}>echo art_constant('MD_RATEIT');<{/php}>" />
+		</span>
+	</div>
+	</form>
+	</div>
+</div>
+<{/if}>
+
+<!-- API -->
+<div id="article-api" class="article-section article-api">
+API: 
+<{if $transfer}>
+	<{if $transfer.more}> 
+	<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/transfer.php<{$smarty.const.URL_DELIMITER}>c<{$article.category}>/<{$article.id}>/" target="_blank" title="<{$transfer.desc}>"><{$transfer.title}></a>
+	<{/if}>
+	<{foreachq item=opt key=op from=$transfer.list}>
+	<img src="<{$xoops_url}>/images/pointer.gif" alt="" />  <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/transfer.php<{$smarty.const.URL_DELIMITER}>c<{$article.category}>/<{$article.id}>/<{$op}>" target="<{$op}>" title="<{$opt.desc}>"><{$opt.title}></a>
+	<{/foreach}>
+	 | 
+<{/if}>
+
+<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/xml.php<{$smarty.const.URL_DELIMITER}>rss/c<{$article.category}>/<{$article.id}>" target="api"><{php}>echo art_constant("MD_RSS");<{/php}></a>
+| <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/xml.php<{$smarty.const.URL_DELIMITER}>rdf/c<{$article.category}>/<{$article.id}>" target="api"><{php}>echo art_constant("MD_RDF");<{/php}></a>
+| <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/xml.php<{$smarty.const.URL_DELIMITER}>atom/c<{$article.category}>/<{$article.id}>" target="api"><{php}>echo art_constant("MD_ATOM");<{/php}></a>
+	<{if $isauthor OR $isadmin}>
+	| <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/edit.article.php?article=<{$article.id}>&amp;category=<{$article.category}>&amp;page=<{$page}>"><strong><{php}>echo art_constant("MD_CPANEL");<{/php}></strong></a>
+	<{/if}>
+</div>
+
+<!-- Copyright claim -->
+<{if $copyright}>
+<div class="article-section article-copyright">
+	<span><{$copyright|strip_tags}></span>
+</div>
+<{/if}>
+
+<{if $commentsnav}>
+<div style="text-align: center; padding: 3px; margin:3px;">
+	<{$commentsnav}>
+	<{$lang_notice}>
+</div>
+<div id="comment" style="margin:3px; padding: 3px;">
+<{if $comment_mode == "flat"}>
+	<{includeq file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+	<{includeq file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+	<{includeq file="db:system_comments_nest.html"}>
+<{/if}>
+</div>
+<{/if}>
+
+<{if $xoops_notification}>
+<{includeq file='db:system_notification_select.html'}>
+<{/if}>
+
+<{if $do_counter>0}>
+<img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/counter.php?article=<{$article.id}>" width="1px" height="1px" />
+<{/if}>

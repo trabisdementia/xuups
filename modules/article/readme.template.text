@@ -1,0 +1,16 @@
+On Article Template System
+
+The "Article" module provides option for admins to add extra templates so that end users can choose his desired template for his article, mean while module can choose template for the global module and category moderators choose category template.
+
+How to make your extra templates?
+1 Compose a new template for a page, for say, index.php, with corresponding template file name of "article_index.html" by default, and name your file as "article_index_myarticle.html".
+2 Upload this file to modules/article/templates/
+3 Update the module "article"
+4 You will find template options in admin->module preferences->article->General setting->template: "default", "myarticle"
+Optional:
+5 You could add extra CSS for your template "myindex": create CSS file style_myarticle.css and upload to modules/article/templates
+6 You could also create extra templates for article pages or category pages: article_article_myarticle.html, article_category_myarticle.html. They will present on article edit and category edit pages respectively.
+
+Summary:
+template file name rule: (moduleDirName)_(pageName)[_customTemplateName].html
+CSS file name rule: style[_customtemplatename].css
