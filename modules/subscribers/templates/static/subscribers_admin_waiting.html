@@ -1,0 +1,36 @@
+<{if $count > 0}>
+<div style="margin-bottom:5px; float: right;" align="right">
+  <form action="admin_waiting.php" method="POST">
+    <input type="submit" name="delall" value="<{$smarty.const._AM_SUBSCRIBERS_DELETE_ALL}>" />
+  </form>
+</div>
+<{/if}>
+  <table width="100%" cellspacing="1" cellpadding="0" class="outer">
+    <tr align="center">
+      <th><{$smarty.const._AM_SUBSCRIBERS_SUBJECT}></th>
+      <th><{$smarty.const._AM_SUBSCRIBERS_EMAIL}></th>
+      <th><{$smarty.const._AM_SUBSCRIBERS_PRIORITY}></th>
+      <th><{$smarty.const._AM_SUBSCRIBERS_CREATED}></th>
+      <th width="15%"><{$smarty.const._OPTIONS}></th>
+    </tr>
+    <{if $count > 0}>
+      <{foreach item=obj key=key from=$objs}>
+      <tr class="<{cycle values="even,odd"}>" align="center">
+        <td align="left"><{$obj.wt_subject}></td>
+        <td align="left"><{$obj.wt_toemail}></td>
+        <td align="left"><{$obj.wt_priority}></td>
+        <td align="left"><{$obj.wt_created}></td>
+        <td>
+          <a href="admin_waiting.php?op=del&amp;id=<{$obj.wt_id}>"><img src="<{$xoops_url}>/modules/subscribers/images/delete_big.png" title="<{$smarty.const._DELETE}>" alt="<{$smarty.const._DELETE}>" /></a>
+        </td>
+      </tr>
+      <{/foreach}>
+    <{else}>
+      <tr><td class="head" colspan="5" align="center"><{$smarty.const._AM_SUBSCRIBERS_NOTFOUND}></td></tr>
+    <{/if}>
+    <tr>
+      <td class="head" colspan="5" align="right">
+        <{$pag}>
+      </td>
+   </tr>
+  </table>
