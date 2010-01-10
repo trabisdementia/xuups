@@ -1,0 +1,9 @@
+<!-- phppp (D.J.): http://xoopsforge.com; http://xoops.org.cn -->
+
+<div>
+<{foreachq item=author from=$block.authors}>
+	<div style="padding: 2px 0;">
+		<a href="<{$xoops_url}>/modules/<{$block.dirname}>/view.author.php<{$smarty.const.URL_DELIMITER}><{$author.uid}>" ><{$author.name}></a> (<{$author.articles|default:0}>)
+	</div>
+<{/foreach}>
+</div>

@@ -1,0 +1,30 @@
+<!-- phppp (D.J.): http://xoopsforge.com; http://xoops.org.cn -->
+
+<div class="article-breadcrumbs">
+	<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/"><{$modulename}></a>
+	<{foreachq item=track from=$tracks}>
+		:: <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.category.php<{$smarty.const.URL_DELIMITER}><{$track.id}>"><{$track.title}></a>
+	<{/foreach}>
+</div>
+
+<div id="category">
+<div class="title">
+	<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.category.php<{$smarty.const.URL_DELIMITER}><{$category.id}>"><{$category.title}></a>
+</div>
+<div class="description"><{$category.description}></div>
+</div>
+
+<{if count($topics)>0}>
+<div id="topic">
+<{foreachq item=topic from=$topics}>
+<div class="item">
+	<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.topic.php<{$smarty.const.URL_DELIMITER}><{$topic.id}>"><{$topic.title}></a> (<{$topic.articles}>)
+</div>
+<div class="description"><{$topic.description}></div>
+<{/foreach}>
+</div>
+<{/if}>
+
+<div id="pagenav" class="article-section pagenav">
+<{$pagenav}>
+</div>

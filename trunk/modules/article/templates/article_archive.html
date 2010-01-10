@@ -1,0 +1,175 @@
+<!-- phppp (D.J.): http://xoopsforge.com; http://xoops.org.cn -->
+<{* $xoTheme->addStylesheet("modules/$xoops_dirname/templates/style_archive.css") *}>
+
+<!-- page breadcrumbs -->
+<div class="article-breadcrumbs">
+	<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/"><{$modulename}></a>
+	:: <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.archive.php"><{php}>echo art_constant("MD_ACHIVE");<{/php}></a>
+</div>
+
+<!-- list header data -->
+<div class="article-section archive-header">
+	<h2 class="article-title">
+		<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.archive.php<{$smarty.const.URL_DELIMITER}><{$time.year}>/<{$time.month}>/<{$time.day}>/"><{$page.title}>: <{$page.time}></a>
+		<{if $category}>
+			| <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.category.php<{$smarty.const.URL_DELIMITER}>c<{$category.id}>"><{$category.title}></a>
+		<{/if}>
+	</h2>
+		
+	<div class="article-section-container" style="padding: 10px;">
+		<div class="article-list">
+			<a href="<{$timenav.prev.url}>"><{$timenav.prev.title}></a>
+			<{if $timenav.prev AND $timenav.next}> | <{/if}>
+			<a href="<{$timenav.next.url}>"><{$timenav.next.title}></a>
+		</div>
+	</div>
+</div>
+
+<div class="article-section archive-meta">
+	<div class="article-section-title">
+		<span class="subject">
+			<{php}>echo art_constant("MD_ACHIVE");<{/php}>
+		</span>
+		<span class="navigation">
+			<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.archive.php"><{$smarty.const._MORE}></a>
+		</span>
+	</div>
+
+	<{if $months}>
+	<div class="article-section-container archive-months" style="padding: 10px;">
+		<div class="article-list">
+			<div class="article-title"><{php}>echo art_constant("MD_MONTHLY");<{/php}></div>
+			<div>
+
+				<{assign var="num_column" value=4}> <{* Set the column number *}>
+				<{assign var="ful_width" value=95}>  <{* Set the full width for multiple columns *}>
+				<{assign var="col_width" value=$ful_width/$num_column}>  <{* calculate column width *}>
+				
+				<{foreachq item=month name=month from=$months}>
+				<div class="article-list-column" style="width: <{$col_width}>%; float: left; margin: 5px;">
+					<div style="vertical-align: top;">
+						<a href="<{$month.url}>"><{$month.title}></a>
+					</div>
+				</div>
+					
+				<{if $smarty.foreach.month.iteration % $num_column eq 0}>
+				</div>
+				<div class="clear"></div>
+				<br style="clear: both;" />
+				<div>
+				<{/if}>
+				
+				<{/foreach}>
+				
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<br style="clear: both;" />
+	<{/if}>
+	
+	<{if $categories}>
+	<div class="article-section-container archive-categories" style="padding: 10px;">
+		<div class="article-list">
+			<div class="article-title"><{php}>echo art_constant("MD_CATEGORIES");<{/php}></div>
+			<div>
+
+				<{assign var="num_column" value=3}> <{* Set the column number *}>
+				<{assign var="ful_width" value=95}>  <{* Set the full width for multiple columns *}>
+				<{assign var="col_width" value=$ful_width/$num_column}>  <{* calculate column width *}>
+				
+				<{foreachq item=cat name=cat from=$categories}>
+				<div class="article-list-column" style="width: <{$col_width}>%; float: left; margin: 5px;">
+					<div style="vertical-align: top;">
+						<a href="<{$cat.category.url}>"><{$cat.category.title}></a>
+					</div>
+					<{foreachq item=_cat from=$cat.sub}>
+					<div style="vertical-align: top;">
+						<a href="<{$_cat.url}>"><{$_cat.title}></a>
+					</div>
+					<{/foreach}>
+				</div>
+					
+				<{if $smarty.foreach.cat.iteration % $num_column eq 0}>
+				</div>
+				<div class="clear"></div>
+				<br style="clear: both;" />
+				<div>
+				<{/if}>
+				
+				<{/foreach}>
+				
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<br style="clear: both;" />
+	<{/if}>
+		
+	<{if $calendar}>
+	<div class="article-section-container archive-calendar" style="padding: 10px;">
+		<div class="article-list">
+			<{$calendar}>
+		</div>
+	</div>
+	<{/if}>
+</div>
+
+<!-- Recent articles -->
+<{if count($articles) gt 0}>
+<div id="list-article" class="article-section list-article">
+	<div class="article-section-title">
+		<span class="subject">
+			<{php}>echo art_constant("MD_ARTICLES");<{/php}>
+		</span>
+		<span class="navigation">
+			<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.list.php"><{$smarty.const._MORE}></a>
+		</span>
+	</div>
+	
+	<div class="article-section-container">
+		<ol start=<{math equation="( pg / 10 ) * 10 + 1 " pg=$smarty.request.start|default:0}>>
+		<{foreachq item=article from=$articles}>
+		<li>
+			<div class="article-title">
+				<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.article.php<{$smarty.const.URL_DELIMITER}><{$article.id}>"><{$article.title}></a>
+				<{if $article.image}><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/image.gif" width="12px" alt="" /><{/if}>
+			</div>
+			
+			<div class="article-meta">
+				<{$article.writer|default:$article.author}>
+				<{$article.time}>
+				| <{php}>echo art_constant("MD_VIEWS");<{/php}>: <{$article.counter|default:1}>
+				<{if $article.comments}>
+					| <{php}>echo art_constant("MD_COMMENTS");<{/php}>: <{$article.comments}>
+				<{/if}>
+				<{if $article.trackbacks}>
+					| <{php}>echo art_constant("MD_TRACKBACKS");<{/php}>: <{$article.trackbacks}>
+				<{/if}>
+				<{if $article.rating}>
+					| <{php}>echo art_constant("MD_RATE");<{/php}>: <{$article.rating}>
+				<{/if}>
+			</div>
+			<{if count($article.categories)>0}>
+				<div class="article-list">
+					<span class="article-subject"><{php}>echo art_constant("MD_CATEGORIES");<{/php}>:</span>
+					<{foreachq item=cat key=catid from=$article.categories}>
+					<span class="article-term">
+						<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.category.php<{$smarty.const.URL_DELIMITER}><{$cat.id}>/"><{$cat.title}></a>
+					</span>
+					<{/foreach}>
+				</div>
+			<{/if}>
+			<{if $article.summary}>
+				<div class="article-summary"><{$article.summary}></div>
+			<{/if}>
+		</li>
+		<{/foreach}>
+		</ol>
+	</div>
+</div>
+<{/if}>
+
+<div id="pagenav" class="article-section pagenav">
+<{$pagenav}>
+</div>

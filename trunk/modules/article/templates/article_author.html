@@ -1,0 +1,91 @@
+<!-- phppp (D.J.): http://xoopsforge.com; http://xoops.org.cn -->
+
+<div class="article-breadcrumbs">
+	<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/"><{$modulename}></a>
+</div>
+
+<div id="pagetitle">
+<div class="title"><a href="<{$xoops_url}>/userinfo.php?uid=<{$author.uid}>"><{$author.uname}></a></div>
+</div>
+
+<!-- list header data -->
+<div class="article-section author-header">
+	<h2 class="article-title">
+		<a href="<{$xoops_url}>/userinfo.php?uid=<{$author.uid}>"><{$author.uname}></a>
+	</h2>
+</div>
+
+<div id="author">
+<{if $author.avatar}>
+<div class="image"><img src="<{$author.avatar}>" alt="Avatar" /><br/></div>
+<{/if}>
+<{foreachq item=profile from=$author.profiles}>
+<div class="item"><span class="title"><{$profile.title}>:</span><span class="item"><{$profile.content}></span></div>
+<{/foreach}>
+<{if count($author.mods)>0}>
+<div class="item">
+<span class="title"><{php}>echo art_constant("MD_MODERATOR");<{/php}>:</span>
+<{foreachq item=mod from=$author.mods}><span class="item"><a href="<{$mod.url}>"><{$mod.title}></a></span>
+<{/foreach}>
+</div>
+<{/if}>
+<{if $author.stats}>
+<div class="item">
+<span class="title"><{php}>echo art_constant("MD_ARTICLES");<{/php}>:</span><span class="item"><{$author.stats.articles}></span>
+<span class="title"><{php}>echo art_constant("MD_FEATURED");<{/php}>:</span><span class="item"><{$author.stats.featured}></span>
+<span class="title"><{php}>echo art_constant("MD_TOPICS");<{/php}>:</span><span class="item"><{$author.stats.topics}></span>
+</div>
+<{/if}>
+<div class="clear"></div>
+</div>
+
+<div id="type">
+<span class="title"><{php}>echo art_constant("MD_TYPES");<{/php}>:</span>
+<{if $isauthor}>
+<span class="item"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.author.php<{$smarty.const.URL_DELIMITER}><{$author.uid}>/all"><{$smarty.const._ALL}></a></span>
+<span class="item"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.author.php<{$smarty.const.URL_DELIMITER}><{$author.uid}>/created"><{php}>echo art_constant("MD_CREATED");<{/php}></a></span>
+<{if $isauthor OR $isadmin}>
+<span class="item"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.author.php<{$smarty.const.URL_DELIMITER}><{$author.uid}>/submitted"><{php}>echo art_constant("MD_SUBMITTED");<{/php}></a></span>
+<span class="item"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.author.php<{$smarty.const.URL_DELIMITER}><{$author.uid}>/registered"><{php}>echo art_constant("MD_REGISTERED");<{/php}></a></span>
+<{/if}>
+<{/if}>
+<span class="item"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.author.php<{$smarty.const.URL_DELIMITER}><{$author.uid}>/published"><{php}>echo art_constant("MD_PUBLISHED");<{/php}></a></span>
+<span class="item"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.author.php<{$smarty.const.URL_DELIMITER}><{$author.uid}>/featured"><{php}>echo art_constant("MD_FEATURED");<{/php}></a></span>
+</div>
+
+<{if count($articles)>0}>
+<div id="article">
+<div class="title"><{php}>echo art_constant("MD_ARTICLES");<{/php}></div>
+<{foreachq item=article from=$articles}>
+<div class="title"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.article.php<{$smarty.const.URL_DELIMITER}>c<{$article.category.id}>/<{$article.id}>"><{$article.title}></a>
+<{if $isauthor OR $isadmin}>
+ (<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/edit.article.php?article=<{$article.id}>"><{$smarty.const._EDIT}></a>)
+<{/if}>
+</div>
+<div class="item">
+<span class="title"><{php}>echo art_constant("MD_CATEGORIES");<{/php}>:</span>
+<{if $article.category}><span class="title"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.article.php<{$smarty.const.URL_DELIMITER}>c<{$article.category.id}>/<{$article.id}>"><{$article.category.title}></a></span>
+<{/if}>
+<{if count($article.categories)>0}>
+<{foreachq item=category key=catid from=$article.categories}>
+<span class="item"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.article.php<{$smarty.const.URL_DELIMITER}>c<{$category.id}>/<{$article.id}>"><{$category.title}></a></span>
+<{/foreach}>
+<{/if}>
+</div>
+<div class="item"><{$article.summary}></div>
+<{/foreach}>
+</div>
+<{/if}>
+
+<div id="pagenav">
+<{$pagenav}>
+</div>
+
+
+<div id="api">
+  <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/xml.php<{$smarty.const.URL_DELIMITER}>rss0.91/u<{$author.uid}>" target="api">RSS 0.91</a>
+| <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/xml.php<{$smarty.const.URL_DELIMITER}>rss1.0/u<{$author.uid}>" target="api">RSS 1.0</a>
+| <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/xml.php<{$smarty.const.URL_DELIMITER}>rss2.0/u<{$author.uid}>" target="api">RSS 2.0</a>
+| <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/xml.php<{$smarty.const.URL_DELIMITER}>atom/u<{$author.uid}>" target="api">ATOM</a>
+| <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/xml.php<{$smarty.const.URL_DELIMITER}>opml/u<{$author.uid}>" target="api">OPML</a>
+</div>
