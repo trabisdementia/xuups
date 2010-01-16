@@ -12,8 +12,7 @@
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Admin
- * @subpackage      Action
+ * @package         Publisher
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: about.php 0 2009-06-11 18:47:04Z trabis $
@@ -22,9 +21,6 @@
 include_once dirname(__FILE__) . '/admin_header.php';
 include_once PUBLISHER_ROOT_PATH . '/class/about.php';
 
-xoops_loadLanguage('modinfo', PUBLISHER_DIRNAME);
-
 $aboutObj = new PublisherAbout(_AM_PUBLISHER_ABOUT);
 $aboutObj->render();
-
 ?>

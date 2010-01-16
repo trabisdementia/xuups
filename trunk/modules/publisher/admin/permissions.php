@@ -22,6 +22,7 @@
 
 include_once dirname(__FILE__) . '/admin_header.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+$myts =& MyTextSanitizer::getInstance();
 
 if (!$publisher_isAdmin) {
     redirect_header("javascript:history.go(-1)", 1, _NOPERM);
@@ -54,7 +55,7 @@ switch ($op) {
            echo _AM_PUBLISHER_NOPERMSSET;
         }
         publisher_closeCollapsableBar('permissionstable_view', 'permissionsicon_view');
-        
+
         // Submit Categories permissions
         echo "<br />\n";
         publisher_openCollapsableBar('permissionstable_submit', 'permissionsicon_submit', _AM_PUBLISHER_PERMISSIONS_CAT_SUBMIT, _AM_PUBLISHER_PERMISSIONS_CAT_SUBMIT_DSC);
@@ -70,7 +71,7 @@ switch ($op) {
 			echo  _AM_PUBLISHER_NOPERMSSET;
         }
         publisher_closeCollapsableBar('permissionstable_submit', 'permissionsicon_submit');
-        
+
         // Form permissions
         echo "<br />\n";
         publisher_openCollapsableBar('permissionstable_form', 'permissionsicon_form', _AM_PUBLISHER_PERMISSIONS_FORM, _AM_PUBLISHER_PERMISSIONS_FORM_DSC);
@@ -109,7 +110,7 @@ switch ($op) {
         }
         echo $form_submit->render();
         publisher_closeCollapsableBar('permissionstable_form', 'permissionsicon_form');
-        
+
         // Editors permissions
         echo "<br />\n";
         publisher_openCollapsableBar('permissionstable_editors', 'permissions_editors', _AM_PUBLISHER_PERMISSIONS_EDITORS, _AM_PUBLISHER_PERMISSIONS_EDITORS_DSC);
@@ -123,7 +124,7 @@ switch ($op) {
         echo $form_submit->render();
 
         publisher_closeCollapsableBar('permissionstable_editors', 'permissionsicon_editors');
-        
+
         // Global permissions
         echo "<br />\n";
         publisher_openCollapsableBar('permissionstable_global', 'permissionsicon_global', _AM_PUBLISHER_PERMISSIONS_GLOBAL, _AM_PUBLISHER_PERMISSIONS_GLOBAL_DSC);

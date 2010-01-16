@@ -12,8 +12,7 @@
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Admin
- * @subpackage      Action
+ * @package         Publisher
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: clone.php 0 2009-06-11 18:47:04Z trabis $
@@ -25,7 +24,7 @@ publisher_cpHeader();
 publisher_adminMenu(-1, _AM_PUBLISHER_CLONE);
 publisher_openCollapsableBar('clone', 'cloneicon', _AM_PUBLISHER_CLONE, _AM_PUBLISHER_CLONE_DSC);
 
-if ( @$_POST['op'] == 'submit' ) {
+if (@$_POST['op'] == 'submit') {
 
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header('clone.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -83,8 +82,9 @@ publisher_closeCollapsableBar('clone', 'cloneicon');
 xoops_cp_footer();
 
 // work around for PHP < 5.0.x
-if(!function_exists('file_put_contents')) {
-    function file_put_contents($filename, $data, $file_append = false) {
+if (!function_exists('file_put_contents')) {
+    function file_put_contents($filename, $data, $file_append = false)
+    {
         if ($fp = fopen($filename, (!$file_append ? 'w+' : 'a+'))) {
             fputs($fp, $data);
             fclose($fp);
@@ -93,7 +93,8 @@ if(!function_exists('file_put_contents')) {
 }
 
 // recursive clonning script
-function publisher_cloneFileFolder($path) {
+function publisher_cloneFileFolder($path)
+{
     global $patKeys;
     global $patValues;
 
@@ -126,8 +127,8 @@ function publisher_cloneFileFolder($path) {
     }
 }
 
-function publisher_createLogo($dirname) {
-
+function publisher_createLogo($dirname)
+{
     if (!extension_loaded("gd")) {
         return false;
     } else {

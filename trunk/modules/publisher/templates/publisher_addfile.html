@@ -14,6 +14,7 @@
       <{if $element.hidden != true}>
       <tr>
         <td class="head"><{$element.caption}>
+        <{if $element.required}> *<{/if}>
         <{if $element.description}>
         	<div style="font-weight: normal"><{$element.description}></div>
         <{/if}>

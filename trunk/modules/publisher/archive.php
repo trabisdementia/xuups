@@ -34,7 +34,7 @@ $fromyear = PublisherRequest::getInt('year');
 $frommonth = PublisherRequest::getInt('month');
 
 $pgtitle='';
-if($fromyear && $frommonth) {
+if ($fromyear && $frommonth) {
     $pgtitle = sprintf(" - %d - %d", $fromyear, $frommonth);
 }
 
@@ -66,8 +66,8 @@ $itemsObj = $publisher->getHandler('item')->getObjects($criteria);
 $itemsCount = count($itemsObj);
 
 if (!($itemsCount > 0)) {
-    echo _ERRORS;
-    exit();
+    redirect_header(XOOPS_URL, 2, _MD_PUBLISHER_NO_TOP_PERMISSIONS);
+    exit;
 } else {
     $years = array();
     $months = array();

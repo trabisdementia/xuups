@@ -100,10 +100,10 @@ foreach ($elements as $element) {
 //Required fields
 $categoryid = PublisherRequest::getInt('categoryid');
 $title = PublisherRequest::getString('title');
-$body = PublisherRequest::getString('body');
+$body = PublisherRequest::getText('body');
 
 //Not required fields
-$summary = PublisherRequest::getString('summary', '', 'post', PUBLISHER_REQUEST_ALLOWRAW);
+$summary = PublisherRequest::getText('summary');
 
 /*
  $allow_display_summary = in_array(_PUBLISHER_DISPLAY_SUMMARY, $form_view);
@@ -114,7 +114,7 @@ $subtitle = PublisherRequest::getString('subtitle');
 
 //$allow_available_page_wrap = in_array(_PUBLISHER_AVAILABLE_PAGE_WRAP, $form_view);
 
-$item_tags = PublisherRequest::getString('item_tags');
+$item_tag = PublisherRequest::getString('item_tag');
 $image_item = PublisherRequest::getArray('image_item');
 $image_featured = PublisherRequest::getString('image_featured');
 $item_upload_file = isset($_FILES['item_upload_file']) ? $_FILES['item_upload_file'] : '';
@@ -148,7 +148,7 @@ switch ($op) {
         $itemObj->setVar('summary', $summary);
         //$itemObj->setVar('display_summary', $display_summary);
         //$allow_available_page_wrap = $gperm_handler->checkRight('form_view', _PUBLISHER_AVAILABLE_PAGE_WRAP, $groups, $module_id);
-        $itemObj->setVar('item_tag', $item_tags);
+        $itemObj->setVar('item_tag', $item_tag);
         $itemObj->setVar('subtitle', $subtitle);
         $itemObj->setVar('author_alias', $author_alias);
         $itemObj->setVar('uid', $uid);

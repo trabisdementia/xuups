@@ -25,10 +25,9 @@ defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
 include_once dirname(dirname(dirname(__FILE__))) . '/include/common.php';
 
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+xoops_load('XoopsFormLoader');
+xoops_load('XoopsLists');
+include_once XOOPS_ROOT_PATH . '/class/tree.php';
 include_once PUBLISHER_ROOT_PATH . '/class/formdatetime.php';
 include_once PUBLISHER_ROOT_PATH . '/class/themetabform.php';
 
