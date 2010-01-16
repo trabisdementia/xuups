@@ -22,10 +22,7 @@
 
 include_once dirname(__FILE__) . '/admin_header.php';
 
-$op = '';
-
-if (isset($_GET['op'])) $op = $_GET['op'];
-if (isset($_POST['op'])) $op = $_POST['op'];
+$op = PublisherRequest::getString('op');
 
 $op = isset($_POST['editor']) ? 'mod' : $op;
 if (isset($_POST['addcategory'])) {
@@ -33,36 +30,43 @@ if (isset($_POST['addcategory'])) {
 }
 
 // Where do we start ?
-$startcategory = isset($_GET['startcategory']) ? intval($_GET['startcategory']) : 0;
+$startcategory = PublisherRequest::getInt('startcategory');
+$categoryid = PublisherRequest::getInt('categoryid');
 
 switch ($op) {
 
     case "del":
-        include_once dirname(__FILE__) . '/category-delete.php';
+        $categoryObj = $publisher->getHandler('category')->get($categoryid);
+        $confirm = (isset($_POST['confirm'])) ? $_POST['confirm'] : 0;
+        $name = (isset($_POST['name'])) ? $_POST['name'] : '';
+        if ($confirm) {
+            if (!$publisher->getHandler('category')->delete($categoryObj)) {
+                redirect_header("category.php", 1, _AM_PUBLISHER_DELETE_CAT_ERROR);
+                exit();
+            }
+            redirect_header("category.php", 1, sprintf(_AM_PUBLISHER_COLISDELETED, $name));
+            exit();
+        } else {
+            xoops_cp_header();
+            xoops_confirm(array('op' => 'del', 'categoryid' => $categoryObj->categoryid(), 'confirm' => 1, 'name' => $categoryObj->name()), 'category.php', _AM_PUBLISHER_DELETECOL . " '" . $categoryObj->name() . "'. <br /> <br />" . _AM_PUBLISHER_DELETE_CAT_CONFIRM, _AM_PUBLISHER_DELETE);
+            xoops_cp_footer();
+        }
         break;
 
     case "mod":
-
-        $categoryid = isset($_GET['categoryid']) ? intval($_GET['categoryid']) : 0 ;
         //Added by fx2024
-
         $nb_subcats = isset($_POST['nb_subcats']) ? intval($_POST['nb_subcats']) : 0;
         $nb_subcats = $nb_subcats + (isset($_POST['nb_sub_yet']) ? intval($_POST['nb_sub_yet']) : 4);
-        if ($categoryid == 0) {
-            $categoryid = isset($_POST['categoryid']) ? intval($_POST['categoryid']) : 0 ;
-        }
         //end of fx2024 code
 
         publisher_cpHeader();
-
-        editcat(true, $categoryid,$nb_subcats);
+        publisher_editCat(true, $categoryid, $nb_subcats);
         break;
 
     case "addcategory":
-        global $modify, $myts, $categoryid;
+        global $modify;
 
-        $categoryid = isset($_POST['categoryid']) ? intval($_POST['categoryid']) : 0;
-        $parentid = isset($_POST['parentid']) ? intval($_POST['parentid']) : 0;
+        $parentid = PublisherRequest::getInt('parentid');
 
         if ($categoryid != 0) {
             $categoryObj = $publisher->getHandler('category')->get($categoryid);
@@ -81,22 +85,18 @@ switch ($op) {
                 $max_imgheight = $publisher->getConfig('maximum_image_height');
                 $allowed_mimetypes = publisher_getAllowedImagesTypes();
 
-                include_once XOOPS_ROOT_PATH . '/class/uploader.php';
-
                 if ($_FILES[$filename]['tmp_name'] == "" || !is_readable( $_FILES[$filename]['tmp_name'])) {
                     redirect_header('javascript:history.go(-1)' , 2, _AM_PUBLISHER_FILEUPLOAD_ERROR) ;
-                    exit ;
+                    exit();
                 }
 
+                xoops_load('XoopsMediaUploader');
                 $uploader = new XoopsMediaUploader(publisher_getImageDir('category'), $allowed_mimetypes, $max_size, $max_imgwidth, $max_imgheight);
-
-                if( $uploader->fetchMedia( $filename ) && $uploader->upload() ) {
-
+                if ($uploader->fetchMedia($filename) && $uploader->upload()) {
                     $categoryObj->setVar('image', $uploader->getSavedFileName());
-
                 } else {
                     redirect_header('javascript:history.go(-1)' , 2, _AM_PUBLISHER_FILEUPLOAD_ERROR . $uploader->getErrors());
-                    exit ;
+                    exit();
                 }
             }
         } else {
@@ -163,8 +163,6 @@ switch ($op) {
         publisher_saveCategory_Permissions($categoryObj->getGroups_read(), $categoryObj->categoryid(), 'category_read');
         publisher_saveCategory_Permissions($categoryObj->getGroups_submit(), $categoryObj->categoryid(), 'item_submit');
         //publisher_saveCategory_Permissions($groups_admin, $categoriesObj->categoryid(), 'category_admin');
-
-
         if ($applyall) {
             // TODO : put this function in the category class
             publisher_overrideItemsPermissions($categoryObj->getGroups_read(), $categoryObj->categoryid());
@@ -188,41 +186,34 @@ switch ($op) {
                 publisher_saveCategory_Permissions($categoryObj->getGroups_read(), $categoryObj->categoryid(), 'category_read');
                 publisher_saveCategory_Permissions($categoryObj->getGroups_submit(), $categoryObj->categoryid(), 'item_submit');
                 //publisher_saveCategory_Permissions($groups_admin, $categoriesObj->categoryid(), 'category_admin');
-
-
                 if ($applyall) {
                     // TODO : put this function in the category class
                     publisher_overrideItemsPermissions($categoryObj->getGroups_read(), $categoryObj->categoryid());
                 }
-
             }
         }
-
         //end of fx2024 code
         redirect_header($redirect_to, 2, $redirect_msg);
-
         exit();
         break;
 
         //Added by fx2024
 
     case "addsubcats":
-
         $categoryid = 0;
-        $nb_subcats = intval($_POST['nb_subcats'])+ $_POST['nb_sub_yet'];
-
-        publisher_cpHeader();
+        $nb_subcats = intval($_POST['nb_subcats']) + $_POST['nb_sub_yet'];
 
         $categoryObj =& $publisher->getHandler('category')->create();
         $categoryObj->setVar('name', $_POST['name']);
         $categoryObj->setVar('description', $_POST['description']);
         $categoryObj->setVar('weight', $_POST['weight']);
         $categoryObj->setGroups_read(isset($_POST['groups_read']) ? $_POST['groups_read'] : array());
-        if (isset($parentCat)){
+        if (isset($parentCat)) {
             $categoryObj->setVar('parentid', $parentCat);
         }
 
-        editcat(true, $categoryid, $nb_subcats, $categoryObj);
+        publisher_cpHeader();
+        publisher_editCat(true, $categoryid, $nb_subcats, $categoryObj);
         exit();
 
         break;
@@ -257,7 +248,7 @@ switch ($op) {
         $totalCategories = $publisher->getHandler('category')->getCategoriesCount(0);
         if (count($categoriesObj) > 0) {
             foreach ($categoriesObj as $key => $thiscat) {
-                displayCategory($thiscat);
+                publisher_displayCategory($thiscat);
             }
         } else {
             echo "<tr>";
@@ -278,7 +269,7 @@ switch ($op) {
 
 xoops_cp_footer();
 
-function displayCategory($categoryObj, $level = 0)
+function publisher_displayCategory($categoryObj, $level = 0)
 {
     $publisher =& PublisherPublisher::getInstance();
 
@@ -305,13 +296,13 @@ function displayCategory($categoryObj, $level = 0)
     if (count($subCategoriesObj) > 0) {
         $level++;
         foreach ($subCategoriesObj as $key => $thiscat) {
-            displayCategory($thiscat, $level);
+            publisher_displayCategory($thiscat, $level);
         }
     }
     unset($categoryObj);
 }
 
-function editcat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryObj = null)
+function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryObj = null)
 {
     $publisher =& PublisherPublisher::getInstance();
 
@@ -342,23 +333,99 @@ function editcat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryO
         publisher_openCollapsableBar('createtable', 'createtableicon', _AM_PUBLISHER_CATEGORY_CREATE, _AM_PUBLISHER_CATEGORY_CREATE_INFO);
     }
 
-    include_once PUBLISHER_ROOT_PATH . '/class/form-editcategory.php';
-    $sform = new PublisherForm_EditCategory( $categoryObj, $nb_subcats );
+    $sform = $categoryObj->getForm($nb_subcats);
+    $sform->display();
 
     if (!$categoryid) {
-        $sform->display();
         publisher_closeCollapsableBar('createtable', 'createtableicon');
     } else {
-        $sform->display();
         publisher_closeCollapsableBar('edittable', 'edittableicon');
     }
 
     //Added by fx2024
     if ($categoryid) {
-        //todo: fix this
-        include_once PUBLISHER_ROOT_PATH . '/include/displaysubcats.php';
-        include_once PUBLISHER_ROOT_PATH . '/include/displayitems.php';
+        $sel_cat = $categoryid;
+
+        publisher_openCollapsableBar('subcatstable', 'subcatsicon', _AM_PUBLISHER_SUBCAT_CAT, _AM_PUBLISHER_SUBCAT_CAT_DSC);
+        // Get the total number of sub-categories
+        $categoriesObj = $publisher->getHandler('category')->get($sel_cat);
+        $totalsubs = $publisher->getHandler('category')->getCategoriesCount($sel_cat);
+        // creating the categories objects that are published
+        $subcatsObj = $publisher->getHandler('category')->getCategories(0, 0, $categoriesObj->categoryid());
+        $totalSCOnPage = count($subcatsObj);
+        echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
+        echo "<tr>";
+        echo "<td width='60' class='bg3' align='left'><b>" . _AM_PUBLISHER_CATID . "</b></td>";
+        echo "<td width='20%' class='bg3' align='left'><b>" . _AM_PUBLISHER_CATCOLNAME . "</b></td>";
+        echo "<td class='bg3' align='left'><b>" . _AM_PUBLISHER_SUBDESCRIPT . "</b></td>";
+        echo "<td width='60' class='bg3' align='right'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+        echo "</tr>";
+        if ($totalsubs > 0) {
+            foreach ($subcatsObj as $subcat) {
+                $modify = "<a href='category.php?op=mod&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_MODIFY . "' alt='" . _AM_PUBLISHER_MODIFY . "' /></a>";
+                $delete = "<a href='category.php?op=del&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETE . "' alt='" . _AM_PUBLISHER_DELETE . "' /></a>";
+                echo "<tr>";
+                echo "<td class='head' align='left'>" . $subcat->categoryid() . "</td>";
+                echo "<td class='even' align='left'><a href='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/category.php?categoryid=" . $subcat->categoryid() . "&amp;parentid=" . $subcat->parentid() . "'>" .$subcat->name() . "</a></td>";
+                echo "<td class='even' align='left'>" . $subcat->description() . "</td>";
+                echo "<td class='even' align='right'> {$modify} {$delete} </td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr>";
+            echo "<td class='head' align='center' colspan= '7'>" . _AM_PUBLISHER_NOSUBCAT . "</td>";
+            echo "</tr>";
+        }
+        echo "</table>\n";
+        echo "<br />\n";
+        publisher_closeCollapsableBar('subcatstable', 'subcatsicon');
+
+        publisher_openCollapsableBar('bottomtable', 'bottomtableicon', _AM_PUBLISHER_CAT_ITEMS, _AM_PUBLISHER_CAT_ITEMS_DSC);
+        $startitem = PublisherRequest::getInt('startitem');
+        // Get the total number of published ITEMS
+        $totalitems = $publisher->getHandler('item')->getItemsCount($sel_cat, array(_PUBLISHER_STATUS_PUBLISHED));
+        // creating the items objects that are published
+        $itemsObj = $publisher->getHandler('item')->getAllPublished($publisher->getConfig('idxcat_perpage'), $startitem, $sel_cat);
+        $totalitemsOnPage = count($itemsObj);
+        $allcats = $publisher->getHandler('category')->getObjects(null, true);
+        echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
+        echo "<tr>";
+        echo "<td width='40' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMID . "</b></td>";
+        echo "<td width='20%' class='bg3' align='left'><b>" . _AM_PUBLISHER_ITEMCOLNAME . "</b></td>";
+        echo "<td class='bg3' align='left'><b>" . _AM_PUBLISHER_ITEMDESC . "</b></td>";
+        echo "<td width='90' class='bg3' align='center'><b>" . _AM_PUBLISHER_CREATED . "</b></td>";
+        echo "<td width='60' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+        echo "</tr>";
+        if ($totalitems > 0) {
+            for ($i = 0; $i < $totalitemsOnPage; $i++) {
+                $categoryObj =& $allcats[$itemsObj[$i]->categoryid()];
+                $modify = "<a href='item.php?op=mod&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
+                $delete = "<a href='item.php?op=del&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" .  _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
+                echo "<tr>";
+                echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
+                echo "<td class='even' align='left'>" . $categoryObj->name() . "</td>";
+                echo "<td class='even' align='left'>" . $itemsObj[$i]->getitemLink() . "</td>";
+                echo "<td class='even' align='center'>" . $itemsObj[$i]->datesub('s') . "</td>";
+                echo "<td class='even' align='center'> $modify $delete </td>";
+                echo "</tr>";
+            }
+        } else {
+            $itemid = -1;
+            echo "<tr>";
+            echo "<td class='head' align='center' colspan= '7'>" . _AM_PUBLISHER_NOITEMS . "</td>";
+            echo "</tr>";
+        }
+        echo "</table>\n";
+        echo "<br />\n";
+        $parentid = PublisherRequest::getInt('parentid');
+        $pagenav_extra_args = "op=mod&categoryid=$sel_cat&parentid=$parentid";
+        xoops_load('XoopsPageNav');
+        $pagenav = new XoopsPageNav($totalitems, $publisher->getConfig('idxcat_perpage'), $startitem, 'startitem', $pagenav_extra_args);
+        echo '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
+        echo "<input type='button' name='button' onclick=\"location='item.php?op=mod&categoryid=" . $sel_cat . "'\" value='" . _AM_PUBLISHER_CREATEITEM . "'>&nbsp;&nbsp;";
+        echo "</div>";
     }
     //end of fx2024 code
 }
+
 ?>

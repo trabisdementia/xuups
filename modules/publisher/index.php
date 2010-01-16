@@ -32,7 +32,7 @@ $start = PublisherRequest::getInt('start');
 $totalCategories = $publisher->getHandler('category')->getCategoriesCount(0);
 
 // if there ain't no category to display, let's get out of here
-if ($totalCategories == 0 ) {
+if ($totalCategories == 0) {
     redirect_header(XOOPS_URL, 2, _MD_PUBLISHER_NO_TOP_PERMISSIONS);
     exit;
 }

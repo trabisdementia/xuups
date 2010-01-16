@@ -254,6 +254,11 @@ class PublisherRequest
         return PublisherRequest::getVar($name, $default, $hash, 'array');
     }
 
+    function getText($name, $default = '', $hash = 'default')
+    {
+        return (string) PublisherRequest::getVar($name, $default, $hash, 'string', PUBLISHER_REQUEST_ALLOWRAW);
+    }
+
 	/**
 	 * Set a variabe in on of the request variables
 	 *

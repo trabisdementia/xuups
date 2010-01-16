@@ -76,9 +76,11 @@ switch ($op) {
     $xoopsTpl->assign('categoryPath', _CO_PUBLISHER_ADD_FILE);
     $xoopsTpl->assign('lang_intro_title', sprintf(_MD_PUBLISHER_ADD_FILE_TITLE, $publisher->getModule()->getVar('name')));
     $xoopsTpl->assign('lang_intro_text',  sprintf(_MD_PUBLISHER_GOODDAY, $name) . sprintf(_MD_PUBLISHER_ADD_FILE_INTRO, $itemObj->title()));
-
-    include_once PUBLISHER_ROOT_PATH . '/include/fileform.inc.php';
-
+    $fileObj =& $publisher->getHandler('file')->create();
+    $fileObj->setVar('itemid', $itemid);
+    xoops_loadLanguage('admin', 'publisher');
+    $form = $fileObj->getForm();
+    $form->assign($xoopsTpl);
     include_once XOOPS_ROOT_PATH . '/footer.php';
     break;
 }

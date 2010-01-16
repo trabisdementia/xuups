@@ -69,14 +69,14 @@ function publisher_items_columns_show($options)
     if ($ccount == 0) {
 	   return false;
 	}
-	
+
 	if ($ccount < $opt_num_columns) {
         $opt_num_columns = $ccount;
     }
-	
+
 	$k = 0;
 	$columns = array();
-	
+
 	foreach ($sel_categories_obj as $categoryId => $mainitemCatObj) {
 		$categoryItemsObj = $publisher->getHandler('item')->getAllPublished($opt_cat_items, 0, $categoryId);
 		$scount = count($categoryItemsObj);
@@ -97,7 +97,7 @@ function publisher_items_columns_show($options)
 		   	$mainitem['item_cat_description'] = $mainitemCatObj->description() != '' ? $mainitemCatObj->description() : $mainitemCatObj->name();
 		   	$mainitem['item_cat_link']        = $mainitemCatObj->getCategoryLink();
 		   	$mainitem['categoryurl']          = $mainitemCatObj->getCategoryUrl();
-	 	   	
+
 		   	//The Rest
 		   	if ($scount > 1) {
 				while (list($itemid, $thisitem) = each($categoryItemsObj)) {
@@ -111,13 +111,13 @@ function publisher_items_columns_show($options)
                 }
 		   	}
 			$columns[$k][] = $mainitem;
-			unset($item);
+			unset($thisitem);
 			unset($mainitem);
 			$k++;
-			
+
 			if ($k == $opt_num_columns) {
 			    $k = 0;
-			}	   
+			}
 		}
 	}
 	$block['template'] = $options[4];
@@ -125,7 +125,7 @@ function publisher_items_columns_show($options)
 	$block['columnwidth'] = intval(100/$opt_num_columns);
 
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . PUBLISHER_DIRNAME . '/css/publisher.css');
-    
+
 	return $block;
 }
 
@@ -165,8 +165,8 @@ function publisher_items_columns_edit($options)
 	//teaser length
 	$form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_TRUNCATE . "</td><td>";
     $form .= "<input type='text' name='options[3]' value='" . $options[3] . "' size='4'></td></tr>";
-    
-    
+
+
     //template
     $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_TEMPLATE . "</td>";
    	$form .= "<td><select size='1' name='options[4]'>";

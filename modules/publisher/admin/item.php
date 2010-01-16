@@ -22,12 +22,9 @@
 
 include_once dirname(__FILE__) . '/admin_header.php';
 
-$itemid = (isset($_GET['itemid'])) ? $_GET['itemid'] : 0;
-$itemid = (isset($_POST['itemid'])) ? $_POST['itemid'] : $itemid;
-
+$itemid = PublisherRequest::getInt('itemid');
 $op = ($itemid > 0 || isset($_POST['editor'])) ? 'mod' : '';
-$op = isset($_GET['op']) ? $_GET['op'] : $op;
-$op = isset($_POST['op']) ? $_POST['op'] : $op;
+$op = PublisherRequest::getString('op', $op);
 
 if (isset($_POST['additem'])) {
     $op = 'additem';
@@ -35,12 +32,11 @@ if (isset($_POST['additem'])) {
     $op = 'del';
 }
 
-
 // Where shall we start ?
-$submittedstartitem = isset($_GET['submittedstartitem']) ? intval($_GET['submittedstartitem']) : 0;
-$publishedstartitem = isset($_GET['publishedstartitem']) ? intval($_GET['publishedstartitem']) : 0;
-$offlinestartitem = isset($_GET['offlinestartitem']) ? intval($_GET['offlinestartitem']) : 0;
-$rejectedstartitem = isset($_GET['rejectedstartitem']) ? intval($_GET['rejectedstartitem']) : 0;
+$submittedstartitem = PublisherRequest::getInt('submittedstartitem');
+$publishedstartitem = PublisherRequest::getInt('publishedstartitem');
+$offlinestartitem   = PublisherRequest::getInt('offlinestartitem');
+$rejectedstartitem  = PublisherRequest::getInt('rejectedstartitem');
 
 switch ($op) {
     case "clone":
@@ -52,8 +48,7 @@ switch ($op) {
             }
         }
         publisher_cpHeader();
-        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-        edititem(true, $itemid, true);
+        publisher_editItem(true, $itemid, true);
         break;
 
     case "mod":
@@ -66,62 +61,36 @@ switch ($op) {
         }
 
         publisher_cpHeader();
-        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-        edititem(true, $itemid);
+        publisher_editItem(true, $itemid);
         break;
 
     case "additem":
-        global $xoopsUser;
-
-        if (!$xoopsUser) {
-            if ($publisher->getConfig('perm_anon_submit') == 1) {
-                $uid = 0;
-            } else {
-                redirect_header("index.php", 3, _NOPERM);
-                exit();
-            }
-        } else {
-            $uid = $xoopsUser->uid();
-        }
-
         // Creating the item object
         if ($itemid != 0) {
             $itemObj = $publisher->getHandler('item')->get($itemid);
         } else {
             $itemObj = $publisher->getHandler('item')->create();
         }
-        // Putting the values in the ITEM object
 
-        if(isset($_POST['permissions_item'])){
+        // Putting the values in the ITEM object
+        if (isset($_POST['permissions_item'])) {
             $itemObj->setGroups_read($_POST['permissions_item']);
         } else{
             $itemObj->setGroups_read();
         }
 
-        $itemObj->setVar('categoryid', (isset($_POST['categoryid'])) ? intval($_POST['categoryid']) : 0);
-        $itemObj->setVar('title', $_POST['title']);
-        if (isset($_POST['subtitle'])) {
-            $itemObj->setVar('subtitle', $_POST['subtitle']);
-        }
-        if (isset($_POST['summary'])) {
-            $itemObj->setVar('summary', $_POST['summary']);
-        } else {
-            $itemObj->setVar('summary', '');
-        }
-        $itemObj->setVar('body', $_POST['body']);
+        $itemObj->setVar('categoryid', PublisherRequest::getInt('categoryid'));
+        $itemObj->setVar('title', PublisherRequest::getString('title'));
+        $itemObj->setVar('subtitle', PublisherRequest::getString('subtitle'));
+        $itemObj->setVar('summary', PublisherRequest::getText('summary'));
+        $itemObj->setVar('body', PublisherRequest::getText('body'));
 
-        if (isset($_POST['item_meta_keywords'])) {
-            $itemObj->setVar('meta_keywords', $_POST['item_meta_keywords']);
-        }
-        if (isset($_POST['item_meta_description'])) {
-            $itemObj->setVar('meta_description', $_POST['item_meta_description']);
-        }
-        if (isset($_POST['item_short_url'])) {
-            $itemObj->setVar('short_url', $_POST['item_short_url']);
-        }
+        $itemObj->setVar('meta_keywords', PublisherRequest::getString('item_meta_keywords'));
+        $itemObj->setVar('meta_description', PublisherRequest::getString('item_meta_description'));
+        $itemObj->setVar('short_url', PublisherRequest::getString('item_short_url'));
 
-        $image_item = isset($_POST['image_item'])  ? $_POST['image_item'] : array();
-        $image_featured = isset($_POST['image_featured']) ? $_POST['image_featured'] : '';
+        $image_item = PublisherRequest::getArray('image_item');
+        $image_featured = PublisherRequest::getString('image_featured');
 
         $image_handler =& xoops_gethandler('image');
         $imageObjs = $image_handler->getObjects(null, true);
@@ -138,22 +107,23 @@ switch ($op) {
         $itemObj->setVar('images', implode('|', $image_item_ids));
         unset($imageObjs);
 
-        $itemObj->setVar('item_tag', isset($_POST['item_tag']) ? $_POST['item_tag'] : false);
+        $itemObj->setVar('item_tag', PublisherRequest::getString('item_tag'));
 
         $old_status = $itemObj->status();
-        $new_status = isset($_POST['status']) ? intval($_POST['status']) : _PUBLISHER_STATUS_PUBLISHED;//_PUBLISHER_STATUS_NOTSET;
-        $itemObj->setVar('uid', isset($_POST['uid']) ? intval($_POST['uid']) : 0);
+        $new_status = PublisherRequest::getInt('status', _PUBLISHER_STATUS_PUBLISHED);//_PUBLISHER_STATUS_NOTSET;
+
+        $itemObj->setVar('uid', PublisherRequest::getInt('uid', $xoopsUser->uid()));
         $itemObj->setVar('datesub', isset($_POST['datesub']) ? strtotime($_POST['datesub']['date']) + $_POST['datesub']['time'] : time());
 
-        $itemObj->setVar('weight', isset($_POST['weight']) ? intval($_POST['weight']) : $itemObj->weight());
-        $itemObj->setPartial_view(isset($_POST['partial_view']) ? $_POST['partial_view'] : false);
+        $itemObj->setVar('weight', PublisherRequest::getInt('weight'));
+        $itemObj->setPartial_view(PublisherRequest::getInt('partial_view', false));
 
-        $itemObj->setVar('dohtml', isset($_POST['dohtml']) ? intval($_POST['dohtml']) : $publisher->getConfig('submit_dohtml'));
-        $itemObj->setVar('dosmiley', isset($_POST['dosmiley']) ? intval($_POST['dosmiley']) : $publisher->getConfig('submit_dosmiley'));
-        $itemObj->setVar('doxcode', isset($_POST['doxcode']) ? intval($_POST['doxcode']) : $publisher->getConfig('submit_doxcode'));
-        $itemObj->setVar('doimage', isset($_POST['doimage']) ? intval($_POST['doimage']) : $publisher->getConfig('submit_doimage'));
-        $itemObj->setVar('dobr', isset($_POST['dolinebreak']) ? intval($_POST['dolinebreak']) : $publisher->getConfig('submit_dobr'));
-        $itemObj->setVar('cancomment', isset($_POST['allowcomments']) ? intval($_POST['allowcomments']) : $publisher->getConfig('submit_allowcomments'));
+        $itemObj->setVar('dohtml', PublisherRequest::getInt('dohtml', $publisher->getConfig('submit_dohtml')));
+        $itemObj->setVar('dosmiley', PublisherRequest::getInt('dosmiley', $publisher->getConfig('submit_dosmiley')));
+        $itemObj->setVar('doxcode', PublisherRequest::getInt('doxcode', $publisher->getConfig('submit_doxcode')));
+        $itemObj->setVar('doimage', PublisherRequest::getInt('doimage', $publisher->getConfig('submit_doimage')));
+        $itemObj->setVar('dobr', PublisherRequest::getInt('dolinebreak', $publisher->getConfig('submit_dobr')));
+        $itemObj->setVar('cancomment', PublisherRequest::getInt('allowcomments', $publisher->getConfig('submit_allowcomments')));
 
         switch ($new_status) {
             case _PUBLISHER_STATUS_SUBMITTED:
@@ -162,7 +132,6 @@ switch ($op) {
                 } else {
                     $error_msg = _AM_PUBLISHER_ITEMNOTCREATED;
                 }
-
                 $redirect_msg = _AM_PUBLISHER_ITEM_RECEIVED_NEED_APPROVAL;
                 break;
 
@@ -183,7 +152,6 @@ switch ($op) {
                     $redirect_msg = _AM_PUBLISHER_OFFLINE_MOD_SUCCESS;
                 }
                 $error_msg = _AM_PUBLISHER_ITEMNOTUPDATED;
-
                 break;
 
             case _PUBLISHER_STATUS_REJECTED:
@@ -192,7 +160,6 @@ switch ($op) {
                 } else {
                     $error_msg = _AM_PUBLISHER_ITEMNOTCREATED;
                 }
-
                 $redirect_msg = _AM_PUBLISHER_ITEM_REJECTED;
                 break;
         }
@@ -224,32 +191,25 @@ switch ($op) {
 
     case "del":
         $itemObj = $publisher->getHandler('item')->get($itemid);
-
         $confirm = isset($_POST['confirm']) ? $_POST['confirm'] : 0;
-        $title = isset($_POST['title']) ? $_POST['title'] : '';
 
         if ($confirm) {
             if (!$publisher->getHandler('item')->delete($itemObj)) {
                 redirect_header("item.php", 2, _AM_PUBLISHER_ITEM_DELETE_ERROR . publisher_formatErrors($itemObj->getErrors()));
-                exit;
+                exit();
             }
-
             // Removing tags information
             if (xoops_isActiveModule('tag')) {
                 $tag_handler =& xoops_getmodulehandler('tag', 'tag');
                 $tag_handler->updateByItem('', $itemid, PUBLISHER_DIRNAME, 0);
             }
-
             redirect_header("item.php", 2, sprintf(_AM_PUBLISHER_ITEMISDELETED, $itemObj->title()));
             exit();
         } else {
-            // no confirm: show deletion condition
-            $itemid = (isset($_GET['itemid'])) ? intval($_GET['itemid']) : 0;
             xoops_cp_header();
             xoops_confirm(array('op' => 'del', 'itemid' => $itemObj->itemid(), 'confirm' => 1, 'name' => $itemObj->title()), 'item.php', _AM_PUBLISHER_DELETETHISITEM . " <br />'" . $itemObj->title() . "'. <br /> <br />", _AM_PUBLISHER_DELETE);
             xoops_cp_footer();
         }
-
         exit();
         break;
 
@@ -257,8 +217,8 @@ switch ($op) {
     default:
         publisher_cpHeader();
         publisher_adminMenu(2, _AM_PUBLISHER_ITEMS);
-        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-        include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+        xoops_load('XoopsPageNav');
+
         echo "<br />\n";
         echo "<form><div style=\"margin-bottom: 12px;\">";
         echo "<input type='button' name='button' onclick=\"location='item.php?op=mod'\" value='" . _AM_PUBLISHER_CREATEITEM . "'>&nbsp;&nbsp;";
@@ -345,7 +305,7 @@ switch ($op) {
                 echo "<tr>";
                 echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
                 echo "<td class='even' align='left'>" . $categoryObj->getCategoryLink() . "</td>";
-                echo "<td class='even' align='left'><a href='" . PUBLISHER_URL . "/item.php?itemid=" . $itemsObj[$i]->itemid() . "'>" . $itemsObj[$i]->title() . "</a></td>";
+                echo "<td class='even' align='left'>" . $itemsObj[$i]->getItemLink() . "</td>";
                 echo "<td class='even' align='center'>" . $itemsObj[$i]->datesub() . "</td>";
                 echo "<td class='even' align='center'> $clone $modify $delete </td>";
                 echo "</tr>";
@@ -392,7 +352,7 @@ switch ($op) {
                 echo "<tr>";
                 echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
                 echo "<td class='even' align='left'>" . $categoryObj->getCategoryLink() . "</td>";
-                echo "<td class='even' align='left'><a href='" . PUBLISHER_URL . "/item.php?itemid=" . $itemsObj[$i]->itemid() . "'>" . $itemsObj[$i]->title() . "</a></td>";
+                echo "<td class='even' align='left'>" . $itemsObj[$i]->getItemLink() . "</td>";
                 echo "<td class='even' align='center'>" . $itemsObj[$i]->datesub() . "</td>";
                 echo "<td class='even' align='center'> $clone $modify $delete </td>";
                 echo "</tr>";
@@ -440,7 +400,7 @@ switch ($op) {
                 echo "<tr>";
                 echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
                 echo "<td class='even' align='left'>" . $categoryObj->getCategoryLink() . "</td>";
-                echo "<td class='even' align='left'><a href='" . PUBLISHER_URL . "/item.php?itemid=" . $itemsObj[$i]->itemid() . "'>" . $itemsObj[$i]->title() . "</a></td>";
+                echo "<td class='even' align='left'>" . $itemsObj[$i]->getItemLink() . "</td>";
                 echo "<td class='even' align='center'>" . $itemsObj[$i]->datesub() . "</td>";
                 echo "<td class='even' align='center'> $clone $modify $delete </td>";
                 echo "</tr>";
@@ -462,7 +422,7 @@ switch ($op) {
 }
 xoops_cp_footer();
 
-function showfiles($itemObj)
+function publisher_showFiles($itemObj)
 {
     // UPLOAD FILES
     $publisher =& PublisherPublisher::getInstance();
@@ -482,7 +442,7 @@ function showfiles($itemObj)
         for ($i = 0; $i < count($filesObj); $i++) {
             $modify = "<a href='file.php?op=mod&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITFILE . "' alt='" . _AM_PUBLISHER_EDITFILE . "' /></a>";
             $delete = "<a href='file.php?op=del&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEFILE . "' alt='" . _AM_PUBLISHER_DELETEFILE . "'/></a>";
-            if($filesObj[$i]->status() == 0 ){
+            if ($filesObj[$i]->status() == 0) {
                 $not_visible = "<img src='" . PUBLISHER_URL . "/images/no.gif'/>";
             } else {
                 $not_visible ='';
@@ -509,14 +469,12 @@ function showfiles($itemObj)
     publisher_closeCollapsableBar('filetable', 'filetableicon');
 }
 
-function edititem($showmenu = false, $itemid = 0, $clone = false)
+function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
 {
     $publisher =& PublisherPublisher::getInstance();
     global $publisher_current_page, $xoopsUser;
 
-    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    include_once PUBLISHER_ROOT_PATH . '/class/formdatetime.php';
-    include_once XOOPS_ROOT_PATH . '/class/template.php';
+    xoops_load('XoopsFormLoader');
 
     $formTpl = new XoopsTpl();
     //publisher_submit.html
@@ -641,7 +599,6 @@ function edititem($showmenu = false, $itemid = 0, $clone = false)
 
     publisher_closeCollapsableBar('edititemtable', 'edititemicon');
 
-
     publisher_openCollapsableBar('pagewraptable', 'pagewrapicon', _AM_PUBLISHER_PAGEWRAP, _AM_PUBLISHER_PAGEWRAPDSC);
 
     $dir = publisher_getUploadDir(true, 'content');
@@ -684,7 +641,7 @@ function edititem($showmenu = false, $itemid = 0, $clone = false)
     publisher_closeCollapsableBar('pagewraptable', 'pagewrapicon');
 
     if ($itemObj->getVar('itemid') != 0) {
-        showfiles($itemObj);
+        publisher_showFiles($itemObj);
     }
 }
 ?>

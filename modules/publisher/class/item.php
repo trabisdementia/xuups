@@ -21,9 +21,7 @@
  */
 
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
@@ -99,6 +97,11 @@ class PublisherItem extends XoopsObject
         }
     }
 
+    function __call($method, $args) {
+        $arg = isset($args[0]) ? $args[0] : null;
+        return $this->getVar($method, $arg);
+    }
+
     function assignOtherProperties()
     {
         $publisher_allCategoriesObj = publisher_getAllCategoriesObj();
@@ -136,12 +139,6 @@ class PublisherItem extends XoopsObject
     {
         $this->_groups_read = $groups_read;
     }
-
-    function __call($method, $args) {
-        $arg = isset($args[0]) ? $args[0] : null;
-        return $this->getVar($method, $arg);
-    }
-
 
     function category()
     {
@@ -699,6 +696,7 @@ class PublisherItem extends XoopsObject
         $item['itemid']    = $this->itemid();
         $item['uid']       = $this->uid();
         $item['titlelink'] = $this->getItemLink(false, $max_char_title);
+        $item['subtitle']  = $this->subtitle();
         $item['datesub']   = $this->datesub();
         $item['counter']   = $this->counter();
 
