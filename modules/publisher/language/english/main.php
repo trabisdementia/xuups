@@ -17,7 +17,7 @@ define("_MD_PUBLISHER_CATEGORY_SUMMARY", "Summary of %s");
 define("_MD_PUBLISHER_CATEGORY_SUMMARY_INFO", "Sub-categories within %s.");
 define("_MD_PUBLISHER_CLEAR", "Clear");
 define("_MD_PUBLISHER_COMMENTS", "Comment(s)");
-define("_MD_PUBLISHER_CREATE", "Create article");
+//define("_MD_PUBLISHER_CREATE", "Create article");
 define("_MD_PUBLISHER_DATE", "Date");
 define("_MD_PUBLISHER_DATESUB", "Published on");
 
@@ -70,7 +70,7 @@ define("_MD_PUBLISHER_ON", "on");
 define("_MD_PUBLISHER_OTHER_ITEMS", "Other articles in this category");
 define("_MD_PUBLISHER_PAGE", "Page");
 
-define("_MD_PUBLISHER_PREVIEW", "Preview");
+//define("_MD_PUBLISHER_PREVIEW", "Preview");
 define("_MD_PUBLISHER_PREVIOUS_ITEM", "Previous article");
 
 define("_MD_PUBLISHER_PRINTERFRIENDLY", "Print this article in a printer friendly format");
@@ -85,7 +85,7 @@ define("_MD_PUBLISHER_SUBMIT_ERROR", "An error occured. Your article was not sub
 
 define("_MD_PUBLISHER_TOTAL_SMARTITEMS", "Total articles");
 define("_MD_PUBLISHER_UPLOAD", "Upload");
-define("_MD_PUBLISHER_UPLOAD_FILE", "Upload a file");
+//define("_MD_PUBLISHER_UPLOAD_FILE", "Upload a file");
 define("_MD_PUBLISHER_VIEW_MORE", "Read the complete article");
 define("_MD_PUBLISHER_WHO_WHEN", "Published by %s on %s");
 define('_MD_PUBLISHER_PRINT_CLOSE', 'Close this window');

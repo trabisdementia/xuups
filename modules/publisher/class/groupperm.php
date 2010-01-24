@@ -14,16 +14,13 @@
  *
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Class
- * @subpackage      Utils
+ * @package         Publisher
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: groupperm.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-if (!defined('XOOPS_ROOT_PATH')) {
-	exit();
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once XOOPS_ROOT_PATH . '/kernel/groupperm.php';
 

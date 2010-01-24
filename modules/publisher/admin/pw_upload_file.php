@@ -7,13 +7,12 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Admin
- * @subpackage      Action
+ * @package         Publisher
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          The SmartFactory <www.smartfactory.ca>
@@ -25,9 +24,9 @@ include_once dirname(__FILE__) . '/admin_header.php';
 $errors = array();
 
 if (publisher_pagewrap_upload($errors)) {
-	redirect_header($_POST['backto'], 2, _AM_PUBLISHER_FILEUPLOAD_SUCCESS);
+    redirect_header($_POST['backto'], 2, _AM_PUBLISHER_FILEUPLOAD_SUCCESS);
 } else {
-	$errorstxt = implode('<br />', $errors);
+    $errorstxt = implode('<br />', $errors);
     $message = sprintf(_CO_PUBLISHER_MESSAGE_FILE_ERROR, $errorstxt);
     redirect_header($_POST['backto'], 5, $message);
 }
@@ -37,40 +36,24 @@ function publisher_pagewrap_upload(&$errors)
     include_once PUBLISHER_ROOT_PATH . '/class/uploader.php';
 
     $publisher =& PublisherPublisher::getInstance();
-	$post_field = 'fileupload';
-
-	//$allowed_mimetypes = '';
-	// TODO : this needs to be managed by the MimeType section but we need a new parameter for allowed mimetype for pagewrap
-/*	if(!isset($allowed_mimetypes)){
-        $hMime =& xoops_getmodulehandler('mimetype');
-        $allowed_mimetypes = $hMime->checkMimeTypes($post_field);
-        if(!$allowed_mimetypes){
-        	$errors[] = _CO_PUBLISHER_MESSAGE_WRONG_MIMETYPE;
-            return false;
-        }
-    }*/
-
-    /*$maxfilesize = $config['xhelp_uploadSize'];
-    $maxfilewidth = $config['xhelp_uploadWidth'];
-    $maxfileheight = $config['xhelp_uploadHeight'];*/
-
+    $post_field = 'fileupload';
 
     $max_size = $publisher->getConfig('maximum_filesize');
-	$max_imgwidth = $publisher->getConfig('maximum_image_width');
-	$max_imgheight = $publisher->getConfig('maximum_image_height');
+    $max_imgwidth = $publisher->getConfig('maximum_image_width');
+    $max_imgheight = $publisher->getConfig('maximum_image_height');
 
     if (!is_dir(publisher_getUploadDir(true, 'content'))) {
         mkdir(publisher_getUploadDir(true, 'content'), 0757);
     }
     $allowed_mimetypes = array('text/html','text/plain','application/xhtml+xml');
-	$uploader = new XoopsMediaUploader(publisher_getUploadDir(true, 'content') . '/', $allowed_mimetypes, $max_size, $max_imgwidth, $max_imgheight);
+    $uploader = new XoopsMediaUploader(publisher_getUploadDir(true, 'content') . '/', $allowed_mimetypes, $max_size, $max_imgwidth, $max_imgheight);
     if ($uploader->fetchMedia($post_field)) {
         $uploader->setTargetFileName($uploader->getMediaName());
         if ($uploader->upload()) {
             return true;
         } else {
-             $errors = array_merge($errors, $uploader->getErrors(false));
-        	return false;
+            $errors = array_merge($errors, $uploader->getErrors(false));
+            return false;
         }
 
     } else {

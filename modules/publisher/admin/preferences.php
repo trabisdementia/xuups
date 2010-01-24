@@ -12,8 +12,7 @@
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Admin
- * @subpackage      Action
+ * @package         Publisher
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          Kazumi Ono (AKA onokazu)
@@ -28,71 +27,69 @@ $modname = $module->name();
 
 xoops_loadLanguage('admin', 'system');
 xoops_loadLanguage('admin/preferences', 'system');
-if ( !is_object($xoopsUser) || !is_object($module) || !$xoopsUser->isAdmin($module->mid())) {
-    exit("Access Denied");
-} else {
-    $op = 'showmod';
-    if (isset($_POST)) {
-        foreach ( $_POST as $k => $v ) {
-            ${$k} = $v;
-        }
+
+$op = 'showmod';
+if (isset($_POST)) {
+    foreach ($_POST as $k => $v) {
+        ${$k} = $v;
     }
-    if (isset($_GET['op'])) {
-        $op = trim($_GET['op']);
+}
+if (isset($_GET['op'])) {
+    $op = trim($_GET['op']);
+}
+
+if (isset($_GET['configcat'])) {
+    $configcat = $_GET['configcat'];
+}
+
+if ($op == 'showmod') {
+    $config_handler =& xoops_gethandler('config');
+
+    $config = $config_handler->getConfigs(new Criteria('conf_modid', $mod));
+    $count = count($config);
+    if ($count < 1) {
+        redirect_header($module->getInfo('adminindex'), 1);
     }
 
-    if (isset($_GET['configcat'])) {
-        $configcat = $_GET['configcat'];
+    $xv_configs = $module->getInfo('config');
+    $config_cats = $module->getInfo('configcat');
+
+    if (!in_array('others', array_keys($config_cats))) {
+        $config_cats['others'] = array('name'        => _MI_PUBLISHER_CONFCAT_OTHERS,
+                                       'description' => _MI_PUBLISHER_CONFCAT_OTHERS_DSC);
+    }
+    $cat_others_used = false;
+
+    xoops_loadLanguage('modinfo', $module->getVar('dirname'));
+
+    if ($module->getVar('hascomments') == 1) {
+        xoops_loadLanguage('comment');
     }
 
-    if ($op == 'showmod') {
-        $config_handler =& xoops_gethandler('config');
+    if ($module->getVar('hasnotification') == 1) {
+        xoops_loadLanguage('notification');
+    }
 
-        $config = $config_handler->getConfigs(new Criteria('conf_modid', $mod));
-        $count = count($config);
-        if ($count < 1) {
-            redirect_header($module->getInfo('adminindex'), 1);
+    xoops_load('XoopsFormLoader');
+
+    foreach($config_cats as $form_cat => $info) {
+        $$form_cat = new XoopsThemeForm($info['name'], 'pref_form_' . $form_cat, 'preferences.php', 'post', true);
+    }
+
+    for ($i = 0; $i < $count; $i++) {
+
+        foreach($xv_configs as $xv_config) {
+            if ($config[$i]->getVar('conf_name') == $xv_config['name']) break;
+        }
+        $form_cat = @$xv_config['category'];
+
+        if (!in_array($form_cat, array_keys($config_cats))) {
+            $form_cat = 'others';
+            $cat_others_used = true;
         }
 
-        $xv_configs = $module->getInfo('config');
-        $config_cats = $module->getInfo('configcat');
-
-        if (!in_array('others', array_keys($config_cats))) {
-            $config_cats['others'] = array('name'        => _MI_PUBLISHER_CONFCAT_OTHERS,
-                                           'description' => _MI_PUBLISHER_CONFCAT_OTHERS_DSC);
-        }
-        $cat_others_used = false;
-        
-        xoops_loadLanguage('modinfo', $module->getVar('dirname'));
-
-        if ($module->getVar('hascomments') == 1) {
-            include_once XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/comment.php';
-        }
-
-        if ($module->getVar('hasnotification') == 1) {
-            include_once XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/notification.php';
-        }
-
-        include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-
-        foreach($config_cats as $form_cat => $info) {
-            $$form_cat = new XoopsThemeForm($info['name'], 'pref_form_' . $form_cat, 'preferences.php', 'post', true);
-        }
-        
-        for ($i = 0; $i < $count; $i++) {
-
-            foreach($xv_configs as $xv_config) {
-                if ($config[$i]->getVar('conf_name') == $xv_config['name']) break;
-            }
-            $form_cat = @$xv_config['category'];
-
-            if (!in_array($form_cat, array_keys($config_cats))) {
-                $form_cat = 'others';
-                $cat_others_used = true;
-            }
-                
-            $title = (!defined($config[$i]->getVar('conf_desc')) || constant($config[$i]->getVar('conf_desc')) == '') ? constant($config[$i]->getVar('conf_title')) : constant($config[$i]->getVar('conf_title')).'<br /><br /><span style="font-weight:normal;">'.constant($config[$i]->getVar('conf_desc')).'</span>';
-            switch ($config[$i]->getVar('conf_formtype')) {
+        $title = (!defined($config[$i]->getVar('conf_desc')) || constant($config[$i]->getVar('conf_desc')) == '') ? constant($config[$i]->getVar('conf_title')) : constant($config[$i]->getVar('conf_title')).'<br /><br /><span style="font-weight:normal;">'.constant($config[$i]->getVar('conf_desc')).'</span>';
+        switch ($config[$i]->getVar('conf_formtype')) {
             case 'textarea':
                 $myts =& MyTextSanitizer::getInstance();
                 if ($config[$i]->getVar('conf_valuetype') == 'array') {
@@ -158,53 +155,45 @@ if ( !is_object($xoopsUser) || !is_object($module) || !$xoopsUser->isAdmin($modu
                 $myts =& MyTextSanitizer::getInstance();
                 $ele = new XoopsFormText($title, $config[$i]->getVar('conf_name'), 50, 255, $myts->htmlspecialchars($config[$i]->getConfValueForOutput()));
                 break;
-            }
-            $hidden = new XoopsFormHidden('conf_ids[]', $config[$i]->getVar('conf_id'));
-            $$form_cat->addElement($ele);
-            $$form_cat->addElement($hidden);
-            unset($ele);
-            unset($hidden);
         }
-        
-
-        publisher_cpHeader();
-        publisher_adminMenu(5, _PREFERENCES);
-
-        foreach($config_cats as $form_cat => $info) {
-            if ($form_cat == 'others' && !$cat_others_used) continue;
-            $$form_cat->addElement(new XoopsFormHidden('op', 'save'));
-            $$form_cat->addElement(new XoopsFormButton('', 'button', _GO, 'submit'));
-            publisher_openCollapsableBar($form_cat . '_table', $form_cat . '_icon', $info['name'], $info['description']);
-            $$form_cat->display();
-            publisher_closeCollapsableBar($form_cat . '_table', $form_cat . '_icon');
-        }
-        
-        xoops_cp_footer();
-        
-        exit();
+        $hidden = new XoopsFormHidden('conf_ids[]', $config[$i]->getVar('conf_id'));
+        $$form_cat->addElement($ele);
+        $$form_cat->addElement($hidden);
+        unset($ele);
+        unset($hidden);
     }
 
-    if ($op == 'save') {
-        if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header($module->getInfo('adminindex'), 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-        }
-
-        $count = count($conf_ids);
-        if ($count > 0) {
-            for ($i = 0; $i < $count; $i++) {
-                $config =& $config_handler->getConfig($conf_ids[$i]);
-                $new_value =& ${$config->getVar('conf_name')};
-                if (is_array($new_value) || $new_value != $config->getVar('conf_value')) {
-                    $config->setConfValueForInput($new_value);
-                    $config_handler->insertConfig($config);
-                }
-                unset($new_value);
-            }
-        }
-
-        redirect_header('preferences.php', 2, _MD_AM_DBUPDATED);
-
+    publisher_cpHeader();
+    publisher_adminMenu(5, _PREFERENCES);
+    foreach($config_cats as $form_cat => $info) {
+        if ($form_cat == 'others' && !$cat_others_used) continue;
+        $$form_cat->addElement(new XoopsFormHidden('op', 'save'));
+        $$form_cat->addElement(new XoopsFormButton('', 'button', _GO, 'submit'));
+        publisher_openCollapsableBar($form_cat . '_table', $form_cat . '_icon', $info['name'], $info['description']);
+        $$form_cat->display();
+        publisher_closeCollapsableBar($form_cat . '_table', $form_cat . '_icon');
     }
+    xoops_cp_footer();
+    exit();
 }
 
+if ($op == 'save') {
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header($module->getInfo('adminindex'), 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+    }
+    $count = count($conf_ids);
+    if ($count > 0) {
+        for ($i = 0; $i < $count; $i++) {
+            $config =& $config_handler->getConfig($conf_ids[$i]);
+            $new_value =& ${$config->getVar('conf_name')};
+            if (is_array($new_value) || $new_value != $config->getVar('conf_value')) {
+                $config->setConfValueForInput($new_value);
+                $config_handler->insertConfig($config);
+            }
+            unset($new_value);
+        }
+    }
+    redirect_header('preferences.php', 2, _MD_AM_DBUPDATED);
+
+}
 ?>
