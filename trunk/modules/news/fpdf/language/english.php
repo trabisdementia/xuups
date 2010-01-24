@@ -148,9 +148,18 @@ class PDF_language extends FPDF
 	}
 
 	function _encoding(&$text, $in_charset, $out_charset)
-	{
-		// some conversion goes here
-		// refer to schinese.php for example
-	}
+    {
+        $xconv_handler = @xoops_getmodulehandler('xconv', 'xconv', true);
+        if($xconv_handler &&
+            $converted_text = @$xconv_handler->convert_encoding($text, $out_charset, $in_charset)
+        ){
+            $text = $converted_text;
+            return;
+        }
+        if(XOOPS_USE_MULTIBYTES && function_exists('mb_convert_encoding')) $converted_text = @mb_convert_encoding($text, $out_charset, $in_charset);
+        else
+        if(function_exists('iconv')) $converted_text = @iconv($in_charset, $out_charset . "//TRANSLIT", $text);
+        $text = empty($converted_text)?$text:$converted_text;
+    }
 }
 ?>
