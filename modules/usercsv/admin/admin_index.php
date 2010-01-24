@@ -39,35 +39,35 @@ switch ($op) {
 
 function usercsv_index()
 {
-	echo usercsv_form();
+    echo usercsv_form();
 }
 
 function usercsv_export()
 {
     /*
-    if (!$GLOBALS['xoopsSecurity']->check()) {
-		redirect_header(basename(__FILE__), 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-	}
-    */
-    
+     if (!$GLOBALS['xoopsSecurity']->check()) {
+     redirect_header(basename(__FILE__), 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+     }
+     */
+
     if (!isset($_POST['fields'])) {
         redirect_header(basename(__FILE__) , 2, _AM_UCSV_ERROR_NOFIELDS);
     }
-    
+
     $fields = usercsv_getFormFields();
 
     $export_fields = array();
     foreach ($_POST['fields'] as $key => $fieldkey) {
         $export_fields[] = $fields[$fieldkey];
     }
-    
+
     if (count($export_fields) == 0) {
         redirect_header(basename(__FILE__) , 2, _AM_UCSV_ERROR_NOFIELDS);
     }
-    
+
     $is_profile = usercsv_isProfile();
     $user_handler =& xoops_getHandler('user');
-    
+
     if ($is_profile) {
         $profile_handler =& xoops_getModuleHandler('profile', 'profile');
         list($users, $profiles) = usercsv_profileSearch($export_fields);
@@ -79,7 +79,7 @@ function usercsv_export()
             $result[] = $userarray;
             unset($userarray);
         }
-        unset($users, $profiles, $total_users);
+        unset($users, $profiles);
     } else {
         $users = usercsv_search($export_fields);
         foreach ($users as $user) {
@@ -92,7 +92,7 @@ function usercsv_export()
         }
         unset($users);
     }
-    
+
     $csv_terminated = "\n";
     $csv_separator = ",";
     $csv_enclosed = '"';
@@ -103,9 +103,9 @@ function usercsv_export()
         $l = $csv_enclosed . str_replace($csv_enclosed, $csv_escaped . $csv_enclosed, $field) . $csv_enclosed;
         $schema_insert .= $l;
         $schema_insert .= $csv_separator;
-    } 
-    unset($export_fileds);
-    
+    }
+    unset($export_fields);
+
     $out  = trim(substr($schema_insert, 0, -1));
     $out .= $csv_terminated;
 
@@ -178,7 +178,7 @@ function usercsv_profileSearch($searchvars = array())
 
     return array($users, $profiles);
 }
-    
+
 function usercsv_search($searchvars = array())
 {
     global $xoopsDB;
@@ -191,7 +191,7 @@ function usercsv_search($searchvars = array())
     $sql_order = "";
 
     $sql_users = $sql_select . $sql_from . $sql_clause . $sql_order;
-    $result = $xoopsDB->query($sql_users, $limit, $start);
+    $result = $xoopsDB->query($sql_users);
 
     if (!$result) {
         return array();
@@ -200,21 +200,21 @@ function usercsv_search($searchvars = array())
     $user = array();
     while ($myrow = $xoopsDB->fetchArray($result)) {
         $user = array();
-        foreach ($myrow as $name => $value) {  
+        foreach ($myrow as $name => $value) {
             $user[$name] = $value;
         }
         $users[] = $user;
     }
-    
+
     return $users;
 }
 
 function usercsv_getUserFields()
 {
-    $user_fields = array('uid', 'uname', 'name', 'email', 'url','user_avatar', 'user_regdate', 
-                         'user_icq', 'user_from', 'user_sig', 'user_viewemail', 'actkey', 'user_aim', 
-                         'user_yim', 'user_msnm', 'pass', 'posts', 'attachsig', 'rank', 'level', 
-                         'theme', 'timezone_offset', 'last_login', 'umode', 'uorder', 'notify_method', 
+    $user_fields = array('uid', 'uname', 'name', 'email', 'url','user_avatar', 'user_regdate',
+                         'user_icq', 'user_from', 'user_sig', 'user_viewemail', 'actkey', 'user_aim',
+                         'user_yim', 'user_msnm', 'pass', 'posts', 'attachsig', 'rank', 'level',
+                         'theme', 'timezone_offset', 'last_login', 'umode', 'uorder', 'notify_method',
                          'notify_mode', 'user_occ', 'bio', 'user_intrest', 'user_mailok');
     return $user_fields;
 }
@@ -266,15 +266,15 @@ function usercsv_form()
     <input name="usercsv_checkall" id="usercsv_checkall" value="" type="checkbox" onclick="var optionids = new Array(\'' . $option_ids_str . '\'); xoopsCheckAllElements(optionids, \'usercsv_checkall\');")>
     ' . _ALL . '&nbsp;</div>');
     $form->addElement($element2);
-    
+
     unset($element ,$element2);
 
-	$tray = new XoopsFormElementTray('' ,'');
-	$tray->addElement(new XoopsFormButton('', 'usercsv_button', _SUBMIT, 'submit'));
-	$form->addElement($tray);
+    $tray = new XoopsFormElementTray('' ,'');
+    $tray->addElement(new XoopsFormButton('', 'usercsv_button', _SUBMIT, 'submit'));
+    $form->addElement($tray);
 
-	$form->addElement(new XoopsFormHidden('op', 'export'));
+    $form->addElement(new XoopsFormHidden('op', 'export'));
 
-	return $form->render();
+    return $form->render();
 }
 ?>
