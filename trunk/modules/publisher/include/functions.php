@@ -12,17 +12,14 @@
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Include
- * @subpackage      Utils
+ * @package         Publisher
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          The SmartFactory <www.smartfactory.ca>
  * @version         $Id: functions.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(__FILE__) . '/common.php';
 
@@ -1038,7 +1035,7 @@ function publisher_uploadFile($another = false, $withRedirect = true, &$itemObj)
 
     $itemid = isset($_POST['itemid']) ? intval($_POST['itemid']) : 0;
     $uid = is_object($xoopsUser) ? $xoopsUser->uid() : 0;
-    $session = PublisherSession::singleton();
+    $session =& PublisherSession::getInstance();
     $session->set('publisher_file_filename', isset($_POST['name']) ? $_POST['name'] : '');
     $session->set('publisher_file_description', isset($_POST['description']) ? $_POST['description'] : '');
     $session->set('publisher_file_status', isset($_POST['file_status']) ? intval($_POST['file_status']) : 1);

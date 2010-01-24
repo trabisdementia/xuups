@@ -14,16 +14,13 @@
  *
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Class
- * @subpackage      Handlers
+ * @package         Publisher
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: rating.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
@@ -32,7 +29,7 @@ class PublisherRating extends XoopsObject
     /**
      * constructor
      */
-    function PublisherRating()
+    function __construct()
     {
         $this->initVar("ratingid", XOBJ_DTYPE_INT, null, false);
         $this->initVar("itemid", XOBJ_DTYPE_INT, null, false);
@@ -46,11 +43,6 @@ class PublisherRating extends XoopsObject
 
 class PublisherRatingHandler extends XoopsPersistableObjectHandler
 {
-    function PublisherRatingHandler(&$db)
-    {
-        $this->__construct($db);
-    }
-
     function __construct($db)
     {
         parent::__construct($db, 'publisher_rating', 'PublisherRating', 'ratingid', 'itemid');

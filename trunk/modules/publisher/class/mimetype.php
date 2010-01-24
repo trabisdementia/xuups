@@ -7,38 +7,33 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  *  Publisher class
  *
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Class
- * @subpackage      Utils
+ * @package         Publisher
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          The SmartFactory <www.smartfactory.ca>
  * @version         $Id: publisher.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
-
 
 /**
  * PublisherBaseObjectHandler class
  *
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Class
- * @subpackage      Handlers
+ * @package         Publisher
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @author Nazar Aziz <nazar@panthersoftware.com>
+ * @author          Nazar Aziz <nazar@panthersoftware.com>
  * @version         $Id: baseObjectHandler.php 0 2009-06-11 18:47:04Z trabis $
  */
 
@@ -49,42 +44,43 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
      * @var	object
      * @access	private
      */
-	var $_db;
+    var $_db;
 
-	/**
-	 * Autoincrementing DB fieldname
-	 * @var string
-	 * @access private
-	 */
-	var $_idfield = 'id';
+    /**
+     * Autoincrementing DB fieldname
+     * @var string
+     * @access private
+     */
+    var $_idfield = 'id';
 
 
-	/**
+    /**
      * Constructor
      *
      * @param	object   $db    reference to a xoopsDB object
      */
-    function init(&$db) {
+    function init(&$db)
+    {
         $this->_db = $db;
     }
 
 
-   /**
-    * create a new  object
-    * @return object {@link publisherBaseObject}
-    * @access public
-    */
+    /**
+     * create a new  object
+     * @return object {@link publisherBaseObject}
+     * @access public
+     */
     function &create()
     {
         return new $this->classname();
     }
 
     /**
-    * retrieve an object from the database, based on. use in child classes
-    * @param int $id ID
-    * @return mixed object if id exists, false if not
-    * @access public
-    */
+     * retrieve an object from the database, based on. use in child classes
+     * @param int $id ID
+     * @return mixed object if id exists, false if not
+     * @access public
+     */
     function &get($id)
     {
         $id = intval($id);
@@ -103,13 +99,13 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
     }
 
     /**
-    * retrieve objects from the database
-    *
-    * @param object $criteria {@link CriteriaElement} conditions to be met
-    * @param bool $id_as_key Should the department ID be used as array key
-    * @return array array of objects
-    * @access  public
-    */
+     * retrieve objects from the database
+     *
+     * @param object $criteria {@link CriteriaElement} conditions to be met
+     * @param bool $id_as_key Should the department ID be used as array key
+     * @return array array of objects
+     * @access  public
+     */
     function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret    = array();
@@ -175,7 +171,7 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
         }
 
         if (!$result) {
-        	$obj->setErrors('The query returned an error. ' . $this->db->error());
+            $obj->setErrors('The query returned an error. ' . $this->db->error());
             return false;
         }
 
@@ -186,12 +182,12 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
         return true;
     }
 
-   /**
-    * Create a "select" SQL query
-    * @param object $criteria {@link CriteriaElement} to match
-    * @return string SQL query
-    * @access private
-    */
+    /**
+     * Create a "select" SQL query
+     * @param object $criteria {@link CriteriaElement} to match
+     * @return string SQL query
+     * @access private
+     */
     function _selectQuery($criteria = null)
     {
         $sql = sprintf('SELECT * FROM %s', $this->_db->prefix($this->_dbtable));
@@ -206,12 +202,12 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
     }
 
     /**
-    * count objects matching a criteria
-    *
-    * @param object $criteria {@link CriteriaElement} to match
-    * @return int count of objects
-    * @access public
-    */
+     * count objects matching a criteria
+     *
+     * @param object $criteria {@link CriteriaElement} to match
+     * @return int count of objects
+     * @access public
+     */
     function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM '.$this->_db->prefix($this->_dbtable);
@@ -226,14 +222,15 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
     }
 
     /**
-    * delete object based on id
-    *
-    * @param object $obj {@link XoopsObject} to delete
-    * @param bool $force override XOOPS delete protection
-    * @return bool deletion successful?
-    * @access public
-    */
-    function delete(&$obj, $force = false) {
+     * delete object based on id
+     *
+     * @param object $obj {@link XoopsObject} to delete
+     * @param bool $force override XOOPS delete protection
+     * @return bool deletion successful?
+     * @access public
+     */
+    function delete(&$obj, $force = false)
+    {
         if (strcasecmp($this->classname, get_class($obj)) != 0) {
             return false;
         }
@@ -252,31 +249,31 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
     }
 
     /**
-	 * delete department matching a set of conditions
-	 *
-	 * @param object $criteria {@link CriteriaElement}
-	 * @return bool FALSE if deletion failed
-	 * @access	public
-	 */
-	function deleteAll($criteria = null)
-	{
-		$sql = 'DELETE FROM '.$this->_db->prefix($this->_dbtable);
-		if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-			$sql .= ' '.$criteria->renderWhere();
-		}
-		if (!$result = $this->_db->query($sql)) {
-			return false;
-		}
-		return true;
-	}
+     * delete department matching a set of conditions
+     *
+     * @param object $criteria {@link CriteriaElement}
+     * @return bool FALSE if deletion failed
+     * @access	public
+     */
+    function deleteAll($criteria = null)
+    {
+        $sql = 'DELETE FROM '.$this->_db->prefix($this->_dbtable);
+        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+            $sql .= ' '.$criteria->renderWhere();
+        }
+        if (!$result = $this->_db->query($sql)) {
+            return false;
+        }
+        return true;
+    }
 
     /**
-	 * Assign a value to 1 field for tickets matching a set of conditions
-	 *
-	 * @param object $criteria {@link CriteriaElement}
-	 * @return bool FALSE if update failed
-	 * @access	public
-	 */
+     * Assign a value to 1 field for tickets matching a set of conditions
+     *
+     * @param object $criteria {@link CriteriaElement}
+     * @return bool FALSE if update failed
+     * @access	public
+     */
     function updateAll($fieldname, $fieldvalue, $criteria = null)
     {
         $set_clause = is_numeric($fieldvalue) ? $fieldname.' = '.$fieldvalue : $fieldname.' = '.$this->_db->quoteString($fieldvalue);
@@ -290,16 +287,19 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
         return true;
     }
 
-    function _insertQuery(&$obj) {
+    function _insertQuery(&$obj)
+    {
         return false;
     }
 
-    function _updateQuery(&$obj) {
+    function _updateQuery(&$obj)
+    {
         return false;
 
     }
 
-    function _deleteQuery(&$obj) {
+    function _deleteQuery(&$obj)
+    {
         return false;
     }
 
@@ -330,7 +330,8 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
  * @package publisher
  */
 
-class PublisherMimetype extends XoopsObject {
+class PublisherMimetype extends XoopsObject
+{
     function PublisherMimetype($id = null)
     {
         $this->initVar('mime_id', XOBJ_DTYPE_INT, null, false);
@@ -339,189 +340,191 @@ class PublisherMimetype extends XoopsObject {
         $this->initVar('mime_name', XOBJ_DTYPE_TXTBOX, NULL, true, 255);
         $this->initVar('mime_admin', XOBJ_DTYPE_INT, null, false);
         $this->initVar('mime_user', XOBJ_DTYPE_INT, null, false);
-       
+
         if (isset($id)) {
-		    if (is_array($id)) {
-			    $this->assignVars($id);
-			}
-		} else {
-			$this->setNew();
-		} 
+            if (is_array($id)) {
+                $this->assignVars($id);
+            }
+        } else {
+            $this->setNew();
+        }
     }
 }   // end of class
 
-class PublisherMimetypeHandler extends PublisherBaseObjectHandler {
+class PublisherMimetypeHandler extends PublisherBaseObjectHandler
+{
     /**
      * Name of child class
-     * 
+     *
      * @var	string
      * @access	private
      */
     var $classname = 'publishermimetype';
-	
-	/**
-	 * DB Table Name
-	 *
-	 * @var string
-	 * @access private
-	 */
-	var $_dbtable = 'publisher_mimetypes';
-	
-	/**
-	 * Constructor
-	 *
-	 * @param object $db reference to a xoopsDB object
-	 */
-	function PublisherMimetypeHandler(&$db) 
-	{
-		parent::init($db);
-	}
-    
+
     /**
-	 * retrieve a mimetype object from the database
-	 * @param	int	$id	ID of mimetype
-	 * @return	object	{@link PublisherMimetype}
-	 * @access	public
-	 */
-	function &get($id)
-	{
-		$id = intval($id);
-		if ($id > 0) {
-			$sql = $this->_selectQuery(new Criteria('mime_id', $id));
-			if (!$result = $this->_db->query($sql)) {
-				return false;
-			}
-			$numrows = $this->_db->getRowsNum($result);
-			if ($numrows == 1) {
-				$obj = new $this->classname($this->_db->fetchArray($result));
-				return $obj;
-			}
-		}
-		return false;
-	}
-	
-	/**
-	 * retrieve objects from the database
-	 * 
-	 * @param object $criteria {@link CriteriaElement} conditions to be met
-	 * @return array array of {@link PublisherMimetype} objects
-	 * @access	public	
-	 */	
-	function &getObjects($criteria = null)
-	{
-		$ret    = array();
-		$limit  = $start = 0;
-		$sql    = $this->_selectQuery($criteria);
-		if (isset($criteria)) {		
-			$limit = $criteria->getLimit();
-			$start = $criteria->getStart();
-		}
-		//echo "<br />$sql<br />";
-		$result = $this->_db->query($sql, $limit, $start);
-		// if no records from db, return empty array
-		if (!$result) {
-			return $ret;
-		}
-		
-		// Add each returned record to the result array
-		while ($myrow = $this->_db->fetchArray($result)) {
-			$obj = new $this->classname($myrow);
-			$ret[] =& $obj;
-			unset($obj);
-		}
-		return $ret;
-	}
-	
-	/**
-	 * Format mime_types into array
-	 * 
-	 * @return array array of mime_types
-	 * @access public
-	 */
-	function getArray($mime_ext = null)
-	{
-	    global $publisher_isAdmin, $xoopsUser;
-	    
-	    $ret = array();
-	    if ($xoopsUser && !$publisher_isAdmin){
+     * DB Table Name
+     *
+     * @var string
+     * @access private
+     */
+    var $_dbtable = 'publisher_mimetypes';
+
+    /**
+     * Constructor
+     *
+     * @param object $db reference to a xoopsDB object
+     */
+    function PublisherMimetypeHandler(&$db)
+    {
+        parent::init($db);
+    }
+
+    /**
+     * retrieve a mimetype object from the database
+     * @param	int	$id	ID of mimetype
+     * @return	object	{@link PublisherMimetype}
+     * @access	public
+     */
+    function &get($id)
+    {
+        $id = intval($id);
+        if ($id > 0) {
+            $sql = $this->_selectQuery(new Criteria('mime_id', $id));
+            if (!$result = $this->_db->query($sql)) {
+                return false;
+            }
+            $numrows = $this->_db->getRowsNum($result);
+            if ($numrows == 1) {
+                $obj = new $this->classname($this->_db->fetchArray($result));
+                return $obj;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * retrieve objects from the database
+     *
+     * @param object $criteria {@link CriteriaElement} conditions to be met
+     * @return array array of {@link PublisherMimetype} objects
+     * @access	public
+     */
+    function &getObjects($criteria = null)
+    {
+        $ret    = array();
+        $limit  = $start = 0;
+        $sql    = $this->_selectQuery($criteria);
+        if (isset($criteria)) {
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
+        }
+        //echo "<br />$sql<br />";
+        $result = $this->_db->query($sql, $limit, $start);
+        // if no records from db, return empty array
+        if (!$result) {
+            return $ret;
+        }
+
+        // Add each returned record to the result array
+        while ($myrow = $this->_db->fetchArray($result)) {
+            $obj = new $this->classname($myrow);
+            $ret[] =& $obj;
+            unset($obj);
+        }
+        return $ret;
+    }
+
+    /**
+     * Format mime_types into array
+     *
+     * @return array array of mime_types
+     * @access public
+     */
+    function getArray($mime_ext = null)
+    {
+        global $publisher_isAdmin, $xoopsUser;
+
+        $ret = array();
+        if ($xoopsUser && !$publisher_isAdmin){
             // For user uploading
-            $crit = new CriteriaCompo(new Criteria('mime_user', 1));   //$sql = sprintf("SELECT * FROM %s WHERE mime_user=1", $xoopsDB->prefix('publisher_mimetypes'));   
+            $crit = new CriteriaCompo(new Criteria('mime_user', 1));   //$sql = sprintf("SELECT * FROM %s WHERE mime_user=1", $xoopsDB->prefix('publisher_mimetypes'));
         } elseif ($xoopsUser && $publisher_isAdmin){
             // For admin uploading
             $crit = new CriteriaCompo(new Criteria('mime_admin', 1));  //$sql = sprintf("SELECT * FROM %s WHERE mime_admin=1", $xoopsDB->prefix('publisher_mimetypes'));
         } else {
             return $ret;
         }
-        if($mime_ext){
+        if ($mime_ext) {
             $crit->add(new Criteria('mime_ext', $mime_ext));
         }
         $result =& $this->getObjects($crit);
-        
+
         // if no records from db, return empty array
-		if (!$result) {
-			return $ret;
-		}
-		
-		foreach($result as $mime){
-		    $line = split(" ", $mime->getVar('mime_types'));
-		    foreach($line as $row){
-		        $allowed_mimetypes[] = array('type' => $row, 'ext' => $mime->getVar('mime_ext'));
-		    }
-		}
-		return $allowed_mimetypes;
-	}
-   /**
-    * Checks to see if the user uploading the file has permissions to upload this mimetype
-    * @param $post_field file being uploaded
-    * @return false if no permission, return mimetype if has permission
-    * @access public
-    */
-	function checkMimeTypes($post_field)
-	{
-		$fname = $_FILES[$post_field]['name'];
-	    $farray = explode('.', $fname);
+        if (!$result) {
+            return $ret;
+        }
+
+        foreach ($result as $mime) {
+            $line = split(" ", $mime->getVar('mime_types'));
+            foreach($line as $row){
+                $allowed_mimetypes[] = array('type' => $row, 'ext' => $mime->getVar('mime_ext'));
+            }
+        }
+        return $allowed_mimetypes;
+    }
+
+    /**
+     * Checks to see if the user uploading the file has permissions to upload this mimetype
+     * @param $post_field file being uploaded
+     * @return false if no permission, return mimetype if has permission
+     * @access public
+     */
+    function checkMimeTypes($post_field)
+    {
+        $fname = $_FILES[$post_field]['name'];
+        $farray = explode('.', $fname);
         $fextension = strtolower($farray[count($farray) -1]);
-	    
+
         $allowed_mimetypes = $this->getArray();
         if(empty($allowed_mimetypes)){
             return false;
         }
-        
+
         foreach($allowed_mimetypes as $mime){
             //echo $mime['type'];
             if($mime['type'] == $_FILES[$post_field]['type']){
                 $allowed_mimetypes = $mime['type'];
-                break;   
+                break;
             } else {
                 $allowed_mimetypes = false;
             }
         }
         return $allowed_mimetypes;
     }
-    
-	/**
-	 * Create a "select" SQL query
-	 * @param object $criteria {@link CriteriaElement} to match
-	 * @return	string SQL query
-	 * @access	private
-	 */	
-	function _selectQuery($criteria = null, $join = false)
-	{
-		if(!$join){
-    		$sql = sprintf('SELECT * FROM %s', $this->_db->prefix($this->_dbtable));
-	    } else {
-	    	echo "no need for join..."; exit;
-	    }
-	    if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-			$sql .= ' '.$criteria->renderWhere();
-			if ($criteria->getSort() != '') {
-				$sql .= ' ORDER BY '.$criteria->getSort().' '.$criteria->getOrder();
-			}
-		}
-		return $sql;
-	}
-	
-	function _insertQuery(&$obj)
+
+    /**
+     * Create a "select" SQL query
+     * @param object $criteria {@link CriteriaElement} to match
+     * @return	string SQL query
+     * @access	private
+     */
+    function _selectQuery($criteria = null, $join = false)
+    {
+        if(!$join){
+            $sql = sprintf('SELECT * FROM %s', $this->_db->prefix($this->_dbtable));
+        } else {
+            echo "no need for join..."; exit;
+        }
+        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+            $sql .= ' '.$criteria->renderWhere();
+            if ($criteria->getSort() != '') {
+                $sql .= ' ORDER BY '.$criteria->getSort().' '.$criteria->getOrder();
+            }
+        }
+        return $sql;
+    }
+
+    function _insertQuery(&$obj)
     {
         // Copy all object vars into local variables
         foreach ($obj->cleanVars as $k => $v) {
@@ -529,11 +532,11 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler {
         }
 
         $sql = sprintf("INSERT INTO %s (mime_id, mime_ext, mime_types, mime_name, mime_admin, mime_user) VALUES
-               (%u, %s, %s, %s, %u, %u)", $this->_db->prefix($this->_dbtable), $mime_id, $this->_db->quoteString($mime_ext),
-               $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user);
-        return $sql;        
+            (%u, %s, %s, %s, %u, %u)", $this->_db->prefix($this->_dbtable), $mime_id, $this->_db->quoteString($mime_ext),
+            $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user);
+        return $sql;
     }
-    
+
     function _updateQuery(&$obj)
     {
         // Copy all object vars into local variables
@@ -541,17 +544,17 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler {
             ${$k} = $v;
         }
 
-        $sql = sprintf("UPDATE %s SET mime_ext = %s, mime_types = %s, mime_name = %s, mime_admin = %u, mime_user = %u WHERE 
-               mime_id = %u", $this->_db->prefix($this->_dbtable), $this->_db->quoteString($mime_ext), 
-               $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user, $mime_id);
+        $sql = sprintf("UPDATE %s SET mime_ext = %s, mime_types = %s, mime_name = %s, mime_admin = %u, mime_user = %u WHERE
+            mime_id = %u", $this->_db->prefix($this->_dbtable), $this->_db->quoteString($mime_ext),
+            $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user, $mime_id);
         return $sql;
     }
-    
+
     function _deleteQuery(&$obj)
     {
         $sql = sprintf('DELETE FROM %s WHERE mime_id = %u', $this->_db->prefix($this->_dbtable), $obj->getVar('mime_id'));
         return $sql;
     }
-}   // end class
+}// end class
 
 ?>

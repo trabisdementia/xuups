@@ -12,12 +12,11 @@
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Class
- * @subpackage      Handlers
+ * @package         Publisher
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          The SmartFactory <www.smartfactory.ca>
- * @version         $Id: category.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id: file.php 0 2009-06-11 18:47:04Z trabis $
  */
 
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
