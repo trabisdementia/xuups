@@ -89,7 +89,7 @@ function news_adminmenu($currentoption = 0, $breadcrumb = '')
         echo "<li id='" . $tblColors[4] . "'><a href=\"index.php?op=export\"><span>" . _MI_NEWS_EXPORT . "</span></a></li>\n";
         echo "<li id='" . $tblColors[5] . "'><a href=\"index.php?op=configurenewsletter\"><span>" . _MI_NEWS_NEWSLETTER . "</span></a></li>\n";
         echo "<li id='" . $tblColors[6] . "'><a href=\"index.php?op=stats\"><span>" . _MI_NEWS_STATS . "</span></a></li>\n";
-        if ($xoopsModule->getVar('version') != 165) {
+        if ($xoopsModule->getVar('version') != 166) {
             echo "<li id='" . $tblColors[7] . "'><a href=\"upgrade.php\"><span>" . _AM_NEWS_UPGRADE . "</span></a></li>\n";
         }
         echo "<li id='" . $tblColors[8] . "'><a href=\"index.php?op=metagen\"><span>" . _MI_NEWS_METAGEN . "</span></a></li>\n";
