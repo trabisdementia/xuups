@@ -1,10 +1,16 @@
 Changelog
 *******
+v1.66
+*******
+- Removing double encoding with htmlspecialchars
+- Removing pdf folder (dhsoft)
+
+Changelog
+*******
 v1.65
 *******
 - Adding prefix to adminmenu function for 2.4.2 compatibility
 - Correcting method for loading Editors in xoops_version.php
-
 
 *******
 v1.63
