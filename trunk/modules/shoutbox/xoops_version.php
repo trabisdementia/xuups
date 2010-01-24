@@ -57,16 +57,19 @@
 //  Version 4.05  12/15/2008                                                 //
 //  Update version                                                           //
 //  ***                                                                      //
+//  Version 5.0  24/01/2010                                                 //
+//  Update version by xuups.com                                                          //
+//  ***                                                                      //
 
 $modversion['name'] = _MI_SHOUTBOX_NAME;
-$modversion['version'] = '4.05';
+$modversion['version'] = '5.0alpha';
 $modversion['description'] = _MI_SHOUTBOX_DESC;
 $modversion['credits'] = "The XOOPS Project";
 $modversion['license'] = "GPL see LICENSE";
 $modversion['official'] = 0;
-$modversion['image'] = "images/slogo_shoutbox.png";
+$modversion['image'] = "images/module_logo.png";
 $modversion['dirname'] = "shoutbox";
-$modversion['author'] = 'tank (refer to readme_archive for previous developer info)';
+$modversion['author'] = 'xuups, tank (refer to readme_archive for previous developer info)';
 
 // Admin things
 $modversion['hasAdmin'] = 1;
