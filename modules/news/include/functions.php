@@ -698,4 +698,5 @@ function news_resizePicture($src_path , $dst_path, $param_width , $param_height,
 	}
 	return true;
 }
+
 ?>
