@@ -27,9 +27,9 @@
 
 $modversion['name'] = "My Pics";
 $modversion['version'] = 1.0;
-$modversion['description'] = "This module will allow each member to have a picture's album with an X numebr of files. The module uses the ";
-$modversion['credits'] = "The XOOPS Project, Lightbox2, Komeia";
-$modversion['author'] = "Marcello Brandão";
+$modversion['description'] = "This module will allow each member to have a picture's album with an X number of files";
+$modversion['credits'] = "Marcello Brandão, The XOOPS Project, Lightbox2, Komeia";
+$modversion['author'] = "trabis";
 $modversion['help'] = "";
 $modversion['license'] = "GPL see LICENSE";
 $modversion['official'] = 0;
@@ -37,13 +37,14 @@ $modversion['image'] = "images/module_logo.png";
 $modversion['dirname'] = "mypics";
 
 //Adicionado para rodar no about
-$modversion['developer_website_url'] = "http://sourceforge.net/users/marcellobrandao/";
-$modversion['developer_website_name'] = "Marcello Brandão in Sourceforge";
-$modversion['developer_email'] = "marcello.brandao@gmail.com";
-$modversion['status_version'] = "RC1";
-$modversion['status'] = "RC";
-$modversion['date'] = "2007-08-26";
+$modversion['developer_website_url'] = "http://www.xuups.com";
+$modversion['developer_website_name'] = "Xoops User Utilitites";
+$modversion['developer_email'] = "lusopoemas@gmail.com";
+$modversion['status_version'] = "Alpha";
+$modversion['status'] = "Alpha";
+$modversion['date'] = "2010-01-24";
 
+$modversion['people']['developers'][] = "trabis";
 $modversion['people']['developers'][] = "Suiço (Marcello Brandão)";
 $modversion['people']['developers'][] = "Leandro Vieira";
 
@@ -61,10 +62,10 @@ $modversion['people']['other'][] = "Komeia (patrocínio)";
 
 $modversion['demo_site_url'] = "";
 $modversion['demo_site_name'] = "";
-$modversion['support_site_url'] = "http://sourceforge.net/projects/galeriamypics/";
-$modversion['support_site_name'] = "Sourceforge";
-$modversion['submit_bug'] = "http://sourceforge.net/tracker/?func=add&group_id=204109&atid=988288";
-$modversion['submit_feature'] = "http://sourceforge.net/tracker/?func=add&group_id=204109&atid=988291";
+$modversion['support_site_url'] = "http://www.xuups.com/";
+$modversion['support_site_name'] = "Xuups";
+$modversion['submit_bug'] = "http://www.xuups.com/";
+$modversion['submit_feature'] = "http://www.xuups.com/";
 
 
 $modversion['hasMain'] = 1;
