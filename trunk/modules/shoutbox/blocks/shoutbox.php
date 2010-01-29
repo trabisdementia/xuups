@@ -1,61 +1,23 @@
 <?php
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-//  Original Author: Alphalogic <alphafake@hotmail.com>					     //
-//  Original Author Website: http://www.alphalogic-network.de		         //
-//  ------------------------------------------------------------------------ //
-//  XOOPS Version made by: (XOOPS 1.3.x and 2.0.x version)			         //
-//  Jan304 <http://www.jan304.org>									         //
-//  ------------------------------------------------------------------------ //
-//  Author:     tank                                                         //
-//  Website:    http://www.customvirtualdesigns.com                          //
-//  E-Mail:     tanksplace@comcast.net                                       //
-//  Date:       12/15/2008                                                   //
-//  Module:     Shoutbox                                                     //
-//  File:       blocks/shoutbox.php                                          //
-//  Version:    4.05                                                         //
-//  ------------------------------------------------------------------------ //
-//  Change Log                                                               //
-//  ***                                                                      //
-//  Version 4.01 Initial CVD Release 10/05/2008                              //
-//  ***                                                                      //
-//  Version 4.02  11/01/2008                                                 //
-//  New: Add captcha for guest posts                                         //
-//  ***                                                                      //
-//  Version 4.03  11/15/2008                                                 //
-//  New: Eliminate local module copy of the captcha class                    //
-//  New: Add Frameworks captcha support                                      //
-//  ***                                                                      //
-//  Version 4.05  12/15/2008                                                 //
-//  Bug Fix: Move smi-bar string replace function inside comparison to       //
-//           elimnate calling when not enabled                               //
-//  ***                                                                      //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-//
-// Function for displaying Shoutbox
-//
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Shoutbox
+ * @author          Alphalogic <alphafake@hotmail.com>
+ * @author          tank <tanksplace@comcast.net>
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: shoutbox.php 0 2010-01-29 18:47:04Z trabis $
+ */
 
 function b_shoutbox_show($options)
 {
@@ -87,7 +49,7 @@ function b_shoutbox_show($options)
 
     $block['shoutbox_anonymous'] = $xoopsConfig['anonymous'];
 
-    if($block['show_smileybar']) {
+    if ($block['show_smileybar']) {
         ob_start();
         include_once XOOPS_ROOT_PATH . '/include/xoopscodes.php';
         xoopsSmilies('shoutfield');
@@ -96,7 +58,7 @@ function b_shoutbox_show($options)
         $block['shoutbox_smibar'] = str_replace("<a href='#moresmiley' onmouseover='style.cursor=\"hand\"' alt=''","<a href='#moresmiley' onmouseover='style.cursor=\"hand\"' title='More'",   $block['shoutbox_smibar']);
     }
 
-    if(!is_object($xoopsUser) && !$block['popup_guests']){
+    if (!is_object($xoopsUser) && !$block['popup_guests']) {
         $block['popup'] = false;
     }
 

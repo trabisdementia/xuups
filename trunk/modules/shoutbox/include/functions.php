@@ -1,46 +1,24 @@
 <?php
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-//  Original Author: Alphalogic <alphafake@hotmail.com>					     //
-//  Original Author Website: http://www.alphalogic-network.de		         //
-//  ------------------------------------------------------------------------ //
-//  XOOPS Version made by: (XOOPS 1.3.x and 2.0.x version)			         //
-//  Jan304 <http://www.jan304.org>									         //
-//  ------------------------------------------------------------------------ //
-//  Author:     tank                                                         //
-//  Website:    http://www.customvirtualdesigns.com                          //
-//  E-Mail:     tanksplace@comcast.net                                       //
-//  Date:       10/05/2008                                                   //
-//  Module:     Shoutbox                                                     //
-//  File:       include/functions.php                                        //
-//  Version:    4.01                                                         //
-//  ------------------------------------------------------------------------ //
-//  Change Log                                                               //
-//  ***                                                                      //
-//  Version 4.01 Initial CVD Release 10/05/2008                              //
-//  ***                                                                      //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Shoutbox
+ * @author          Alphalogic <alphafake@hotmail.com>
+ * @author          tank <tanksplace@comcast.net>
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: functions.php 0 2010-01-29 18:47:04Z trabis $
+ */
+
 function shoutbox_getOption($option, $dirname = 'shoutbox')
 {
     static $modOptions = array();
@@ -78,12 +56,12 @@ function shoutbox_makeGuestName()
  */
 function shoutbox_setCookie($timestamp)
 {
-    if(empty($_COOKIE['shoutcookie'])) {
+    if (empty($_COOKIE['shoutcookie'])) {
         setcookie("shoutcookie", $timestamp);
         return false;
     }
 
-    if($_COOKIE['shoutcookie'] < $timestamp) {
+    if ($_COOKIE['shoutcookie'] < $timestamp) {
         setcookie("shoutcookie", $timestamp);
         return TRUE;
     } else {
@@ -92,7 +70,8 @@ function shoutbox_setCookie($timestamp)
 }
 
 //irc like commands
-function shoutbox_ircLike($command) {
+function shoutbox_ircLike($command)
+{
     global $xoopsModuleConfig, $xoopsUser, $special_stuff_head;
     if ($command == "/quit") {
         $special_stuff_head .= '<script language="javascript">';
@@ -107,13 +86,12 @@ function shoutbox_ircLike($command) {
         if (!$xoopsUser) {
             if (count($commandlines)==2) {
                 if (($commandlines[0]=='/nick') && ($commandlines[1]!='')) {
-                    if($xoopsModuleConfig['guests_may_chname'] == 1)
-                    {
+                    if($xoopsModuleConfig['guests_may_chname'] == 1) {
                         $special_stuff_head .= '<script language="javascript">';
                         $special_stuff_head .= '    top.document.location.href="popup.php?username='.htmlentities($commandlines[1], ENT_QUOTES).'";';
                         $special_stuff_head .= '</script>';
                         return true;
-                    }else{
+                    } else {
                         return true;
                     }
                 }

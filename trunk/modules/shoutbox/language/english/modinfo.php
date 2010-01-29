@@ -1,62 +1,4 @@
 <?php
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-//  Original Author: Alphalogic <alphafake@hotmail.com>					     //
-//  Original Author Website: http://www.alphalogic-network.de		         //
-//  ------------------------------------------------------------------------ //
-//  XOOPS Version made by: (XOOPS 1.3.x and 2.0.x version)			         //
-//  Jan304 <http://www.jan304.org>									         //
-//  ------------------------------------------------------------------------ //
-//  Author:     tank                                                         //
-//  Website:    http://www.customvirtualdesigns.com                          //
-//  E-Mail:     tanksplace@comcast.net                                       //
-//  Date:       12/15/2008                                                   //
-//  Module:     Shoutbox                                                     //
-//  File:       language/english/modinfo.php                                 //
-//  Version:    4.05                                                         //
-//  ------------------------------------------------------------------------ //
-//  Change Log                                                               //
-//  ***                                                                      //
-//  Version 4.01 Initial CVD Release 10/05/2008                              //
-//  ***                                                                      //
-//  Version 4.02  11/01/2008                                                 //
-//  New: Add captcha enable parameter text                                   //
-//  New: Improve upon some of the text translations                          //
-//  ***                                                                      //
-//  Version 4.03  11/15/2008                                                 //
-//  New: Eliminate local module copy of the captcha class                    //
-//  New: Add preference parameter for setting/enabling wordwrap              //
-//  New: Add preference parameter to enable/disable avatar display in block  //
-//  New: Add Frameworks captcha support                                      //
-//  ***                                                                      //
-//  Version 4.04  12/01/2008                                                 //
-//  New: Add selectable guest avatars                                        //
-//  ***                                                                      //
-//  Version 4.05  12/15/2008                                                 //
-//  Bug Fix: Clean up a few minor typos                                      //
-//  ***                                                                      //
 
 // The name of this module
 define("_MI_SHOUTBOX_NAME","Shoutbox");
@@ -74,16 +16,16 @@ define("_MI_SHOUTBOX_BLOCK","Shoutbox");
 
 // Categories
 define("_MI_SHOUTBOX_CAT1","--- Global Settings ---");
-define("_MI_SHOUTBOX_PREF_CAT1","Global Settings"); 
+define("_MI_SHOUTBOX_PREF_CAT1","Global Settings");
 define("_MI_SHOUTBOX_CAT2","--- Block Settings ---");
 define("_MI_SHOUTBOX_PREF_CAT2","Block Settings");
 define("_MI_SHOUTBOX_CAT3","--- PopUp Settings ---");
-define("_MI_SHOUTBOX_PREF_CAT3","PopUp Settings"); 
+define("_MI_SHOUTBOX_PREF_CAT3","PopUp Settings");
 define("_MI_SHOUTBOX_CAT4","--- Text Input Settings ---");
-define("_MI_SHOUTBOX_PREF_CAT4","Text Input Settings"); 
+define("_MI_SHOUTBOX_PREF_CAT4","Text Input Settings");
 
 // Config language definitions...
-define("_MI_SHOUTBOX_TITLE1", "May guests post?"); 
+define("_MI_SHOUTBOX_TITLE1", "May guests post?");
 define("_MI_SHOUTBOX_TITLE2", "May guests choose a name?");
 define("_MI_SHOUTBOX_DESC2", "If guests may post, may they choose an own name?");
 define("_MI_SHOUTBOX_TITLE3", "Allow bbcode");
@@ -99,7 +41,7 @@ define("_MI_SHOUTBOX_DESC7", "Define where the shouts should be stored");
 define("_MI_SHOUTBOX_OP7_F", "File [csv]");
 define("_MI_SHOUTBOX_OP7_D", "Database [mysql]");
 
-define("_MI_SHOUTBOX_TITLE11","Show smiley bar in block?"); 
+define("_MI_SHOUTBOX_TITLE11","Show smiley bar in block?");
 define("_MI_SHOUTBOX_TITLE12", "Shout Message Block IFrame width");
 define("_MI_SHOUTBOX_DESC12", "The width of the iframe in the block.");
 define("_MI_SHOUTBOX_TITLE13", "Shout Message Block IFrame height");
@@ -119,16 +61,16 @@ define("_MI_SHOUTBOX_TITLE19", "Guest Avatar");
 define("_MI_SHOUTBOX_DESC19", "<table><tr>
                                <td><img src=\"".XOOPS_URL."/modules/shoutbox/images/guestavatars/guest1.gif\" width=60></td>
                                <td><img src=\"".XOOPS_URL."/modules/shoutbox/images/guestavatars/guest2.gif\" width=60></td>
-							   <td><img src=\"".XOOPS_URL."/modules/shoutbox/images/guestavatars/guest3.gif\" width=60></td>
-							   <td><img src=\"".XOOPS_URL."/modules/shoutbox/images/guestavatars/guest4.gif\" width=60></td>
-							   <td><img src=\"".XOOPS_URL."/modules/shoutbox/images/guestavatars/guest5.gif\" width=60></td>
-							   </tr><tr>
-							   <td>guest1</td>
+                               <td><img src=\"".XOOPS_URL."/modules/shoutbox/images/guestavatars/guest3.gif\" width=60></td>
+                               <td><img src=\"".XOOPS_URL."/modules/shoutbox/images/guestavatars/guest4.gif\" width=60></td>
+                               <td><img src=\"".XOOPS_URL."/modules/shoutbox/images/guestavatars/guest5.gif\" width=60></td>
+                               </tr><tr>
+                               <td>guest1</td>
                                <td>guest2</td>
-							   <td>guest3</td>
-							   <td>guest4</td>
-							   <td>guest5</td>
-							   </tr></table>");
+                               <td>guest3</td>
+                               <td>guest4</td>
+                               <td>guest5</td>
+                               </tr></table>");
 define("_MI_SHOUTBOX_OP19_GA0", "None");
 define("_MI_SHOUTBOX_OP19_GA1", "guest1");
 define("_MI_SHOUTBOX_OP19_GA2", "guest2");
@@ -136,36 +78,36 @@ define("_MI_SHOUTBOX_OP19_GA3", "guest3");
 define("_MI_SHOUTBOX_OP19_GA4", "guest4");
 define("_MI_SHOUTBOX_OP19_GA5", "guest5");
 
-define("_MI_SHOUTBOX_TITLE31", "Show 'Who's online'"); 
-define("_MI_SHOUTBOX_DESC31", "Show in the popup who's on-line. Warning: Who's on-line block has to be activated!"); 
-define("_MI_SHOUTBOX_TITLE32", "Show smiley bar in PopUp"); 
-define("_MI_SHOUTBOX_TITLE33", "Play sound on new message?"); 
-define("_MI_SHOUTBOX_TITLE34", "May guests use popup?"); 
-define("_MI_SHOUTBOX_DESC34", "If the popup is activated, may guests use it?"); 
-define("_MI_SHOUTBOX_TITLE35", "IRC-a-like"); 
-define("_MI_SHOUTBOX_DESC35", "Enable IRC commands. At this time only /quit and /nick are supported."); 
-define("_MI_SHOUTBOX_TITLE36", "Auto-focus"); 
-define("_MI_SHOUTBOX_DESC36", "Automaticly focus the popup window when there comes a new message."); 
-define("_MI_SHOUTBOX_TITLE37", "PopUp Width"); 
-define("_MI_SHOUTBOX_DESC37", "Default popup width (in pixels)"); 
-define("_MI_SHOUTBOX_TITLE38", "PopUp Height"); 
-define("_MI_SHOUTBOX_DESC38", "Default popup height (in pixels)"); 
-define("_MI_SHOUTBOX_TITLE40", "Shout Text Input Type"); 
-define("_MI_SHOUTBOX_DESC40", "Shout text entry form selection"); 
+define("_MI_SHOUTBOX_TITLE31", "Show 'Who's online'");
+define("_MI_SHOUTBOX_DESC31", "Show in the popup who's on-line. Warning: Who's on-line block has to be activated!");
+define("_MI_SHOUTBOX_TITLE32", "Show smiley bar in PopUp");
+define("_MI_SHOUTBOX_TITLE33", "Play sound on new message?");
+define("_MI_SHOUTBOX_TITLE34", "May guests use popup?");
+define("_MI_SHOUTBOX_DESC34", "If the popup is activated, may guests use it?");
+define("_MI_SHOUTBOX_TITLE35", "IRC-a-like");
+define("_MI_SHOUTBOX_DESC35", "Enable IRC commands. At this time only /quit and /nick are supported.");
+define("_MI_SHOUTBOX_TITLE36", "Auto-focus");
+define("_MI_SHOUTBOX_DESC36", "Automaticly focus the popup window when there comes a new message.");
+define("_MI_SHOUTBOX_TITLE37", "PopUp Width");
+define("_MI_SHOUTBOX_DESC37", "Default popup width (in pixels)");
+define("_MI_SHOUTBOX_TITLE38", "PopUp Height");
+define("_MI_SHOUTBOX_DESC38", "Default popup height (in pixels)");
+define("_MI_SHOUTBOX_TITLE40", "Shout Text Input Type");
+define("_MI_SHOUTBOX_DESC40", "Shout text entry form selection");
 define("_MI_SHOUTBOX_OP40_TL", "Single Line Text");
 define("_MI_SHOUTBOX_OP40_TA", "Multi-line Text Area");
-define("_MI_SHOUTBOX_TITLE41", "Text Area Rows"); 
-define("_MI_SHOUTBOX_DESC41", "Height of text area in rows<br />Only applicable when Shout Text Entry Form Selection = Multi-line Text Area"); 
-define("_MI_SHOUTBOX_TITLE42", "Text Area Columns"); 
-define("_MI_SHOUTBOX_DESC42", "Width of text area in columns<br />Only applicable when Shout Text Entry Form Selection = Multi-line Text Area"); 
-define("_MI_SHOUTBOX_TITLE43", "Text Line Length"); 
-define("_MI_SHOUTBOX_DESC43", "Width of single line text entry in characters"); 
-define("_MI_SHOUTBOX_TITLE44", "Text Max Characters"); 
-define("_MI_SHOUTBOX_DESC44", "Maximum length of text entry"); 
-define("_MI_SHOUTBOX_TITLE45", "Text Input Maximum Alerts"); 
-define("_MI_SHOUTBOX_DESC45", "Enables alert messages when approaching and reaching maximum text entry limit"); 
-define("_MI_SHOUTBOX_TITLE46", "Captcha Enable"); 
-define("_MI_SHOUTBOX_DESC46", "Enables captcha confirmation code requirement (anti-spam measure)"); 
+define("_MI_SHOUTBOX_TITLE41", "Text Area Rows");
+define("_MI_SHOUTBOX_DESC41", "Height of text area in rows<br />Only applicable when Shout Text Entry Form Selection = Multi-line Text Area");
+define("_MI_SHOUTBOX_TITLE42", "Text Area Columns");
+define("_MI_SHOUTBOX_DESC42", "Width of text area in columns<br />Only applicable when Shout Text Entry Form Selection = Multi-line Text Area");
+define("_MI_SHOUTBOX_TITLE43", "Text Line Length");
+define("_MI_SHOUTBOX_DESC43", "Width of single line text entry in characters");
+define("_MI_SHOUTBOX_TITLE44", "Text Max Characters");
+define("_MI_SHOUTBOX_DESC44", "Maximum length of text entry");
+define("_MI_SHOUTBOX_TITLE45", "Text Input Maximum Alerts");
+define("_MI_SHOUTBOX_DESC45", "Enables alert messages when approaching and reaching maximum text entry limit");
+define("_MI_SHOUTBOX_TITLE46", "Captcha Enable");
+define("_MI_SHOUTBOX_DESC46", "Enables captcha confirmation code requirement (anti-spam measure)");
 define("_MI_SHOUTBOX_OP46_A", "Disabled - Frameworks/captcha not found");
 define("_MI_SHOUTBOX_OP46_B", "Disable Captcha");
 define("_MI_SHOUTBOX_OP46_C", "Enable Frameworks Captcha");

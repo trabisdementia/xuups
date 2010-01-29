@@ -1,18 +1,40 @@
 <?php
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Shoutbox
+ * @author          Alphalogic <alphafake@hotmail.com>
+ * @author          tank <tanksplace@comcast.net>
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: shoutbox.php 0 2010-01-29 18:47:04Z trabis $
+ */
+
 include_once dirname(dirname(__FILE__)) . '/include/functions.php';
 
 class Shoutbox
 {
     var $handler = '';
 
-    function Shoutbox($storage_type) {
+    function Shoutbox($storage_type)
+    {
         $this->handler =& xoops_getModuleHandler($storage_type, 'shoutbox');
     }
 
-    function getDefaultAvatar() {
+    function getDefaultAvatar()
+    {
         if ($value = shoutbox_getOption('guest_avatar')) {
             $avatar = XOOPS_URL . "/modules/shoutbox/images/guestavatars/guest" . $value . ".gif";
-        }else{
+        } else {
             $avatar = XOOPS_URL . '/uploags/blank.gif';
         }
         return $avatar;
