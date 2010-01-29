@@ -1,49 +1,23 @@
 <?php
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-//  Original Author: Alphalogic <alphafake@hotmail.com>					     //
-//  Original Author Website: http://www.alphalogic-network.de		         //
-//  ------------------------------------------------------------------------ //
-//  XOOPS Version made by: (XOOPS 1.3.x and 2.0.x version)			         //
-//  Jan304 <http://www.jan304.org>									         //
-//  ------------------------------------------------------------------------ //
-//  Author:     tank                                                         //
-//  Website:    http://www.customvirtualdesigns.com                          //
-//  E-Mail:     tanksplace@comcast.net                                       //
-//  Date:       11/01/2008                                                   //
-//  Module:     Shoutbox                                                     //
-//  File:       include/module.php                                           //
-//  Version:    4.02                                                         //
-//  ------------------------------------------------------------------------ //
-//  Change Log                                                               //
-//  ***                                                                      //
-//  Version 4.01 Initial CVD Release 10/05/2008                              //
-//  ***                                                                      //
-//  Version 4.02  11/01/2008                                                 //
-//  New: Add Drop Table to Module Uninstall                                  //
-//  ***                                                                      //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Shoutbox
+ * @author          Alphalogic <alphafake@hotmail.com>
+ * @author          tank <tanksplace@comcast.net>
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: module.php 0 2010-01-29 18:47:04Z trabis $
+ */
 
 function xoops_module_install_shoutbox(&$module)
 {
@@ -99,29 +73,26 @@ function xoops_module_install_shoutbox(&$module)
     $cacheDir = XOOPS_ROOT_PATH . '/uploads/shoutbox';
     $cacheFile = $cacheDir . '/shout.csv';
 
-    if(!file_exists($cacheFile))
-    {
-        if(!is_dir($cacheDir))
-        {
-            if(!mkdir($cacheDir))
-            {
+    if (!file_exists($cacheFile)) {
+        if (!is_dir($cacheDir)) {
+            if (!mkdir($cacheDir)) {
                 //$msgs[] = "Failed to create dir!";
                 return false;
-            }else{
+            } else {
                 //$msgs[] = "&nbsp;&nbsp;Dir /uploads/shoutbox/ succesfully created!";
                 chmod($cacheDir, 0777);
             }
         }
 
-        if($file = fopen($cacheFile, 'w')) {
-            if(!fwrite($file, "Shoutbox|Welcome to the Shoutbox v4.x for Xoops|1|111.111.111.111|guest\n")) {
+        if ($file = fopen($cacheFile, 'w')) {
+            if (!fwrite($file, "Shoutbox|Welcome to the Shoutbox v4.x for Xoops|1|111.111.111.111|guest\n")) {
                 //$msgs[] = "&nbsp;&nbsp;Could not put content in file /uploads/shoutbox/shout.cvs! Please create <i>manually</i>.";
             }
             fclose($file);
             chmod($cacheFile, 0777);
             //$msgs[] = "&nbsp;&nbsp;File /uploads/shoutbox/shout.cvs succesfully created!";
             return true;
-        }else{
+        } else {
             //$msgs[] = "&nbsp;&nbsp;Could not create file /uploads/shoutbox/shout.cvs! Please create <i>manually</i>.";
             return false;
         }
