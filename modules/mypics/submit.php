@@ -42,7 +42,7 @@ $pictwidth      = $xoopsModuleConfig['resized_width'];
 $pictheight     = $xoopsModuleConfig['resized_height'];
 $thumbwidth     = $xoopsModuleConfig['thumb_width'];
 $thumbheight    = $xoopsModuleConfig['thumb_height'];
-$maxfilebytes   = $xoopsModuleConfig['maxfilesize'];
+$maxfilebytes   = $xoopsModuleConfig['max_file_size'];
 $maxfileheight  = $xoopsModuleConfig['max_original_height'];
 $maxfilewidth   = $xoopsModuleConfig['max_original_width'];
 

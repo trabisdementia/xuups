@@ -140,11 +140,7 @@ class MypicsImageHandler extends XoopsPersistableObjectHandler
     function receivePicture($title, $path_upload, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $maxfilebytes, $maxfilewidth, $maxfileheight)
     {
         global $xoopsUser, $xoopsDB;
-        //busca id do user logado
         $uid = $xoopsUser->getVar('uid');
-        //create a hash so it does not erase another file
-        $hash1 = date();
-        $hash = substr($hash1,0,4);
 
         // mimetypes and settings put this in admin part later
         $allowed_mimetypes = array('image/jpeg', 'image/pjpeg');
@@ -155,7 +151,7 @@ class MypicsImageHandler extends XoopsPersistableObjectHandler
         // fetch the media
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             //lets create a name for it
-            $uploader->setPrefix('pic_' . $uid .'_');
+            $uploader->setPrefix('pic_' . $uid . '_');
             //now let s upload the file
             if (!$uploader->upload()) {
                 // if there are errors lets return them

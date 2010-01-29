@@ -43,4 +43,5 @@ define("_MD_MYPICS_NOTHINGYET","No pictures in this album yet");
 define("_MD_MYPICS_NOCACHACA","Sorry no cachaça for you");
 define("_MD_MYPICS_AVATAR_CHANGE","Set as your profile picture");
 define("_MD_MYPICS_AVATAR_EDITED","Your profile picture was updated!");
+define("_MD_MYPICS_UPLOADED", "Picture uploaded!");
 ?>
