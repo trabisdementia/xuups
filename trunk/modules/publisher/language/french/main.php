@@ -10,6 +10,7 @@
 define("_MD_PUBLISHER_ADD_FILE_INTRO", "s'il vous plaît veuillez remplir ce formulaire afin de joindre un fichier à ce présent article: %s'.");
 define("_MD_PUBLISHER_ADD_FILE_TITLE", "Ajouter un fichier à un article");
 define("_MD_PUBLISHER_ADMIN_PAGE", ":: Section administrative ::");
+define("_MD_PUBLISHER_MODIFY", "Modifier");
 define("_MD_PUBLISHER_CANCEL", "Annuler");
 define("_MD_PUBLISHER_CATEGORY_EDIT", "Modifier la catégorie");
 define("_MD_PUBLISHER_CATEGORY_SUMMARY", "%s");
