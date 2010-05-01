@@ -19,6 +19,10 @@
  * @author          Xoops Modules Dev Team
  * @version         $Id: item.php 0 2009-06-11 18:47:04Z trabis $
  */
+######################################################################
+# Original version:
+# [11-may-2001] Kenneth Lee - http://www.nexgear.com/
+######################################################################
 
 include_once dirname(__FILE__) . '/header.php';
 $xoopsOption['template_main'] = 'publisher_archive.html';
