@@ -226,7 +226,7 @@ switch ($op) {
         $itemObj->setVar('summary', $summary);
         //$itemObj->setVar('display_summary', $display_summary);
         //$allow_available_page_wrap = $gperm_handler->checkRight('form_view', _PUBLISHER_AVAILABLE_PAGE_WRAP, $groups, $module_id);
-        $itemObj->setVar('item_tag', $item_tags);
+        $itemObj->setVar('item_tag', $item_tag);
 
         $image_handler =& xoops_gethandler('image');
         $imageObjs = $image_handler->getObjects(null, true);

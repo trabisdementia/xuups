@@ -5,7 +5,7 @@
 <span class="publisher_collaps_info"><{$category.description}><br><br></span>
 <!-- if the option is set, add the last item column -->
 <{if $category && $displaylastitem == 1 && $items}>
-	<div id="publisher_bullet_lastitem"><b><{$lang_last_publisher}> :	<{$category.last_title_link}></div>
+	<div id="publisher_bullet_lastitem"><b><{$smarty.const._MD_PUBLISHER_LAST_SMARTITEM}> :	<{$category.last_title_link}></div>
 	<{/if}>
 <br />
 
@@ -28,12 +28,12 @@
 
 	<table border="0" width="90%" cellspacing="0" cellpadding="0" align="center" class = "outer">
   		<tr>
-			<td align="left" class="itemHead" width='60%'><b>&nbsp;&nbsp;<{$lang_title}></b></td>
+			<td align="left" class="itemHead" width='60%'><b>&nbsp;&nbsp;<{$smarty.const._CO_PUBLISHER_TITLE}></b></td>
 			<{if $display_date_col == 1}>
-				<td align="center" class="itemHead" width="30%"><b><{$lang_datesub}></b></td>
+				<td align="center" class="itemHead" width="30%"><b><{$smarty.const._MD_PUBLISHER_DATESUB}></b></td>
 			<{/if}>
 			<{if $display_hits_col == 1}>
-				<td align="center" class="itemHead" width="10%"><b><{$lang_hits}></b></td>
+				<td align="center" class="itemHead" width="10%"><b><{$smarty.const._MD_PUBLISHER_HITS}></b></td>
 			<{/if}>
   		</tr>
 			<!-- Start item loop -->
@@ -64,7 +64,7 @@
 <!-- end of if $items --><{/if}>
 
 <{if !$subcats && !$items}>
-		<div class="publisher_infotext"><{$lang_empty}></div>
+		<div class="publisher_infotext"><{$smarty.const._MD_PUBLISHER_EMPTY}></div>
 <{/if}>
 
 <{include file='db:publisher_footer.html'}>

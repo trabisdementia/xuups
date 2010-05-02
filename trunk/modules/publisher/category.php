@@ -193,19 +193,14 @@ $xoopsTpl->assign('category', $category);
 $xoopsTpl->assign('categories', $categories);
 
 // Language constants
-$xoopsTpl->assign(array('lang_on' => _MD_PUBLISHER_ON, 'lang_postedby' => _CO_PUBLISHER_POSTEDBY, 'lang_total' => $totalItemOnPage, 'lang_title' => _CO_PUBLISHER_TITLE, 'lang_datesub' => _MD_PUBLISHER_DATESUB, 'lang_hits' => _MD_PUBLISHER_HITS));
 $xoopsTpl->assign('sectionname', $publisher->getModule()->getVar('name'));
 $xoopsTpl->assign('whereInSection', $publisher->getModule()->getVar('name'));
 $xoopsTpl->assign('modulename', $publisher->getModule()->getVar('dirname'));
 $xoopsTpl->assign('lang_category_summary', sprintf(_MD_PUBLISHER_CATEGORY_SUMMARY,$categoryObj->name()));
 $xoopsTpl->assign('lang_category_summary_info', sprintf(_MD_PUBLISHER_CATEGORY_SUMMARY_INFO,$categoryObj->name()));
 $xoopsTpl->assign('lang_items_title', sprintf(_MD_PUBLISHER_ITEMS_TITLE,$categoryObj->name()));
-$xoopsTpl->assign('lang_items_info', _MD_PUBLISHER_ITEMS_INFO);
 $xoopsTpl->assign('module_home', publisher_moduleHome($publisher->getConfig('format_linked_path')));
 $xoopsTpl->assign('categoryPath', $category['categoryPath']);
-$xoopsTpl->assign('lang_name_column',_MD_PUBLISHER_NAME);
-$xoopsTpl->assign('lang_empty',_MD_PUBLISHER_EMPTY);
-$xoopsTpl->assign('lang_view_more',_MD_PUBLISHER_VIEW_MORE);
 $xoopsTpl->assign('selected_category',$categoryid);
 
 // The Navigation Bar
@@ -216,7 +211,6 @@ if ($publisher->getConfig('format_image_nav') == 1) {
 } else {
     $navbar = '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';
 }
-
 $xoopsTpl->assign('navbar', $navbar);
 
 /**

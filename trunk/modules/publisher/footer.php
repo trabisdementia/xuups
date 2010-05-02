@@ -50,26 +50,11 @@ $xoopsTpl->assign('modulename', $publisher->getModule()->dirname());
 $xoopsTpl->assign('displaylastitem', $publisher->getConfig('idxcat_display_last_item'));
 $xoopsTpl->assign('displaysubcatdsc', $publisher->getConfig('idxcat_display_subcat_dsc'));
 $xoopsTpl->assign('publisher_display_breadcrumb', $publisher->getConfig('display_breadcrumb'));
-
 $xoopsTpl->assign('collapsable_heading', $publisher->getConfig('idxcat_collaps_heading'));
 $xoopsTpl->assign('display_comment_link', $publisher->getConfig('item_disp_comment_link'));
 $xoopsTpl->assign('display_whowhen_link', $publisher->getConfig('item_disp_whowhen_link'));
 $xoopsTpl->assign('displayarticlescount', $publisher->getConfig('idxcat_display_art_count'));
-
 $xoopsTpl->assign('display_date_col', $publisher->getConfig('idxcat_display_date_col'));
 $xoopsTpl->assign('display_hits_col', $publisher->getConfig('idxcat_display_hits_col'));
-
 $xoopsTpl->assign('cat_list_image_width', $publisher->getConfig('cat_list_image_width'));
 $xoopsTpl->assign('cat_main_image_width', $publisher->getConfig('cat_main_image_width'));
-
-$xoopsTpl->assign('lang_total', _MD_PUBLISHER_TOTAL_SMARTITEMS);
-$xoopsTpl->assign('lang_home', _MD_PUBLISHER_HOME);
-$xoopsTpl->assign('lang_description', _MD_PUBLISHER_DESCRIPTION);
-$xoopsTpl->assign('lang_reads', _MD_PUBLISHER_READS);
-$xoopsTpl->assign('lang_items', _MD_PUBLISHER_ITEMS);
-$xoopsTpl->assign('lang_last_publisher', _MD_PUBLISHER_LAST_SMARTITEM);
-$xoopsTpl->assign('lang_category_column', _CO_PUBLISHER_CATEGORY );
-$xoopsTpl->assign('lang_editcategory', _MD_PUBLISHER_CATEGORY_EDIT);
-$xoopsTpl->assign('lang_comments', _MD_PUBLISHER_COMMENTS);
-$xoopsTpl->assign('lang_view_more',_MD_PUBLISHER_VIEW_MORE);
-?>

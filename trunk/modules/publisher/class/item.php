@@ -1208,6 +1208,35 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
         return $this->getItems($limit, $start, array(_PUBLISHER_STATUS_PUBLISHED), $categoryid, $sort, $order, $notNullFields, $asobject, $otherCriteria, $id_key);
     }
 
+    function getPreviousPublished($obj)
+    {
+        $ret = false;
+        $limit = 1;
+        $start = 0;
+        $otherCriteria = new CriteriaCompo();
+        $otherCriteria->add(new Criteria('datesub', $obj->getVar('datesub'), '<'));
+        $objs = $this->getItems(1, 0, array(_PUBLISHER_STATUS_PUBLISHED), $obj->getVar('categoryid'), 'datesub', 'DESC', '', true, $otherCriteria, 'none');
+        if (count($objs) > 0) {
+            $ret = $objs[0];
+        }
+        return $ret;
+    }
+
+    function getNextPublished($obj)
+    {
+        $ret = false;
+        $limit = 1;
+        $start = 0;
+        $otherCriteria = new CriteriaCompo();
+        $otherCriteria->add(new Criteria('datesub', $obj->getVar('datesub'), '>'));
+        $otherCriteria->add(new Criteria('datesub', time(), '<='));
+        $objs = $this->getItems(1, 0, array(_PUBLISHER_STATUS_PUBLISHED), $obj->getVar('categoryid'), 'datesub', 'ASC', '', true, $otherCriteria, 'none');
+        if (count($objs) > 0) {
+            $ret = $objs[0];
+        }
+        return $ret;
+    }
+
     // Submited articles
     function getAllSubmitted($limit = 0, $start = 0, $categoryid = -1, $sort = 'datesub', $order = 'DESC', $notNullFields = '', $asobject = true, $id_key = 'none')
     {

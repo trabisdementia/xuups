@@ -112,7 +112,7 @@ foreach ($categoriesObj as $cat_id => $category) {
         $total += $totalItems[$cat_id];
     }
     // I'm commenting out this to also display empty categories...
-    //if ($total > 0) {
+    // if ($total > 0) {
     if (isset($last_itemObj[$cat_id])) {
         $category->setVar('last_itemid', $last_itemObj[$cat_id]->getVar('itemid'));
         $category->setVar('last_title_link', $last_itemObj[$cat_id]->getItemLink(false, $lastitemsize));
@@ -169,7 +169,6 @@ if ($publisher->getConfig('index_display_last_items')) {
 }
 
 // Language constants
-$xoopsTpl->assign(array('lang_on' => _MD_PUBLISHER_ON, 'lang_postedby' => _CO_PUBLISHER_POSTEDBY, 'lang_total' => isset($totalItemsOnPage) ? $totalItemsOnPage : '', 'lang_title' => _CO_PUBLISHER_TITLE, 'lang_datesub' => _MD_PUBLISHER_DATESUB, 'lang_hits' => _MD_PUBLISHER_HITS));
 $xoopsTpl->assign('title_and_welcome', $publisher->getConfig('index_title_and_welcome')); //SHINE ADDED DEBUG mainintro txt
 $xoopsTpl->assign('lang_mainintro', $myts->displayTarea($publisher->getConfig('index_welcome_msg'), 1));
 $xoopsTpl->assign('sectionname', $publisher->getModule()->getVar('name'));
@@ -180,18 +179,17 @@ $xoopsTpl->assign('indexfooter', $myts->displayTarea($publisher->getConfig('inde
 $xoopsTpl->assign('lang_category_summary', _MD_PUBLISHER_INDEX_CATEGORIES_SUMMARY);
 $xoopsTpl->assign('lang_category_summary_info', _MD_PUBLISHER_INDEX_CATEGORIES_SUMMARY_INFO);
 $xoopsTpl->assign('lang_items_title', _MD_PUBLISHER_INDEX_ITEMS);
-$xoopsTpl->assign('lang_items_info', _MD_PUBLISHER_INDEX_ITEMS_INFO);
-$xoopsTpl->assign('index_page', true);
+$xoopsTpl->assign('indexpage', true);
 
-// Category Navigation Bar
+
 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+// Category Navigation Bar
 $pagenav = new XoopsPageNav($totalCategories, $publisher->getConfig('idxcat_cat_perpage'), $catstart, 'catstart', '');
 if ($publisher->getConfig('format_image_nav') == 1) {
     $xoopsTpl->assign('catnavbar', '<div style="text-align:right;">' . $pagenav->renderImageNav() . '</div>');
 } else {
     $xoopsTpl->assign('catnavbar', '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>');
 }
-
 // ITEM Navigation Bar
 $pagenav = new XoopsPageNav($real_total_items, $publisher->getConfig('idxcat_index_perpage'), $start, 'start', '');
 if ($publisher->getConfig('format_image_nav') == 1) {
@@ -209,14 +207,10 @@ $xoopsTpl->assign('displaylastitems', $publisher->getConfig('index_display_last_
 $publisher_metagen = new PublisherMetagen($publisher->getModule()->getVar('name'));
 $publisher_metagen->createMetaTags();
 
-// We are on the index page
-$xoopsTpl->assign('indexpage', true);
-
 // RSS Link
-if($publisher->getConfig('idxcat_show_rss_link') == 1) {
+if ($publisher->getConfig('idxcat_show_rss_link') == 1) {
     $link = sprintf("<a href='%s' title='%s'><img src='%s' border=0 alt='%s'></a>", PUBLISHER_URL . "/backend.php", _MD_PUBLISHER_RSSFEED, PUBLISHER_URL . "/images/rss.gif", _MD_PUBLISHER_RSSFEED);
     $xoopsTpl->assign('rssfeed_link', $link);
 }
 
 include_once XOOPS_ROOT_PATH . '/footer.php';
-?>

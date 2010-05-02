@@ -1,12 +1,12 @@
 	<div align="right"><{$catnavbar}></div>
 <table border="0" width="90%" cellspacing="1" cellpadding="0" align="center" class = "outer">
 	<tr>
-		<td align="left" class="itemHead"><b><{$lang_category_column}></b></td>
+		<td align="left" class="itemHead"><b><{$smarty.const._CO_PUBLISHER_CATEGORY}></b></td>
 		<{if $displayarticlescount}>
-			<td align="left" width="70px" class="itemHead"><b><{$lang_items}></b></td>
+			<td align="left" width="70px" class="itemHead"><b><{$smarty.const._MD_PUBLISHER_ITEMS}></b></td>
 		<{/if}>
 		<{if $displaylastitem == 1}>
-			<td align="left" width="40%" class="itemHead"><b><{$lang_last_publisher}></b></td>
+			<td align="left" width="40%" class="itemHead"><b><{$smarty.const._MD_PUBLISHER_LAST_SMARTITEM}></b></td>
 		<{/if}>
 	</tr>
 
@@ -16,7 +16,7 @@
 			<td class="even" align="left">
 				<{if $category.image_path}>
 					<{if $isAdmin == 1}>
-						<a href="<{$publisher_url}>/admin/category.php?op=mod&categoryid=<{$category.categoryid}>"><img src="<{$category.image_path}>" title="<{$lang_editcategory}>" alt="<{$lang_editcategory}>"/></a>&nbsp;
+						<a href="<{$publisher_url}>/admin/category.php?op=mod&categoryid=<{$category.categoryid}>"><img src="<{$category.image_path}>" title="<{$smarty.const._MD_PUBLISHER_CATEGORY_EDIT}>" alt="<{$lang_editcategory}>"/></a>&nbsp;
 					<{else}>
 						<img src="<{$category.image_path}>" alt="<{$category.name}>" />&nbsp;
 					<{/if}>
