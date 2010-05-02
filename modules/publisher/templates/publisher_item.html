@@ -6,7 +6,7 @@
   <h3><{$item.subtitle}></h3>
   <{/if}>
   <{if $display_whowhen_link}>
-  <small><{$item.who_when}> (<{$item.counter}> <{$lang_reads}>)</small>
+  <small><{$item.who_when}> (<{$item.counter}> <{$smarty.const._MD_PUBLISHER_READS}>)</small>
   <{/if}>
 	<div class="itemBody">
 <!--
@@ -15,7 +15,7 @@
     <{/if}>
 -->
     <{if $pagenav}>
-    <div class="publisher_pagenav_top"><{$lang_page}>: <{$pagenav}></div>
+    <div class="publisher_pagenav_top"><{$smarty.const._MD_PUBLISHER_PAGE}>: <{$pagenav}></div>
     <{/if}>
       <div class="itemText">
         <{if $item.image_path || $item.images}>
@@ -49,7 +49,7 @@
 			</div>
 		  <{/if}>
 	    <{if $pagenav}>
-	    <div class="publisher_pagenav_bottom"><{$lang_page}>: <{$pagenav}></div>
+	    <div class="publisher_pagenav_bottom"><{$smarty.const._MD_PUBLISHER_PAGE}>: <{$pagenav}></div>
 	  	<{/if}>
 	  	<{if $tagbar}>
 		  <p><{include file="db:tag_bar.html"}></p>
@@ -62,7 +62,7 @@
 		  <div class="itemInfo" style="height: 14px;">
 	  		<{if $display_comment_link && $item.cancomment}>
 				<span style="float: left;">
-          <a href="<{$item.itemurl}>"><{$item.comments}> <{$lang_comments}></a>
+          <a href="<{$item.itemurl}>"><{$item.comments}> <{$smarty.const._MD_PUBLISHER_COMMENTS}></a>
         </span>
 	  	  <{else}>
 				<span style="float: left;">&nbsp;</span>
@@ -82,12 +82,12 @@
 <{if $item.files}>
 <table border="0" width="90%" cellspacing="1" cellpadding="0" align="center" class = "outer">
 	<tr>
-		<td colspan="4" class="itemHead"><b><{$lang_files_linked}></b></td>
+		<td colspan="4" class="itemHead"><b><{$smarty.const._MD_PUBLISHER_FILES_LINKED}></b></td>
 	</tr>
 	<tr class="even">
-		<td align="left" class="itemTitle"><b><{$lang_file_name}></b></td>
-	  <td align="center" width="100" class="itemTitle"><b><{$lang_datesub}></b></td>
-	  <td align="center" width="50" class="itemTitle"><b><{$lang_hits}></b></td>
+		<td align="left" class="itemTitle"><b><{$smarty.const._MD_PUBLISHER_FILENAME}></b></td>
+	  <td align="center" width="100" class="itemTitle"><b><{$smarty.const._MD_PUBLISHER_DATESUB}></b></td>
+	  <td align="center" width="50" class="itemTitle"><b><{$smarty.const._MD_PUBLISHER_HITS}></b></td>
 	</tr>
 
 	<!-- BEGIN DYNAMIC BLOCK -->
@@ -95,7 +95,7 @@
   <tr>
  		<td class="odd" align="left">
 		  <a href="<{$publisher_url}>/visit.php?fileid=<{$file.fileid}>" target="_blank">
-		    <img src="<{$publisher_url}>/images/icon/file.gif" title="<{$lang_download_file}>" alt="<{$lang_download_file}>"/>&nbsp;<b><{$file.name}></b>
+		    <img src="<{$publisher_url}>/images/icon/file.gif" title="<{$lang_download_file}>" alt="<{$smarty.const._MD_PUBLISHER_DOWNLOAD_FILE}>"/>&nbsp;<b><{$file.name}></b>
       </a>
 		  <div><{$file.description}></div>
     </td>
@@ -112,13 +112,13 @@
 <{if $previous_item_link || $next_item_link}>
 <table class="outer">
   <tr>
-    <td class="itemHead" colspan="2"><b><{$lang_items_links}></b></td>
+    <td class="itemHead" colspan="2"><b><{$smarty.const._MD_PUBLISHER_ITEMS_LINKS}></b></td>
   </tr>
   <tr style="vertical-align: middle;">
     <td class="odd" width="50%" align="left">
       <{if $previous_item_link}>
       <a href="<{$previous_item_url}>">
-        <img style="vertical-align: middle;" src="<{$publisher_images_url}>/links/previous.gif" title="<{$lang_previous_item}>" alt="<{$lang_previous_item}>"/>
+        <img style="vertical-align: middle;" src="<{$publisher_images_url}>/links/previous.gif" title="<{$smarty.const._MD_PUBLISHER_PREVIOUS_ITEM}>" alt="<{$smarty.const._MD_PUBLISHER_PREVIOUS_ITEM}>"/>
       </a> 
       <{$previous_item_link}>
       <{/if}>
@@ -126,7 +126,7 @@
     <td class="odd" width="50%" align="right">
       <{if $next_item_link}>
       <{$next_item_link}>
-      <a href="<{$next_item_url}>"><img style="vertical-align: middle;" src="<{$publisher_images_url}>/links/next.gif" title="<{$lang_next_item}>" alt="<{$lang_next_item}>"/></a>
+      <a href="<{$next_item_url}>"><img style="vertical-align: middle;" src="<{$publisher_images_url}>/links/next.gif" title="<{$smarty.const._MD_PUBLISHER_NEXT_ITEM}>" alt="<{$smarty.const._MD_PUBLISHER_NEXT_ITEM}>"/></a>
       <{/if}>
     </td>
   </tr>
@@ -135,12 +135,12 @@
 <{elseif $other_items == 'all'}>
   <table border="0" width="90%" cellspacing="1" cellpadding="3" align="center" class= "outer">
 	<tr>
-	  <td align="left" class="itemHead" width='65%'><b><{$lang_item}></b></td>
+	  <td align="left" class="itemHead" width='65%'><b><{$smarty.const._MD_PUBLISHER_OTHER_ITEMS}></b></td>
 		<{if $display_date_col == 1}>
-	  <td align="center" class="itemHead" width="25%"><b><{$lang_datesub}></b></td>
+	  <td align="center" class="itemHead" width="25%"><b><{$smarty.const._MD_PUBLISHER_DATESUB}></b></td>
 	  <{/if}>
 		<{if $display_hits_col == 1}>
-	  <td align="center" class="itemHead" width="10%"><b><{$lang_hits}></b></td>
+	  <td align="center" class="itemHead" width="10%"><b><{$smarty.const._MD_PUBLISHER_HITS}></b></td>
 	  <{/if}>
 	</tr>
   <!-- Start item loop -->
