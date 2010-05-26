@@ -36,3 +36,4 @@
 - Added : Latest news block (trabis/bandit-x/Mowaffak)
 - Added : Category selection block (trabis/Mowaffak)
 - Added : Image manager / easy uploading (trabis)
+- Fixed : Item name not available in comment notification (Phoenyx)

@@ -48,7 +48,7 @@ function publisher_notify_iteminfo($category, $item_id)
 
     if ($category == 'item') {
         // Assume we have a valid story id
-        $sql = 'SELECT title, short_url FROM ' . $xoopsDB->prefix('publisher_item') . ' WHERE itemid = ' . $item_id;
+        $sql = 'SELECT title, short_url FROM ' . $xoopsDB->prefix('publisher_items') . ' WHERE itemid = ' . $item_id;
         $result = $xoopsDB->query($sql); // TODO: error check
         $result_array = $xoopsDB->fetchArray($result);
         $item['name'] = $result_array['title'];
