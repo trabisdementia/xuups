@@ -228,20 +228,25 @@ switch ($op) {
         //$allow_available_page_wrap = $gperm_handler->checkRight('form_view', _PUBLISHER_AVAILABLE_PAGE_WRAP, $groups, $module_id);
         $itemObj->setVar('item_tag', $item_tag);
 
-        $image_handler =& xoops_gethandler('image');
-        $imageObjs = $image_handler->getObjects(null, true);
+        //Todo: get a better image class for xoops!
+        //Image hack
         $image_item_ids = array();
-        foreach ($imageObjs as $id => $imageObj) {
-            $image_name = $imageObj->getVar('image_name');
+        global $xoopsDB;
+        $sql = 'SELECT image_id, image_name FROM ' . $xoopsDB->prefix('image');
+        $result = $xoopsDB->query($sql, 0, 0);
+        while ($myrow = $xoopsDB->fetchArray($result)) {
+            $image_name = $myrow['image_name'];
+            $id = $myrow['image_id'];
             if ($image_name == $image_featured) {
-                $itemObj->setVar('image', $id);
+                 $itemObj->setVar('image', $id);
             }
             if (in_array($image_name, $image_item)) {
                 $image_item_ids[] = $id;
             }
+
         }
+
         $itemObj->setVar('images', implode('|', $image_item_ids));
-        unset($imageObjs);
 
         $itemObj->setVar('subtitle', $subtitle);
         $itemObj->setVar('author_alias', $author_alias);
