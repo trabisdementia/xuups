@@ -2,18 +2,18 @@
 define("_AM_SUBSCRIBERS_GOMOD", "’›Õ… «·»—‰«„Ã");
 define("_AM_SUBSCRIBERS_BLOCKS", "≈œ«—… «·»·Êﬂ« ");
 define("_AM_SUBSCRIBERS_UPDATE_MODULE", " ÕœÌÀ «·»—‰«„Ã");
-define("_AM_SUBSCRIBERS_ERROR", "Sorry, an error occured!");
-define("_AM_SUBSCRIBERS_SOME_ERROR", "Hum, some requests were not performed!");
+define("_AM_SUBSCRIBERS_ERROR", "⁄–—«° ÕœÀ Œÿ√!");
+define("_AM_SUBSCRIBERS_SOME_ERROR", "Ì»œÊ √‰ »⁄÷ «·„ ÿ·»«  €Ì— „ Ê›—…!");
 define("_AM_SUBSCRIBERS_SUCCESS", " „  «·⁄„·Ì… »‰Ã«Õ");
 define("_AM_SUBSCRIBERS_AYS", "Â· √‰  „ √ﬂœ ø");
 define("_AM_SUBSCRIBERS_LIST", "ﬁ«∆„… «·„‘ —ﬂÌ‰");
-define("_AM_SUBSCRIBERS_ERROR_SELECT", "Selection Error!!!");
-define("_AM_SUBSCRIBERS_RESULTS_FOUND", "Newsletters Subscribers : ");
+define("_AM_SUBSCRIBERS_ERROR_SELECT", "Œÿ√ ›Ì «·≈Œ Ì«—!!!");
+define("_AM_SUBSCRIBERS_RESULTS_FOUND", "„‘ —ﬂÌ «·ﬁ«∆„… «·»—ÌœÌ… : ");
 
 define("_AM_SUBSCRIBERS_COUNTRY", "«·»·œ");
 define("_AM_SUBSCRIBERS_EMAIL", "«·»—Ìœ «·≈·ﬂ —Ê‰Ì");
 define("_AM_SUBSCRIBERS_NAME", "«·«”„");
-define("_AM_SUBSCRIBERS_CREATED", "Created");
+define("_AM_SUBSCRIBERS_CREATED", "» «—ÌŒ");
 define("_AM_SUBSCRIBERS_PRIORITY", "«·√Ê·ÊÌ…");
 define("_AM_SUBSCRIBERS_SUBJECT", "«·⁄‰Ê«‰");
 define("_AM_SUBSCRIBERS_NOTFOUND", "«·ÃœÊ· ›«—€");
@@ -21,19 +21,19 @@ define("_AM_SUBSCRIBERS_NOTFOUND", "«·ÃœÊ· ›«—€");
 define("_AM_SUBSCRIBERS_SEND", "—”«·… ≈⁄·«‰Ì… ÃœÌœ…");
 define("_AM_SUBSCRIBERS_ALL_COUNTRIES", "Ã„Ì⁄ «·œÊ·");
 define("_AM_SUBSCRIBERS_EMAIL_PRIORITY", "«·√Ê·ÊÌ…");
-define("_AM_SUBSCRIBERS_EMAIL_PRIORITY_DSC", "The higher the faster!");
+define("_AM_SUBSCRIBERS_EMAIL_PRIORITY_DSC", "«·√⁄·Ï √”—⁄!");
 define("_AM_SUBSCRIBERS_EMAIL_SUBJECT", "«·⁄‰Ê«‰");
 define("_AM_SUBSCRIBERS_EMAIL_BODY", "«·—”«·…");
-define("_AM_SUBSCRIBERS_EMAIL_BODY_DSC", "You can use {NAME} and {EMAIL} tags.<br /> They will be replaced by subscriber's name and email");
+define("_AM_SUBSCRIBERS_EMAIL_BODY_DSC", "Ì„ﬂ‰ﬂ ≈” Œœ«„ «·√Ê”„… {NAME} Ê {EMAIL} .<br /> Ê ”  „  ÕÊÌ·Â« ≈·Ï «”„ Ê »—Ìœ «·„‘ —ﬂ");
 
 // Groups
-define("_AM_SUBSCRIBERS_SUBSCRIBERS", "Subscribers");
-define("_AM_SUBSCRIBERS_USERS", "Active users");
-define("_AM_SUBSCRIBERS_BOTH", "Both");
-define("_AM_SUBSCRIBERS_EMAIL_GROUPS", "Groups");
-define("_AM_SUBSCRIBERS_EMAIL_GROUPS_DSC", "Select groups of recipients");
+define("_AM_SUBSCRIBERS_SUBSCRIBERS", "«·„‘ —ﬂÌ‰");
+define("_AM_SUBSCRIBERS_USERS", "«·√⁄÷«¡ «·„›⁄·Ì‰");
+define("_AM_SUBSCRIBERS_BOTH", "«·ﬂ·");
+define("_AM_SUBSCRIBERS_EMAIL_GROUPS", "«·„Ã„Ê⁄« ");
+define("_AM_SUBSCRIBERS_EMAIL_GROUPS_DSC", "≈Œ — „Ã„Ê⁄… «·„” ·„Ì‰");
 
-define("_AM_SUBSCRIBERS_DELETE_ALL", "Delete all");
-define("_AM_SUBSCRIBERS_USERS_FOUND", "Website Members : ");
-define("_AM_SUBSCRIBERS_TOTAL_FOUND", "Total : ");
+define("_AM_SUBSCRIBERS_DELETE_ALL", "Õ–› «·ﬂ·");
+define("_AM_SUBSCRIBERS_USERS_FOUND", "√⁄÷«¡ «·„Êﬁ⁄ : ");
+define("_AM_SUBSCRIBERS_TOTAL_FOUND", "«·≈Ã„«·Ì : ");
 ?>
