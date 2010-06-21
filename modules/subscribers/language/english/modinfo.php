@@ -2,7 +2,6 @@
 define("_MI_SUBSCRIBERS_MD_NAME", "Subscribers");
 define("_MI_SUBSCRIBERS_MD_DSC", "Subscription and mailing module");
 define("_MI_SUBSCRIBERS_BLK_ADD", "Add Subscription");
-define("_MI_SUBSCRIBERS_BLK_ADD_DSC", "");
 define("_MI_SUBSCRIBERS_PAGE_INDEX", "Index page");
 define("_MI_SUBSCRIBERS_ADMENU_USER", "Subscribers list");
 define("_MI_SUBSCRIBERS_ADMENU_WAITING", "Waiting Messages");

@@ -6,8 +6,8 @@ if (!defined("XOOPS_ROOT_PATH")) {
 $modversion['name'] = _MI_SUBSCRIBERS_MD_NAME;
 $modversion['version'] = 1.0;
 $modversion['description'] = _MI_SUBSCRIBERS_MD_DSC;
-$modversion['author'] = "XUUPS";
-$modversion['credits'] = "trabis";
+$modversion['author'] = "Trabis - www.xuups.com";
+$modversion['credits'] = "Mowaffaq - www.arabxoops.com";
 $modversion['help'] = "";
 $modversion['license'] = "GNU General Public License (GPL)";
 $modversion['official'] = 0;
