@@ -50,6 +50,7 @@ if ($itemid != 0) {
     }
     $categoryObj = $itemObj->category();
     $datesub = $itemObj->getVar('datesub');
+    $uid = $itemObj->getVar('uid');
 } else {
     // we are submitting a new article
     // if the user is not admin AND we don't allow user submission, exit

@@ -190,11 +190,11 @@ class PublisherItemForm extends XoopsThemeTabForm {
             }
             $uid_select->addOptionArray($users_array);
             $this->addElement($uid_select);
-        } else {
+        }/* else {
             $hidden = new XoopsFormHidden('uid', $obj->uid());
             $this->addElement($hidden);
             unset($hidden);
-        }
+        }*/
 
         // Author ALias
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_AUTHOR_ALIAS)) {
