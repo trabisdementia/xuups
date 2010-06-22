@@ -24,7 +24,7 @@ error_reporting(0);
 include_once dirname(__FILE__) . '/header.php';
 
 $itemid = PublisherRequest::getInt('itemid');
-$item_page_id = $itemid = PublisherRequest::getInt('page', -1);
+$item_page_id = PublisherRequest::getInt('page', -1);
 
 if ($itemid == 0) {
     redirect_header("javascript:history.go(-1)", 1, _MD_PUBLISHER_NOITEMSELECTED);
