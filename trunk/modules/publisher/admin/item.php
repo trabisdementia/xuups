@@ -68,8 +68,12 @@ switch ($op) {
         // Creating the item object
         if ($itemid != 0) {
             $itemObj = $publisher->getHandler('item')->get($itemid);
+            $uid = $itemObj->getVar('uid');
+            $datesub = $itemObj->getVar('datesub');
         } else {
             $itemObj = $publisher->getHandler('item')->create();
+            $uid = $xoopsUser->uid();
+            $datesub = time();
         }
 
         // Putting the values in the ITEM object
@@ -118,8 +122,8 @@ switch ($op) {
         $old_status = $itemObj->status();
         $new_status = PublisherRequest::getInt('status', _PUBLISHER_STATUS_PUBLISHED);//_PUBLISHER_STATUS_NOTSET;
 
-        $itemObj->setVar('uid', PublisherRequest::getInt('uid', $xoopsUser->uid()));
-        $itemObj->setVar('datesub', isset($_POST['datesub']) ? strtotime($_POST['datesub']['date']) + $_POST['datesub']['time'] : time());
+        $itemObj->setVar('uid', PublisherRequest::getInt('uid', $uid));
+        $itemObj->setVar('datesub', isset($_POST['datesub']) ? strtotime($_POST['datesub']['date']) + $_POST['datesub']['time'] : $datesub);
 
         $itemObj->setVar('weight', PublisherRequest::getInt('weight'));
         $itemObj->setPartial_view(PublisherRequest::getInt('partial_view', false));
