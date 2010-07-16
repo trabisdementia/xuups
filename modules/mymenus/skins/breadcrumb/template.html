@@ -1,0 +1,12 @@
+<{if $config.home}>
+    <a href="<{$xoops.url}>" alt="<{$smarty.const._MB_MYMENUS_HOME}>" title="<{$smarty.const._MB_MYMENUS_HOME}>">
+    <{$smarty.const._MB_MYMENUS_HOME}>
+    </a><{$config.separator}>
+<{/if}>
+<{foreach item=menu from=$block}>
+    <{if $menu.selected}>
+        <a href="<{$menu.link}>" target="<{$menu.target}>" alt="<{$menu.alt_title}>" title="<{$menu.alt_title}>">
+        <{$menu.title}>
+        </a><{if !$menu.topselected}> <{$config.separator}><{/if}>
+    <{/if}>
+<{/foreach}>
