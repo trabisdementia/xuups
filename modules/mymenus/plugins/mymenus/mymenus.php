@@ -3,9 +3,7 @@
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
-if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 class MymenusMymenusPluginItem extends MymenusPluginItem
 {
@@ -41,7 +39,8 @@ class MymenusMymenusPluginItem extends MymenusPluginItem
         $registry =& MymenusRegistry::getInstance();
         $linkArray = $registry->getEntry('link_array');
         $linkArray['link'] = self::_doDecoration($linkArray['link']);
-        if (!eregi('mailto:', $linkArray['link']) && !eregi('://', $linkArray['link'])) {
+        //if (!eregi('mailto:', $linkArray['link']) && !eregi('://', $linkArray['link'])) {
+        if (!preg_match('/mailto:/i', $linkArray['link']) && !preg_match('/:\/\//i', $linkArray['link'])) {
             $linkArray['link'] = XOOPS_URL . '/' . $linkArray['link'];  //Do not do this in other decorators
         }
         $registry->setEntry('link_array', $linkArray);
@@ -79,7 +78,8 @@ class MymenusMymenusPluginItem extends MymenusPluginItem
     function _doDecoration($string)
     {
         $registry =& MymenusRegistry::getInstance();
-        if (!eregi("{(.*\|.*)}", $string, $reg)) {
+        //if (!eregi("{(.*\|.*)}", $string, $reg)) {
+        if (!preg_match('/{(.*\|.*)}/i', $string, $reg)) {
             return $string;
         }
 

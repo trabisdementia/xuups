@@ -3,9 +3,8 @@
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
-if (!defined('XOOPS_ROOT_PATH')) {
-    die("XOOPS root path not defined");
-}
+defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
+
 
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH . '/modules/mymenus/include/functions.php';
@@ -110,7 +109,7 @@ function mymenus_block_show($options)
     }
 
     include_once XOOPS_ROOT_PATH . '/class/template.php';
-    $blockTpl =& new XoopsTpl();
+    $blockTpl = new XoopsTpl();
     $blockTpl->assign('block', $block);
     //$blockTpl->assign('block2', $block2);
     //$blockTpl->assign('skin', $skin);

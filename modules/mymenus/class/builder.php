@@ -100,7 +100,7 @@ class MymenusBuilder
 
         //get all matching links
         foreach ($this->output as $idx => $menu) {
-            $selected = eregi($menu['link'], $self) ? 1 : 0;
+            $selected = (false !== stristr($self, $menu['link'])) ? 1 : 0;
             $selected = ($menu['link'] == $self) ? 1 : $selected;
             $selected = ($menu['link'] == $default) ? 1 : $selected;
             if ($selected) {

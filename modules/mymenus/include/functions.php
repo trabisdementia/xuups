@@ -5,38 +5,38 @@
 
 function mymenus_adminMenu($currentoption = 0, $breadcrumb = '')
 {
-	include_once XOOPS_ROOT_PATH . '/class/template.php';
-	include XOOPS_ROOT_PATH . '/modules/mymenus/admin/menu.php';
+    include_once XOOPS_ROOT_PATH . '/class/template.php';
+    include XOOPS_ROOT_PATH . '/modules/mymenus/admin/menu.php';
 
     xoops_loadLanguage('admin', 'mymenus');
     xoops_loadLanguage('modinfo', 'mymenus');
 
-	$tpl =& new XoopsTpl();
-	$tpl->assign(array('modurl'	    => XOOPS_URL . '/modules/mymenus',
-	                   'headermenu'	=> $mymenus_headermenu,
-                       'adminmenu'	=> $mymenus_adminmenu,
-	                   'current'	=> $currentoption,
-	                   'breadcrumb'	=> $breadcrumb,
-	                   'headermenucount' => count($mymenus_headermenu)));
-	$tpl->display(XOOPS_ROOT_PATH . '/modules/mymenus/templates/static/mymenus_admin_adminmenu.html');
+    $tpl = new XoopsTpl();
+    $tpl->assign(array('modurl'	    => XOOPS_URL . '/modules/mymenus',
+        'headermenu'	=> $mymenus_headermenu,
+        'adminmenu'	=> $mymenus_adminmenu,
+        'current'	=> $currentoption,
+        'breadcrumb'	=> $breadcrumb,
+        'headermenucount' => count($mymenus_headermenu)));
+    $tpl->display(XOOPS_ROOT_PATH . '/modules/mymenus/templates/static/mymenus_admin_adminmenu.html');
 }
 
 function mymenus_getModuleConfig($dirname = 'mymenus')
 {
-	static $config;
-	if (!$config) {
-		global $xoopsModule;
-		if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $dirname) {
-			global $xoopsModuleConfig;
-			$config =& $xoopsModuleConfig;
-		} else {
-			$hModule =& xoops_gethandler('module');
-			$module = $hModule->getByDirname($dirname);
-			$hConfig =& xoops_gethandler('config');
-			$config = $hConfig->getConfigsByCat(0, $module->getVar('mid'));
-		}
-	}
-	return $config;
+    static $config;
+    if (!$config) {
+        global $xoopsModule;
+        if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $dirname) {
+            global $xoopsModuleConfig;
+            $config =& $xoopsModuleConfig;
+        } else {
+            $hModule =& xoops_gethandler('module');
+            $module = $hModule->getByDirname($dirname);
+            $hConfig =& xoops_gethandler('config');
+            $config = $hConfig->getConfigsByCat(0, $module->getVar('mid'));
+        }
+    }
+    return $config;
 }
 
 function mymenus_getSkinInfo($skin)
