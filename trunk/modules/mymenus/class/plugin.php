@@ -1,14 +1,27 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
-include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-include_once XOOPS_ROOT_PATH . '/modules/mymenus/class/registry.php';
+/**
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Mymenus
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: plugin.php 0 2010-07-21 18:47:04Z trabis $
+ */
+
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
+
+xoops_load('XoopsLists');
+include_once $GLOBALS['xoops']->path('modules/mymenus/class/registry.php');
 
 
 class MymenusPlugin
@@ -18,7 +31,7 @@ class MymenusPlugin
     var $_plugins;
     var $_events;
 
-    function MymenusPlugin()
+    function __construct()
     {
         $this->_plugins = array();
         $this->_events = array();
@@ -38,10 +51,10 @@ class MymenusPlugin
 
     function setPlugins()
     {
-        if (is_dir($dir = XOOPS_ROOT_PATH . "/modules/mymenus/plugins/")) {
-            $plugins_list = XoopsLists::getDirListAsArray($dir, "");
+        if (is_dir($dir = $GLOBALS['xoops']->path('modules/mymenus/plugins/'))) {
+            $plugins_list = XoopsLists::getDirListAsArray($dir, '');
             foreach ($plugins_list as $plugin) {
-                if (file_exists(XOOPS_ROOT_PATH . "/modules/mymenus/plugins/{$plugin}/{$plugin}.php")) {
+                if (file_exists($GLOBALS['xoops']->path("modules/mymenus/plugins/{$plugin}/{$plugin}.php"))) {
                     $this->_plugins[] = $plugin;
                 }
             }
@@ -51,7 +64,7 @@ class MymenusPlugin
     function setEvents()
     {
         foreach ($this->_plugins as $plugin) {
-            include_once XOOPS_ROOT_PATH . "/modules/mymenus/plugins/{$plugin}/{$plugin}.php";
+            include_once $GLOBALS['xoops']->path("/modules/mymenus/plugins/{$plugin}/{$plugin}.php");
             $class_name = ucfirst($plugin) . 'MymenusPluginItem' ;
             if (!class_exists($class_name)) {
                 continue;
@@ -79,20 +92,18 @@ class MymenusPlugin
 
 }
 
-
 class MymenusPluginItem
 {
-    function MymenusPluginItem()
-    {
-    }
 
     function loadLanguage($name)
-        {
+    {
         $language =  $GLOBALS['xoopsConfig']['language'];
-        $path = XOOPS_ROOT_PATH . "/modules/mymenus/plugins/{$name}/language";
+        $path = $GLOBALS['xoops']->path("modules/mymenus/plugins/{$name}/language");
         if (!($ret = @include_once "{$path}/{$language}/{$name}.php")) {
             $ret = @include_once "{$path}/english/{$name}.php";
         }
         return $ret;
     }
 }
+
+?>

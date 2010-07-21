@@ -1,24 +1,42 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Mymenus
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: functions.php 0 2010-07-21 18:47:04Z trabis $
+ */
+
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 function mymenus_adminMenu($currentoption = 0, $breadcrumb = '')
 {
-    include_once XOOPS_ROOT_PATH . '/class/template.php';
-    include XOOPS_ROOT_PATH . '/modules/mymenus/admin/menu.php';
+    include_once $GLOBALS['xoops']->path('class/template.php');
+    include $GLOBALS['xoops']->path('modules/mymenus/admin/menu.php');
 
     xoops_loadLanguage('admin', 'mymenus');
     xoops_loadLanguage('modinfo', 'mymenus');
 
     $tpl = new XoopsTpl();
-    $tpl->assign(array('modurl'	    => XOOPS_URL . '/modules/mymenus',
-        'headermenu'	=> $mymenus_headermenu,
-        'adminmenu'	=> $mymenus_adminmenu,
-        'current'	=> $currentoption,
-        'breadcrumb'	=> $breadcrumb,
+    $tpl->assign(array(
+        'modurl'          => $GLOBALS['xoops']->url('modules/mymenus'),
+        'headermenu'      => $mymenus_headermenu,
+        'adminmenu'       => $mymenus_adminmenu,
+        'current'         => $currentoption,
+        'breadcrumb'      => $breadcrumb,
         'headermenucount' => count($mymenus_headermenu)));
-    $tpl->display(XOOPS_ROOT_PATH . '/modules/mymenus/templates/static/mymenus_admin_adminmenu.html');
+    $tpl->display($GLOBALS['xoops']->path('modules/mymenus/templates/static/mymenus_admin_adminmenu.html'));
 }
 
 function mymenus_getModuleConfig($dirname = 'mymenus')
@@ -41,7 +59,17 @@ function mymenus_getModuleConfig($dirname = 'mymenus')
 
 function mymenus_getSkinInfo($skin)
 {
-    $file = XOOPS_ROOT_PATH . "/modules/mymenus/skins/{$skin}/skin_version.php";
+    if ($skin == 'skin_from_theme') {
+        $path = "themes/" . $GLOBALS['xoopsConfig']['theme_set'] . "/menu";
+        if (!file_exists($GLOBALS['xoops']->path("{$path}/skin_version.php"))) {
+            $skin = 'default';
+        }
+    }
+    if ($skin != 'skin_from_theme') {
+        $path = "modules/mymenus/skins/{$skin}";
+    }
+
+    $file = $GLOBALS['xoops']->path("{$path}/skin_version.php");
     $info = array();
 
     if (file_exists($file)) {
@@ -50,9 +78,9 @@ function mymenus_getSkinInfo($skin)
     }
 
     if (!isset($info['template'])) {
-        $info['template'] = XOOPS_ROOT_PATH . "/modules/mymenus/templates/static/blocks/mymenus_block.html";
+        $info['template'] = $GLOBALS['xoops']->path("modules/mymenus/templates/static/blocks/mymenus_block.html");
     } else {
-        $info['template'] = XOOPS_ROOT_PATH . "/modules/mymenus/skins/{$skin}/" . $info['template'];
+        $info['template'] = $GLOBALS['xoops']->path("{$path}/" . $info['template']);
     }
 
     if (!isset($info['prefix'])) {
@@ -62,14 +90,14 @@ function mymenus_getSkinInfo($skin)
     if (isset($info['css'])) {
         $info['css'] = (array)$info['css'];
         foreach ($info['css'] as $key => $value) {
-            $info['css'][$key] = XOOPS_URL . "/modules/mymenus/skins/{$skin}/{$value}" ;
+            $info['css'][$key] = $GLOBALS['xoops']->url("{$path}/{$value}");
         }
     }
 
     if (isset($info['js'])) {
         $info['js'] = (array)$info['js'];
         foreach ($info['js'] as $key => $value) {
-            $info['js'][$key] = XOOPS_URL . "/modules/mymenus/skins/{$skin}/{$value}" ;
+            $info['js'][$key] = $GLOBALS['xoops']->url("{$path}/{$value}");
         }
     }
 
@@ -79,3 +107,5 @@ function mymenus_getSkinInfo($skin)
 
     return $info;
 }
+
+?>

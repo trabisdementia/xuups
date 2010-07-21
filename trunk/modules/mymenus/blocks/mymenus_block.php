@@ -1,13 +1,24 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Mymenus
+ * @since           1.0
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: mymenus_block.php 0 2010-07-21 18:47:04Z trabis $
+ */
 
 defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
-
-
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once XOOPS_ROOT_PATH . '/modules/mymenus/include/functions.php';
 
 function mymenus_block_show($options)
 {
@@ -16,10 +27,10 @@ function mymenus_block_show($options)
     $xoopsLogger->startTime('My Menus Block');
     $myts =& MyTextSanitizer::getInstance();
 
-    include_once XOOPS_ROOT_PATH . '/modules/mymenus/include/functions.php';
-    include_once XOOPS_ROOT_PATH . '/modules/mymenus/class/registry.php';
-    include_once XOOPS_ROOT_PATH . '/modules/mymenus/class/plugin.php';
-    include_once XOOPS_ROOT_PATH . '/modules/mymenus/class/builder.php';
+    include_once $GLOBALS['xoops']->path('modules/mymenus/include/functions.php');
+    include_once $GLOBALS['xoops']->path('modules/mymenus/class/registry.php');
+    include_once $GLOBALS['xoops']->path('modules/mymenus/class/plugin.php');
+    include_once $GLOBALS['xoops']->path('modules/mymenus/class/builder.php');
 
     $registry =& MymenusRegistry::getInstance();
     $plugin =& MymenusPlugin::getInstance();
@@ -108,7 +119,6 @@ function mymenus_block_show($options)
         }
     }
 
-    include_once XOOPS_ROOT_PATH . '/class/template.php';
     $blockTpl = new XoopsTpl();
     $blockTpl->assign('block', $block);
     //$blockTpl->assign('block2', $block2);
@@ -137,21 +147,21 @@ function mymenus_block_edit($options)
     $menus_handler =& xoops_getModuleHandler('menus', 'mymenus');
     xoops_loadLanguage('admin', 'mymenus');
 
-    $criteria = new Criteria(1, 1);
+    $criteria = new CriteriaCompo();
     $criteria->setSort('title');
     $criteria->setOrder('ASC');
     $menus = $menus_handler->getObjects($criteria);
     unset($criteria);
 
     if (count($menus) == 0) {
-        $form = "<a href='" . XOOPS_URL . "/modules/mymenus/admin/admin_menus.php'>" . _AM_MYMENUS_MSG_NOMENUS . "</a>";
+        $form = "<a href='" . $GLOBALS['xoops']->url('modules/mymenus/admin/admin_menus.php') . "'>" . _AM_MYMENUS_MSG_NOMENUS . "</a>";
         return $form;
     }
 
-    include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
+    xoops_load('XoopsFormLoader');
 
     $form = "<b>" . _MB_MYMENUS_SELECT_MENU . "</b>&nbsp;<select name='options[0]'>";
-    foreach($menus as $menu){
+    foreach ($menus as $menu) {
         $form .= "<option value='" . $menu->getVar('id') . "'";
         if ($options[0] == $menu->getVar('id')) {
             $form .= " selected='selected'";
@@ -159,36 +169,31 @@ function mymenus_block_edit($options)
         $form .= '>' . $menu->getVar('title') . "</option>\n";
     }
     $form .= "</select>\n<br /><br />";
-    /*
-    $form .= "<b>" . _MB_MYTABS_WIDTH . "</b>&nbsp;";
-    $element = new XoopsFormText('', 'options[1]', 10, 50, $options[1]);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_WIDTH_DSC . "</i><br /><br />";
 
-    $form .= "<b>" . _MB_MYTABS_HEIGHT . "</b>&nbsp;";
-    $element = new XoopsFormText('', 'options[2]', 10, 50, $options[2]);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_HEIGHT_DSC . "</i><br /><br />";
-    */
+    xoops_load('XoopsLists');
+    $temp_skins = XoopsLists::getDirListAsArray(XOOPS_ROOT_PATH . "/modules/mymenus/skins/", "");
+    $skins[] = 'skin_from_theme';
+    foreach ($temp_skins as $key => $skin) {
+        if (file_exists($GLOBALS['xoops']->path('modules/mymenus/skins/' . $skin . '/skin_version.php'))) {
+            $skins[] = $skin;
+        }
+    }
 
-    $menus = XoopsLists::getDirListAsArray(XOOPS_ROOT_PATH . "/modules/mymenus/skins/", "");
     $form .= "<b>" . _MB_MYMENUS_SELECT_SKIN . "</b>&nbsp;";
     $form .= "<select name='options[1]'>";
-    foreach ($menus as $menu) {
-        if (file_exists(XOOPS_ROOT_PATH . '/modules/mymenus/skins/' . $menu . '/skin_version.php')) {
-            $form .= "<option value='" . $menu . "'";
-            if ( $options[1] == $menu ) {
-                $form .= " selected='selected'";
-            }
-            $form .= '>' . $menu . "</option>\n";
+    foreach ($skins as $skin) {
+        $form .= "<option value='" . $skin . "'";
+        if ( $options[1] == $skin ) {
+            $form .= " selected='selected'";
         }
+        $form .= '>' . $skin . "</option>\n";
     }
     $form .= "</select>\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_SELECT_SKIN_DSC . "</i><br /><br />";
 
     $display_options = array(
-                     'block'    => _MB_MYMENUS_DISPLAY_METHOD_BLOCK,
-                     'template' => _MB_MYMENUS_DISPLAY_METHOD_TEMPLATE
-                    );
+        'block'    => _MB_MYMENUS_DISPLAY_METHOD_BLOCK,
+        'template' => _MB_MYMENUS_DISPLAY_METHOD_TEMPLATE
+    );
 
     $form .= "<b>" . _MB_MYMENUS_DISPLAY_METHOD . "</b>&nbsp;";
     $element = new XoopsFormSelect('', 'options[2]', $options[2], 1);
@@ -200,81 +205,9 @@ function mymenus_block_edit($options)
     $element = new XoopsFormText('', 'options[3]', 10, 50, $options[3]);
     $form .= $element->render();
     $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_UNIQUEID_DSC . "</i><br /><br />";
-    /*
-    $form .= "<b>" . _MB_MYTABS_PERSIST . "</b>&nbsp";
-    $element = new XoopsFormRadioYN('', 'options[4]', $options[4]);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_PERSIST_DSC . "</i><br /><br />"; */
-    /*
-    $form .= "<b>" . _MB_MYTABS_PERSIST . "</b>&nbsp";
-    $element = new XoopsFormRadioYN('', 'options[4]', $options[4]);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_PERSIST_DSC . "</i><br /><br />";
 
-    $form .= "<b>" . _MB_MYTABS_MILISEC . "</b>&nbsp;";
-    $element = new XoopsFormText('', 'options[5]', 10, 50, $options[5]);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_MILISEC_DSC . "</i><br /><br />";
-
-    $form .= "<b>" . _MB_MYTABS_UNIQUEID . "</b>&nbsp;";
-    $element = new XoopsFormText('', 'options[6]', 10, 50, $options[6]);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_UNIQUEID_DSC . "</i><br /><br />";
-
-    $form .= "<b>" . _MB_MYTABS_BLOCKSTITLE . "</b>&nbsp";
-    $element = new XoopsFormRadioYN('', 'options[7]', $options[7]);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_BLOCKSTITLE_DSC . "</i><br /><br />";
-
-    $form .= "<b>" . _MB_MYTABS_ONMOUSEOVER . "</b>&nbsp";
-    $element = new XoopsFormRadioYN('', 'options[8]', $options[8]);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_ONMOUSEOVER_DSC . "</i><br /><br />";
-
-    $form .= "<b>" . _MB_MYTABS_HIDETABS . "</b>&nbsp";
-    $element = new XoopsFormRadioYN('', 'options[9]', $options[9]);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_HIDETABS_DSC . "</i><br /><br />";
-
-    $effects = array('none', 'fade',
-                    'easeInQuad', 'easeOutQuad', 'easeInOutQuad',
-                    'easeInCubic', 'easeOutCubic', 'easeInOutCubic',
-                    'easeInQuart', 'easeOutQuart', 'easeInOutQuart',
-                    'easeInQuint', 'easeOutQuint', 'easeInOutQuint',
-                    'easeInSine', 'easeOutSine', 'easeInOutSine',
-                    'easeInExpo', 'easeOutExpo', 'easeInOutExpo',
-                    'easeInCirc', 'easeOutCirc', 'easeInOutCirc',
-                    'easeInElastic', 'easeOutElastic', 'easeInOutElastic',
-                    'easeInBack', 'easeOutBack', 'easeInOutBack',
-                    'easeInBounce', 'easeOutBounce', 'easeInOutBounce'
-                    );
-
-    if (!isset($options[10])) $options[10] = 'none'; //needed for upgrades :(
-    $form .= "<b>" . _MB_MYTABS_EFFECTS_IN . "</b>&nbsp;";
-    $element = new XoopsFormSelect('', 'options[10]', $options[10], 3);
-    $element->addOptionArray($effects);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_EFFECTS_IN_DSC . "</i><br /><br />";
-
-    if (!isset($options[11])) $options[11] = 0; //needed for upgrades :(
-    $form .= "<b>" . _MB_MYTABS_EFFECTS_INTIME . "</b>&nbsp;";
-    $element = new XoopsFormText('', 'options[11]', 10, 50, $options[11]);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_EFFECTS_INTIME_DSC . "</i><br /><br />";
-
-    if (!isset($options[12])) $options[12] = 'none'; //needed for upgrades :(
-    $form .= "<b>" . _MB_MYTABS_EFFECTS_OUT . "</b>&nbsp;";
-    $element = new XoopsFormSelect('', 'options[12]', $options[12], 3);
-    $element->addOptionArray($effects);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_EFFECTS_OUT_DSC . "</i><br /><br />";
-
-    if (!isset($options[13])) $options[13] = 0; //needed for upgrades :(
-    $form .= "<b>" . _MB_MYTABS_EFFECTS_OUTTIME . "</b>&nbsp;";
-    $element = new XoopsFormText('', 'options[13]', 10, 50, $options[13]);
-    $form .= $element->render();
-    $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYTABS_EFFECTS_OUTTIME_DSC . "</i><br /><br />";
-     */
     return $form;
 
 }
+
+?>
