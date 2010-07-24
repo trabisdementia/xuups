@@ -16,9 +16,12 @@ $publisher(document).ready(function() {
             txtOf: 'of'
         });
 	   
-        $publisher("#tabs").tabs();
+        if( $publisher.isFunction($publisher.fn.tabs) ){
 
-        var MenuDom = xoopsGetElementById('image_item');
+        $publisher("#tabs").tabs();
+        }
+        
+		var MenuDom = xoopsGetElementById('image_item');
         if (MenuDom != null) {
             for(var i=0; i < MenuDom.options.length; i++) {
                 MenuDom.options[i].selected = true;
