@@ -1037,6 +1037,12 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
             return false;
         }
 
+        // Removing tags information
+        if (xoops_isActiveModule('tag')) {
+            $tag_handler =& xoops_getmodulehandler('tag', 'tag');
+            $tag_handler->updateByItem('', $item->getVar('itemid'), PUBLISHER_DIRNAME, 0);
+        }
+        // Removing item permissions
         xoops_groupperm_deletebymoditem ($module_id, "item_read", $item->itemid());
         return true;
     }

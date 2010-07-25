@@ -208,11 +208,6 @@ switch ($op) {
                 redirect_header("item.php", 2, _AM_PUBLISHER_ITEM_DELETE_ERROR . publisher_formatErrors($itemObj->getErrors()));
                 exit();
             }
-            // Removing tags information
-            if (xoops_isActiveModule('tag')) {
-                $tag_handler =& xoops_getmodulehandler('tag', 'tag');
-                $tag_handler->updateByItem('', $itemid, PUBLISHER_DIRNAME, 0);
-            }
             redirect_header("item.php", 2, sprintf(_AM_PUBLISHER_ITEMISDELETED, $itemObj->title()));
             exit();
         } else {
