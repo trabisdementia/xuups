@@ -37,7 +37,12 @@ class MymenusMymenusPluginItem extends MymenusPluginItem
 
         $ownerid = isset($_GET['uid']) ? intval($_GET['uid']) : null;
         $owner = $member_handler->getUser($ownerid);
-        if($owner->isNew()) {
+        //if uid > 0 but user does not exists
+        if (!is_object($owner)) {
+            //create new user
+            $owner = $member_handler->createUser();
+        }
+        if ($owner->isNew()) {
             $owner->setVar('uid', 0);
             $owner->setVar('uname', $GLOBALS['xoopsConfig']['anonymous']);
         }
