@@ -124,6 +124,8 @@ function mymenus_block_show($options)
     //$blockTpl->assign('block2', $block2);
     //$blockTpl->assign('skin', $skin);
     $blockTpl->assign('config', $skin_info['config']);
+    $blockTpl->assign('skinurl', $GLOBALS['xoops']->url("modules/mymenus/skins/{$skin}"));
+    $blockTpl->assign('skinpath', $GLOBALS['xoops']->path("modules/mymenus/skins/{$skin}"));
 
     $block['content'] = $blockTpl->fetch($skin_info['template']);
 
