@@ -19,15 +19,15 @@
  */
 
 $skinversion['template'] = 'template.html';
-/*
-$skinversion['css'] = '';
 
+$skinversion['css'] = 'style.css';
+/*
 $skinversion['js'] = array();
 
 $skinversion['header'] = '';
 */
-$myts =& MyTextSanitizer::getInstance();
-$skinversion['config']['home'] = false;
-$skinversion['config']['separator'] = '>';
+
+$skinversion['config']['home'] = true;
+$skinversion['config']['iconset'] = 'default';
 
 ?>
