@@ -5,27 +5,27 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-class xhelpReportRenderer {    
+class xhelpReportRenderer {
     var $report;
-	function xhelpReportRenderer($report)
+    function xhelpReportRenderer($report)
     {
         $this->report = $report;
     }
-    
-	/*
-	// Not sure this function is needed
-	
-    function setData($data)
-    {   
-		$this->data = $data;
-		   
 
-    }
-    */
-    
+    /*
+     // Not sure this function is needed
+
+     function setData($data)
+     {
+     $this->data = $data;
+
+
+     }
+     */
+
     function render()
     {
-		// this section should not run
+        // this section should not run
     }
 }
 

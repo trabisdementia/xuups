@@ -5,11 +5,11 @@ require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_contour.php');
 
 $data = array(
-    array (12,12,10,10,8,4),
-    array (10,10,8,14,10,3),
-    array (7,7,13,17,12,8),
-    array (4,5,8,12,7,6),
-    array (10,8,7,8,10,4));
+array (12,12,10,10,8,4),
+array (10,10,8,14,10,3),
+array (7,7,13,17,12,8),
+array (4,5,8,12,7,6),
+array (10,8,7,8,10,4));
 
 // Setup a basic graph context with some generous margins to be able
 // to fit the legend

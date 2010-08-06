@@ -9,7 +9,7 @@ $datay2=array(35,90,190,190);
 $datay3=array(20,60,70,140);
 
 // Create the basic graph
-$graph = new Graph(450,250,'auto');	
+$graph = new Graph(450,250,'auto');
 $graph->SetScale("textlin");
 $graph->img->SetMargin(40,80,30,40);
 

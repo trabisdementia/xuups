@@ -91,105 +91,105 @@ $frommonth = (isset($_GET['month'])) ? intval($_GET['month']) : 0;
 
 $pgtitle='';
 if($fromyear && $frommonth) {
-	$pgtitle=sprintf(" - %d - %d",$fromyear,$frommonth);
+    $pgtitle=sprintf(" - %d - %d",$fromyear,$frommonth);
 }
 $infotips=news_getmoduleoption('infotips');
 $restricted=news_getmoduleoption('restrictindex');
 $dateformat=news_getmoduleoption('dateformat');
 if($dateformat == '') {
-	$dateformat='m';
+    $dateformat='m';
 }
 $myts =& MyTextSanitizer::getInstance();
 $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . $xoopsModule->name('s'));
 
 $useroffset = '';
 if(is_object($xoopsUser)) {
-	$timezone = $xoopsUser->timezone();
-	if(isset($timezone)){
-		$useroffset = $xoopsUser->timezone();
-	} else {
-		$useroffset = $xoopsConfig['default_TZ'];
-	}
+    $timezone = $xoopsUser->timezone();
+    if(isset($timezone)){
+        $useroffset = $xoopsUser->timezone();
+    } else {
+        $useroffset = $xoopsConfig['default_TZ'];
+    }
 }
 $result = $xoopsDB->query('SELECT published FROM '.$xoopsDB->prefix('stories').' WHERE (published>0 AND published<='.time().') AND (expired = 0 OR expired <= '.time().') ORDER BY published DESC');
 if (!$result) {
-	echo _ERRORS;
-	exit();
+    echo _ERRORS;
+    exit();
 } else {
-	$years = array();
-	$months = array();
-	$i = 0;
-	while (list($time) = $xoopsDB->fetchRow($result)) {
-		$time = formatTimestamp($time, 'mysql', $useroffset);
-			if (preg_match("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $time, $datetime)) {
-				$this_year  = intval($datetime[1]);
-				$this_month = intval($datetime[2]);
-			if (empty($lastyear)) {
-				$lastyear = $this_year;
-			}
-			if ($lastmonth == 0) {
-				$lastmonth = $this_month;
-				$months[$lastmonth]['string'] = $months_arr[$lastmonth];
-				$months[$lastmonth]['number'] = $lastmonth;
-			}
-			if ($lastyear != $this_year) {
-				$years[$i]['number'] = $lastyear;
-				$years[$i]['months'] = $months;
-				$months = array();
-				$lastmonth = 0;
-				$lastyear = $this_year;
-				$i++;
-			}
-			if ($lastmonth != $this_month) {
-				$lastmonth = $this_month;
-				$months[$lastmonth]['string'] = $months_arr[$lastmonth];
-				$months[$lastmonth]['number'] = $lastmonth;
-			}
-		}
-	}
-	$years[$i]['number'] = $this_year;
-	$years[$i]['months'] = $months;
-	$xoopsTpl->assign('years', $years);
+    $years = array();
+    $months = array();
+    $i = 0;
+    while (list($time) = $xoopsDB->fetchRow($result)) {
+        $time = formatTimestamp($time, 'mysql', $useroffset);
+        if (preg_match("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $time, $datetime)) {
+            $this_year  = intval($datetime[1]);
+            $this_month = intval($datetime[2]);
+            if (empty($lastyear)) {
+                $lastyear = $this_year;
+            }
+            if ($lastmonth == 0) {
+                $lastmonth = $this_month;
+                $months[$lastmonth]['string'] = $months_arr[$lastmonth];
+                $months[$lastmonth]['number'] = $lastmonth;
+            }
+            if ($lastyear != $this_year) {
+                $years[$i]['number'] = $lastyear;
+                $years[$i]['months'] = $months;
+                $months = array();
+                $lastmonth = 0;
+                $lastyear = $this_year;
+                $i++;
+            }
+            if ($lastmonth != $this_month) {
+                $lastmonth = $this_month;
+                $months[$lastmonth]['string'] = $months_arr[$lastmonth];
+                $months[$lastmonth]['number'] = $lastmonth;
+            }
+        }
+    }
+    $years[$i]['number'] = $this_year;
+    $years[$i]['months'] = $months;
+    $xoopsTpl->assign('years', $years);
 }
 
 if ($fromyear != 0 && $frommonth != 0) {
-	$xoopsTpl->assign('show_articles', true);
-	$xoopsTpl->assign('lang_articles', _NW_ARTICLES);
-	$xoopsTpl->assign('currentmonth', $months_arr[$frommonth]);
-	$xoopsTpl->assign('currentyear', $fromyear);
-	$xoopsTpl->assign('lang_actions', _NW_ACTIONS);
-	$xoopsTpl->assign('lang_date', _NW_DATE);
-	$xoopsTpl->assign('lang_views', _NW_VIEWS);
+    $xoopsTpl->assign('show_articles', true);
+    $xoopsTpl->assign('lang_articles', _NW_ARTICLES);
+    $xoopsTpl->assign('currentmonth', $months_arr[$frommonth]);
+    $xoopsTpl->assign('currentyear', $fromyear);
+    $xoopsTpl->assign('lang_actions', _NW_ACTIONS);
+    $xoopsTpl->assign('lang_date', _NW_DATE);
+    $xoopsTpl->assign('lang_views', _NW_VIEWS);
 
-	// must adjust the selected time to server timestamp
-	$timeoffset = $useroffset - $xoopsConfig['server_TZ'];
-	$monthstart = mktime(0 - $timeoffset, 0, 0, $frommonth, 1, $fromyear);
-	$monthend = mktime(23 - $timeoffset, 59, 59, $frommonth + 1, 0, $fromyear);
-	$monthend = ($monthend > time()) ? time() : $monthend;
+    // must adjust the selected time to server timestamp
+    $timeoffset = $useroffset - $xoopsConfig['server_TZ'];
+    $monthstart = mktime(0 - $timeoffset, 0, 0, $frommonth, 1, $fromyear);
+    $monthend = mktime(23 - $timeoffset, 59, 59, $frommonth + 1, 0, $fromyear);
+    $monthend = ($monthend > time()) ? time() : $monthend;
 
-	$count=0;
-	$news = new NewsStory();
-	$storyarray = $news->getArchive($monthstart, $monthend, $restricted);
-	$count=count($storyarray);
-	if(is_array($storyarray) && $count>0) {
-		foreach ($storyarray as $article) {
-	    	$story = array();
-			$htmltitle='';
-			if($infotips>0) {
-				$story['infotips'] = news_make_infotips($article->hometext());
-				$htmltitle=' title="'.$story['infotips'].'"';
-			}
-	    	$story['title'] = "<a href='".XOOPS_URL.'/modules/news/index.php?storytopic='.$article->topicid()."'>".$article->topic_title()."</a>: <a href='".XOOPS_URL."/modules/news/article.php?storyid=".$article->storyid()."'".$htmltitle.">".$article->title()."</a>";
-	    	$story['counter'] = $article->counter();
-	    	$story['date'] = formatTimestamp($article->published(),$dateformat,$useroffset);
-	    	$story['print_link'] = XOOPS_URL.'/modules/news/print.php?storyid='.$article->storyid();
-	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/article.php?storyid='.$article->storyid();
-	    	$xoopsTpl->append('stories', $story);
-		}
-	}
-	$xoopsTpl->assign('lang_printer', _NW_PRINTERFRIENDLY);
-	$xoopsTpl->assign('lang_sendstory', _NW_SENDSTORY);
-	$xoopsTpl->assign('lang_storytotal', sprintf(_NW_THEREAREINTOTAL, $count));
+    $count=0;
+    $news = new NewsStory();
+    $storyarray = $news->getArchive($monthstart, $monthend, $restricted);
+    $count=count($storyarray);
+    if(is_array($storyarray) && $count>0) {
+        foreach ($storyarray as $article) {
+            $story = array();
+            $htmltitle='';
+            if($infotips>0) {
+                $story['infotips'] = news_make_infotips($article->hometext());
+                $htmltitle=' title="'.$story['infotips'].'"';
+            }
+            $story['title'] = "<a href='".XOOPS_URL.'/modules/news/index.php?storytopic='.$article->topicid()."'>".$article->topic_title()."</a>: <a href='".XOOPS_URL."/modules/news/article.php?storyid=".$article->storyid()."'".$htmltitle.">".$article->title()."</a>";
+            $story['counter'] = $article->counter();
+            $story['date'] = formatTimestamp($article->published(),$dateformat,$useroffset);
+            $story['print_link'] = XOOPS_URL.'/modules/news/print.php?storyid='.$article->storyid();
+            $story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/article.php?storyid='.$article->storyid();
+            $xoopsTpl->append('stories', $story);
+        }
+    }
+    $xoopsTpl->assign('lang_printer', _NW_PRINTERFRIENDLY);
+    $xoopsTpl->assign('lang_sendstory', _NW_SENDSTORY);
+    $xoopsTpl->assign('lang_storytotal', sprintf(_NW_THEREAREINTOTAL, $count));
 } else {
     $xoopsTpl->assign('show_articles', false);
 }
@@ -197,8 +197,8 @@ if ($fromyear != 0 && $frommonth != 0) {
 $xoopsTpl->assign('lang_newsarchives', _NW_NEWSARCHIVES);
 
 /**
-* Create the meta datas
-*/
+ * Create the meta datas
+ */
 news_CreateMetaDatas();
 
 include_once XOOPS_ROOT_PATH.'/footer.php';

@@ -5,7 +5,7 @@ require_once ('jpgraph/jpgraph_date.php');
 
 // Create a data set in range (50,70) and X-positions
 DEFINE('NDATAPOINTS',360);
-DEFINE('SAMPLERATE',240); 
+DEFINE('SAMPLERATE',240);
 $start = time();
 $end = $start+NDATAPOINTS*SAMPLERATE;
 $data = array();

@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,10 +17,10 @@
  * @version         $Id: module.v400.php 2170 2008-09-23 13:40:23Z phppp $
  */
 
-function xoops_module_update_newbb_v400(&$module) 
+function xoops_module_update_newbb_v400(&$module)
 {
     $stats_handler =& xoops_getmodulehandler('stats', 'newbb');
-    
+
     $result = $GLOBALS['xoopsDB']->query( "SELECT `forum_id`, `forum_topics`, `forum_posts` FROM ".$GLOBALS['xoopsDB']->prefix("bb_forums") );
     while($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
         $stats_handler->update($row["forum_id"], "topic", $row["forum_topics"]);
@@ -39,38 +39,38 @@ function xoops_module_update_newbb_v400(&$module)
         $stats_handler->update(-1, "topic", $row["topics"]);
         $stats_handler->update(-1, "post", $row["posts"]);
     }
-    
+
     /*
-    $GLOBALS['xoopsDB']->queryF(
-            "    INSERT INTO ".$GLOBALS['xoopsDB']->prefix("bb_stats").
-            "        (`id`, `value`, `type`, `period`, `time_update`, `time_format`)".
-            "    SELECT `forum_id`, `forum_topics`, '".NEWBB_STATS_TYPE_TOPIC."', '".NEWBB_STATS_PERIOD_TOTAL."', NOW() + 0, ''".
-            "         FROM ".$GLOBALS['xoopsDB']->prefix("bb_forums")
-            );
-    $GLOBALS['xoopsDB']->queryF(
-            "    INSERT INTO ".$GLOBALS['xoopsDB']->prefix("bb_stats").
-            "        (`id`, `value`, `type`, `period`, `time_update`, `time_format`)".
-            "    SELECT `forum_id`, `forum_posts`, '".NEWBB_STATS_TYPE_POST."', '".NEWBB_STATS_PERIOD_TOTAL."', NOW() + 0, ''".
-            "         FROM ".$GLOBALS['xoopsDB']->prefix("bb_forums")
-            );
-    $GLOBALS['xoopsDB']->queryF(
-            "    INSERT INTO ".$GLOBALS['xoopsDB']->prefix("bb_stats").
-            "        (`id`, `value`, `type`, `period`, `time_update`, `time_format`)".
-            "    SELECT `forum_id`, count(*), '".NEWBB_STATS_TYPE_DIGEST."', '".NEWBB_STATS_PERIOD_TOTAL."', NOW() + 0, ''".
-            "         FROM ".$GLOBALS['xoopsDB']->prefix("bb_topics").
-            "        WHERE topic_digest = 1".
-            "        GROUP BY `forum_id`".
-            );
-    $GLOBALS['xoopsDB']->queryF(
-            "    INSERT INTO ".$GLOBALS['xoopsDB']->prefix("bb_stats").
-            "        (`id`, `value`, `type`, `period`, `time_update`, `time_format`)".
-            "    SELECT `forum_id`, SUM(topic_views), '".NEWBB_STATS_TYPE_VIEW."', '".NEWBB_STATS_PERIOD_TOTAL."', NOW() + 0, ''".
-            "         FROM ".$GLOBALS['xoopsDB']->prefix("bb_topics").
-            "        WHERE topic_digest = 1".
-            "        GROUP BY `forum_id`".
-            );
-    */
-    
+     $GLOBALS['xoopsDB']->queryF(
+     "    INSERT INTO ".$GLOBALS['xoopsDB']->prefix("bb_stats").
+     "        (`id`, `value`, `type`, `period`, `time_update`, `time_format`)".
+     "    SELECT `forum_id`, `forum_topics`, '".NEWBB_STATS_TYPE_TOPIC."', '".NEWBB_STATS_PERIOD_TOTAL."', NOW() + 0, ''".
+     "         FROM ".$GLOBALS['xoopsDB']->prefix("bb_forums")
+     );
+     $GLOBALS['xoopsDB']->queryF(
+     "    INSERT INTO ".$GLOBALS['xoopsDB']->prefix("bb_stats").
+     "        (`id`, `value`, `type`, `period`, `time_update`, `time_format`)".
+     "    SELECT `forum_id`, `forum_posts`, '".NEWBB_STATS_TYPE_POST."', '".NEWBB_STATS_PERIOD_TOTAL."', NOW() + 0, ''".
+     "         FROM ".$GLOBALS['xoopsDB']->prefix("bb_forums")
+     );
+     $GLOBALS['xoopsDB']->queryF(
+     "    INSERT INTO ".$GLOBALS['xoopsDB']->prefix("bb_stats").
+     "        (`id`, `value`, `type`, `period`, `time_update`, `time_format`)".
+     "    SELECT `forum_id`, count(*), '".NEWBB_STATS_TYPE_DIGEST."', '".NEWBB_STATS_PERIOD_TOTAL."', NOW() + 0, ''".
+     "         FROM ".$GLOBALS['xoopsDB']->prefix("bb_topics").
+     "        WHERE topic_digest = 1".
+     "        GROUP BY `forum_id`".
+     );
+     $GLOBALS['xoopsDB']->queryF(
+     "    INSERT INTO ".$GLOBALS['xoopsDB']->prefix("bb_stats").
+     "        (`id`, `value`, `type`, `period`, `time_update`, `time_format`)".
+     "    SELECT `forum_id`, SUM(topic_views), '".NEWBB_STATS_TYPE_VIEW."', '".NEWBB_STATS_PERIOD_TOTAL."', NOW() + 0, ''".
+     "         FROM ".$GLOBALS['xoopsDB']->prefix("bb_topics").
+     "        WHERE topic_digest = 1".
+     "        GROUP BY `forum_id`".
+     );
+     */
+
     $sql =        "    UPDATE " . $GLOBALS['xoopsDB']->prefix("bb_posts_text") . " AS t, " . $GLOBALS['xoopsDB']->prefix("bb_posts") . " AS p" .
                 "    SET t.dohtml = p.dohtml, " .
                 "        t.dosmiley = p.dosmiley, " .
@@ -89,11 +89,11 @@ function xoops_module_update_newbb_v400(&$module)
     } else {
         xoops_error($GLOBALS['xoopsDB']->error() . "<br />" . $sql);
     }
-    
+
     @include_once XOOPS_ROOT_PATH . "/modules/tag/include/functions.php";
     if ( function_exists("tag_getTagHandler") && $tag_handler =& tag_getTagHandler() ) {
         $table_topic = $GLOBALS['xoopsDB']->prefix("bb_topics");
-        
+
         $sql =    "    SELECT topic_id, topic_tags" .
                 "    FROM {$table_topic}";
         if ( ($result = $GLOBALS['xoopsDB']->query($sql)) == false) {
@@ -105,7 +105,7 @@ function xoops_module_update_newbb_v400(&$module)
         }
     }
 
-    
+
     if (!$GLOBALS['xoopsDB']->query("
             SELECT COUNT(*)    
             FROM " . $GLOBALS['xoopsDB']->prefix("bb_type_tmp") . " AS a, " . $GLOBALS['xoopsDB']->prefix("bb_type_forum_tmp") . " AS b
@@ -117,25 +117,25 @@ function xoops_module_update_newbb_v400(&$module)
         $GLOBALS['xoopsDB']->queryF("DROP TABLE " . $GLOBALS['xoopsDB']->prefix("bb_type_forum_tmp"));
         return true;
     }
-    
+
     $GLOBALS['xoopsDB']->queryF(
             "    INSERT INTO ".$GLOBALS['xoopsDB']->prefix("bb_type") .
             "        (`type_id`, `type_name`, `type_color`)" .
             "    SELECT `type_id`, `type_name`, `type_color`" .
             "         FROM ".$GLOBALS['xoopsDB']->prefix("bb_type_tmp")
-            );
+    );
     $GLOBALS['xoopsDB']->queryF(
             "    INSERT INTO ".$GLOBALS['xoopsDB']->prefix("bb_type_forum") .
             "        (`type_id`, `forum_id`, `type_order`)" .
             "    SELECT `type_id`, `forum_id`, `type_order`" .
             "         FROM ".$GLOBALS['xoopsDB']->prefix("bb_type_forum_tmp")
-            );
-    
+    );
+
     $GLOBALS['xoopsDB']->queryF("DROP TABLE " . $GLOBALS['xoopsDB']->prefix("bb_type_tmp"));
     $GLOBALS['xoopsDB']->queryF("DROP TABLE " . $GLOBALS['xoopsDB']->prefix("bb_type_forum_tmp"));
-    
+
     // TODO: convert IP from numeric format to string format
-    
+
     return true;
 }
 ?>

@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -45,9 +45,9 @@ if (@$_POST['op'] == 'submit') {
     }
 
     $patterns = array(
-        strtolower(PUBLISHER_DIRNAME)           => strtolower($clone),
-        strtoupper(PUBLISHER_DIRNAME)           => strtoupper($clone),
-        ucfirst(strtolower(PUBLISHER_DIRNAME))  => ucfirst(strtolower($clone))
+    strtolower(PUBLISHER_DIRNAME)           => strtolower($clone),
+    strtoupper(PUBLISHER_DIRNAME)           => strtoupper($clone),
+    ucfirst(strtolower(PUBLISHER_DIRNAME))  => ucfirst(strtolower($clone))
     );
 
     $patKeys = array_keys($patterns);
@@ -111,7 +111,7 @@ function publisher_cloneFileFolder($path)
                     publisher_cloneFileFolder("{$path}/{$file}");
                 }
             }
-        closedir($handle);
+            closedir($handle);
         }
     } else {
 

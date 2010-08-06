@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -17,13 +17,13 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: builder.php 0 2010-07-21 18:47:04Z trabis $
  */
-
 class MymenusBuilder
 {
     var $parents = array();
     var $output = array();
 
-    function __construct($array){
+    function __construct($array)
+    {
         $this->addMenu($array);
     }
 
@@ -39,7 +39,8 @@ class MymenusBuilder
         $this->parents[$item['pid']][] = $item;
     }
 
-    function buildMenus($pid = 0) {
+    function buildMenus($pid = 0)
+    {
         static $idx = -1;
         static $level = -1;
         $level += 1;

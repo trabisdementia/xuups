@@ -14,7 +14,7 @@ $xoopsLogger->activated = false;
 $ajax             = true;   // AJAX mode: import will be done without refreshing the website
 $linespersession  = 100;   // Lines to be executed per one import session
 $delaypersession  = 0;     // You can specify a sleep time in milliseconds after each session
-                            // Works only if JavaScript is activated. Use to reduce server overrun
+// Works only if JavaScript is activated. Use to reduce server overrun
 $filename='';
 
 
@@ -23,7 +23,7 @@ $filename='';
 // *******************************************************************************************
 
 if ($ajax)
-  ob_start();
+ob_start();
 define ('DATA_CHUNK_LENGTH',100);  // How many chars are read per time
 define ('MAX_QUERY_LINES',1);      // How many lines may be considered to be one query (except text lines)
 define ('TESTMODE',false);           // Set to true to process the file without actually accessing the database
@@ -39,10 +39,10 @@ header("Pragma: no-cache");
 
 // Clean and strip anything we don't want from user's input [0.27b]
 
-foreach ($_REQUEST as $key => $val) 
+foreach ($_REQUEST as $key => $val)
 {
-  $val = preg_replace("/[^_A-Za-z0-9-\.&= ]/i",'', $val);
-  $_REQUEST[$key] = $val;
+    $val = preg_replace("/[^_A-Za-z0-9-\.&= ]/i",'', $val);
+    $_REQUEST[$key] = $val;
 }
 //
 ?>
@@ -51,12 +51,12 @@ foreach ($_REQUEST as $key => $val)
 <html>
 <head>
 <title>Membership Ip-To-Contry Importer</title>
-<meta http-equiv="CONTENT-TYPE" content="text/html; charset=iso-8859-1"/>
-<meta http-equiv="CONTENT-LANGUAGE" content="EN"/>
+<meta http-equiv="CONTENT-TYPE" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="CONTENT-LANGUAGE" content="EN" />
 
-<meta http-equiv="Cache-Control" content="no-cache/"/>
-<meta http-equiv="Pragma" content="no-cache"/>
-<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Cache-Control" content="no-cache/" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
 <link rel="stylesheet" type="text/css" media="all" href="style.css" />
 
 
@@ -68,159 +68,159 @@ foreach ($_REQUEST as $key => $val)
 <center>
 
 <table width="780" cellspacing="0" cellpadding="0">
-<tr><td class="transparent">
+	<tr>
+		<td class="transparent"><?php
 
-<?php
+		function skin_open() {
+		    echo ('<div class="skin1">');
+		}
 
-function skin_open() {
-echo ('<div class="skin1">');
-}
+		function skin_close() {
+		    echo ('</div>');
+		}
 
-function skin_close() {
-echo ('</div>');
-}
+		skin_open();
+		echo ('<h1>Membership Ip-To-Country Importer</h1>');
+		skin_close();
 
-skin_open();
-echo ('<h1>Membership Ip-To-Country Importer</h1>');
-skin_close();
+		$error = false;
+		$file  = false;
 
-$error = false;
-$file  = false;
+		// Check PHP version
 
-// Check PHP version
+		if (!$error && !function_exists('version_compare'))
+		{ echo ("<p class=\"error\">PHP version 4.1.0 is required for Membership Ip-To-Country Importer to proceed. You have PHP ".phpversion()." installed. Sorry!</p>\n");
+		$error=true;
+		}
 
-if (!$error && !function_exists('version_compare'))
-{ echo ("<p class=\"error\">PHP version 4.1.0 is required for Membership Ip-To-Country Importer to proceed. You have PHP ".phpversion()." installed. Sorry!</p>\n");
-  $error=true;
-}
+		// Calculate PHP max upload size (handle settings like 10M or 100K)
 
-// Calculate PHP max upload size (handle settings like 10M or 100K)
+		if (!$error)
+		{ $upload_max_filesize=ini_get("upload_max_filesize");
+		if (eregi("([0-9]+)K",$upload_max_filesize,$tempregs)) $upload_max_filesize=$tempregs[1]*1024;
+		if (eregi("([0-9]+)M",$upload_max_filesize,$tempregs)) $upload_max_filesize=$tempregs[1]*1024*1024;
+		if (eregi("([0-9]+)G",$upload_max_filesize,$tempregs)) $upload_max_filesize=$tempregs[1]*1024*1024*1024;
+		}
 
-if (!$error)
-{ $upload_max_filesize=ini_get("upload_max_filesize");
-  if (eregi("([0-9]+)K",$upload_max_filesize,$tempregs)) $upload_max_filesize=$tempregs[1]*1024;
-  if (eregi("([0-9]+)M",$upload_max_filesize,$tempregs)) $upload_max_filesize=$tempregs[1]*1024*1024;
-  if (eregi("([0-9]+)G",$upload_max_filesize,$tempregs)) $upload_max_filesize=$tempregs[1]*1024*1024*1024;
-}
+		// Get the current directory
 
-// Get the current directory
+		if (isset($_SERVER["CGIA"]))
+		$upload_dir=dirname($_SERVER["CGIA"]);
+		else if (isset($_SERVER["ORIG_PATH_TRANSLATED"]))
+		$upload_dir=dirname($_SERVER["ORIG_PATH_TRANSLATED"]);
+		else if (isset($_SERVER["ORIG_SCRIPT_FILENAME"]))
+		$upload_dir=dirname($_SERVER["ORIG_SCRIPT_FILENAME"]);
+		else if (isset($_SERVER["PATH_TRANSLATED"]))
+		$upload_dir=dirname($_SERVER["PATH_TRANSLATED"]);
+		else
+		$upload_dir=dirname($_SERVER["SCRIPT_FILENAME"]);
 
-if (isset($_SERVER["CGIA"]))
-  $upload_dir=dirname($_SERVER["CGIA"]);
-else if (isset($_SERVER["ORIG_PATH_TRANSLATED"]))
-  $upload_dir=dirname($_SERVER["ORIG_PATH_TRANSLATED"]);
-else if (isset($_SERVER["ORIG_SCRIPT_FILENAME"]))
-  $upload_dir=dirname($_SERVER["ORIG_SCRIPT_FILENAME"]);
-else if (isset($_SERVER["PATH_TRANSLATED"]))
-  $upload_dir=dirname($_SERVER["PATH_TRANSLATED"]);
-else 
-  $upload_dir=dirname($_SERVER["SCRIPT_FILENAME"]);
+		// Handle file upload
 
-// Handle file upload
+		if (!$error && isset($_REQUEST["uploadbutton"]))
+		{ if (is_uploaded_file($_FILES["dumpfile"]["tmp_name"]) && ($_FILES["dumpfile"]["error"])==0)
+		{
+		    $uploaded_filename=str_replace(" ","_",$_FILES["dumpfile"]["name"]);
+		    $uploaded_filename=preg_replace("/[^_A-Za-z0-9-\.]/i",'',$uploaded_filename);
+		    $uploaded_filepath=str_replace("\\","/",$upload_dir."/".$uploaded_filename);
 
-if (!$error && isset($_REQUEST["uploadbutton"]))
-{ if (is_uploaded_file($_FILES["dumpfile"]["tmp_name"]) && ($_FILES["dumpfile"]["error"])==0)
-  { 
-    $uploaded_filename=str_replace(" ","_",$_FILES["dumpfile"]["name"]);
-    $uploaded_filename=preg_replace("/[^_A-Za-z0-9-\.]/i",'',$uploaded_filename);
-    $uploaded_filepath=str_replace("\\","/",$upload_dir."/".$uploaded_filename);
-
-    if (file_exists($uploaded_filename))
-    { echo ("<p class=\"error\">File $uploaded_filename already exist! Delete and upload again!</p>\n");
-    }
-    else if (!eregi("(\.(sql|gz|csv))$",$uploaded_filename))
-    { echo ("<p class=\"error\">You may only upload .gz or .csv files.</p>\n");
-    }
-    else if (!@move_uploaded_file($_FILES["dumpfile"]["tmp_name"],$uploaded_filepath))
-    { echo ("<p class=\"error\">Error moving uploaded file ".$_FILES["dumpfile"]["tmp_name"]." to the $uploaded_filepath</p>\n");
-      echo ("<p>Check the directory permissions for $upload_dir (must be 777)!</p>\n");
-    }
-    else
-    { echo ("<p class=\"success\">Uploaded file saved as $uploaded_filename</p>\n");
-    }
-  }
-  else
-  { echo ("<p class=\"error\">Error uploading file ".$_FILES["dumpfile"]["name"]."</p>\n");
-  }
-}
-
-
-// Handle file deletion (delete only in the current directory for security reasons)
-
-if (!$error && isset($_REQUEST["delete"]) && $_REQUEST["delete"]!=basename($_SERVER["SCRIPT_FILENAME"]))
-{ if (eregi("(\.(sql|gz|csv))$",$_REQUEST["delete"]) && @unlink(basename($_REQUEST["delete"])))
-    echo ("<p class=\"success\">".$_REQUEST["delete"]." was removed successfully</p>\n");
-  else
-    echo ("<p class=\"error\">Can't remove ".$_REQUEST["delete"]."</p>\n");
-}
+		    if (file_exists($uploaded_filename))
+		    { echo ("<p class=\"error\">File $uploaded_filename already exist! Delete and upload again!</p>\n");
+		    }
+		    else if (!eregi("(\.(sql|gz|csv))$",$uploaded_filename))
+		    { echo ("<p class=\"error\">You may only upload .gz or .csv files.</p>\n");
+		    }
+		    else if (!@move_uploaded_file($_FILES["dumpfile"]["tmp_name"],$uploaded_filepath))
+		    { echo ("<p class=\"error\">Error moving uploaded file ".$_FILES["dumpfile"]["tmp_name"]." to the $uploaded_filepath</p>\n");
+		    echo ("<p>Check the directory permissions for $upload_dir (must be 777)!</p>\n");
+		    }
+		    else
+		    { echo ("<p class=\"success\">Uploaded file saved as $uploaded_filename</p>\n");
+		    }
+		}
+		else
+		{ echo ("<p class=\"error\">Error uploading file ".$_FILES["dumpfile"]["name"]."</p>\n");
+		}
+		}
 
 
-// List uploaded files in multifile mode
+		// Handle file deletion (delete only in the current directory for security reasons)
 
-if (!$error && !isset($_REQUEST["fn"]) && $filename=="")
-{ if ($dirhandle = opendir($upload_dir)) 
-  { $dirhead=false;
-    while (false !== ($dirfile = readdir($dirhandle)))
-    { if ($dirfile != "." && $dirfile != ".." && $dirfile!=basename($_SERVER["SCRIPT_FILENAME"]))
-      { if (!$dirhead)
-        { echo ("<table width=\"100%\" cellspacing=\"2\" cellpadding=\"2\">\n");
-          echo ("<tr><th>Filename</th><th>Size</th><th>Date&amp;Time</th><th>Type</th><th>&nbsp;</th><th>&nbsp;</th>\n");
-          $dirhead=true;
-        }
-        if (eregi("\.csv$",$dirfile)){
-          echo ("<tr><td>$dirfile</td><td class=\"right\">".filesize($dirfile)."</td><td>".date ("Y-m-d H:i:s", filemtime($dirfile))."</td>");
-          echo ("<td>CSV</td>");
-        }
-        if ((eregi("\.gz$",$dirfile) && function_exists("gzopen")) || eregi("\.csv$",$dirfile))
-          echo ("<td><a href=\"".$_SERVER["PHP_SELF"]."?start=1&amp;fn=".urlencode($dirfile)."&amp;foffset=0&amp;totalqueries=0\">Start Import</a> into $db_name at $db_server</td>\n <td><a href=\"".$_SERVER["PHP_SELF"]."?delete=".urlencode($dirfile)."\">Delete file</a></td></tr>\n");
-      }
-
-    }
-    if ($dirhead) echo ("</table>\n");
-    else echo ("<p>No uploaded files found in the working directory</p>\n");
-    closedir($dirhandle); 
-  }
-  else
-  { echo ("<p class=\"error\">Error listing directory $upload_dir</p>\n");
-    $error=true;
-  }
-}
+		if (!$error && isset($_REQUEST["delete"]) && $_REQUEST["delete"]!=basename($_SERVER["SCRIPT_FILENAME"]))
+		{ if (eregi("(\.(sql|gz|csv))$",$_REQUEST["delete"]) && @unlink(basename($_REQUEST["delete"])))
+		echo ("<p class=\"success\">".$_REQUEST["delete"]." was removed successfully</p>\n");
+		else
+		echo ("<p class=\"error\">Can't remove ".$_REQUEST["delete"]."</p>\n");
+		}
 
 
-// Single file mode
+		// List uploaded files in multifile mode
 
-if (!$error && !isset ($_REQUEST["fn"]) && $filename!="")
-{ echo ("<p><a href=\"".$_SERVER["PHP_SELF"]."?start=1&amp;fn=".urlencode($filename)."&amp;foffset=0&amp;totalqueries=0\">Start Import</a> from $filename into $db_name at $db_server</p>\n");
-}
+		if (!$error && !isset($_REQUEST["fn"]) && $filename=="")
+		{ if ($dirhandle = opendir($upload_dir))
+		{ $dirhead=false;
+		while (false !== ($dirfile = readdir($dirhandle)))
+		{ if ($dirfile != "." && $dirfile != ".." && $dirfile!=basename($_SERVER["SCRIPT_FILENAME"]))
+		{ if (!$dirhead)
+		{ echo ("<table width=\"100%\" cellspacing=\"2\" cellpadding=\"2\">\n");
+		echo ("<tr><th>Filename</th><th>Size</th><th>Date&amp;Time</th><th>Type</th><th>&nbsp;</th><th>&nbsp;</th>\n");
+		$dirhead=true;
+		}
+		if (eregi("\.csv$",$dirfile)){
+		    echo ("<tr><td>$dirfile</td><td class=\"right\">".filesize($dirfile)."</td><td>".date ("Y-m-d H:i:s", filemtime($dirfile))."</td>");
+		    echo ("<td>CSV</td>");
+		}
+		if ((eregi("\.gz$",$dirfile) && function_exists("gzopen")) || eregi("\.csv$",$dirfile))
+		echo ("<td><a href=\"".$_SERVER["PHP_SELF"]."?start=1&amp;fn=".urlencode($dirfile)."&amp;foffset=0&amp;totalqueries=0\">Start Import</a> into $db_name at $db_server</td>\n <td><a href=\"".$_SERVER["PHP_SELF"]."?delete=".urlencode($dirfile)."\">Delete file</a></td></tr>\n");
+		}
+
+		}
+		if ($dirhead) echo ("</table>\n");
+		else echo ("<p>No uploaded files found in the working directory</p>\n");
+		closedir($dirhandle);
+		}
+		else
+		{ echo ("<p class=\"error\">Error listing directory $upload_dir</p>\n");
+		$error=true;
+		}
+		}
 
 
-// File Upload Form
+		// Single file mode
 
-if (!$error && !isset($_REQUEST["fn"]) && $filename=="")
-{ 
+		if (!$error && !isset ($_REQUEST["fn"]) && $filename!="")
+		{ echo ("<p><a href=\"".$_SERVER["PHP_SELF"]."?start=1&amp;fn=".urlencode($filename)."&amp;foffset=0&amp;totalqueries=0\">Start Import</a> from $filename into $db_name at $db_server</p>\n");
+		}
 
-// Test permissions on working directory
 
-  do { $tempfilename=time().".tmp"; } while (file_exists($tempfilename));
-  if (!($tempfile=@fopen($tempfilename,"w")))
-  { echo ("<p>Upload form disabled. Permissions for the working directory <i>$upload_dir</i> <b>must be set to 777</b> in order ");
-    echo ("to upload files from here. Alternatively you can upload your dump files via FTP.</p>\n");
-  }
-  else
-  { fclose($tempfile);
-    unlink ($tempfilename);
- 
-    echo ("<p>You can now upload your ip-to-country.csv file up to $upload_max_filesize bytes (".round ($upload_max_filesize/1024/1024)." Mbytes)  ");
-    echo ("directly from your browser to the server. Alternatively you can upload your file of any size via FTP.</p>\n");
-    echo ("<p>Get the latest version of Ip-To-Country list at <a href='http://ip-to-country.webhosting.info/node/view/6' target='_blank'>http://ip-to-country.webhosting.info/node/view/6</a>.</p>\n");
+		// File Upload Form
 
-?>
-<form method="POST" action="<?php echo ($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
-<input type="hidden" name="MAX_FILE_SIZE" value="$upload_max_filesize">
-<p>Dump file: <input type="file" name="dumpfile" accept="*/*" size=60"></p>
-<p><input type="submit" name="uploadbutton" value="Upload"></p>
-</form>
-<?php
+		if (!$error && !isset($_REQUEST["fn"]) && $filename=="")
+		{
+
+		    // Test permissions on working directory
+
+		    do { $tempfilename=time().".tmp"; } while (file_exists($tempfilename));
+		    if (!($tempfile=@fopen($tempfilename,"w")))
+		    { echo ("<p>Upload form disabled. Permissions for the working directory <i>$upload_dir</i> <b>must be set to 777</b> in order ");
+		    echo ("to upload files from here. Alternatively you can upload your dump files via FTP.</p>\n");
+		    }
+		    else
+		    { fclose($tempfile);
+		    unlink ($tempfilename);
+
+		    echo ("<p>You can now upload your ip-to-country.csv file up to $upload_max_filesize bytes (".round ($upload_max_filesize/1024/1024)." Mbytes)  ");
+		    echo ("directly from your browser to the server. Alternatively you can upload your file of any size via FTP.</p>\n");
+		    echo ("<p>Get the latest version of Ip-To-Country list at <a href='http://ip-to-country.webhosting.info/node/view/6' target='_blank'>http://ip-to-country.webhosting.info/node/view/6</a>.</p>\n");
+
+		    ?>
+		<form method="POST" action="<?php echo ($_SERVER["PHP_SELF"]); ?>"
+			enctype="multipart/form-data"><input type="hidden"
+			name="MAX_FILE_SIZE" value="$upload_max_filesize">
+		<p>Dump file: <input type="file" name="dumpfile" accept="*/*" size=60"></p>
+		<p><input type="submit" name="uploadbutton" value="Upload"></p>
+		</form>
+		<?php
   }
 }
 
@@ -515,12 +515,20 @@ else if ($file && $gzipmode) gzclose($file);
 
 ?>
 
-<p class="centr">Original script by <a href="mailto:alexey@ozerov.de">Alexey Ozerov</a> - <a href="http://www.ozerov.de/bigdump.php" target="_blank">BigDump Home</a></p>
-<p class="centr">Script modified by <a href="mailto:lusopoemas@gmail.com">Trabis</a> - <a href="http://www.xuups.com" target="_blank">Xuups Home</a></p>
-<p class="centr">&nbsp;</p>
-<p class="centr"><a href="<?php echo XOOPS_URL.'/modules/membership/admin/index.php';?>" target="_blank">Administration Panel</a></p>
+		<p class="centr">Original script by <a href="mailto:alexey@ozerov.de">Alexey
+		Ozerov</a> - <a href="http://www.ozerov.de/bigdump.php"
+			target="_blank">BigDump Home</a></p>
+		<p class="centr">Script modified by <a
+			href="mailto:lusopoemas@gmail.com">Trabis</a> - <a
+			href="http://www.xuups.com" target="_blank">Xuups Home</a></p>
+		<p class="centr">&nbsp;</p>
+		<p class="centr"><a
+			href="<?php echo XOOPS_URL.'/modules/membership/admin/index.php';?>"
+			target="_blank">Administration Panel</a></p>
 
-</td></tr></table>
+		</td>
+	</tr>
+</table>
 
 </center>
 </div>
@@ -692,7 +700,7 @@ function create_ajax_script()
 {
   global $linenumber, $foffset, $totalqueries, $delaypersession, $curfilename;
 	?>
-	<script type="text/javascript" language="javascript">			
+<script type="text/javascript" language="javascript">			
 
 	// creates next action url (upload page, or XML response)
 	function get_url(linenumber,fn,foffset,totalqueries) {
@@ -786,6 +794,6 @@ function create_ajax_script()
 	// ask for upload page
 	window.setTimeout("makeRequest(url_request)",500+<?php echo $delaypersession; ?>);
 	</script>
-	<?php
+<?php
 }
 ?>

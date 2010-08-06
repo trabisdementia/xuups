@@ -10,25 +10,25 @@ $_pluginInfo=array(
 	'type'=>'social',
 	'check_url'=>'http://www.hyves.nl/?l1=mo'
 	);
-/**
- * http://hyves.net/ Plugin
- * 
- * Import user's contacts from Hyves and send private messages
- * using Hyves system
- * 
- * @author OpenInviter
- * @version 1.0.0
- */
-class hyves extends OpenInviter_Base
+	/**
+	 * http://hyves.net/ Plugin
+	 *
+	 * Import user's contacts from Hyves and send private messages
+	 * using Hyves system
+	 *
+	 * @author OpenInviter
+	 * @version 1.0.0
+	 */
+	class hyves extends OpenInviter_Base
 	{
-	private $login_ok=false;
-	public $showContacts=true;
-	public $requirement='user';
-	public $internalError=false;
-	public $allowed_domains=false;
-	protected $timeout=30;
-	
-	public $debug_array=array(
+	    private $login_ok=false;
+	    public $showContacts=true;
+	    public $requirement='user';
+	    public $internalError=false;
+	    public $allowed_domains=false;
+	    protected $timeout=30;
+
+	    public $debug_array=array(
 				'initial_get'=>'accesskey="1"',
 				'url_login'=>'auth_username',
 				'login_post'=>'hyver',
@@ -37,128 +37,128 @@ class hyves extends OpenInviter_Base
 				'url_send_message'=>'postman',
 				'send_message'=>'message has been sent'
 				);
-	
-	/**
-	 * Login function
-	 * 
-	 * Makes all the necessary requests to authenticate
-	 * the current user to the server.
-	 * 
-	 * @param string $user The current user.
-	 * @param string $pass The password for the current user.
-	 * @return bool TRUE if the current user was authenticated successfully, FALSE otherwise.
-	 */
-	public function login($user,$pass)
-		{
-		$this->resetDebugger();
-		$this->service='hyves';
-		$this->service_user=$user;
-		$this->service_password=$pass;
-		if (!$this->init()) return false;
 
-		$res=$this->get("http://www.hyves.nl/?l1=mo");
-		if ($this->checkResponse("initial_get",$res))
-			$this->updateDebugBuffer('initial_get',"http://www.hyves.nl/?l1=mo",'GET');
-		else
-			{
-			$this->updateDebugBuffer('initial_get',"http://www.hyves.nl/?l1=mo",'GET',false);
-			$this->debugRequest();
-			$this->stopPlugin();
-			return false;
-			}
-			
-		$url_login_array=$this->getElementDOM($res,"//a[@accesskey='1']",'href');
-		$res=$this->get('http://www.hyves.nl'.$url_login_array[0],true);
-		if ($this->checkResponse("url_login",$res))
-			$this->updateDebugBuffer('$url_login',"http://www.hyves.nl".$url_login_array[0],'GET');
-		else
-			{
-			$this->updateDebugBuffer('$url_login',"http://www.hyves.nl".$url_login_array[0],'GET',false);
-			$this->debugRequest();
-			$this->stopPlugin();
-			return false;
-			}
-		
-		$form_action='http://www.hyves.nl/'.html_entity_decode($this->getElementString($res,'form action="','"'));
-		$post_elements=$this->getHiddenElements($res);$post_elements['auth_username']=$user;$post_elements['auth_password']=$pass;$post_elements['login']='ok';
-		$res=$this->post($form_action,$post_elements,true);
-		if ($this->checkResponse("login_post",$res))
-			$this->updateDebugBuffer('login_post',"{$form_action}",'POST',true,$post_elements);
-		else
-			{
-			$this->updateDebugBuffer('login_post',"{$form_action}",'POST',false,$post_elements);
-			$this->debugRequest();
-			$this->stopPlugin();
-			return false;
-			}
-			
-		$url_logout='http://www.hyves.nl/?module=authentication&action=logoutMobile'.html_entity_decode($this->getElementString($res,"?module=authentication&amp;action=logoutMobile",'"'));
-		$url_friends="http://www.hyves.nl/?l1=mo&l2=mb&l3=hm&l4=sendi";
-		$this->login_ok=$url_friends;
-		file_put_contents($this->getLogoutPath(),$url_logout);
-		return true;
-		}
+				/**
+				 * Login function
+				 *
+				 * Makes all the necessary requests to authenticate
+				 * the current user to the server.
+				 *
+				 * @param string $user The current user.
+				 * @param string $pass The password for the current user.
+				 * @return bool TRUE if the current user was authenticated successfully, FALSE otherwise.
+				 */
+				public function login($user,$pass)
+				{
+				    $this->resetDebugger();
+				    $this->service='hyves';
+				    $this->service_user=$user;
+				    $this->service_password=$pass;
+				    if (!$this->init()) return false;
 
-	/**
-	 * Get the current user's contacts
-	 * 
-	 * Makes all the necesarry requests to import
-	 * the current user's contacts
-	 * 
-	 * @return mixed The array if contacts if importing was successful, FALSE otherwise.
-	 */	
-	public function getMyContacts()
-		{
-		if (!$this->login_ok)
-			{
-			$this->debugRequest();
-			$this->stopPlugin();
-			return false;
-			}
-		else $url=$this->login_ok;	
-		$res=$this->get($url);
-		if ($this->checkResponse("get_friends",$res))
-			$this->updateDebugBuffer('get_friends',$url,'GET');
-		else
-			{
-			$this->updateDebugBuffer('get_friends',$url,'GET',false);
-			$this->debugRequest();
-			$this->stopPlugin();
-			return false;
-			}
-		$contacts=array();
-		$doc=new DOMDocument();libxml_use_internal_errors(true);if (!empty($res)) $doc->loadHTML($res);libxml_use_internal_errors(false);
-		$xpath=new DOMXPath($doc);$query="//option";$data=$xpath->query($query);
-		foreach($data as $node) 
-			{$name=$node->getAttribute('label');$value=$node->getAttribute('value');if (!empty($value)) $contacts[$value]=!empty($name)?$name:false;}
-		return $contacts;
-		}
+				    $res=$this->get("http://www.hyves.nl/?l1=mo");
+				    if ($this->checkResponse("initial_get",$res))
+				    $this->updateDebugBuffer('initial_get',"http://www.hyves.nl/?l1=mo",'GET');
+				    else
+				    {
+				        $this->updateDebugBuffer('initial_get',"http://www.hyves.nl/?l1=mo",'GET',false);
+				        $this->debugRequest();
+				        $this->stopPlugin();
+				        return false;
+				    }
+				    	
+				    $url_login_array=$this->getElementDOM($res,"//a[@accesskey='1']",'href');
+				    $res=$this->get('http://www.hyves.nl'.$url_login_array[0],true);
+				    if ($this->checkResponse("url_login",$res))
+				    $this->updateDebugBuffer('$url_login',"http://www.hyves.nl".$url_login_array[0],'GET');
+				    else
+				    {
+				        $this->updateDebugBuffer('$url_login',"http://www.hyves.nl".$url_login_array[0],'GET',false);
+				        $this->debugRequest();
+				        $this->stopPlugin();
+				        return false;
+				    }
 
-	/**
-	 * Send message to contacts
-	 * 
-	 * Sends a message to the contacts using
-	 * the service's inernal messaging system
-	 * 
-	 * @param string $cookie_file The location of the cookies file for the current session
-	 * @param string $message The message being sent to your contacts
-	 * @param array $contacts An array of the contacts that will receive the message
-	 * @return mixed FALSE on failure.
-	 */
-	public function sendMessage($session_id,$message,$contacts)
-		{
-		$res=$this->get("http://www.hyves.nl/?l1=mo&l2=mb&l3=hm&l4=sendi");
-		$form_action="http://www.hyves.nl/?l1=mo&l2=mb&l3=hm&l4=sendi";
-		if ($this->checkResponse("url_send_message",$res))
-			$this->updateDebugBuffer('url_send_message',$form_action,'GET');
-		else
-			{
-			$this->updateDebugBuffer('url_send_message',$form_action,'GET',false);
-			$this->debugRequest();
-			$this->stopPlugin();
-			return false;
-			}
-		$post_elements=array(
+				    $form_action='http://www.hyves.nl/'.html_entity_decode($this->getElementString($res,'form action="','"'));
+				    $post_elements=$this->getHiddenElements($res);$post_elements['auth_username']=$user;$post_elements['auth_password']=$pass;$post_elements['login']='ok';
+				    $res=$this->post($form_action,$post_elements,true);
+				    if ($this->checkResponse("login_post",$res))
+				    $this->updateDebugBuffer('login_post',"{$form_action}",'POST',true,$post_elements);
+				    else
+				    {
+				        $this->updateDebugBuffer('login_post',"{$form_action}",'POST',false,$post_elements);
+				        $this->debugRequest();
+				        $this->stopPlugin();
+				        return false;
+				    }
+				    	
+				    $url_logout='http://www.hyves.nl/?module=authentication&action=logoutMobile'.html_entity_decode($this->getElementString($res,"?module=authentication&amp;action=logoutMobile",'"'));
+				    $url_friends="http://www.hyves.nl/?l1=mo&l2=mb&l3=hm&l4=sendi";
+				    $this->login_ok=$url_friends;
+				    file_put_contents($this->getLogoutPath(),$url_logout);
+				    return true;
+				}
+
+				/**
+				 * Get the current user's contacts
+				 *
+				 * Makes all the necesarry requests to import
+				 * the current user's contacts
+				 *
+				 * @return mixed The array if contacts if importing was successful, FALSE otherwise.
+				 */
+				public function getMyContacts()
+				{
+				    if (!$this->login_ok)
+				    {
+				        $this->debugRequest();
+				        $this->stopPlugin();
+				        return false;
+				    }
+				    else $url=$this->login_ok;
+				    $res=$this->get($url);
+				    if ($this->checkResponse("get_friends",$res))
+				    $this->updateDebugBuffer('get_friends',$url,'GET');
+				    else
+				    {
+				        $this->updateDebugBuffer('get_friends',$url,'GET',false);
+				        $this->debugRequest();
+				        $this->stopPlugin();
+				        return false;
+				    }
+				    $contacts=array();
+				    $doc=new DOMDocument();libxml_use_internal_errors(true);if (!empty($res)) $doc->loadHTML($res);libxml_use_internal_errors(false);
+				    $xpath=new DOMXPath($doc);$query="//option";$data=$xpath->query($query);
+				    foreach($data as $node)
+				    {$name=$node->getAttribute('label');$value=$node->getAttribute('value');if (!empty($value)) $contacts[$value]=!empty($name)?$name:false;}
+				    return $contacts;
+				}
+
+				/**
+				 * Send message to contacts
+				 *
+				 * Sends a message to the contacts using
+				 * the service's inernal messaging system
+				 *
+				 * @param string $cookie_file The location of the cookies file for the current session
+				 * @param string $message The message being sent to your contacts
+				 * @param array $contacts An array of the contacts that will receive the message
+				 * @return mixed FALSE on failure.
+				 */
+				public function sendMessage($session_id,$message,$contacts)
+				{
+				    $res=$this->get("http://www.hyves.nl/?l1=mo&l2=mb&l3=hm&l4=sendi");
+				    $form_action="http://www.hyves.nl/?l1=mo&l2=mb&l3=hm&l4=sendi";
+				    if ($this->checkResponse("url_send_message",$res))
+				    $this->updateDebugBuffer('url_send_message',$form_action,'GET');
+				    else
+				    {
+				        $this->updateDebugBuffer('url_send_message',$form_action,'GET',false);
+				        $this->debugRequest();
+				        $this->stopPlugin();
+				        return false;
+				    }
+				    $post_elements=array(
 							'postman'=>'Message/send',
 							'postman_secret'=>$this->getElementString($res,'postman_secret" value="','"'),
 							'sitepositionurl'=>$this->getElementString($res,'name="sitepositionurl" value="','"'),
@@ -168,44 +168,44 @@ class hyves extends OpenInviter_Base
 							'sendmessage_type'=>2,
 							'bsend'=>'send'
 							);
-		foreach($contacts as $value=>$name) 
-			{
-			$post_elements["sendmessage_to[]"]=$value;
-			$res=$this->post($form_action,$post_elements,true);
-			if ($this->checkResponse("send_message",$res))
-				$this->updateDebugBuffer('send_message',"{$form_action}",'POST',true,$post_elements);
-			else
-				{
-				$this->updateDebugBuffer('send_message',"{$form_action}",'POST',false,$post_elements);
-				$this->debugRequest();
-				$this->stopPlugin();
-				return false;
+							foreach($contacts as $value=>$name)
+							{
+							    $post_elements["sendmessage_to[]"]=$value;
+							    $res=$this->post($form_action,$post_elements,true);
+							    if ($this->checkResponse("send_message",$res))
+							    $this->updateDebugBuffer('send_message',"{$form_action}",'POST',true,$post_elements);
+							    else
+							    {
+							        $this->updateDebugBuffer('send_message',"{$form_action}",'POST',false,$post_elements);
+							        $this->debugRequest();
+							        $this->stopPlugin();
+							        return false;
+							    }
+							}
 				}
-			}
-		}
 
-	/**
-	 * Terminate session
-	 * 
-	 * Terminates the current user's session,
-	 * debugs the request and reset's the internal 
-	 * debudder.
-	 * 
-	 * @return bool TRUE if the session was terminated successfully, FALSE otherwise.
-	 */	
-	public function logout()
-		{
-		if (!$this->checkSession()) return false;
-		if (file_exists($this->getLogoutPath()))
-			{
-			$url_logout=file_get_contents($this->getLogoutPath());
-			$res=$this->get($url_logout,true);
-			}
-		$this->debugRequest();
-		$this->resetDebugger();
-		$this->stopPlugin();
-		return true;	
-		}
-	}	
+				/**
+				 * Terminate session
+				 *
+				 * Terminates the current user's session,
+				 * debugs the request and reset's the internal
+				 * debudder.
+				 *
+				 * @return bool TRUE if the session was terminated successfully, FALSE otherwise.
+				 */
+				public function logout()
+				{
+				    if (!$this->checkSession()) return false;
+				    if (file_exists($this->getLogoutPath()))
+				    {
+				        $url_logout=file_get_contents($this->getLogoutPath());
+				        $res=$this->get($url_logout,true);
+				    }
+				    $this->debugRequest();
+				    $this->resetDebugger();
+				    $this->stopPlugin();
+				    return true;
+				}
+	}
 
-?>
+	?>

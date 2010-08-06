@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -134,8 +134,8 @@ if (!empty($_POST['submit'])) {
     $sform->setExtra('enctype="multipart/form-data"');
 
     /* Let User select the number of days
-    $sform->addElement( new XoopsFormText(_AM_NEWBB_PRUNE_DAYS , 'days', 5, 10,100 ), true );
-    */
+     $sform->addElement( new XoopsFormText(_AM_NEWBB_PRUNE_DAYS , 'days', 5, 10,100 ), true );
+     */
     // $sql="SELECT p.topic_id, p.post_id t.post_text FROM ".$xoopsDB->prefix("bb_posts")." p, ".$xoopsDB->prefix("bb_posts_text")." t WHERE p.post_id IN ($post_list) AND p.post_id=t.post_id";
     // $result = $xoopsDB->query();
     // Days selected by selbox (better error control :lol:)

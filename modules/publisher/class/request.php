@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  *  Publisher class
@@ -270,7 +270,7 @@ class PublisherRequest
         //If overwrite is true, makes sure the variable hasn't been set yet
         if (!$overwrite && array_key_exists($name, $_REQUEST)) {
             return $_REQUEST[$name];
-    }
+        }
 
         // Get the request hash value
         $hash = strtoupper($hash);
@@ -365,7 +365,7 @@ class PublisherRequest
 
             default:
                 $input = $_REQUEST;
-            break;
+                break;
         }
 
         $result = PublisherRequest::_cleanVar($input, $mask);
@@ -467,7 +467,7 @@ class PublisherRequest
                 $GLOBALS[$key] = $value;
             }
         }
-        }
+    }
 
     /**
      * Clean up an input variable.
@@ -568,7 +568,7 @@ class PublisherFilterInput
         $this->tagsMethod   = $tagsMethod;
         $this->attrMethod   = $attrMethod;
         $this->xssAuto      = $xssAuto;
-        }
+    }
 
     /**
      * Returns a reference to an input filter object, only creating it if it doesn't already exist.
@@ -683,26 +683,26 @@ class PublisherFilterInput
                 } else {
                     $filter =& PublisherFilterInput::getInstance();
                 }
-            // Are we dealing with an array?
-            if (is_array($source)) {
-                foreach ($source as $key => $value) {
-                    // filter element for XSS and other 'bad' code etc.
-                    if (is_string($value)) {
-                        $source[$key] = $filter->_remove($filter->_decode($value));
+                // Are we dealing with an array?
+                if (is_array($source)) {
+                    foreach ($source as $key => $value) {
+                        // filter element for XSS and other 'bad' code etc.
+                        if (is_string($value)) {
+                            $source[$key] = $filter->_remove($filter->_decode($value));
+                        }
+                    }
+                    $result = $source;
+                } else {
+                    // Or a string?
+                    if (is_string($source) && !empty ($source)) {
+                        // filter source for XSS and other 'bad' code etc.
+                        $result = $filter->_remove($filter->_decode($source));
+                    } else {
+                        // Not an array or string.. return the passed parameter
+                        $result = $source;
                     }
                 }
-                $result = $source;
-            } else {
-                // Or a string?
-                if (is_string($source) && !empty ($source)) {
-                    // filter source for XSS and other 'bad' code etc.
-                    $result = $filter->_remove($filter->_decode($source));
-                } else {
-                    // Not an array or string.. return the passed parameter
-                    $result = $source;
-                }
-            }
-            break;
+                break;
         }
         return $result;
     }
@@ -738,7 +738,7 @@ class PublisherFilterInput
             $loopCounter ++;
         }
         return $source;
-        }
+    }
 
     /**
      * Internal method to strip a string of certain tags

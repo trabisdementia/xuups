@@ -1,6 +1,7 @@
-	<?php
- 
- /**
+
+<?php
+
+/**
  *    $Id: admin.php,v 1.4 2005/04/08 15:47:29 eric_juden Exp $
  *
  *    Japanese Translation by : Seibu Tsushin KK www.seibu-tsushin.co.jp
@@ -9,8 +10,8 @@
  *    Mizukoshi Norio <opensource@seibu-tsushin.co.jp>
  *
  */
- 
- //Menu choices
+
+//Menu choices
 define('_AM_XHELP_ADMIN_TITLE', '管理者ﾒﾆｭｰ');
 define('_AM_XHELP_BLOCK_TEXT', 'ブロック管理');
 define('_AM_XHELP_MENU_MANAGE_DEPARTMENTS', 'カテゴリー管理');
@@ -176,8 +177,8 @@ define('_AM_XHELP_CURRENTVER', 'カレントバージョン 0.6');
 define('_AM_XHELP_DBVER', 'ﾃﾞｰﾀﾍﾞｰｽバージョン0.6');
 define('_AM_XHELP_DB_UPDATE', '最新のモジュールバージョンです');
 define('_AM_XHELP_DB_NOUPDATE', '最新のモジュールバージョンに更新してください');
- 
- define('_AM_XHELP_MENU_MANAGE_ROLES', 'Manage Roles');
+
+define('_AM_XHELP_MENU_MANAGE_ROLES', 'Manage Roles');
 
 define('_AM_XHELP_TEXT_EXISTING_ROLES', 'Existing Roles');
 define('_AM_XHELP_TEXT_NO_ROLES', 'No Roles Found');
@@ -314,7 +315,7 @@ define('_AM_XHELP_SEC_TICKET_MERGE', 9);
 define('_AM_XHELP_SEC_TEXT_TICKET_MERGE', 'Merge Tickets');
 define('_AM_XHELP_MSG_UPDATE_ROLE', '%s role permissions have been updated.');
 define('_AM_XHELP_MSG_UPDATE_ROLE_ERR', 'Error: %s role permissions were not updated.');
-define('_AM_XHELP_MSG_DEPT_MBOX_DEL_CFRM', 'Are you sure you want to delete the mailbox %s?'); 
+define('_AM_XHELP_MSG_DEPT_MBOX_DEL_CFRM', 'Are you sure you want to delete the mailbox %s?');
 
 define('_AM_XHELP_TEXT_ADD_STATUS', 'Add Status');
 define('_AM_XHELP_TEXT_STATE', 'State:');
@@ -343,7 +344,7 @@ define('_AM_XHELP_PATH_NOTCREATED', "The folder could not be created");
 
 define('_AM_XHELP_TEXT_CODE', 'Patches:');
 define('_AM_XHELP_POSITION', 'Position');
-define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Begin Date:'); 
+define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Begin Date:');
 define('_AM_XHELP_SEARCH_ENDDATE', 'End Date:');
 
 define('_AM_XHELP_SEC_FILE_DELETE', 10);
@@ -463,4 +464,4 @@ define('_AM_XHELP_TEXT_SUBMITTER', 'Submitter');
 define('_AM_XHELP_TEXT_NOTIF_STAFF', 'Staff Notification');
 define('_AM_XHELP_TEXT_NOTIF_USER', 'User Notification');
 define('_AM_XHELP_TEXT_ASSOC_TPL', 'Associated Templates');
- ?>
+?>

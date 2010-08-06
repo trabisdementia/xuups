@@ -3,39 +3,39 @@ require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_line.php');
 
 // A function to return the Roman Numeral, given an integer
- function numberToRoman($aNum)
- {
-     // Make sure that we only use the integer portion of the value
-     $n = intval($aNum);
-     $result = '';
+function numberToRoman($aNum)
+{
+    // Make sure that we only use the integer portion of the value
+    $n = intval($aNum);
+    $result = '';
 
-     // Declare a lookup array that we will use to traverse the number:
-     $lookup = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400,
+    // Declare a lookup array that we will use to traverse the number:
+    $lookup = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400,
      'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40,
      'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1);
 
-     foreach ($lookup as $roman => $value)
-     {
-         // Determine the number of matches
-         $matches = intval($n / $value);
+    foreach ($lookup as $roman => $value)
+    {
+        // Determine the number of matches
+        $matches = intval($n / $value);
 
-         // Store that many characters
-         $result .= str_repeat($roman, $matches);
+        // Store that many characters
+        $result .= str_repeat($roman, $matches);
 
-         // Substract that from the number
-         $n = $n % $value;
-     }
+        // Substract that from the number
+        $n = $n % $value;
+    }
 
-     // The Roman numeral should be built, return it
-     return $result;
+    // The Roman numeral should be built, return it
+    return $result;
 }
 
 function formatCallback($aVal) {
-	return '('.numberToRoman($aVal).')';
+    return '('.numberToRoman($aVal).')';
 }
 
 
- // Some (random) data
+// Some (random) data
 $ydata = array(11,3,8,12,5,1,9,13,5,7);
 
 // Size of the overall graph

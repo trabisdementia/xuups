@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,14 +20,14 @@ include_once dirname(__FILE__) . '/read.php';
 
 /**
  * A handler for read/unread handling
- * 
+ *
  * @package     newbb/cbb
- * 
+ *
  * @author        D.J. (phppp, http://xoopsforge.com)
  * @copyright    copyright (c) 2005 XOOPS.org
  */
 
-class Readtopic extends Read 
+class Readtopic extends Read
 {
     function Readtopic()
     {
@@ -44,7 +44,7 @@ class NewbbReadtopicHandler extends NewbbReadHandler
      * @var integer
      */
     var $items_per_forum;
-    
+
     function NewbbReadtopicHandler(&$db)
     {
         $this->NewbbReadHandler($db, "topic");
@@ -52,51 +52,51 @@ class NewbbReadtopicHandler extends NewbbReadHandler
         $newbbConfig = newbb_loadConfig();
         $this->items_per_forum = isset($newbbConfig["read_items"]) ? intval($newbbConfig["read_items"]) : 100;
     }
-    
+
     /**
      * clean orphan items from database
-     * 
+     *
      * @return     bool    true on success
      */
     function cleanOrphan()
     {
         parent::cleanOrphan($this->db->prefix("bb_posts"), "post_id");
         return parent::cleanOrphan($this->db->prefix("bb_topics"), "topic_id", "read_item");
-    }    
+    }
 
     /**
      * Clear garbage
-     * 
+     *
      * Delete all expired and duplicated records
      */
     function clearGarbage()
     {
         parent::clearGarbage();
-        
+
         // TODO: clearItemsExceedMaximumItemsPerForum
         return true;
     }
-    
+
     function setRead_items($status = 0, $forum_id = 0, $uid = null)
     {
         if (empty($this->mode)) return true;
-        
+
         if ($this->mode == 1) return $this->setRead_items_cookie($status, $forum_id);
         else return $this->setRead_items_db($status, $forum_id, $uid);
     }
-        
+
     function setRead_items_cookie($status, $forum_id)
     {
         $cookie_name = "LT";
         $cookie_vars = newbb_getcookie($cookie_name, true);
-        
+
         $item_handler =& xoops_getmodulehandler('topic', 'newbb');
         $criteria =& new CriteriaCompo(new Criteria("forum_id", $forum_id));
         $criteria->setSort("topic_last_post_id");
         $criteria->setOrder("DESC");
         $criteria->setLimit($this->items_per_forum);
         $items = $item_handler->getIds($criteria);
-        
+
         foreach ($items as $var) {
             if (empty($status)) {
                 if (isset($cookie_vars[$var])) unset($cookie_vars[$var]);
@@ -107,7 +107,7 @@ class NewbbReadtopicHandler extends NewbbReadHandler
         newbb_setcookie($cookie_name, $cookie_vars);
         return true;
     }
-    
+
     function setRead_items_db($status, $forum_id, $uid)
     {
         if (empty($uid)) {
@@ -117,7 +117,7 @@ class NewbbReadtopicHandler extends NewbbReadHandler
                 return false;
             }
         }
-        
+
         $item_handler =& xoops_getmodulehandler('topic', 'newbb');
         $criteria_topic =& new CriteriaCompo(new Criteria("forum_id", $forum_id));
         $criteria_topic->setSort("topic_last_post_id");
@@ -125,8 +125,8 @@ class NewbbReadtopicHandler extends NewbbReadHandler
         $criteria_topic->setLimit($this->items_per_forum);
         $criteria_sticky =& new CriteriaCompo(new Criteria("forum_id", $forum_id));
         $criteria_sticky->add(new Criteria("topic_sticky", 1));
-    
-        if (empty($status)) {            
+
+        if (empty($status)) {
             $items_id = $item_handler->getIds($criteria_topic);
             $sticky_id = $item_handler->getIds($criteria_sticky);
             $items =  $items_id+$sticky_id;
@@ -135,7 +135,7 @@ class NewbbReadtopicHandler extends NewbbReadHandler
             $this->deleteAll($criteria, true);
             return true;
         }
-        
+
         $items_obj =& $item_handler->getAll($criteria_topic, array("topic_last_post_id"));
         $sticky_obj =& $item_handler->getAll($criteria_sticky, array("topic_last_post_id"));
         $items_obj = $items_obj + $sticky_obj;

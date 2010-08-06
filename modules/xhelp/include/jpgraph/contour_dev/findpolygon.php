@@ -2,7 +2,7 @@
 require_once '../jpgraph.php';
 require_once '../jpgraph_canvas.php';
 require_once '../jpgraph_canvtools.php';
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -27,11 +27,11 @@ class Findpolygon {
     }
 
     function SetupTestData() {
-    //        for($i=0; $i<count($this->contourCoord[0]); ++$i) {
-    //            echo '('.$this->contourCoord[0][$i][0][0].','.$this->contourCoord[0][$i][0][1].') -> '.
-    //            '('.$this->contourCoord[0][$i][1][0].','.$this->contourCoord[0][$i][1][1].")\n";
-    //        }
-    //
+        //        for($i=0; $i<count($this->contourCoord[0]); ++$i) {
+        //            echo '('.$this->contourCoord[0][$i][0][0].','.$this->contourCoord[0][$i][0][1].') -> '.
+        //            '('.$this->contourCoord[0][$i][1][0].','.$this->contourCoord[0][$i][1][1].")\n";
+        //        }
+        //
 
         $c=0;
         $p[$c] = array(0.6,1, 1,0.5, 2,0.5, 3,0.5, 3.5,1, 3.5,2, 3,2.5, 2,2.5, 1,2.5, 0.5,2, 0.6,1);
@@ -55,7 +55,7 @@ class Findpolygon {
                 $swap1 = rand(0,$n-1);
                 $t = $this->contourCoord[$c][$swap1];
                 while( $swap1 == ($swap2 = rand(0,$n-1)) )
-                    ;
+                ;
                 $this->contourCoord[$c][$swap1] = $this->contourCoord[$c][$swap2];
                 $this->contourCoord[$c][$swap2] = $t;
             }
@@ -88,9 +88,9 @@ class Findpolygon {
 
     function CompareCyclic($a,$b,$forward=true) {
 
-    // We assume disjoint vertices and if last==first this just means
-    // that the polygon is closed. For this comparison it must be unique
-    // elements
+        // We assume disjoint vertices and if last==first this just means
+        // that the polygon is closed. For this comparison it must be unique
+        // elements
         if( $a[count($a)-1] == $a[0] ) {
             array_pop($a);
         }
@@ -100,14 +100,14 @@ class Findpolygon {
 
         $n1 = count($a); $n2 = count($b);
         if( $n1 != $n2 )
-            return false;
+        return false;
 
         $i=0;
         while( ($i < $n2) && ($a[0] != $b[$i]) )
-            ++$i;
+        ++$i;
 
         if( $i >= $n2 )
-            return false;
+        return false;
 
         $j=0;
         if( $forward ) {
@@ -129,11 +129,11 @@ class Findpolygon {
     }
 
     function dbg($s) {
-    // echo $s."\n";
+        // echo $s."\n";
     }
 
     function IsVerticeOnBorder($x1,$y1) {
-    // Check if the vertice lies on any of the four border
+        // Check if the vertice lies on any of the four border
         if( $x1==$this->scale[0] || $x1==$this->scale[1] ) {
             return true;
         }
@@ -158,7 +158,7 @@ class Findpolygon {
                 list($x1,$y1) = $edge[0];
                 list($x2,$y2) = $edge[1];
                 $polygons[$pol]=array(
-                    array($x1,$y1),array($x2,$y2)
+                array($x1,$y1),array($x2,$y2)
                 );
 
                 $this->dbg("Searching on second vertice.");
@@ -261,8 +261,8 @@ class FillGridRect {
     }
 
     function GetIsobarVal($a,$b) {
-    // Get the isobar that is between the values a and b
-    // If there are more isobars then return the one with lowest index
+        // Get the isobar that is between the values a and b
+        // If there are more isobars then return the one with lowest index
         if( $b < $a ) {
             $t=$a; $a=$b; $b=$t;
         }
@@ -272,13 +272,13 @@ class FillGridRect {
             ++$i;
         }
         if( $i >= $n )
-            die("Internal error. Cannot find isobar values for ($a,$b)");
+        die("Internal error. Cannot find isobar values for ($a,$b)");
         return $this->isoBars[$i];
     }
 
     function getCrossingCoord($aRow,$aCol,$aEdgeDir,$aIsobarVal) {
-    // In order to avoid numerical problem when two vertices are very close
-    // we have to check and avoid dividing by close to zero denumerator.
+        // In order to avoid numerical problem when two vertices are very close
+        // we have to check and avoid dividing by close to zero denumerator.
         if( $aEdgeDir == HORIZ_EDGE ) {
             $d = abs($this->dataPoints[$aRow][$aCol] - $this->dataPoints[$aRow][$aCol+1]);
             if( $d > 0.001 ) {
@@ -321,25 +321,25 @@ class FillGridRect {
                 if ( $this->edges[HORIZ_EDGE][$row+1][$col] ) $quad_edges[$n++] = array($row+1,$col,  HORIZ_EDGE);
 
                 if( $n == 0 ) {
-                // Easy, fill the entire quadrant with one color since we have no crossings
-                // Select the top left datapoint as representing this quadrant
-                // color for this quadrant
+                    // Easy, fill the entire quadrant with one color since we have no crossings
+                    // Select the top left datapoint as representing this quadrant
+                    // color for this quadrant
                     $color = $this->GetIsobarColor($this->dataPoints[$row][$col]);
                     $polygon = array($col,$row,$col,$row+1,$col+1,$row+1,$col+1,$row,$col,$row);
                     $canvas->FilledPolygon($polygon,$color);
 
                 } elseif( $n==2 ) {
 
-                // There is one isobar edge crossing this quadrant. In order to fill we need to
-                // find out the orientation of the two areas this edge is separating in order to
-                // construct the two polygons that define the two areas to be filled
-                // There are six possible variants
-                // 0) North-South
-                // 1) West-East
-                // 2) West-North
-                // 3) East-North
-                // 4) West-South
-                // 5) East-South
+                    // There is one isobar edge crossing this quadrant. In order to fill we need to
+                    // find out the orientation of the two areas this edge is separating in order to
+                    // construct the two polygons that define the two areas to be filled
+                    // There are six possible variants
+                    // 0) North-South
+                    // 1) West-East
+                    // 2) West-North
+                    // 3) East-North
+                    // 4) West-South
+                    // 5) East-South
                     $type=-1;
                     if( $this->edges[HORIZ_EDGE][$row][$col] ) {
                         if( $this->edges[HORIZ_EDGE][$row+1][$col] ) $type=0; // North-South
@@ -360,7 +360,7 @@ class FillGridRect {
                     switch( $type ) {
                         case 0: //North-South
 
-                        // North vertice
+                            // North vertice
                             $v1 = $this->dataPoints[$row][$col];
                             $v2 = $this->dataPoints[$row][$col+1];
                             $isobarValue = $this->GetIsobarVal($v1, $v2);
@@ -382,7 +382,7 @@ class FillGridRect {
 
                         case 1: // West-East
 
-                        // West vertice
+                            // West vertice
                             $v1 = $this->dataPoints[$row][$col];
                             $v2 = $this->dataPoints[$row+1][$col];
                             $isobarValue = $this->GetIsobarVal($v1, $v2);
@@ -403,7 +403,7 @@ class FillGridRect {
 
                         case 2: // West-North
 
-                        // West vertice
+                            // West vertice
                             $v1 = $this->dataPoints[$row][$col];
                             $v2 = $this->dataPoints[$row+1][$col];
                             $isobarValue = $this->GetIsobarVal($v1, $v2);
@@ -425,12 +425,12 @@ class FillGridRect {
 
                         case 3: // East-North
 
-                        //                            if( $row==3 && $col==1 && $n==2 ) {
-                        //                                echo " ** East-North<br>";
-                        //                            }
+                            //                            if( $row==3 && $col==1 && $n==2 ) {
+                            //                                echo " ** East-North<br>";
+                            //                            }
 
 
-                        // East vertice
+                            // East vertice
                             $v1 = $this->dataPoints[$row][$col+1];
                             $v2 = $this->dataPoints[$row+1][$col+1];
                             $isobarValue = $this->GetIsobarVal($v1, $v2);
@@ -465,7 +465,7 @@ class FillGridRect {
 
                         case 4: // West-South
 
-                        // West vertice
+                            // West vertice
                             $v1 = $this->dataPoints[$row][$col];
                             $v2 = $this->dataPoints[$row+1][$col];
                             $isobarValue = $this->GetIsobarVal($v1, $v2);
@@ -487,12 +487,12 @@ class FillGridRect {
 
                         case 5: // East-South
 
-                        //
-                        //                            if( $row==1 && $col==1 && $n==2 ) {
-                        //                                echo " ** Sout-East<br>";
-                        //                            }
+                            //
+                            //                            if( $row==1 && $col==1 && $n==2 ) {
+                            //                                echo " ** Sout-East<br>";
+                            //                            }
 
-                        // East vertice
+                            // East vertice
                             $v1 = $this->dataPoints[$row][$col+1];
                             $v2 = $this->dataPoints[$row+1][$col+1];
                             $isobarValue = $this->GetIsobarVal($v1, $v2);
@@ -567,9 +567,9 @@ class ContCanvas {
                 list($x1,$y1) = $this->scale->Translate($x,$y);
 
                 if( $datapoints[$y][$x] > 0 )
-                    $t->SetColor('blue');
+                $t->SetColor('blue');
                 else
-                    $t->SetColor('black');
+                $t->SetColor('black');
                 $t->SetFont(FF_ARIAL,FS_BOLD,8);
                 $t->Set($datapoints[$y][$x]);
                 $t->Stroke($this->g->img,$x1,$y1);
@@ -652,12 +652,12 @@ class PixelFill {
             for($row=0; $row < $ny_vertices-1; ++$row) {
 
                 $v=array(
-                    $this->dataPoints[$row][$col],
-                    $this->dataPoints[$row][$col+1],
-                    $this->dataPoints[$row+1][$col+1],
-                    $this->dataPoints[$row+1][$col],
+                $this->dataPoints[$row][$col],
+                $this->dataPoints[$row][$col+1],
+                $this->dataPoints[$row+1][$col+1],
+                $this->dataPoints[$row+1][$col],
                 );
-                
+
                 list($x1,$y1) = $canvas->scale->Translate($col, $row);
                 list($x2,$y2) = $canvas->scale->Translate($col+1, $row+1);
 

@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: rate.php 2283 2008-10-12 03:36:13Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
@@ -24,23 +24,23 @@ include_once dirname(dirname(__FILE__)) . "/include/vars.php";
 mod_loadFunctions("parse", $GLOBALS["artdirname"]);
 
 if (!class_exists("Rate")) {
-class Rate extends XoopsObject
-{
-    //var $db;
-    //var $table;
-
-    function Rate($id = null)
+    class Rate extends XoopsObject
     {
-        //$this->ArtObject();
-        //$this->table = art_DB_prefix("rate");
-        $this->initVar("rate_id", XOBJ_DTYPE_INT, null, false);
-        $this->initVar("art_id", XOBJ_DTYPE_INT, 0, true);
-        $this->initVar("uid", XOBJ_DTYPE_INT, 0);
-        $this->initVar("rate_ip", XOBJ_DTYPE_INT);
-        $this->initVar("rate_rating", XOBJ_DTYPE_INT);
-        $this->initVar("rate_time", XOBJ_DTYPE_INT);
+        //var $db;
+        //var $table;
+
+        function Rate($id = null)
+        {
+            //$this->ArtObject();
+            //$this->table = art_DB_prefix("rate");
+            $this->initVar("rate_id", XOBJ_DTYPE_INT, null, false);
+            $this->initVar("art_id", XOBJ_DTYPE_INT, 0, true);
+            $this->initVar("uid", XOBJ_DTYPE_INT, 0);
+            $this->initVar("rate_ip", XOBJ_DTYPE_INT);
+            $this->initVar("rate_rating", XOBJ_DTYPE_INT);
+            $this->initVar("rate_time", XOBJ_DTYPE_INT);
+        }
     }
-}
 }
 
 art_parse_class('

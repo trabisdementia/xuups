@@ -153,7 +153,7 @@ class Xmf_Folder
             return $this->path = $path;
         }
         return false;
-     }
+    }
     /**
      * Returns an array of the contents of the current directory, or false on failure.
      * The returned array holds two arrays: one of dirs and one of files.
@@ -330,7 +330,7 @@ class Xmf_Folder
             return $path;
         }
         return $path . Xmf_Folder::correctSlashFor($path);
-     }
+    }
     /**
      * Returns $path with $element added, with correct slash in-between.
      *
@@ -355,7 +355,7 @@ class Xmf_Folder
         $dir = substr($this->slashTerm(XOOPS_ROOT_PATH), 0, -1);
         $newdir = $dir . $path;
         return $this->inPath($newdir);
-     }
+    }
     /**
      * Returns true if the File is in given path.
      *
@@ -387,45 +387,45 @@ class Xmf_Folder
      * @return boolean Returns TRUE on success, FALSE on failure
      * @access public
      */
-     function chmod($path, $mode = false, $recursive = true, $exceptions = array())
-     {
-         if (!$mode) {
-             $mode = $this->mode;
-         }
+    function chmod($path, $mode = false, $recursive = true, $exceptions = array())
+    {
+        if (!$mode) {
+            $mode = $this->mode;
+        }
 
-         if ($recursive === false && is_dir($path)) {
-                 if (chmod($path, intval($mode, 8))) {
-                     $this->messages[] = sprintf('%s changed to %s', $path, $mode);
-                     return true;
-                 } else {
-                     $this->errors[] = sprintf('%s NOT changed to %s', $path, $mode);
-                     return false;
-                 }
-         }
+        if ($recursive === false && is_dir($path)) {
+            if (chmod($path, intval($mode, 8))) {
+                $this->messages[] = sprintf('%s changed to %s', $path, $mode);
+                return true;
+            } else {
+                $this->errors[] = sprintf('%s NOT changed to %s', $path, $mode);
+                return false;
+            }
+        }
 
-         if (is_dir($path)) {
-             list($paths) = $this->tree($path);
+        if (is_dir($path)) {
+            list($paths) = $this->tree($path);
 
-             foreach ($paths as $key => $fullpath) {
-                 $check = explode("/", $fullpath);
-                 $count = count($check);
+            foreach ($paths as $key => $fullpath) {
+                $check = explode("/", $fullpath);
+                $count = count($check);
 
-                 if (in_array($check[$count - 1], $exceptions)) {
-                     continue;
-                 }
+                if (in_array($check[$count - 1], $exceptions)) {
+                    continue;
+                }
 
-                 if (chmod($fullpath, intval($mode, 8))) {
-                     $this->messages[] = sprintf('%s changed to %s', $fullpath, $mode);
-                 } else {
-                     $this->errors[] = sprintf('%s NOT changed to %s', $fullpath, $mode);
-                 }
-             }
-             if (empty($this->errors)) {
-                 return true;
-             }
-         }
-         return false;
-     }
+                if (chmod($fullpath, intval($mode, 8))) {
+                    $this->messages[] = sprintf('%s changed to %s', $fullpath, $mode);
+                } else {
+                    $this->errors[] = sprintf('%s NOT changed to %s', $fullpath, $mode);
+                }
+            }
+            if (empty($this->errors)) {
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * Returns an array of nested directories and files in each directory
      *

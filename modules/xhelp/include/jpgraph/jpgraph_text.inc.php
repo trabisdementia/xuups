@@ -50,7 +50,7 @@ class Text {
 
     // Alias for Pos()
     function SetPos($aXAbsPos=0,$aYAbsPos=0,$aHAlign="left",$aVAlign="top") {
-    //$this->Pos($aXAbsPos,$aYAbsPos,$aHAlign,$aVAlign);
+        //$this->Pos($aXAbsPos,$aYAbsPos,$aHAlign,$aVAlign);
         $this->x = $aXAbsPos;
         $this->y = $aYAbsPos;
         $this->halign = $aHAlign;
@@ -67,7 +67,7 @@ class Text {
         $this->halign = $aHAlign;
         $this->valign = $aVAlign;
         if( $aParagraphAlign != "" )
-            $this->paragraph_align = $aParagraphAlign;
+        $this->paragraph_align = $aParagraphAlign;
     }
 
     // Alias
@@ -145,7 +145,7 @@ class Text {
         $this->x = $aLeft + ($aRight-$aLeft )/2;
         $this->halign = "center";
         if( is_numeric($aYAbsPos) )
-            $this->y = $aYAbsPos;
+        $this->y = $aYAbsPos;
     }
 
     // Set text color
@@ -160,13 +160,13 @@ class Text {
     // Orientation of text. Note only TTF fonts can have an arbitrary angle
     function SetOrientation($aDirection=0) {
         if( is_numeric($aDirection) )
-            $this->dir=$aDirection;
+        $this->dir=$aDirection;
         elseif( $aDirection=="h" )
-            $this->dir = 0;
+        $this->dir = 0;
         elseif( $aDirection=="v" )
-            $this->dir = 90;
+        $this->dir = 90;
         else
-            JpGraphError::RaiseL(25051);//(" Invalid direction specified for text.");
+        JpGraphError::RaiseL(25051);//(" Invalid direction specified for text.");
     }
 
     // Total width of text
@@ -191,7 +191,7 @@ class Text {
     }
 
     function GetHeight($aImg) {
-    // Synonym for GetTextHeight()
+        // Synonym for GetTextHeight()
         $aImg->SetFont($this->font_family,$this->font_style,$this->font_size);
         $h = $aImg->GetTextHeight($this->t,$this->dir);
         return $h;
@@ -209,8 +209,8 @@ class Text {
         }
         else {
             $this->Stroke($aImg,
-                round($axscale->Translate($this->iScalePosX)),
-                round($ayscale->Translate($this->iScalePosY)));
+            round($axscale->Translate($this->iScalePosX)),
+            round($ayscale->Translate($this->iScalePosY)));
         }
     }
 
@@ -259,20 +259,20 @@ class Text {
             if( $this->iBoxType == 2 && $this->font_family > FF_FONT2+2 ) {
 
                 $bbox = $aImg->StrokeBoxedText2($this->x, $this->y,
-                                                $this->t, $this->dir,
-                                                $this->fcolor,
-                                                $this->bcolor,
-                                                $this->shadow,
-                                                $this->paragraph_align,
-                                                2,4,
-                                                $this->icornerradius,
-                                                $this->ishadowwidth);
+                $this->t, $this->dir,
+                $this->fcolor,
+                $this->bcolor,
+                $this->shadow,
+                $this->paragraph_align,
+                2,4,
+                $this->icornerradius,
+                $this->ishadowwidth);
             }
             else {
                 $bbox = $aImg->StrokeBoxedText($this->x,$this->y,$this->t,
-                    $this->dir,$this->fcolor,$this->bcolor,$this->shadow,
-                    $this->paragraph_align,3,3,$this->icornerradius,
-                    $this->ishadowwidth);
+                $this->dir,$this->fcolor,$this->bcolor,$this->shadow,
+                $this->paragraph_align,3,3,$this->icornerradius,
+                $this->ishadowwidth);
             }
 
             $aImg->SetLineWeight($oldweight);

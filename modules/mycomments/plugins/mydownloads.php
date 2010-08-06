@@ -4,7 +4,7 @@
 //  E-Mail: lusopoemas@gmail.com
 
 function mydownloads_useritems($uid, $limit=0, $offset=0){
-	global $xoopsDB;
+    global $xoopsDB;
     $ret = array();
 
     $sql = "SELECT lid, title, date
@@ -12,21 +12,21 @@ function mydownloads_useritems($uid, $limit=0, $offset=0){
     WHERE submitter=" . $uid . "
     AND status>0
     ORDER BY lid";
-	$result = $xoopsDB->query($sql,$limit,$offset);
+    $result = $xoopsDB->query($sql,$limit,$offset);
 
     if ( $result ) {
         while ($row = $xoopsDB->fetchArray($result)){
-		  $ret[] = $row['lid'];
-		}
-	}
-	
-	return $ret;
+            $ret[] = $row['lid'];
+        }
+    }
+
+    return $ret;
 }
 
 function mydownloads_iteminfo($items, $limit=0, $offset=0){
 
     global $xoopsDB;
-	$ret = array();
+    $ret = array();
     $URL_MOD = XOOPS_URL."/modules/mydownloads";
 
     $sql = "SELECT d.lid, d.title as dtitle, d.date, d.cid, d.submitter, d.hits, t.description, c.title as ctitle
@@ -38,20 +38,20 @@ function mydownloads_iteminfo($items, $limit=0, $offset=0){
     ORDER BY d.date DESC";
     $result = $xoopsDB->query($sql, $limit, $offset);
 
-	$i = 0;
- 	while( $row = $xoopsDB->fetchArray($result) ){
- 		$lid = $row['lid'];
-		$ret[$i]['link']     = $URL_MOD."/singlefile.php?lid=".$lid;
-		$ret[$i]['cat_link'] = $URL_MOD."/viewcat.php?cid=".$row['cid'];
-		$ret[$i]['title'] = $row['dtitle'];
-		$ret[$i]['time']  = $row['date'];
-		$ret[$i]['id'] = $lid;
-	    // uid
-		$ret[$i]['uid'] = $row['submitter'];
+    $i = 0;
+    while( $row = $xoopsDB->fetchArray($result) ){
+        $lid = $row['lid'];
+        $ret[$i]['link']     = $URL_MOD."/singlefile.php?lid=".$lid;
+        $ret[$i]['cat_link'] = $URL_MOD."/viewcat.php?cid=".$row['cid'];
+        $ret[$i]['title'] = $row['dtitle'];
+        $ret[$i]['time']  = $row['date'];
+        $ret[$i]['id'] = $lid;
+        // uid
+        $ret[$i]['uid'] = $row['submitter'];
         // category
-		$ret[$i]['cat_name'] = $row['ctitle'];
+        $ret[$i]['cat_name'] = $row['ctitle'];
         // counter
-		$ret[$i]['hits'] = $row['hits'];
+        $ret[$i]['hits'] = $row['hits'];
         // comments
         $ret[$i]['replies'] = $row['comments'];
         // description
@@ -61,9 +61,9 @@ function mydownloads_iteminfo($items, $limit=0, $offset=0){
         $xcodes = 1;
         $ret[$i]['description'] = $myts->displayTarea($row['description'], $html, $smiley, $xcodes);
         $i++;
-	}
-	
-	return $ret;
+    }
+
+    return $ret;
 }
 
 ?>

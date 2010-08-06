@@ -535,11 +535,11 @@ class Graph {
 
     public $titlebackground = false;
     public $titlebackground_color = 'lightblue',
-           $titlebackground_style = 1,
-           $titlebackground_framecolor = 'blue',
-           $titlebackground_framestyle = 2,
-           $titlebackground_frameweight = 1,
-           $titlebackground_bevelheight = 3 ;
+    $titlebackground_style = 1,
+    $titlebackground_framecolor = 'blue',
+    $titlebackground_framestyle = 2,
+    $titlebackground_frameweight = 1,
+    $titlebackground_bevelheight = 3 ;
     public $titlebkg_fillstyle=TITLEBKG_FILLSTYLE_SOLID;
     public $titlebkg_scolor1='black',$titlebkg_scolor2='white';
     public $framebevel = false, $framebeveldepth = 2 ;
@@ -550,16 +550,16 @@ class Graph {
     public $background_cflag_type = BGIMG_FILLPLOT;
     public $background_cflag_mix = 100;
     public $iImgTrans=false,
-           $iImgTransHorizon = 100,$iImgTransSkewDist=150,
-           $iImgTransDirection = 1, $iImgTransMinSize = true,
-           $iImgTransFillColor='white',$iImgTransHighQ=false,
-           $iImgTransBorder=false,$iImgTransHorizonPos=0.5;
+    $iImgTransHorizon = 100,$iImgTransSkewDist=150,
+    $iImgTransDirection = 1, $iImgTransMinSize = true,
+    $iImgTransFillColor='white',$iImgTransHighQ=false,
+    $iImgTransBorder=false,$iImgTransHorizonPos=0.5;
     public $legend;
     protected $iYAxisDeltaPos=50;
     protected $iIconDepth=DEPTH_BACK;
     protected $iAxisLblBgType = 0,
-              $iXAxisLblBgFillColor = 'lightgray', $iXAxisLblBgColor = 'black',
-              $iYAxisLblBgFillColor = 'lightgray', $iYAxisLblBgColor = 'black';
+    $iXAxisLblBgFillColor = 'lightgray', $iXAxisLblBgColor = 'black',
+    $iYAxisLblBgFillColor = 'lightgray', $iYAxisLblBgColor = 'black';
     protected $iTables=NULL;
 
     // aWIdth   Width in pixels of image
@@ -802,8 +802,8 @@ class Graph {
         }
 
         if( ($cl instanceof Text) ||
-            (class_exists('PlotLine',false) && ($cl instanceof PlotLine)) ||
-            (class_exists('PlotBand',false) && ($cl instanceof PlotBand)) ) {
+        (class_exists('PlotLine',false) && ($cl instanceof PlotLine)) ||
+        (class_exists('PlotBand',false) && ($cl instanceof PlotBand)) ) {
             JpGraph::RaiseL(25013);//('You can only add standard plots to multiple Y-axis');
         }
         else {
@@ -1509,8 +1509,8 @@ class Graph {
 
     function AdjustMarginsForTitles() {
         $totrequired = ($this->title->t != '' ? $this->title->GetTextHeight($this->img) + $this->title->margin + 5 : 0 ) +
-            ($this->subtitle->t != '' ? $this->subtitle->GetTextHeight($this->img) + $this->subtitle->margin + 5 : 0 ) +
-            ($this->subsubtitle->t != '' ? $this->subsubtitle->GetTextHeight($this->img) + $this->subsubtitle->margin + 5 : 0 ) ;
+        ($this->subtitle->t != '' ? $this->subtitle->GetTextHeight($this->img) + $this->subtitle->margin + 5 : 0 ) +
+        ($this->subsubtitle->t != '' ? $this->subsubtitle->GetTextHeight($this->img) + $this->subsubtitle->margin + 5 : 0 ) ;
 
         $btotrequired = 0;
         if($this->xaxis != null &&  !$this->xaxis->hide && !$this->xaxis->hide_labels ) {
@@ -1570,7 +1570,7 @@ class Graph {
     }
 
     function doAutoscaleXAxis() {
-    //Check if we should autoscale x-axis
+        //Check if we should autoscale x-axis
         if( !$this->xscale->IsSpecified() ) {
             if( substr($this->axtype,0,4) == "text" ) {
                 $max=0;
@@ -1660,7 +1660,7 @@ class Graph {
             }
         }
         elseif( $this->xscale->IsSpecified() &&
-                ( $this->xscale->auto_ticks || !$this->xscale->ticks->IsSpecified()) ) {
+        ( $this->xscale->auto_ticks || !$this->xscale->ticks->IsSpecified()) ) {
             // The tick calculation will use the user suplied min/max values to determine
             // the ticks. If auto_ticks is false the exact user specifed min and max
             // values will be used for the scale.
@@ -1882,10 +1882,10 @@ class Graph {
     }
 
     function StrokeBands($aDepth,$aCSIM) {
-    // Stroke bands
+        // Stroke bands
         if( $this->bands != null && !$aCSIM) {
             for($i=0; $i < count($this->bands); ++$i) {
-            // Stroke all bands that asks to be in the background
+                // Stroke all bands that asks to be in the background
                 if( $this->bands[$i]->depth == $aDepth ) {
                     $this->bands[$i]->Stroke($this->img,$this->xscale,$this->yscale);
                 }
@@ -1894,7 +1894,7 @@ class Graph {
 
         if( $this->y2bands != null && $this->y2scale != null && !$aCSIM ) {
             for($i=0; $i < count($this->y2bands); ++$i) {
-            // Stroke all bands that asks to be in the foreground
+                // Stroke all bands that asks to be in the foreground
                 if( $this->y2bands[$i]->depth == $aDepth ) {
                     $this->y2bands[$i]->Stroke($this->img,$this->xscale,$this->y2scale);
                 }
@@ -1956,7 +1956,7 @@ class Graph {
         // no other scale was given so we can't possible draw anything). If you use manual
         // scaling you also have to supply the tick steps as well.
         if( (!$this->yscale->IsSpecified() && count($this->plots)==0) ||
-            ($this->y2scale!=null && !$this->y2scale->IsSpecified() && count($this->y2plots)==0) ) {
+        ($this->y2scale!=null && !$this->y2scale->IsSpecified() && count($this->y2plots)==0) ) {
             //$e = "n=".count($this->y2plots)."\n";
             // $e = "Can't draw unspecified Y-scale.<br>\nYou have either:<br>\n";
             // $e .= "1. Specified an Y axis for autoscaling but have not supplied any plots<br>\n";
@@ -1989,8 +1989,8 @@ class Graph {
         // much further in and not close to the Y-axis. Hence the test
         // for 'text'
         if( ($this->yaxis->pos==$this->xscale->GetMinVal() || (is_string($this->yaxis->pos) && $this->yaxis->pos=='min')) &&
-            !is_numeric($this->xaxis->pos) && $this->yscale->GetMinVal() < 0 &&
-            substr($this->axtype,0,4) != 'text' && $this->xaxis->pos != 'min' ) {
+        !is_numeric($this->xaxis->pos) && $this->yscale->GetMinVal() < 0 &&
+        substr($this->axtype,0,4) != 'text' && $this->xaxis->pos != 'min' ) {
 
             //$this->yscale->ticks->SupressZeroLabel(false);
             $this->xscale->ticks->SupressFirst();
@@ -2380,10 +2380,10 @@ class Graph {
 
         $supported = imagetypes();
         if( ( $ext == 'jpg' && !($supported & IMG_JPG) ) ||
-            ( $ext == 'gif' && !($supported & IMG_GIF) ) ||
-            ( $ext == 'png' && !($supported & IMG_PNG) ) ||
-            ( $ext == 'bmp' && !($supported & IMG_WBMP) ) ||
-            ( $ext == 'xpm' && !($supported & IMG_XPM) ) ) {
+        ( $ext == 'gif' && !($supported & IMG_GIF) ) ||
+        ( $ext == 'png' && !($supported & IMG_PNG) ) ||
+        ( $ext == 'bmp' && !($supported & IMG_WBMP) ) ||
+        ( $ext == 'xpm' && !($supported & IMG_XPM) ) ) {
 
             JpGraphError::RaiseL(25037,$aFile);//('The image format of your background image ('.$aFile.') is not supported in your system configuration. ');
         }
@@ -2412,8 +2412,8 @@ class Graph {
 
     function StrokePlotGrad() {
         if( $this->plot_gradtype < 0  )
-            return;
-            
+        return;
+
         $grad = new Gradient($this->img);
         $xl = $this->img->left_margin;
         $yt = $this->img->top_margin;
@@ -2425,7 +2425,7 @@ class Graph {
 
     function StrokeBackgroundGrad() {
         if( $this->bkg_gradtype < 0  )
-            return;
+        return;
 
         $grad = new Gradient($this->img);
         if( $this->bkg_gradstyle == BGRAD_PLOT ) {
@@ -2495,17 +2495,17 @@ class Graph {
                     $aa = $this->img->SetAngle(0);
                     $adj = ($this->img->height - $this->img->width)/2;
                     $this->img->CopyMerge($bkgimg,
-                        $this->img->bottom_margin-$adj,$this->img->left_margin+$adj,
-                        0,0,
-                        $this->img->plotheight+1,$this->img->plotwidth,
-                        $bw,$bh,$this->background_image_mix);
+                    $this->img->bottom_margin-$adj,$this->img->left_margin+$adj,
+                    0,0,
+                    $this->img->plotheight+1,$this->img->plotwidth,
+                    $bw,$bh,$this->background_image_mix);
                 }
                 else {
                     $this->FillPlotArea();
                     $this->img->CopyMerge($bkgimg,
-                        $this->img->left_margin,$this->img->top_margin+1,
-                        0,0,$this->img->plotwidth+1,$this->img->plotheight,
-                        $bw,$bh,$this->background_image_mix);
+                    $this->img->left_margin,$this->img->top_margin+1,
+                    0,0,$this->img->plotwidth+1,$this->img->plotheight,
+                    $bw,$bh,$this->background_image_mix);
                 }
                 break;
             case BGIMG_FILLFRAME: // Fill the whole area from upper left corner, resize to just fit
@@ -3073,7 +3073,7 @@ class GraphTabTitle extends Text{
 
     function Stroke($aImg,$aDummy1=null,$aDummy2=null) {
         if( $this->hide )
-            return;
+        return;
         $this->boxed = false;
         $w = $this->GetWidth($aImg) + 2*$this->posx;
         $h = $this->GetTextHeight($aImg) + 2*$this->posy;
@@ -3716,7 +3716,7 @@ class Axis extends AxisPrototype {
     // Stroke the axis.
     function Stroke($aOtherAxisScale,$aStrokeLabels=true) {
         if( $this->hide )
-            return;
+        return;
         if( is_numeric($this->pos) ) {
             $pos=$aOtherAxisScale->Translate($this->pos);
         }
@@ -3878,12 +3878,12 @@ class Axis extends AxisPrototype {
                     }
 
                     // We number the scale from 1 and not from 0 so increase by one
-                    if( $this->scale->textscale && 
-                        $this->scale->ticks->label_formfunc == '' &&
-                        ! $this->scale->ticks->HaveManualLabels() ) {
+                    if( $this->scale->textscale &&
+                    $this->scale->ticks->label_formfunc == '' &&
+                    ! $this->scale->ticks->HaveManualLabels() ) {
 
                         ++$label;
-                        
+
                     }
                 }
 
@@ -3973,7 +3973,7 @@ class Ticks {
     public $direction=1; // Should ticks be in(=1) the plot area or outside (=-1)
     public $supress_last=false,$supress_tickmarks=false,$supress_minor_tickmarks=false;
     public $maj_ticks_pos = array(), $maj_ticklabels_pos = array(),
-           $ticks_pos = array(), $maj_ticks_label = array();
+    $ticks_pos = array(), $maj_ticks_label = array();
     public $precision;
 
     protected $minor_abs_size=3, $major_abs_size=5;
@@ -5038,7 +5038,7 @@ class DisplayValue {
     public $txt=null;
 
     function __construct() {
-                $this->txt = new Text();
+        $this->txt = new Text();
     }
 
     function Show($aFlag=true) {
@@ -5391,7 +5391,7 @@ class ColorFactory {
 
     static function getColor() {
         if( ColorFactory::$iIdx >= ColorFactory::$iNum )
-            ColorFactory::$iIdx = 0;
+        ColorFactory::$iIdx = 0;
         return ColorFactory::$iColorList[ColorFactory::$iIdx++];
     }
 

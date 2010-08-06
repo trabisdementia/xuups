@@ -4,7 +4,7 @@ require_once ('jpgraph/jpgraph_bar.php');
 
 $datay=array(12,26,9,17,31);
 
-// Create the graph. 
+// Create the graph.
 $graph = new Graph(400,250);
 $graph->SetScale("textlin");
 $graph->SetMargin(50,80,20,40);
@@ -41,7 +41,7 @@ $txt1->SetPos(40,50);
 $txt1->SetCSIMTarget('#88','Text element');
 $graph->Add($txt1);
 
-// Add image map to the graph title as well (you can do this to the 
+// Add image map to the graph title as well (you can do this to the
 // sub- and subsub-title as well)
 $graph->title->Set("Image maps barex1");
 $graph->title->SetFont(FF_FONT1,FS_BOLD);

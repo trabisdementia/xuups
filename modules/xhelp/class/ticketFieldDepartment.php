@@ -11,7 +11,7 @@ class xhelpTicketFieldDepartmentHandler
     var $_db;
     var $_hField;
     var $_hDept;
-    
+
     /**
      * Constructor
      *
@@ -24,8 +24,8 @@ class xhelpTicketFieldDepartmentHandler
         $this->_hField =& xhelpGetHandler('ticketField');
         $this->_hDept  =& xhelpGetHandler('department');
     }
-    
-    
+
+
     /**
      * Get every department a field is "in"
      *
@@ -38,10 +38,10 @@ class xhelpTicketFieldDepartmentHandler
     {
         $field = intval($field);
         $sql   = sprintf('SELECT d.* FROM %s d INNER JOIN %s j ON d.id = j.deptid WHERE j.fieldid = %u',
-            $this->_db->prefix('xhelp_departments'), $this->_db->prefix('xhelp_ticket_field_departments'), $field);
+        $this->_db->prefix('xhelp_departments'), $this->_db->prefix('xhelp_ticket_field_departments'), $field);
         $ret = $this->_db->query($sql);
         $arr = array();
-        
+
         if($ret){
             while ($temp = $this->_db->fetchArray($ret)) {
                 $dept =& $this->_hDept->create();
@@ -52,10 +52,10 @@ class xhelpTicketFieldDepartmentHandler
                     $arr[] =& $dept;
                 }
                 unset($temp);
-                
+
             }
         }
-        
+
         return $arr;
     }
 
@@ -72,10 +72,10 @@ class xhelpTicketFieldDepartmentHandler
     {
         $dept = intval($dept);
         $sql   = sprintf('SELECT f.* FROM %s f INNER JOIN %s j ON f.id = j.fieldid WHERE j.deptid = %u ORDER BY f.weight',
-            $this->_db->prefix('xhelp_ticket_fields'), $this->_db->prefix('xhelp_ticket_field_departments'), $dept);
+        $this->_db->prefix('xhelp_ticket_fields'), $this->_db->prefix('xhelp_ticket_field_departments'), $dept);
         $ret = $this->_db->query($sql);
         $arr = array();
-        
+
         if($ret){
             while ($temp = $this->_db->fetchArray($ret)) {
                 $field =& $this->_hField->create();
@@ -86,21 +86,21 @@ class xhelpTicketFieldDepartmentHandler
                     $arr[] =& $field;
                 }
                 unset($temp);
-                
-            }        
+
+            }
         }
         return $arr;
     }
-    
+
 
     /**
-    * Add the given field to the given department
-    *
-    * @param mixed $staff single or array of uids or {@link xhelpTicketField} objects
-    * @param int $deptid Department ID
-    * @return bool True if successful, False if not
-    * @access public
-    */        
+     * Add the given field to the given department
+     *
+     * @param mixed $staff single or array of uids or {@link xhelpTicketField} objects
+     * @param int $deptid Department ID
+     * @return bool True if successful, False if not
+     * @access public
+     */
     function addFieldToDepartment(&$field, $deptid)
     {
         if (!is_array($field)) {
@@ -110,12 +110,12 @@ class xhelpTicketFieldDepartmentHandler
                 $ret = $this->_addMembership($var, $deptid);
                 if (!$ret) {
                     break;
-                }              
+                }
             }
         }
         return $ret;
     }
-    
+
     /**
      * Add the given department(s) to the given field
      *
@@ -138,7 +138,7 @@ class xhelpTicketFieldDepartmentHandler
         }
         return $ret;
     }
-    
+
     /**
      * Remove the given field(s) from the given department
      *
@@ -169,7 +169,7 @@ class xhelpTicketFieldDepartmentHandler
      * @param int $field Field ID
      * @return bool True if successful, False if not
      * @access public
-     */        
+     */
     function removeDeptFromField(&$dept, $field)
     {
         if (!is_array($dept)) {
@@ -184,7 +184,7 @@ class xhelpTicketFieldDepartmentHandler
         }
         return $ret;
     }
-    
+
     /**
      * Remove All Departments from a particular field
      * @param int $field Field ID
@@ -196,16 +196,16 @@ class xhelpTicketFieldDepartmentHandler
         $field = intval($field);
         $crit = new Criteria('fieldid', $field);
         $ret = $this->deleteAll($crit);
-        return $ret;         
+        return $ret;
     }
-    
+
     /**
      * Remove All Departments from a particular field
      * @param int $field Field ID
      * @return bool True if successful, False if not
      * @access public
      */
-    
+
     function removeDeptFromAllFields($dept)
     {
         $dept = intval($dept);
@@ -213,26 +213,26 @@ class xhelpTicketFieldDepartmentHandler
         $ret = $this->deleteAll($crit);
         return $ret;
     }
-    
-    
+
+
     function deleteAll($criteria=null, $force=false)
     {
         $sql = 'DELETE FROM '.$this->_db->prefix('xhelp_ticket_field_departments');
-		if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-			$sql .= ' '.$criteria->renderWhere();
-		}
-		
-		if (!$force) {
-		    $result = $this->_db->query($sql);
-		} else {
-		    $result = $this->_db->queryF($sql);
-		}
-		if (!$result) {
-			return false;
-		}
-		return true;
+        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+            $sql .= ' '.$criteria->renderWhere();
+        }
+
+        if (!$force) {
+            $result = $this->_db->query($sql);
+        } else {
+            $result = $this->_db->queryF($sql);
+        }
+        if (!$result) {
+            return false;
+        }
+        return true;
     }
-    
+
     /**
      * Add a field to a department
      *
@@ -244,31 +244,31 @@ class xhelpTicketFieldDepartmentHandler
     function _addMembership(&$field, &$dept)
     {
         $fieldid = $deptid = 0;
-        
+
         if (is_object($field)) {
             $fieldid = $field->getVar('id');
         } else {
             $fieldid = intval($field);
         }
-        
+
         if (is_object($dept)) {
             $deptid = $dept->getVar('id');
         } else {
             $deptid = intval($dept);
         }
-        
+
         $ret = $this->_addJoinerRecord($fieldid, $deptid);
         return $ret;
     }
 
     function _addJoinerRecord($fieldid, $deptid)
     {
-        $sql = sprintf('INSERT INTO %s (fieldid, deptid) VALUES (%u, %u)', 
-            $this->_db->prefix('xhelp_ticket_field_departments'), $fieldid, $deptid);
+        $sql = sprintf('INSERT INTO %s (fieldid, deptid) VALUES (%u, %u)',
+        $this->_db->prefix('xhelp_ticket_field_departments'), $fieldid, $deptid);
         $ret = $this->_db->query($sql);
         return $ret;
     }
-    
+
     function _removeMembership(&$field, &$dept)
     {
         $fieldid = $deptid = 0;
@@ -277,26 +277,26 @@ class xhelpTicketFieldDepartmentHandler
         } else {
             $fieldid = intval($field);
         }
-        
+
         if (is_object($dept)) {
             $deptid = $dept->getVar('id');
         } else {
             $deptid = intval($dept);
         }
-        
+
         $ret = $this->_removeJoinerRecord($fieldid, $deptid);
         return $ret;
-    }        
+    }
 
     function _removeJoinerRecord($fieldid, $deptid)
     {
-        $sql = sprintf('DELETE FROM %s WHERE fieldid = %u AND deptid = %u', 
-            $this->_db->prefix('xhelp_ticket_field_departments'), $fieldid, $deptid);
+        $sql = sprintf('DELETE FROM %s WHERE fieldid = %u AND deptid = %u',
+        $this->_db->prefix('xhelp_ticket_field_departments'), $fieldid, $deptid);
         $ret = $this->_db->query($sql);
         return $ret;
     }
 
-        
+
 }
 
 

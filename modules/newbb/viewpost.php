@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -66,43 +66,43 @@ if (!empty($uid)) {
 
 $join = null;
 switch($status) {
-case "pending":
-    $criteria_status_count = new Criteria("approved", 0);
-    $criteria_status_post = new Criteria("p.approved", 0);
-    break;
-    
-case "deleted":
-    $criteria_status_count = new Criteria("approved", -1);
-    $criteria_status_post = new Criteria("p.approved", -1);
-    break;
-    
-case "new":
-    $criteria_status_count = new CriteriaCompo(new Criteria("post_time", intval($last_visit), ">"));
-    $criteria_status_post = new CriteriaCompo(new Criteria("p.post_time", intval($last_visit), ">"));
-    $criteria_status_count->add(new Criteria("approved", 1));
-    $criteria_status_post->add(new Criteria("p.approved", 1));
-    // following is for "unread" -- not finished
-    /*
-    if (empty($xoopsModuleConfig["read_mode"])) {
-    } elseif ($xoopsModuleConfig["read_mode"] ==2) {
-        $join = ' LEFT JOIN ' . $this->db->prefix('bb_reads_topic') . ' r ON r.read_item = p.topic_id';
-        $criteria_status_post = new CriteriaCompo(new Criteria("p.post_id", "r.post_id", ">"));
-        $criteria_status_post->add(new Criteria("r.read_id", "NULL", "IS"), "OR");
-        $criteria_status_post->add(new Criteria("p.approved", 1));
-        $criteria_status_count =& $criteria_status_post;
-    } elseif ($xoopsModuleConfig["read_mode"] == 1) {
+    case "pending":
+        $criteria_status_count = new Criteria("approved", 0);
+        $criteria_status_post = new Criteria("p.approved", 0);
+        break;
+
+    case "deleted":
+        $criteria_status_count = new Criteria("approved", -1);
+        $criteria_status_post = new Criteria("p.approved", -1);
+        break;
+
+    case "new":
         $criteria_status_count = new CriteriaCompo(new Criteria("post_time", intval($last_visit), ">"));
         $criteria_status_post = new CriteriaCompo(new Criteria("p.post_time", intval($last_visit), ">"));
         $criteria_status_count->add(new Criteria("approved", 1));
         $criteria_status_post->add(new Criteria("p.approved", 1));
-    }
-    */
-    break;
-    
-default:
-    $criteria_status_count = new Criteria("approved", 1);
-    $criteria_status_post = new Criteria("p.approved", 1);
-    break;
+        // following is for "unread" -- not finished
+        /*
+         if (empty($xoopsModuleConfig["read_mode"])) {
+         } elseif ($xoopsModuleConfig["read_mode"] ==2) {
+         $join = ' LEFT JOIN ' . $this->db->prefix('bb_reads_topic') . ' r ON r.read_item = p.topic_id';
+         $criteria_status_post = new CriteriaCompo(new Criteria("p.post_id", "r.post_id", ">"));
+         $criteria_status_post->add(new Criteria("r.read_id", "NULL", "IS"), "OR");
+         $criteria_status_post->add(new Criteria("p.approved", 1));
+         $criteria_status_count =& $criteria_status_post;
+         } elseif ($xoopsModuleConfig["read_mode"] == 1) {
+         $criteria_status_count = new CriteriaCompo(new Criteria("post_time", intval($last_visit), ">"));
+         $criteria_status_post = new CriteriaCompo(new Criteria("p.post_time", intval($last_visit), ">"));
+         $criteria_status_count->add(new Criteria("approved", 1));
+         $criteria_status_post->add(new Criteria("p.approved", 1));
+         }
+         */
+        break;
+
+    default:
+        $criteria_status_count = new Criteria("approved", 1);
+        $criteria_status_post = new Criteria("p.approved", 1);
+        break;
 }
 $criteria_count->add($criteria_status_count);
 $criteria_post->add($criteria_status_post);
@@ -116,11 +116,11 @@ if (isset($_GET['viewmode']) && $_GET['viewmode'] == "compact") {
     newbb_setcookie("V", "compact", $forumCookie['expire']);
 }
 $viewmode = isset($_GET['viewmode'])
-            ? $_GET['viewmode']
-            : ( !empty($viewmode_cookie)
-                ? $viewmode_cookie
-                : @$valid_modes[$xoopsModuleConfig['view_mode'] - 1]
-                );
+? $_GET['viewmode']
+: ( !empty($viewmode_cookie)
+? $viewmode_cookie
+: @$valid_modes[$xoopsModuleConfig['view_mode'] - 1]
+);
 $viewmode = in_array($viewmode, $valid_modes) ? $viewmode : $valid_modes[0];
 
 $postCount = $post_handler->getPostCount($criteria_count);
@@ -218,7 +218,7 @@ foreach (array_keys($posts) as $id) {
             'uid'   => 0,
             'name'  => $post->getVar('poster_name') ? $post->getVar('poster_name') : $myts->HtmlSpecialChars($xoopsConfig['anonymous']),
             'link'  => $post->getVar('poster_name') ? $post->getVar('poster_name') : $myts->HtmlSpecialChars($xoopsConfig['anonymous'])
-            );
+        );
     }
     if ($isadmin || $post->checkIdentity()) {
         $post_text = $post->getVar('post_text');
@@ -235,20 +235,20 @@ foreach (array_keys($posts) as $id) {
     }
 
     $thread_buttons = array();
-    
+
     if ($GLOBALS["xoopsModuleConfig"]['enable_permcheck']) {
-    
+
         if (!isset($suspension[$post->getVar('forum_id')])) {
             $moderate_handler =& xoops_getmodulehandler('moderate', 'newbb');
             $suspension[$post->getVar('forum_id')] = $moderate_handler->verifyUser(-1, "", $post->getVar('forum_id'));
         }
-        
+
         if (!$suspension[$post->getVar('forum_id')] && $post->checkIdentity() && $post->checkTimelimit('edit_timelimit') || $isadmin) {
             $thread_buttons['edit']['image'] = newbb_displayImage('p_edit', _EDIT);
             $thread_buttons['edit']['link'] = "edit.php?forum=" . $post->getVar('forum_id') . "&amp;topic_id=" . $post->getVar('topic_id');
             $thread_buttons['edit']['name'] = _EDIT;
         }
-    
+
         if ( (!$suspension[$post->getVar('forum_id')] && $post->checkIdentity() && $post->checkTimelimit('delete_timelimit')) || $isadmin ) {
             $thread_buttons['delete']['image'] = newbb_displayImage('p_delete', _DELETE);
             $thread_buttons['delete']['link'] = "delete.php?forum=" . $post->getVar('forum_id') . "&amp;topic_id=" . $post->getVar('topic_id');
@@ -258,12 +258,12 @@ foreach (array_keys($posts) as $id) {
             $thread_buttons['reply']['image'] = newbb_displayImage('p_reply', _MD_REPLY);
             $thread_buttons['reply']['link'] = "reply.php?forum=" . $post->getVar('forum_id') . "&amp;topic_id=" . $post->getVar('topic_id');
             $thread_buttons['reply']['name'] = _MD_REPLY;
-            
+
             $thread_buttons['quote']['image'] = newbb_displayImage('p_quote', _MD_QUOTE);
             $thread_buttons['quote']['link'] = "reply.php?forum=" . $post->getVar('forum_id') . "&amp;topic_id=" . $post->getVar('topic_id') . "&amp;quotedac=1";
             $thread_buttons['quote']['name'] = _MD_QUOTE;
         }
-    
+
     } else {
         $thread_buttons['edit']['image'] = newbb_displayImage('p_edit', _EDIT);
         $thread_buttons['edit']['link'] = "edit.php?forum=" .$post->getVar('forum_id') . "&amp;topic_id=" . $post->getVar('topic_id');
@@ -299,8 +299,8 @@ foreach (array_keys($posts) as $id) {
                     'thread_action'     => $thread_action,
                     'thread_buttons'    => $thread_buttons,
                     'poster'            => $poster
-                   )
-          );
+    )
+    );
 
     unset($thread_buttons);
     unset($poster);
@@ -324,25 +324,25 @@ if ( $postCount > $post_perpage ) {
 $xoopsTpl->assign('lang_forum_index', sprintf(_MD_FORUMINDEX, htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES)));
 
 switch($status) {
-case 'active':
-    $lang_title = _MD_VIEWALLPOSTS. ' ['._MD_TYPE_ADMIN.']';
-    break;
-case 'pending':
-    $lang_title = _MD_VIEWALLPOSTS. ' ['._MD_TYPE_PENDING.']';
-    break;
-case 'deleted':
-    $lang_title = _MD_VIEWALLPOSTS. ' ['._MD_TYPE_DELETED.']';
-    break;
-case 'new':
-    $lang_title = _MD_NEWPOSTS;
-    break;
-default:
-    $lang_title = _MD_VIEWALLPOSTS;
-    break;
+    case 'active':
+        $lang_title = _MD_VIEWALLPOSTS. ' ['._MD_TYPE_ADMIN.']';
+        break;
+    case 'pending':
+        $lang_title = _MD_VIEWALLPOSTS. ' ['._MD_TYPE_PENDING.']';
+        break;
+    case 'deleted':
+        $lang_title = _MD_VIEWALLPOSTS. ' ['._MD_TYPE_DELETED.']';
+        break;
+    case 'new':
+        $lang_title = _MD_NEWPOSTS;
+        break;
+    default:
+        $lang_title = _MD_VIEWALLPOSTS;
+        break;
 }
 if ($uid > 0) {
     $lang_title .= ' (' . XoopsUser::getUnameFromId($uid) . ')';
-}    
+}
 $xoopsTpl->assign('lang_title', $lang_title);
 $xoopsTpl->assign('up', newbb_displayImage('up',_MD_TOP));
 $xoopsTpl->assign('groupbar_enable', $xoopsModuleConfig['groupbar_enabled']);

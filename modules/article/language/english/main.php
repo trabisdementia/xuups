@@ -81,12 +81,12 @@ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_EDNOTE_DESC_TEXT","");
 
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_FORUM","Forum");
 /*
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_BLOG","Blog");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_PDF","Pdf");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_PRINT","Print");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_BOOKMARK","Bookmark");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_DC","DC");
-*/
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_BLOG","Blog");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_PDF","Pdf");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_PRINT","Print");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_BOOKMARK","Bookmark");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_DC","DC");
+ */
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRACKBACKS","Trackback");
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TEMPLATE_SELECT","Select template");
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_CATEGORY_BASE","Basic category");
@@ -248,13 +248,13 @@ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_LIST", "Article list");
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_DRAFTS", "Drafts");
 
 /*
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER", "Transfer");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER_DESC", "Transfer the article to other applications");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER_DONE","The action is done successully: %s");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER", "Transfer");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER_DESC", "Transfer the article to other applications");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER_DONE","The action is done successully: %s");
 
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_SELECTEDITOR","Select editor");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_REQUIRED", "Required");
-*/
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_SELECTEDITOR","Select editor");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_REQUIRED", "Required");
+ */
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_REMOVE", "Remove");
 
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_SAVE_BEFORE_SWITCH", "Save before switching to another page");

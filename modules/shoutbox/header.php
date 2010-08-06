@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -25,14 +25,14 @@ $xoopsTpl = new XoopsTpl();
 $xoopsTpl->xoops_setCaching(0);
 
 $xoopsTpl->assign(
-    array(
+array(
         'xoops_theme' => $xoopsConfig['theme_set'],
         'xoops_imageurl' => XOOPS_THEME_URL.'/'.$xoopsConfig['theme_set'].'/',
         'xoops_themecss'=> xoops_getcss($xoopsConfig['theme_set']),
         'xoops_requesturi' => htmlspecialchars($GLOBALS['xoopsRequestUri'], ENT_QUOTES),
         'xoops_sitename' => htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES),
         'xoops_slogan' => htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES)
-    )
+)
 );
 $xoopsTpl->assign('xoops_js', '<script type="text/javascript" src="'.XOOPS_URL.'/include/xoops.js"></script>');
 if (is_object($xoopsUser)) {

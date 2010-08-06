@@ -8,7 +8,7 @@ require_once ('jpgraph/jpgraph_line.php');
 $ydata = array(12,15,22,19,5);
 
 $graph = new Graph(400,200);
-$graph->img->SetMargin(40,80,40,40);	
+$graph->img->SetMargin(40,80,40,40);
 $graph->SetScale("textlin");
 $graph->SetShadow();
 

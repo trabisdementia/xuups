@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -50,7 +50,7 @@ class newbbObjectTree extends XoopsObjectTree
             if (count($tags) > 0) {
                 foreach ($tags as $tag) {
                     $ret[$key][$tag] = $this->_tree[$key]['obj']->getVar($tag);
-                } 
+                }
             } else {
                 $ret[$key]["forum_name"] = $this->_tree[$key]['obj']->getVar("forum_name");
             }
@@ -105,23 +105,23 @@ class newbbObjectTree extends XoopsObjectTree
         $ret .= '</select>';
         return $ret;
     }
-    
-    
+
+
     /**
      * Make a tree for the array of a given category
-     * 
+     *
      * @param   string  $key    top key of the tree
      * @param   array    $ret    the tree
      * @param   array    $tags   fields to be used
      * @param   integer    $depth    level of subcategories
-     * @return  array      
+     * @return  array
      **/
     function getAllChild_object($key, &$ret, $depth = 0)
     {
         if (-- $depth == 0) {
             return;
         }
-        
+
         if (isset($this->_tree[$key]['child'])) {
             foreach ($this->_tree[$key]['child'] as $childkey) {
                 if (isset($this->_tree[$childkey]['obj'])) {
@@ -134,11 +134,11 @@ class newbbObjectTree extends XoopsObjectTree
 
     /**
      * Make a tree for the array
-     * 
+     *
      * @param   string  $key    top key of the tree
      * @param   array    $tags   fields to be used
      * @param   integer    $depth    level of subcategories
-     * @return  array      
+     * @return  array
      **/
     function &makeObjectTree($key = 0, $depth = 0)
     {
@@ -147,22 +147,22 @@ class newbbObjectTree extends XoopsObjectTree
         $this->getAllChild_object($key, $ret, $depth);
         return $ret;
     }
-    
+
     /**
      * Make a tree for the array of a given category
-     * 
+     *
      * @param   string  $key    top key of the tree
      * @param   array    $ret    the tree
      * @param   array    $tags   fields to be used
      * @param   integer    $depth    level of subcategories
-     * @return  array      
+     * @return  array
      **/
     function getAllChild_array($key, &$ret, $tags = array(), $depth = 0)
     {
         if (-- $depth == 0) {
             return;
         }
-        
+
         if (isset($this->_tree[$key]['child'])) {
             foreach ($this->_tree[$key]['child'] as $childkey) {
                 if (isset($this->_tree[$childkey]['obj'])):
@@ -174,7 +174,7 @@ class newbbObjectTree extends XoopsObjectTree
                     $ret['child'][$childkey]["forum_name"] = $this->_tree[$childkey]['obj']->getVar("forum_name");
                 }
                 endif;
-                
+
                 $this->getAllChild_array($childkey, $ret['child'][$childkey], $tags, $depth);
             }
         }
@@ -182,11 +182,11 @@ class newbbObjectTree extends XoopsObjectTree
 
     /**
      * Make a tree for the array
-     * 
+     *
      * @param   string  $key    top key of the tree
      * @param   array    $tags   fields to be used
      * @param   integer    $depth    level of subcategories
-     * @return  array      
+     * @return  array
      **/
     function &makeArrayTree($key = 0, $tags = null, $depth = 0)
     {
@@ -198,11 +198,11 @@ class newbbObjectTree extends XoopsObjectTree
 
     /**#@+
      * get all parent forums
-     * 
+     *
      * @param   string    $key        ID of the child object
      * @param   array   $ret        (empty when called from outside) Result from previous recursions
      * @param   int        $uplevel    (empty when called from outside) level of recursion
-     * @return  array   Array of parent nodes. 
+     * @return  array   Array of parent nodes.
      */
     function &_getParentForums($key, $ret = array(), $uplevel = 0)
     {
@@ -215,7 +215,7 @@ class newbbObjectTree extends XoopsObjectTree
         }
         return $ret;
     }
-    
+
     function &getParentForums($key, $reverse = true)
     {
         $ret = array();
@@ -236,6 +236,6 @@ class newbbObjectTree extends XoopsObjectTree
         return $pids;
     }
     /**#@-*/
-    
+
 }
 ?>

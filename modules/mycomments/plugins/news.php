@@ -5,22 +5,22 @@
 
 function news_useritems($uid, $limit=0, $offset=0)
 {
-	global $xoopsDB;
-	$ret = array();
+    global $xoopsDB;
+    $ret = array();
 
     $sql = "SELECT storyid FROM ".$xoopsDB->prefix("stories")." WHERE published>0 AND published<=".time()." AND uid=".$uid;
-	$result = $xoopsDB->query($sql, $limit, $offset);
+    $result = $xoopsDB->query($sql, $limit, $offset);
     if ( $result ) {
         while ($row = $xoopsDB->fetchArray($result)){
-		  $ret[] = $row['storyid'];
-		}
-	}
-	return $ret;
+            $ret[] = $row['storyid'];
+        }
+    }
+    return $ret;
 }
 
 function news_iteminfo($items, $limit=0, $offset=0)
 {
-	global $xoopsDB;
+    global $xoopsDB;
     $ret = array();
     $URL_MOD = XOOPS_URL."/modules/news";
 
@@ -34,7 +34,7 @@ function news_iteminfo($items, $limit=0, $offset=0)
     $result = $xoopsDB->query($sql, $limit, $offset);
 
     $i = 0;
-	while($row = $xoopsDB->fetchArray($result)){
+    while($row = $xoopsDB->fetchArray($result)){
         $storyid = $row['storyid'];
         $ret[$i]['link']     = $URL_MOD."/article.php?storyid=".$storyid;
         $ret[$i]['pda']      = $URL_MOD."/print.php?storyid=".$storyid;
@@ -59,7 +59,7 @@ function news_iteminfo($items, $limit=0, $offset=0)
         $i++;
     }
 
-	return $ret;
+    return $ret;
 }
 
 ?>

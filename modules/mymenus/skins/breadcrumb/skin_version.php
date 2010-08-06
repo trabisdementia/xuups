@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -22,10 +22,10 @@ $skinversion['template'] = 'template.html';
 
 $skinversion['css'] = 'style.css';
 /*
-$skinversion['js'] = array();
+ $skinversion['js'] = array();
 
-$skinversion['header'] = '';
-*/
+ $skinversion['header'] = '';
+ */
 
 $skinversion['config']['home'] = true;
 $skinversion['config']['iconset'] = 'default';

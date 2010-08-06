@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: user.php 2169 2008-09-23 13:37:10Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
@@ -34,10 +34,10 @@ function newbb_calculateLevel($RPG, $RPGDIFF)
     $ep = floor (100 * ($level - floor ($level)));
     $showlevel = floor ($level + 1);
     $hpmulti =round ($ppd / 6, 1);
-    if ($hpmulti > 1.5) { 
-        $hpmulti = 1.5; 
+    if ($hpmulti > 1.5) {
+        $hpmulti = 1.5;
     }
-    if ($hpmulti < 1) { 
+    if ($hpmulti < 1) {
         $hpmulti = 1;
     }
     $maxhp = $level * 25 * $hpmulti;
@@ -89,7 +89,7 @@ function newbb_calculateLevel($RPG, $RPGDIFF)
 class User
 {
     var $user = null;
-    
+
     function User()
     {
     }
@@ -97,13 +97,13 @@ class User
     function getUserbar()
     {
         global $xoopsModuleConfig, $xoopsUser, $isadmin;
-        
+
         $userbar = array();
         if (empty($xoopsModuleConfig['userbar_enabled'])) return $userbar;
-        
+
         $user = $this->user;
         $userbar["profile"] = array("link" => XOOPS_URL . "/userinfo.php?uid=" . $user->getVar("uid"), "name" => _PROFILE);
-        
+
         if (is_object($xoopsUser)) {
             $userbar["pm"] = array("link" => "javascript:void openWithSelfMain('" . XOOPS_URL . "/pmlite.php?send2=1&amp;to_userid=" . $user->getVar("uid") . "', 'pmlite', 450, 380);", "name" => _MD_PM);
         }
@@ -125,14 +125,14 @@ class User
         if ($msn = $user->getVar('user_msnm')) {
             $userbar["msnm"] = array("link" => "javascript:void window.open('http://members.msn.com?mem=" . $msn . "', 'new');", "name" => _MD_MSNM);
         }
-        
+
         return $userbar;
     }
-    
+
     function getLevel()
     {
         global $xoopsModuleConfig, $forumUrl;
-        
+
         $level = newbb_calculateLevel($this->user->getVar("posts"), $this->user->getVar("user_regdate"));
         if ($xoopsModuleConfig['user_level'] == 2) {
             static $rpg_images;
@@ -146,11 +146,11 @@ class User
             $table = "<table class='userlevel'><tr><td class='end'><img src='" . $rpg_images['img_left'] . "' alt='' /></td><td class='center' background='" . $rpg_images['img_backing'] . "'><img src='%s' width='%d' alt='' /></td><td><img src='" . $rpg_images['img_right'] . "' alt='' /></td></tr></table>";
 
             $info = _MD_LEVEL . " " . $level['level'] . "<br />" . _MD_HP . " " . $level['hp'] . " / " . $level['hp_max'] . "<br />".
-                sprintf($table, $rpg_images["orange"], $level['hp_width']);
+            sprintf($table, $rpg_images["orange"], $level['hp_width']);
             $info .= _MD_MP . " " . $level['mp'] . " / " . $level['mp_max'] . "<br />".
-                sprintf($table, $rpg_images["green"], $level['mp_width']);
+            sprintf($table, $rpg_images["green"], $level['mp_width']);
             $info .= _MD_EXP . " " . $level['exp'] . "<br />".
-                sprintf($table, $rpg_images["blue"], $level['exp_width']);
+            sprintf($table, $rpg_images["blue"], $level['exp_width']);
         } else {
             $info = _MD_LEVEL . " " . $level['level'] . "; ". _MD_EXP . " " . $level['exp'] . "<br />";
             $info .= _MD_HP . " " . $level['hp'] . " / " . $level['hp_max'] . "<br />";
@@ -163,36 +163,36 @@ class User
     {
         global $xoopsModuleConfig, $myts;
         static $name_anonymous;
-        
+
         if ( !(is_object($user)) || !($user->isActive()) )    {
             if (!isset($name_anonymous)) {
                 $name_anonymous = $myts->HtmlSpecialChars($GLOBALS["xoopsConfig"]['anonymous']);
             }
             return array("name" => $name_anonymous, "link" => $name_anonymous);
         }
-        
+
         $this->user = $user;
-        
+
         $userinfo["uid"] = $user->getVar("uid");
-        
+
         $name = empty($xoopsModuleConfig['show_realname']) ? $user->getVar('uname') : $user->getVar('name');
         $userinfo["name"] = $name ? $name : $user->getVar('uname');
-        
+
         $userinfo["link"] = "<a href=\"".XOOPS_URL . "/userinfo.php?uid=" . $user->getVar("uid") . "\" title=''>" . $userinfo["name"] . "</a>";
-        
+
         $userinfo["avatar"] = $user->getVar('user_avatar');
-        
+
         $userinfo["from"] = $user->getVar('user_from');
-        
+
         require_once XOOPS_ROOT_PATH . "/modules/newbb/include/functions.time.php";
         $userinfo["regdate"] = newbb_formatTimestamp($user->getVar('user_regdate'), 'reg');
-        
+
         $userinfo["posts"] = $user->getVar('posts');
-        
+
         if (!empty($xoopsModuleConfig['user_level'])) {
             $userinfo["level"] = $this->getLevel();
         }
-        
+
         if (!empty($xoopsModuleConfig['userbar_enabled'])) {
             $userinfo["userbar"] = $this->getUserbar();
         }
@@ -215,7 +215,7 @@ class NewbbUserHandler
         $this->enableGroup = $enableGroup;
         $this->enableOnline = $enableOnline;
     }
-    
+
     function loadUserInfo()
     {
         @include_once XOOPS_ROOT_PATH . "/modules/" . $GLOBALS["xoopsModule"]->getVar("dirname", "n") . "/language/" . $GLOBALS["xoopsConfig"]["language"] . "/user.php";
@@ -225,31 +225,31 @@ class NewbbUserHandler
             $handler = new User();
         }
         foreach (array_keys($this->users) as $uid) {
-               $this->userlist[$uid] = $handler->getInfo($this->users[$uid]);
+            $this->userlist[$uid] = $handler->getInfo($this->users[$uid]);
         }
     }
-    
+
     function loadUserOnline()
     {
         if (empty($this->users) || !$this->enableOnline) return;
         require_once XOOPS_ROOT_PATH . "/modules/newbb/include/functions.render.php";
         $image_online = newbb_displayImage('online', _MD_ONLINE);
         $image_offline = newbb_displayImage('offline',_MD_OFFLINE);
-        
+
         $online_handler =& xoops_getmodulehandler('online', 'newbb');
         $onlines = $online_handler->checkStatus(array_keys($this->users));
-        
+
         foreach (array_keys($this->users) as $uid) {
             $this->userlist[$uid]["status"] = empty($onlines[$uid]) ? $image_offline : $image_online;
         }
     }
-    
+
     function loadUserGroups()
     {
         GLOBAL $xoopsDB;
-        
+
         if (empty($this->users) || !$this->enableGroup) return;
-        
+
         $groups = array();
         $member_handler =& xoops_gethandler('member');
         $groups_obj = $member_handler->getGroups();
@@ -258,34 +258,34 @@ class NewbbUserHandler
             $groups[$groups_obj[$i]->getVar('groupid')] = $groups_obj[$i]->getVar('name');
         }
         unset($groups_obj);
-        
+
         $sql = 'SELECT groupid, uid FROM ' . $xoopsDB->prefix('groups_users_link') . " WHERE uid IN( " . implode(", ", array_keys($this->users)) . ")";
         $result = $xoopsDB->query($sql);
         while ($myrow = $xoopsDB->fetchArray($result)) {
             $this->userlist[$myrow['uid']]["groups"][] = $groups[$myrow['groupid']];
         }
     }
-    
+
     function loadUserDigest()
     {
         GLOBAL $xoopsDB;
-        
+
         if (empty($this->users)) return;
-        
+
         $sql = 'SELECT user_digests, uid FROM ' . $xoopsDB->prefix('bb_user_stats') . " WHERE uid IN( " . implode(", ", array_keys($this->users)) . ")";
         $result = $xoopsDB->query($sql);
         while ($myrow = $xoopsDB->fetchArray($result)) {
             $this->userlist[$myrow['uid']]["digests"] = intval( $myrow['user_digests'] );
         }
     }
-    
+
     function loadUserRank()
     {
         GLOBAL $xoopsDB;
-        
+
         if (empty($this->users)) return;
         $myts =& MyTextSanitizer::getInstance();
-        
+
         $sql = 'SELECT * FROM ' . $xoopsDB->prefix('ranks');
         $result = $xoopsDB->query($sql);
         while ($myrow = $xoopsDB->fetchArray($result)) {
@@ -295,23 +295,23 @@ class NewbbUserHandler
                 $ranks[$myrow['rank_id']]['rank_image'] = "<img src='" . XOOPS_UPLOAD_URL . "/" . htmlspecialchars($ranks[$myrow['rank_id']]['rank_image'], ENT_QUOTES) . "' alt='' />";
             }
         }
-    
+
         foreach (array_keys($this->userlist) as $uid) {
             if ($rank = $this->users[$uid]->getVar("rank")) {
-                $this->userlist[$uid]["rank"]["title"] = $ranks[$rank]["rank_title"];        
-                $this->userlist[$uid]["rank"]["image"] = $ranks[$rank]["rank_image"];        
+                $this->userlist[$uid]["rank"]["title"] = $ranks[$rank]["rank_title"];
+                $this->userlist[$uid]["rank"]["image"] = $ranks[$rank]["rank_image"];
                 continue;
             }
             foreach ($ranks as $id => $rank) {
                 if ($rank["rank_min"] <= $this->userlist[$uid]["posts"] && $rank["rank_max"] >= $this->userlist[$uid]["posts"]) {
-                    $this->userlist[$uid]["rank"]["title"] = $rank["rank_title"];        
-                    $this->userlist[$uid]["rank"]["image"] = $rank["rank_image"];        
+                    $this->userlist[$uid]["rank"]["title"] = $rank["rank_title"];
+                    $this->userlist[$uid]["rank"]["image"] = $rank["rank_image"];
                     break;
                 }
             }
         }
     }
-    
+
     function getUsers()
     {
         $this->loadUserInfo();
@@ -319,7 +319,7 @@ class NewbbUserHandler
         $this->loadUserGroups();
         $this->loadUserRank();
         $this->loadUserDigest();
-        
+
         return $this->userlist;
     }
 }

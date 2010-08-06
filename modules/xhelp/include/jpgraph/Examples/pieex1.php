@@ -11,7 +11,7 @@ $graph->SetShadow();
 
 // Set A title for the plot
 $graph->title->Set("Example 1 Pie plot");
-$graph->title->SetFont(FF_VERDANA,FS_BOLD,14); 
+$graph->title->SetFont(FF_VERDANA,FS_BOLD,14);
 $graph->title->SetColor("brown");
 
 // Create pie plot

@@ -14,7 +14,7 @@ define('XHELP_FAQ_CATEGORY_NONE', 2);
 
 class xhelpFaqAdapter {
     var $categoryType = XHELP_FAQ_CATEGORY_SING;
-    
+
     /**
      * Adapter Details
      * Required Values:
@@ -26,7 +26,7 @@ class xhelpFaqAdapter {
      * url - support url for plugin
      * module_dir - module directory name (not needed if class overloads the isActive() function from xhelpFAQAdapter)
      * @access public
-     */  
+     */
     var $meta = array(
             'name' => '', 
             'author' => '',
@@ -42,25 +42,25 @@ class xhelpFaqAdapter {
     function init()
     {
     }
-    
+
     /**
      * Stub function (does nothing)
      * @return array of xhelpFaqCategory objects
      */
     function &getCategories()
     {
-        
+
     }
-    
+
     /**
      * @return bool true (success)/false (failure)
      */
     function storeFaq()
-    {        
+    {
         // Store an faq
         return false;
     }
-    
+
     /**
      * @return xhelpFaq object
      */
@@ -68,10 +68,10 @@ class xhelpFaqAdapter {
     {
         // Create an faq
         $faq =& new xhelpFaq();
-        
+
         return $faq;
     }
-    
+
     /**
      * @return bool true (success) / false (failure)
      */
@@ -79,15 +79,15 @@ class xhelpFaqAdapter {
     {
         $module_dir = $this->meta['module_dir'];
         $module_name = $this->meta['name'];
-        
+
         if($module_dir == '' || $module_name == ''){      // Sanity check
             return false;
         }
-        
+
         // Make sure that module is active
         $hModule =& xoops_gethandler('module');
         $mod =& $hModule->getByDirname($module_dir);
-        
+
         if(is_object($mod)){
             if($mod->getVar('isactive')){   // Module active?
                 $activeAdapter = xhelpGetMeta('faq_adapter');

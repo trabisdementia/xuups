@@ -24,15 +24,15 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 if (!defined('XOOPS_ROOT_PATH')) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 function mysearch_adminmenu($currentoption = 0, $breadcrumb = '')
 {
-	include_once XOOPS_ROOT_PATH.'/modules/mysearch/include/functions.php';
+    include_once XOOPS_ROOT_PATH.'/modules/mysearch/include/functions.php';
 
-	/* Nice buttons styles */
-	echo "
+    /* Nice buttons styles */
+    echo "
     	<style type='text/css'>
     	#buttontop { float:left; width:100%; background: #e7e7e7; font-size:93%; line-height:normal; border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; margin: 0; }
     	#buttonbar { float:left; width:100%; background: #e7e7e7 url('" . XOOPS_URL . "/modules/mysearch/images/bg.png') repeat-x left bottom; font-size:93%; line-height:normal; border-left: 1px solid black; border-right: 1px solid black; margin-bottom: 12px; }
@@ -50,35 +50,35 @@ function mysearch_adminmenu($currentoption = 0, $breadcrumb = '')
 		#buttonbar a:hover span { background-position:100% -150px; }
 		</style>
     ";
- 	global $xoopsModule, $xoopsConfig;
+    global $xoopsModule, $xoopsConfig;
 
-	$tblColors = array('','','','','');
-	if($currentoption>=0) {
-		$tblColors[$currentoption] = 'current';
-	}
+    $tblColors = array('','','','','');
+    if($currentoption>=0) {
+        $tblColors[$currentoption] = 'current';
+    }
 
-	if (file_exists(XOOPS_ROOT_PATH . '/modules/mysearch/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-		include_once XOOPS_ROOT_PATH. '/modules/mysearch/language/' . $xoopsConfig['language'] . '/modinfo.php';
-	} else {
-		include_once XOOPS_ROOT_PATH . '/modules/mysearch/language/english/modinfo.php';
-	}
+    if (file_exists(XOOPS_ROOT_PATH . '/modules/mysearch/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
+        include_once XOOPS_ROOT_PATH. '/modules/mysearch/language/' . $xoopsConfig['language'] . '/modinfo.php';
+    } else {
+        include_once XOOPS_ROOT_PATH . '/modules/mysearch/language/english/modinfo.php';
+    }
 
-	echo "<div id='buttontop'>";
-	echo "<table style=\"width: 100%; padding: 0; \" cellspacing=\"0\"><tr>";
-	echo "<td style=\"width: 60%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\"><a class=\"nobutton\" href=\"../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=".$xoopsModule->getVar('mid')."\">" . _AM_MYSEARCH_GENERALSET . "</a> | <a href=\"../index.php\">" . _AM_MYSEARCH_GOTOMOD . "</a></td>";
-	echo "<td style=\"width: 40%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;\"><b>" . $xoopsModule->name() . "  " . _AM_MYSEARCH_MODULEADMIN . "</b> " . $breadcrumb . "</td>";
-	echo "</tr></table>";
-	echo "</div>";
+    echo "<div id='buttontop'>";
+    echo "<table style=\"width: 100%; padding: 0; \" cellspacing=\"0\"><tr>";
+    echo "<td style=\"width: 60%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\"><a class=\"nobutton\" href=\"../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=".$xoopsModule->getVar('mid')."\">" . _AM_MYSEARCH_GENERALSET . "</a> | <a href=\"../index.php\">" . _AM_MYSEARCH_GOTOMOD . "</a></td>";
+    echo "<td style=\"width: 40%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;\"><b>" . $xoopsModule->name() . "  " . _AM_MYSEARCH_MODULEADMIN . "</b> " . $breadcrumb . "</td>";
+    echo "</tr></table>";
+    echo "</div>";
 
-	echo "<div id='buttonbar'>";
-	echo "<ul>";
-	echo "<li id='" . $tblColors[0] . "'><a href=\"index.php?op=stats\"\"><span>"._MI_MYSEARCH_ADMMENU1 ."</span></a></li>\n";
-	echo "<li id='" . $tblColors[1] . "'><a href=\"index.php?op=purge\"\"><span>"._MI_MYSEARCH_ADMMENU2 ."</span></a></li>\n";
-	echo "<li id='" . $tblColors[2] . "'><a href=\"index.php?op=export\"><span>" . _MI_MYSEARCH_ADMMENU3 . "</span></a></li>\n";
-	echo "<li id='" . $tblColors[3] . "'><a href=\"index.php?op=blacklist\"><span>" . _MI_MYSEARCH_ADMMENU4 . "</span></a></li>\n";
-	echo "<li id='" . $tblColors[4] . "'><a href=\"index.php?op=about\"><span>" . _MI_MYSEARCH_ADMMENU5 . "</span></a></li>\n";
-	echo "</ul></div>";
-	echo "<br /><br /><pre>&nbsp;</pre><pre>&nbsp;</pre><br />";
+    echo "<div id='buttonbar'>";
+    echo "<ul>";
+    echo "<li id='" . $tblColors[0] . "'><a href=\"index.php?op=stats\"\"><span>"._MI_MYSEARCH_ADMMENU1 ."</span></a></li>\n";
+    echo "<li id='" . $tblColors[1] . "'><a href=\"index.php?op=purge\"\"><span>"._MI_MYSEARCH_ADMMENU2 ."</span></a></li>\n";
+    echo "<li id='" . $tblColors[2] . "'><a href=\"index.php?op=export\"><span>" . _MI_MYSEARCH_ADMMENU3 . "</span></a></li>\n";
+    echo "<li id='" . $tblColors[3] . "'><a href=\"index.php?op=blacklist\"><span>" . _MI_MYSEARCH_ADMMENU4 . "</span></a></li>\n";
+    echo "<li id='" . $tblColors[4] . "'><a href=\"index.php?op=about\"><span>" . _MI_MYSEARCH_ADMMENU5 . "</span></a></li>\n";
+    echo "</ul></div>";
+    echo "<br /><br /><pre>&nbsp;</pre><pre>&nbsp;</pre><br />";
 }
 
 
@@ -87,7 +87,7 @@ function mysearch_collapsableBar($tablename = '', $iconname = '')
 {
 
     ?>
-	<script type="text/javascript"><!--
+<script type="text/javascript"><!--
 	function goto_URL(object)
 	{
 		window.location.href = object.options[object.selectedIndex].value;
@@ -125,8 +125,8 @@ function mysearch_collapsableBar($tablename = '', $iconname = '')
 
 	//-->
 	</script>
-	<?php
-	echo "<h4 style=\"color: #2F5376; margin: 6px 0 0 0; \"><a href='#' onClick=\"toggle('" . $tablename . "'); toggleIcon('" . $iconname . "');\">";
+    <?php
+    echo "<h4 style=\"color: #2F5376; margin: 6px 0 0 0; \"><a href='#' onClick=\"toggle('" . $tablename . "'); toggleIcon('" . $iconname . "');\">";
 }
 
 ?>

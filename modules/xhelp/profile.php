@@ -8,19 +8,19 @@ $xoopsConfig['module_cache'][$xoopsModule->getVar('mid')] = 0;
 
 if($xoopsUser){
     $responseTplID = 0;
-    
+
     $op = 'default';
     if(isset($_REQUEST['op'])){
         $op = $_REQUEST['op'];
     }
-    
+
     if(isset($_GET['responseTplID'])){
         $responseTplID = intval($_GET['responseTplID']);
     }
-    
+
     $xoopsOption['template_main'] = 'xhelp_staff_profile.html';   // Set template
     require(XOOPS_ROOT_PATH.'/header.php');                     // Include the page header
-    
+
     $numResponses = 0;
     $uid = $xoopsUser->getVar('uid');
     $hStaff =& xhelpGetHandler('staff');
@@ -33,7 +33,7 @@ if($xoopsUser){
     $crit = new Criteria('uid', $uid);
     $crit->setSort('name');
     $responseTpl =& $hResponseTpl->getObjects($crit);
-    
+
     foreach($responseTpl as $response){
         $aResponseTpl[] = array('id'=>$response->getVar('id'),
                               'uid'=>$response->getVar('uid'),
@@ -42,9 +42,9 @@ if($xoopsUser){
     }
     $has_responseTpl = count($responseTpl) > 0;
     unset($responseTpl);
-    
+
     $displayTpl =& $hResponseTpl->get($responseTplID);
-    
+
     switch($op){
         case "responseTpl":
             if(isset($_POST['updateResponse'])){
@@ -58,7 +58,7 @@ if($xoopsUser){
                     redirect_header(XHELP_BASE_URL."/profile.php", 3, _XHELP_ERROR_INV_TEMPLATE);
                 }
                 if($_POST['responseid'] != 0){
-                    $updateTpl =& $hResponseTpl->get($_POST['responseid']);      
+                    $updateTpl =& $hResponseTpl->get($_POST['responseid']);
                 } else {
                     $updateTpl =& $hResponseTpl->create();
                 }
@@ -81,8 +81,8 @@ if($xoopsUser){
                 }
                 redirect_header(XHELP_BASE_URL."/profile.php", 3, $message);
             }
-        break;
-            
+            break;
+
         case "updateNotification":
             $notArray = (is_array($_POST['notifications']) ?  $_POST['notifications'] : array(0));
             $notValue = array_sum($notArray);
@@ -92,12 +92,12 @@ if($xoopsUser){
             }
             if(!$hStaff->insert($staff)){
                 $message = _XHELP_MESSAGE_UPDATE_EMAIL_ERROR;
-                
+
             }
             $message = _XHELP_MESSAGE_NOTIFY_UPDATE;
             redirect_header(XHELP_BASE_URL."/profile.php", 3, $message);
             break;
-            
+
         case "addTicketList":
             if(isset($_POST['savedSearch']) && ($_POST['savedSearch'] != 0)){
                 $searchid = intval($_POST['savedSearch']);
@@ -105,23 +105,23 @@ if($xoopsUser){
                 $ticketList->setVar('uid', $xoopsUser->getVar('uid'));
                 $ticketList->setVar('searchid', $searchid);
                 $ticketList->setVar('weight', $hTicketList->createNewWeight($xoopsUser->getVar('uid')));
-                
+
                 if($hTicketList->insert($ticketList)){
                     header("Location: ".XHELP_BASE_URL."/profile.php");
                 } else {
                     redirect_header(XHELP_BASE_URL."/profile.php", 3, _XHELP_MSG_ADD_TICKETLIST_ERR);
                 }
             }
-        break;
-        
+            break;
+
         case "editTicketList":
             if(isset($_REQUEST['id']) && $_REQUEST['id'] != 0){
                 $listID = intval($_REQUEST['id']);
             } else {
                 redirect_header(XHELP_BASE_URL."/profile.php", 3, _XHELP_MSG_NO_ID);
             }
-        break;
-        
+            break;
+
         case "deleteTicketList":
             if(isset($_REQUEST['id']) && $_REQUEST['id'] != 0){
                 $listID = intval($_REQUEST['id']);
@@ -134,8 +134,8 @@ if($xoopsUser){
             } else {
                 redirect_header(XHELP_BASE_URL."/profile.php", 3, _XHELP_MSG_DEL_TICKETLIST_ERR);
             }
-        break;
-        
+            break;
+
         case "changeListWeight":
             if(isset($_REQUEST['id']) && $_REQUEST['id'] != 0){
                 $listID = intval($_REQUEST['id']);
@@ -148,8 +148,8 @@ if($xoopsUser){
             }
             $hTicketList->changeWeight($listID, $up);
             header("Location: ".XHELP_BASE_URL."/profile.php");
-        break;
-            
+            break;
+
         default:
             $xoopsTpl->assign('xhelp_responseTplID', $responseTplID);
             $module_header = '<!--[if gte IE 5.5000]><script src="iepngfix.js" language="JavaScript" type="text/javascript"></script><![endif]-->';
@@ -176,7 +176,7 @@ if($xoopsUser){
             $xoopsTpl->assign('xhelp_responseTime', xhelpFormatTime( ($staff->getVar('ticketsResponded') ? $staff->getVar('responseTime') / $staff->getVar('ticketsResponded') : 0)));
             $notify_method = $xoopsUser->getVar('notify_method');
             $xoopsTpl->assign('xhelp_notify_method', ($notify_method == 1) ? _XHELP_NOTIFY_METHOD1 : _XHELP_NOTIFY_METHOD2);
-    
+
             if(($staff->getVar('rating') == 0) || ($staff->getVar('numReviews') == 0)){
                 $xoopsTpl->assign('xhelp_rating', 0);
             } else {
@@ -191,14 +191,14 @@ if($xoopsUser){
             $xoopsTpl->assign('xhelp_rating5', _XHELP_RATING5);
             $xoopsTpl->assign('xhelp_staff_email', $staff->getVar('email'));
             $xoopsTpl->assign('xhelp_savedSearches', $aSavedSearches);
-            
+
             $myRoles =& $hStaff->getRoles($xoopsUser->getVar('uid'), true);
             $hNotification =& xhelpGetHandler('notification');
             $settings =& $hNotification->getObjects(null, true);
-            
+
             $templates =& $xoopsModule->getInfo('_email_tpl');
             $has_notifications = count($templates);
-            
+
             // Check that notifications are enabled by admin
             $i = 0;
             $staff_enabled = true;
@@ -218,7 +218,7 @@ if($xoopsUser){
                             }
                         }
                     }
-                    
+
                     $deptNotification[] = array('id'=> $template_id,
                                                 'name'=>$template['name'],
                                                 'category'=>$template['category'],
@@ -237,21 +237,21 @@ if($xoopsUser){
             } else {
                 $xoopsTpl->assign('xhelp_deptNotifications', 0);
             }
-                    
+
             $hReview  =& xhelpGetHandler('staffReview');
             $hMembers =& xoops_gethandler('member');
             $crit = new Criteria('staffid', $xoopsUser->getVar('uid'));
             $crit->setSort('id');
             $crit->setOrder('DESC');
             $crit->setLimit(5);
-            
+
             $reviews =& $hReview->getObjects($crit);
-            
+
             $displayName =& $xoopsModuleConfig['xhelp_displayName'];    // Determines if username or real name is displayed
-            
+
             foreach ($reviews as $review) {
                 $reviewer = $hMembers->getUser($review->getVar('submittedBy'));
-                $xoopsTpl->append('xhelp_reviews', array('rating' => $review->getVar('rating'), 
+                $xoopsTpl->append('xhelp_reviews', array('rating' => $review->getVar('rating'),
                             'ratingdsc' => xhelpGetRating($review->getVar('rating')),
                             'submittedBy' => ($reviewer ? xhelpGetUsername($reviewer, $displayName) : $xoopsConfig['anonymous']),
                             'submittedByUID' => $review->getVar('submittedBy'),
@@ -260,7 +260,7 @@ if($xoopsUser){
                             'ticketid' => $review->getVar('ticketid')));
             }
             $xoopsTpl->assign('xhelp_hasReviews', (count($reviews) > 0));
-            
+
             // Ticket Lists
             $ticketLists =& $hTicketList->getListsByUser($xoopsUser->getVar('uid'));
             $aMySavedSearches = array();
@@ -285,7 +285,7 @@ if($xoopsUser){
                 $aUsedSearches[$searchid] = $searchid;
             }
             unset($ticketLists);
-            
+
             // Take used searches to get unused searches
             $aSearches = array();
             foreach($mySavedSearches as $savedSearch){
@@ -301,7 +301,7 @@ if($xoopsUser){
             $xoopsTpl->assign('xhelp_unusedSearches', $aSearches);
             $xoopsTpl->assign('xhelp_hasUnusedSearches', $hasUnusedSearches);
             $xoopsTpl->assign('xhelp_baseURL', XHELP_BASE_URL);
-        break;
+            break;
     }
 } else {
     redirect_header(XOOPS_URL .'/user.php', 3);

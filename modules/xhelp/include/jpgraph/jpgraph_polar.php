@@ -129,7 +129,7 @@ class PolarPlot {
                 $this->csimareas .= $this->mark->GetCSIMAreas();
             }
             else {
-            	$this->mark->Stroke($img,$x1,$y1);
+                $this->mark->Stroke($img,$x1,$y1);
             }
 
             ++$i;
@@ -291,16 +291,16 @@ class PolarAxis extends Axis {
                     // Make sure there are no rounding problem with
                     // exactly vertical lines
                     $this->img->Line($x+$start_radius*cos($a/180*M_PI)+1,
-                                     $pos-$start_radius*sin($a/180*M_PI),
-                                     $x+$start_radius*cos($a/180*M_PI)+1,
-                                     $pos-$d*sin($a/180*M_PI));
+                    $pos-$start_radius*sin($a/180*M_PI),
+                    $x+$start_radius*cos($a/180*M_PI)+1,
+                    $pos-$d*sin($a/180*M_PI));
 
                 }
                 else {
                     $this->img->Line($x+$start_radius*cos($a/180*M_PI)+1,
-                                     $pos-$start_radius*sin($a/180*M_PI),
-                                     $x+$d*cos($a/180*M_PI),
-                                     $pos-$d*sin($a/180*M_PI));
+                    $pos-$start_radius*sin($a/180*M_PI),
+                    $x+$d*cos($a/180*M_PI),
+                    $pos-$d*sin($a/180*M_PI));
                 }
                 $a += $this->angle_step;
             }
@@ -310,7 +310,7 @@ class PolarAxis extends Axis {
     function StrokeAngleLabels($pos,$type) {
 
         if( !$this->show_angle_label )
-            return;
+        return;
 
         $x0 = round($this->img->left_margin+$this->img->plotwidth/2)+1;
 
@@ -480,7 +480,7 @@ class PolarAxis extends Axis {
                 }
                 $t->Align($ha,$va);
                 if( $this->show_angle_mark && $t->font_family > 4 ) {
-                	$a .= SymChar::Get('degree');
+                    $a .= SymChar::Get('degree');
                 }
                 $t->Set($a);
                 $t->Stroke($this->img,$xt,$yt);
@@ -499,8 +499,8 @@ class PolarAxis extends Axis {
         $this->img->SetFont($this->font_family,$this->font_style,$this->font_size);
         if( !$this->hide_line ) {
             $this->img->FilledRectangle($this->img->left_margin,$pos,
-                                        $this->img->width-$this->img->right_margin,
-                                        $pos+$this->weight-1);
+            $this->img->width-$this->img->right_margin,
+            $pos+$this->weight-1);
         }
         $y=$pos+$this->img->GetFontHeight()+$this->title_margin+$this->title->margin;
         if( $this->title_adjust=="high" ) {
@@ -508,7 +508,7 @@ class PolarAxis extends Axis {
         }
         elseif( $this->title_adjust=="middle" || $this->title_adjust=="center" ) {
             $this->title->SetPos(($this->img->width-$this->img->left_margin-$this->img->right_margin)/2+$this->img->left_margin,
-                                $y,"center","top");
+            $y,"center","top");
         }
         elseif($this->title_adjust=="low") {
             $this->title->SetPos($this->img->left_margin,$y,"left","top");
@@ -613,7 +613,7 @@ class PolarScale extends LinearScale {
         $aRad = $aRad/$m*$w;
 
         $a = $aAngle/180 * M_PI;
-        if( $this->clockwise ) { 
+        if( $this->clockwise ) {
             $a = 2*M_PI-$a;
         }
 
@@ -729,7 +729,7 @@ class PolarGraph extends Graph {
 
     function SetPlotSize($w,$h) {
         $this->SetMargin(($this->img->width-$w)/2,($this->img->width-$w)/2,
-                         ($this->img->height-$h)/2,($this->img->height-$h)/2);
+        ($this->img->height-$h)/2,($this->img->height-$h)/2);
     }
 
     // Private methods
@@ -795,10 +795,10 @@ class PolarGraph extends Graph {
         }
 
         if( $this->iType ==  POLAR_180 ) {
-        	$pos = $this->img->height - $this->img->bottom_margin;
+            $pos = $this->img->height - $this->img->bottom_margin;
         }
         else {
-        	$pos = $this->img->plotheight/2 + $this->img->top_margin;
+            $pos = $this->img->plotheight/2 + $this->img->top_margin;
         }
 
         if( !$_csim ) {
@@ -825,9 +825,9 @@ class PolarGraph extends Graph {
             // Clipping only supports graphs at 0 and 90 degrees
             if( $this->img->a == 0  ) {
                 $this->img->CopyCanvasH($oldimage,$this->img->img,
-                                        $this->img->left_margin,$this->img->top_margin,
-                                        $this->img->left_margin,$this->img->top_margin,
-                                        $this->img->plotwidth+1,$this->img->plotheight+1);
+                $this->img->left_margin,$this->img->top_margin,
+                $this->img->left_margin,$this->img->top_margin,
+                $this->img->plotwidth+1,$this->img->plotheight+1);
             }
             elseif( $this->img->a == 90 ) {
                 $adj1 = round(($this->img->height - $this->img->width)/2);
@@ -837,12 +837,12 @@ class PolarGraph extends Graph {
                 $tm = $this->img->top_margin;
                 $bm = $this->img->bottom_margin;
                 $this->img->CopyCanvasH($oldimage,$this->img->img,
-                                        $adj2 + round(($lm-$rm+$tm+$bm)/2),
-                                        $adj1 + round(($tm-$bm+$lm+$rm)/2),
-                                        $adj2 + round(($lm-$rm+$tm+$bm)/2),
-                                        $adj1 + round(($tm-$bm+$lm+$rm)/2),
-                                        $this->img->plotheight+1,
-                                        $this->img->plotwidth+1);
+                $adj2 + round(($lm-$rm+$tm+$bm)/2),
+                $adj1 + round(($tm-$bm+$lm+$rm)/2),
+                $adj2 + round(($lm-$rm+$tm+$bm)/2),
+                $adj1 + round(($tm-$bm+$lm+$rm)/2),
+                $this->img->plotheight+1,
+                $this->img->plotwidth+1);
             }
             $this->img->Destroy();
             $this->img->SetCanvasH($oldimage);
@@ -876,7 +876,7 @@ class PolarGraph extends Graph {
 
             // Draw an outline around the image map
             if(_JPG_DEBUG)
-            	$this->DisplayClientSideaImageMapAreas();
+            $this->DisplayClientSideaImageMapAreas();
 
             // If the filename is given as the special "__handle"
             // then the image handler is returned and the image is NOT

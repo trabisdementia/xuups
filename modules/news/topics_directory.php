@@ -48,7 +48,7 @@ $perms = '';
 $xt = new NewsTopic();
 $restricted = news_getmoduleoption('restrictindex');
 if ($restricted) {
-	global $xoopsUser;
+    global $xoopsUser;
     $module_handler =& xoops_gethandler('module');
     $newsModule =& $module_handler->getByDirname('news');
     $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
@@ -58,25 +58,25 @@ if ($restricted) {
        	$topics = implode(',', $topics);
        	$perms = ' AND topic_id IN ('.$topics.') ';
     } else {
-    	return '';
+        return '';
     }
 }
 $topics_arr = $xt->getChildTreeArray(0, 'topic_title', $perms);
 $newscountbytopic = $xt->getNewsCountByTopic();
 if(is_array($topics_arr) && count($topics_arr))	{
-	foreach ($topics_arr as $onetopic) {
-		$count = 0;
-		if(array_key_exists($onetopic['topic_id'],$newscountbytopic)) {
-			$count = $newscountbytopic[$onetopic['topic_id']];
-		}
-		if($onetopic['topic_pid'] != 0) {
-			$onetopic['prefix'] = str_replace('.','-',$onetopic['prefix']) . '&nbsp;';
-		} else {
-			$onetopic['prefix'] = str_replace('.','',$onetopic['prefix']);
-		}
+    foreach ($topics_arr as $onetopic) {
+        $count = 0;
+        if(array_key_exists($onetopic['topic_id'],$newscountbytopic)) {
+            $count = $newscountbytopic[$onetopic['topic_id']];
+        }
+        if($onetopic['topic_pid'] != 0) {
+            $onetopic['prefix'] = str_replace('.','-',$onetopic['prefix']) . '&nbsp;';
+        } else {
+            $onetopic['prefix'] = str_replace('.','',$onetopic['prefix']);
+        }
 
-	    $tbl_topics[] = array('id'=>$onetopic['topic_id'], 'news_count'=>$count, 'topic_color'=>'#'.$onetopic['topic_color'], 'prefix'=>$onetopic['prefix'], 'title'=>$myts->displayTarea($onetopic['topic_title']));
-	}
+        $tbl_topics[] = array('id'=>$onetopic['topic_id'], 'news_count'=>$count, 'topic_color'=>'#'.$onetopic['topic_color'], 'prefix'=>$onetopic['prefix'], 'title'=>$myts->displayTarea($onetopic['topic_title']));
+    }
 }
 $xoopsTpl->assign('topics', $tbl_topics);
 
@@ -90,9 +90,9 @@ news_CreateMetaDatas();
 $xoopsTpl->assign('xoops_pagetitle', _AM_NEWS_TOPICS_DIRECTORY);
 $meta_description = _AM_NEWS_TOPICS_DIRECTORY . ' - ' . $xoopsModule->name('s');
 if(isset($xoTheme) && is_object($xoTheme)) {
-	$xoTheme->addMeta( 'meta', 'description', $meta_description);
+    $xoTheme->addMeta( 'meta', 'description', $meta_description);
 } else {	// Compatibility for old Xoops versions
-	$xoopsTpl->assign('xoops_meta_description', $meta_description);
+    $xoopsTpl->assign('xoops_meta_description', $meta_description);
 }
 
 include_once XOOPS_ROOT_PATH.'/footer.php';

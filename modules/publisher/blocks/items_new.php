@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -19,7 +19,7 @@
  * @author          The SmartFactory <www.smartfactory.ca>
  * @version         $Id: items_new.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
@@ -30,32 +30,32 @@ function publisher_items_new_show ($options)
 {
     $publisher =& PublisherPublisher::getInstance();
 
-	$selectedcatids = explode(',', $options[0]);
-	
-	$block = array();
-	if (in_array(0, $selectedcatids)) {
-		$allcats = true;
-	} else {
-		$allcats = false;
-	}
+    $selectedcatids = explode(',', $options[0]);
 
-	$sort = $options[1];
-	$order = publisher_getOrderBy($sort);
-	$limit = $options[2];
-	$start = 0;
-	$image = $options[4];
+    $block = array();
+    if (in_array(0, $selectedcatids)) {
+        $allcats = true;
+    } else {
+        $allcats = false;
+    }
 
-	// creating the ITEM objects that belong to the selected category
-	if ($allcats) {
-		$criteria=null;
-	} else {
-		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('categoryid', '(' . $options[0] . ')', 'IN'));
-	}	
-	$itemsObj = $publisher->getHandler('item')->getItems($limit, $start, array(_PUBLISHER_STATUS_PUBLISHED), -1, $sort, $order, '', true, $criteria, true);
-	
-	$totalitems = count($itemsObj);
-	if ($itemsObj) {
+    $sort = $options[1];
+    $order = publisher_getOrderBy($sort);
+    $limit = $options[2];
+    $start = 0;
+    $image = $options[4];
+
+    // creating the ITEM objects that belong to the selected category
+    if ($allcats) {
+        $criteria=null;
+    } else {
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('categoryid', '(' . $options[0] . ')', 'IN'));
+    }
+    $itemsObj = $publisher->getHandler('item')->getItems($limit, $start, array(_PUBLISHER_STATUS_PUBLISHED), -1, $sort, $order, '', true, $criteria, true);
+
+    $totalitems = count($itemsObj);
+    if ($itemsObj) {
         for ( $i = 0; $i < $totalitems; $i++ ) {
 
             $item = array();
@@ -78,7 +78,7 @@ function publisher_items_new_show ($options)
                 $item['image'] = XOOPS_URL . '/uploads/' . $itemsObj[$i]->posterAvatar();
                 $item['image_name'] = $itemsObj[$i]->posterName();
             }
-            
+
             $item['title'] = $itemsObj[$i]->title();
 
             if ($sort == "datesub") {
@@ -89,19 +89,19 @@ function publisher_items_new_show ($options)
                 $item['new'] = $itemsObj[$i]->weight();
             }
 
-			$block['newitems'][] = $item;
-		}
-	}
+            $block['newitems'][] = $item;
+        }
+    }
 
-	return $block;
+    return $block;
 }
 
 function publisher_items_new_edit($options)
 {
     $form  = "<table border='0'>";
-	$form .= '<tr><td style="vertical-align: top; width: 250px;">' . _MB_PUBLISHER_SELECTCAT . '</td>';
-	$form .= '<td>' . publisher_createCategorySelect($options[0]) . '</td></tr>';
-		
+    $form .= '<tr><td style="vertical-align: top; width: 250px;">' . _MB_PUBLISHER_SELECTCAT . '</td>';
+    $form .= '<td>' . publisher_createCategorySelect($options[0]) . '</td></tr>';
+
     $form .= "<tr><td>" . _MB_PUBLISHER_ORDER . "</td>";
     $form .= "<td><select name='options[1]'>";
 

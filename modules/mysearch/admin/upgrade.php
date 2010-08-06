@@ -31,12 +31,12 @@ include_once XOOPS_ROOT_PATH.'/modules/mysearch/include/functions.php';
 
 
 if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
-	if (!mysearch_FieldExists('ip',$xoopsDB->prefix('mysearch_searches'))) {
-		mysearch_AddField("ip varchar(32) NOT NULL default ''",$xoopsDB->prefix('mysearch_searches'));
-	}
-	echo "<br>ok";
+    if (!mysearch_FieldExists('ip',$xoopsDB->prefix('mysearch_searches'))) {
+        mysearch_AddField("ip varchar(32) NOT NULL default ''",$xoopsDB->prefix('mysearch_searches'));
+    }
+    echo "<br>ok";
 } else {
-	printf("<H2>%s</H2>\n",_ERRORS);
+    printf("<H2>%s</H2>\n",_ERRORS);
 }
 xoops_cp_footer();
 ?>

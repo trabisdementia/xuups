@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: form.category.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) exit();
 
 require_once XOOPS_ROOT_PATH . "/class/xoopstree.php";
@@ -96,7 +96,7 @@ if (!empty($xoopsModuleConfig["path_image"])) {
 
 // The moderator
 if (art_isAdministrator()) {
-       $form_art->addElement(new XoopsFormSelectUser(art_constant("MD_MODERATOR"), 'cat_moderator', false, $category_obj->getVar("cat_moderator"), 5, true));
+    $form_art->addElement(new XoopsFormSelectUser(art_constant("MD_MODERATOR"), 'cat_moderator', false, $category_obj->getVar("cat_moderator"), 5, true));
 } else {
     if ($moderators = $category_obj->getVar("cat_moderator")) {
         $moderator_checkbox = new XoopsFormCheckBox(art_constant("MD_MODERATOR"), "cat_moderator", array_keys($moderators));
@@ -114,7 +114,7 @@ if ($category_obj->getVar("cat_id")) {
     $article_count = $article_handler->getCount($criteria_article);
     if ($article_count > 0) {
         $article_list[0] = _NONE;
-        
+
         if ($article_count > $limit_article) {
             $article_list = $article_list + $article_handler->getList(new Criteria("art_id", $category_obj->getVar("cat_entry")));
             $article_option_tray = new XoopsFormElementTray(art_constant("MD_ENTRY_SELECT"));
@@ -152,9 +152,9 @@ if ($category_obj->getVar("cat_id")) {
                 }
                 </script>"
             
-            );
-            $article_option_tray->addElement($article_more);
-            $form_art->addElement($article_option_tray);
+                );
+                $article_option_tray->addElement($article_more);
+                $form_art->addElement($article_option_tray);
         } else {
             //$criteria_article->setLimit($limit_article);
             $criteria_article->setSort("art_id");

@@ -1,6 +1,6 @@
-<?php 
+<?php
 if (!defined('XOOPS_ROOT_PATH')) {
-	exit();
+    exit();
 }
 
 if (!defined('XHELP_CONSTANTS_INCLUDED')) {
@@ -9,8 +9,12 @@ if (!defined('XHELP_CONSTANTS_INCLUDED')) {
 
 include_once XOOPS_ROOT_PATH.'/language/'.$GLOBALS['xoopsConfig']['language'].'/calendar.php';
 ?>
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo XHELP_INCLUDE_PATH;?>/calendar/calendar-blue.css" />
-<script type="text/javascript" src="<?php echo XHELP_INCLUDE_PATH.'/calendar/calendar.js';?>"></script>
+<link
+	rel="stylesheet" type="text/css" media="all"
+	href="<?php echo XHELP_INCLUDE_PATH;?>/calendar/calendar-blue.css" />
+<script
+	type="text/javascript"
+	src="<?php echo XHELP_INCLUDE_PATH.'/calendar/calendar.js';?>"></script>
 <script type="text/javascript">
 <!--
 var calendar = null;

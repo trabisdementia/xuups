@@ -324,11 +324,11 @@ class Xmf_Metagen
          $return_keywords = array();
 
          // Cleaning for duplicate keywords
-          foreach ($keywords as $keyword) {
-          if (!in_array($keyword, $keywords)) {
-          $return_keywords[] = trim($keyword);
-          }
-          }*/
+         foreach ($keywords as $keyword) {
+         if (!in_array($keyword, $keywords)) {
+         $return_keywords[] = trim($keyword);
+         }
+         }*/
 
         // Only take the first 90 keywords
         $newKeywords = array();

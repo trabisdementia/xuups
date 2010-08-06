@@ -533,7 +533,7 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler
 
         $sql = sprintf("INSERT INTO %s (mime_id, mime_ext, mime_types, mime_name, mime_admin, mime_user) VALUES
             (%u, %s, %s, %s, %u, %u)", $this->_db->prefix($this->_dbtable), $mime_id, $this->_db->quoteString($mime_ext),
-            $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user);
+        $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user);
         return $sql;
     }
 
@@ -546,7 +546,7 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler
 
         $sql = sprintf("UPDATE %s SET mime_ext = %s, mime_types = %s, mime_name = %s, mime_admin = %u, mime_user = %u WHERE
             mime_id = %u", $this->_db->prefix($this->_dbtable), $this->_db->quoteString($mime_ext),
-            $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user, $mime_id);
+        $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user, $mime_id);
         return $sql;
     }
 

@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: functions.rpc.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 if (!defined('XOOPS_ROOT_PATH')) { exit(); }
 
 include dirname(__FILE__)."/vars.php";
@@ -52,7 +52,7 @@ function art_trackback($trackback_url, &$article)
     $url = urlencode(XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/view.article.php" . URL_DELIMITER . $article->getVar("art_id"));
     $query_string = "title=$title1&url=$url&blog_name=$name1&excerpt=$excerpt1&charset=$charset";
     $trackback_url = parse_url($trackback_url);
-    
+
     $http_request  = 'POST ' . $trackback_url['path'] . ($trackback_url['query'] ? '?' . $trackback_url['query'] : '') . " HTTP/1.0\r\n";
     $http_request .= "Host: " . $trackback_url["host"] . "\r\n";
     $http_request .= "Content-Type: application/x-www-form-urlencoded; charset=" . $charset . "\r\n";
@@ -106,22 +106,22 @@ function art_ping($server, $id)
 
     // when set to true, this outputs debug messages by itself
     $client->debug = false;
-    
+
     $blogname = xoops_utf8_encode($GLOBALS['xoopsModule']->getVar("name"));
     $home = XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/";
     $rss2_url = XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/xml.php" . URL_DELIMITER . "rss2.0/" . $id;
-    
+
     if ( !$client->query('weblogUpdates.extendedPing', $blogname, $home, $rss2_url ) ) // then try a normal ping
-        $client->query('weblogUpdates.ping', $blogname, $home);
+    $client->query('weblogUpdates.ping', $blogname, $home);
 }
 
 /**
  * Function to respond to a trackback
  */
-function art_trackback_response($error = 0, $error_message = '') 
+function art_trackback_response($error = 0, $error_message = '')
 {
     $moduleConfig = art_load_config();
-    
+
     if (!empty($moduleConfig["do_trackbackutf8"])) {
         $charset = "utf-8";
         $error_message = xoops_utf8_encode($error_message);

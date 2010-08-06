@@ -11,7 +11,7 @@ if ( DIRECTORY_SEPARATOR != "/" ) $current_path = str_replace( strpos( $current_
 $url_arr = explode("/",strstr($current_path,"/modules/"));
 include XOOPS_ROOT_PATH."/modules/".$url_arr[2]."/include/vars.php";
 
-if(defined($GLOBALS["ART_VAR_PREFIXU"]."_LANG_GB_ADMIN")) return; 
+if(defined($GLOBALS["ART_VAR_PREFIXU"]."_LANG_GB_ADMIN")) return;
 define($GLOBALS["ART_VAR_PREFIXU"]."_LANG_GB_ADMIN",1);
 
 define($GLOBALS["ART_VAR_PREFIXU"]."_AM_ARTICLES", "文章设置");
@@ -69,17 +69,17 @@ define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERM_SEARCH", "搜索");
 define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERM_HTML", "使用HTML");
 define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERM_UPLOAD", "上传");
 
-define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERMISSION_DESC", 
+define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERMISSION_DESC",
 	"可以设定的分类权限: ".
-	art_constant("AM_PERM_ACCESS").", ".
-	art_constant("AM_PERM_VIEW").", ".
-	art_constant("AM_PERM_SUBMIT").", ".
-	art_constant("AM_PERM_RATE").", ".
-	art_constant("AM_PERM_MODERATE")."<br />". 
+art_constant("AM_PERM_ACCESS").", ".
+art_constant("AM_PERM_VIEW").", ".
+art_constant("AM_PERM_SUBMIT").", ".
+art_constant("AM_PERM_RATE").", ".
+art_constant("AM_PERM_MODERATE")."<br />".
 	"可以设定的全局权限: ".
-	art_constant("AM_PERM_SEARCH").", ".
-	art_constant("AM_PERM_HTML").", ".
-	art_constant("AM_PERM_UPLOAD")
+art_constant("AM_PERM_SEARCH").", ".
+art_constant("AM_PERM_HTML").", ".
+art_constant("AM_PERM_UPLOAD")
 );
 
 define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERMISSION_TEMPLATE", "设置缺省权限模板");

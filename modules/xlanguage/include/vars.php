@@ -103,5 +103,5 @@ $available_languages = array(
     'uk' => array('uk|ukrainian', 'ukrainian'),
     'zh-tw' => array('zh[-_]tw|chinese traditional', 'tchinese'),
     'zh-cn' => array('zh[-_]cn|chinese simplified', 'schinese'),
-    );
+);
 ?>

@@ -52,7 +52,7 @@ class Xmf_Loader
         return true;
     }
 
-     /**
+    /**
      * Ensure that filename does not contain exploits
      *
      * @param  string $filename

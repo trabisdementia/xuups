@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code 
+ of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * XOOPS tag management module
@@ -35,10 +35,10 @@ xoops_loadLanguage("blocks", "tag");
  *    <li>Call the tag_block_cloud_show in your defined block function:<br />
  *        <code>
  *            function newbb_block_tag_cloud_show($options) {
- *                $catid        = $options[4];    // Not used by newbb, Only for demonstration 
+ *                $catid        = $options[4];    // Not used by newbb, Only for demonstration
  *                if (!@include_once XOOPS_ROOT_PATH."/modules/tag/blocks/block.php") {
- *                    return null; 
- *                } 
+ *                    return null;
+ *                }
  *                $block_content = tag_block_cloud_show($options, "newbb", $catid);
  *                return $block_content;
  *            }
@@ -49,10 +49,10 @@ xoops_loadLanguage("blocks", "tag");
  *        <code>
  *            function newbb_block_tag_cloud_edit($options) {
  *                if (!@include_once XOOPS_ROOT_PATH."/modules/tag/blocks/block.php") {
- *                    return null; 
- *                } 
+ *                    return null;
+ *                }
  *                $form = tag_block_cloud_edit($options);
- *                $form .= $CODE_FOR_GET_CATID;    // Not used by newbb, Only for demonstration 
+ *                $form .= $CODE_FOR_GET_CATID;    // Not used by newbb, Only for demonstration
  *                return $form;
  *            }
  *        </code>
@@ -65,9 +65,9 @@ xoops_loadLanguage("blocks", "tag");
  *    </li>
  * </ul>
  *
- * {@link TagTag} 
+ * {@link TagTag}
  *
- * @param    array     $options:  
+ * @param    array     $options:
  *                    $options[0] - number of tags to display
  *                    $options[1] - time duration, in days, 0 for all the time
  *                    $options[2] - max font size (px or %)
@@ -86,11 +86,11 @@ function tag_block_cloud_show( $options, $dirname = "", $catid = 0 )
         $module = $module_handler->getByDirname($dirname);
         $modid = $module->getVar("mid");
     }
-    
+
     $block = array();
     $tag_handler =& xoops_getmodulehandler("tag", "tag");
     tag_define_url_delimiter();
-    
+
     $criteria = new CriteriaCompo();
     $criteria->setSort("count");
     $criteria->setOrder("DESC");
@@ -105,7 +105,7 @@ function tag_block_cloud_show( $options, $dirname = "", $catid = 0 )
     if (!$tags = $tag_handler->getByLimit($criteria, empty($options[1]))) {
         return $block;
     }
-    
+
     $count_max = 0;
     $count_min = 0;
     $tags_term = array();
@@ -117,11 +117,11 @@ function tag_block_cloud_show( $options, $dirname = "", $catid = 0 )
     array_multisort($tags_term, SORT_ASC, $tags);
     $count_interval = $count_max - $count_min;
     $level_limit = 5;
-    
+
     $font_max = $options[2];
     $font_min = $options[3];
     $font_ratio = ($count_interval) ? ($font_max - $font_min) / $count_interval : 1;
-    
+
     $tags_data = array();
     foreach (array_keys($tags) as $key) {
         $tags_data[] = array(
@@ -130,10 +130,10 @@ function tag_block_cloud_show( $options, $dirname = "", $catid = 0 )
                         "level"    => empty($count_max) ? 0 : floor( ($tags[$key]["count"] - $count_min) * $level_limit / $count_max ),
                         "term"    => $tags[$key]["term"],
                         "count"    => $tags[$key]["count"],
-                        );
+        );
     }
     unset($tags, $tags_term);
-    
+
     $block["tags"] =& $tags_data;
     $block["tag_dirname"] = "tag";
     if (!empty($modid)) {
@@ -151,7 +151,7 @@ function tag_block_cloud_edit($options)
     $form .=    TAG_MB_TIME_DURATION . ":&nbsp;&nbsp;<input type=\"text\" name=\"options[1]\" value=\"" . $options[1] . "\" /><br />";
     $form .=    TAG_MB_FONTSIZE_MAX . ":&nbsp;&nbsp;<input type=\"text\" name=\"options[2]\" value=\"" . $options[2] . "\" /><br />";
     $form .=    TAG_MB_FONTSIZE_MIN . ":&nbsp;&nbsp;<input type=\"text\" name=\"options[3]\" value=\"" . $options[3] . "\" /><br />";
-    
+
     return $form;
 }
 
@@ -165,9 +165,9 @@ function tag_block_cloud_edit($options)
  *    <li>Call the tag_block_top_show in your defined block function:<br />
  *        <code>
  *            function newbb_block_tag_top_show($options) {
- *                $catid        = $options[3];    // Not used by newbb, Only for demonstration 
+ *                $catid        = $options[3];    // Not used by newbb, Only for demonstration
  *                if (!@include_once XOOPS_ROOT_PATH."/modules/tag/blocks/block.php") {
- *                    return null; 
+ *                    return null;
  *                }
  *                $block_content = tag_block_top_show($options, "newbb", $catid);
  *                return $block_content;
@@ -179,10 +179,10 @@ function tag_block_cloud_edit($options)
  *        <code>
  *            function newbb_block_tag_top_edit($options) {
  *                if (!@include_once XOOPS_ROOT_PATH."/modules/tag/blocks/block.php") {
- *                    return null; 
- *                } 
+ *                    return null;
+ *                }
  *                $form = tag_block_cloud_edit($options);
- *                $form .= $CODE_FOR_GET_CATID;    // Not used by newbb, Only for demonstration 
+ *                $form .= $CODE_FOR_GET_CATID;    // Not used by newbb, Only for demonstration
  *                return $form;
  *            }
  *        </code>
@@ -195,9 +195,9 @@ function tag_block_cloud_edit($options)
  *    </li>
  * </ul>
  *
- * {@link TagTag} 
+ * {@link TagTag}
  *
- * @param    array     $options:  
+ * @param    array     $options:
  *                    $options[0] - number of tags to display
  *                    $options[1] - time duration, in days, 0 for all the time
  *                    $options[2] - sort: a - alphabet; c - count; t - time
@@ -219,7 +219,7 @@ function tag_block_top_show( $options, $dirname = "", $catid = 0 )
     $block = array();
     $tag_handler =& xoops_getmodulehandler("tag", "tag");
     tag_define_url_delimiter();
-    
+
     $criteria = new CriteriaCompo();
     $sort = ($options[2] == "a" || $options[2] == "alphabet") ? "count" : $options[2];
     $criteria->setSort("count");
@@ -238,7 +238,7 @@ function tag_block_top_show( $options, $dirname = "", $catid = 0 )
     if (!$tags = $tag_handler->getByLimit($criteria, empty($options[1]))) {
         return $block;
     }
-    
+
     $count_max = 0;
     $count_min = 0;
     $tags_sort = array();
@@ -250,27 +250,27 @@ function tag_block_top_show( $options, $dirname = "", $catid = 0 )
         }
     }
     $count_interval = $count_max - $count_min;
-    
+
     /*
-    $font_max = $options[1];
-    $font_min = $options[2];
-    $font_ratio = ($count_interval) ? ($font_max - $font_min) / $count_interval : 1;
-    */
+     $font_max = $options[1];
+     $font_min = $options[2];
+     $font_ratio = ($count_interval) ? ($font_max - $font_min) / $count_interval : 1;
+     */
     if (!empty($tags_sort)) {
         array_multisort($tags_sort, SORT_ASC, $tags);
     }
-    
+
     $tags_data = array();
     foreach (array_keys($tags) as $key) {
         $tags_data[] = array(
                         "id"    => $tags[$key]["id"],
-                        //"level"    => ($tags[$key]["count"] - $count_min) * $font_ratio + $font_min,
+        //"level"    => ($tags[$key]["count"] - $count_min) * $font_ratio + $font_min,
                         "term"  => $tags[$key]["term"],
                         "count" => $tags[$key]["count"],
-                        );
+        );
     }
     unset($tags, $tags_term);
-    
+
     $block["tags"] =& $tags_data;
     $block["tag_dirname"] = "tag";
     if (!empty($modid)) {
@@ -297,7 +297,7 @@ function tag_block_top_edit($options)
     if ($options[2] == "t") $form .= " selected='selected' ";
     $form .= ">" . TAG_MB_TIME . "</option>";
     $form .= "</select>";
-    
+
     return $form;
 }
 

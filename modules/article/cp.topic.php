@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: cp.topic.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 $category_id = empty($_GET["category"]) ? 0 : intval($_GET["category"]);
@@ -76,7 +76,7 @@ foreach ($topics_obj as $id => $topic) {
         "order"        => $topic->getVar("top_order"),
         "time"        => $topic->getTime($xoopsModuleConfig["timeformat"]),
         "expire"    => $topic->getExpire()
-        );
+    );
 }
 
 $category_data = array();

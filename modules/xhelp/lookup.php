@@ -29,16 +29,16 @@ $xoopsTpl->assign('xoops_themecss', xoops_getcss());
 $xoopsTpl->assign('xoops_url', XOOPS_URL);
 $xoopsTpl->assign('xhelp_inadmin', $inadmin);
 $xoopsTpl->assign('xhelp_adminURL', XHELP_ADMIN_URL);
-    
+
 if(isset($_POST['search'])){
     if(isset($_POST['searchText'])){
-        $text = $_POST['searchText'];   
+        $text = $_POST['searchText'];
     }
     if(isset($_POST['subject'])){
-        $subject = $_POST['subject'];   
+        $subject = $_POST['subject'];
     }
     $xoopsTpl->assign('xhelp_viewResults', true);
-    
+
     $user_handler =& xoops_gethandler('user');
     $crit = new Criteria($subject, "%". $text ."%", 'LIKE');
     $crit->setSort($subject);
@@ -49,7 +49,7 @@ if(isset($_POST['search'])){
                           'name'=>$user->getVar('name'),
                           'email'=>$user->getVar('email'));
     }
-    
+
     $xoopsTpl->assign('xhelp_matches', $aUsers);
     $xoopsTpl->assign('xhelp_matchCount', count($aUsers));
 } else {

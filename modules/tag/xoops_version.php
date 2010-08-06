@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code 
+ of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * XOOPS tag management module
@@ -55,36 +55,36 @@ $modversion["onUninstall"] = "include/action.module.php";
 $modversion["use_smarty"] = 1;
 
 /**
-* Templates
-*/
+ * Templates
+ */
 $modversion['templates']    = array();
 $modversion['templates'][1]    = array(
     'file'          => 'tag_index.html',
     'description'   => 'Index page of tag module'
     );
-$modversion['templates'][]    = array(
+    $modversion['templates'][]    = array(
     'file'          => 'tag_list.html',
     'description'   => 'List of tags'
     );
-$modversion['templates'][]    = array(
+    $modversion['templates'][]    = array(
     'file'          => 'tag_view.html',
     'description'   => 'Links of a tag'
     );
-$modversion['templates'][]    = array(
+    $modversion['templates'][]    = array(
     'file'          => 'tag_bar.html',
     'description'   => 'Tag list in an item'
     );
 
-// Blocks
-$modversion['blocks']    = array();
+    // Blocks
+    $modversion['blocks']    = array();
 
-/*
- * $options:  
- *                    $options[0] - number of tags to display
- *                    $options[1] - max font size (px or %)
- *                    $options[2] - min font size (px or %)
- */
-$modversion["blocks"][1]    = array(
+    /*
+     * $options:
+     *                    $options[0] - number of tags to display
+     *                    $options[1] - max font size (px or %)
+     *                    $options[2] - min font size (px or %)
+     */
+    $modversion["blocks"][1]    = array(
     "file"          => "block.php",
     "name"          => TAG_MI_BLOCK_CLOUD,
     "description"   => TAG_MI_BLOCK_CLOUD_DESC,
@@ -94,13 +94,13 @@ $modversion["blocks"][1]    = array(
     "template"      => "tag_block_cloud.html",
     );
 
-/*
- * $options:  
- *                    $options[0] - number of tags to display
- *                    $options[1] - time duration, in days, 0 for all the time
- *                    $options[2] - sort: a - alphabet; c - count; t - time
- */
-$modversion["blocks"][]    = array(
+    /*
+     * $options:
+     *                    $options[0] - number of tags to display
+     *                    $options[1] - time duration, in days, 0 for all the time
+     *                    $options[2] - sort: a - alphabet; c - count; t - time
+     */
+    $modversion["blocks"][]    = array(
     "file"          => "block.php",
     "name"          => TAG_MI_BLOCK_TOP,
     "description"   => TAG_MI_BLOCK_TOP_DESC,
@@ -110,18 +110,18 @@ $modversion["blocks"][]    = array(
     "template"      => "tag_block_top.html",
     );
 
-// Search
-$modversion["hasSearch"] = 1;
-$modversion['search']['file'] = "include/search.inc.php";
-$modversion['search']['func'] = "tag_search";
+    // Search
+    $modversion["hasSearch"] = 1;
+    $modversion['search']['file'] = "include/search.inc.php";
+    $modversion['search']['func'] = "tag_search";
 
-// Comments
-$modversion["hasComments"] = 0;
+    // Comments
+    $modversion["hasComments"] = 0;
 
-// Configs
-$modversion["config"] = array();
-    
-$modversion["config"][1] = array(
+    // Configs
+    $modversion["config"] = array();
+
+    $modversion["config"][1] = array(
     "name"          => "do_urw",
     "title"         => "TAG_MI_DOURLREWRITE",
     "description"   => "TAG_MI_DOURLREWRITE_DESC",
@@ -130,7 +130,7 @@ $modversion["config"][1] = array(
     "default"       => in_array(php_sapi_name(), array("apache", "apache2handler")),
     );
 
-$modversion["config"][] = array(
+    $modversion["config"][] = array(
     "name"          => "items_perpage",
     "title"         => "TAG_MI_ITEMSPERPAGE",
     "description"   => "TAG_MI_ITEMSPERPAGE_DESC",
@@ -140,8 +140,8 @@ $modversion["config"][] = array(
     );
 
 
-// Notification
+    // Notification
 
-$modversion["hasNotification"] = 0;
-$modversion["notification"] = array();
-?>
+    $modversion["hasNotification"] = 0;
+    $modversion["notification"] = array();
+    ?>

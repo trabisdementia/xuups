@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -47,7 +47,7 @@ $newbb_module_header .= '
     <script type="text/javascript">var toggle_cookie="' . $forumCookie['prefix'] . 'G'.'";</script>
     <script src="include/js/newbb_toggle.js" type="text/javascript"></script>
     ';
-    
+
 if ($menumode == 2) {
     $newbb_module_header .= '
     <link rel="stylesheet" type="text/css" href="templates/newbb_menu_hover.css" />

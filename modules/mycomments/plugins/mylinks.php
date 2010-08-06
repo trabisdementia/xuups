@@ -5,52 +5,52 @@
 
 function mylinks_useritems($uid, $limit=0, $offset=0){
     global $xoopsDB;
-	$ret = array();
+    $ret = array();
 
-	$sql = "SELECT lid, title, date
+    $sql = "SELECT lid, title, date
     FROM ".$xoopsDB->prefix("mylinks_links")."
     WHERE submitter=" . $uid . "
     AND status>0
     ORDER BY lid";
-	$result = $xoopsDB->query($sql,$limit,$offset);
+    $result = $xoopsDB->query($sql,$limit,$offset);
 
     if ( $result ) {
         while ($row = $xoopsDB->fetchArray($result)){
-		  $ret[] = $row['lid'];
-		}
-	}
+            $ret[] = $row['lid'];
+        }
+    }
 
-	return $ret;
+    return $ret;
 }
 
 function mylinks_iteminfo($items, $limit=0, $offset=0){
 
     global $xoopsDB;
-	$ret = array();
+    $ret = array();
     $URL_MOD = XOOPS_URL."/modules/mylinks";
 
-	$sql = "SELECT l.lid, l.title as ltitle, l.date, l.cid, l.submitter, l.hits, l.comments, t.description, c.title as ctitle
+    $sql = "SELECT l.lid, l.title as ltitle, l.date, l.cid, l.submitter, l.hits, l.comments, t.description, c.title as ctitle
     FROM ".$xoopsDB->prefix("mylinks_links")." l, ".$xoopsDB->prefix("mylinks_text")." t, ".$xoopsDB->prefix("mylinks_cat")." c
     WHERE l.lid IN (".implode(',',$items).")
     AND t.lid=l.lid
     AND l.cid=c.cid
     AND l.status>0
     ORDER BY l.date DESC";
-	$result = $xoopsDB->query($sql,$limit,$offset);
+    $result = $xoopsDB->query($sql,$limit,$offset);
 
-	$i = 0;
- 	while($row = $xoopsDB->fetchArray($result)){
-		$ret[$i]['link']     = $URL_MOD."/singlelink.php?lid=".$row['lid'];
-		$ret[$i]['cat_link'] = $URL_MOD."/viewcat.php?cid=".$row['cid'];
-		$ret[$i]['title'] = $row['ltitle'];
-		$ret[$i]['time']  = $row['date'];
-		$ret[$i]['id'] = $row['lid'];
+    $i = 0;
+    while($row = $xoopsDB->fetchArray($result)){
+        $ret[$i]['link']     = $URL_MOD."/singlelink.php?lid=".$row['lid'];
+        $ret[$i]['cat_link'] = $URL_MOD."/viewcat.php?cid=".$row['cid'];
+        $ret[$i]['title'] = $row['ltitle'];
+        $ret[$i]['time']  = $row['date'];
+        $ret[$i]['id'] = $row['lid'];
         //uid
-		$ret[$i]['uid'] = $row['submitter'];
+        $ret[$i]['uid'] = $row['submitter'];
         // category
-		$ret[$i]['cat_name'] = $row['ctitle'];
+        $ret[$i]['cat_name'] = $row['ctitle'];
         // counter
-		$ret[$i]['hits'] = $row['hits'];
+        $ret[$i]['hits'] = $row['hits'];
         // comments
         $ret[$i]['replies'] = $row['comments'];
         // description
@@ -60,8 +60,8 @@ function mylinks_iteminfo($items, $limit=0, $offset=0){
         $xcodes = 1;
         $ret[$i]['description'] = $myts->displayTarea($row['description'], $html, $smiley, $xcodes);
         $i++;
-	}
-	return $ret;
+    }
+    return $ret;
 }
 
 ?>

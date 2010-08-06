@@ -30,7 +30,7 @@ class Xmf_Form_Element_Label extends Xmf_Form_Element
         $this->setCaption($caption);
         $this->setName($name);
         $this->_value = $value;
-     }
+    }
 
     /**
      * Get the "value" attribute

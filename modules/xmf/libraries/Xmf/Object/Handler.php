@@ -66,7 +66,7 @@ class Xmf_Object_Handler
             'joint' => null,
             'write' => null,
             'sync'  => null,
-        );
+    );
 
     /**#@+
      * Information about the class, the handler is managing
@@ -147,16 +147,16 @@ class Xmf_Object_Handler
         return $handlers[$name];
 
         /*
-        // Following code just kept as placeholder for PHP5
-        if (!isset(self::$handlers[$name])) {
-            self::$handlers[$name] = XoopsModelFactory::loadHandler($this, $name, $args);
-        } else {
-            self::$handlers[$name]->setHandler($this);
-               self::$handlers[$name]->setVars($args);
-        }
+         // Following code just kept as placeholder for PHP5
+         if (!isset(self::$handlers[$name])) {
+         self::$handlers[$name] = XoopsModelFactory::loadHandler($this, $name, $args);
+         } else {
+         self::$handlers[$name]->setHandler($this);
+         self::$handlers[$name]->setVars($args);
+         }
 
-        return self::$handlers[$name];
-        */
+         return self::$handlers[$name];
+         */
     }
 
     /**

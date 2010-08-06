@@ -19,7 +19,7 @@ class Session {
     {
         @session_start();
     }
-    
+
     /**
      * Sets a session variable
      * @param string name of variable
@@ -27,11 +27,11 @@ class Session {
      * @return void
      * @access public
      */
-    function set($name, $value) 
+    function set($name, $value)
     {
         $_SESSION[$name] = $value;
     }
-    
+
     /**
      * Fetches a session variable
      * @param string name of variable
@@ -46,7 +46,7 @@ class Session {
             return false;
         }
     }
-    
+
     /**
      * Deletes a session variable
      * @param string name of variable
@@ -57,8 +57,8 @@ class Session {
     {
         unset($_SESSION[$name]);
     }
-    
-    
+
+
     /**
      * Destroys the whole session
      * @return void
@@ -69,11 +69,11 @@ class Session {
         $_SESSION = array();
         session_destroy();
     }
-    
+
     function singleton()
     {
         static $_sess;
-        
+
         if (!isset($_sess)) {
             $_sess =& new Session();
         }

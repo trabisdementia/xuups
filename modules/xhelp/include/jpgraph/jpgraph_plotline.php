@@ -124,12 +124,12 @@ class PlotLine {
 
     function Stroke($aImg,$aXScale,$aYScale) {
         $this->_Stroke($aImg,
-            $aImg->left_margin,
-            $aYScale->Translate($aYScale->GetMinVal()),
-            $aImg->width-$aImg->right_margin,
-            $aYScale->Translate($aYScale->GetMaxVal()),
-            $aXScale->Translate($this->scaleposition),
-            $aYScale->Translate($this->scaleposition)
+        $aImg->left_margin,
+        $aYScale->Translate($aYScale->GetMinVal()),
+        $aImg->width-$aImg->right_margin,
+        $aYScale->Translate($aYScale->GetMaxVal()),
+        $aXScale->Translate($this->scaleposition),
+        $aYScale->Translate($this->scaleposition)
         );
     }
 }

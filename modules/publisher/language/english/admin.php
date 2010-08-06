@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: admin.php 1470 2008-04-07 16:04:52Z kurak_bu $
-* Module: Publisher
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: admin.php 1470 2008-04-07 16:04:52Z kurak_bu $
+ * Module: Publisher
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 define("_AM_PUBLISHER_ABOUT", "About");
 define("_AM_PUBLISHER_ACTION", "Action");

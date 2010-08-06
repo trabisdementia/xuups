@@ -6,22 +6,22 @@
 function publisher_useritems($uid, $limit=0, $offset=0)
 {
     global $xoopsDB;
-	$ret = array();
+    $ret = array();
 
     $sql = "SELECT storyid FROM ".$xoopsDB->prefix("publisher_stories")." WHERE published>0 AND published<=".time()." AND uid=".$uid;
     $result = $xoopsDB->query($sql, $limit, $offset);
-	if ( $result ) {
+    if ( $result ) {
         while ($row = $xoopsDB->fetchArray($result)){
-		  $ret[] = $row['storyid'];
-		}
-	}
-	return $ret;
+            $ret[] = $row['storyid'];
+        }
+    }
+    return $ret;
 }
 
 function publisher_iteminfo($items, $limit=0, $offset=0)
 {
-	global $xoopsDB;
-	$ret = array();
+    global $xoopsDB;
+    $ret = array();
     $URL_MOD = XOOPS_URL."/modules/publisher";
 
     $sql = "SELECT s.storyid, s.title, s.published, s.bodytext, s.uid, s.counter, s.comments, t.topic_id, t.topic_title
@@ -30,10 +30,10 @@ function publisher_iteminfo($items, $limit=0, $offset=0)
     AND s.storyid IN (".implode(',',$items).")
     AND s.published>0 AND s.published<=".time()."
     ORDER BY s.published DESC";
-	$result = $xoopsDB->query($sql, $limit, $offset);
+    $result = $xoopsDB->query($sql, $limit, $offset);
 
     $i = 0;
-	while($row = $xoopsDB->fetchArray($result)){
+    while($row = $xoopsDB->fetchArray($result)){
         $storyid = $row['storyid'];
         $ret[$i]['link']     = $URL_MOD."/article.php?storyid=".$storyid;
         $ret[$i]['pda']      = $URL_MOD."/print.php?storyid=".$storyid;
@@ -57,32 +57,32 @@ function publisher_iteminfo($items, $limit=0, $offset=0)
         $i++;
     }
 
-	return $ret;
+    return $ret;
 }
 
 
 /*
-function news_data($limit=0, $offset=0)
-{
-	global $xoopsDB;
+ function news_data($limit=0, $offset=0)
+ {
+ global $xoopsDB;
 
-	$sql = "SELECT storyid, title, created FROM ".$xoopsDB->prefix("stories")." WHERE published>0 AND published<=".time()." ORDER BY storyid";
-	$result = $xoopsDB->query($sql,$limit,$offset);
+ $sql = "SELECT storyid, title, created FROM ".$xoopsDB->prefix("stories")." WHERE published>0 AND published<=".time()." ORDER BY storyid";
+ $result = $xoopsDB->query($sql,$limit,$offset);
 
-	$i = 0;
-	$ret = array();
+ $i = 0;
+ $ret = array();
 
-	while($row = $xoopsDB->fetchArray($result))
-	{
-	    $id = $row['storyid'];
-	    $ret[$i]['id']    = $id;
-		$ret[$i]['link'] = XOOPS_URL."/modules/news/article.php?storyid=".$id."";
-		$ret[$i]['title'] = $row['title'];
-		$ret[$i]['time']  = $row['created'];
-		$i++;
-	}
+ while($row = $xoopsDB->fetchArray($result))
+ {
+ $id = $row['storyid'];
+ $ret[$i]['id']    = $id;
+ $ret[$i]['link'] = XOOPS_URL."/modules/news/article.php?storyid=".$id."";
+ $ret[$i]['title'] = $row['title'];
+ $ret[$i]['time']  = $row['created'];
+ $i++;
+ }
 
-	return $ret;
-}
-*/
+ return $ret;
+ }
+ */
 ?>

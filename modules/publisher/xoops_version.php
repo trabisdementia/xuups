@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -39,9 +39,9 @@ include_once XOOPS_ROOT_PATH . "/modules/" . $modversion['dirname'] ."/include/c
 $logo_filename = $modversion['dirname'] . "_logo.png";
 
 if (file_exists(XOOPS_ROOT_PATH . "/modules/" . $modversion['dirname'] . "/images/" . $logo_filename)) {
-	$modversion['image'] = "images/{$logo_filename}";
+    $modversion['image'] = "images/{$logo_filename}";
 } else {
-	$modversion['image'] = "images/module_logo.png";
+    $modversion['image'] = "images/module_logo.png";
 }
 
 // Added by marcan for the About page in admin section
@@ -190,15 +190,15 @@ $modversion['blocks'][$i]['template'] = "publisher_date_to_date.html";
 /* We need to comment this out has it require a smarty plugin not present in the core...
  * We will find a solution later...
 
-$i++;
-$modversion['blocks'][6]['file'] = "items_tree.php";
-$modversion['blocks'][6]['name'] = _MI_PUBLISHER_ITEMSTREE;
-$modversion['blocks'][6]['description'] = _MI_PUBLISHER_ITEMSTREE_DSC;
-$modversion['blocks'][6]['show_func'] = "publisher_items_tree_show";
-$modversion['blocks'][6]['edit_func'] = "publisher_items_tree_edit";
-$modversion['blocks'][6]['template'] = "publisher_items_tree.html";
-$modversion['blocks'][6]['options'] = "0|weight|ASC|-1|1";
-*/
+ $i++;
+ $modversion['blocks'][6]['file'] = "items_tree.php";
+ $modversion['blocks'][6]['name'] = _MI_PUBLISHER_ITEMSTREE;
+ $modversion['blocks'][6]['description'] = _MI_PUBLISHER_ITEMSTREE_DSC;
+ $modversion['blocks'][6]['show_func'] = "publisher_items_tree_show";
+ $modversion['blocks'][6]['edit_func'] = "publisher_items_tree_edit";
+ $modversion['blocks'][6]['template'] = "publisher_items_tree.html";
+ $modversion['blocks'][6]['options'] = "0|weight|ASC|-1|1";
+ */
 
 $i++;
 $modversion['blocks'][$i]['file'] = "items_columns.php";
@@ -358,7 +358,7 @@ $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'none';
 $modversion['config'][$i]['options'] = array(_MI_PUBLISHER_URL_REWRITE_NONE      => 'none',
-                                   		     _MI_PUBLISHER_URL_REWRITE_PATHINFO  => 'path-info');
+_MI_PUBLISHER_URL_REWRITE_PATHINFO  => 'path-info');
 // Is performing module install/update?
 $isModuleAction = (!empty($_POST["fct"]) && "modulesadmin" == $_POST["fct"]) ? true : false;
 if ($isModuleAction && in_array(php_sapi_name(), array("apache", "apache2handler"))) {
@@ -504,8 +504,8 @@ $modversion['config'][$i]['description'] = '_MI_PUBLISHER_OTHERITEMSDSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['options'] = array(_MI_PUBLISHER_OTHER_ITEMS_TYPE_NONE => 'none',
-                                             _MI_PUBLISHER_OTHER_ITEMS_TYPE_PREVIOUS_NEXT => 'previous_next',
-                                             _MI_PUBLISHER_OTHER_ITEMS_TYPE_ALL => 'all');
+_MI_PUBLISHER_OTHER_ITEMS_TYPE_PREVIOUS_NEXT => 'previous_next',
+_MI_PUBLISHER_OTHER_ITEMS_TYPE_ALL => 'all');
 $modversion['config'][$i]['default'] = 'previous_next';
 $modversion['config'][$i]['category'] = 'item';
 
@@ -518,9 +518,9 @@ $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'all';
 $modversion['config'][$i]['options'] = array(_MI_PUBLISHER_SHOW_SUBCATS_NO        => 'no',
-                                   		     _MI_PUBLISHER_SHOW_SUBCATS_NOTEMPTY  => 'nonempty',
-                                  		     _MI_PUBLISHER_SHOW_SUBCATS_ALL       => 'all',
-                                             _MI_PUBLISHER_SHOW_SUBCATS_NOMAIN    => 'nomain');
+_MI_PUBLISHER_SHOW_SUBCATS_NOTEMPTY  => 'nonempty',
+_MI_PUBLISHER_SHOW_SUBCATS_ALL       => 'all',
+_MI_PUBLISHER_SHOW_SUBCATS_NOMAIN    => 'nomain');
 $modversion['config'][$i]['category'] = 'indexcat';
 
 $i++;
@@ -548,9 +548,9 @@ $modversion['config'][$i]['description'] = '_MI_PUBLISHER_DISTYPEDSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['options'] = array(_MI_PUBLISHER_DISPLAYTYPE_SUMMARY   => 'summary',
-                                             _MI_PUBLISHER_DISPLAYTYPE_FULL      => 'full',
-                                             _MI_PUBLISHER_DISPLAYTYPE_LIST      => 'list',
-                                             _MI_PUBLISHER_DISPLAYTYPE_WFSECTION => 'wfsection');
+_MI_PUBLISHER_DISPLAYTYPE_FULL      => 'full',
+_MI_PUBLISHER_DISPLAYTYPE_LIST      => 'list',
+_MI_PUBLISHER_DISPLAYTYPE_WFSECTION => 'wfsection');
 $modversion['config'][$i]['default'] = 'summary';
 $modversion['config'][$i]['category'] = 'indexcat';
 
@@ -674,9 +674,9 @@ $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'item footer';
 $modversion['config'][$i]['options'] = array(_MI_PUBLISHER_ITEMFOOTER_SEL  => 'item footer',
-                                   		     _MI_PUBLISHER_INDEXFOOTER_SEL => 'index footer',
-                                  		     _MI_PUBLISHER_BOTH_FOOTERS    => 'both',
-                                  		     _MI_PUBLISHER_NO_FOOTERS      => 'none');
+_MI_PUBLISHER_INDEXFOOTER_SEL => 'index footer',
+_MI_PUBLISHER_BOTH_FOOTERS    => 'both',
+_MI_PUBLISHER_NO_FOOTERS      => 'none');
 $modversion['config'][$i]['category'] = 'print';
 
 
@@ -697,8 +697,8 @@ $modversion['config'][$i]['description'] = '_MI_PUBLISHER_ORDERBYDSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['options'] = array(_MI_PUBLISHER_ORDERBY_TITLE  => 'title',
-                                             _MI_PUBLISHER_ORDERBY_DATE   => 'date',
-                                             _MI_PUBLISHER_ORDERBY_WEIGHT => 'weight');
+_MI_PUBLISHER_ORDERBY_DATE   => 'date',
+_MI_PUBLISHER_ORDERBY_WEIGHT => 'weight');
 $modversion['config'][$i]['default'] = 'date';
 $modversion['config'][$i]['category'] = 'format';
 
@@ -822,9 +822,9 @@ $modversion['config'][$i]['description'] = '_MI_PUBLISHER_FORM_STATUS_DSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['options'] = array(_MI_PUBLISHER_PUBLISHED => _PUBLISHER_STATUS_PUBLISHED,
-                                             _MI_PUBLISHER_OFFLINE   => _PUBLISHER_STATUS_OFFLINE,
-                                             _MI_PUBLISHER_SUBMITTED => _PUBLISHER_STATUS_SUBMITTED,
-                                             _MI_PUBLISHER_REJECTED  => _PUBLISHER_STATUS_REJECTED);
+_MI_PUBLISHER_OFFLINE   => _PUBLISHER_STATUS_OFFLINE,
+_MI_PUBLISHER_SUBMITTED => _PUBLISHER_STATUS_SUBMITTED,
+_MI_PUBLISHER_REJECTED  => _PUBLISHER_STATUS_REJECTED);
 $modversion['config'][$i]['default'] = _PUBLISHER_STATUS_SUBMITTED;
 $modversion['config'][$i]['category'] = 'submit';
 

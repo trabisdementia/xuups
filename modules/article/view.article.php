@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: view.article.php 2283 2008-10-12 03:36:13Z phppp $
  */
- 
+
 include "header.php";
 
 //if(!empty($xoopsModuleConfig["do_urw"])):
@@ -98,9 +98,9 @@ if (!empty($REQUEST_URI_parsed)) {
     if (!empty($category_id)) {
         $args_REQUEST_URI[] = "category=" . $category_id;
     }
-    $_SERVER["REQUEST_URI"] = substr($_SERVER["REQUEST_URI"], 0, strpos($_SERVER["REQUEST_URI"], "/modules/" . $GLOBALS["artdirname"] . "/view.article.php")) . 
+    $_SERVER["REQUEST_URI"] = substr($_SERVER["REQUEST_URI"], 0, strpos($_SERVER["REQUEST_URI"], "/modules/" . $GLOBALS["artdirname"] . "/view.article.php")) .
         "/modules/" . $GLOBALS["artdirname"] . "/view.article.php" .
-        (empty($args_REQUEST_URI) ? "" : "?" . implode("&",$args_REQUEST_URI));
+    (empty($args_REQUEST_URI) ? "" : "?" . implode("&",$args_REQUEST_URI));
 }
 
 $xoopsOption["xoops_pagetitle"] = $xoopsModule->getVar("name") . " - " . $article_obj->getVar("art_title");
@@ -239,7 +239,7 @@ if ($xoopsModuleConfig["trackback_option"] != 2) { // trackback open
             "time"        => $trackback->getTime($xoopsModuleConfig["timeformat"]),
             "ip"        => $trackback->getIp(),
             "name"        => $trackback->getVar("tb_blog_name"),
-            );
+        );
     }
 }
 
@@ -248,7 +248,7 @@ if (!empty($xoopsModuleConfig["do_sibling"])) {
         $cats = array_keys($category_handler->getAllByPermission($permission = "access", array("cat_id")));
     } else {
         $cats = array($idCategorized);
-    }    
+    }
     $articles_sibling =& $article_handler->getSibling($article_obj, $cats);
     if (!empty($articles_sibling["previous"])) {
         $articles_sibling["previous"]["url"] = XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/view.article.php" . URL_DELIMITER . $articles_sibling["previous"]["id"] . "/c" . $idCategorized;

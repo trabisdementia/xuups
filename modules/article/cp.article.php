@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: cp.article.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 $category_id = empty($_GET["category"]) ? 0 : intval($_GET["category"]);
@@ -37,7 +37,7 @@ if (!empty($topic_id)) {
 } else {
     if (!empty($category_id)) {
         $category_obj =& $category_handler->get($category_id);
-        $categories_obj = array($category_id=>$category_obj); 
+        $categories_obj = array($category_id=>$category_obj);
     } else {
         $categories_obj = $category_handler->getAllByPermission("moderate", array("cat_title", "cat_pid"));
     }
@@ -52,8 +52,8 @@ if( (!empty($category_id) && !$category_handler->getPermission($category_obj, "m
 
 $xoopsOption["xoops_pagetitle"] = $xoopsModule->getVar("name") . " - " . art_constant("MD_CPARTICLE");
 $template = empty($topic_obj)
-    ? (empty($category_obj) ? $xoopsModuleConfig["template"] : $category_obj->getVar("cat_template") )
-    : $topic_obj->getVar("top_template");
+? (empty($category_obj) ? $xoopsModuleConfig["template"] : $category_obj->getVar("cat_template") )
+: $topic_obj->getVar("top_template");
 $xoopsOption["template_main"] = art_getTemplate("cparticle", $template);
 $xoopsOption["xoops_module_header"] = art_getModuleHeader($template);
 // Disable cache
@@ -70,24 +70,24 @@ switch ($type) {
         $criteria->add(new Criteria("art_time_submit", 0, ">"));
         $byCategory = false;
         break;
-        
+
     case "registered":
         $type_name = art_constant("MD_REGISTERED");
         $criteria = new CriteriaCompo(new Criteria("ac.ac_publish", 0));
         break;
-        
+
     case "featured":
         $type_name = art_constant("MD_FEATURED");
         $criteria = new CriteriaCompo(new Criteria("ac.ac_feature", 0, ">"));
         break;
-        
+
     case "published":
         $type="published";
         $type_name = art_constant("MD_PUBLISHED");
         $criteria = new CriteriaCompo(new Criteria("ac.ac_publish", 0, ">"));
         $criteria->add(new Criteria("ac.ac_feature", 0));
         break;
-        
+
     case "all":
     default:
         $type_name = _ALL;
@@ -101,31 +101,31 @@ if (!empty($topic_id)) {
     $articles_count = $topic_handler->getArticleCount($topic_id);
     $tags = array("a.art_summary", "a.art_title", "a.uid", "at.at_time", "a.cat_id");
     $articles_array = $article_handler->getByTopic(
-        $topic_id,
-        $xoopsModuleConfig["articles_perpage"],
-        $start,
-        null,
-        $tags,
-        false);
+    $topic_id,
+    $xoopsModuleConfig["articles_perpage"],
+    $start,
+    null,
+    $tags,
+    false);
 } elseif($byCategory) {
     $articles_count = $category_handler->getArticleCount($categories_id, $criteria);
     $tags = array("a.cat_id AS basic_cat_id", "a.art_summary", "a.art_title", "a.uid", "a.art_time_submit", "a.art_time_publish", "ac.cat_id", "ac.ac_register", "ac.ac_publish", "ac.ac_feature");
     $articles_array = $category_handler->getArticles(
-        $categories_id,
-        $xoopsModuleConfig["articles_perpage"],
-        $start,
-        $criteria,
-        $tags,
-        false);
+    $categories_id,
+    $xoopsModuleConfig["articles_perpage"],
+    $start,
+    $criteria,
+    $tags,
+    false);
 } else {
     $articles_count = $article_handler->getCount($criteria);
     $tags = array("cat_id", "art_summary", "art_title", "art_time_submit", "art_time_publish", "art_summary", "uid");
     $criteria->setStart($start);
     $criteria->setLimit($xoopsModuleConfig["articles_perpage"]);
     $articles_array = $article_handler->getAll(
-        $criteria,
-        $tags,
-        false);
+    $criteria,
+    $tags,
+    false);
 }
 
 $articles = array();
@@ -151,14 +151,14 @@ if (count($articles_array) > 0) {
             "time_topic"        => art_formatTimestamp(@$article["at_time"]),
             "summary"           => $article["art_summary"],
             "author"            => $users[$article["uid"]]
-            );
+        );
         if (!empty($article["ac_feature"])) {
             $_article["feature_category"] = art_formatTimestamp($article["ac_feature"]);
         }
         if (!empty($article["ac_publish"])) {
             $_article["publish_category"] = art_formatTimestamp($article["ac_publish"]);
         }
-            
+
         if (!empty($category_obj)) {
             $_article["category"] = array("id" => $category_obj->getVar("cat_id"));
         } else {

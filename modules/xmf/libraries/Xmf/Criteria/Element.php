@@ -68,8 +68,8 @@ class Xmf_Criteria_Element extends Xmf_Abstract
     }
 
     /**#@+
-    * Accessor
-    */
+     * Accessor
+     */
     /**
      * @param	string  $sort
      */

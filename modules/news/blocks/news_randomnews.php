@@ -25,7 +25,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
+    die('XOOPS root path not defined');
 }
 
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
@@ -34,32 +34,32 @@ function b_news_randomnews_show($options) {
     include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
     $myts =& MyTextSanitizer::getInstance();
     $block = array();
-	$block['sort']=$options[0];
+    $block['sort']=$options[0];
 
-	$tmpstory = new NewsStory;
-	$restricted = news_getmoduleoption('restrictindex');
-	$dateformat = news_getmoduleoption('dateformat');
-	$infotips = news_getmoduleoption('infotips');
-	if($dateformat == '') {
-		$dateformat = 's';
-	}
+    $tmpstory = new NewsStory;
+    $restricted = news_getmoduleoption('restrictindex');
+    $dateformat = news_getmoduleoption('dateformat');
+    $infotips = news_getmoduleoption('infotips');
+    if($dateformat == '') {
+        $dateformat = 's';
+    }
     if ($options[4] == 0) {
         $stories = $tmpstory->getRandomNews($options[1],0,$restricted,0,1, $options[0]);
     } else {
         $topics = array_slice($options, 4);
         $stories = $tmpstory->getRandomNews($options[1],0,$restricted,$topics, 1, $options[0]);
     }
-	unset($tmpstory);
+    unset($tmpstory);
     if(count($stories)==0) {
-    	return '';
+        return '';
     }
     foreach ( $stories as $story ) {
         $news = array();
         $title = $story->title();
-		if (strlen($title) > $options[2]) {
-			$title = xoops_substr($title,0,$options[2]+3);
-		}
-		$news['title'] = $title;
+        if (strlen($title) > $options[2]) {
+            $title = xoops_substr($title,0,$options[2]+3);
+        }
+        $news['title'] = $title;
         $news['id'] = $story->storyid();
         $news['date'] = formatTimestamp($story->published(), $dateformat);
         $news['hits'] = $story->counter();
@@ -70,17 +70,17 @@ function b_news_randomnews_show($options) {
         $news['topic_color']= '#'.$myts->displayTarea($story->topic_color);
 
         if ($options[3] > 0) {
-        	$html = $story->nohtml() == 1 ? 0 : 1;
-        	$news['teaser'] = news_truncate_tagsafe($myts->displayTarea($story->hometext, $html), $options[3]+3);
-        	$news['infotips'] = '';
+            $html = $story->nohtml() == 1 ? 0 : 1;
+            $news['teaser'] = news_truncate_tagsafe($myts->displayTarea($story->hometext, $html), $options[3]+3);
+            $news['infotips'] = '';
         }
         else {
-        	$news['teaser'] = '';
-			if($infotips>0) {
-				$news['infotips'] = ' title="'.news_make_infotips($story->hometext()).'"';
-			} else {
-				$news['infotips'] = '';
-			}
+            $news['teaser'] = '';
+            if($infotips>0) {
+                $news['infotips'] = ' title="'.news_make_infotips($story->hometext()).'"';
+            } else {
+                $news['infotips'] = '';
+            }
         }
         $block['stories'][] = $news;
     }
@@ -137,12 +137,12 @@ function b_news_randomnews_edit($options) {
 
 function b_news_randomnews_onthefly($options)
 {
-	$options = explode('|',$options);
-	$block = & b_news_randomnews_show($options);
+    $options = explode('|',$options);
+    $block = & b_news_randomnews_show($options);
 
-	$tpl = new XoopsTpl();
-	$tpl->assign('block', $block);
-	$tpl->display('db:news_block_moderate.html');
+    $tpl = new XoopsTpl();
+    $tpl->assign('block', $block);
+    $tpl->display('db:news_block_moderate.html');
 }
 
 ?>

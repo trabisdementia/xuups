@@ -17,11 +17,11 @@ $data_windspeed[0] = rand(7,10);
 for( $i=0; $i < NDATAPOINTS-1; ++$i ) {
     $data_winddirection[$i+1] = $data_winddirection[$i] + rand(-4,4);
     if($data_winddirection[$i+1] < 0 || $data_winddirection[$i+1] > 359)
-        $data_winddirection[$i+1] = 0;
+    $data_winddirection[$i+1] = 0;
 
     $data_windspeed[$i+1] = $data_windspeed[$i] + rand(-2,2);
     if($data_windspeed[$i+1] < 0 )
-        $data_windspeed[$i+1] = 0;
+    $data_windspeed[$i+1] = 0;
 
     $xdata[$i] = $start + $i * SAMPLERATE;
 }

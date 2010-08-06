@@ -1150,7 +1150,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
         }
         list($count) = $this->db->fetchRow($result);
         return $count;
-        }
+    }
 
     function getItemsCount($categoryid = -1, $status = '', $notNullFields = '')
     {
@@ -1383,7 +1383,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
             $ret .= " ($notNullFields IS NOT NULL AND $notNullFields <> ' ' )";
         }
         return $ret;
-        }
+    }
 
     function getItemsFromSearch($queryarray = array(), $andor = 'AND', $limit = 0, $offset = 0, $userid = 0, $categories = array(), $sortby = 0, $searchin = "", $extra = "")
     {

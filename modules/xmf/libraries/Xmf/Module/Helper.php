@@ -133,13 +133,13 @@ class Xmf_Module_Helper
 
         if (!isset($this->handler[$name . '_handler'])) {
             /*if ( file_exists( $hnd_file = XOOPS_ROOT_PATH . "/modules/{$this->dirname}/Object/Handler/{$name}.php" ) ) {
-                include_once $hnd_file;
-            }
-            if ( file_exists( $hnd_file = XOOPS_ROOT_PATH . "/modules/{$this->dirname}/Object/{$name}.php" ) ) {
-                include_once $hnd_file;
-            }
-            $class = ucfirst(strtolower($this->dirname)) . '_Object_Handler_' . $name;
-            */
+             include_once $hnd_file;
+             }
+             if ( file_exists( $hnd_file = XOOPS_ROOT_PATH . "/modules/{$this->dirname}/Object/{$name}.php" ) ) {
+             include_once $hnd_file;
+             }
+             $class = ucfirst(strtolower($this->dirname)) . '_Object_Handler_' . $name;
+             */
             if (file_exists($hnd_file = XOOPS_ROOT_PATH . "/modules/{$this->dirname}/class/{$name}.php")) {
                 include_once $hnd_file;
             }

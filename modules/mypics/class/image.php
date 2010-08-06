@@ -273,9 +273,9 @@ class MypicsImageHandler extends XoopsPersistableObjectHandler
 
         if($xratio < 1 || $yratio < 1) {
             if($xratio < $yratio)
-                $resized = imagecreatetruecolor($thumbwidth,floor(imagesy($img)*$xratio));
+            $resized = imagecreatetruecolor($thumbwidth,floor(imagesy($img)*$xratio));
             else
-                $resized = imagecreatetruecolor(floor(imagesx($img)*$yratio), $thumbheight);
+            $resized = imagecreatetruecolor(floor(imagesx($img)*$yratio), $thumbheight);
             imagecopyresampled($resized, $img, 0, 0, 0, 0, imagesx($resized)+1,imagesy($resized)+1,imagesx($img),imagesy($img));
             imagejpeg($resized,$path_upload."/thumb_".$path["basename"]);
             imagedestroy($resized);
@@ -292,9 +292,9 @@ class MypicsImageHandler extends XoopsPersistableObjectHandler
         if($xratio2 < 1 || $yratio2 < 1) {
 
             if($xratio2 < $yratio2)
-                $resized2 = imagecreatetruecolor($pictwidth,floor(imagesy($img2)*$xratio2));
+            $resized2 = imagecreatetruecolor($pictwidth,floor(imagesy($img2)*$xratio2));
             else
-                $resized2 = imagecreatetruecolor(floor(imagesx($img2)*$yratio2), $pictheight);
+            $resized2 = imagecreatetruecolor(floor(imagesx($img2)*$yratio2), $pictheight);
 
             imagecopyresampled($resized2, $img2, 0, 0, 0, 0, imagesx($resized2)+1,imagesy($resized2)+1,imagesx($img2),imagesy($img2));
             imagejpeg($resized2,$path_upload."/resized_".$path2["basename"]);

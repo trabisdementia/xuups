@@ -8,44 +8,44 @@ if( ! defined( 'XOOPS_ROOT_PATH' ) ) exit ;
 function show_membership_block($options) {
     global $xoopsConfig, $xoopsUser, $xoopsModule, $xoopsDB, $_SERVER;
     $online_handler =& xoops_gethandler('online');
-	mt_srand((double)microtime()*1000000);
-	// set gc probabillity to 10% for now..
-	if (mt_rand(1, 100) < 70) {
-		$online_handler->gc(300);
-	}
+    mt_srand((double)microtime()*1000000);
+    // set gc probabillity to 10% for now..
+    if (mt_rand(1, 100) < 70) {
+        $online_handler->gc(300);
+    }
     if (is_object($xoopsUser)) {
-		$uid = $xoopsUser->getVar('uid');
-		$uname = $xoopsUser->getVar('uname');
+        $uid = $xoopsUser->getVar('uid');
+        $uname = $xoopsUser->getVar('uname');
     } else {
-		$uid = 0;
-		$uname = '';
+        $uid = 0;
+        $uname = '';
     }
 
     if (is_object($xoopsModule)) {
-		$online_handler->write($uid, $uname, time(), $xoopsModule->getVar('mid'), $_SERVER['REMOTE_ADDR']);
-	} else {
-		$online_handler->write($uid, $uname, time(), 0, $_SERVER['REMOTE_ADDR']);
-	}
+        $online_handler->write($uid, $uname, time(), $xoopsModule->getVar('mid'), $_SERVER['REMOTE_ADDR']);
+    } else {
+        $online_handler->write($uid, $uname, time(), 0, $_SERVER['REMOTE_ADDR']);
+    }
 
 
     // status online
     $onlines =& $online_handler->getAll();
-	if (false != $onlines) {
+    if (false != $onlines) {
         $module_handler =& xoops_gethandler('module');
         $modules =& $module_handler->getList(new Criteria('isactive', 1));
-		$total = count($onlines);
-		$block = array();
-		$guests = 0;
-		$guess = '';
-		$members = '';
-		$rows = $list = $alt = array();
-		//added bots by Rew-weR
-		$bots = 0;
-		$findbot  = 'crawl';
-		$findsearch = 'search';
+        $total = count($onlines);
+        $block = array();
+        $guests = 0;
+        $guess = '';
+        $members = '';
+        $rows = $list = $alt = array();
+        //added bots by Rew-weR
+        $bots = 0;
+        $findbot  = 'crawl';
+        $findsearch = 'search';
 
         // lets get the listing
-		if ($options[0] == 1 ) {
+        if ($options[0] == 1 ) {
             // lets save some queries here
             $sql = "SELECT * FROM ".$xoopsDB->prefix("mship_ips")." WHERE ";
             for ($i = 0; $i < $total; $i++) {
@@ -84,7 +84,7 @@ function show_membership_block($options) {
                 //if is a user
                 if ($onlines[$i]['online_uid'] > 0) {
                     $members .= '<table class="outer" cellspacing="0"><tr><td class="even" width="40%"><a href="'.XOOPS_URL.'/userinfo.php?uid='.$onlines[$i]['online_uid'].'">'.$onlines[$i]['online_uname'].'</td><td class="odd" align="center">'.$onlineUsers[$i]['module'].'</td><td class="even" align="center" width="10%"><img src="'.XOOPS_URL.'/modules/membership/images/flags/'.$country.'.gif" alt="'.$alt.'" title="'.$alt.'"></td></tr></table>';
-                //if is not a user
+                    //if is not a user
                 } else {
                     $hostname = strtolower(gethostbyaddr($onlines[$i]['online_ip']));
                     $pos1 = strpos($hostname, $findbot);
@@ -113,7 +113,7 @@ function show_membership_block($options) {
 
                     //if is bot
                     if ($pos1 !== false || $pos2 !== false) {
-                         $bots++;
+                        $bots++;
                     }
                     $guests++;
                 }
@@ -152,7 +152,7 @@ function show_membership_block($options) {
         $block['online_members'] = $total - $guests;
         //added bots by Rew-weR
         $block['online_guests'] = $guests - $bots;
-		$block['online_bots'] = $bots;
+        $block['online_bots'] = $bots;
 
         $block['total_online'] = $total;
         $block['latest'] = $lastname;
@@ -172,23 +172,23 @@ function show_membership_block($options) {
         //added bots by Rew-weR
         $block['bots_lang'] = _MB_MSHIP_BOTS;
         return $block;
-	} else {
-		return false;
-	}
+    } else {
+        return false;
+    }
 }
 
 function membership_edit($options) {
-	$form = _MB_MSHIP_SHOWLIST."&nbsp;";
-	if ( $options[0] == 1 ) {
-		$chk = " checked='checked'";
-	}
-	$form .= "<input type='radio' name='options[]' value='1'".$chk." />&nbsp;"._YES."";
-	$chk = "";
-	if ( $options[0] == 0 ) {
-		$chk = " checked='checked'";
-	}
-	$form .= "&nbsp;<input type='radio' name='options[]' value='0'".$chk." />"._NO."<br />";
-	return $form;
+    $form = _MB_MSHIP_SHOWLIST."&nbsp;";
+    if ( $options[0] == 1 ) {
+        $chk = " checked='checked'";
+    }
+    $form .= "<input type='radio' name='options[]' value='1'".$chk." />&nbsp;"._YES."";
+    $chk = "";
+    if ( $options[0] == 0 ) {
+        $chk = " checked='checked'";
+    }
+    $form .= "&nbsp;<input type='radio' name='options[]' value='0'".$chk." />"._NO."<br />";
+    return $form;
 }
 
 ?>

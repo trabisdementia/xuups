@@ -17,28 +17,28 @@ define('_XHELP_MAILBOXTYPE_IMAP', 2);
  */
 
 class xhelpMailBox {
-  function connect($server, $port = 110){
-  }
-  //
-  function login($username, $password){
-  }
-  //
-  function messageCount(){
-  }
-  //
-  function getHeaders($i) {
-  }
-  //
-  function getBody($i) {
-  }
-  
-  function getMsg($i) {
-  }
-  //
-  function deleteMessage($i) {
-  }
-  //
-  function disconnect(){
-  }
+    function connect($server, $port = 110){
+    }
+    //
+    function login($username, $password){
+    }
+    //
+    function messageCount(){
+    }
+    //
+    function getHeaders($i) {
+    }
+    //
+    function getBody($i) {
+    }
+
+    function getMsg($i) {
+    }
+    //
+    function deleteMessage($i) {
+    }
+    //
+    function disconnect(){
+    }
 }
 ?>

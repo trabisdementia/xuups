@@ -31,26 +31,26 @@ foreach($deptmboxes as $mbox) {
             while ($msg =& $mbox->getMessage()) {
                 $msg_logs = array();
                 $skip_msg = false;
-                
-                
+
+
                 //Check if there are any errors parsing msg
                 if ($parsed =& $msgParser->parseMessage($msg)) {
-                    
+
                     //Sanity Check: Disallow emails from other department mailboxes
                     if (_isDepartmentEmail($parsed->getEmail())) {
-                        $msg_logs[_XHELP_MAIL_CLASS3][] = sprintf(_XHELP_MESSAGE_EMAIL_DEPT_MBOX, $parsed->getEmail());    
+                        $msg_logs[_XHELP_MAIL_CLASS3][] = sprintf(_XHELP_MESSAGE_EMAIL_DEPT_MBOX, $parsed->getEmail());
                     } else {
-                        
+
                         //Create new user account if necessary
-                        
+
                         if (!$xoopsUser =& xhelpEmailIsXoopsUser($parsed->getEmail())) {
-                            
-                            if ($xoopsModuleConfig['xhelp_allowAnonymous']) {                   
+
+                            if ($xoopsModuleConfig['xhelp_allowAnonymous']) {
                                 switch($xoopsConfigUser['activation_type']){
                                     case 1:
                                         $level = 1;
-                                    break;
-                                    
+                                        break;
+
                                     case 0:
                                     case 2:
                                     default:
@@ -63,23 +63,23 @@ foreach($deptmboxes as $mbox) {
                                 $skip_msg = true;
                             }
                         }
-                        
-                      
+
+
                         if ($skip_msg == false) {
                             //Store Message In Server
                             if($obj =& $msgStore->storeMsg($parsed, $xoopsUser, $mbox, $errors)) {
                                 switch ($parsed->getMsgType()) {
-                                case _XHELP_MSGTYPE_TICKET:
-                                    //Trigger New Ticket Events
-                                    $_eventsrv->trigger('new_ticket', $obj);
-                                    break;
-                                case _XHELP_MSGTYPE_RESPONSE:
-                                    //Trigger New Response Events
-                                    $_eventsrv->trigger('new_response', $obj);
-                                    break;
-                                }        
-                            //} else {        // If message not stored properly, log event                    
-                            //    $storeEvent =& $hMailEvent->newEvent($mbox->getVar('id'), _XHELP_MAILEVENT_DESC2, _XHELP_MAILEVENT_CLASS2);
+                                    case _XHELP_MSGTYPE_TICKET:
+                                        //Trigger New Ticket Events
+                                        $_eventsrv->trigger('new_ticket', $obj);
+                                        break;
+                                    case _XHELP_MSGTYPE_RESPONSE:
+                                        //Trigger New Response Events
+                                        $_eventsrv->trigger('new_response', $obj);
+                                        break;
+                                }
+                                //} else {        // If message not stored properly, log event
+                                //    $storeEvent =& $hMailEvent->newEvent($mbox->getVar('id'), _XHELP_MAILEVENT_DESC2, _XHELP_MAILEVENT_CLASS2);
                             } else {
                                 $msg_logs[_XHELP_MAILEVENT_CLASS2] =& $errors;
                             }
@@ -93,7 +93,7 @@ foreach($deptmboxes as $mbox) {
 
                 //Log Any Messages
                 _logMessages($mbox->getVar('id'),$msg_logs);
-               
+                 
             }
         }
         //Disconnect from Server
@@ -104,7 +104,7 @@ foreach($deptmboxes as $mbox) {
 }
 
 
-function _logMessages($mbox, $arr) 
+function _logMessages($mbox, $arr)
 {
     global $hMailEvent;
     foreach ($arr as $class=>$msg) {
@@ -118,7 +118,7 @@ function _logMessages($mbox, $arr)
 function _isDepartmentEmail($email)
 {
     static $email_arr;
-    
+
     if (!isset($email_arr)) {
         global $hDeptBoxes;
         $deptmboxes =& $hDeptBoxes->getObjects();
@@ -128,9 +128,9 @@ function _isDepartmentEmail($email)
         }
         unset($deptmboxes);
     }
-    
+
     $ret = in_array($email, $email_arr);
     return $ret;
 }
-    
+
 ?>

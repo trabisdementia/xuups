@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -69,7 +69,7 @@ switch($op) {
             $forum_handler->synchronization($forum);
         }
         break;
-        
+
     case "approve":
         $post_id = array_values($post_id);
         sort($post_id);
@@ -90,15 +90,15 @@ switch($op) {
         foreach (array_keys($forums) as $forum) {
             $forum_handler->synchronization($forum);
         }
-        
+
         if (empty($xoopsModuleConfig['notification_enabled'])) break;
-        
+
         $criteria_topic = new Criteria("topic_id", "(" . implode(",", array_keys($topics)) . ")", "IN");
         $topic_list = $topic_handler->getList($criteria_topic, true);
-        
+
         $criteria_forum = new Criteria("forum_id", "(" . implode(",", array_keys($forums)) . ")", "IN");
         $forum_list = $forum_handler->getList($criteria_forum);
-            
+
         include_once 'include/notification.inc.php';
         $notification_handler =& xoops_gethandler('notification');
         foreach ($post_id as $post) {
@@ -117,7 +117,7 @@ switch($op) {
             $notification_handler->triggerEvent('forum', $posts_obj[$post]->getVar('forum_id'), 'new_fullpost', $tags);
         }
         break;
-        
+
     case "delete":
         $post_id = array_values($post_id);
         rsort($post_id);
@@ -138,14 +138,14 @@ switch($op) {
             $forum_handler->synchronization($forum);
         }
         break;
-        
+
     case "split":
         $post_obj =& $post_handler->get($post_id);
         if (empty($post_id) || $post_obj->isTopic()) {
             break;
         }
         $topic_id = $post_obj->getVar("topic_id");
-        
+
         $newtopic =& $topic_handler->create();
         $newtopic->setVar("topic_title", $post_obj->getVar("subject"), true);
         $newtopic->setVar("topic_poster", $post_obj->getVar("uid"), true);
@@ -153,21 +153,21 @@ switch($op) {
         $newtopic->setVar("topic_time", $post_obj->getVar("post_time"), true);
         $newtopic->setVar("poster_name", $post_obj->getVar("poster_name"), true);
         $newtopic->setVar("approved", 1, true);
-        $topic_handler->insert($newtopic, true);        
+        $topic_handler->insert($newtopic, true);
         $new_topic_id = $newtopic->getVar('topic_id');
-        
+
         $pid = $post_obj->getVar("pid");
-        
+
         $post_obj->setVar("topic_id", $new_topic_id, true);
         $post_obj->setVar("pid", 0, true);
         $post_handler->insert($post_obj);
-        
+
         /* split a single post */
         if ($mode == 1) {
             $criteria = new CriteriaCompo(new Criteria("topic_id", $topic_id));
             $criteria->add(new Criteria('pid',$post_id));
             $post_handler->updateAll("pid", $pid, $criteria, true);
-        /* split a post and its children posts */
+            /* split a post and its children posts */
         } elseif ($mode == 2) {
             include_once XOOPS_ROOT_PATH . "/class/xoopstree.php";
             $mytree = new XoopsTree($xoopsDB->prefix("bb_posts"), "post_id", "pid");
@@ -176,23 +176,23 @@ switch($op) {
                 $criteria = new Criteria('post_id', "(" . implode(",", $posts) . ")", "IN");
                 $post_handler->updateAll("topic_id", $new_topic_id, $criteria, true);
             }
-        /* split a post and all posts coming after */
+            /* split a post and all posts coming after */
         } elseif ($mode==3) {
             $criteria = new CriteriaCompo(new Criteria("topic_id", $topic_id));
             $criteria->add(new Criteria('post_id', $post_id, ">"));
             $post_handler->updateAll("topic_id", $new_topic_id, $criteria, true);
-            
+
             unset($criteria);
             $criteria = new CriteriaCompo(new Criteria("topic_id", $new_topic_id));
             $criteria->add(new Criteria('post_id', $post_id, ">"));
             $post_handler->identifierName = "pid";
             $posts = $post_handler->getList($criteria);
-            
+
             unset($criteria);
             $post_update = array();
             foreach ($posts as $postid=>$pid) {
                 if (!in_array($pid, array_keys($posts))) {
-                    $post_update[] = $pid; 
+                    $post_update[] = $pid;
                 }
             }
             if (count($post_update)) {
@@ -200,13 +200,13 @@ switch($op) {
                 $post_handler->updateAll("pid", $post_id, $criteria, true);
             }
         }
-        
+
         $forum_id = $post_obj->getVar("forum_id");
         $topic_handler->synchronization($topic_id);
         $topic_handler->synchronization($new_topic_id);
         $sql = sprintf("UPDATE %s SET forum_topics = forum_topics+1 WHERE forum_id = %u", $xoopsDB->prefix("bb_forums"), $forum_id);
         $result = $xoopsDB->queryF($sql);
-        
+
         break;
 }
 if (!empty($topic_id)) {

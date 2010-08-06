@@ -33,7 +33,7 @@ class LogScale extends LinearScale {
     // Translate between world and screen
     function Translate($a) {
         if( !is_numeric($a) ) {
-            if( $a != '' && $a != '-' && $a != 'x' ) { 
+            if( $a != '' && $a != '-' && $a != 'x' ) {
                 JpGraphError::RaiseL(11001);
                 // ('Your data contains non-numeric values.');
             }

@@ -262,7 +262,7 @@ $modversion['templates'][31]['file'] = 'xhelp_report.html';
 $modversion['templates'][31]['description'] = _MI_XHELP_TEMP_REPORT;
 
 
-// Blocks 
+// Blocks
 // Block that displays open tickets
 $modversion['blocks'][1]['file'] = "xhelp_blocks.php";
 $modversion['blocks'][1]['name'] = _MI_XHELP_BNAME1;
@@ -322,7 +322,7 @@ if($xhelp_isStaff){
     $modversion['sub'][4]['name'] = _MI_XHELP_SMNAME4;
     $modversion['sub'][4]['url'] = "index.php?op=userViewAll";
 }
-	
+
 // Search
 $modversion['hasSearch'] = 0;
 
@@ -452,7 +452,7 @@ $modversion['_email_tpl'][3]['title'] = _MI_XHELP_DEPT_MODIFIEDTICKET_NOTIFY;
 $modversion['_email_tpl'][3]['caption'] = _MI_XHELP_DEPT_MODIFIEDTICKET_NOTIFYCAP;
 $modversion['_email_tpl'][3]['description'] = _MI_XHELP_DEPT_MODIFIEDTICKET_NOTIFYDSC;
 
-$modversion['_email_tpl'][4]['name'] = 'new_response'; 
+$modversion['_email_tpl'][4]['name'] = 'new_response';
 $modversion['_email_tpl'][4]['category'] = 'dept';         // All tickets
 $modversion['_email_tpl'][4]['mail_template'] = 'dept_newresponse_notify';
 $modversion['_email_tpl'][4]['mail_subject'] = _MI_XHELP_DEPT_NEWRESPONSE_NOTIFYSBJ;
@@ -542,7 +542,7 @@ $modversion['_email_tpl'][13]['title'] = _MI_XHELP_TICKET_MODIFIEDTICKET_NOTIFY;
 $modversion['_email_tpl'][13]['caption'] = _MI_XHELP_TICKET_MODIFIEDTICKET_NOTIFYCAP;
 $modversion['_email_tpl'][13]['description'] = _MI_XHELP_TICKET_MODIFIEDTICKET_NOTIFYDSC;
 
-$modversion['_email_tpl'][14]['name'] = 'new_this_response'; 
+$modversion['_email_tpl'][14]['name'] = 'new_this_response';
 $modversion['_email_tpl'][14]['category'] = 'ticket';         // Individual ticket
 $modversion['_email_tpl'][14]['mail_template'] = 'ticket_newresponse_notify';
 $modversion['_email_tpl'][14]['mail_subject'] = _MI_XHELP_TICKET_NEWRESPONSE_NOTIFYSBJ;
@@ -551,7 +551,7 @@ $modversion['_email_tpl'][14]['title'] = _MI_XHELP_TICKET_NEWRESPONSE_NOTIFY;
 $modversion['_email_tpl'][14]['caption'] = _MI_XHELP_TICKET_NEWRESPONSE_NOTIFYCAP;
 $modversion['_email_tpl'][14]['description'] = _MI_XHELP_TICKET_NEWRESPONSE_NOTIFYDSC;
 
-$modversion['_email_tpl'][15]['name'] = 'modified_this_response'; 
+$modversion['_email_tpl'][15]['name'] = 'modified_this_response';
 $modversion['_email_tpl'][15]['category'] = 'ticket';         // Individual ticket
 $modversion['_email_tpl'][15]['mail_template'] = 'ticket_modifiedresponse_notify';
 $modversion['_email_tpl'][15]['mail_subject'] = _MI_XHELP_TICKET_MODIFIEDRESPONSE_NOTIFYSBJ;

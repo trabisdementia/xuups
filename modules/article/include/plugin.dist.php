@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,14 +16,14 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: plugin.dist.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 // plugin guide:
-/* 
+/*
  * Add customized configs, variables or functions
  */
 $customConfig = array();
- 
-/* 
+
+/*
  * When a category is to be deleted, there are two options for its subcategories and articles:
  * A: true -- all subcategories and articles will be deleted from database
  * B: false -- all subcategories and articles will be moved to its parent category or (if no parent) the category of cat_id = 1
@@ -41,16 +41,16 @@ $customConfig["category_delete_forced"] = false;
 
 // specification for custom time format
 // default manner will be used if not specified
-$customConfig["formatTimestamp_custom"] = ""; // Could be set as "Y-m-d H:i" 
+$customConfig["formatTimestamp_custom"] = ""; // Could be set as "Y-m-d H:i"
 
 
-// Set allowed editors 
+// Set allowed editors
 $customConfig["editor_allowed"] = array();  // Could be set as array("FCKeditor", "koivi" or "textarea")
 
 // Set the default editor
 $customConfig["editor_default"] = ""; // Could be set as any of "FCKeditor", "koivi" and "textarea"
 
-// default value for editor rows, coloumns 
+// default value for editor rows, coloumns
 $customConfig["editor_rows"] = 25;
 $customConfig["editor_cols"] = 60;
 

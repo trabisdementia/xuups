@@ -29,7 +29,7 @@ class Xmf_Object_Form_Element_Select_Time extends Xmf_Form_Element_Select
      * @param	string    $key      the form name
      */
     function __construct($object, $key)
-        {
+    {
         $var = $object->vars[$key];
         $timearray = array();
         for ($i = 0; $i < 24; $i++) {
@@ -41,5 +41,5 @@ class Xmf_Object_Form_Element_Select_Time extends Xmf_Form_Element_Select
         ksort($timearray);
         parent::__construct($var['title'], $key, $object->getVar($key, 'e'));
         $this->addOptionArray($timearray);
-        }
+    }
 }

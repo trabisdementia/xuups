@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,70 +17,70 @@
  * @version         $Id: print.php 2175 2008-09-23 14:07:03Z phppp $
  */
 
-/* 
+/*
  * Print contents of a post or a topic
  * currently only available for post print
  *
  * TODO: topic print; print with page splitting
- * 
+ *
  */
- 
+
 error_reporting(0);
 include 'header.php';
 error_reporting(0);
 
 if (empty($_POST["post_data"])) {
-    
-$forum = intval(@$_GET['forum']);
-$topic_id = intval(@$_GET['topic_id']);
-$post_id = intval(@$_GET['post_id']);
 
-if ( empty($post_id) && empty($topic_id) ) {
-    die(_MD_ERRORTOPIC);
-}
+    $forum = intval(@$_GET['forum']);
+    $topic_id = intval(@$_GET['topic_id']);
+    $post_id = intval(@$_GET['post_id']);
 
-if (!empty($post_id)) {
-    $post_handler =& xoops_getmodulehandler('post', 'newbb');
-    $post = & $post_handler->get($post_id);
-    if (!$approved = $post->getVar('approved')) {
+    if ( empty($post_id) && empty($topic_id) ) {
+        die(_MD_ERRORTOPIC);
+    }
+
+    if (!empty($post_id)) {
+        $post_handler =& xoops_getmodulehandler('post', 'newbb');
+        $post = & $post_handler->get($post_id);
+        if (!$approved = $post->getVar('approved')) {
+            die(_MD_NORIGHTTOVIEW);
+        }
+        $topic_id = $post->getVar("topic_id");
+        $post_data = $post_handler->getPostForPrint($post);
+        $isPost = 1;
+        $post_data["url"] = XOOPS_URL . "/newbb/viewtopic.php?topic_id=" . $post->getVar("topic_id") . "&amp;post_id=" . $post_id;
+    }
+
+    $topic_handler =& xoops_getmodulehandler('topic', 'newbb');
+    $topic_obj =& $topic_handler->get($topic_id);
+    $topic_id = $topic_obj->getVar('topic_id');
+    $forum = $topic_obj->getVar('forum_id');
+    if (!$approved = $topic_obj->getVar('approved'))    {
         die(_MD_NORIGHTTOVIEW);
     }
-    $topic_id = $post->getVar("topic_id");
-    $post_data = $post_handler->getPostForPrint($post);
-    $isPost = 1;
-    $post_data["url"] = XOOPS_URL . "/newbb/viewtopic.php?topic_id=" . $post->getVar("topic_id") . "&amp;post_id=" . $post_id;
-}
 
-$topic_handler =& xoops_getmodulehandler('topic', 'newbb');
-$topic_obj =& $topic_handler->get($topic_id);
-$topic_id = $topic_obj->getVar('topic_id');
-$forum = $topic_obj->getVar('forum_id');
-if (!$approved = $topic_obj->getVar('approved'))    {
-    die(_MD_NORIGHTTOVIEW);
-}
+    $isadmin = newbb_isAdmin($forum_obj);
+    if (!$isadmin && $topic_obj->getVar('approved') < 0 ) {
+        die(_MD_NORIGHTTOVIEW);
+    }
 
-$isadmin = newbb_isAdmin($forum_obj);
-if (!$isadmin && $topic_obj->getVar('approved') < 0 ) {
-    die(_MD_NORIGHTTOVIEW);
-}
+    $forum_handler =& xoops_getmodulehandler('forum', 'newbb');
+    $forum = $topic_obj->getVar('forum_id');
+    $forum_obj =& $forum_handler->get($forum);
+    if (!$forum_handler->getPermission($forum_obj)) {
+        die(_MD_NORIGHTTOVIEW);
+    }
 
-$forum_handler =& xoops_getmodulehandler('forum', 'newbb');
-$forum = $topic_obj->getVar('forum_id');
-$forum_obj =& $forum_handler->get($forum);
-if (!$forum_handler->getPermission($forum_obj)) {
-    die(_MD_NORIGHTTOVIEW);
-}
-
-if (!$topic_handler->getPermission($forum_obj, $topic_obj->getVar('topic_status'), "view")) {
-    die(_MD_NORIGHTTOVIEW);
-}
+    if (!$topic_handler->getPermission($forum_obj, $topic_obj->getVar('topic_status'), "view")) {
+        die(_MD_NORIGHTTOVIEW);
+    }
 
 } else {
     $post_data = unserialize(base64_decode($_POST["post_data"]));
     $isPost = 1;
 }
 
-header('Content-Type: text/html; charset=' . _CHARSET); 
+header('Content-Type: text/html; charset=' . _CHARSET);
 
 if (empty($isPost)) {
 
@@ -113,7 +113,7 @@ if (empty($isPost)) {
     echo "<p>" . _MD_COMEFROM . "&nbsp;" . XOOPS_URL . "/newbb/viewtopic.php?forum=" . $forum_id . "&amp;topic_id=" . $topic_id . "</p>";
     echo "</div></div>";
     echo "</body></html>";
-    
+
 } else {
 
     echo "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>\n";

@@ -25,22 +25,22 @@
 //  ------------------------------------------------------------------------ //
 function b_mysearch_stats_show()
 {
-	include_once XOOPS_ROOT_PATH."/modules/mysearch/include/functions.php";
-	$mysearch_handler =& xoops_getmodulehandler('searches', 'mysearch');
-	$block = array();
-	$visiblekeywords = mysearch_getmoduleoption('showindex');
-	if($visiblekeywords > 0) {
-		$keywords_count = mysearch_getmoduleoption('admincount');
+    include_once XOOPS_ROOT_PATH."/modules/mysearch/include/functions.php";
+    $mysearch_handler =& xoops_getmodulehandler('searches', 'mysearch');
+    $block = array();
+    $visiblekeywords = mysearch_getmoduleoption('showindex');
+    if($visiblekeywords > 0) {
+        $keywords_count = mysearch_getmoduleoption('admincount');
 
-		// Total keywords count
-		$block['total_keywords'] = $mysearch_handler->getCount();
+        // Total keywords count
+        $block['total_keywords'] = $mysearch_handler->getCount();
 
-		// Most searched elements
-		$elements = $mysearch_handler->getMostSearched(0,$keywords_count);
-		foreach($elements as $keywordid => $datas) {
-			$block['mostsearched'][]=array('keyword'=>$datas['keyword'],'count'=>$datas['count']);
-		}
-	}
-	return $block;
+        // Most searched elements
+        $elements = $mysearch_handler->getMostSearched(0,$keywords_count);
+        foreach($elements as $keywordid => $datas) {
+            $block['mostsearched'][]=array('keyword'=>$datas['keyword'],'count'=>$datas['count']);
+        }
+    }
+    return $block;
 }
 ?>

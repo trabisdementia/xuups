@@ -11,10 +11,10 @@
 
 
 /*===================================================
-// CLASS RGB
-// Description: Color definitions as RGB triples
-//===================================================
-*/
+ // CLASS RGB
+ // Description: Color definitions as RGB triples
+ //===================================================
+ */
 
 class RGB {
     public $rgb_table;
@@ -572,8 +572,8 @@ class RGB {
             if( count( $aColor ) == 3 ) {
                 if( is_numeric($aColor[0]) && is_numeric($aColor[1]) && is_numeric($aColor[2]) ) {
                     if( ($aColor[0] >= 0 && $aColor[0] <= 255) &&
-                        ($aColor[1] >= 0 && $aColor[1] <= 255) &&
-                        ($aColor[2] >= 0 && $aColor[2] <= 255) ) {
+                    ($aColor[1] >= 0 && $aColor[1] <= 255) &&
+                    ($aColor[2] >= 0 && $aColor[2] <= 255) ) {
                         return sprintf('#%02x%02x%02x',$aColor[0],$aColor[1],$aColor[2]);
                     }
                 }

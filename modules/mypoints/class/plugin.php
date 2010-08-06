@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
@@ -52,8 +52,8 @@ class MypointspluginHandler extends XoopsPersistableObjectHandler
         $mid = intval($mid);
         if ($mid > 0) {
             $sql = 'SELECT * FROM '.$this->db->prefix('mypoints_plugin')
-                 . ' WHERE pluginmid=' . $mid
-                 .' AND plugintype=' . $this->db->quoteString($type);
+            . ' WHERE pluginmid=' . $mid
+            .' AND plugintype=' . $this->db->quoteString($type);
             if (!$result = $this->db->query($sql)) {
                 return $plugin;
             }

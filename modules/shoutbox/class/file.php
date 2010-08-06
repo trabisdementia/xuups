@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  *  Shoutbox class
@@ -74,10 +74,10 @@ class ShoutboxFileHandler extends XoopsPersistableObjectHandler
     {
         $f = fopen($this->csvfile, 'a');
         fwrite($f, $obj->getVar('uname', 'n') . '|' .
-                   $obj->getVar('message', 'n') . '|' .
-                   $obj->getVar('time', 'n') . '|' .
-                   $obj->getVar('ip', 'n') . '|' .
-                   $obj->getVar('uid', 'n') . "\n");
+        $obj->getVar('message', 'n') . '|' .
+        $obj->getVar('time', 'n') . '|' .
+        $obj->getVar('ip', 'n') . '|' .
+        $obj->getVar('uid', 'n') . "\n");
         fclose($f);
         return true;
     }

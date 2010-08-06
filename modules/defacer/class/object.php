@@ -30,22 +30,22 @@
 // ------------------------------------------------------------------------- //
 
 /**
-* Persistable Object Handler class.
-* This class is responsible for providing data access mechanisms to the data source
-* of derived class objects.
-*
-* @author  Jan Keller Pedersen <mithrandir@xoops.org> - IDG Danmark A/S <www.idg.dk>
-* @copyright copyright (c) 2000-2004 XOOPS.org
-* @package Kernel
-*/
+ * Persistable Object Handler class.
+ * This class is responsible for providing data access mechanisms to the data source
+ * of derived class objects.
+ *
+ * @author  Jan Keller Pedersen <mithrandir@xoops.org> - IDG Danmark A/S <www.idg.dk>
+ * @copyright copyright (c) 2000-2004 XOOPS.org
+ * @package Kernel
+ */
 
 class XoopsPersistableObjectHandler extends XoopsObjectHandler {
 
     /**#@+
-    * Information about the class, the handler is managing
-    *
-    * @var string
-    */
+     * Information about the class, the handler is managing
+     *
+     * @var string
+     */
     var $table;
     var $keyName;
     var $className;
@@ -53,14 +53,14 @@ class XoopsPersistableObjectHandler extends XoopsObjectHandler {
     /**#@-*/
 
     /**
-    * Constructor - called from child classes
-    * @param object     $db         {@link XoopsDatabase} object
-    * @param string     $tablename  Name of database table
-    * @param string     $classname  Name of Class, this handler is managing
-    * @param string     $keyname    Name of the property, holding the key
-    *
-    * @return void
-    */
+     * Constructor - called from child classes
+     * @param object     $db         {@link XoopsDatabase} object
+     * @param string     $tablename  Name of database table
+     * @param string     $classname  Name of Class, this handler is managing
+     * @param string     $keyname    Name of the property, holding the key
+     *
+     * @return void
+     */
     function XoopsPersistableObjectHandler(&$db, $tablename, $classname, $keyname, $idenfierName = false) {
         $this->XoopsObjectHandler($db);
         $this->table = $db->prefix($tablename);
@@ -186,14 +186,14 @@ class XoopsPersistableObjectHandler extends XoopsObjectHandler {
     }
 
     /**
-    * Retrieve a list of objects as arrays - DON'T USE WITH JOINT KEYS
-    *
-    * @param object $criteria {@link CriteriaElement} conditions to be met
-    * @param int   $limit      Max number of objects to fetch
-    * @param int   $start      Which record to start at
-    *
-    * @return array
-    */
+     * Retrieve a list of objects as arrays - DON'T USE WITH JOINT KEYS
+     *
+     * @param object $criteria {@link CriteriaElement} conditions to be met
+     * @param int   $limit      Max number of objects to fetch
+     * @param int   $start      Which record to start at
+     *
+     * @return array
+     */
     function getList($criteria = null, $limit = 0, $start = 0) {
         $ret = array();
         if ($criteria == null) {
@@ -206,7 +206,7 @@ class XoopsPersistableObjectHandler extends XoopsObjectHandler {
 
         $sql = 'SELECT '.$this->keyName;
         if(!empty($this->identifierName)){
-	        $sql .= ', '.$this->identifierName;
+            $sql .= ', '.$this->identifierName;
         }
         $sql .= ' FROM '.$this->table;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -232,11 +232,11 @@ class XoopsPersistableObjectHandler extends XoopsObjectHandler {
 
     /**
 
-     * count objects matching a condition
-     *
-     * @param object $criteria {@link CriteriaElement} to match
-     * @return int count of objects
-     */
+    * count objects matching a condition
+    *
+    * @param object $criteria {@link CriteriaElement} to match
+    * @return int count of objects
+    */
     function getCount($criteria = null)
     {
         $field = "";
@@ -283,7 +283,7 @@ class XoopsPersistableObjectHandler extends XoopsObjectHandler {
         if (is_array($this->keyName)) {
             $clause = array();
             for ($i = 0; $i < count($this->keyName); $i++) {
-	            $clause[] = $this->keyName[$i]." = ".$obj->getVar($this->keyName[$i]);
+                $clause[] = $this->keyName[$i]." = ".$obj->getVar($this->keyName[$i]);
             }
             $whereclause = implode(" AND ", $clause);
         }
@@ -337,7 +337,7 @@ class XoopsPersistableObjectHandler extends XoopsObjectHandler {
             if ($obj->vars[$k]['data_type'] == XOBJ_DTYPE_INT) {
                 $cleanvars[$k] = intval($v);
             } elseif ( is_array( $v ) ) {
-            	$cleanvars[ $k ] = $this->db->quoteString( implode( ',', $v ) );
+                $cleanvars[ $k ] = $this->db->quoteString( implode( ',', $v ) );
             } else {
                 $cleanvars[$k] = $this->db->quoteString($v);
             }

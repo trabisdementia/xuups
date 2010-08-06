@@ -105,8 +105,8 @@ class Xmf_Export
     /*
      * Set an array of fields that we don't want in export
      */
-     function setNotDisplayFields($fields)
-     {
+    function setNotDisplayFields($fields)
+    {
         if (!$this->notDisplayFields) {
             if (is_array($fields)) {
                 $this->notDisplayFields = $fields;
@@ -120,5 +120,5 @@ class Xmf_Export
                 $this->notDisplayFields[] = $fields;
             }
         }
-     }
+    }
 }

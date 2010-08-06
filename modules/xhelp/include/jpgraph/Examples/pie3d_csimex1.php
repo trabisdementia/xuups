@@ -8,7 +8,7 @@ require_once ('jpgraph/jpgraph_pie3d.php');
 // Some data
 $data = array(40,21,17,27,23);
 
-// Create the Pie Graph. 
+// Create the Pie Graph.
 $graph = new PieGraph(400,200,'auto');
 $graph->SetShadow();
 

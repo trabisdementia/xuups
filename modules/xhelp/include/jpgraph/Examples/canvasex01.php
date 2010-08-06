@@ -3,7 +3,7 @@
 require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_canvas.php');
 
-// Setup a basic canvas we can work 
+// Setup a basic canvas we can work
 $g = new CanvasGraph(400,300,'auto');
 $g->SetMargin(5,11,6,11);
 $g->SetShadow();

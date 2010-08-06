@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -19,7 +19,7 @@
  * @author          The SmartFactory <www.smartfactory.ca>
  * @version         $Id: latest_files.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
@@ -29,22 +29,22 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 function publisher_latest_files_show ($options)
 {
     $publisher =& PublisherPublisher::getInstance();
-	/**
-	 * $options[0] : Sort order - datesub | counter
-	 * $options[1] : Number of files to display
-	 * $oprions[2] : bool TRUE to link to the file download, FALSE to link to the article
-	 */
+    /**
+     * $options[0] : Sort order - datesub | counter
+     * $options[1] : Number of files to display
+     * $oprions[2] : bool TRUE to link to the file download, FALSE to link to the article
+     */
 
-	$block = array();
+    $block = array();
 
-	$sort = $options[0];
-	$order = publisher_getOrderBy($sort);
-	$limit = $options[1];
-	$directDownload = $options[2];
+    $sort = $options[0];
+    $order = publisher_getOrderBy($sort);
+    $limit = $options[1];
+    $directDownload = $options[2];
 
-	// creating the files objects
-	$filesObj = $publisher->getHandler('file')->getAllFiles(0, _PUBLISHER_STATUS_FILE_ACTIVE, $limit, 0, $sort, $order);
-	foreach ($filesObj as $fileObj) {
+    // creating the files objects
+    $filesObj = $publisher->getHandler('file')->getAllFiles(0, _PUBLISHER_STATUS_FILE_ACTIVE, $limit, 0, $sort, $order);
+    foreach ($filesObj as $fileObj) {
         $aFile = array();
         $aFile['link'] = $directDownload ? $fileObj->getFileLink() : $fileObj->getItemLink();
         if ($sort == "datesub") {
@@ -54,10 +54,10 @@ function publisher_latest_files_show ($options)
         } elseif ($sort == "weight") {
             $aFile['new'] = $fileObj->weight();
         }
-		$block['files'][] = $aFile;
-	}
+        $block['files'][] = $aFile;
+    }
 
-	return $block;
+    return $block;
 }
 
 function publisher_latest_files_edit($options)
@@ -80,10 +80,10 @@ function publisher_latest_files_edit($options)
 
     $form .= "&nbsp;" . _MB_PUBLISHER_DISP . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "' />&nbsp;" . _MB_PUBLISHER_FILES . "";
 
-	$yesChecked = $options[2] == true ? "checked='checked'" : '';
-	$noChecked = $options[2] == false ? "checked='checked'" : '';
+    $yesChecked = $options[2] == true ? "checked='checked'" : '';
+    $noChecked = $options[2] == false ? "checked='checked'" : '';
 
-	$form .= "<br />" . _MB_PUBLISHER_DIRECTDOWNLOAD . "&nbsp;<input name='options[2]' value='1' type='radio' $yesChecked/>&nbsp;" . _YES . "<input name='options[2]' value='0' type='radio' $noChecked/>" . _NO;
+    $form .= "<br />" . _MB_PUBLISHER_DIRECTDOWNLOAD . "&nbsp;<input name='options[2]' value='1' type='radio' $yesChecked/>&nbsp;" . _YES . "<input name='options[2]' value='0' type='radio' $noChecked/>" . _NO;
     return $form;
 }
 

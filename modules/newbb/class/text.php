@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: text.php 2169 2008-09-23 13:37:10Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
@@ -32,16 +32,16 @@ class Ntext extends XoopsObject
     }
 }
 
-class NewbbTextHandler extends XoopsPersistableObjectHandler 
+class NewbbTextHandler extends XoopsPersistableObjectHandler
 {
     function NewbbTextHandler(&$db)
     {
         $this->XoopsPersistableObjectHandler($db, 'bb_posts_text', 'Ntext', 'post_id');
     }
-    
+
     /**
      * clean orphan items from database
-     * 
+     *
      * @return     bool    true on success
      */
     function cleanOrphan()

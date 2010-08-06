@@ -42,13 +42,13 @@ $xoopsTpl->assign('can_edit', $is_admin);
 
 //Show last member, if there is a querry than show last member from result
 if ( $query != '' ) {
-        $where = "WHERE level>0 AND (uname LIKE '%$query%' OR user_icq LIKE '%$query%' ";
-        $where .= "OR user_from LIKE '%$query%' OR user_sig LIKE '%$query%' ";
-        $where .= "OR user_aim LIKE '%$query%' OR user_yim LIKE '%$query%' OR user_msnm like '%$query%'";
+    $where = "WHERE level>0 AND (uname LIKE '%$query%' OR user_icq LIKE '%$query%' ";
+    $where .= "OR user_from LIKE '%$query%' OR user_sig LIKE '%$query%' ";
+    $where .= "OR user_aim LIKE '%$query%' OR user_yim LIKE '%$query%' OR user_msnm like '%$query%'";
     if ( $is_admin ) {
         $where .= " OR email LIKE '%$query%'";
     }
-	$where .= ") ";
+    $where .= ") ";
 } else {
     $where = "WHERE level>0";
 }
@@ -58,7 +58,7 @@ list($lastuid, $lastuser) = $xoopsDB->fetchRow($result);
 $xoopsTpl->assign('lang_welcome', sprintf(_MA_MSHIP_WELCOMETO,$xoopsConfig['sitename']));
 $xoopsTpl->assign('lang_greetings', _MA_MSHIP_GREETINGS." <a href='".XOOPS_URL."/userinfo.php?uid=".$lastuid."'>".$lastuser."</a>");
 
-        
+
 $form_submit = "<form action='".XOOPS_URL."/modules/membership/index.php' method='post'>";
 if ( $query != '' ) {
     $form_submit .= "<input type='text' size='30' name='query' value='".htmlspecialchars(stripslashes($query))."' />";
@@ -90,15 +90,15 @@ $xoopsTpl->assign('form_letters', $form_letters);
 
 
 $min = $start;//$pagesize * ($page - 1);
-$max = $pagesize; 
-        
+$max = $pagesize;
+
 $count = "SELECT COUNT(uid) AS total FROM ".$xoopsDB->prefix("users")." "; // Count all the users in the db..
 $select = "SELECT uid, name, uname, email, url, user_avatar, user_regdate, user_icq, user_from, user_aim, user_yim, user_msnm, user_viewemail FROM ".$xoopsDB->prefix("users")." ";
 if ( ( $letter != _MA_MSHIP_OTHER ) AND ( $letter != _MA_MSHIP_ALL ) ) {
-	$where = "WHERE level>0 AND uname LIKE '".$letter."%' ";
+    $where = "WHERE level>0 AND uname LIKE '".$letter."%' ";
 } else if ( ( $letter == _MA_MSHIP_OTHER ) AND ( $letter != _MA_MSHIP_ALL ) ) {
     $where = "WHERE level>0 AND uname REGEXP '^\[1-9]' ";
-} else { 
+} else {
     $where = "WHERE level>0 ";
 }
 $sort = "order by $sortby $orderby";
@@ -111,7 +111,7 @@ if ( $query != '' ) {
    	if ( $is_admin ) {
         $where .= "OR email LIKE '%$query%'";
     }
-	$where .= ") ";
+    $where .= ") ";
 }
 $count_result = $xoopsDB->query($count.$where);
 list($totalcount) = $xoopsDB->fetchRow($count_result);
@@ -141,42 +141,42 @@ if ( $letter != "front" ) {
     $num_users = $xoopsDB->getRowsNum($result); //number of users per sorted and limit query
     if ( $totalcount > 0  ) {
         while ( $userinfo = $xoopsDB->fetchArray($result) ) {
-			$userinfo = new XoopsUser($userinfo['uid']);
-			$user = array();
-			$avatar = $userinfo->user_avatar();
-			if ($avatar == 'blank.gif' &&  $xoopsModuleConfig['defaultavatar']){
+            $userinfo = new XoopsUser($userinfo['uid']);
+            $user = array();
+            $avatar = $userinfo->user_avatar();
+            if ($avatar == 'blank.gif' &&  $xoopsModuleConfig['defaultavatar']){
                 $user['avatar'] = "<img src='".XOOPS_URL."/modules/membership/images/davatar.gif' alt='' width='64' height='64' />";
             } else {
                 $user['avatar'] = "<img src='".XOOPS_URL."/uploads/".$userinfo->user_avatar()."' alt='' width='64' height='64' />";
             }
             $user['nickname'] = "<a href='".XOOPS_URL."/userinfo.php?uid=".$userinfo->uid()."'>".$userinfo->uname("E")."</a>";
-			$user['regdate'] = formatTimeStamp($userinfo->user_regdate(),"m");
-			$showmail = 0;
-			if ( $userinfo->user_viewemail() ) {
-				$showmail = 1;
-			} else {
-				if ( $is_admin ) {
-				    $showmail = 1;
-				}
-			}
-			if ( $showmail ){
-				$user['email']  = "<a href='mailto:".$userinfo->email("E")."'>";
+            $user['regdate'] = formatTimeStamp($userinfo->user_regdate(),"m");
+            $showmail = 0;
+            if ( $userinfo->user_viewemail() ) {
+                $showmail = 1;
+            } else {
+                if ( $is_admin ) {
+                    $showmail = 1;
+                }
+            }
+            if ( $showmail ){
+                $user['email']  = "<a href='mailto:".$userinfo->email("E")."'>";
                 $user['email'] .= "<img src='".XOOPS_URL."/images/icons/email.gif' border='0' alt='".sprintf(_SENDEMAILTO,$userinfo->uname("E"))."' /></a>";
-			} else {
-				$user['email'] = "";
-			}
+            } else {
+                $user['email'] = "";
+            }
 
-			if ( $xoopsUser ) {
-				$user['pm']  = "<a href='javascript:openWithSelfMain(\"".XOOPS_URL."/pmlite.php?send2=1&to_userid=".$userinfo->uid()."\",\"pmlite\",450,370);'>";
+            if ( $xoopsUser ) {
+                $user['pm']  = "<a href='javascript:openWithSelfMain(\"".XOOPS_URL."/pmlite.php?send2=1&to_userid=".$userinfo->uid()."\",\"pmlite\",450,370);'>";
                 $user['pm'] .= "<img src='".XOOPS_URL."/images/icons/pm.gif' border='0' alt='".sprintf(_SENDPMTO,$userinfo->uname("E"))."' /></a>";
             } else {
-				$user['pm']  = "";
-			}
-			if ( $userinfo->url("E") ) {
-			    $user['url'] = "<a href='".$userinfo->url("E")."' target=new><img src='".XOOPS_URL."/images/icons/www.gif' border='0' alt='"._VISITWEBSITE."' /></a>";
+                $user['pm']  = "";
+            }
+            if ( $userinfo->url("E") ) {
+                $user['url'] = "<a href='".$userinfo->url("E")."' target=new><img src='".XOOPS_URL."/images/icons/www.gif' border='0' alt='"._VISITWEBSITE."' /></a>";
             } else {
-			     $user['url'] = "";
-			}
+                $user['url'] = "";
+            }
             if ( $is_admin ) {
                 $user['functions']  = "[ <a href='".XOOPS_URL."/modules/system/admin.php?fct=users&op=reactivate&uid=".$userinfo->uid()."&op=modifyUser'>"._MA_MSHIP_EDIT."</a> | ";
                 $user['functions'] .= "<a href='".XOOPS_URL."/modules/system/admin.php?fct=users&op=delUser&uid=".$userinfo->uid()."'>"._MA_MSHIP_DELETE."</a> ]";
@@ -186,16 +186,16 @@ if ( $letter != "front" ) {
 
         }
 
-    //$countstring = ($totalcount != 1 )?_MA_PUB_NSTORIES:_MA_PUB_NSTORY;
-    //$xoopsTpl->assign('stories_count', $totalcount.' '.$countstring);
+        //$countstring = ($totalcount != 1 )?_MA_PUB_NSTORIES:_MA_PUB_NSTORY;
+        //$xoopsTpl->assign('stories_count', $totalcount.' '.$countstring);
 
-    if ( $totalcount > $pagesize ) {
-        include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
-        $pagenav = new XoopsPageNav($totalcount, $pagesize, $start, 'start', ltrim($pagenav_args,'&'));
-        $xoopsTpl->assign('pagenav', $pagenav->renderNav());
-    } else {
-        $xoopsTpl->assign('pagenav', '');
-    }
+        if ( $totalcount > $pagesize ) {
+            include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
+            $pagenav = new XoopsPageNav($totalcount, $pagesize, $start, 'start', ltrim($pagenav_args,'&'));
+            $xoopsTpl->assign('pagenav', $pagenav->renderNav());
+        } else {
+            $xoopsTpl->assign('pagenav', '');
+        }
 
     } else {
         $xoopsTpl->assign('no_results', sprintf(_MA_MSHIP_NOUSERFOUND,$letter));

@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -33,8 +33,8 @@ function newbb_updateStats($id, $type, $increment = 1)
 }
 
 /*
-* Gets the total number of topics in a form
-*/
+ * Gets the total number of topics in a form
+ */
 function newbb_getTotalTopics($forum_id = "")
 {
     $topic_handler =& xoops_getmodulehandler('topic', 'newbb');
@@ -46,23 +46,23 @@ function newbb_getTotalTopics($forum_id = "")
 }
 
 /*
-* Returns the total number of posts in the whole system, a forum, or a topic
-* Also can return the number of users on the system.
-*/
+ * Returns the total number of posts in the whole system, a forum, or a topic
+ * Also can return the number of users on the system.
+ */
 function newbb_getTotalPosts($id = 0, $type = "all")
 {
     $post_handler =& xoops_getmodulehandler('post', 'newbb');
     $criteria =& new CriteriaCompo(new Criteria("approved", 0, ">"));
     switch ( $type ) {
-    case 'forum':
-        if ($id > 0) $criteria->add(new Criteria("forum_id", intval($id)));
-        break;
-    case 'topic':
-        if ($id > 0) $criteria->add(new Criteria("topic_id", intval($id)));
-        break;
-    case 'all':
-    default:
-        break;
+        case 'forum':
+            if ($id > 0) $criteria->add(new Criteria("forum_id", intval($id)));
+            break;
+        case 'topic':
+            if ($id > 0) $criteria->add(new Criteria("topic_id", intval($id)));
+            break;
+        case 'all':
+        default:
+            break;
     }
     return $post_handler->getCount($criteria);
 }

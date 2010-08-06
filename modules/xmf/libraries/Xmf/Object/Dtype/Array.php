@@ -38,7 +38,7 @@ class Xmf_Object_Dtype_Array extends Xmf_Object_Dtype_Abstract
 
     function getVar($obj, $key, $format, $ret)
     {
-         if (!is_array($ret)) {
+        if (!is_array($ret)) {
             if ($ret != "") {
                 $ret = @unserialize( $ret );
             }

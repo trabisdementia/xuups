@@ -1,7 +1,7 @@
-<?php   
+<?php
 //$Id: index.php,v 1.144 2005/11/29 17:48:12 ackbarr Exp $
-include('../../../include/cp_header.php');          
-include_once('admin_header.php');           
+include('../../../include/cp_header.php');
+include_once('admin_header.php');
 include_once(XOOPS_ROOT_PATH . '/class/pagenav.php');
 define('MAX_STAFF_RESPONSETIME', 5);
 define('MAX_STAFF_CALLSCLOSED', 5);
@@ -21,11 +21,11 @@ switch ( $op )
     case "about":
         about();
         break;
-        
+
     case "mailEvents":
         mailEvents();
         break;
-          
+
     case "searchMailEvents":
         searchMailEvents();
         break;
@@ -33,19 +33,19 @@ switch ( $op )
     case "blocks":
         require 'myblocksadmin.php';
         break;
-        
-	case "createdir":
-	    createdir();
-    	break;
-    
+
+    case "createdir":
+        createdir();
+        break;
+
     case "setperm":
         setperm();
         break;
-    
+
     case "manageFields":
         manageFields();
         break;
-               
+         
     default:
         xhelp_default();
         break;
@@ -54,7 +54,7 @@ switch ( $op )
 function modifyTicketFields()
 {
     //xoops_cp_header();
-        //echo "not created yet";
+    //echo "not created yet";
     xoops_cp_footer();
 }
 
@@ -68,7 +68,7 @@ function displayEvents($mailEvents, $mailboxes)
                               <td>"._AM_XHELP_TEXT_DESCRIPTION."</td>
                               <td>"._AM_XHELP_TEXT_TIME."</td>
              </tr>";
-        
+
         $class = 'odd';
         foreach($mailEvents as $event){
             echo "<tr class='". $class ."'><td>".$mailboxes[$event->getVar('mbox_id')]->getVar('emailaddress')."</td>
@@ -78,7 +78,7 @@ function displayEvents($mailEvents, $mailboxes)
                   </tr>";
             $class = ($class == 'odd') ? 'even' : 'odd';
         }
-        
+
     } else {
         echo "<tr><th>"._AM_XHELP_TEXT_MAIL_EVENTS."</th></tr>";
         echo "<tr><td class='odd'>"._AM_XHELP_NO_EVENTS."</td></tr>";
@@ -86,7 +86,7 @@ function displayEvents($mailEvents, $mailboxes)
     echo "</table><br />";
     echo "<a href='index.php?op=searchMailEvents'>"._AM_XHELP_SEARCH_EVENTS."</a>";
 }
-    
+
 
 function mailEvents()
 {
@@ -95,18 +95,18 @@ function mailEvents()
     $hMailEvent =& xhelpGetHandler('mailEvent');
     $hDeptMbox =& xhelpGetHandler('departmentMailBox');
     $mailboxes =& $hDeptMbox->getObjects(null, true);
-    
+
     $crit = new Criteria('', '');
     $crit->setLimit(50);
     $crit->setOrder('DESC');
     $crit->setSort('posted');
     $mailEvents =& $hMailEvent->getObjects($crit);
-    
+
     xoops_cp_header();
     echo $oAdminButton->renderButtons('mailEvents');
-    
+
     displayEvents($mailEvents, $mailboxes);
-    
+
     xhelpAdminFooter();
     xoops_cp_footer();
 }
@@ -116,14 +116,14 @@ function searchMailEvents()
     global $oAdminButton;
     xoops_cp_header();
     echo $oAdminButton->renderButtons('mailEvents');
-    
+
     if(!isset($_POST['searchEvents'])){
-        
+
         $stylePath = include_once XHELP_INCLUDE_PATH.'/calendar/calendarjs.php';
         echo '<link rel="stylesheet" type="text/css" media="all" href="'.$stylePath.'" /><!--[if gte IE 5.5000]><script src="iepngfix.js" language="JavaScript" type="text/javascript"></script><![endif]-->';
-    
+
         echo "<form method='post' action='".XHELP_ADMIN_URL."/index.php?op=searchMailEvents'>";
-        
+
         echo "<table width='100%' cellspacing='1' class='outer'>";
         echo "<tr><th colspan='2'>"._AM_XHELP_SEARCH_EVENTS."</th></tr>";
         echo "<tr><td width='20%' class='head'>"._AM_XHELP_TEXT_MAILBOX."</td>
@@ -145,23 +145,23 @@ function searchMailEvents()
         echo "<tr><td class='foot' colspan='2'><input type='submit' name='searchEvents' value='"._AM_XHELP_BUTTON_SEARCH."' /></td></tr>";
         echo "</table>";
         echo "</form>";
-        
+
         xhelpAdminFooter();
         xoops_cp_footer();
     } else {
         $hMailEvent =& xhelpGetHandler('mailEvent');
         $hDeptMbox =& xhelpGetHandler('departmentMailBox');
         $mailboxes =& $hDeptMbox->getObjects(null, true);
-    
+
         $begin_date = explode( '-', $_POST['begin_date']);
         $end_date = explode('-', $_POST['end_date']);
         $begin_hour = xhelpChangeHour($_POST['begin_mode'], $_POST['begin_hour']);
         $end_hour = xhelpChangeHour($_POST['end_mode'], $_POST['end_hour']);
-        
+
         // Get timestamps to search by
         $begin_time = mktime($begin_hour, $_POST['begin_minute'], 0, $begin_date[1], $begin_date[2], $begin_date[0]);
         $end_time = mktime($end_hour, $_POST['end_minute'], 0, $end_date[1], $end_date[2], $end_date[0]);
-        
+
         $crit = new CriteriaCompo(new Criteria('posted', $begin_time, '>='));
         $crit->add(new Criteria('posted', $end_time, '<='));
         if($_POST['email'] != ''){
@@ -179,9 +179,9 @@ function searchMailEvents()
         } else {
             $mailEvents =& $hMailEvent->getObjects($crit);
         }
-        
+
         displayEvents($mailEvents, $mailboxes);
-    
+
         xhelpAdminFooter();
         xoops_cp_footer();
     }
@@ -199,7 +199,7 @@ function xhelpChangeHour($mode, $hour)
 {
     $mode = intval($mode);
     $hour = intval($hour);
-    
+
     if($mode == 2){
         $hour = $hour + 12;
         return $hour;
@@ -224,7 +224,7 @@ function xhelpDrawHourSelect($name, $lSelect="-1")
 function xhelpDrawMinuteSelect($name)
 {
     $lSum = 0;
-    
+
     echo "<select name='".$name."'>";
     for($i = 0; $lSum <= 50; $i++){
         if($i == 0){
@@ -236,7 +236,7 @@ function xhelpDrawMinuteSelect($name)
     }
     echo "</select>";
 }
-            
+
 function xhelpDrawModeSelect($name, $sSelect='AM')
 {
     echo "<select name='".$name."'>";
@@ -255,14 +255,14 @@ function xhelp_default()
     xoops_cp_header();
     echo $oAdminButton->renderButtons('index');
     $displayName =& $xoopsModuleConfig['xhelp_displayName'];    // Determines if username or real name is displayed
-    
+
     $stylePath = XHELP_BASE_URL.'/styles/xhelp.css';
     echo '<link rel="stylesheet" type="text/css" media="all" href="'.$stylePath.'" /><!--[if gte IE 5.5000]><script src="iepngfix.js" language="JavaScript" type="text/javascript"></script><![endif]-->';
 
     global $xoopsUser, $xoopsDB;
     $hTickets =& xhelpGetHandler('ticket');
     $hStatus =& xhelpGetHandler('status');
-    
+
     $crit = new Criteria('', '');
     $crit->setSort('description');
     $crit->setOrder('ASC');
@@ -279,8 +279,8 @@ function xhelp_default()
         $crit = new Criteria('status', $status->getVar('id'));
         $numTickets =& $hTickets->getCount($crit);
         $totalTickets += $numTickets;
-        
-        
+
+
         echo "<tr class='".$class."'><td>".$status->getVar('description')."</td><td>".$numTickets."</td></tr>";
         if($class == "odd"){
             $class = "even";
@@ -290,14 +290,14 @@ function xhelp_default()
     }
     echo "<tr class='foot'><td>"._AM_XHELP_TEXT_TOTAL_TICKETS."</td><td>".$totalTickets."</td></tr>";
     echo "</table></div><br />";
-    
+
     $hStaff =& xhelpGetHandler('staff');
     $hResponses =& xhelpGetHandler('responses');
     echo "</td><td valign='top'>";    // Outer table
     echo "<div id='timeSpent'>";    // Start inner top-left cell
     echo "<table border='0' width='100%' cellspacing='1' class='outer'>
           <tr><th colspan='2'>". _AM_XHELP_TEXT_RESPONSE_TIME ."</th></tr>";
-          
+
     $sql = sprintf('SELECT u.uid, u.uname, u.name, (s.responseTime / s.ticketsResponded) as AvgResponseTime FROM %s u INNER JOIN %s s ON u.uid = s.uid WHERE ticketsResponded > 0 ORDER BY AvgResponseTime', $xoopsDB->prefix('users'), $xoopsDB->prefix('xhelp_staff'));
     $ret = $xoopsDB->query($sql, MAX_STAFF_RESPONSETIME);
     $i = 0;
@@ -308,7 +308,7 @@ function xhelp_default()
     }
     echo "</table></div><br />"; // End inner top-left cell
     echo "</td></tr><tr><td valign='top'>"; // End first, start second cell
-    
+
     //Get Calls Closed block
     $sql = sprintf('SELECT SUM(callsClosed) FROM %s', $xoopsDB->prefix('xhelp_staff'));
     $ret = $xoopsDB->query($sql);
@@ -327,11 +327,11 @@ function xhelp_default()
             }
             echo "</table></div><br />"; // End inner table top row
             echo "</td><td valign='top'>"; // End top row of outer table
-            
+
             $sql = sprintf('SELECT u.uid, u.uname, u.name, (s.responseTime / s.ticketsResponded) as AvgResponseTime FROM %s u INNER JOIN %s s ON u.uid = s.uid WHERE ticketsResponded > 0 ORDER BY AvgResponseTime DESC', $xoopsDB->prefix('users'), $xoopsDB->prefix('xhelp_staff'));
             $ret = $xoopsDB->query($sql, MAX_STAFF_RESPONSETIME);
             echo "<div id='leastCallsClosed'>";
-            echo "<table border='0' width='100%' cellspacing='1' class='outer'> 
+            echo "<table border='0' width='100%' cellspacing='1' class='outer'>
                   <tr><th colspan='2'>". _AM_XHELP_TEXT_RESPONSE_TIME_SLOW ."</th></tr>";
             $i = 0;
             while (list($uid, $uname, $name, $avgResponseTime) = $xoopsDB->fetchRow($ret)) {
@@ -343,7 +343,7 @@ function xhelp_default()
         }
     }
     echo "</td></tr></table><br />";   // End second cell, second row of inner table
-    
+
     $crit = new Criteria('state', '2', '<>', 's');
     $crit->setSort('priority');
     $crit->setOrder('ASC');
@@ -357,25 +357,25 @@ function xhelp_default()
         echo "<tr class='head'><td>". _AM_XHELP_TEXT_PRIORITY ."</td><td>". _AM_XHELP_TEXT_ELAPSED ."</td><td>". _AM_XHELP_TEXT_STATUS ."</td><td>". _AM_XHELP_TEXT_SUBJECT ."</td><td>". _AM_XHELP_TEXT_DEPARTMENT ."</td><td>". _AM_XHELP_TEXT_OWNER ."</td><td>". _AM_XHELP_TEXT_LAST_UPDATED ."</td><td>". _AM_XHELP_TEXT_LOGGED_BY ."</td></tr>";
         $i = 0;
         foreach($highPriority as $ticket){
-               if($ticket->isOverdue()){
-                   $class = $table_class[$i % 2] . " overdue";
-               } else {
-                   $class = $table_class[$i % 2];
-                }
-               $priority_url = "<img src='".XHELP_IMAGE_URL."/priority". $ticket->getVar('priority') .".png' alt='". $ticket->getVar('priority') ."' />";
-               $subject_url = sprintf("<a href='".XHELP_BASE_URL."/ticket.php?id=". $ticket->getVar('id') ."' target='_BLANK'>%s</a>", $ticket->getVar('subject'));
-               if($dept = $ticket->getDepartment()){
-                   $dept_url = sprintf("<a href='".XHELP_BASE_URL."/index.php?op=staffViewAll&amp;dept=". $dept->getVar('id') ."' target='_BLANK'>%s</a>", $dept->getVar('department'));
-               } else {
-                   $dept_url = _AM_XHELP_TEXT_NO_DEPT;
-               }
-               if($ticket->getVar('ownership') <> 0){
-                   $owner_url = sprintf("<a href='".XOOPS_URL."/userinfo.php?uid=". $ticket->getVar('uid') ."' target='_BLANK'>%s</a>", xhelpGetUsername($ticket->getVar('ownership'), $displayName));
-               } else {
-                   $owner_url = _AM_XHELP_TEXT_NO_OWNER;
-               }
-               $user_url = sprintf("<a href='".XOOPS_URL."/userinfo.php?uid=". $ticket->getVar('uid') ."' target='_BLANK'>%s</a>", xhelpGetUsername($ticket->getVar('uid'), $displayName));
-               echo "<tr class='$class'><td>". $priority_url ."</td>
+            if($ticket->isOverdue()){
+                $class = $table_class[$i % 2] . " overdue";
+            } else {
+                $class = $table_class[$i % 2];
+            }
+            $priority_url = "<img src='".XHELP_IMAGE_URL."/priority". $ticket->getVar('priority') .".png' alt='". $ticket->getVar('priority') ."' />";
+            $subject_url = sprintf("<a href='".XHELP_BASE_URL."/ticket.php?id=". $ticket->getVar('id') ."' target='_BLANK'>%s</a>", $ticket->getVar('subject'));
+            if($dept = $ticket->getDepartment()){
+                $dept_url = sprintf("<a href='".XHELP_BASE_URL."/index.php?op=staffViewAll&amp;dept=". $dept->getVar('id') ."' target='_BLANK'>%s</a>", $dept->getVar('department'));
+            } else {
+                $dept_url = _AM_XHELP_TEXT_NO_DEPT;
+            }
+            if($ticket->getVar('ownership') <> 0){
+                $owner_url = sprintf("<a href='".XOOPS_URL."/userinfo.php?uid=". $ticket->getVar('uid') ."' target='_BLANK'>%s</a>", xhelpGetUsername($ticket->getVar('ownership'), $displayName));
+            } else {
+                $owner_url = _AM_XHELP_TEXT_NO_OWNER;
+            }
+            $user_url = sprintf("<a href='".XOOPS_URL."/userinfo.php?uid=". $ticket->getVar('uid') ."' target='_BLANK'>%s</a>", xhelpGetUsername($ticket->getVar('uid'), $displayName));
+            echo "<tr class='$class'><td>". $priority_url ."</td>
                          <td>". $ticket->elapsed() ."</td>
                          <td>". xhelpGetStatus($ticket->getVar('status')) ."</td>
                          <td>". $subject_url ."</td>
@@ -384,43 +384,43 @@ function xhelp_default()
                          <td>". $ticket->lastUpdated() ."</td>
                          <td>". $user_url ."</td>
                      </tr>";
-              $i++;
+            $i++;
         }
         echo "</table></div>";
     }
-    
+
     pathConfiguration();
-    
+
     xhelpAdminFooter();
     xoops_cp_footer();
 }
 
 function pathConfiguration()
 {
-	global $xoopsModule, $xoopsConfig;
-	
-	// Upload and Images Folders
+    global $xoopsModule, $xoopsConfig;
+
+    // Upload and Images Folders
 
     $paths = array();
     $paths[_AM_XHELP_PATH_TICKETATTACH] = XHELP_UPLOAD_PATH;
     $paths[_AM_XHELP_PATH_EMAILTPL] = XHELP_BASE_PATH."/language/{$xoopsConfig['language']}";
-	
-	echo "<h3>"._AM_XHELP_PATH_CONFIG."</h3>";
-	echo "<table width='100%' class='outer' cellspacing='1' cellpadding='3' border='0' ><tr>";
-	echo "<td class='bg3'><b>" . _AM_XHELP_TEXT_DESCRIPTION . "</b></td>";
-	echo "<td class='bg3'><b>" . _AM_XHELP_TEXT_PATH . "</b></td>";
-	echo "<td class='bg3' align='center'><b>" . _AM_XHELP_TEXT_STATUS . "</b></td></tr>";
+
+    echo "<h3>"._AM_XHELP_PATH_CONFIG."</h3>";
+    echo "<table width='100%' class='outer' cellspacing='1' cellpadding='3' border='0' ><tr>";
+    echo "<td class='bg3'><b>" . _AM_XHELP_TEXT_DESCRIPTION . "</b></td>";
+    echo "<td class='bg3'><b>" . _AM_XHELP_TEXT_PATH . "</b></td>";
+    echo "<td class='bg3' align='center'><b>" . _AM_XHELP_TEXT_STATUS . "</b></td></tr>";
 
     foreach($paths as $desc=>$path) {
         echo "<tr><td class='odd'>$desc</td>";
-	    echo "<td class='odd'>$path</td>";
-	    echo "<td class='even' style='text-align: center;'>" . xhelp_admin_getPathStatus($path) . "</td></tr>";
-	}
-	
-	echo "</table>";
-	echo "<br />";
-	
-	echo "</div>";
+        echo "<td class='odd'>$path</td>";
+        echo "<td class='even' style='text-align: center;'>" . xhelp_admin_getPathStatus($path) . "</td></tr>";
+    }
+
+    echo "</table>";
+    echo "<br />";
+
+    echo "</div>";
 }
 
 function about()
@@ -434,11 +434,11 @@ function about()
 function createdir()
 {
     $path = $_GET['path'];
-	$res = xhelp_admin_mkdir($path);
-	
-	$msg = ($res)?_AM_XHELP_PATH_CREATED:_AM_XHELP_PATH_NOTCREATED;
-	redirect_header(XHELP_ADMIN_URL.'/index.php', 2, $msg . ': ' . $path);
-	exit();
+    $res = xhelp_admin_mkdir($path);
+
+    $msg = ($res)?_AM_XHELP_PATH_CREATED:_AM_XHELP_PATH_NOTCREATED;
+    redirect_header(XHELP_ADMIN_URL.'/index.php', 2, $msg . ': ' . $path);
+    exit();
 }
 
 function setperm()

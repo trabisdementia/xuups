@@ -16,8 +16,8 @@ function accfreq($data) {
     $asp = array(100*$as[0]/$s);
     $n = count($data);
     for( $i=1; $i < $n; ++$i ) {
-	$as[$i] = $as[$i-1]+$data[$i];
-	$asp[$i] = 100.0*$as[$i]/$s;
+        $as[$i] = $as[$i-1]+$data[$i];
+        $asp[$i] = 100.0*$as[$i]/$s;
     }
     return $asp;
 }
@@ -26,13 +26,13 @@ function accfreq($data) {
 $data_freq = array(22,20,12,10,5,4,2);
 $data_accfreq = accfreq($data_freq);
 
-// Create the graph. 
+// Create the graph.
 $graph = new Graph(350,250);
 
 // We need to make this extra call for CSIM scripts
 // that make use of the cache. If the cache contains this
 // graph the HTML wrapper will be returned and then the
-// method will call exit() and hence NO LINES AFTER THIS 
+// method will call exit() and hence NO LINES AFTER THIS
 // CALL WILL BE EXECUTED.
 // $graph->CheckCSIMCache('auto');
 

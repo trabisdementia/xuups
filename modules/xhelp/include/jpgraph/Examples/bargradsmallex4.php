@@ -6,8 +6,8 @@ require_once ('jpgraph/jpgraph_bar.php');
 // We need some data
 $datay=array(4,8,6);
 
-// Setup the graph. 
-$graph = new Graph(200,150);	
+// Setup the graph.
+$graph = new Graph(200,150);
 $graph->SetScale("textlin");
 $graph->img->SetMargin(25,15,25,25);
 
@@ -22,7 +22,7 @@ $graph->yaxis->SetFont(FF_FONT1);
 $bplot = new BarPlot($datay);
 $bplot->SetWidth(0.6);
 
-// Setup color for gradient fill style 
+// Setup color for gradient fill style
 $bplot->SetFillGradient("navy","lightsteelblue",GRAD_VER);
 
 // Set color for the frame of each bar

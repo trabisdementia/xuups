@@ -1,13 +1,13 @@
-<?php 
+<?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code 
+ of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  *  FCKeditor adapter for XOOPS
@@ -61,7 +61,7 @@ class Xmf_Form_Element_Editor_FckEditor extends Xmf_Form_Element_Editor
         } else {
             $this->language = str_replace('_', '-', strtolower(_LANGCODE));
         }
-        
+
         return $this->language;
     }
 
@@ -93,8 +93,8 @@ class Xmf_Form_Element_Editor_FckEditor extends Xmf_Form_Element_Editor
         if (defined("_XOOPS_EDITOR_FCKEDITOR_FONTLIST")) {
             $oFCKeditor->Config['FontNames'] = _XOOPS_EDITOR_FCKEDITOR_FONTLIST;
         }
-        
-        $dirname = is_object($GLOBALS["xoopsModule"]) ? $GLOBALS["xoopsModule"]->getVar("dirname", "n") : "system"; 
+
+        $dirname = is_object($GLOBALS["xoopsModule"]) ? $GLOBALS["xoopsModule"]->getVar("dirname", "n") : "system";
         if (!file_exists($config_file = XOOPS_ROOT_PATH . "/cache/fckconfig.{$dirname}.js")) {
             if ( $fp = fopen( $config_file , "wt" ) ) {
                 $fp_content = "";
@@ -123,25 +123,25 @@ class Xmf_Form_Element_Editor_FckEditor extends Xmf_Form_Element_Editor
                     $fp_content .= "FCKConfig.ImageUpload = false;\n";
                     $fp_content .= "FCKConfig.FlashUpload = false;\n\n";
                 }
-                
+
                 fwrite( $fp, $fp_content );
                 fclose( $fp );
             } else {
                 trigger_error( "Cannot create fckeditor config file", E_USER_ERROR );
             }
         }
-        
+
         if (is_readable($config_file)) {
             $oFCKeditor->Config['CustomConfigurationsPath'] = XOOPS_URL . "/cache/fckconfig.{$dirname}.js";
         } else {
             $oFCKeditor->Config['CustomConfigurationsPath'] = XOOPS_URL . '/' . $this->rootPath. '/fckconfig-xoops.js';
         }
-        
+
         foreach ($this->configs as $key => $val) {
             if (isset($this->{$key})) continue;
             $oFCKeditor->Config[$key] = $val;
         }
-        
+
         $ret = $oFCKeditor->CreateHtml();
         return $ret;
     }
@@ -160,7 +160,7 @@ class Xmf_Form_Element_Editor_FckEditor extends Xmf_Form_Element_Editor
         }
         return $this->isEnabled;
     }
-    
+
 
     function renderValidationJS()
     {

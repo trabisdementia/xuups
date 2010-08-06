@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -28,21 +28,21 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 function publisher_category_items_sel_show($options)
 {
     $publisher =& PublisherPublisher::getInstance();
-	$myts =& MyTextSanitizer::getInstance();
+    $myts =& MyTextSanitizer::getInstance();
 
-	$block = array();
+    $block = array();
 
     $categories = $publisher->getHandler('category')->getCategories(0, 0, -1);
 
     if (count($categories) == 0) return $block;
-    
+
     $selectedcatids = explode(',', $options[0]);
-	$sort = $options[1];
-	$order = publisher_getOrderBy($sort);
-	$limit = $options[2];
-	$start = 0;
-	
-	// creating the ITEM objects that belong to the selected category
+    $sort = $options[1];
+    $order = publisher_getOrderBy($sort);
+    $limit = $options[2];
+    $start = 0;
+
+    // creating the ITEM objects that belong to the selected category
     $block['categories'] = array();
     foreach ($categories as $catID => $catObj) {
         if (!in_array(0, $selectedcatids) && !in_array($catID, $selectedcatids)) continue;
@@ -50,7 +50,7 @@ function publisher_category_items_sel_show($options)
         $criteria = new Criteria('categoryid', $catID);
         $items = $publisher->getHandler('item')->getItems($limit, $start, array(_PUBLISHER_STATUS_PUBLISHED), -1, $sort, $order, '', true, $criteria, true);
         unset($criteria);
-        
+
         if (count($items) == 0) continue;
 
         $item['title']                          = $catObj->name();
@@ -58,24 +58,24 @@ function publisher_category_items_sel_show($options)
         $block['categories'][$catID]['items'][] = $item;
 
         foreach ($items as $itemObj) {
-			$item['title']                          = $itemObj->title(isset($options[3]) ? $options[3] : 0);
-			$item['itemurl']                        = $itemObj->getItemUrl();
-			$block['categories'][$catID]['items'][] = $item;
-		}
-		$block['categories'][$catID]['name'] = $catObj->name();
+            $item['title']                          = $itemObj->title(isset($options[3]) ? $options[3] : 0);
+            $item['itemurl']                        = $itemObj->getItemUrl();
+            $block['categories'][$catID]['items'][] = $item;
+        }
+        $block['categories'][$catID]['name'] = $catObj->name();
     }
-    
+
     unset($items, $categories);
-    
+
     if (count($block['categories']) == 0) return $block;
-	return $block;
+    return $block;
 }
 
 function publisher_category_items_sel_edit($options) {
 
     $form  = "<table border='0'>";
-	$form .= '<tr><td style="vertical-align: top; width: 250px;">' . _MB_PUBLISHER_SELECTCAT . '</td>';
-	$form .= '<td>'. publisher_createCategorySelect($options[0]) . '</td></tr>';
+    $form .= '<tr><td style="vertical-align: top; width: 250px;">' . _MB_PUBLISHER_SELECTCAT . '</td>';
+    $form .= '<td>'. publisher_createCategorySelect($options[0]) . '</td></tr>';
 
     $form .= "<tr><td>" . _MB_PUBLISHER_ORDER . "</td>";
     $form .= "<td><select name='options[1]'>";

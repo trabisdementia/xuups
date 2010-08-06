@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -37,16 +37,16 @@ function publisher_items_columns_show($options)
     $publisher =& PublisherPublisher::getInstance();
     $myts =& MyTextSanitizer::getInstance();
 
-	//Column Settings
-	$opt_num_columns = isset($options[0]) ? intval($options[0]) : '2';
-	$sel_categories = isset($options[1]) ? explode(',', $options[1]) : array();
-	$opt_cat_items = intval($options[2]);
-	$opt_cat_truncate = isset($options[3]) ? intval($options[3]) : '0';
+    //Column Settings
+    $opt_num_columns = isset($options[0]) ? intval($options[0]) : '2';
+    $sel_categories = isset($options[1]) ? explode(',', $options[1]) : array();
+    $opt_cat_items = intval($options[2]);
+    $opt_cat_truncate = isset($options[3]) ? intval($options[3]) : '0';
 
-	$block = array();
-	$block['lang_reads'] = _MB_PUBLISHER_READS;
-	$block['lang_comments'] = _MB_PUBLISHER_COMMENTS;
-	$block['lang_readmore'] = _MB_PUBLISHER_READMORE;
+    $block = array();
+    $block['lang_reads'] = _MB_PUBLISHER_READS;
+    $block['lang_comments'] = _MB_PUBLISHER_COMMENTS;
+    $block['lang_readmore'] = _MB_PUBLISHER_READMORE;
 
     $sel_categories_obj = array();
 
@@ -54,79 +54,79 @@ function publisher_items_columns_show($options)
     $categories_obj = $publisher->getHandler('category')->getCategories(0, 0, -1);
 
     //if not selected 'all', let's get the selected ones
-	if (!in_array(0, $sel_categories)) {
+    if (!in_array(0, $sel_categories)) {
         foreach ($categories_obj as $key=>$value) {
             if (in_array($key, $sel_categories)) {
                 $sel_categories_obj[$key] = $value;
             }
         }
-	} else {
+    } else {
         $sel_categories_obj = $categories_obj;
     }
 
     $ccount = count($sel_categories_obj);
 
     if ($ccount == 0) {
-	   return false;
-	}
+        return false;
+    }
 
-	if ($ccount < $opt_num_columns) {
+    if ($ccount < $opt_num_columns) {
         $opt_num_columns = $ccount;
     }
 
-	$k = 0;
-	$columns = array();
+    $k = 0;
+    $columns = array();
 
-	foreach ($sel_categories_obj as $categoryId => $mainitemCatObj) {
-		$categoryItemsObj = $publisher->getHandler('item')->getAllPublished($opt_cat_items, 0, $categoryId);
-		$scount = count($categoryItemsObj);
-	    if ($scount > 0 && is_array($categoryItemsObj)) {
-		   	reset($categoryItemsObj);
-		   	//First Item
-		   	list($itemid, $thisitem) = each($categoryItemsObj);
+    foreach ($sel_categories_obj as $categoryId => $mainitemCatObj) {
+        $categoryItemsObj = $publisher->getHandler('item')->getAllPublished($opt_cat_items, 0, $categoryId);
+        $scount = count($categoryItemsObj);
+        if ($scount > 0 && is_array($categoryItemsObj)) {
+            reset($categoryItemsObj);
+            //First Item
+            list($itemid, $thisitem) = each($categoryItemsObj);
 
-		   	$mainitem['item_title']      = $thisitem->title();
-		   	$mainitem['item_cleantitle'] = strip_tags($thisitem->title());
-		   	$mainitem['item_link']       = $thisitem->itemid();
-		   	$mainitem['itemurl']         = $thisitem->getItemUrl();
-		   	$mainImage                   = $thisitem->getMainImage();
-		   	$mainitem['item_image']      = $mainImage['image_path'];
-		   	$mainitem['item_summary']    = $thisitem->getBlockSummary($opt_cat_truncate);
+            $mainitem['item_title']      = $thisitem->title();
+            $mainitem['item_cleantitle'] = strip_tags($thisitem->title());
+            $mainitem['item_link']       = $thisitem->itemid();
+            $mainitem['itemurl']         = $thisitem->getItemUrl();
+            $mainImage                   = $thisitem->getMainImage();
+            $mainitem['item_image']      = $mainImage['image_path'];
+            $mainitem['item_summary']    = $thisitem->getBlockSummary($opt_cat_truncate);
 
-		   	$mainitem['item_cat_name']        = $mainitemCatObj->name();
-		   	$mainitem['item_cat_description'] = $mainitemCatObj->description() != '' ? $mainitemCatObj->description() : $mainitemCatObj->name();
-		   	$mainitem['item_cat_link']        = $mainitemCatObj->getCategoryLink();
-		   	$mainitem['categoryurl']          = $mainitemCatObj->getCategoryUrl();
+            $mainitem['item_cat_name']        = $mainitemCatObj->name();
+            $mainitem['item_cat_description'] = $mainitemCatObj->description() != '' ? $mainitemCatObj->description() : $mainitemCatObj->name();
+            $mainitem['item_cat_link']        = $mainitemCatObj->getCategoryLink();
+            $mainitem['categoryurl']          = $mainitemCatObj->getCategoryUrl();
 
-		   	//The Rest
-		   	if ($scount > 1) {
-				while (list($itemid, $thisitem) = each($categoryItemsObj)) {
-			    	$subitem['title']      = $thisitem->title();
-			    	$subitem['cleantitle'] = strip_tags($thisitem->title());
-			    	$subitem['link']       = $thisitem->getItemLink();
-			    	$subitem['itemurl']    = $thisitem->getItemUrl();
-			    	$subitem['summary']    = $thisitem->getBlockSummary($opt_cat_truncate);
+            //The Rest
+            if ($scount > 1) {
+                while (list($itemid, $thisitem) = each($categoryItemsObj)) {
+                    $subitem['title']      = $thisitem->title();
+                    $subitem['cleantitle'] = strip_tags($thisitem->title());
+                    $subitem['link']       = $thisitem->getItemLink();
+                    $subitem['itemurl']    = $thisitem->getItemUrl();
+                    $subitem['summary']    = $thisitem->getBlockSummary($opt_cat_truncate);
                     $mainitem['subitem'][] = $subitem;
                     unset($subitem);
                 }
-		   	}
-			$columns[$k][] = $mainitem;
-			unset($thisitem);
-			unset($mainitem);
-			$k++;
+            }
+            $columns[$k][] = $mainitem;
+            unset($thisitem);
+            unset($mainitem);
+            $k++;
 
-			if ($k == $opt_num_columns) {
-			    $k = 0;
-			}
-		}
-	}
-	$block['template'] = $options[4];
-	$block['columns'] = $columns;
-	$block['columnwidth'] = intval(100/$opt_num_columns);
+            if ($k == $opt_num_columns) {
+                $k = 0;
+            }
+        }
+    }
+    $block['template'] = $options[4];
+    $block['columns'] = $columns;
+    $block['columnwidth'] = intval(100/$opt_num_columns);
 
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . PUBLISHER_DIRNAME . '/css/publisher.css');
 
-	return $block;
+    return $block;
 }
 
 /***
@@ -136,11 +136,11 @@ function publisher_items_columns_show($options)
  */
 function publisher_items_columns_edit($options)
 {
-	global $xoopsDB;
+    global $xoopsDB;
 
     $form  = "<table border='0'>";
-	$form .= "<tr><td style='vertical-align: top; width: 250px;'>" . _MB_PUBLISHER_NUMBER_COLUMN_VIEW . "</td>";
-	$form .= "<td><select size='1' name='options[0]'>";
+    $form .= "<tr><td style='vertical-align: top; width: 250px;'>" . _MB_PUBLISHER_NUMBER_COLUMN_VIEW . "</td>";
+    $form .= "<td><select size='1' name='options[0]'>";
 
     for ($i = 1; $i < 5; $i++) {
         $form .= "<option value='{$i}'";
@@ -151,19 +151,19 @@ function publisher_items_columns_edit($options)
         $form .= ">{$i}</option>";
     }
 
-  	$form .= "</select></td></tr>";
+    $form .= "</select></td></tr>";
 
-	//Select Which Categories To Show
+    //Select Which Categories To Show
     $form .= "<tr><td style='vertical-align: top;'>"._MB_PUBLISHER_SELECTCAT."</td><td>";
-	$form .= publisher_createCategorySelect($options[1], 0, true, 'options[1]');
-	$form .= "</td></tr>";
+    $form .= publisher_createCategorySelect($options[1], 0, true, 'options[1]');
+    $form .= "</td></tr>";
 
-	//number of items in category
-	$form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_NUMBER_ITEMS_CAT . "</td><td>";
+    //number of items in category
+    $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_NUMBER_ITEMS_CAT . "</td><td>";
     $form .= "<input type='text' name='options[2]' value='" . $options[2] . "' size='4'></td></tr>";
 
-	//teaser length
-	$form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_TRUNCATE . "</td><td>";
+    //teaser length
+    $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_TRUNCATE . "</td><td>";
     $form .= "<input type='text' name='options[3]' value='" . $options[3] . "' size='4'></td></tr>";
 
 
@@ -180,9 +180,9 @@ function publisher_items_columns_edit($options)
         $form .= ">{$value}</option>";
     }
 
-  	$form .= "</select></td></tr>";
+    $form .= "</select></td></tr>";
 
-	$form .= "</table>";
-	return $form;
+    $form .= "</table>";
+    return $form;
 }
 ?>

@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -149,8 +149,8 @@ if ($publisher->getConfig('index_display_last_items')) {
 
         default :
             $sort = 'weight';
-        $order = 'ASC';
-        break;
+            $order = 'ASC';
+            break;
     }
 
     // Creating the last ITEMs

@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  *  Publisher class
@@ -138,15 +138,15 @@ class PublisherPublisher
     }
 
     /*
-    function __destruct()
-    {
-        if ($this->debug) {
-            $dump = '';
-            foreach ($this->debugArray as $msg) {
-                $dump .= $msg . '<br>';
-            }
-            echo $dump;
-        }
-    } */
+     function __destruct()
+     {
+     if ($this->debug) {
+     $dump = '';
+     foreach ($this->debugArray as $msg) {
+     $dump .= $msg . '<br>';
+     }
+     echo $dump;
+     }
+     } */
 }
 ?>

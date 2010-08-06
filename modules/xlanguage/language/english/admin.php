@@ -1,4 +1,4 @@
-<?php 
+<?php
 // $Id: admin.php,v 1.2 2004/09/27 20:06:50 phppp Exp $
 //  ------------------------------------------------------------------------ //
 //         Xlanguage: eXtensible Language Management For Xoops               //

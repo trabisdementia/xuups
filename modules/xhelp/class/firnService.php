@@ -18,10 +18,10 @@ class xhelpFirnService extends xhelpService
     {
         $this->init();
     }
-    
+
     function _attachEvents()
     {
-        $this->_attachEvent('new_faq', $this);        
+        $this->_attachEvent('new_faq', $this);
     }
 
     /**
@@ -29,39 +29,39 @@ class xhelpFirnService extends xhelpService
      * Triggered after FAQ addition
      * @param xhelpTicket $ticket Ticket used as base for FAQ
      * @param xhelpFaq $faq FAQ that was added
-     */    
+     */
     function new_faq($ticket, $faq)
     {
         global $xoopsUser;
-        
+
         //Create a new solution from the supplied ticket / faq
         $hTicketSol =& xhelpGetHandler('ticketSolution');
         $sol =& $hTicketSol->create();
-        
+
         $sol->setVar('ticketid', $ticket->getVar('id'));
         $sol->setVar('url', $faq->getVar('url'));
         $sol->setVar('title', $faq->getVar('subject'));
         $sol->setVar('uid', $xoopsUser->getVar('uid'));
         return $hTicketSol->addSolution($ticket, $sol);
-        
+
     }
-    
+
     /**
-	 * Only have 1 instance of class used
-	 * @return object {@link xhelp_eventService}
-	 * @access	public
-	 */
+     * Only have 1 instance of class used
+     * @return object {@link xhelp_eventService}
+     * @access	public
+     */
     function &singleton()
     {
         // Declare a static variable to hold the object instance
-        static $instance; 
+        static $instance;
 
         // If the instance is not there, create one
-        if(!isset($instance)) { 
+        if(!isset($instance)) {
             $c = __CLASS__;
             $instance = new $c;
-        } 
-        return($instance); 
+        }
+        return($instance);
     }
 
 }

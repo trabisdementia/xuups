@@ -24,93 +24,93 @@ require_once(XHELP_CLASS_PATH.'/xhelpNaiveBayesian.php');
 class xhelpTicketSolution extends XoopsObject {
     function xhelpTicketSolution($id = null)
     {
-       $this->initVar('id', XOBJ_DTYPE_INT, null, false);
-       $this->initVar('ticketid', XOBJ_DTYPE_INT, null, true);
-       $this->initVar('url', XOBJ_DTYPE_TXTAREA, null, true, 4096);
-       $this->initVar('title', XOBJ_DTYPE_TXTBOX, null, true, 255);
-       $this->initVar('description', XOBJ_DTYPE_TXTAREA, null, false, 10000);
-       $this->initVar('uid', XOBJ_DTYPE_INT, null, true);
-       $this->initVar('posted', XOBJ_DTYPE_INT, null, true);
-          
-       if (isset($id)) {
-			if (is_array($id)) {
-				$this->assignVars($id);
-			}
-		} else {
-			$this->setNew();
-		} 
+        $this->initVar('id', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('ticketid', XOBJ_DTYPE_INT, null, true);
+        $this->initVar('url', XOBJ_DTYPE_TXTAREA, null, true, 4096);
+        $this->initVar('title', XOBJ_DTYPE_TXTBOX, null, true, 255);
+        $this->initVar('description', XOBJ_DTYPE_TXTAREA, null, false, 10000);
+        $this->initVar('uid', XOBJ_DTYPE_INT, null, true);
+        $this->initVar('posted', XOBJ_DTYPE_INT, null, true);
+
+        if (isset($id)) {
+            if (is_array($id)) {
+                $this->assignVars($id);
+            }
+        } else {
+            $this->setNew();
+        }
     }
-    
+
     function posted($format="l")
-	{
-		return formatTimestamp($this->getVar('posted'), $format);
-	}
+    {
+        return formatTimestamp($this->getVar('posted'), $format);
+    }
 }   // end of class
 
 class xhelpTicketSolutionHandler extends xhelpBaseObjectHandler{
     /**
      * Name of child class
-     * 
+     *
      * @var	string
      * @access	private
      */
-	 var $classname = 'xhelpticketsolution';
-	
-	/**
-	 * DB Table Name
-	 *
-	 * @var 		string
-	 * @access 	private
-	 */
-	var $_dbtable = 'xhelp_ticket_solutions';
-	
-	/**
-	 * Constructor
-	 *
-	 * @param	object   $db    reference to a xoopsDB object
-	 */
-	function xhelpTicketSolutionHandler(&$db) 
-	{
-		parent::init($db);
-	}
-		
+    var $classname = 'xhelpticketsolution';
+
+    /**
+     * DB Table Name
+     *
+     * @var 		string
+     * @access 	private
+     */
+    var $_dbtable = 'xhelp_ticket_solutions';
+
+    /**
+     * Constructor
+     *
+     * @param	object   $db    reference to a xoopsDB object
+     */
+    function xhelpTicketSolutionHandler(&$db)
+    {
+        parent::init($db);
+    }
+
     function _insertQuery(&$obj)
     {
         // Copy all object vars into local variables
         foreach ($obj->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-                
-        $sql = sprintf("INSERT INTO %s (id, ticketid, url, title, description, uid, posted) VALUES (%u, %u, %s, %s, %s, %u, %u)", 
-                $this->_db->prefix($this->_dbtable), $id, $ticketid, $this->_db->quoteString($url), 
-                $this->_db->quoteString($title), $this->_db->quoteString($description), $uid, time());
-            
+
+        $sql = sprintf("INSERT INTO %s (id, ticketid, url, title, description, uid, posted) VALUES (%u, %u, %s, %s, %s, %u, %u)",
+        $this->_db->prefix($this->_dbtable), $id, $ticketid, $this->_db->quoteString($url),
+        $this->_db->quoteString($title), $this->_db->quoteString($description), $uid, time());
+
         return $sql;
-        
+
     }
-    
+
     function _updateQuery(&$obj)
     {
         // Copy all object vars into local variables
         foreach ($obj->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-                
-        $sql = sprintf("UPDATE %s SET ticketid = %u, url = %s, title = %s, description = %s, uid = %u, posted = %u WHERE id = %u", 
-                $this->_db->prefix($this->_dbtable), $ticketid, $this->_db->quoteString($url), 
-                $this->_db->quoteString($title), $this->_db->quoteString($description), $uid, $posted, $id);
-                
+
+        $sql = sprintf("UPDATE %s SET ticketid = %u, url = %s, title = %s, description = %s, uid = %u, posted = %u WHERE id = %u",
+        $this->_db->prefix($this->_dbtable), $ticketid, $this->_db->quoteString($url),
+        $this->_db->quoteString($title), $this->_db->quoteString($description), $uid, $posted, $id);
+
         return $sql;
     }
-    
+
     function _deleteQuery(&$obj)
     {
         $sql = sprintf('DELETE FROM %s WHERE id = %u', $this->_db->prefix($this->_dbtable), $obj->getVar('id'));
         return $sql;
     }
-    
+
     /**
-     * Recommend solutions to a ticket based on similarity 
+     * Recommend solutions to a ticket based on similarity
      * to previous tickets and their solutions
      * @param xhelpTicket $ticket ticket to search for solutions
      * @return array Value 1 = bayesian likeness probability, Value 2 = xhelpTicketSolution object
@@ -119,25 +119,25 @@ class xhelpTicketSolutionHandler extends xhelpBaseObjectHandler{
     function &recommendSolutions($ticket)
     {
         $ret = array();
-        
+
         //1. Get list of bayesian categories(tickets) similar to current ticket
         $bayes = new xhelpNaiveBayesian(new xhelpNaiveBayesianStorage);
         $document = $ticket->getVar('subject') . "\r\n" . $ticket->getVar('description');
         $cats = $bayes->categorize($document);
-        
+
         //2. Get solutions to those tickets
         $crit = new Criteria('ticketid', "(". implode(array_keys($cats), ',') .")", 'IN');
         $solutions =& $this->getObjects($crit);
-        
+
         //3. Sort solutions based on likeness probability
         foreach ($solutions as $solution) {
-            $ret[] = array( 'probability'=> $cats[$solution->getVar('ticketid')], 
+            $ret[] = array( 'probability'=> $cats[$solution->getVar('ticketid')],
                             'solution' => $solution);
         }
         unset($solutions);
-        return $this->multi_sort($ret, 'probability');                            
+        return $this->multi_sort($ret, 'probability');
     }
-    
+
     function addSolution($ticket, $solution)
     {
         //1. Store solution in db for current ticket
@@ -148,13 +148,13 @@ class xhelpTicketSolutionHandler extends xhelpBaseObjectHandler{
             $categoryid = (string) $ticket->getVar('id');
             $document   = $ticket->getVar('subject') . "\r\n" . $ticket->getVar('description');
             $bayes->train($documentid, $categoryid, $document);
-            
+
             return true;
         }
         return false;
-    }        
-        	
-    
+    }
+     
+
     function &multi_sort($array, $akey)
     {
         function _compare($a, $b)
@@ -167,7 +167,7 @@ class xhelpTicketSolutionHandler extends xhelpBaseObjectHandler{
             } elseif ($a[$key]==$b[$key]) {
                 $varcmp = "0";
             }
-            
+
             return $varcmp;
         }
         usort($array, "_compare");

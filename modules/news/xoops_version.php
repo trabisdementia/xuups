@@ -520,14 +520,14 @@ $modversion['config'][25]['description'] = "_MI_NEWS_TABS_SKIN_DESC";
 $modversion['config'][25]['formtype'] = 'select';
 $modversion['config'][25]['valuetype'] = 'int';
 $modversion['config'][25]['options'] = array(
-    _MI_NEWS_SKIN_1 => 1,
-    _MI_NEWS_SKIN_2 => 2,
-    _MI_NEWS_SKIN_3 => 3,
-    _MI_NEWS_SKIN_4 => 4,
-    _MI_NEWS_SKIN_5 => 5,
-    _MI_NEWS_SKIN_6 => 6,
-    _MI_NEWS_SKIN_7 => 7,
-    _MI_NEWS_SKIN_8 => 8
+_MI_NEWS_SKIN_1 => 1,
+_MI_NEWS_SKIN_2 => 2,
+_MI_NEWS_SKIN_3 => 3,
+_MI_NEWS_SKIN_4 => 4,
+_MI_NEWS_SKIN_5 => 5,
+_MI_NEWS_SKIN_6 => 6,
+_MI_NEWS_SKIN_7 => 7,
+_MI_NEWS_SKIN_8 => 8
 );
 $modversion['config'][25]['default'] = 6;
 

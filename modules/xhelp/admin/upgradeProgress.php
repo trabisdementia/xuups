@@ -1,7 +1,7 @@
 <?php
 // $Id: upgradeProgress.php,v 1.2 2005/12/01 22:36:21 ackbarr Exp $
-include('../../../include/cp_header.php');          
-include_once('admin_header.php');   
+include('../../../include/cp_header.php');
+include_once('admin_header.php');
 
 echo "<html>
       <head>

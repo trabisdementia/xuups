@@ -23,16 +23,16 @@ echo $imgmap;
 
 <?php
 if( empty($_GET['clickedon']) ) {
-   echo '<b style="color:darkred;">Clicked on bar: &lt;none></b>';
+    echo '<b style="color:darkred;">Clicked on bar: &lt;none></b>';
 }
 else {
-   echo '<b style="color:darkred;">Clicked on bar: '.$_GET['clickedon'].'</b>';
+    echo '<b style="color:darkred;">Clicked on bar: '.$_GET['clickedon'].'</b>';
 }
 echo '<p />';
 ?>
 
 <p>First we need to get hold of the image map and include it in the HTML
-  page.</p>
+page.</p>
 <p>For this graph it is:</p>
 <?php
 
@@ -43,19 +43,17 @@ echo '<pre><b>'.htmlentities($imgmap).'</b></pre>';?>
 // Construct the <img> tag and rebuild the
 $imgtag = $graph->GetCSIMImgHTML($_mapname,$_graphfilename);
 ?>
-<p>The graph is then be displayed as shown in figure 1. With the following
-  created &lt;img> tag:</p>
+<p>The graph is then be displayed as shown in figure 1. With the
+following created &lt;img> tag:</p>
 <pre><b>
 <?php echo htmlentities($imgtag); ?>
 </b></pre>
 
 
-<p>
-<?php
+<p><?php
 echo $imgtag;
-?>
-<br><b>Figure 1. </b>The included CSIM graph.
-</p>
+?> <br>
+<b>Figure 1. </b>The included CSIM graph.</p>
 
 </body>
 </html>

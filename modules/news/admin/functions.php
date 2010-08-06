@@ -32,7 +32,7 @@
  *
  * NOTE : Please give credits if you copy this code !
  *
-  * @package News
+ * @package News
  * @author Instant Zero (http://www.instant-zero.com) & Dojo Javscript Toolkit
  * @copyright	(c) Instant Zero - http://www.instant-zero.com
  */
@@ -97,89 +97,85 @@ function news_adminmenu($currentoption = 0, $breadcrumb = '')
         echo '<br /><br /><pre>&nbsp;</pre><pre>&nbsp;</pre>';
     } else {
         ?>
-	<script type="text/javascript" src="../js/dojo.js"></script>
-	<script language="JavaScript" type="text/javascript">
+<script
+	type="text/javascript" src="../js/dojo.js"></script>
+<script language="JavaScript" type="text/javascript">
 		dojo.require("dojo.widget.FisheyeList");
 		dojo.hostenv.writeIncludes();
 	</script>
-	<script>
+<script>
 		function load_app(id){
  			urltogo = new Array("../../system/admin.php?fct=preferences&op=showmod&mod=<?php echo $xoopsModule->getVar('mid'); ?>","../index.php","#","index.php?op=verifydb","index.php?op=topicsmanager","index.php?op=newarticle","groupperms.php","index.php?op=prune","index.php?op=export","index.php?op=configurenewsletter","index.php?op=stats","index.php?op=metagen","upgrade.php");
     		window.location.href = urltogo[id];
 		}
 	</script>
 
-	<style>
-	.dojoHtmlFisheyeListBar {
-		margin: 0 auto;
-		text-align: center;
-	}
+<style>
+.dojoHtmlFisheyeListBar {
+	margin: 0 auto;
+	text-align: center;
+}
 
-	.outerbar {
-		background-color: #ffffff;
-		text-align: center;
-		position: relative;
-		left: 0px;
-		top: 0px;
-		width: 100%;
-	}
-	</style>
+.outerbar {
+	background-color: #ffffff;
+	text-align: center;
+	position: relative;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+}
+</style>
 
-	<div class="outerbar">
-		<div class="dojo-FisheyeList"
-			dojo:itemWidth="50" dojo:itemHeight="50"
-			dojo:itemMaxWidth="200" dojo:itemMaxHeight="200"
-			dojo:orientation="horizontal"
-			dojo:effectUnits="2"
-			dojo:itemPadding="10"
-			dojo:attachEdge="top"
-			dojo:labelEdge="bottom"
-			dojo:enableCrappySvgSupport="false">
+<div class="outerbar">
+<div class="dojo-FisheyeList" dojo:itemWidth="50" dojo:itemHeight="50"
+	dojo:itemMaxWidth="200" dojo:itemMaxHeight="200"
+	dojo:orientation="horizontal" dojo:effectUnits="2"
+	dojo:itemPadding="10" dojo:attachEdge="top" dojo:labelEdge="bottom"
+	dojo:enableCrappySvgSupport="false">
 
-			<div class="dojo-FisheyeListItem" onClick="load_app(0)"
-				dojo:iconsrc="../images/options.png" caption="<?php echo _AM_NEWS_GENERALSET; ?>">
-			</div>
-			<div class="dojo-FisheyeListItem" onClick="load_app(1);"
-				dojo:iconsrc="../images/home.png" caption="<?php echo _AM_NEWS_GOTOMOD; ?>">
-			</div>
-			<div class="dojo-FisheyeListItem" onClick="load_app(2);"
-				dojo:iconsrc="../images/help.png" caption="<?php echo _AM_NEWS_HELP; ?>">
-			</div>
-			<div class="dojo-FisheyeListItem" onClick="load_app(3);"
-				dojo:iconsrc="../images/maintain.png" caption="<?php echo _AM_NEWS_VERIFY_TABLES; ?>">
-			</div>
-			<div class="dojo-FisheyeListItem" onClick="load_app(4);"
-				dojo:iconsrc="../images/topics.png" caption="<?php echo _MI_NEWS_ADMENU2; ?>">
-			</div>
-			<div class="dojo-FisheyeListItem" onClick="load_app(5);"
-				dojo:iconsrc="../images/articles.png" dojo:caption="<?php echo _MI_NEWS_ADMENU3; ?>" >
-			</div>
-			<div class="dojo-FisheyeListItem" onClick="load_app(6);"
-				dojo:iconsrc="../images/permissions.png" dojo:caption="<?php echo _MI_NEWS_GROUPPERMS; ?>" >
-			</div>
-			<div class="dojo-FisheyeListItem" onClick="load_app(7);"
-				dojo:iconsrc="../images/purge.png" dojo:caption="<?php echo _MI_NEWS_PRUNENEWS; ?>" >
-			</div>
-			<div class="dojo-FisheyeListItem" onClick="load_app(8);"
-				dojo:iconsrc="../images/export.png" dojo:caption="<?php echo _MI_NEWS_EXPORT; ?>" >
-			</div>
-			<div class="dojo-FisheyeListItem" onClick="load_app(9);"
-				dojo:iconsrc="../images/newsletter.png" dojo:caption="<?php echo _MI_NEWS_NEWSLETTER; ?>" >
-			</div>
-			<div class="dojo-FisheyeListItem" onClick="load_app(10);"
-				dojo:iconsrc="../images/statistics.png" dojo:caption="<?php echo _MI_NEWS_STATS; ?>" >
-			</div>
-			<div class="dojo-FisheyeListItem" onClick="load_app(11);"
-				dojo:iconsrc="../images/metagen.png" dojo:caption="<?php echo _MI_NEWS_METAGEN; ?>" >
-			</div>
-			<?php if ($xoopsModule->getVar('version') != 153) { ?>
-				<div class="dojo-FisheyeListItem" onClick="load_app(12);"
-					dojo:iconsrc="../images/update.png" dojo:caption="<?php echo _AM_NEWS_UPGRADE; ?>" >
-				</div>
-			<?php } ?>
-		</div>
-	</div>
-<?php
+<div class="dojo-FisheyeListItem" onClick="load_app(0)"
+	dojo:iconsrc="../images/options.png"
+	caption="<?php echo _AM_NEWS_GENERALSET; ?>"></div>
+<div class="dojo-FisheyeListItem" onClick="load_app(1);"
+	dojo:iconsrc="../images/home.png"
+	caption="<?php echo _AM_NEWS_GOTOMOD; ?>"></div>
+<div class="dojo-FisheyeListItem" onClick="load_app(2);"
+	dojo:iconsrc="../images/help.png"
+	caption="<?php echo _AM_NEWS_HELP; ?>"></div>
+<div class="dojo-FisheyeListItem" onClick="load_app(3);"
+	dojo:iconsrc="../images/maintain.png"
+	caption="<?php echo _AM_NEWS_VERIFY_TABLES; ?>"></div>
+<div class="dojo-FisheyeListItem" onClick="load_app(4);"
+	dojo:iconsrc="../images/topics.png"
+	caption="<?php echo _MI_NEWS_ADMENU2; ?>"></div>
+<div class="dojo-FisheyeListItem" onClick="load_app(5);"
+	dojo:iconsrc="../images/articles.png"
+	dojo:caption="<?php echo _MI_NEWS_ADMENU3; ?>"></div>
+<div class="dojo-FisheyeListItem" onClick="load_app(6);"
+	dojo:iconsrc="../images/permissions.png"
+	dojo:caption="<?php echo _MI_NEWS_GROUPPERMS; ?>"></div>
+<div class="dojo-FisheyeListItem" onClick="load_app(7);"
+	dojo:iconsrc="../images/purge.png"
+	dojo:caption="<?php echo _MI_NEWS_PRUNENEWS; ?>"></div>
+<div class="dojo-FisheyeListItem" onClick="load_app(8);"
+	dojo:iconsrc="../images/export.png"
+	dojo:caption="<?php echo _MI_NEWS_EXPORT; ?>"></div>
+<div class="dojo-FisheyeListItem" onClick="load_app(9);"
+	dojo:iconsrc="../images/newsletter.png"
+	dojo:caption="<?php echo _MI_NEWS_NEWSLETTER; ?>"></div>
+<div class="dojo-FisheyeListItem" onClick="load_app(10);"
+	dojo:iconsrc="../images/statistics.png"
+	dojo:caption="<?php echo _MI_NEWS_STATS; ?>"></div>
+<div class="dojo-FisheyeListItem" onClick="load_app(11);"
+	dojo:iconsrc="../images/metagen.png"
+	dojo:caption="<?php echo _MI_NEWS_METAGEN; ?>"></div>
+        <?php if ($xoopsModule->getVar('version') != 153) { ?>
+<div class="dojo-FisheyeListItem" onClick="load_app(12);"
+	dojo:iconsrc="../images/update.png"
+	dojo:caption="<?php echo _AM_NEWS_UPGRADE; ?>"></div>
+        <?php } ?></div>
+</div>
+        <?php
     }
 }
 
@@ -187,7 +183,7 @@ function news_collapsableBar($tablename = '', $iconname = '')
 {
 
     ?>
-	<script type="text/javascript"><!--
+<script type="text/javascript"><!--
 	function goto_URL(object)
 	{
 		window.location.href = object.options[object.selectedIndex].value;
@@ -225,8 +221,8 @@ function news_collapsableBar($tablename = '', $iconname = '')
 
 	//-->
 	</script>
-	<?php
-echo "<h4 style=\"color: #2F5376; margin: 6px 0 0 0; \"><a href='#' onClick=\"toggle('" . $tablename . "'); toggleIcon('" . $iconname . "');\">";
+    <?php
+    echo "<h4 style=\"color: #2F5376; margin: 6px 0 0 0; \"><a href='#' onClick=\"toggle('" . $tablename . "'); toggleIcon('" . $iconname . "');\">";
 }
 
 ?>

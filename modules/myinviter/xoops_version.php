@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
@@ -141,8 +141,8 @@ $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'custom';
 $modversion['config'][$i]['options'] = array(_MI_MYINV_CONF_FROM_CUSTOM => 'custom',
-                                             _MI_MYINV_CONF_FROM_SYSTEM => 'system',
-                                             _MI_MYINV_CONF_FROM_USER => 'user');
+_MI_MYINV_CONF_FROM_SYSTEM => 'system',
+_MI_MYINV_CONF_FROM_USER => 'user');
 
 $i++;
 $modversion['config'][$i]['name'] = 'defaultuid';

@@ -12,7 +12,7 @@
  * @package		module::article
  */
 
-$sql =	
+$sql =
 			"	INSERT INTO ".$GLOBALS['xoopsDB']->prefix("topics").
 			"		(topic_id,	topic_title,	topic_pid,	topic_imgurl,	topic_description)".
 			"	SELECT ".
@@ -21,11 +21,11 @@ $sql =
 			"		ORDER BY cat_id ASC"
 			;
 
-$result = $xoopsDB->queryF($sql);
-xoops_result("succeed with building CATEGORY table: ". $count = $xoopsDB->getAffectedRows());
+			$result = $xoopsDB->queryF($sql);
+			xoops_result("succeed with building CATEGORY table: ". $count = $xoopsDB->getAffectedRows());
 
 
-$sql =	
+			$sql =
 			"	INSERT INTO ".$GLOBALS['xoopsDB']->prefix("stories").
 			"		(storyid,	title,		topicid,	uid,	keywords, 		hometext,		created,			published,			counter,		rating,							votes,		comments,".
 			"		bodytext,	nohtml,		nosmiley)".
@@ -37,11 +37,11 @@ $sql =
 			"		ORDER BY art_id ASC"
 			;
 
-$result = $xoopsDB->queryF($sql);
-xoops_result("succeed with building ARTICLE table: ".$count = $xoopsDB->getAffectedRows());
+			$result = $xoopsDB->queryF($sql);
+			xoops_result("succeed with building ARTICLE table: ".$count = $xoopsDB->getAffectedRows());
 
 
-$sql =	
+			$sql =
 			"	INSERT INTO ".$GLOBALS['xoopsDB']->prefix("stories_votedata").
 			"		(ratingid,	storyid,	ratinguser,	rating,			ratingtimestamp)".
 			"	SELECT ".
@@ -50,7 +50,7 @@ $sql =
 			"		ORDER BY rate_id ASC"
 			;
 
-$result = $xoopsDB->queryF($sql);
-xoops_result("succeed with building RATE table: ".$count = $xoopsDB->getAffectedRows());
+			$result = $xoopsDB->queryF($sql);
+			xoops_result("succeed with building RATE table: ".$count = $xoopsDB->getAffectedRows());
 
-?>
+			?>

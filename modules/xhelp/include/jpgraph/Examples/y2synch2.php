@@ -15,7 +15,7 @@ function toCelcius($aVal) {
 
 $datay =array(2,3,8,19,7,17,6,22);
 
-// Create the graph. 
+// Create the graph.
 $graph = new Graph(400,280);
 
 // Slightly bigger margins than default to make room for titles
@@ -36,7 +36,7 @@ $graph->xaxis->title->Set('Measurement');
 $graph->xaxis->title->SetMargin(5);
 $graph->xaxis->title->SetFont(FF_ARIAL,FS_NORMAL,11);
 
-// Create Y data set 
+// Create Y data set
 $lplot = new BarPlot($datay);
 $graph->yaxis->title->Set('Celcius (C)');
 $graph->yaxis->title->SetMargin(5);
@@ -44,7 +44,7 @@ $graph->yaxis->title->SetFont(FF_ARIAL,FS_NORMAL,11);
 // ... and add the plot to the Y-axis
 $graph->Add($lplot);
 
-// Create Y2 scale data set 
+// Create Y2 scale data set
 $l2plot = new LinePlot($datay);
 $l2plot->SetWeight(0);
 $graph->y2axis->title->Set('Fahrenheit (F)');

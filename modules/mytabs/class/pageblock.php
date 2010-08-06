@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
@@ -142,7 +142,7 @@ class MytabsPageBlock extends XoopsObject
                        'title'     => $this->getVar('title'),
                        'placement' => $this->getVar('placement'),
                        'weight'    => $this->getVar('priority')
-                       );
+        );
 
         $xoopsLogger = XoopsLogger::getInstance();
 
@@ -164,7 +164,7 @@ class MytabsPageBlock extends XoopsObject
         if (!$bcachetime || !$template->is_cached($tplName, $cacheid)) {
             $xoopsLogger->addBlock( $this->block->getVar('title') );
             if (!($bresult = $this->block->buildBlock())) {
-               return false;
+                return false;
             }
             $template->assign('block', $bresult);
             $block['content'] = $template->fetch($tplName, $cacheid);
@@ -198,13 +198,13 @@ class MytabsPageBlockHandler extends XoopsPersistableObjectHandler
     {
         $blocks = array();
         $sql = "SELECT *, pb.options, pb.title FROM "
-             . $this->db->prefix('mytabs_pageblock')
-             . " pb LEFT JOIN "
-             . $this->db->prefix("newblocks")
-             ." b ON pb.blockid=b.bid WHERE (pb.pageid = " . $pageid . ")";
+        . $this->db->prefix('mytabs_pageblock')
+        . " pb LEFT JOIN "
+        . $this->db->prefix("newblocks")
+        ." b ON pb.blockid=b.bid WHERE (pb.pageid = " . $pageid . ")";
 
         if ($tabid > 0) {
-             $sql .=" AND (pb.tabid = " . $tabid . ")";
+            $sql .=" AND (pb.tabid = " . $tabid . ")";
         }
 
         if ($remove != '') {
@@ -296,13 +296,13 @@ class MytabsPageBlockHandler extends XoopsPersistableObjectHandler
             . "WHERE pageid=" . intval($pageid)
             . "AND tabid=" . intval($tabid));
 
-        if ($this->db->getRowsNum($result) == 0) {
-            $priority = 1;
-        } else {
-            $row = $this->db->fetchRow($result);
-            $priority = $row[0]+1;
-        }
-        return $priority;
+            if ($this->db->getRowsNum($result) == 0) {
+                $priority = 1;
+            } else {
+                $row = $this->db->fetchRow($result);
+                $priority = $row[0]+1;
+            }
+            return $priority;
     }
 
 
@@ -321,10 +321,10 @@ class MytabsPageBlockHandler extends XoopsPersistableObjectHandler
             . $this->db->prefix("modules")
             . " m WHERE (b.mid=m.mid) ORDER BY modname, name");
 
-        while (list($id, $name, $title, $modname) = $this->db->fetchRow($result)) {
-            $ret[$id] = $modname . ' --> ' . $title . ' ('.$name.')';
-        }
-        return $ret;
+            while (list($id, $name, $title, $modname) = $this->db->fetchRow($result)) {
+                $ret[$id] = $modname . ' --> ' . $title . ' ('.$name.')';
+            }
+            return $ret;
     }
 
     /**
@@ -339,10 +339,10 @@ class MytabsPageBlockHandler extends XoopsPersistableObjectHandler
             . $this->db->prefix("newblocks")
             . "  WHERE  mid = 0 ORDER BY name");
 
-        while (list($id, $name, $title) = $this->db->fetchRow($result)) {
-            $ret[$id] = $name . " --> " . $title;
-        }
-        return $ret;
+            while (list($id, $name, $title) = $this->db->fetchRow($result)) {
+                $ret[$id] = $name . " --> " . $title;
+            }
+            return $ret;
     }
 }
 ?>

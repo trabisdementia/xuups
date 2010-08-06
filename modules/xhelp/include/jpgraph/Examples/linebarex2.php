@@ -7,12 +7,12 @@ require_once ('jpgraph/jpgraph_bar.php');
 
 $steps=100;
 for($i=0; $i<$steps; ++$i) {
-	$datay[$i]=log(pow($i,$i/10)+1)*sin($i/15)+35;
-	$datax[]=$i;
-	if( $i % 10 == 0 ) {
-		$databarx[]=$i;
-		$databary[]=$datay[$i]/2;
-	}
+    $datay[$i]=log(pow($i,$i/10)+1)*sin($i/15)+35;
+    $datax[]=$i;
+    if( $i % 10 == 0 ) {
+        $databarx[]=$i;
+        $databary[]=$datay[$i]/2;
+    }
 }
 
 // New graph with a background image and drop shadow
@@ -32,7 +32,7 @@ $graph->title->SetFont(FF_FONT1,FS_BOLD);
 
 // Make the margin around the plot a little bit bigger
 // then default
-$graph->img->SetMargin(40,120,40,40);	
+$graph->img->SetMargin(40,120,40,40);
 
 // Slightly adjust the legend from it's default position in the
 // top right corner to middle right side

@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -50,7 +50,7 @@ if (!empty($_POST['submit'])) {
     loadModuleAdminMenu(6, _AM_NEWBB_SETFORUMORDER);
     echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_NEWBB_SETFORUMORDER . "</legend>";
     echo"<br /><br /><table width='100%' border='0' cellspacing='1' class='outer'>"
-     . "<tr><td class='odd'>";
+    . "<tr><td class='odd'>";
     $tform = new XoopsThemeForm(_AM_NEWBB_SETFORUMORDER, "", "");
     $tform->display();
     echo "<form name='reorder' method='post'>";

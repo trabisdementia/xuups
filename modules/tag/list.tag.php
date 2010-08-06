@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code 
+ of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * XOOPS tag management module
@@ -53,19 +53,19 @@ include XOOPS_ROOT_PATH . "/header.php";
 
 $mode_display = empty($mode_display) ? @$_GET["mode"] : $mode_display;
 switch (strtolower($mode_display)) {
-case "list":
-    $mode_display = "list";
-    $sort    = "count";
-    $order    = "DESC";
-    $limit = empty($tag_config["limit_tag_list"]) ? 10 : $tag_config["limit_tag"];
-    break;
-case "cloud":
-default:
-    $mode_display = "cloud";
-    $sort    = "count";
-    $order    = "DESC";
-    $limit = empty($tag_config["limit_tag_could"]) ? 100 : $tag_config["limit_tag"];
-    break;
+    case "list":
+        $mode_display = "list";
+        $sort    = "count";
+        $order    = "DESC";
+        $limit = empty($tag_config["limit_tag_list"]) ? 10 : $tag_config["limit_tag"];
+        break;
+    case "cloud":
+    default:
+        $mode_display = "cloud";
+        $sort    = "count";
+        $order    = "DESC";
+        $limit = empty($tag_config["limit_tag_could"]) ? 100 : $tag_config["limit_tag"];
+        break;
 }
 
 $tag_handler =& xoops_getmodulehandler("tag", "tag");
@@ -106,15 +106,15 @@ $font_ratio = ($count_interval) ? ($font_max - $font_min) / $count_interval : 1;
 $tags_data = array();
 foreach (array_keys($tags) as $key) {
     $tags_data[] = array(
-                    /*
-                     * Font-size = ((tag.count - count.min) * (font.max - font.min) / (count.max - count.min) ) * 100%
-                     */
+    /*
+     * Font-size = ((tag.count - count.min) * (font.max - font.min) / (count.max - count.min) ) * 100%
+     */
                     "id"        => $tags[$key]["id"],
                     "font"      => empty($count_interval) ? 100 : floor( ($tags[$key]["count"] - $count_min) * $font_ratio ) + $font_min,
                     "level"     => empty($count_max) ? 0 : floor( ($tags[$key]["count"] - $count_min) * $level_limit / $count_max ),
                     "term"      => $tags[$key]["term"],
                     "count"     => $tags[$key]["count"],
-                    );
+    );
 }
 unset($tags, $tags_term);
 

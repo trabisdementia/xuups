@@ -38,8 +38,8 @@ class Xmf_Object extends Xmf_Abstract
 {
     /*var $helper;*/
     var $_helpers = array(
-        /*'caption' => null,*/
-        );
+    /*'caption' => null,*/
+    );
 
 
     /**
@@ -114,7 +114,7 @@ class Xmf_Object extends Xmf_Abstract
         if (!isset($helpers[$name])) {
             $helpers[$name] = Xmf_Object_Helper_Factory::loadHelper($this, $name, $args);
             $this->_helpers[$name] = null;
-        /*} else {*/
+            /*} else {*/
             $helpers[$name]->setObject($this);
             $helpers[$name]->setVars($args);
             $helpers[$name]->init();
@@ -359,13 +359,13 @@ class Xmf_Object extends Xmf_Abstract
     }
 
     /**
-    * returns a specific variable for the object in a proper format
-    *
-    * @access public
-    * @param string $key key of the object's variable to be returned
-    * @param string $format format to use for the output
-    * @return mixed formatted value of the variable
-    */
+     * returns a specific variable for the object in a proper format
+     *
+     * @access public
+     * @param string $key key of the object's variable to be returned
+     * @param string $format format to use for the output
+     * @return mixed formatted value of the variable
+     */
     function getVar($key, $format = 's')
     {
         $ret = null;

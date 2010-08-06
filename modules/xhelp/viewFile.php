@@ -51,8 +51,8 @@ if (!$viewFile) {
 //Check if the file exists
 $fileAbsPath = XHELP_UPLOAD_PATH . '/'. $filename_full;
 if (!file_exists($fileAbsPath)) {
-	redirect_header(XHELP_BASE_URL.'/index.php', 3, _XHELP_NO_FILES_ERROR);
-	exit();
+    redirect_header(XHELP_BASE_URL.'/index.php', 3, _XHELP_NO_FILES_ERROR);
+    exit();
 }
 
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
@@ -63,8 +63,8 @@ header("Content-Length: ".filesize($fileAbsPath));
 if(isset($mimeType)) {
     header("Content-Type: " . $mimeType);
 } else {
-	header("Content-Type: application/octet-stream");
-}	
+    header("Content-Type: application/octet-stream");
+}
 
 // Add Header to set filename
 header("Content-Disposition: attachment; filename=" . $filename);
@@ -81,12 +81,12 @@ fpassthru($fp);
 
 
 function _userAllowed(&$ticket, &$user) {
-	$emails =& $ticket->getEmails(true);
-	foreach($emails as $email) {
-		if ($email->getVar('email') == $user->getVar('email')) {
-			return true;
-		}
-	}
-	return false;
+    $emails =& $ticket->getEmails(true);
+    foreach($emails as $email) {
+        if ($email->getVar('email') == $user->getVar('email')) {
+            return true;
+        }
+    }
+    return false;
 }
 ?>

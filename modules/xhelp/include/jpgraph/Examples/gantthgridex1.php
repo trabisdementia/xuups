@@ -6,10 +6,10 @@ require_once ('jpgraph/jpgraph_gantt.php');
 
 // Some dummy data for some activities
 $data = array(
-	array(0,"Group 1  Johan", "2001-10-23","2001-11-06",FF_FONT1,FS_BOLD,8),
-	array(1,"  Label 2", "2001-10-26","2001-11-04"),
-	array(3,"Group 2", "2001-11-20","2001-11-28",FF_FONT1,FS_BOLD,8),
-	array(4,"  Label 1", "2001-11-20","2001-12-1"));
+array(0,"Group 1  Johan", "2001-10-23","2001-11-06",FF_FONT1,FS_BOLD,8),
+array(1,"  Label 2", "2001-10-26","2001-11-04"),
+array(3,"Group 2", "2001-11-20","2001-11-28",FF_FONT1,FS_BOLD,8),
+array(4,"  Label 1", "2001-11-20","2001-12-1"));
 
 // New Gantt Graph
 $graph = new GanttGraph(500);
@@ -32,13 +32,13 @@ $graph->hgrid->SetRowFillColor('darkblue@0.9');
 for($i=0; $i<count($data); ++$i) {
     $bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[5%]",10);
     if( count($data[$i]) > 4 )
-	$bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
+    $bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
     $bar->SetPattern(BAND_RDIAG,"yellow");
     $bar->SetFillColor("red");
     $graph->Add($bar);
 }
 
-// Setup a vertical marker line 
+// Setup a vertical marker line
 $vline = new GanttVLine("2001-11-01");
 $vline->SetDayOffset(0.5);
 $vline->title->Set("2001-11-01");

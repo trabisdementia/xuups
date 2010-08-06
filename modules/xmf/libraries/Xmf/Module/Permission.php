@@ -124,13 +124,13 @@ class Xmf_Module_Permission extends XoopsGroupPermHandler
         return true;
     }
     /*
-    function storeAllPermissionsForId($id)
-    {
-        foreach ($this->handler->getPermissions() as $permission) {
-            $this->updatePermissions($_POST[$permission['perm_name']], $id, $permission['perm_name']);
-        }
-    }
-    */
+     function storeAllPermissionsForId($id)
+     {
+     foreach ($this->handler->getPermissions() as $permission) {
+     $this->updatePermissions($_POST[$permission['perm_name']], $id, $permission['perm_name']);
+     }
+     }
+     */
     /**
      * Delete all permissions for a specific item and/or name
      *

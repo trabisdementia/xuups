@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code 
+ of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * XOOPS tag management module
@@ -19,7 +19,7 @@
  * @version         $Id: tagbar.php 2292 2008-10-12 04:53:18Z phppp $
  * @package         tag
  */
- 
+
 if (!defined('XOOPS_ROOT_PATH') || !is_object($GLOBALS["xoopsModule"])) {
     die();
 }
@@ -38,9 +38,9 @@ if (!defined('XOOPS_ROOT_PATH') || !is_object($GLOBALS["xoopsModule"])) {
 function tagBar($tags, $catid = 0, $modid = 0)
 {
     static $loaded, $delimiter;
-    
+
     if (empty($tags)) return array();
-    
+
     if (!isset($loaded)):
     include XOOPS_ROOT_PATH . "/modules/tag/include/vars.php";
     include_once XOOPS_ROOT_PATH . "/modules/tag/include/functions.php";
@@ -51,7 +51,7 @@ function tagBar($tags, $catid = 0, $modid = 0)
     $loaded = 1;
     $delimiter = @file_exists(XOOPS_ROOT_PATH . "/modules/tag/images/delimiter.gif") ? "<img src=\"" . XOOPS_URL . "/modules/tag/images/delimiter.gif\" alt=\"\" />" : "<img src=\"" . XOOPS_URL . "/images/pointer.gif\" alt=\"\" />";
     endif;
-    
+
     // itemid
     if (is_numeric($tags)) {
         if (empty($modid) && is_object($GLOBALS["xoopsModule"])) {
@@ -61,11 +61,11 @@ function tagBar($tags, $catid = 0, $modid = 0)
         if (!$tags = $tag_handler->getByItem($tags, $modid, $catid)) {
             return array();
         }
-        
-    // if ready, do nothing
+
+        // if ready, do nothing
     } elseif (is_array($tags)) {
-        
-    // parse
+
+        // parse
     } elseif (!$tags = tag_parse_tag($tags)) {
         return array();
     }

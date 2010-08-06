@@ -37,11 +37,11 @@ if (!defined("XOOPS_ROOT_PATH")) {
 }
 
 /*
-//PATH
-$current_path = __FILE__;
-if ( DIRECTORY_SEPARATOR != "/" ) $current_path = str_replace( strpos( $current_path, "\\\\", 2 ) ? "\\\\" : DIRECTORY_SEPARATOR, "/", $current_path);
-define("_XK_P_PATH", substr(dirname($current_path), strlen(realpath(XOOPS_ROOT_PATH))));
-*/
+ //PATH
+ $current_path = __FILE__;
+ if ( DIRECTORY_SEPARATOR != "/" ) $current_path = str_replace( strpos( $current_path, "\\\\", 2 ) ? "\\\\" : DIRECTORY_SEPARATOR, "/", $current_path);
+ define("_XK_P_PATH", substr(dirname($current_path), strlen(realpath(XOOPS_ROOT_PATH))));
+ */
 
 define("_XK_P_PATH", "/class/xoopseditor/koivi/koivieditor/");
 

@@ -34,13 +34,13 @@ switch ($step){
         $times = $Salat->getPrayTime();
         ksort($times);
         $prayers =  array(
-                            _MA_SALAT_PRAYERS_FAJR,
-                            _MA_SALAT_PRAYERS_SUNRISE,
-                            _MA_SALAT_PRAYERS_ZUHR,
-                            _MA_SALAT_PRAYERS_ASR,
-                            _MA_SALAT_PRAYERS_MAGHRIB,
-                            _MA_SALAT_PRAYERS_ISHA
-                         );
+        _MA_SALAT_PRAYERS_FAJR,
+        _MA_SALAT_PRAYERS_SUNRISE,
+        _MA_SALAT_PRAYERS_ZUHR,
+        _MA_SALAT_PRAYERS_ASR,
+        _MA_SALAT_PRAYERS_MAGHRIB,
+        _MA_SALAT_PRAYERS_ISHA
+        );
 
         $xoopsTpl->assign('times', $times);
         $xoopsTpl->assign('prayers', $prayers);

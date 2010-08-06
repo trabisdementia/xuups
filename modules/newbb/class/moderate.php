@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: moderate.php 2169 2008-09-23 13:37:10Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
@@ -46,9 +46,9 @@ class NewbbModerateHandler extends XoopsPersistableObjectHandler
 
     /**
      * Clear garbage
-     * 
+     *
      * Delete all moderation information that has expired
-     * 
+     *
      * @param    int $expire Expiration time in UNIX, 0 for time()
      */
     function clearGarbage($expire = 0)
@@ -57,16 +57,16 @@ class NewbbModerateHandler extends XoopsPersistableObjectHandler
         $sql = sprintf("DELETE FROM %s WHERE mod_end < %u", $this->db->prefix('bb_moderates'), $expire);
         $this->db->queryF($sql);
     }
-    
+
     /**
      * Check if a user is moderated, according to his uid and ip
-     * 
-     * 
+     *
+     *
      * @param    int     $uid user id
      * @param    string     $ip user ip
      */
     function verifyUser($uid = -1, $ip = "", $forum = 0)
-    {        
+    {
         if (!empty($GLOBALS["xoopsModuleConfig"]['cache_enabled'])) {
             $forums = $this->forumList($uid, $ip);
             return in_array($forum, $forums);
@@ -92,12 +92,12 @@ class NewbbModerateHandler extends XoopsPersistableObjectHandler
         list($count) = $this->db->fetchRow($result);
         return $count;
     }
-    
+
     /**
      * Get a forum list that a user is suspended, according to his uid and ip
      * Store the list into session if module cache is enabled
-     * 
-     * 
+     *
+     *
      * @param    int     $uid user id
      * @param    string     $ip user ip
      */
@@ -133,21 +133,21 @@ class NewbbModerateHandler extends XoopsPersistableObjectHandler
         $_forums = array();
         while($row = $this->db->fetchArray($result)) {
             if ($row["count"] > 0) {
-                $_forums[$row["forum_id"]] = 1; 
+                $_forums[$row["forum_id"]] = 1;
             }
         }
         $forums[$uid][$ip] = count($_forums) ? array_keys($_forums) : array(-1);
         if (!empty($GLOBALS["xoopsModuleConfig"]['cache_enabled'])) {
             newbb_setsession("sf" . $uid . "_" . ip2long($ip), $forums[$uid][$ip]);
         }
-        
+
         return $forums[$uid][$ip];
     }
-    
+
     /**
      * Get latest expiration for a user moderation
-     * 
-     * 
+     *
+     *
      * @param    mix     $item    user id or ip
      */
     function getLatest($item, $isUid = true)
@@ -169,10 +169,10 @@ class NewbbModerateHandler extends XoopsPersistableObjectHandler
         $row = $this->db->fetchArray($result);
         return $row["expire"];
     }
-    
+
     /**
      * clean orphan items from database
-     * 
+     *
      * @return     bool    true on success
      */
     function cleanOrphan()
@@ -190,10 +190,10 @@ class NewbbModerateHandler extends XoopsPersistableObjectHandler
         /* */
         // for 4.1+
         /*
-        $sql =     "DELETE bb FROM ".$this->table." AS bb".
-                " LEFT JOIN ".$this->db->prefix("bb_forums")." AS aa ON bb.forum_id = aa.forum_id ".
-                " WHERE bb.forum_id > 0 AND (aa.forum_id IS NULL)";
-        */
+         $sql =     "DELETE bb FROM ".$this->table." AS bb".
+         " LEFT JOIN ".$this->db->prefix("bb_forums")." AS aa ON bb.forum_id = aa.forum_id ".
+         " WHERE bb.forum_id > 0 AND (aa.forum_id IS NULL)";
+         */
         endif;
         if (!$result = $this->db->queryF($sql)) {
             //xoops_error($this->db->error());

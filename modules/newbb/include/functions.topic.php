@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -31,7 +31,7 @@ function newbb_getTopicTitle($topic_title, $prefix_name = null, $prefix_color = 
         return $topic_title;
     }
     $topic_prefix = $prefix_color ? "<em style=\"font-style: normal; color: {$prefix_color};\">[{$prefix_name}]</em> " : "[{$prefix_name}] ";
-    
+
     return $topic_prefix . $topic_title;
 }
 ?>

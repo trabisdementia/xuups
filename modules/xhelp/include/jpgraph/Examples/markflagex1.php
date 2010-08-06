@@ -4,8 +4,8 @@ require_once ('jpgraph/jpgraph_line.php');
 require_once ('jpgraph/jpgraph_scatter.php');
 
 $datay = array(
-    array(4,26,15,44),
-    array(20,51,32,20));
+array(4,26,15,44),
+array(20,51,32,20));
 
 // Setup the graph
 $graph = new Graph(300,200);

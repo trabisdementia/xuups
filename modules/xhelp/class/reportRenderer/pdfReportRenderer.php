@@ -4,12 +4,12 @@
 class xhelpPdfReportRenderer extends reportRenderer {
     function xhelpPdfReportRenderer()
     {
-    
+
     }
-    
+
     function render()
     {
-    
+
     }
 }
 ?>

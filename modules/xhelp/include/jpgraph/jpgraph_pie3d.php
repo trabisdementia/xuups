@@ -397,7 +397,7 @@ class PiePlot3D extends PiePlot {
 
     // Draw a 3D Pie
     function Pie3D($aaoption,$img,$data,$colors,$xc,$yc,$d,$angle,$z,
-                   $shadow=0.65,$startangle=0,$edgecolor="",$edgeweight=1) {
+    $shadow=0.65,$startangle=0,$edgecolor="",$edgeweight=1) {
 
         //---------------------------------------------------------------------------
         // As usual the algorithm get more complicated than I originally
@@ -841,7 +841,7 @@ class PiePlot3D extends PiePlot {
             $thick = $width/12;
         }
         $a = $this->angle;
-        
+
         if( $a <= 30 ) $thick *= 1.6;
         elseif( $a <= 40 ) $thick *= 1.4;
         elseif( $a <= 50 ) $thick *= 1.2;
@@ -854,7 +854,7 @@ class PiePlot3D extends PiePlot {
 
         if( $this->explode_all ) {
             for($i=0; $i < $n; ++$i)
-                $this->explode_radius[$i]=$this->explode_r;
+            $this->explode_radius[$i]=$this->explode_r;
         }
 
         $this->Pie3D($aaoption,$img,$this->data, $ca, $xc, $yc, $width, $this->angle,
@@ -895,11 +895,11 @@ class PiePlot3D extends PiePlot {
         else {
             $w=$img->GetTextWidth($label);
         }
-        
+
         while( $a > 2*M_PI ) {
             $a -= 2*M_PI;
         }
-        
+
         if( $a>=7*M_PI/4 || $a <= M_PI/4 ) $dx=0;
         if( $a>=M_PI/4 && $a <= 3*M_PI/4 ) $dx=($a-M_PI/4)*2/M_PI;
         if( $a>=3*M_PI/4 && $a <= 5*M_PI/4 ) $dx=1;
@@ -916,10 +916,10 @@ class PiePlot3D extends PiePlot {
 
         // Mark anchor point for debugging
         /*
-        $img->SetColor('red');
-        $img->Line($xp-10,$yp,$xp+10,$yp);
-        $img->Line($xp,$yp-10,$xp,$yp+10);
-        */
+         $img->SetColor('red');
+         $img->Line($xp-10,$yp,$xp+10,$yp);
+         $img->Line($xp,$yp-10,$xp,$yp+10);
+         */
 
         $oldmargin = $this->value->margin;
         $this->value->margin=0;

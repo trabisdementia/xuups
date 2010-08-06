@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -29,14 +29,14 @@ function &newbb_search($queryarray, $andor, $limit, $offset, $userid, $forums = 
 
     $forum_handler =& xoops_getmodulehandler('forum', 'newbb');
     $valid_forums = $forum_handler->getIdsByPermission();
-    
+
     if (is_array($forums) && count($forums) > 0) {
         $valid_forums = array_intersect($valid_forums, $forums);
     } elseif (is_numeric($forums) && $forums > 0) {
         $valid_forums = array_intersect($valid_forums, array($forums));
     }
 
-     $sql = 'SELECT p.uid,f.forum_id, p.topic_id, p.poster_name, p.post_time,';
+    $sql = 'SELECT p.uid,f.forum_id, p.topic_id, p.poster_name, p.post_time,';
     $sql .= ' f.forum_name, p.post_id, p.subject
             FROM '.$xoopsDB->prefix('bb_posts').' p,
             '.$xoopsDB->prefix('bb_posts_text').' pt,
@@ -44,7 +44,7 @@ function &newbb_search($queryarray, $andor, $limit, $offset, $userid, $forums = 
     $sql .= ' WHERE p.post_id = pt.post_id';
     $sql .= ' AND p.approved = 1';
     $sql .= ' AND p.forum_id = f.forum_id';
-//                AND p.uid = u.uid'; // In case exists a userid with which the associated user is removed, this line will block search results.  Can do nothing unless xoops changes its way dealing with user removal
+    //                AND p.uid = u.uid'; // In case exists a userid with which the associated user is removed, this line will block search results.  Can do nothing unless xoops changes its way dealing with user removal
     if (!empty($forum)) {
         $sql .= ' AND f.forum_id IN ('.implode(',', $valid_forums).')';
     }
@@ -64,32 +64,32 @@ function &newbb_search($queryarray, $andor, $limit, $offset, $userid, $forums = 
     $count = count($queryarray);
     if ( is_array($queryarray) && $count > 0) {
         switch ($searchin) {
-           case 'title':
-               $sql .= " AND ((p.subject LIKE '%$queryarray[0]%')";
-               for ($i = 1; $i < $count; $i++) {
-                   $sql .= " $andor ";
-                   $sql .= "(p.subject LIKE '%$queryarray[$i]%')";
-               }
-               $sql .= ") ";
-               break;
+            case 'title':
+                $sql .= " AND ((p.subject LIKE '%$queryarray[0]%')";
+                for ($i = 1; $i < $count; $i++) {
+                    $sql .= " $andor ";
+                    $sql .= "(p.subject LIKE '%$queryarray[$i]%')";
+                }
+                $sql .= ") ";
+                break;
 
-           case 'text':
-               $sql .= " AND ((pt.post_text LIKE '%$queryarray[0]%')";
-               for ($i = 1; $i < $count; $i++) {
-                   $sql .= " $andor ";
-                   $sql .= "(pt.post_text LIKE '%$queryarray[$i]%')";
-               }
-               $sql .= ") ";
-               break;
+            case 'text':
+                $sql .= " AND ((pt.post_text LIKE '%$queryarray[0]%')";
+                for ($i = 1; $i < $count; $i++) {
+                    $sql .= " $andor ";
+                    $sql .= "(pt.post_text LIKE '%$queryarray[$i]%')";
+                }
+                $sql .= ") ";
+                break;
             case 'both' :
             default;
-               $sql .= " AND ((p.subject LIKE '%$queryarray[0]%' OR pt.post_text LIKE '%$queryarray[0]%')";
-               for ($i = 1; $i < $count; $i++) {
-                   $sql .= " $andor ";
-                   $sql .= "(p.subject LIKE '%$queryarray[$i]%' OR pt.post_text LIKE '%$queryarray[$i]%')";
-               }
-               $sql .= ") ";
-               break;
+            $sql .= " AND ((p.subject LIKE '%$queryarray[0]%' OR pt.post_text LIKE '%$queryarray[0]%')";
+            for ($i = 1; $i < $count; $i++) {
+                $sql .= " $andor ";
+                $sql .= "(p.subject LIKE '%$queryarray[$i]%' OR pt.post_text LIKE '%$queryarray[$i]%')";
+            }
+            $sql .= ") ";
+            break;
         }
     }
 
@@ -101,7 +101,7 @@ function &newbb_search($queryarray, $andor, $limit, $offset, $userid, $forums = 
     $ret = array();
     $users = array();
     $i = 0;
-     while($myrow = $xoopsDB->fetchArray($result)) {
+    while($myrow = $xoopsDB->fetchArray($result)) {
         $ret[$i]['link'] = "viewtopic.php?topic_id=".$myrow['topic_id']."&amp;forum=".$myrow['forum_id']."&amp;post_id=".$myrow['post_id']."#forumpost".$myrow['post_id'];
         $ret[$i]['title'] = $myrow['subject'];
         $ret[$i]['time'] = $myrow['post_time'];

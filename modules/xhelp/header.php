@@ -19,7 +19,7 @@ if($xoopsUser){
     $hStaff =& xhelpGetHandler('staff');
     if($xhelp_staff =& $hStaff->getByUid($xoopsUser->getVar('uid'))){
         $xhelp_isStaff = true;
-        
+
         // Check if the staff member permissions have changed since the last page request
         if(!$myTime = $_xhelpSession->get("xhelp_permTime")){
             $roleReset = true;
@@ -29,13 +29,13 @@ if($xoopsUser){
                 $roleReset = true;
             }
         }
-        
-        // Update staff member permissions (if necessary)   
+
+        // Update staff member permissions (if necessary)
         if($roleReset){
             $updateRoles = $xhelp_staff->resetRoleRights();
             $_xhelpSession->set("xhelp_permTime", time());
         }
-        
+
         //Retrieve the staff member's saved searches
         if(!$aSavedSearches = $_xhelpSession->get("xhelp_savedSearches")){
             $aSavedSearches =& xhelpGetSavedSearches($xoopsUser->getVar('uid'));

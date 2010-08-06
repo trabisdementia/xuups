@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: form.article.elements.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) exit();
 
 if (!is_object($form_art)) {
@@ -70,7 +70,7 @@ $form_element["inactive"]["art_summary"] = new XoopsFormHidden("art_summary", $a
 $form_element["active"]["subtitle"] = new XoopsFormText(art_constant("MD_SUBTITLE"), "subtitle", 60, 255, $subtitle);
 $form_element["inactive"]["subtitle"] = new XoopsFormHidden("subtitle", $subtitle);
 
-// The editor selection 
+// The editor selection
 $nohtml = empty($canhtml);
 if (!empty($editor)) {
     //art_setcookie("editor",$editor);
@@ -127,11 +127,11 @@ $form_element["inactive"]["text_options"][] = new XoopsFormHidden("dobr", $dobr)
 $pages = $article_obj->getPageCount(true);
 $pages_valid = $article_obj->getPageCount();
 if ($pages) {
-    
+
     $QUERY_STRING = array();
     if (!empty($art_id)) $QUERY_STRING[] = "article=" . $art_id;
     if (!empty($cat_id)) $QUERY_STRING[] = "category=" . $cat_id;
-    
+
     $href = "edit.article.php?" . implode("&", $QUERY_STRING) . "&";
 
     $page_string = "";
@@ -149,7 +149,7 @@ if ($pages) {
         }
         </script>
         ";
-        
+
     for($i = 1; $i <= $pages; $i++) {
         $pageno = ($i>$pages_valid) ? "<span style=\"font-style:italic\">" . $i . "</span>" : $i;
         if (!empty($newpage)) {
@@ -204,25 +204,25 @@ if (@include_once XOOPS_ROOT_PATH . "/modules/tag/include/formtag.php") {
 
 // Attachments
 /*
-$form_element["inactive"]["userfile"] = null;
-if ($canupload) {
-    $upload_tray = new XoopsFormElementTray(art_constant("MD_ATTACHMENT"), '<br />');
-    $upload_tray->addElement(new XoopsFormFile(art_constant("MD_ATTACHMENT"), "userfile",""));
-    $upload_tray->addElement(new XoopsFormLabel(art_constant("MD_ALLOWED_EXTENSIONS"), "<i>".str_replace("|"," ",$xoopsModuleConfig["extension"]) . "</i>"));
-    
-    if (!empty($attachments)) {
-        $delete_attach_checkbox = new XoopsFormCheckBox(art_constant("MD_ATTACHED"), "delete_attach[]");
-        foreach($attachments as $key => $attachment) {
-            $attach = _DELETE." <a href=".XOOPS_URL."/" . $xoopsModuleConfig["path_upload"]."/" . $attachment["name_saved"]." targe="_blank" >" . $attachment["name_display"]."</a>";
-            $delete_attach_checkbox->addOption($key, $attach);
-        }
-        $upload_tray->addElement($delete_attach_checkbox);
-    }
-    $form_element["active"]["userfile"] =& $upload_tray;
-} else {
-    $form_element["active"]["userfile"] = null;
-}
-*/
+ $form_element["inactive"]["userfile"] = null;
+ if ($canupload) {
+ $upload_tray = new XoopsFormElementTray(art_constant("MD_ATTACHMENT"), '<br />');
+ $upload_tray->addElement(new XoopsFormFile(art_constant("MD_ATTACHMENT"), "userfile",""));
+ $upload_tray->addElement(new XoopsFormLabel(art_constant("MD_ALLOWED_EXTENSIONS"), "<i>".str_replace("|"," ",$xoopsModuleConfig["extension"]) . "</i>"));
+
+ if (!empty($attachments)) {
+ $delete_attach_checkbox = new XoopsFormCheckBox(art_constant("MD_ATTACHED"), "delete_attach[]");
+ foreach($attachments as $key => $attachment) {
+ $attach = _DELETE." <a href=".XOOPS_URL."/" . $xoopsModuleConfig["path_upload"]."/" . $attachment["name_saved"]." targe="_blank" >" . $attachment["name_display"]."</a>";
+ $delete_attach_checkbox->addOption($key, $attach);
+ }
+ $upload_tray->addElement($delete_attach_checkbox);
+ }
+ $form_element["active"]["userfile"] =& $upload_tray;
+ } else {
+ $form_element["active"]["userfile"] = null;
+ }
+ */
 
 // Spot Image
 $image_tray = new XoopsFormElementTray(art_constant("MD_IMAGE_ARTICLE"), "<br />");
@@ -265,10 +265,10 @@ $cat_pid = 0;
 foreach ($categories as $id => $cat) {
     $cat_options[$id] = $cat["prefix"] . $cat["cat_title"];
     if ($cat["cat_pid"] == 0) {
-        $top_categories[$id]["cat"] = $cat; 
+        $top_categories[$id]["cat"] = $cat;
         $cat_pid = $id;
     } else {
-        $top_categories[$cat_pid]["sub"][$id] = $cat; 
+        $top_categories[$cat_pid]["sub"][$id] = $cat;
     }
 }
 
@@ -287,15 +287,15 @@ if (art_isAdministrator() || $isAuthor) {
 $col_num = 3;
 $col_wid = floor( 95 / $col_num );
 $category_string = "<div>";
-$top_count = 0; 
-//$form_element["active"]["category_hidden"] = array(); 
-//$form_element["inactive"]["category_hidden"] = array(); 
+$top_count = 0;
+//$form_element["active"]["category_hidden"] = array();
+//$form_element["inactive"]["category_hidden"] = array();
 foreach ( array_keys($top_categories) as $id) {
     $top_count++;
     $cat = $top_categories[$id]["cat"];
     $sub = empty($top_categories[$id]["sub"]) ? array() : $top_categories[$id]["sub"];
     $category_string .= "<div style=\"float: left; width: {$col_wid}%\">\n";
-    
+
     $category_string .= "<div>" . $cat["prefix"];
     if ($category_handler->getPermission($id, "moderate")) {
         $category_string .= "<input type=\"checkbox\" name=\"category[]\"";
@@ -313,7 +313,7 @@ foreach ( array_keys($top_categories) as $id) {
     if (is_array($category) && in_array($id, $category)) {
         $form_element["inactive"]["category"][] = new XoopsFormHidden("category[]", $id);
     }
-    
+
     foreach ($sub as $sid => $scat) {
         $category_string .= "<div>" . $scat["prefix"];
         if ($category_handler->getPermission($sid, "moderate")) {
@@ -333,9 +333,9 @@ foreach ( array_keys($top_categories) as $id) {
             $form_element["inactive"]["category"][] = new XoopsFormHidden("category[]", $sid);
         }
     }
-    
+
     $category_string .= "</div>\n";
-    
+
     if ($top_count == $col_num) {
         $top_count = 0;
         $category_string .= "</div>\n<br style=\"clear: both;\" /><div style=\"margin-top: 10px;\">";
@@ -352,7 +352,7 @@ $topic_handler =& xoops_getmodulehandler("topic", $GLOBALS["artdirname"]);
 $criteria = new CriteriaCompo(new Criteria("top_expire", time(), ">"));
 $tags = array("top_title", "cat_id");
 $topic_string = "";
-//$form_element["active"]["topic_hidden"] = array(); 
+//$form_element["active"]["topic_hidden"] = array();
 if ( $topics_obj = $topic_handler->getByCategory($allowed_cats, $xoopsModuleConfig["topics_max"], 0, $criteria, $tags) ) {
     foreach ($topics_obj as $top_id => $top) {
         if ($topic_handler->getPermission($top, "moderate")) {

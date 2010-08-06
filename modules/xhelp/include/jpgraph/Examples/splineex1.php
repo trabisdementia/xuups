@@ -38,7 +38,7 @@ $g->xaxis->SetLabelFormat('%1.1f');
 // contro points.
 $splot = new ScatterPlot($ydata,$xdata);
 
-// 
+//
 $splot->mark->SetFillColor('red@0.3');
 $splot->mark->SetColor('red@0.5');
 

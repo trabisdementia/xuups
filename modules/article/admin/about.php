@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,24 +16,24 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: about.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 xoops_cp_header();
 loadModuleAdminMenu(10);
 
-// Fetch moduleinfo 
+// Fetch moduleinfo
 //$versioninfo =& $module_handler->get( $xoopsModule->getVar( 'mid' ) );
 
 function art_getInfo($var)
 {
     global $xoopsModule;
-    
+
     // Moved from xoops_version.php
     $modinfo["license"] = "GNU see LICENSE";
     $modinfo["license_file"] = XOOPS_URL . "/modules/" . $xoopsModule->getVar("dirname") . "/gpl.txt";
     $modinfo["release"] = "2006-06-17";
-    
+
     $modinfo["author_website_url"] = "http://xoopsforge.com";
     $modinfo["author_website_name"] = "Xoops Forge";
     $modinfo["author_word"] = "Acknowledgement: <br />
@@ -44,13 +44,13 @@ function art_getInfo($var)
     -- domecc (chweifly@hotmail.com), test, documentation.<br />
     -- marco (http://frxoops.org), test.<br />
     ";
-    
+
     $modinfo["module_status"] = "RC";
     $modinfo["module_team"] = "The Xoops Community.";
-    
+
     $modinfo["module_website_url"] = "http://xoopsforge.com/modules/article/";
     $modinfo["module_website_name"] = "XOOPS FORGE";
-    
+
     if(empty($var)) return null;
     if(!$val = $xoopsModule->getInfo( $var )){
         $val = @$modinfo[$var];

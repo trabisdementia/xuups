@@ -231,15 +231,15 @@ define('_MD_REQUIRE_REPLY', '回复');
 define('_MD_REQUIRE_NULL', '无');
 
 /*
-define("_MD_SELECT_FORMTYPE", "选择编辑器");
-define("_MD_FORM_COMPACT", "简洁");
-define("_MD_FORM_DHTML", "标准");
-define("_MD_FORM_SPAW", "Spaw");
-define("_MD_FORM_HTMLAREA", "HTMLArea");
-define("_MD_FORM_FCK", "FCK");
-define("_MD_FORM_KOIVI", "Koivi");
-define("_MD_FORM_TINYMCE", "TinyMCE");
-*/
+ define("_MD_SELECT_FORMTYPE", "选择编辑器");
+ define("_MD_FORM_COMPACT", "简洁");
+ define("_MD_FORM_DHTML", "标准");
+ define("_MD_FORM_SPAW", "Spaw");
+ define("_MD_FORM_HTMLAREA", "HTMLArea");
+ define("_MD_FORM_FCK", "FCK");
+ define("_MD_FORM_KOIVI", "Koivi");
+ define("_MD_FORM_TINYMCE", "TinyMCE");
+ */
 
 // ERROR messages
 define('_MD_ERRORFORUM', '错误：未选择讨论区！');
@@ -478,7 +478,7 @@ define("_MD_SUSPEND_NOACCESS", "你的账号或IP已被禁止发言");
 define("_MD_NEWBB_TYPE", "主题类别");
 define("_MD_NEWBB_TAG", "Tag");
 
-// !!IMPORTANT!! insert '\' before any char among reserved chars: "a", "A", "B", "c", "d", "D", "F", "g", "G", "h", "H", "i", "I", "j", "l", "L", "m", "M", "n", "O", "r", "s", "S", "t", "T", "U", "w", "W", "Y", "y", "z", "Z"	
+// !!IMPORTANT!! insert '\' before any char among reserved chars: "a", "A", "B", "c", "d", "D", "F", "g", "G", "h", "H", "i", "I", "j", "l", "L", "m", "M", "n", "O", "r", "s", "S", "t", "T", "U", "w", "W", "Y", "y", "z", "Z"
 // insert double '\' before 't', 'r', 'n'
 define("_MD_TODAY", "今天 G:i:s");
 define("_MD_YESTERDAY", "昨天 G:i:s");

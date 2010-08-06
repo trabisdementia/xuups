@@ -4,13 +4,13 @@ require_once ('jpgraph/jpgraph_bar.php');
 
 $datay=array(10,29,3,6);
 
-// Create the graph. 
-$graph = new Graph(200,200);	
+// Create the graph.
+$graph = new Graph(200,200);
 $graph->SetScale('textlin');
 $graph->SetMargin(25,10,20,25);
 $graph->SetBox(true);
 
-// Add 10% grace ("space") at top and botton of Y-scale. 
+// Add 10% grace ("space") at top and botton of Y-scale.
 $graph->yscale->SetGrace(10);
 $graph->ygrid->Show(false);
 

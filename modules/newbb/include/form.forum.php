@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: form.forum.php 2170 2008-09-23 13:40:23Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) exit();
 
 if (!is_object($forum_obj)) {
@@ -67,7 +67,7 @@ $perm_checkbox->addOption(1, _AM_NEWBB_PERM_TEMPLATEAPP);
 $perm_tray->addElement($perm_checkbox);
 $perm_tray->addElement(new XoopsFormLabel('', '<a href="admin_permissions.php?action=template" rel="external" title="">' . _AM_NEWBB_PERM_TEMPLATE . '</a>'));
 $form_forum->addElement($perm_tray);
-    
+
 $form_forum->addElement(new XoopsFormHidden('forum', $forum_obj->getVar("forum_id")));
 $form_forum->addElement(new XoopsFormHidden('op', "save"));
 

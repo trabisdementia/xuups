@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,12 +16,12 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: topic.php 2284 2008-10-12 03:45:46Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
 
-class Topic extends XoopsObject 
+class Topic extends XoopsObject
 {
     function Topic()
     {
@@ -47,13 +47,13 @@ class Topic extends XoopsObject
         $this->initVar('poll_id',                 XOBJ_DTYPE_INT);
         $this->initVar('topic_tags',             XOBJ_DTYPE_SOURCE);
     }
-    
+
     function incrementCounter()
     {
         $sql = 'UPDATE ' . $GLOBALS["xoopsDB"]->prefix('bb_topics') . ' SET topic_views = topic_views + 1 WHERE topic_id =' . $this->getVar('topic_id');
         $GLOBALS["xoopsDB"]->queryF($sql);
     }
-    
+
     /**
      * Create full title of the topic
      *
@@ -66,7 +66,7 @@ class Topic extends XoopsObject
         if (!$this->getVar("type_id")) return $topic_title;
         $type_handler =& xoops_getmodulehandler('type', 'newbb');
         if (!$type_obj =& $type_handler->get($this->getVar("type_id"))) return $topic_title;
-        
+
         require_once XOOPS_ROOT_PATH . "/modules/newbb/include/functions.topic.php";
         return newbb_getTopicTitle($topic_title, $type_obj->getVar("type_name"), $type_obj->getVar("type_color"));
     }
@@ -78,7 +78,7 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
     {
         $this->XoopsPersistableObjectHandler($db, 'bb_topics', 'Topic', 'topic_id', 'topic_title');
     }
-    
+
     function &get($id, $var = null)
     {
         $ret = null;
@@ -106,7 +106,7 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
         if (!parent::insert($object, $force) || !$object->getVar("approved")) {
             return $object->getVar("topic_id");
         }
-        
+
         require_once XOOPS_ROOT_PATH . "/modules/newbb/include/functions.config.php";
         $newbbConfig = newbb_loadConfig();
         if ( !empty($newbbConfig['do_tag']) && @include_once XOOPS_ROOT_PATH . "/modules/tag/include/functions.php" ) {
@@ -116,7 +116,7 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
         }
         return $object->getVar("topic_id");
     }
-    
+
     function approve(&$object)
     {
         $topic_id = $object->getVar("topic_id");
@@ -158,7 +158,7 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
         if (!empty($action)):
         $sql = "SELECT * FROM " . $this->table .
                 " WHERE 1=1" .
-                (($forum_id>0) ? " AND forum_id=" . intval($forum_id) : "") .
+        (($forum_id>0) ? " AND forum_id=" . intval($forum_id) : "") .
                    " AND topic_id " . (($action > 0) ? ">" : "<") . intval($topic_id) .
                 " ORDER BY topic_id " . (($action > 0) ? "ASC" : "DESC") . " LIMIT 1";
         if ($result = $this->db->query($sql)) {
@@ -191,15 +191,15 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
     function getPostCount(&$topic, $type ="")
     {
         switch($type) {
-        case "pending":
-            $approved = 0;                
-            break;
-        case "deleted":
-            $approved = -1;                
-            break;
-        default:
-            $approved = 1;                
-            break;
+            case "pending":
+                $approved = 0;
+                break;
+            case "deleted":
+                $approved = -1;
+                break;
+            default:
+                $approved = 1;
+                break;
         }
         $criteria =& new CriteriaCompo(new Criteria("topic_id", $topic->getVar('topic_id')));
         $criteria->add(new Criteria("approved", $approved));
@@ -247,15 +247,15 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
         $perpage = (intval($perpage)>0) ? intval($perpage) : (empty($xoopsModuleConfig['posts_per_page']) ? 10 : $xoopsModuleConfig['posts_per_page']);
         $start = intval($start);
         switch($type) {
-        case "pending":
-            $approve_criteria = ' AND p.approved = 0';
-            break;
-        case "deleted":
-            $approve_criteria = ' AND p.approved = -1';
-            break;
-        default:
-            $approve_criteria = ' AND p.approved = 1';
-            break;
+            case "pending":
+                $approve_criteria = ' AND p.approved = 0';
+                break;
+            case "deleted":
+                $approve_criteria = ' AND p.approved = -1';
+                break;
+            default:
+                $approve_criteria = ' AND p.approved = 1';
+                break;
         }
 
         if ($post_id) {
@@ -350,16 +350,16 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
         $post_obj =& $this->getTopPost($topic_id);
         $post_handler =& xoops_getmodulehandler('post', 'newbb');
         $post_handler->delete($post_obj, false, $force);
-        
+
         require_once XOOPS_ROOT_PATH . "/modules/newbb/include/functions.config.php";
         $newbbConfig = newbb_loadConfig();
         if (!empty($newbbConfig['do_tag']) && $tag_handler = @xoops_getmodulehandler('tag', 'tag', true)) {
             $tag_handler->updateByItem(array(), $topic_id, "newbb");
         }
-        
+
         return true;
     }
-    
+
     // get permission
     // parameter: $type: 'post', 'view',  'reply', 'edit', 'delete', 'addpoll', 'vote', 'attach'
     // $gperm_names = "'forum_can_post', 'forum_can_view', 'forum_can_reply', 'forum_can_edit', 'forum_can_delete', 'forum_can_addpoll', 'forum_can_vote', 'forum_can_attach', 'forum_can_noapprove'";
@@ -381,10 +381,10 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
         }
         return $permission;
     }
-    
+
     /**
      * clean orphan items from database
-     * 
+     *
      * @return     bool    true on success
      */
     function cleanOrphan()
@@ -392,13 +392,13 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
         $this->deleteAll(new Criteria("topic_time", 0), true, true);
         parent::cleanOrphan($this->db->prefix("bb_forums"), "forum_id");
         parent::cleanOrphan($this->db->prefix("bb_posts"), "topic_id");
-        
+
         return true;
     }
 
     /**
      * clean expired objects from database
-     * 
+     *
      * @param     int     $expire     time limit for expiration
      * @return     bool    true on success
      */
@@ -408,7 +408,7 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
         $crit_expire->add(new Criteria("topic_time", time() - intval($expire), "<"));
         return $this->deleteAll($crit_expire, true/*, true*/);
     }
-    
+
     function synchronization(&$object/*, $force = true*/)
     {
         if (!is_object($object)) {

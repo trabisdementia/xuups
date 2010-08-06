@@ -61,11 +61,11 @@ $gperm_handler =& xoops_gethandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
 } else {
-	$groups = XOOPS_GROUP_ANONYMOUS;
+    $groups = XOOPS_GROUP_ANONYMOUS;
 }
 if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, $xoopsModule->getVar('mid'))) {
-	redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
-	exit();
+    redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
+    exit();
 }
 
 $dateformat = news_getmoduleoption('dateformat');
@@ -100,7 +100,7 @@ $pdf_config['slogan']=$xoopsConfig['sitename'].' - '.$xoopsConfig['slogan'];
 
 $pdf=new PDF();
 if(method_exists($pdf, 'encoding')){
-	$pdf->encoding($pdf_data, _CHARSET);
+    $pdf->encoding($pdf_data, _CHARSET);
 }
 $pdf->SetCreator($pdf_config['creator']);
 $pdf->SetTitle($pdf_data['title']);
@@ -125,14 +125,14 @@ $pdf->SetFont($pdf_config['font']['title']['family'],$pdf_config['font']['title'
 $pdf->WriteHTML($pdf_data['title'],$pdf_config['scale']);
 
 if ($pdf_data['subtitle']<>''){
-	$pdf->WriteHTML($puff,$pdf_config['scale']);
-	$pdf->SetFont($pdf_config['font']['subtitle']['family'],$pdf_config['font']['subtitle']['style'],$pdf_config['font']['subtitle']['size']);
-	$pdf->WriteHTML($pdf_data['subtitle'],$pdf_config['scale']);
+    $pdf->WriteHTML($puff,$pdf_config['scale']);
+    $pdf->SetFont($pdf_config['font']['subtitle']['family'],$pdf_config['font']['subtitle']['style'],$pdf_config['font']['subtitle']['size']);
+    $pdf->WriteHTML($pdf_data['subtitle'],$pdf_config['scale']);
 }
 if ($pdf_data['subsubtitle']<>'') {
-	$pdf->WriteHTML($puff,$pdf_config['scale']);
-	$pdf->SetFont($pdf_config['font']['subsubtitle']['family'],$pdf_config['font']['subsubtitle']['style'],$pdf_config['font']['subsubtitle']['size']);
-	$pdf->WriteHTML($pdf_data['subsubtitle'],$pdf_config['scale']);
+    $pdf->WriteHTML($puff,$pdf_config['scale']);
+    $pdf->SetFont($pdf_config['font']['subsubtitle']['family'],$pdf_config['font']['subsubtitle']['style'],$pdf_config['font']['subsubtitle']['size']);
+    $pdf->WriteHTML($pdf_data['subsubtitle'],$pdf_config['scale']);
 }
 
 $pdf->WriteHTML($puff,$pdf_config['scale']);

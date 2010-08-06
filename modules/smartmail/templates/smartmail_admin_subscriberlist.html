@@ -1,0 +1,32 @@
+<div>
+	<form name="<{$form.name}>" method="<{$form.method}>" action="<{$form.action}>">
+		<{foreach item=element from=$form.elements}>
+			<{$element.caption}>&nbsp;<{$element.body}>&nbsp;
+		<{/foreach}>
+	</form>
+</div>
+<table>
+	<tr>
+		<th><{$smarty.const._NL_AM_USERNAME}></th>
+		<th><{$smarty.const._NL_AM_USEREMAIL}></th>
+		<th></th>
+	</tr>
+	<{foreach item=subscriber from=$subscribers}>
+		<tr>
+			<td><{$subscriber.uname}></td>
+			<td><{$subscriber.email}></td>
+			<td>
+				<form action="subscribers.php" method="post">
+					<input type="hidden" name="uid" value="<{$subscriber.uid}>" />
+					<input type="hidden" name="id" value="<{$newsletter.newsletter_id}>" />
+					<input type="hidden" name="op" value="remove" />
+					<input type="submit" name="submit" value="<{$smarty.const._DELETE}>" />
+				</form>
+			</td>
+		</tr>
+	<{/foreach}>
+</table>
+
+<{if $pagenav}>
+	<{$pagenav}>
+<{/if}>

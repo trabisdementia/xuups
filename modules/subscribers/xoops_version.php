@@ -1,6 +1,6 @@
 <?php
 if (!defined("XOOPS_ROOT_PATH")) {
- 	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 $modversion['name'] = _MI_SUBSCRIBERS_MD_NAME;

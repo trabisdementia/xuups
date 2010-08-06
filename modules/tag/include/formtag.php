@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code 
+ of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * XOOPS tag management module
@@ -19,7 +19,7 @@
  * @version         $Id: formtag.php 2292 2008-10-12 04:53:18Z phppp $
  * @package         tag
  */
- 
+
 if (!defined('XOOPS_ROOT_PATH')) {
     die("XOOPS root path not defined");
 }
@@ -31,7 +31,7 @@ class XoopsFormTag extends XoopsFormText
 
     /**
      * Constructor
-     * 
+     *
      * @param    string    $name       "name" attribute
      * @param    int        $size        Size
      * @param    int        $maxlength    Maximum length of text
@@ -61,7 +61,7 @@ class XoopsFormTag extends XoopsFormText
 
     /**
      * Prepare HTML for output
-     * 
+     *
      * @return    string  HTML
      */
     function render()

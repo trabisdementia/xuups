@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -65,9 +65,9 @@ $perm = false;
 if ($isadmin) {
     $perm = true;
 } elseif ($topic_handler->getPermission($forum_obj, $topic_obj->getVar('topic_status'), "addpoll")
-    //&& $forum_obj->getVar('allow_polls') == 1
+//&& $forum_obj->getVar('allow_polls') == 1
 ) {
-    if ( ($op=="add" || $op=="save") && !$topic_obj->getVar("topic_haspoll") && is_object($xoopsUser) && $xoopsUser->getVar("uid") == $topic_obj->getVar("topic_poster") ) { 
+    if ( ($op=="add" || $op=="save") && !$topic_obj->getVar("topic_haspoll") && is_object($xoopsUser) && $xoopsUser->getVar("uid") == $topic_obj->getVar("topic_poster") ) {
         $perm = true;
     } elseif (!empty($poll_id)) {
         $poll = new XoopsPoll($poll_id);

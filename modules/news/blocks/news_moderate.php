@@ -25,7 +25,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
+    die('XOOPS root path not defined');
 }
 
 
@@ -33,36 +33,36 @@ if (!defined('XOOPS_ROOT_PATH')) {
  * Dispay a block where news moderators can show news that need to be moderated.
  */
 function b_news_topics_moderate() {
-	include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
-	include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
-	$block = array();
-	$dateformat=news_getmoduleoption('dateformat');
-	$infotips=news_getmoduleoption('infotips');
+    include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
+    include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
+    $block = array();
+    $dateformat=news_getmoduleoption('dateformat');
+    $infotips=news_getmoduleoption('infotips');
 
     $storyarray = NewsStory :: getAllSubmitted(0, true, news_getmoduleoption('restrictindex'));
     if ( count( $storyarray ) > 0 )
     {
-		$block['lang_story_title'] = _MB_TITLE;
-		$block['lang_story_date'] = _MB_POSTED;
-		$block['lang_story_author'] =_MB_POSTER;
-		$block['lang_story_action'] =_MB_ACTION;
-		$block['lang_story_topic'] =_MB_TOPIC;
-		$myts =& MyTextSanitizer::getInstance();
+        $block['lang_story_title'] = _MB_TITLE;
+        $block['lang_story_date'] = _MB_POSTED;
+        $block['lang_story_author'] =_MB_POSTER;
+        $block['lang_story_action'] =_MB_ACTION;
+        $block['lang_story_topic'] =_MB_TOPIC;
+        $myts =& MyTextSanitizer::getInstance();
         foreach( $storyarray as $newstory )
         {
             $title = $newstory -> title();
-			$htmltitle='';
-			if($infotips>0) {
-				$story['infotips'] = news_make_infotips($newstory->hometext());
-				$htmltitle=' title="'.$story['infotips'].'"';
-			}
+            $htmltitle='';
+            if($infotips>0) {
+                $story['infotips'] = news_make_infotips($newstory->hometext());
+                $htmltitle=' title="'.$story['infotips'].'"';
+            }
 
             if (!isset( $title ) || ($title == '')) {
                 $linktitle = "<a href='" . XOOPS_URL . "/modules/news/index.php?op=edit&amp;storyid=" . $newstory->storyid() . "' target='_blank'".$htmltitle.">" . _AD_NOSUBJECT . "</a>";
             } else {
                 $linktitle = "<a href='" . XOOPS_URL . "/modules/news/submit.php?op=edit&amp;storyid=" . $newstory->storyid() . "' target='_blank'".$htmltitle.">" . $title . "</a>";
             }
-			$story=array();
+            $story=array();
             $story['title'] = $linktitle;
             $story['date'] = formatTimestamp($newstory->created(),$dateformat);
             $story['author'] = "<a href='" . XOOPS_URL . "/userinfo.php?uid=" . $newstory -> uid() . "'>" . $newstory->uname() . "</a>";
@@ -73,16 +73,16 @@ function b_news_topics_moderate() {
             unset($story);
         }
     }
-	return $block;
+    return $block;
 }
 
 function b_news_topics_moderate_onthefly($options)
 {
-	$options = explode('|',$options);
-	$block = & b_news_topics_moderate($options);
+    $options = explode('|',$options);
+    $block = & b_news_topics_moderate($options);
 
-	$tpl = new XoopsTpl();
-	$tpl->assign('block', $block);
-	$tpl->display('db:news_block_moderate.html');
+    $tpl = new XoopsTpl();
+    $tpl->assign('block', $block);
+    $tpl->display('db:news_block_moderate.html');
 }
 ?>

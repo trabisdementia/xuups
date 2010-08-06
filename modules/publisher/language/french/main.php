@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: main.php 836 2009-09-14 23:29:42Z Dugris $
-* Module: Publisher
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: main.php 836 2009-09-14 23:29:42Z Dugris $
+ * Module: Publisher
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 define("_MD_PUBLISHER_ADD_FILE_INTRO", "s'il vous plaît veuillez remplir ce formulaire afin de joindre un fichier à ce présent article: %s'.");
 define("_MD_PUBLISHER_ADD_FILE_TITLE", "Ajouter un fichier à un article");
@@ -113,5 +113,5 @@ define('_MD_PUBLISHER_NO_AUTHOR_ITEMS', "Il n'y a pas d'article de cet auteur ")
  * @specification   _CHARSET: UTF-8
  *
  * @version         $Id: main.php 836 2009-09-14 23:29:42Z Dugris $
-**/
+ **/
 ?>

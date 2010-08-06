@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -20,7 +20,7 @@
  */
 
 if (!defined("XOOPS_ROOT_PATH")) {
- 	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
@@ -29,32 +29,32 @@ function publisher_search($queryarray, $andor, $limit, $offset, $userid, $catego
     global $myts;
     $publisher =& PublisherPublisher::getInstance();
 
-	$ret = array();
+    $ret = array();
 
-	if ($queryarray == '' || count($queryarray) == 0){
-		$keywords= '';
-		$hightlight_key = '';
-	} else {
-		$keywords=implode('+', $queryarray);
-		$hightlight_key = "&amp;keywords=" . $keywords;
-	}
+    if ($queryarray == '' || count($queryarray) == 0){
+        $keywords= '';
+        $hightlight_key = '';
+    } else {
+        $keywords=implode('+', $queryarray);
+        $hightlight_key = "&amp;keywords=" . $keywords;
+    }
 
-	$itemsObjs = $publisher->getHandler('item')->getItemsFromSearch($queryarray, $andor, $limit, $offset, $userid, $categories, $sortby, $searchin, $extra);
+    $itemsObjs = $publisher->getHandler('item')->getItemsFromSearch($queryarray, $andor, $limit, $offset, $userid, $categories, $sortby, $searchin, $extra);
 
     $withCategoryPath = $publisher->getConfig('search_cat_path');
     //xoops_load("xoopslocal");
     $usersIds = array();
     foreach ($itemsObjs as $obj) {
-		$item['image'] = "images/item_icon.gif";
-		$item['link'] = $obj->getItemUrl();
+        $item['image'] = "images/item_icon.gif";
+        $item['link'] = $obj->getItemUrl();
         $item['link'] .=  (!empty($hightlight_key) && (strpos($item['link'], '.php?') === false)) ? "?" . ltrim($hightlight_key ,'&amp;') : $hightlight_key;
         if ($withCategoryPath) {
-			$item['title'] = $obj->getCategoryPath(false) . " > " . $obj->title();
-		} else {
-			$item['title'] = $obj->title();
-		}
-		$item['time'] = $obj->getVar('datesub');   //must go has unix timestamp
-		$item['uid'] = $obj->uid();
+            $item['title'] = $obj->getCategoryPath(false) . " > " . $obj->title();
+        } else {
+            $item['title'] = $obj->title();
+        }
+        $item['time'] = $obj->getVar('datesub');   //must go has unix timestamp
+        $item['uid'] = $obj->uid();
 
         /*
          * "Fulltext search"/highlight needs better formulize
@@ -78,12 +78,12 @@ function publisher_search($queryarray, $andor, $limit, $offset, $userid, $catego
         $item['datesub'] = $obj->datesub($publisher->getConfig('format_date'));
         $usersIds[$obj->uid()] = $obj->uid();
 
-		$ret[] = $item;
-		unset($item, $sanitized_text);
-	}
+        $ret[] = $item;
+        unset($item, $sanitized_text);
+    }
 
     xoops_load('XoopsUserUtility');
-	$usersNames = XoopsUserUtility::getUnameFromIds($usersIds, $publisher->getConfig('format_realname'), true);
+    $usersNames = XoopsUserUtility::getUnameFromIds($usersIds, $publisher->getConfig('format_realname'), true);
     foreach ($ret as $key => $item) {
         if ($item["author"] == '') {
             $ret[$key]["author"] = @$usersNames[$item["uid"]];
@@ -91,7 +91,7 @@ function publisher_search($queryarray, $andor, $limit, $offset, $userid, $catego
     }
     unset($usersNames, $usersIds);
 
-	return $ret;
+    return $ret;
 }
 
 ?>

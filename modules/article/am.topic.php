@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: am.topic.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 $category_id = empty($_GET["category"]) ? (empty($_POST["category"]) ? 0 : intval($_POST["category"])) : intval($_GET["category"]);
@@ -84,8 +84,8 @@ switch ($op) {
 }
 
 $redirect = empty($from)
-    ? XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/cp.topic.php?category=" . $category_id . "&amp;start=" . $start
-    : XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/admin/admin.topic.php";
+? XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/cp.topic.php?category=" . $category_id . "&amp;start=" . $start
+: XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/admin/admin.topic.php";
 redirect_header($redirect, 2, art_constant("MD_ACTIONDONE"));
 
 include_once "footer.php";

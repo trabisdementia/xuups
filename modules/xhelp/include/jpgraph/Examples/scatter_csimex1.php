@@ -11,7 +11,7 @@ $graph = new Graph(300,200,'auto');
 $graph->SetShadow();
 $graph->SetScale("linlin");
 
-//$graph->img->SetMargin(40,40,40,40);		
+//$graph->img->SetMargin(40,40,40,40);
 
 $graph->title->Set("Scatter plot with Image Map");
 $graph->title->SetFont(FF_FONT1,FS_BOLD);

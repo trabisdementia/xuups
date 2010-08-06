@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * Initiating Defacer module
@@ -23,22 +23,22 @@
  */
 
 defined('ICMS_ROOT_PATH') or die("ICMS root path not defined");
- 
+
 class IcmsPreloadDefacer extends IcmsPreloadItem
 {
-	function eventbeforeFooter()
+    function eventbeforeFooter()
     {
-		if (file_exists($filename = ICMS_ROOT_PATH . '/modules/defacer/include/beforefooter.php')) {
-			include $filename;
-		}
-	}
-	
-	function eventfinishCoreBoot()
+        if (file_exists($filename = ICMS_ROOT_PATH . '/modules/defacer/include/beforefooter.php')) {
+            include $filename;
+        }
+    }
+
+    function eventfinishCoreBoot()
     {
-		if (file_exists($filename = ICMS_ROOT_PATH . '/modules/defacer/include/beforeheader.php')) {
-			include $filename;
-		}
-	}
-	
+        if (file_exists($filename = ICMS_ROOT_PATH . '/modules/defacer/include/beforeheader.php')) {
+            include $filename;
+        }
+    }
+
 }
 ?>

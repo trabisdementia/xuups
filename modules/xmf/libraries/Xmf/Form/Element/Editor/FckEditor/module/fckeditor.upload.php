@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  *  FCKeditor adapter for XOOPS
  *

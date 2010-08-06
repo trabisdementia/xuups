@@ -37,14 +37,14 @@ if ($count < 5) {
     $obj->setVar('category_id', 2);
     $helper->getHandler('Post')->insert($obj);
     /*$handler = $helper->getHandler('Category');
-    $obj = $handler->create();
-    $obj->setVar('id', 2);
-    $obj->setVar('title', 'Category two');
-    $handler->insert($obj);*/
+     $obj = $handler->create();
+     $obj->setVar('id', 2);
+     $obj->setVar('title', 'Category two');
+     $handler->insert($obj);*/
     //->create();
     /*$obj->setVar('title', "Category number {$num}" );
-    $obj->setVar('id', $num);
-    $helper->getHandler('Category')->insert($obj);*/
+     $obj->setVar('id', $num);
+     $helper->getHandler('Category')->insert($obj);*/
 }
 $criteria = new Xmf_Criteria();
 $criteria->setLimit(5)->setStart(0)->setOrder('desc')->setSort('id');
@@ -52,7 +52,7 @@ $objs = $helper->getHandler('Post')->getObjects($criteria);
 $posts = array();
 foreach ($objs as $obj) {
     $posts[]['title'] =
-     $obj->getVar('title')
+    $obj->getVar('title')
     . '-'
     . $obj->getVar('body')
     . '-'
@@ -71,9 +71,9 @@ echo $helper->getConfig('config3') . '<br>'; //trows an error on log cause confi
 
 
 /**
-* Alternative methodto load language
-* Xmf_Language::load('manifesto', 'xteste');
-*/
+ * Alternative methodto load language
+ * Xmf_Language::load('manifesto', 'xteste');
+ */
 
 $helper->loadLanguage('badmanifesto'); //trows error on log because language was not found
 $helper->loadLanguage('manifesto');

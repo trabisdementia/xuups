@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -25,7 +25,7 @@ function usercsv_adminMenu($currentoption = 0, $breadcrumb = '')
 {
     global $xoopsModule;
     /* Nice buttons styles */
-	echo "
+    echo "
     	<style type='text/css'>
     	#buttontop { float:left; width:100%; background: #e7e7e7; font-size:93%; line-height:normal; border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; margin: 0; }
     	#buttonbar { float:left; width:100%; background: #e7e7e7 url('" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/bg.png') repeat-x left bottom; font-size:93%; line-height:normal; border-left: 1px solid black; border-right: 1px solid black; margin-bottom: 12px; }
@@ -44,27 +44,27 @@ function usercsv_adminMenu($currentoption = 0, $breadcrumb = '')
 		</style>
     ";
 
-	$tblColors = array('', '', '', '', '');
-	if ($currentoption >= 0) {
-		$tblColors[$currentoption] = 'current';
-	}
+    $tblColors = array('', '', '', '', '');
+    if ($currentoption >= 0) {
+        $tblColors[$currentoption] = 'current';
+    }
 
-	if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php')) {
-		include_once $filename;
-	} else {
-		include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/language/english/modinfo.php';
-	}
+    if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php')) {
+        include_once $filename;
+    } else {
+        include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/language/english/modinfo.php';
+    }
 
-	echo "<div id='buttontop'>";
-	echo "<table style=\"width: 100%; padding: 0; \" cellspacing=\"0\"><tr>";
-	//echo "<td style=\"width: 60%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\"><a class=\"nobutton\" href=\"../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $usercsv->getModule()->mid() . "\">" . _AM_UCSV_GENERALSET . "</a>";
-	echo "<td style=\"width: 40%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;\"><b>" . $xoopsModule->name() . "  " . _AM_UCSV_MODULEADMIN . "</b> " . $breadcrumb . "</td>";
-	echo "</tr></table>";
-	echo "</div>";
+    echo "<div id='buttontop'>";
+    echo "<table style=\"width: 100%; padding: 0; \" cellspacing=\"0\"><tr>";
+    //echo "<td style=\"width: 60%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\"><a class=\"nobutton\" href=\"../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $usercsv->getModule()->mid() . "\">" . _AM_UCSV_GENERALSET . "</a>";
+    echo "<td style=\"width: 40%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;\"><b>" . $xoopsModule->name() . "  " . _AM_UCSV_MODULEADMIN . "</b> " . $breadcrumb . "</td>";
+    echo "</tr></table>";
+    echo "</div>";
 
-	echo "<div id='buttonbar'>";
-	echo "<ul>";
-	echo "<li id='" . $tblColors[0] . "'><a href=\"admin_index.php\"\"><span>" . _MI_UCSV_ADMIN_INDEX . "</span></a></li>\n";
-	echo "</ul></div><div>&nbsp;</div>";
+    echo "<div id='buttonbar'>";
+    echo "<ul>";
+    echo "<li id='" . $tblColors[0] . "'><a href=\"admin_index.php\"\"><span>" . _MI_UCSV_ADMIN_INDEX . "</span></a></li>\n";
+    echo "</ul></div><div>&nbsp;</div>";
 }
 ?>

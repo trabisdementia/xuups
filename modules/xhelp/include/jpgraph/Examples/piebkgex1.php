@@ -5,16 +5,16 @@ require_once ('jpgraph/jpgraph_pie3d.php');
 
 // Some data
 $data = array(
-    array(80,18,15,17),
-    array(35,28,6,34),
-    array(10,28,10,5),
-    array(22,22,10,17));
+array(80,18,15,17),
+array(35,28,6,34),
+array(10,28,10,5),
+array(22,22,10,17));
 
 $piepos = array(0.2,0.4,0.65,0.28,0.25,0.75,0.8,0.75);
 $titles = array('USA','Sweden','South America','Australia');
 
 $n = count($piepos)/2;
- 
+
 // A new graph
 $graph = new PieGraph(550,400,'auto');
 

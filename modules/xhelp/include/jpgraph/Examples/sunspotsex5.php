@@ -23,7 +23,7 @@ function year_callback($aLabel) {
     return 1700+(int)$aLabel;
 }
 
- // Width and height of the graph
+// Width and height of the graph
 $width = 600; $height = 200;
 
 // Create a graph instance

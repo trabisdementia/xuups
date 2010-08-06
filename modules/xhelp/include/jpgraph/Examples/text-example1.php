@@ -2,8 +2,8 @@
 require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_canvas.php');
 
-// Create the graph. 
-$graph = new CanvasGraph(350,200);	
+// Create the graph.
+$graph = new CanvasGraph(350,200);
 
 $t1 = new Text("This is a text with more text");
 $t1->SetPos(0.05,0.5);

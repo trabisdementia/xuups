@@ -7,7 +7,7 @@ require_once ('../jpgraph_date.php');
 $xdata = array();
 $ydata = array();
 
-// Timestamps - 2h (=7200s) apart starting 
+// Timestamps - 2h (=7200s) apart starting
 $sampling = 7200;
 $n = 50; // data points
 for($i=0; $i < $n; ++$i ) {
@@ -24,7 +24,7 @@ function formatDate(&$aVal) {
 // Apply this format to all time values in the data to prepare it to be display
 array_walk($xdata,'formatDate');
 
-// Create the graph. 
+// Create the graph.
 $graph  = new Graph(600, 350);
 $graph->title->Set('Accumulated values with specified X-axis scale');
 $graph->SetScale('textlin');

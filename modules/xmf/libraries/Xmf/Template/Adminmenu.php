@@ -137,7 +137,7 @@ class Xmf_Template_Adminmenu extends Xmf_Template_Abstract
             'submenus' => $this->submenus,
             'currentsub' => $this->currentsub,
             'submenuscount' => count($this->submenus)
-            ));
+        ));
     }
 
 }

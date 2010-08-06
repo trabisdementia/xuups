@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * Xoops Editor element
@@ -29,44 +29,44 @@ class Xmf_Form_Element_Editor extends Xmf_Form_Element
 
     /**
      * number of columns
-	 * @var	int
-	 * @access  private
-	 */
-	var $_cols = 50;
-
-	/**
-	 * number of rows
      * @var	int
-	 * @access  private
-	 */
-	var $_rows = 5;
+     * @access  private
+     */
+    var $_cols = 50;
 
-	/**
+    /**
+     * number of rows
+     * @var	int
+     * @access  private
+     */
+    var $_rows = 5;
+
+    /**
      * initial content
-	 * @var	string
-	 * @access  private
-	 */
-	var $_value;
+     * @var	string
+     * @access  private
+     */
+    var $_value;
 
-	/**
-	 * Constuctor
-	 *
+    /**
+     * Constuctor
+     *
      * @param	string  $caption    caption
      * @param	string  $name       name
      * @param	string  $value      initial content
      * @param	int     $rows       number of rows
      * @param	int     $cols       number of columns
-	 */
-	function __construct($caption, $name, $configs = null, $nohtml = false, $OnFailure = "")
+     */
+    function __construct($caption, $name, $configs = null, $nohtml = false, $OnFailure = "")
     {
         $configs["name"] = $name;
 
         $this->setCaption($caption);
-		$this->setName($name);
-		/*$this->_rows = intval($rows);
-		$this->_cols = intval($cols);
-		$this->setValue($value); */
-		$editor_handler = Xmf_Form_Element_Editor_Handler::getInstance();
+        $this->setName($name);
+        /*$this->_rows = intval($rows);
+         $this->_cols = intval($cols);
+         $this->setValue($value); */
+        $editor_handler = Xmf_Form_Element_Editor_Handler::getInstance();
         $this->editor = $editor_handler->get($configs["editor"], $configs, $nohtml, $OnFailure);
     }
 
@@ -78,45 +78,45 @@ class Xmf_Form_Element_Editor extends Xmf_Form_Element
     }
 
     /**
-	 * get number of rows
-	 *
+     * get number of rows
+     *
      * @return	int
-	 */
-	function getRows()
+     */
+    function getRows()
     {
-		return $this->_rows;
-	}
+        return $this->_rows;
+    }
 
-	/**
-	 * Get number of columns
-	 *
+    /**
+     * Get number of columns
+     *
      * @return	int
-	 */
-	function getCols()
+     */
+    function getCols()
     {
-		return $this->_cols;
-	}
+        return $this->_cols;
+    }
 
-	/**
-	 * Get initial content
-	 *
-	 * @param	bool    $encode To sanitizer the text? Default value should be "true"; however we have to set "false" for backward compat
+    /**
+     * Get initial content
+     *
+     * @param	bool    $encode To sanitizer the text? Default value should be "true"; however we have to set "false" for backward compat
      * @return	string
-	 */
-	function getValue($encode = false)
+     */
+    function getValue($encode = false)
     {
-		return $encode ? htmlspecialchars($this->_value) : $this->_value;
-	}
+        return $encode ? htmlspecialchars($this->_value) : $this->_value;
+    }
 
-	/**
-	 * Set initial content
-	 *
+    /**
+     * Set initial content
+     *
      * @param	$value	string
-	 */
-	function setValue($value)
+     */
+    function setValue($value)
     {
-		$this->_value = $value;
-	}
+        $this->_value = $value;
+    }
 
     /**
      * renderValidationJS

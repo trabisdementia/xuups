@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -21,7 +21,7 @@
  */
 
 if (!defined("XOOPS_ROOT_PATH")) {
- 	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 include_once dirname(__FILE__) . '/seo_functions.php';
@@ -32,7 +32,7 @@ function publisher_notify_iteminfo($category, $item_id)
         $item['name'] = '';
         $item['url'] = '';
         return $item;
-    } 
+    }
 
     global $xoopsDB;
 
@@ -42,9 +42,9 @@ function publisher_notify_iteminfo($category, $item_id)
         $result = $xoopsDB->query($sql); // TODO: error check
         $result_array = $xoopsDB->fetchArray($result);
         $item['name'] = $result_array['name'];
-        $item['url'] = publisher_seo_genUrl('category', $item_id, $result_array['short_url']); 
+        $item['url'] = publisher_seo_genUrl('category', $item_id, $result_array['short_url']);
         return $item;
-    } 
+    }
 
     if ($category == 'item') {
         // Assume we have a valid story id
@@ -52,9 +52,9 @@ function publisher_notify_iteminfo($category, $item_id)
         $result = $xoopsDB->query($sql); // TODO: error check
         $result_array = $xoopsDB->fetchArray($result);
         $item['name'] = $result_array['title'];
-        $item['url'] = publisher_seo_genUrl('item', $item_id, $result_array['short_url']); 
+        $item['url'] = publisher_seo_genUrl('item', $item_id, $result_array['short_url']);
         return $item;
-    } 
-} 
+    }
+}
 
 ?>

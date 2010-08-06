@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -33,9 +33,9 @@ if ( empty($post_id) )  {
         $ref_parser = parse_url($_SERVER['HTTP_REFERER']);
         $uri_parser = parse_url($_SERVER['REQUEST_URI']);
         if (
-            (!empty($ref_parser['host']) && !empty($uri_parser['host']) && $uri_parser['host'] != $ref_parser['host']) 
-            || 
-            ($ref_parser["path"] != $uri_parser["path"])
+        (!empty($ref_parser['host']) && !empty($uri_parser['host']) && $uri_parser['host'] != $ref_parser['host'])
+        ||
+        ($ref_parser["path"] != $uri_parser["path"])
         ) {
             include XOOPS_ROOT_PATH . "/header.php";
             xoops_confirm(array(), "javascript: window.close();", sprintf(_MD_TRANSFER_DONE, ""), _CLOSE, $_SERVER['HTTP_REFERER']);
@@ -88,13 +88,13 @@ if (empty($op)) {
     $data["content"] = $post_data["text"];
     $data["date"] = $post_data["date"];
     $data["time"] = formatTimestamp($post_data["date"]);
-    
+
     switch($op) {
         case "pdf":
             $data['subtitle'] = $topic_obj->getVar('topic_title');
             break;
-        
-        // Use regular content
+
+            // Use regular content
         default:
             break;
     }

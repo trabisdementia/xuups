@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: digest.php 2169 2008-09-23 13:37:10Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
@@ -176,21 +176,21 @@ class NewbbDigestHandler extends XoopsPersistableObjectHandler
     {
         return parent::insert($digest);
         /*
-        $content = $digest->getVar('digest_content', 'E');
+         $content = $digest->getVar('digest_content', 'E');
 
-        $id = $this->db->genId($digest->table . "_digest_id_seq");
-        $sql = "INSERT INTO " . $digest->table . " (digest_id, digest_time, digest_content)    VALUES (" . $id . ", " . time() . ", " . $this->db->quoteString($content) . " )";
+         $id = $this->db->genId($digest->table . "_digest_id_seq");
+         $sql = "INSERT INTO " . $digest->table . " (digest_id, digest_time, digest_content)    VALUES (" . $id . ", " . time() . ", " . $this->db->quoteString($content) . " )";
 
-        if (!$this->db->queryF($sql)) {
-            //echo "<br />digest insert error::" . $sql;
-            return false;
-        }
-        if (empty($id)) {
-            $id = $this->db->getInsertId();
-        }
-        $digest->setVar('digest_id', $id);
-        return true;
-        */
+         if (!$this->db->queryF($sql)) {
+         //echo "<br />digest insert error::" . $sql;
+         return false;
+         }
+         if (empty($id)) {
+         $id = $this->db->getInsertId();
+         }
+         $digest->setVar('digest_id', $id);
+         return true;
+         */
     }
 
     function delete($digest)

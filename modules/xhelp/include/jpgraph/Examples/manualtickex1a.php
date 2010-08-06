@@ -7,7 +7,7 @@ require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_line.php');
 require_once ('jpgraph/jpgraph_utils.inc.php');
 
-// 
+//
 // Create some random data for the plot. We use the current time for the
 // first X-position
 //
@@ -16,7 +16,7 @@ $datax = array();
 $ts = time();
 $n=15; // Number of data points
 for($i=0; $i < $n; ++$i ) {
-    $datax[$i] = $ts+$i*700000; 
+    $datax[$i] = $ts+$i*700000;
     $datay[$i] = rand(5,60);
 }
 

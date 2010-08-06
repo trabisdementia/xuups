@@ -20,7 +20,7 @@ $year = array();
 $ydata = array();
 readsunspotdata('yearssn.txt',$year,$ydata);
 
- // Width and height of the graph
+// Width and height of the graph
 $width = 600; $height = 200;
 
 // Create a graph instance

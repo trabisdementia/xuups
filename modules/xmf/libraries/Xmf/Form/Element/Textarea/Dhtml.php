@@ -258,13 +258,30 @@ class Xmf_Form_Element_TextArea_Dhtml extends Xmf_Form_Element_TextArea
         return '';
     }
 }
-?>                                                                                                                              ='" . XOOPS_URL . "/images/alignleft.gif' alt='" . _XOOPS_FORM_ALT_LEFT . "' title='" . _XOOPS_FORM_ALT_LEFT . "' onmouseover='style.cursor=\"hand\"' onclick='xoopsMakeLeft(\"{$hiddentext}\", \"{$textarea_id}\");' />&nbsp;";
-        $alignStr .= "<img src='" . XOOPS_URL . "/images/aligncenter.gif' alt='" . _XOOPS_FORM_ALT_CENTER . "' title='" . _XOOPS_FORM_ALT_CENTER . "' onmouseover='style.cursor=\"hand\"' onclick='xoopsMakeCenter(\"{$hiddentext}\", \"{$textarea_id}\");' />&nbsp;";
-        $alignStr .= "<img src='" . XOOPS_URL . "/images/alignright.gif' alt='" . _XOOPS_FORM_ALT_RIGHT . "' title='" . _XOOPS_FORM_ALT_RIGHT . "' onmouseover='style.cursor=\"hand\"' onclick='xoopsMakeRight(\"{$hiddentext}\", \"{$textarea_id}\");' />&nbsp;";
-        
-        //$fontStr = $fontStr . "<br />\n{$styleStr}&nbsp;&nbsp;<span id='{$hiddentext}'>" . _EXAMPLE . "</span>\n";
-        $fontStr = $fontStr . "<br />\n{$styleStr}&nbsp;{$alignStr}&nbsp;\n";
-        return $fontStr;
-    }
-
-    function renderValidationJS(
+?>
+                                                                                                                              ='"
+. XOOPS_URL . "/images/alignleft.gif' alt='" . _XOOPS_FORM_ALT_LEFT . "'
+title='" . _XOOPS_FORM_ALT_LEFT . "' onmouseover='style.cursor=\"hand\"'
+onclick='xoopsMakeLeft(\"{$hiddentext}\", \"{$textarea_id}\");'
+/>&nbsp;"; $alignStr .= "
+<img
+	src='" . XOOPS_URL . "/images/aligncenter.gif'
+	alt='" . _XOOPS_FORM_ALT_CENTER . "'
+	title='" . _XOOPS_FORM_ALT_CENTER . "'
+	onmouseover='style.cursor=\"hand\"'
+	onclick='xoopsMakeCenter(\"{$hiddentext}\", \"{$textarea_id}\");' />
+&nbsp;"; $alignStr .= "
+<img
+	src='" . XOOPS_URL . "/images/alignright.gif'
+	alt='" . _XOOPS_FORM_ALT_RIGHT . "'
+	title='" . _XOOPS_FORM_ALT_RIGHT . "'
+	onmouseover='style.cursor=\"hand\"'
+	onclick='xoopsMakeRight(\"{$hiddentext}\", \"{$textarea_id}\");' />
+&nbsp;"; //$fontStr = $fontStr . "
+<br />
+\n{$styleStr}&nbsp;&nbsp;
+<span id='{$hiddentext}'>" . _EXAMPLE . "</span>
+\n"; $fontStr = $fontStr . "
+<br />
+\n{$styleStr}&nbsp;{$alignStr}&nbsp;\n"; return $fontStr; } function
+renderValidationJS(

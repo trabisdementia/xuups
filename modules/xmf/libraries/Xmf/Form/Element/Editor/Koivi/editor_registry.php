@@ -15,5 +15,5 @@ return $config = array(
         "file"      =>    dirname(dirname(__FILE__)) . '/Koivi.php',
         "title"     =>    _XOOPS_EDITOR_KOIVI,
         "order"     =>    4
-    );
+);
 ?>

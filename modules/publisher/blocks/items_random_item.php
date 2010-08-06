@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -19,7 +19,7 @@
  * @author          The SmartFactory <www.smartfactory.ca>
  * @version         $Id: items_random_item.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
@@ -30,12 +30,12 @@ function publisher_items_random_item_show($options)
 {
     $block = array();
     $publisher =& PublisherPublisher::getInstance();
-    
+
     // creating the ITEM object
     $itemsObj = $publisher->getHandler('item')->getRandomItem('', array(_PUBLISHER_STATUS_PUBLISHED));
 
     if (!is_object($itemsObj)) return $block;
-    
+
    	$block['content']       = $itemsObj->getBlockSummary(300, true); //show complete summary  but truncate to 300 if only body available
    	$block['id']            = $itemsObj->itemid();
    	$block['url']           = $itemsObj->getItemUrl();

@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -63,7 +63,7 @@ $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'xotheme';
 $modversion['config'][$i]['options'] = array(_MI_MENUS_CONF_ASSIGN_METHOD_XOOPSTPL   => 'xoopstpl',
-                                             _MI_MENUS_CONF_ASSIGN_METHOD_XOTHEME => 'xotheme');
+_MI_MENUS_CONF_ASSIGN_METHOD_XOTHEME => 'xotheme');
 
 // Blocks
 $i = 0;

@@ -419,7 +419,7 @@ class Xmf_Form
         $i = -1;
         $elements = array();
         if (count($this->getRequired()) > 0) {
-           $this->_elements[] = "<tr class='foot'><td colspan='2'>* = " . _REQUIRED . "</td></tr>";
+            $this->_elements[] = "<tr class='foot'><td colspan='2'>* = " . _REQUIRED . "</td></tr>";
         }
         foreach ($this->getElements() as $ele) {
             ++$i;

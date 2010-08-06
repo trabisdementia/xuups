@@ -10,30 +10,30 @@
  * @access public
  * @package xhelp
  */
- class xhelpService
- {
+class xhelpService
+{
     var $_cookies;
     var $_eventSrv;
-    
+
     function _attachEvent($eventName, $callback)
     {
         $this->_addCookie($eventName, $this->_eventSrv->advise($eventName, $callback));
     }
-    
+
     function init()
     {
         $this->_eventSrv =& xhelpNewEventService();
         $this->_attachEvents();
     }
-    
+
     function _attachEvents()
     {
         //Do nothing (must implement this function in subclasses)
     }
-    
+
     function detachEvents()
     {
-        
+
         foreach($this->_cookies as $event => $cookie) {
             if (is_array($cookie)) {
                 foreach($cookie as $ele) {
@@ -45,7 +45,7 @@
         }
         $this->_cookie = array();
     }
-    
+
     function detachFromEvent($eventName)
     {
         if (isset($this->_cookies[$eventName])) {
@@ -58,9 +58,9 @@
                 $this->_eventSrv->unadvise($eventName, $cookie);
             }
             unset($this->_cookies[$eventName]);
-        }    
+        }
     }
-    
+
     function _addCookie($eventName, $cookie)
     {
         //Check if the cookie already exist
@@ -78,9 +78,9 @@
             }
         }
     }
-    
 
 
-}        
-    
+
+}
+
 ?>

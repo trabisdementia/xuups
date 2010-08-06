@@ -162,16 +162,16 @@ if ($op == 'go') {
             // HTML Wrap
             // TODO: copy contents folder
             /*
-             if ($arrArticle['htmlpage']) {
-             $pagewrap_filename	= XOOPS_ROOT_PATH . "/modules/wfsection/html/" .$arrArticle['htmlpage'];
-             if (file_exists($pagewrap_filename)) {
-             if (copy($pagewrap_filename, XOOPS_ROOT_PATH . "/uploads/publisher/content/" . $arrArticle['htmlpage'])) {
-             $itemObj->setVar('body', "[pagewrap=" . $arrArticle['htmlpage'] . "]");
-             echo sprintf("&nbsp;&nbsp;&nbsp;&nbsp;" . _AM_PUBLISHER_IMPORT_ARTICLE_WRAP, $arrArticle['htmlpage']) . "<br/>";
-             }
-             }
-             }
-             */
+            if ($arrArticle['htmlpage']) {
+            $pagewrap_filename	= XOOPS_ROOT_PATH . "/modules/wfsection/html/" .$arrArticle['htmlpage'];
+            if (file_exists($pagewrap_filename)) {
+            if (copy($pagewrap_filename, XOOPS_ROOT_PATH . "/uploads/publisher/content/" . $arrArticle['htmlpage'])) {
+            $itemObj->setVar('body', "[pagewrap=" . $arrArticle['htmlpage'] . "]");
+            echo sprintf("&nbsp;&nbsp;&nbsp;&nbsp;" . _AM_PUBLISHER_IMPORT_ARTICLE_WRAP, $arrArticle['htmlpage']) . "<br/>";
+            }
+            }
+            }
+            */
 
             if (!$itemObj->store()) {
                 echo sprintf("  " . _AM_PUBLISHER_IMPORT_ARTICLE_ERROR, $arrArticle['title']) . "<br/>";

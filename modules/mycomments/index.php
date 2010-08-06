@@ -40,7 +40,7 @@ $thisuser = new XoopsUser($uid);
 switch($xoopsModuleConfig['displayname']) {
     case 1:		// Username
         $username = $thisuser->getVar('uname');
-    break;
+        break;
 
     case 2:		// Display full name (if it is not empty)
         if(xoops_trim($thisuser->getVar('name')) == '') {
@@ -48,7 +48,7 @@ switch($xoopsModuleConfig['displayname']) {
         } else {
             $username = $thisuser->getVar('name');
         }
-    break;
+        break;
 }
 
 // admins can view all comments and IPs, others can only view approved(active) comments
@@ -85,7 +85,7 @@ foreach( $modules as $moduleid => $module ) {
             $criteria->add(new CriteriaCompo(new Criteria('1', 2)),'OR');
         }
         unset($items);
-    //for comments sent
+        //for comments sent
     } else {
         $items = array();
         $items = mycomments_get_plugin_info( $module->getVar('dirname') , 'useritems');

@@ -25,45 +25,45 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 if (!defined('XOOPS_ROOT_PATH')) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 function news_notify_iteminfo($category, $item_id)
 {
-	if ($category == 'global') {
-		$item['name'] = '';
-		$item['url'] = '';
-		return $item;
-	}
+    if ($category == 'global') {
+        $item['name'] = '';
+        $item['url'] = '';
+        return $item;
+    }
 
-	global $xoopsDB;
+    global $xoopsDB;
 
-	if ($category=='story') {
-		// Assume we have a valid story id
-		$sql = 'SELECT title FROM '.$xoopsDB->prefix('stories') . ' WHERE storyid = ' . intval($item_id);
-		$result = $xoopsDB->query($sql);
-		if($result) {
-			$result_array = $xoopsDB->fetchArray($result);
-			$item['name'] = $result_array['title'];
-			$item['url'] = XOOPS_URL . '/modules/news/article.php?storyid=' . intval($item_id);
-			return $item;
-		} else {
-			return null;
-		}
-	}
-	
-	// Added by Lankford on 2007/3/23
-	if ($category=='category') {
-		$sql = 'SELECT title FROM ' . $xoopsDB->prefix('topics') . ' WHERE topic_id = '.intval($item_id);
-		$result = $xoopsDB->query($sql);
-		if($result) {
-			$result_array = $xoopsDB->fetchArray($result);
-			$item['name'] = $result_array['topic_id'];
-			$item['url'] = XOOPS_URL . '/modules/news/index.php?storytopic=' . intval($item_id);
-			return $item;
-		} else {
-			return null;
-		}
-	}	
+    if ($category=='story') {
+        // Assume we have a valid story id
+        $sql = 'SELECT title FROM '.$xoopsDB->prefix('stories') . ' WHERE storyid = ' . intval($item_id);
+        $result = $xoopsDB->query($sql);
+        if($result) {
+            $result_array = $xoopsDB->fetchArray($result);
+            $item['name'] = $result_array['title'];
+            $item['url'] = XOOPS_URL . '/modules/news/article.php?storyid=' . intval($item_id);
+            return $item;
+        } else {
+            return null;
+        }
+    }
+
+    // Added by Lankford on 2007/3/23
+    if ($category=='category') {
+        $sql = 'SELECT title FROM ' . $xoopsDB->prefix('topics') . ' WHERE topic_id = '.intval($item_id);
+        $result = $xoopsDB->query($sql);
+        if($result) {
+            $result_array = $xoopsDB->fetchArray($result);
+            $item['name'] = $result_array['topic_id'];
+            $item['url'] = XOOPS_URL . '/modules/news/index.php?storytopic=' . intval($item_id);
+            return $item;
+        } else {
+            return null;
+        }
+    }
 }
 ?>

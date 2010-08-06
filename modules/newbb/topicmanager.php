@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -39,8 +39,8 @@ $forum_new = !empty($newtopic)?$topic_handler->get($newtopic, "forum_id"):0;
 
 $forum_handler =& xoops_getmodulehandler('forum', 'newbb');
 if (!$forum_handler->getPermission($forum, 'moderate')
-    || (!empty($forum_new) && !$forum_handler->getPermission($forum_new, 'reply')) // The forum for the topic to be merged to
-    || (!empty($newforum) && !$forum_handler->getPermission($newforum, 'post')) // The forum to be moved to
+|| (!empty($forum_new) && !$forum_handler->getPermission($forum_new, 'reply')) // The forum for the topic to be merged to
+|| (!empty($newforum) && !$forum_handler->getPermission($newforum, 'post')) // The forum to be moved to
 ) {
     redirect_header("viewtopic.php?forum={$forum}&amp;topic_id={$topic_id}", 2, _NOPERM);
     exit();
@@ -82,7 +82,7 @@ if ( isset($_POST['submit']) ) {
         echo $action[$mode]['msg'] . "<p><a href='viewforum.php?forum={$forum}'>" . _MD_RETURNTOTHEFORUM . "</a></p><p><a href='index.php'>" . _MD_RETURNFORUMINDEX . "</a></p>";
     } elseif ('merge' == $mode) {
         $post_handler =& xoops_getmodulehandler('post', 'newbb');
-        
+
         $topic_obj =& $topic_handler->get($topic_id);
         $newtopic_obj =& $topic_handler->get($newtopic);
         /* return false if destination topic is newer or not existing */
@@ -90,19 +90,19 @@ if ( isset($_POST['submit']) ) {
             redirect_header("javascript:history.go(-1)", 2, _MD_ERROR);
             exit();
         }
-        
+
         $criteria_topic = new Criteria("topic_id", $topic_id);
         $criteria = new CriteriaCompo($criteria_topic);
         $criteria->add(new Criteria('pid', 0));
         $post_handler->updateAll("pid", $topic_handler->getTopPostId($newtopic), $criteria, true);
         $post_handler->updateAll("topic_id", $newtopic, $criteria_topic, true);
-        
+
         $topic_views =  $topic_obj->getVar("topic_views") + $newtopic_obj->getVar("topic_views");
         $criteria_newtopic = new Criteria("topic_id", $newtopic);
         $topic_handler->updateAll("topic_views", $topic_views, $criteria_newtopic, true);
-        
+
         $topic_handler->synchronization($newtopic);
-        
+
         $poll_id = $topic_handler->get($topic_id, "poll_id");
         if ($poll_id>0) {
             if (is_dir(XOOPS_ROOT_PATH . "/modules/xoopspoll/")) {
@@ -110,7 +110,7 @@ if ( isset($_POST['submit']) ) {
                 include_once XOOPS_ROOT_PATH . "/modules/xoopspoll/class/xoopspolloption.php";
                 include_once XOOPS_ROOT_PATH . "/modules/xoopspoll/class/xoopspolllog.php";
                 include_once XOOPS_ROOT_PATH . "/modules/xoopspoll/class/xoopspollrenderer.php";
-            
+
                 $poll = new XoopsPoll($poll_id);
                 if ( $poll->delete() != false ) {
                     XoopsPollOption::deleteByPollId($poll->getVar("poll_id"));
@@ -119,10 +119,10 @@ if ( isset($_POST['submit']) ) {
                 }
             }
         }
-        
+
         $sql = sprintf("DELETE FROM %s WHERE topic_id = %u", $xoopsDB->prefix("bb_topics"), $topic_id);
         $result = $xoopsDB->queryF($sql);
-        
+
         $sql = sprintf("DELETE FROM %s WHERE topic_id = %u", $xoopsDB->prefix("bb_votedata"), $topic_id);
         $result = $xoopsDB->queryF($sql);
 
@@ -131,7 +131,7 @@ if ( isset($_POST['submit']) ) {
 
         $topic_obj->loadFilters("delete");
         $newtopic_obj->loadFilters("update");
-        
+
         echo $action[$mode]['msg'] .
                 "<p><a href='viewtopic.php?topic_id={$newtopic}'>" . _MD_VIEWTHETOPIC . "</a></p>".
                 "<p><a href='viewforum.php?forum={$forum}'>" . _MD_RETURNTOTHEFORUM . "</a></p>".
@@ -143,7 +143,7 @@ if ( isset($_POST['submit']) ) {
             $topic_obj->setVar("forum_id", $newforum, true);
             $topic_handler->insert($topic_obj, true);
             $topic_obj->loadFilters("update");
-            
+
             $sql = sprintf("UPDATE %s SET forum_id = %u WHERE topic_id = %u", $xoopsDB->prefix("bb_posts"), $newforum, $topic_id);
             if ( !$r = $xoopsDB->query($sql) ) {
                 return false;
@@ -188,13 +188,13 @@ if ( isset($_POST['submit']) ) {
         $category_handler =& xoops_getmodulehandler('category', 'newbb');
         $categories = $category_handler->getByPermission('access');
         $forums = $forum_handler->getForumsByCategory(array_keys($categories), 'post', false);
-    
+
         if (count($categories) > 0 && count($forums) > 0) {
             foreach (array_keys($forums) as $key) {
                 $box .= "<option value='-1'>[" . $categories[$key]->getVar('cat_title') . "]</option>";
                 foreach ($forums[$key] as $forumid=>$_forum) {
                     $box .= "<option value='" . $forumid . "'>-- " . $_forum['title'] . "</option>";
-                    if ( !isset($_forum["sub"])) continue; 
+                    if ( !isset($_forum["sub"])) continue;
                     foreach (array_keys($_forum["sub"]) as $fid) {
                         $box .= "<option value='" . $fid . "'>---- " . $_forum["sub"][$fid]['title'] . "</option>";
                     }
@@ -204,8 +204,8 @@ if ( isset($_POST['submit']) ) {
             $box .= "<option value='-1'>" . _MD_NOFORUMINDB . "</option>";
         }
         unset($forums, $categories);
-          
-        echo $box;      
+
+        echo $box;
         echo '</select></td></tr>';
     }
     if ( $mode == 'merge' ) {

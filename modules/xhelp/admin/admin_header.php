@@ -46,11 +46,11 @@ $imagearray = array(
     'deleteimg' => "<img src='". XHELP_IMAGE_URL ."/button_delete.png' alt='" . _AM_XHELP_ICO_DELETE . "' align='middle' />",
     'online' => "<img src='". XHELP_IMAGE_URL ."/on.png' alt='" . _AM_XHELP_ICO_ONLINE . "' align='middle' />",
     'offline' => "<img src='". XHELP_IMAGE_URL ."/off.png' alt='" . _AM_XHELP_ICO_OFFLINE . "' align='middle' />",
-	);
+);
 
 // Overdue time
 require_once(XHELP_CLASS_PATH.'/session.php');
-$_xhelpSession = new Session();	
+$_xhelpSession = new Session();
 
 if(!$overdueTime = $_xhelpSession->get("xhelp_overdueTime")){
     $_xhelpSession->set("xhelp_overdueTime", $xoopsModuleConfig['xhelp_overdueTime']);
@@ -59,7 +59,7 @@ if(!$overdueTime = $_xhelpSession->get("xhelp_overdueTime")){
 
 if($overdueTime != $xoopsModuleConfig['xhelp_overdueTime']){
     $_xhelpSession->set("xhelp_overdueTime", $xoopsModuleConfig['xhelp_overdueTime']);   // Set new value for overdueTime
-    
+
     // Change overdueTime in all of tickets (OPEN & HOLD)
     $hTickets =& xhelpGetHandler('ticket');
     $crit = new Criteria('status', 2, '<>');

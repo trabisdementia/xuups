@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: blocks.php 331 2007-12-23 16:01:11Z malanciault $
-* Module: Publisher
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: blocks.php 331 2007-12-23 16:01:11Z malanciault $
+ * Module: Publisher
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 // Blocks
 define("_MB_PUBLISHER_ALLCAT", "All categories");

@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: blocks.php 836 2009-09-14 23:29:42Z Dugris $
-* Module: Publisher
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: blocks.php 836 2009-09-14 23:29:42Z Dugris $
+ * Module: Publisher
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 // Blocks
 define("_MB_PUBLISHER_ALLCAT", "Toutes les catégories");
@@ -107,5 +107,5 @@ define("_MB_PUBLISHER_TEMPLATE_EXTENDED", "Etendu");
  * @specification   _CHARSET: UTF-8
  *
  * @version         $Id: blocks.php 836 2009-09-14 23:29:42Z Dugris $
-**/
+ **/
 ?>

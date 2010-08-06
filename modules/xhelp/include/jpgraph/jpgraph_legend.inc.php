@@ -30,10 +30,10 @@ class Legend {
     private $xmargin=10,$ymargin=0,$shadow_width=2;
     private $xlmargin=4;
     private $ylinespacing=5;
-    
-     // We need a separate margin since the baseline of the last text would coincide with the bottom otherwise
+
+    // We need a separate margin since the baseline of the last text would coincide with the bottom otherwise
     private $ybottom_margin = 8;
-    
+
     private $xpos=0.05, $ypos=0.15, $xabspos=-1, $yabspos=-1;
     private $halign="right", $valign="top";
     private $font_color='black';
@@ -190,7 +190,7 @@ class Legend {
         $numcolumns = ($n > $this->layout_n ? $this->layout_n : $n);
         for( $i=0; $i < $numcolumns; ++$i ) {
             $colwidth[$i] = $aImg->GetTextWidth($this->txtcol[$i][0]) +
-                            2*$this->xmargin + 2*$this->mark_abs_hsize;
+            2*$this->xmargin + 2*$this->mark_abs_hsize;
             $colheight[$i] = 0;
 
         }
@@ -219,13 +219,13 @@ class Legend {
 
         // Make sure that the height is at least as high as mark size + ymargin
         $abs_height = max($abs_height,$this->mark_abs_vsize);
-        $abs_height += $this->ybottom_margin; 
+        $abs_height += $this->ybottom_margin;
 
         // Find out the maximum width in each column
         for( $i=$numcolumns; $i < $n; ++$i ) {
             $colwidth[$i % $numcolumns] = max(
-                $aImg->GetTextWidth($this->txtcol[$i][0])+2*$this->xmargin+2*$this->mark_abs_hsize,
-                $colwidth[$i % $numcolumns]);
+            $aImg->GetTextWidth($this->txtcol[$i][0])+2*$this->xmargin+2*$this->mark_abs_hsize,
+            $colwidth[$i % $numcolumns]);
         }
 
         // Get the total width
@@ -248,21 +248,21 @@ class Legend {
 
         // Positioning of the legend box
         if( $this->halign == 'left' ) {
-        	$xp = $this->xabspos;
+            $xp = $this->xabspos;
         }
         elseif( $this->halign == 'center' ) {
-        	$xp = $this->xabspos - $abs_width/2;
+            $xp = $this->xabspos - $abs_width/2;
         }
         else {
-        	$xp = $aImg->width - $this->xabspos - $abs_width;
+            $xp = $aImg->width - $this->xabspos - $abs_width;
         }
 
         $yp=$this->yabspos;
         if( $this->valign == 'center' ) {
-        	$yp-=$abs_height/2;
+            $yp-=$abs_height/2;
         }
         elseif( $this->valign == 'bottom' ) {
-        	$yp-=$abs_height;
+            $yp-=$abs_height;
         }
 
         // Stroke legend box
@@ -271,10 +271,10 @@ class Legend {
         $aImg->SetLineStyle('solid');
 
         if( $this->shadow ) {
-        	$aImg->ShadowRectangle($xp,$yp,
-                                   $xp+$abs_width+$this->shadow_width+2,
-                                   $yp+$abs_height+$this->shadow_width+2,
-                                   $this->fill_color,$this->shadow_width+2,$this->shadow_color);
+            $aImg->ShadowRectangle($xp,$yp,
+            $xp+$abs_width+$this->shadow_width+2,
+            $yp+$abs_height+$this->shadow_width+2,
+            $this->fill_color,$this->shadow_width+2,$this->shadow_color);
         }
         else {
             $aImg->SetColor($this->fill_color);
@@ -286,9 +286,9 @@ class Legend {
         if( $this->bkg_gradtype >= 0 ) {
             $grad = new Gradient($aImg);
             $grad->FilledRectangle($xp+1, $yp+1,
-                                   $xp+$abs_width-3, $yp+$abs_height-3,
-                                   $this->bkg_gradfrom, $this->bkg_gradto,
-                                   $this->bkg_gradtype);
+            $xp+$abs_width-3, $yp+$abs_height-3,
+            $this->bkg_gradfrom, $this->bkg_gradto,
+            $this->bkg_gradtype);
         }
 
         // x1,y1 is the position for the legend marker + text
@@ -343,13 +343,13 @@ class Legend {
                 // Paragraph
                 $marky = $y1 - $aImg->GetTextHeight($p[0])/2;
 
-              //  echo "y1=$y1, p[o]={$p[0]}, marky=$marky<br>";
+                //  echo "y1=$y1, p[o]={$p[0]}, marky=$marky<br>";
             }
 
             //echo "<br>Mark #$i: marky=$marky<br>";
 
             $x1 += $this->mark_abs_hsize;
-    
+
             if ( !empty($p[2]) && $p[2]->GetType() > -1 ) {
 
 
@@ -421,18 +421,18 @@ class Legend {
                     if( is_array($color) && count($color)==2 ) {
                         // The client want a gradient color
                         $grad->FilledRectangle($x1-$boxsize/2,$ym,
-                                               $x1+$boxsize/2,$ym+$boxsize,
-                                               $color[0],$color[1],-$p[3]);
+                        $x1+$boxsize/2,$ym+$boxsize,
+                        $color[0],$color[1],-$p[3]);
                     }
                     else {
                         $aImg->SetColor($p[1]);
                         $aImg->FilledRectangle($x1-$boxsize/2,$ym,
-                                               $x1+$boxsize/2,$ym+$boxsize);
+                        $x1+$boxsize/2,$ym+$boxsize);
                     }
                     $aImg->SetColor($this->color);
                     $aImg->SetLineWeight($fillBoxFrameWeight);
                     $aImg->Rectangle($x1-$boxsize/2,$ym,
-                                     $x1+$boxsize/2,$ym+$boxsize);
+                    $x1+$boxsize/2,$ym+$boxsize);
                 }
             }
             $aImg->SetColor($this->font_color);
@@ -441,7 +441,7 @@ class Legend {
 
             $debug=false;
             $aImg->StrokeText($x1+$this->mark_abs_hsize+$this->xmargin,$y1,$p[0],
-                0,'left',$debug);
+            0,'left',$debug);
 
             // Add CSIM for Legend if defined
             if( !empty($p[4]) ) {
@@ -470,7 +470,7 @@ class Legend {
                 $x1 = $xp+$this->xlmargin;
                 $row++;
                 if( !empty($rowheight[$row]) )
-                    $y1 += $rowheight[$row];
+                $y1 += $rowheight[$row];
                 $i = 1;
             }
             else {

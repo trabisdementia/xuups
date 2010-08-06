@@ -11,17 +11,17 @@ require_once ('jpgraph/jpgraph_bar.php');
 $month=array(
 "Jan","Feb","Mar","Apr","Maj","Jun","Jul","Aug","Sep","Okt","Nov","Dec");
 
-// Create some datapoints 
+// Create some datapoints
 $steps=100;
 for($i=0; $i<$steps; ++$i) {
-	$databarx[]=sprintf("198%d %s",floor($i/12),$month[$i%12]);
-	$datay[$i]=log(pow($i,$i/10)+1)*sin($i/15)+35;
-	if( $i % 6 == 0 && $i<$steps-6) {
-		$databary[]=abs(25*sin($i)+5);
-	}
-	else {
-		$databary[]=0;
-	}
+    $databarx[]=sprintf("198%d %s",floor($i/12),$month[$i%12]);
+    $datay[$i]=log(pow($i,$i/10)+1)*sin($i/15)+35;
+    if( $i % 6 == 0 && $i<$steps-6) {
+        $databary[]=abs(25*sin($i)+5);
+    }
+    else {
+        $databary[]=0;
+    }
 }
 
 // New graph with a background image and drop shadow
@@ -48,7 +48,7 @@ $graph->subtitle->Set("100 data points, X-Scale: 'text'");
 $graph->title->SetFont(FF_FONT1,FS_BOLD);
 
 // Make the margin around the plot a little bit bigger then default
-$graph->img->SetMargin(40,140,40,80);	
+$graph->img->SetMargin(40,140,40,80);
 
 // Slightly adjust the legend from it's default position in the
 // top right corner to middle right side

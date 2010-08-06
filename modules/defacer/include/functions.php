@@ -63,6 +63,6 @@ function defacer_getPageInfo($ids = array())
     }
 
     return $bigone['pid'];
-    }
+}
 
 ?>

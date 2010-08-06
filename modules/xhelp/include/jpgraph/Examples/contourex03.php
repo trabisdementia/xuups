@@ -1,25 +1,25 @@
 <?php // content="text/plain; charset=utf-8"
-// Contour plot example 
+// Contour plot example
 
 require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_contour.php');
 
-$data = array( 
-            array (0.5,1.1,1.5,1,2.0,3,3,2,1,0.1),
-            array (1.0,1.5,3.0,5,6.0,2,1,1.2,1,4),
-            array (0.9,2.0,2.1,3,6.0,7,3,2,1,1.4),
-            array (1.0,1.5,3.0,4,6.0,5,2,1.5,1,2),
-            array (0.8,2.0,3.0,3,4.0,4,3,2.4,2,3),
-            array (0.6,1.1,1.5,1,4.0,3.5,3,2,3,4),
-            array (1.0,1.5,3.0,5,6.0,2,1,1.2,2.7,4),
-            array (0.8,2.0,3.0,3,5.5,6,3,2,1,1.4),
-            array (1.0,1.5,3.0,4,6.0,5,2,1,0.5,0.2));
+$data = array(
+array (0.5,1.1,1.5,1,2.0,3,3,2,1,0.1),
+array (1.0,1.5,3.0,5,6.0,2,1,1.2,1,4),
+array (0.9,2.0,2.1,3,6.0,7,3,2,1,1.4),
+array (1.0,1.5,3.0,4,6.0,5,2,1.5,1,2),
+array (0.8,2.0,3.0,3,4.0,4,3,2.4,2,3),
+array (0.6,1.1,1.5,1,4.0,3.5,3,2,3,4),
+array (1.0,1.5,3.0,5,6.0,2,1,1.2,2.7,4),
+array (0.8,2.0,3.0,3,5.5,6,3,2,1,1.4),
+array (1.0,1.5,3.0,4,6.0,5,2,1,0.5,0.2));
 
 
 // Setup a basic graph context with some generous margins to be able
-// to fit the legend            
+// to fit the legend
 $graph = new Graph(500,380);
-$graph->SetMargin(40,140,60,40);	
+$graph->SetMargin(40,140,60,40);
 
 // Enable antialias. Note with antiaaliasing only line weight=1 is supported.
 $graph->img->SetAntiAliasing();

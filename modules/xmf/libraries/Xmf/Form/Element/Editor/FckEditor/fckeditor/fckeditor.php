@@ -26,6 +26,6 @@
  */
 
 if ( !function_exists('version_compare') || version_compare( phpversion(), '5', '<' ) )
-	include_once dirname(__FILE__) . '/fckeditor_php4.php';
+include_once dirname(__FILE__) . '/fckeditor_php4.php';
 else
-	include_once dirname(__FILE__) . '/fckeditor_php5.php';
+include_once dirname(__FILE__) . '/fckeditor_php5.php';

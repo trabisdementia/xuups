@@ -15,32 +15,32 @@ Class xhelpFaqAdapterFactory {
     function &installedAdapters()
     {
         $aAdapters = array();
-        
+
         // Step 1 - directory listing of all files in class/faq/ directory
         $adapters_dir = @ dir(XHELP_FAQ_ADAPTER_PATH);
-    	if ($adapters_dir) {
-    		while(($file = $adapters_dir->read()) !== false) {
-    			if (preg_match('|^\.+$|', $file)){
-    				continue;
-    			}
-    			if (preg_match('|\.php$|', $file)){
+        if ($adapters_dir) {
+            while(($file = $adapters_dir->read()) !== false) {
+                if (preg_match('|^\.+$|', $file)){
+                    continue;
+                }
+                if (preg_match('|\.php$|', $file)){
                     $modname = basename($file, ".php"); // Get name without file extension
-                    
+
                     // Check that class exists in file
                     $adapter_data = implode('', file(XHELP_FAQ_ADAPTER_PATH.'/'.$file));
                     $classname = 'xhelp'.ucfirst($modname).'Adapter';
                     if(preg_match("|class $classname(.*)|i", $adapter_data) > 0){
                         include_once(XHELP_FAQ_ADAPTER_PATH . "/$file");
-                        $aAdapters[$modname] =& new $classname();   
-                    }	
+                        $aAdapters[$modname] =& new $classname();
+                    }
                     unset($adapter_data);
-    			}
-    		}
-    	}
+                }
+            }
+        }
         // Step 3 - return array of accepted filenames
         return $aAdapters;
     }
-    
+
     /**
      * Retrieve an FaqAdapter class
      */
@@ -53,24 +53,24 @@ Class xhelpFaqAdapterFactory {
                 return false;
             }
         }
-        
+
         // Check adapterValid function
         $isValid = xhelpFaqAdapterFactory::_adapterValid($name);
-        
+
         if($isValid){
             // Step 2 - include script with faq adapter class
             require_once(XHELP_FAQ_ADAPTER_PATH .'/'.$name.'.php');
-            
+
             // Step 3 - create instance of adapter class
             $classname = 'xhelp'.$name.'Adapter';
-            
+
             // Step 4 - return adapter class
             return new $classname();
         } else {
             return false;
         }
     }
-    
+
     /**
      * Set an FaqAdapter class
      *
@@ -80,23 +80,23 @@ Class xhelpFaqAdapterFactory {
     {
         // Step 1 - check that $name is a valid adapter
         $isValid = xhelpFaqAdapterFactory::_adapterValid($name);
-        
-        
+
+
         // Step 2 - store in xhelp_meta table
         $ret = false;
         if($isValid){
             $ret = xhelpSetMeta('faq_adapter', $name);
         }
-        
+
         // Step 3 - return true/false
         return $ret;
     }
-    
+
     /**
      * Check if an adapter exists
      *
      * @return BOOL true (success) / false (failure)
-     */    
+     */
     function _adapterValid($name)
     {
         $ret = false;
@@ -106,7 +106,7 @@ Class xhelpFaqAdapterFactory {
             if(include_once(XHELP_FAQ_ADAPTER_PATH .'/'.$name.'.php')){
                 $classname = 'xhelp'.$name.'Adapter';
                 $oAdapter = new $classname();
-        
+
                 // Step 2 - run isActive inside of adapter class
                 $ret = $oAdapter->isActive($oAdapter->meta['module_dir']);
             }

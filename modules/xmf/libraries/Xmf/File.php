@@ -290,7 +290,7 @@ class Xmf_File
             return unlink($this->pwd());
         }
         return false;
-     }
+    }
     /**
      * Returns the File extension.
      *
@@ -378,11 +378,11 @@ class Xmf_File
         return false;
     }
     /**
-    * Returns the full path of the File.
-    *
-    * @return string Full path to file
-    * @access public
-    */
+     * Returns the full path of the File.
+     *
+     * @return string Full path to file
+     * @access public
+     */
     function pwd()
     {
         return $this->folder->slashTerm($this->folder->pwd()) . $this->name;
@@ -466,7 +466,7 @@ class Xmf_File
             return fileowner($this->pwd());
         }
         return false;
-     }
+    }
     /**
      * Returns the File group.
      *
@@ -479,7 +479,7 @@ class Xmf_File
             return filegroup($this->pwd());
         }
         return false;
-     }
+    }
     /**
      * Returns last access time.
      *
@@ -492,7 +492,7 @@ class Xmf_File
             return fileatime($this->pwd());
         }
         return false;
-     }
+    }
     /**
      * Returns last modified time.
      *

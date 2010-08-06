@@ -242,8 +242,8 @@ class PiePlot {
     // Should we display actual value or percentage?
     function SetLabelType($aType) {
         if( $aType < 0 || $aType > 2 )
-        	JpGraphError::RaiseL(15008,$aType);
-	        //("PiePlot::SetLabelType() Type for pie plots must be 0 or 1 (not $t).");
+        JpGraphError::RaiseL(15008,$aType);
+        //("PiePlot::SetLabelType() Type for pie plots must be 0 or 1 (not $t).");
         $this->labeltype = $aType;
     }
 
@@ -281,7 +281,7 @@ class PiePlot {
 
         $sum=0;
         for($i=0; $i < $n; ++$i)
-            $sum += $this->data[$i];
+        $sum += $this->data[$i];
 
         // Bail out with error if the sum is 0
         if( $sum==0 )
@@ -423,7 +423,7 @@ class PiePlot {
         // Draw the slices
         $sum=0;
         for($i=0; $i < $n; ++$i)
-            $sum += $this->data[$i];
+        $sum += $this->data[$i];
 
         // Bail out with error if the sum is 0
         if( $sum==0 ) {
@@ -560,10 +560,10 @@ class PiePlot {
                 $slicecolor=$this->setslicecolors[$i%$numcolors];
             }
 
-//            $_sa = round($angle1*180/M_PI);
-//            $_ea = round($angle2*180/M_PI);
-//            $_la = round($this->la[$i]*180/M_PI);
-//            echo "Slice#$i: ang1=$_sa , ang2=$_ea, la=$_la, color=$slicecolor<br>";
+            //            $_sa = round($angle1*180/M_PI);
+            //            $_ea = round($angle2*180/M_PI);
+            //            $_la = round($this->la[$i]*180/M_PI);
+            //            echo "Slice#$i: ang1=$_sa , ang2=$_ea, la=$_la, color=$slicecolor<br>";
 
 
             // If we have enabled antialias then we don't draw any border so
@@ -1275,7 +1275,7 @@ class PieGraph extends Graph {
         foreach($this->plots as $p ) {
             $csim .= $p->GetCSIMareas();
         }
-        
+
         $csim.= $this->legend->GetCSIMareas();
         if (preg_match_all("/area shape=\"(\w+)\" coords=\"([0-9\, ]+)\"/", $csim, $coords)) {
             $this->img->SetColor($this->csimcolor);

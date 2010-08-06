@@ -6,10 +6,10 @@ require_once ('jpgraph/jpgraph_bar.php');
 $months=$gDateLocale->GetShortMonth();
 srand ((double) microtime() * 1000000);
 for( $i=0; $i<25; ++$i) {
-	$databary[]=rand(1,50);
-	$databarx[]=$months[$i%12];
+    $databary[]=rand(1,50);
+    $databarx[]=$months[$i%12];
 }
-	
+
 // New graph with a drop shadow
 $graph = new Graph(300,200,'auto');
 $graph->SetShadow();

@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,16 +16,16 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: form.writer.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) exit();
 
 /*
-if (defined("XOOPS_PATH")):
-include_once XOOPS_ROOT_PATH."/modules/" . $GLOBALS["artdirname"]."/Frameworks/class/xoopsformloader.php";
-else:
-include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
-endif;
-*/
+ if (defined("XOOPS_PATH")):
+ include_once XOOPS_ROOT_PATH."/modules/" . $GLOBALS["artdirname"]."/Frameworks/class/xoopsformloader.php";
+ else:
+ include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
+ endif;
+ */
 
 // Form
 $form_art = new XoopsThemeForm(art_constant("MD_AUTHOR") . " " . $writer_obj->getVar("writer_name") . " (" . ($writer_obj->getVar("writer_id") ? _EDIT : _ADD) . ")", "formwriter", xoops_getenv('PHP_SELF'));
@@ -42,7 +42,7 @@ $form_art->addElement(new XoopsFormTextArea(art_constant("MD_PROFILE"), "writer_
 if (art_isAdministrator() && !empty($xoopsModuleConfig["path_image"])) {
 
     //require_once(XOOPS_ROOT_PATH . "/class/xoopstree.php");
-    
+
     $writer_avatar = $writer_obj->getVar("writer_avatar");
     $image_option_tray = new XoopsFormElementTray(art_constant("MD_IMAGE_UPLOAD"), "<br />");
     $image_option_tray->addElement(new XoopsFormFile("", "userfile", ""));

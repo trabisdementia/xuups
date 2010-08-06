@@ -6,9 +6,9 @@ require_once ('jpgraph/jpgraph_scatter.php');
 // Make a circle with a scatterplot
 $steps=16;
 for($i=0; $i<$steps; ++$i) {
-	$a=2*M_PI/$steps*$i;
-	$datax[$i]=cos($a);
-	$datay[$i]=sin($a);
+    $a=2*M_PI/$steps*$i;
+    $datax[$i]=cos($a);
+    $datay[$i]=sin($a);
 }
 
 $graph = new Graph(350,230);

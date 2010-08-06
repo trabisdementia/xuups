@@ -12,7 +12,7 @@
  * @package		module::article
  */
 
-$sql =	
+$sql =
 			"	INSERT INTO ".art_DB_prefix("category").
 			"		(cat_id,	cat_title,		cat_pid,	cat_description)".
 			"	SELECT ".
@@ -21,11 +21,11 @@ $sql =
 			"		ORDER BY categoryid ASC"
 			;
 
-$result = $xoopsDB->queryF($sql);
-xoops_result("succeed with building CATEGORY table: ". $count = $xoopsDB->getAffectedRows());
+			$result = $xoopsDB->queryF($sql);
+			xoops_result("succeed with building CATEGORY table: ". $count = $xoopsDB->getAffectedRows());
 
 
-$sql =	
+			$sql =
 			"	INSERT INTO ".art_DB_prefix("article").
 			"		(art_id, 	art_title, 	cat_id,		uid,	art_keywords,	art_summary,	art_time_create,	art_time_submit,	art_time_publish, 	art_counter,	art_comments)".
 			"	SELECT ".
@@ -34,11 +34,11 @@ $sql =
 			"		ORDER BY itemid ASC"
 			;
 
-$result = $xoopsDB->queryF($sql);
-xoops_result("succeed with building ARTICLE table: ".$count = $xoopsDB->getAffectedRows());
+			$result = $xoopsDB->queryF($sql);
+			xoops_result("succeed with building ARTICLE table: ".$count = $xoopsDB->getAffectedRows());
 
 
-$sql =	
+			$sql =
 			"	INSERT INTO ".art_DB_prefix("artcat").
 			"		(art_id, 	cat_id,		uid,	ac_register,	ac_publish)".
 			"	SELECT ".
@@ -47,11 +47,11 @@ $sql =
 			"		ORDER BY itemid ASC"
 			;
 
-$result = $xoopsDB->queryF($sql);
-xoops_result("succeed with building ARTICLE-CATEGORY table: ".$count = $xoopsDB->getAffectedRows());
+			$result = $xoopsDB->queryF($sql);
+			xoops_result("succeed with building ARTICLE-CATEGORY table: ".$count = $xoopsDB->getAffectedRows());
 
 
-$sql =	
+			$sql =
 			"	INSERT INTO ".art_DB_prefix("text").
 			"		(text_id,	art_id, 	text_body, 	dohtml,		dosmiley,	dobr,	doimage,	doxcode)".
 			"	SELECT ".
@@ -60,7 +60,7 @@ $sql =
 			"		ORDER BY itemid ASC"
 			;
 
-$result = $xoopsDB->queryF($sql);
-xoops_result("succeed with building TEXT table: ".$count = $xoopsDB->getAffectedRows());
+			$result = $xoopsDB->queryF($sql);
+			xoops_result("succeed with building TEXT table: ".$count = $xoopsDB->getAffectedRows());
 
-?>
+			?>

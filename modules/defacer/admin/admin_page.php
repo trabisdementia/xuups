@@ -284,5 +284,5 @@ function defacer_form($itemid = 0)
     }
 
     return $form->render();
-    }
+}
 ?>

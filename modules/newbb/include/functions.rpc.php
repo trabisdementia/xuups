@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,11 +22,11 @@ if (!defined('XOOPS_ROOT_PATH')) { exit(); }
 /**
  * Function to respond to a trackback
  */
-function newbb_trackback_response($error = 0, $error_message = '') 
+function newbb_trackback_response($error = 0, $error_message = '')
 {
     require_once XOOPS_ROOT_PATH . "/modules/newbb/include/functions.config.php";
     $moduleConfig = newbb_loadConfig();
-    
+
     if (!empty($moduleConfig["rss_utf8"])) {
         $charset = "utf-8";
         $error_message = xoops_utf8_encode($error_message);

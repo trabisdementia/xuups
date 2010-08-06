@@ -14,7 +14,7 @@ $endDate = date('m/d/y') ." 12:00:00 AM";
 $paramVals = array('startDate' => ((isset($_REQUEST['startDate']) && $_REQUEST['startDate'] != '') ? $_REQUEST['startDate'] : $startDate),
                    'endDate' => ((isset($_REQUEST['endDate']) && $_REQUEST['endDate'] != '') ? $_REQUEST['endDate'] : $endDate));
 
-class xhelpTimeSpentByDeptReport extends xhelpReport {    
+class xhelpTimeSpentByDeptReport extends xhelpReport {
     function xhelpTimeSpentByDeptReport()
     {
         $this->initVar('results', XOBJ_DTYPE_ARRAY, null, false);
@@ -22,7 +22,7 @@ class xhelpTimeSpentByDeptReport extends xhelpReport {
         $this->initVar('hasGraph', XOBJ_DTYPE_INT, 1, false);
     }
     var $name = 'timeSpentByDept';
-    
+
     var $meta = array(
         'name' => _XHELP_TSBD_NAME,
         'author' => 'Eric Juden',
@@ -33,9 +33,9 @@ class xhelpTimeSpentByDeptReport extends xhelpReport {
             'department' => _XHELP_TSBD_DB1, 
             'TotalTime' => _XHELP_TSBD_DB2)
     );
-    
+
     var $parameters = array(
-        _XHELP_TSBD_PARAM1 => array(
+    _XHELP_TSBD_PARAM1 => array(
             'controltype' => XHELP_CONTROL_DATETIME,
             'fieldname' => 'startDate',
             'value' => '',      // last month
@@ -43,7 +43,7 @@ class xhelpTimeSpentByDeptReport extends xhelpReport {
             'fieldlength' => 25,
             'dbfield' => 'r.updateTime',
             'dbaction' => '>'),
-        _XHELP_TSBD_PARAM2 => array (
+    _XHELP_TSBD_PARAM2 => array (
             'controltype' => XHELP_CONTROL_DATETIME,
             'fieldname' => 'endDate',
             'value' => '',      // today
@@ -52,101 +52,101 @@ class xhelpTimeSpentByDeptReport extends xhelpReport {
             'dbfield' => 'r.updateTime',
             'dbaction' => '<=')
     );
-    
-	/*    
-    function generateReport()
-    {         
-        global $paramVals;
-         
-        if($this->getVar('hasResults') == 0){
-            $this->_setResults();
-        }
-        $aResults = $this->getVar('results');
-        
-        if(empty($aResults)){       // If no records found
-            $myReport = $this->generateReportNoData();
-            return $myReport;
-        }
-        
-        $params = '';
-        foreach($paramVals as $key=>$value){
-            $params .= "&$key=$value";
-        }
-        
-        // Print graph
-        $myReport = '';
-        $myReport .= "<div id='xhelp_graph'>";
-        $myReport .= "<img src='".XHELP_BASE_URL."/report.php?op=graph&name=timeSpentByDept".$params."' align='center' width='500' height='300' />";
-        $myReport .= "</div>";
-        
-        // Display report
-        $myReport .= "<br />";
-        $myReport .= "<div id='xhelp_report'>";
-        $myReport .= "<table>";
-        $myReport .= "<tr>";
-        $dbFields = $this->meta['dbFields'];
-        
-        foreach($dbFields as $dbField=>$field){
-            $myReport .= "<th>".$field."</th>";    
-        }
-        $myReport .= "</tr>";
-        
-        $totalTime = 0;
-        foreach($aResults as $result){
-            $myReport .= "<tr class='even'>";
-            
-            foreach($dbFields as $dbField=>$field){
-                $myReport .= "<td>". $result[$dbField] ."</td>";
-                if($dbField == 'TotalTime'){
-                    $totalTime += $result[$dbField];
-                }
-            }
-            $myReport .= "</tr>";
-        }
-        
-        // Display total time
-        $myReport .= "<tr class='foot'><td>"._XHELP_TEXT_TOTAL."</td><td>". $totalTime ."</td></tr>";
-        
-        $myReport .= "</table>";
-        $myReport .= "</div>";
-        
-        return $myReport;
-    }
-    */
-    
+
+    /*
+     function generateReport()
+     {
+     global $paramVals;
+
+     if($this->getVar('hasResults') == 0){
+     $this->_setResults();
+     }
+     $aResults = $this->getVar('results');
+
+     if(empty($aResults)){       // If no records found
+     $myReport = $this->generateReportNoData();
+     return $myReport;
+     }
+
+     $params = '';
+     foreach($paramVals as $key=>$value){
+     $params .= "&$key=$value";
+     }
+
+     // Print graph
+     $myReport = '';
+     $myReport .= "<div id='xhelp_graph'>";
+     $myReport .= "<img src='".XHELP_BASE_URL."/report.php?op=graph&name=timeSpentByDept".$params."' align='center' width='500' height='300' />";
+     $myReport .= "</div>";
+
+     // Display report
+     $myReport .= "<br />";
+     $myReport .= "<div id='xhelp_report'>";
+     $myReport .= "<table>";
+     $myReport .= "<tr>";
+     $dbFields = $this->meta['dbFields'];
+
+     foreach($dbFields as $dbField=>$field){
+     $myReport .= "<th>".$field."</th>";
+     }
+     $myReport .= "</tr>";
+
+     $totalTime = 0;
+     foreach($aResults as $result){
+     $myReport .= "<tr class='even'>";
+
+     foreach($dbFields as $dbField=>$field){
+     $myReport .= "<td>". $result[$dbField] ."</td>";
+     if($dbField == 'TotalTime'){
+     $totalTime += $result[$dbField];
+     }
+     }
+     $myReport .= "</tr>";
+     }
+
+     // Display total time
+     $myReport .= "<tr class='foot'><td>"._XHELP_TEXT_TOTAL."</td><td>". $totalTime ."</td></tr>";
+
+     $myReport .= "</table>";
+     $myReport .= "</div>";
+
+     return $myReport;
+     }
+     */
+
     function generateGraph()
     {
         if($this->getVar('hasGraph') == 0){
             return false;
         }
-    
+
         if($this->getVar('hasResults') == 0){
             $this->_setResults();
         }
         $aResults = $this->getVar('results');
-        
+
         $i = 0;
         $data = array();
         foreach($aResults as $result){
             $data[0][] = $result['department'];     // Used for identifier on chart
             $data[1][] = $result['TotalTime'];      // used for data on chart
         }
-        
+
         $this->generatePie3D($data, 0, 1, XHELP_IMAGE_PATH .'/graph_bg.jpg');
     }
-    
+
     function _setResults()
     {
         global $xoopsDB;
-        
+
         $sSQL = sprintf("SELECT d.department, SUM(r.timeSpent) AS TotalTime FROM %s d, %s t, %s r WHERE (d.id = t.department) AND (t.id = r.ticketid) %s GROUP BY d.department",
-            $xoopsDB->prefix('xhelp_departments'), $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('xhelp_responses'), $this->extraWhere);
+        $xoopsDB->prefix('xhelp_departments'), $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('xhelp_responses'), $this->extraWhere);
 
         $result = $xoopsDB->query($sSQL);
         $aResults = $this->_arrayFromData($result);
         $this->setVar('results', serialize($aResults));
         $this->setVar('hasResults', 1);
-        
+
         return true;
     }
 }

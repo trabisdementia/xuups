@@ -1,34 +1,34 @@
 <?php
 /*=======================================================================
-// File:     EN.INC.PHP
-// Description: English language file for error messages
-// Created:     2006-01-25
-// Ver:        $Id: en.inc.php 1886 2009-10-01 23:30:16Z ljp $
-//
-// Copyright (c) Aditus Consulting. All rights reserved.
-//========================================================================
-*/
+ // File:     EN.INC.PHP
+ // Description: English language file for error messages
+ // Created:     2006-01-25
+ // Ver:        $Id: en.inc.php 1886 2009-10-01 23:30:16Z ljp $
+ //
+ // Copyright (c) Aditus Consulting. All rights reserved.
+ //========================================================================
+ */
 
 // Note: Format of each error message is array(<error message>,<number of arguments>)
 $_jpg_messages = array(
 
 /*
-** Headers already sent error. This is formatted as HTML different since this will be sent back directly as text
-*/
+ ** Headers already sent error. This is formatted as HTML different since this will be sent back directly as text
+ */
 10  => array('<table border="1"><tr><td style="color:darkred; font-size:1.2em;"><b>JpGraph Error:</b>
 HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at line <b>%d</b>.</td></tr><tr><td><b>Explanation:</b><br>HTTP headers have already been sent back to the browser indicating the data as text before the library got a chance to send it\'s image HTTP header to this browser. This makes it impossible for the library to send back image data to the browser (since that would be interpretated as text by the browser and show up as junk text).<p>Most likely you have some text in your script before the call to <i>Graph::Stroke()</i>. If this texts gets sent back to the browser the browser will assume that all data is plain text. Look for any text, even spaces and newlines, that might have been sent back to the browser. <p>For example it is a common mistake to leave a blank line before the opening "<b>&lt;?php</b>".</td></tr></table>',2),
 
 /*
-** Setup errors
-*/
+ ** Setup errors
+ */
 11 => array('No path specified for CACHE_DIR. Please specify CACHE_DIR manually in jpg-config.inc',0),
 12 => array('No path specified for TTF_DIR and path can not be determined automatically. Please specify TTF_DIR manually (in jpg-config.inc).',0),
 13 => array('The installed PHP version (%s) is not compatible with this release of the library. The library requires at least PHP version %s',2),
 
 
 /*
-**  jpgraph_bar
-*/
+ **  jpgraph_bar
+ */
 
 2001 => array('Number of colors is not the same as the number of patterns in BarPlot::SetPattern()',0),
 2002 => array('Unknown pattern specified in call to BarPlot::SetPattern()',0),
@@ -48,20 +48,20 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 
 
 /*
-**  jpgraph_date
-*/
+ **  jpgraph_date
+ */
 
 3001 => array('It is only possible to use either SetDateAlign() or SetTimeAlign() but not both',0),
 
 /*
-**  jpgraph_error
-*/
+ **  jpgraph_error
+ */
 
 4002 => array('Error in input data to LineErrorPlot. Number of data points must be a multiple of 3',0),
 
 /*
-**  jpgraph_flags
-*/
+ **  jpgraph_flags
+ */
 
 5001 => array('Unknown flag size (%d).',1),
 5002 => array('Flag index %s does not exist.',1),
@@ -70,8 +70,8 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 
 
 /*
-**  jpgraph_gantt
-*/
+ **  jpgraph_gantt
+ */
 
 6001 => array('Internal error. Height for ActivityTitles is < 0',0),
 6002 => array('You can\'t specify negative sizes for Gantt graph dimensions. Use 0 to indicate that you want the library to automatically determine a dimension.',0),
@@ -105,14 +105,14 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 6033 => array('Array of fonts must contain arrays with 3 elements, i.e. (Family, Style, Size)',0),
 
 /*
-**  jpgraph_gradient
-*/
+ **  jpgraph_gradient
+ */
 
 7001 => array('Unknown gradient style (=%d).',1),
 
 /*
-**  jpgraph_iconplot
-*/
+ **  jpgraph_iconplot
+ */
 
 8001 => array('Mix value for icon must be between 0 and 100.',0),
 8002 => array('Anchor position for icons must be one of "top", "bottom", "left", "right" or "center"',0),
@@ -120,22 +120,22 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 8004 => array('In order to use Country flags as icons you must include the "jpgraph_flags.php" file.',0),
 
 /*
-**  jpgraph_imgtrans
-*/
+ **  jpgraph_imgtrans
+ */
 
 9001 => array('Value for image transformation out of bounds. Vanishing point on horizon must be specified as a value between 0 and 1.',0),
 
 /*
-**  jpgraph_lineplot
-*/
+ **  jpgraph_lineplot
+ */
 
 10001 => array('LinePlot::SetFilled() is deprecated. Use SetFillColor()',0),
 10002 => array('Plot too complicated for fast line Stroke. Use standard Stroke()',0),
 10003 => array('Each plot in an accumulated lineplot must have the same number of data points.',0),
 
 /*
-**  jpgraph_log
-*/
+ **  jpgraph_log
+ */
 
 11001 => array('Your data contains non-numeric values.',0),
 11002 => array('Negative data values can not be used in a log scale.',0),
@@ -144,8 +144,8 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 11005 => array('Specifying tick interval for a logarithmic scale is undefined. Remove any calls to SetTextLabelStart() or SetTextTickInterval() on the logarithmic scale.',0),
 
 /*
-**  jpgraph_mgraph
-*/
+ **  jpgraph_mgraph
+ */
 
 12001 => array("You are using GD 2.x and are trying to use a background images on a non truecolor image. To use background images with GD 2.x it is necessary to enable truecolor by setting the USE_TRUECOLOR constant to TRUE. Due to a bug in GD 2.0.1 using any truetype fonts with truecolor images will result in very poor quality fonts.",0),
 12002 => array('Incorrect file name for MGraph::SetBackgroundImage() : %s Must have a valid image extension (jpg,gif,png) when using auto detection of image type',1),
@@ -161,8 +161,8 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 12012 => array('Can\'t create image. Check that you really have GD2 library installed.',0),
 
 /*
-**  jpgraph_pie3d
-*/
+ **  jpgraph_pie3d
+ */
 
 14001 => array('Pie3D::ShowBorder() . Deprecated function. Use Pie3D::SetEdge() to control the edges around slices.',0),
 14002 => array('PiePlot3D::SetAngle() 3D Pie projection angle must be between 5 and 85 degrees.',0),
@@ -173,8 +173,8 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 14007 => array('Width for 3D Pie is 0. Specify a size > 0',0),
 
 /*
-**  jpgraph_pie
-*/
+ **  jpgraph_pie
+ */
 
 15001 => array('PiePLot::SetTheme() Unknown theme: %s',1),
 15002 => array('Argument to PiePlot::ExplodeSlice() must be an integer',0),
@@ -189,8 +189,8 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 15011 => array('In order to use image transformation you must include the file jpgraph_imgtrans.php in your script.',0),
 
 /*
-**  jpgraph_plotband
-*/
+ **  jpgraph_plotband
+ */
 
 16001 => array('Density for pattern must be between 1 and 100. (You tried %f)',1),
 16002 => array('No positions specified for pattern.',0),
@@ -199,8 +199,8 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 
 
 /*
-**  jpgraph_polar
-*/
+ **  jpgraph_polar
+ */
 
 17001 => array('Polar plots must have an even number of data point. Each data point is a tuple (angle,radius).',0),
 17002 => array('Unknown alignment specified for X-axis title. (%s)',1),
@@ -208,8 +208,8 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 17004 => array('Unknown scale type for polar graph. Must be "lin" or "log"',0),
 
 /*
-**  jpgraph_radar
-*/
+ **  jpgraph_radar
+ */
 
 18001 => array('Client side image maps not supported for RadarPlots.',0),
 18002 => array('RadarGraph::SupressTickMarks() is deprecated. Use HideTickMarks() instead.',0),
@@ -221,46 +221,46 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 18008 => array('Each radar plot must have the same number of data points.',0),
 
 /*
-**  jpgraph_regstat
-*/
+ **  jpgraph_regstat
+ */
 
 19001 => array('Spline: Number of X and Y coordinates must be the same',0),
 19002 => array('Invalid input data for spline. Two or more consecutive input X-values are equal. Each input X-value must differ since from a mathematical point of view it must be a one-to-one mapping, i.e. each X-value must correspond to exactly one Y-value.',0),
 19003 => array('Bezier: Number of X and Y coordinates must be the same',0),
 
 /*
-**  jpgraph_scatter
-*/
+ **  jpgraph_scatter
+ */
 
 20001 => array('Fieldplots must have equal number of X and Y points.',0),
 20002 => array('Fieldplots must have an angle specified for each X and Y points.',0),
 20003 => array('Scatterplot must have equal number of X and Y points.',0),
 
 /*
-**  jpgraph_stock
-*/
+ **  jpgraph_stock
+ */
 
 21001 => array('Data values for Stock charts must contain an even multiple of %d data points.',1),
 
 /*
-**  jpgraph_plotmark
-*/
+ **  jpgraph_plotmark
+ */
 
 23001 => array('This marker "%s" does not exist in color with index: %d',2),
 23002 => array('Mark color index too large for marker "%s"',1),
 23003 => array('A filename must be specified if you set the mark type to MARK_IMG.',0),
 
 /*
-**  jpgraph_utils
-*/
+ **  jpgraph_utils
+ */
 
 24001 => array('FuncGenerator : No function specified. ',0),
 24002 => array('FuncGenerator : Syntax error in function specification ',0),
 24003 => array('DateScaleUtils: Unknown tick type specified in call to GetTicks()',0),
 24004 => array('ReadCSV2: Column count mismatch in %s line %d',2),
 /*
-**  jpgraph
-*/
+ **  jpgraph
+ */
 
 25001 => array('This PHP installation is not configured with the GD library. Please recompile PHP with GD support to run JpGraph. (Neither function imagetypes() nor imagecreatefromstring() does exist)',0),
 25002 => array('Your PHP installation does not seem to have the required GD library. Please see the PHP documentation on how to install and enable the GD library.',0),
@@ -406,20 +406,20 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 25131 => array('StrokeBoxedText2() only supports TTF fonts and not built-in bitmap fonts.',0),
 
 /*
-**  jpgraph_led
-*/
+ **  jpgraph_led
+ */
 
 25500 => array('Multibyte strings must be enabled in the PHP installation in order to run the LED module so that the function mb_strlen() is available. See PHP documentation for more information.',0),
 
 /*
-**---------------------------------------------------------------------------------------------
-** Pro-version strings
-**---------------------------------------------------------------------------------------------
-*/
+ **---------------------------------------------------------------------------------------------
+ ** Pro-version strings
+ **---------------------------------------------------------------------------------------------
+ */
 
 /*
-**  jpgraph_table
-*/
+ **  jpgraph_table
+ */
 
 27001 => array('GTextTable: Invalid argument to Set(). Array argument must be 2 dimensional',0),
 27002 => array('GTextTable: Invalid argument to Set()',0),
@@ -438,8 +438,8 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 27015 => array('GTextTable: Cell image constrain type must be TIMG_WIDTH or TIMG_HEIGHT',0),
 
 /*
-**  jpgraph_windrose
-*/
+ **  jpgraph_windrose
+ */
 
 22001 => array('Total percentage for all windrose legs in a windrose plot can not exceed 100%% !\n(Current max is: %d)',1),
 22002 => array('Graph is too small to have a scale. Please make the graph larger.',0),
@@ -462,15 +462,15 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 22020 => array('Windrose plot is too large to fit the specified Graph size. Please use WindrosePlot::SetSize() to make the plot smaller or increase the size of the Graph in the initial WindroseGraph() call.',0),
 22021 => array('It is only possible to add Text, IconPlot or WindrosePlot to a Windrose Graph',0),
 /*
-**  jpgraph_odometer
-*/
+ **  jpgraph_odometer
+ */
 
 13001 => array('Unknown needle style (%d).',1),
 13002 => array('Value for odometer (%f) is outside specified scale [%f,%f]',3),
 
 /*
-**  jpgraph_barcode
-*/
+ **  jpgraph_barcode
+ */
 
 1001 => array('Unknown encoder specification: %s',1),
 1002 => array('Data validation failed. Can\'t encode [%s] using encoding "%s"',2),
@@ -485,8 +485,8 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 1011 => array('Non supported barcode backend for type %s',1),
 
 /*
-** PDF417
-*/
+ ** PDF417
+ */
 26000 => array('PDF417: The PDF417 module requires that the PHP installation must support the function bcmod(). This is normally enabled at compile time. See documentation for more information.',0),
 26001 => array('PDF417: Number of Columns must be >= 1 and <= 30',0),
 26002 => array('PDF417: Error level must be between 0 and 8',0),
@@ -506,8 +506,8 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 26016 => array('PDF417: Internal error: Unrecognized state transition mode in decode.',0),
 
 /*
-** jpgraph_contour
-*/
+ ** jpgraph_contour
+ */
 
 28001 => array('Third argument to Contour must be an array of colors.',0),
 28002 => array('Number of colors must equal the number of isobar lines specified',0),
@@ -519,7 +519,7 @@ HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at 
 
 /*
  * jpgraph_matrix and colormap
-*/
+ */
 29201 => array('Min range value must be less or equal to max range value for colormaps',0),
 29202 => array('The distance between min and max value is too small for numerical precision',0),
 29203 => array('Number of color quantification level must be at least %d',1),

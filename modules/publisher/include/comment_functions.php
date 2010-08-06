@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -24,11 +24,11 @@ function publisher_com_update($item_id, $total_num)
     $db =& Database::getInstance();
     $sql = 'UPDATE ' . $db->prefix('publisher_items') . ' SET comments = ' . $total_num . ' WHERE itemid = ' . $item_id;
     $db->query($sql);
-} 
+}
 
 function publisher_com_approve(&$comment)
-{ 
+{
     // notification mail here
-} 
+}
 
 ?>

@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: am.article.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 $category_id = empty($_GET["category"]) ? ( empty($_POST["category"]) ? 0 : intval($_POST["category"]) ) : intval($_GET["category"]);
@@ -83,70 +83,70 @@ if ( !empty($topic_id) && $op == "terminate" ) {
     $update_topic = true;
 } elseif ( !empty($category_id) ) {
     switch($op) {
-    case "update_time":
-        if ($type == "featured") {
-            $status = 2;
-            $time = time();
-        } else {
-            $status = 1;
-            $time = 0;
-        }
-        foreach ($art_id as $id) {
-            $article_handler->setCategoryStatus($id, $category_id, $status, $time);
-        }
-        break;
-    case "terminate":
-        foreach ($art_id as $id) {
-            $article_handler->terminateCategory($id, $category_id);
-        }
-        $update_topic = true;
-        $update_category = true;
-        break;
-    case "approve":
-        $valid_id = array();
-        foreach ($art_id as $id) {
-            $old_category = $article_handler->getCategoryArray($id);
-            if (!empty($old_category[$category_id])) continue;
-            $article_handler->publishCategory($id, $category_id);
-            $valid_id[] = $id;
-            $update_category = true;
-        }
-        $art_id = $valid_id;
-        
-        break;
-    case "feature":
-        foreach ($art_id as $id) {
-            $old_category =& $article_handler->getCategoryArray($id);
-            if (isset($old_category[$category_id]) && $old_category[$category_id] == 2) continue;
-            $article_handler->featureCategory($id, $category_id);
-        }
-        break;
-    case "unfeature":
-        foreach ($art_id as $id) {
-            $old_category = $article_handler->getCategoryArray($id);
-            if (!isset($old_category[$category_id]) && $old_category[$category_id] < 2) continue;
-            $article_handler->unfeatureCategory($id, $category_id);
-        }
-        break;
-    case "registertopic":
-        $valid_id = array();
-        $criteria = new Criteria("art_id", "(" . implode(",", $art_id) . ")", "IN");
-        $arts =& $article_handler->getAll($criteria, array("uid"));
-        $criteria = new CriteriaCompo(new Criteria("1", 1));
-        foreach (array_keys($arts) as $aid) {
-            $old_topic =& $article_handler->getTopicIds($aid, $criteria);
-            if (in_array($top_id_post, $old_topic)) continue;
-            $article_handler->registerTopic($arts[$aid], $top_id_post);
+        case "update_time":
+            if ($type == "featured") {
+                $status = 2;
+                $time = time();
+            } else {
+                $status = 1;
+                $time = 0;
+            }
+            foreach ($art_id as $id) {
+                $article_handler->setCategoryStatus($id, $category_id, $status, $time);
+            }
+            break;
+        case "terminate":
+            foreach ($art_id as $id) {
+                $article_handler->terminateCategory($id, $category_id);
+            }
             $update_topic = true;
-            $valid_id[] = $aid;
-        }
-        $art_id = $valid_id;
-        break;
+            $update_category = true;
+            break;
+        case "approve":
+            $valid_id = array();
+            foreach ($art_id as $id) {
+                $old_category = $article_handler->getCategoryArray($id);
+                if (!empty($old_category[$category_id])) continue;
+                $article_handler->publishCategory($id, $category_id);
+                $valid_id[] = $id;
+                $update_category = true;
+            }
+            $art_id = $valid_id;
+
+            break;
+        case "feature":
+            foreach ($art_id as $id) {
+                $old_category =& $article_handler->getCategoryArray($id);
+                if (isset($old_category[$category_id]) && $old_category[$category_id] == 2) continue;
+                $article_handler->featureCategory($id, $category_id);
+            }
+            break;
+        case "unfeature":
+            foreach ($art_id as $id) {
+                $old_category = $article_handler->getCategoryArray($id);
+                if (!isset($old_category[$category_id]) && $old_category[$category_id] < 2) continue;
+                $article_handler->unfeatureCategory($id, $category_id);
+            }
+            break;
+        case "registertopic":
+            $valid_id = array();
+            $criteria = new Criteria("art_id", "(" . implode(",", $art_id) . ")", "IN");
+            $arts =& $article_handler->getAll($criteria, array("uid"));
+            $criteria = new CriteriaCompo(new Criteria("1", 1));
+            foreach (array_keys($arts) as $aid) {
+                $old_topic =& $article_handler->getTopicIds($aid, $criteria);
+                if (in_array($top_id_post, $old_topic)) continue;
+                $article_handler->registerTopic($arts[$aid], $top_id_post);
+                $update_topic = true;
+                $valid_id[] = $aid;
+            }
+            $art_id = $valid_id;
+            break;
     }
     $message = art_constant("MD_ACTIONDONE");
 }
 if ( $op == "rate") {
-    
+
     if ($xoopsUserIsAdmin) {
         $art_id_valid = $art_id;
     } else {
@@ -166,67 +166,67 @@ if ( $op == "rate") {
     $message = art_constant("MD_ACTIONDONE");
 }
 /*
-}elseif(art_isAdministrator()){
-    for($i=0;$i<$count_artid;$i++){
-        switch($op){
-        case "terminate":
-            $article_handler->terminateCategory($art_id[$i], $cat_id[$i]);
-            $update_topic = true;
-            $update_category = true;
-            break;
-        case "approve":
-            $article_handler->publishCategory($art_id[$i], $cat_id[$i]);
-            $update_category = true;
-        
-            if (!empty($xoopsModuleConfig['notification_enabled'])) {
-                $notification_handler =& xoops_gethandler('notification');
-                $tags = array();
-                $tags['ARTICLE_ACTION'] = art_constant("MD_NOT_ACTION_PUBLISHED");
-                $article_obj =& $article_handler->get($art_id[$i]);
-                $category_obj =& $category_handler->get($cat_id[$i]);
-                $tags['ARTICLE_TITLE'] = $article_obj->getVar("art_title");
-                $tags['ARTICLE_URL'] = XOOPS_URL . '/modules/' . $GLOBALS["artdirname"] . '/view.article.php'.URL_DELIMITER.'' .$art_id[$i].'/c'.$cat_id[$i];
-                $tags['CATEGORY_TITLE'] = $category_obj->getVar("cat_title");
-                $notification_handler->triggerEvent('global', 0, 'article_new', $tags);
-                $notification_handler->triggerEvent('global', 0, 'article_monitor', $tags);
-                $notification_handler->triggerEvent('category', $cat_id[$i], 'article_new', $tags);
-                $notification_handler->triggerEvent('article', $art_id[$i], 'article_approve', $tags);
-                unset($article_obj, $category_obj);
-            }
-            
-            break;
-        case "feature":
-            $article_handler->featureCategory($art_id[$i], $cat_id[$i]);
-        
-            if (!empty($xoopsModuleConfig['notification_enabled'])) {
-                $notification_handler =& xoops_gethandler('notification');
-                $tags = array();
-                $tags['ARTICLE_ACTION'] = art_constant("MD_NOT_ACTION_FEATURED");
-                $article_obj =& $article_handler->get($art_id[$i]);
-                $category_obj =& $category_handler->get($cat_id[$i]);
-                $tags['ARTICLE_TITLE'] = $article_obj->getVar("art_title");
-                $tags['ARTICLE_URL'] = XOOPS_URL . '/modules/' . $GLOBALS["artdirname"] . '/view.article.php'.URL_DELIMITER.'' .$art_id[$i].'/c'.$cat_id[$i];
-                $tags['CATEGORY_TITLE'] = $category_obj->getVar("cat_title");
-                $notification_handler->triggerEvent('global', 0, 'article_new', $tags);
-                $notification_handler->triggerEvent('global', 0, 'article_monitor', $tags);
-                $notification_handler->triggerEvent('category', $cat_id[$i], 'article_new', $tags);
-                $notification_handler->triggerEvent('article', $art_id[$i], 'article_monitor', $tags);
-                unset($article_obj, $category_obj);
-            }
-            
-            break;
-        case "unfeature":
-            $article_handler->unfeatureCategory($art_id[$i], $cat_id[$i]);
-            break;
-        }
-    }
-    $message = art_constant("MD_ACTIONDONE");
-}
-*/    
+ }elseif(art_isAdministrator()){
+ for($i=0;$i<$count_artid;$i++){
+ switch($op){
+ case "terminate":
+ $article_handler->terminateCategory($art_id[$i], $cat_id[$i]);
+ $update_topic = true;
+ $update_category = true;
+ break;
+ case "approve":
+ $article_handler->publishCategory($art_id[$i], $cat_id[$i]);
+ $update_category = true;
+
+ if (!empty($xoopsModuleConfig['notification_enabled'])) {
+ $notification_handler =& xoops_gethandler('notification');
+ $tags = array();
+ $tags['ARTICLE_ACTION'] = art_constant("MD_NOT_ACTION_PUBLISHED");
+ $article_obj =& $article_handler->get($art_id[$i]);
+ $category_obj =& $category_handler->get($cat_id[$i]);
+ $tags['ARTICLE_TITLE'] = $article_obj->getVar("art_title");
+ $tags['ARTICLE_URL'] = XOOPS_URL . '/modules/' . $GLOBALS["artdirname"] . '/view.article.php'.URL_DELIMITER.'' .$art_id[$i].'/c'.$cat_id[$i];
+ $tags['CATEGORY_TITLE'] = $category_obj->getVar("cat_title");
+ $notification_handler->triggerEvent('global', 0, 'article_new', $tags);
+ $notification_handler->triggerEvent('global', 0, 'article_monitor', $tags);
+ $notification_handler->triggerEvent('category', $cat_id[$i], 'article_new', $tags);
+ $notification_handler->triggerEvent('article', $art_id[$i], 'article_approve', $tags);
+ unset($article_obj, $category_obj);
+ }
+
+ break;
+ case "feature":
+ $article_handler->featureCategory($art_id[$i], $cat_id[$i]);
+
+ if (!empty($xoopsModuleConfig['notification_enabled'])) {
+ $notification_handler =& xoops_gethandler('notification');
+ $tags = array();
+ $tags['ARTICLE_ACTION'] = art_constant("MD_NOT_ACTION_FEATURED");
+ $article_obj =& $article_handler->get($art_id[$i]);
+ $category_obj =& $category_handler->get($cat_id[$i]);
+ $tags['ARTICLE_TITLE'] = $article_obj->getVar("art_title");
+ $tags['ARTICLE_URL'] = XOOPS_URL . '/modules/' . $GLOBALS["artdirname"] . '/view.article.php'.URL_DELIMITER.'' .$art_id[$i].'/c'.$cat_id[$i];
+ $tags['CATEGORY_TITLE'] = $category_obj->getVar("cat_title");
+ $notification_handler->triggerEvent('global', 0, 'article_new', $tags);
+ $notification_handler->triggerEvent('global', 0, 'article_monitor', $tags);
+ $notification_handler->triggerEvent('category', $cat_id[$i], 'article_new', $tags);
+ $notification_handler->triggerEvent('article', $art_id[$i], 'article_monitor', $tags);
+ unset($article_obj, $category_obj);
+ }
+
+ break;
+ case "unfeature":
+ $article_handler->unfeatureCategory($art_id[$i], $cat_id[$i]);
+ break;
+ }
+ }
+ $message = art_constant("MD_ACTIONDONE");
+ }
+ */
 
 
 
-    
+
 if ($update_topic || $update_category) {
     foreach ($art_id as $id) {
         $art_obj =& $article_handler->get($id);
@@ -237,9 +237,9 @@ if ($update_topic || $update_category) {
     }
 }
 
-$redirect = empty($from) 
-    ? XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/cp.article.php?category=" . $category_id . "&amp;topic=" . $topic_id . "&amp;start=" . $start . "&amp;type=" . $type
-    : XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/admin/admin.article.php";
+$redirect = empty($from)
+? XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/cp.article.php?category=" . $category_id . "&amp;topic=" . $topic_id . "&amp;start=" . $start . "&amp;type=" . $type
+: XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/admin/admin.article.php";
 $message = empty($message) ? art_constant("MD_INVALID") : $message;
 redirect_header($redirect, 2, $message);
 

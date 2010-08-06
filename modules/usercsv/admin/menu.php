@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -17,7 +17,7 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: menu.php 0 2009-08-26 18:47:04Z trabis $
  */
- 
+
 defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
 $i = -1;

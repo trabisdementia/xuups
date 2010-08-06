@@ -18,17 +18,17 @@ define("_MI_NEWBB_BLOCK_AUTHOR", "Authors");
 define("_MI_NEWBB_BLOCK_TAG_CLOUD", "Tag Cloud");
 define("_MI_NEWBB_BLOCK_TAG_TOP", "Top Tags");
 /*
-define("_MI_NEWBB_BNAME2", "Most Viewed Topics");
-define("_MI_NEWBB_BNAME3", "Most Active Topics");
-define("_MI_NEWBB_BNAME4", "Newest Digest");
-define("_MI_NEWBB_BNAME5", "Newest Sticky Topics");
-define("_MI_NEWBB_BNAME6", "Newest Posts");
-define("_MI_NEWBB_BNAME7", "Authors with most topics");
-define("_MI_NEWBB_BNAME8", "Authors with most posts");
-define("_MI_NEWBB_BNAME9", "Authors with most digests");
-define("_MI_NEWBB_BNAME10", "Authors with most sticky topics");
-define("_MI_NEWBB_BNAME11", "Recent post with text");
-*/
+ define("_MI_NEWBB_BNAME2", "Most Viewed Topics");
+ define("_MI_NEWBB_BNAME3", "Most Active Topics");
+ define("_MI_NEWBB_BNAME4", "Newest Digest");
+ define("_MI_NEWBB_BNAME5", "Newest Sticky Topics");
+ define("_MI_NEWBB_BNAME6", "Newest Posts");
+ define("_MI_NEWBB_BNAME7", "Authors with most topics");
+ define("_MI_NEWBB_BNAME8", "Authors with most posts");
+ define("_MI_NEWBB_BNAME9", "Authors with most digests");
+ define("_MI_NEWBB_BNAME10", "Authors with most sticky topics");
+ define("_MI_NEWBB_BNAME11", "Recent post with text");
+ */
 
 // Names of admin menu items
 define("_MI_NEWBB_ADMENU_INDEX", "Index");

@@ -62,8 +62,8 @@ switch ($op)
         break;
 
     case "search";
-        search();
-        break;
+    search();
+    break;
 
     case "updateMimeValue":
         updateMimeValue();
@@ -381,7 +381,7 @@ function edit()
             header("Location: " . PUBLISHER_ADMIN_URL . "/mimetypes.php?op=manage&limit=$limit&start=$start");
         }
     }
-    }
+}
 
 function manage()
 {

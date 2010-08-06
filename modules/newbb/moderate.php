@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: moderate.php 2175 2008-09-23 14:07:03Z phppp $
  */
- 
+
 include 'header.php';
 
 $forum_id = isset($_POST['forum']) ? intval($_POST['forum']) : 0;
@@ -36,11 +36,11 @@ if (!empty($_POST["submit"]) && !empty($_POST["expire"])) {
         $_POST["ip"] = "";
     }
     if (
-        (!empty($_POST["uid"]) && $moderate_handler->getLatest($_POST["uid"]) > (time() + $_POST["expire"] * 3600 * 24))
-        ||
-        (!empty($_POST["ip"]) && $moderate_handler->getLatest($_POST["ip"], false) > (time() + $_POST["expire"] * 3600 * 24))
-        ||
-        (empty($_POST["uid"]) && empty($_POST["ip"]))
+    (!empty($_POST["uid"]) && $moderate_handler->getLatest($_POST["uid"]) > (time() + $_POST["expire"] * 3600 * 24))
+    ||
+    (!empty($_POST["ip"]) && $moderate_handler->getLatest($_POST["ip"], false) > (time() + $_POST["expire"] * 3600 * 24))
+    ||
+    (empty($_POST["uid"]) && empty($_POST["ip"]))
     ) {
     } else {
         $moderate_obj =& $moderate_handler->create();
@@ -101,18 +101,18 @@ switch($sortname) {
         $sort = "uid ASC, ip";
         $order = "ASC";
         break;
-        
+
     case "start":
         $sort = "mod_start";
         $order = "ASC";
         break;
-        
+
     case "expire":
         $sort = "mod_end";
         $order = "DESC";
         break;
-        
-    //case "expire":
+
+        //case "expire":
     default:
         $sort = "forum_id ASC, uid ASC, ip";
         $order = "ASC";
@@ -141,7 +141,7 @@ if (!empty($moderate_count)) {
         $_users[$moderate_objs[$id]->getVar("uid")] = 1;
     }
     $users = newbb_getUnameFromIds(array_keys($_users), $xoopsModuleConfig['show_realname'], true);
-    
+
     echo '
     <table class="outer" cellpadding="6" cellspacing="1" border="0" width="100%" align="center">
         <tr class="head" align="left">
@@ -165,16 +165,16 @@ if (!empty($moderate_count)) {
                 </td>
         </tr>
     ';
-    
+
     foreach (array_keys($moderate_objs) as $id) {
-        echo '    
+        echo '
             <tr>
                 <td width="5%" align="center" nowrap="nowrap">
                     ' . (
-                        $moderate_objs[$id]->getVar("uid")
-                        ? (isset($users[$moderate_objs[$id]->getVar("uid")]) ? $users[$moderate_objs[$id]->getVar("uid")] : $moderate_objs[$id]->getVar("uid"))
-                        : $moderate_objs[$id]->getVar("ip")
-                    ) . '
+        $moderate_objs[$id]->getVar("uid")
+        ? (isset($users[$moderate_objs[$id]->getVar("uid")]) ? $users[$moderate_objs[$id]->getVar("uid")] : $moderate_objs[$id]->getVar("uid"))
+        : $moderate_objs[$id]->getVar("ip")
+        ) . '
                     </td>
                 <td width="10%" align="center">
                     ' . (formatTimestamp($moderate_objs[$id]->getVar("mod_start"))) . '
@@ -190,11 +190,11 @@ if (!empty($moderate_count)) {
                     </td>
                 <td width="5%" align="center" nowrap="nowrap">
                     ' .
-                    ( ($is_administrator || $moderate_objs[$id]->getVar("forum_id") == $forum_id) ? '<a href="moderate.php?forum=' . $forum_id . '&amp;del=' . $moderate_objs[$id]->getVar("mod_id") . '">' . _DELETE . '</a>' : ' ') . '
+        ( ($is_administrator || $moderate_objs[$id]->getVar("forum_id") == $forum_id) ? '<a href="moderate.php?forum=' . $forum_id . '&amp;del=' . $moderate_objs[$id]->getVar("mod_id") . '">' . _DELETE . '</a>' : ' ') . '
                     </td>
             </tr>
         ';
-    }    
+    }
     echo '
         <tr class="head" align="left">
             <td width="5%" align="center" nowrap="nowrap">
@@ -222,8 +222,8 @@ if (!empty($moderate_count)) {
         $nav = new XoopsPageNav($all_topics, $xoopsModuleConfig['topics_per_page'], $start, "start", 'forum=' . $forum_id . '&amp;sort=' . $sortname);
         echo '<tr><td colspan="6">' . $nav->renderNav(4) . '</td></tr>';
     }
-    
-    echo '</table><br /><br />';            
+
+    echo '</table><br /><br />';
 }
 
 include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";

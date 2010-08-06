@@ -10,8 +10,8 @@ $r = 10;
 $f = 5;
 
 for( $i=1; $i <= $f; ++$i ) {
-	$xdata[] = $i;
-	$ydata[] =  pow( $r*pow(2,($i-1)) - ( pow(2,$i) - 1 ),2);
+    $xdata[] = $i;
+    $ydata[] =  pow( $r*pow(2,($i-1)) - ( pow(2,$i) - 1 ),2);
 }
 
 $graph = new Graph(400,240);

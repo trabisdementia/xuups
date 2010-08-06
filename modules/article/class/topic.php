@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: topic.php 2283 2008-10-12 03:36:13Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
@@ -25,77 +25,77 @@ mod_loadFunctions("parse", $GLOBALS["artdirname"]);
 
 
 if (!class_exists("Xtopic")) {
-class Xtopic extends XoopsObject
-{
-
-    /**
-     * Constructor
-     */
-    function Xtopic()
+    class Xtopic extends XoopsObject
     {
-        //$this->ArtObject();
-        //$this->table = art_DB_prefix("topic");
-        $this->initVar("top_id",            XOBJ_DTYPE_INT, null, false);
-        $this->initVar("cat_id",             XOBJ_DTYPE_INT, 0, false);
-        $this->initVar("top_title",         XOBJ_DTYPE_TXTBOX, "", true);
-        $this->initVar("top_description",     XOBJ_DTYPE_TXTAREA);
-        $this->initVar("top_template",         XOBJ_DTYPE_SOURCE);
-        $this->initVar("top_time",             XOBJ_DTYPE_INT);
-        $this->initVar("top_expire",         XOBJ_DTYPE_INT);
-        $this->initVar("top_order",         XOBJ_DTYPE_INT, 1);
-        $this->initVar("top_sponsor",         XOBJ_DTYPE_TXTAREA);
-    }
 
-    /**
-     * get a list of parsed sponsors of the topic
-     * 
-     * @return     array
-     */
-    function &getSponsor()
-    {
-        $ret = art_parseLinks($this->getVar("top_sponsor", "e"));
-        return $ret;
-    }
+        /**
+         * Constructor
+         */
+        function Xtopic()
+        {
+            //$this->ArtObject();
+            //$this->table = art_DB_prefix("topic");
+            $this->initVar("top_id",            XOBJ_DTYPE_INT, null, false);
+            $this->initVar("cat_id",             XOBJ_DTYPE_INT, 0, false);
+            $this->initVar("top_title",         XOBJ_DTYPE_TXTBOX, "", true);
+            $this->initVar("top_description",     XOBJ_DTYPE_TXTAREA);
+            $this->initVar("top_template",         XOBJ_DTYPE_SOURCE);
+            $this->initVar("top_time",             XOBJ_DTYPE_INT);
+            $this->initVar("top_expire",         XOBJ_DTYPE_INT);
+            $this->initVar("top_order",         XOBJ_DTYPE_INT, 1);
+            $this->initVar("top_sponsor",         XOBJ_DTYPE_TXTAREA);
+        }
 
-    /**
-     * get formatted creation time of the topic
-     * 
-     * @param string $format format of time
-     * @return     string
-     */
-    function getTime($format = "")
-    {
-        mod_loadFunctions("time", $GLOBALS["artdirname"]);
-        $time = art_formatTimestamp($this->getVar("top_time"), $format);
-        return $time;
-    }
+        /**
+         * get a list of parsed sponsors of the topic
+         *
+         * @return     array
+         */
+        function &getSponsor()
+        {
+            $ret = art_parseLinks($this->getVar("top_sponsor", "e"));
+            return $ret;
+        }
 
-    /**
-     * get formatted expiring time of the topic
-     * 
-     * @param string $format format of time
-     * @return     string
-     */
-    function getExpire($format = "")
-    {
-        mod_loadFunctions("time", $GLOBALS["artdirname"]);
-        $time = art_formatTimestamp($this->getVar("top_expire"), $format);
-        return $time;
+        /**
+         * get formatted creation time of the topic
+         *
+         * @param string $format format of time
+         * @return     string
+         */
+        function getTime($format = "")
+        {
+            mod_loadFunctions("time", $GLOBALS["artdirname"]);
+            $time = art_formatTimestamp($this->getVar("top_time"), $format);
+            return $time;
+        }
+
+        /**
+         * get formatted expiring time of the topic
+         *
+         * @param string $format format of time
+         * @return     string
+         */
+        function getExpire($format = "")
+        {
+            mod_loadFunctions("time", $GLOBALS["artdirname"]);
+            $time = art_formatTimestamp($this->getVar("top_expire"), $format);
+            return $time;
+        }
     }
-}
 }
 
 /**
-* Topic object handler class.  
-* @package module::article
-*
-* @author  D.J. (phppp)
-* @copyright copyright &copy; 2005 The XOOPS Project
-*
-* {@link XoopsPersistableObjectHandler} 
-*
-* @param CLASS_PREFIX variable prefix for the class name
-*/
+ * Topic object handler class.
+ * @package module::article
+ *
+ * @author  D.J. (phppp)
+ * @copyright copyright &copy; 2005 The XOOPS Project
+ *
+ * {@link XoopsPersistableObjectHandler}
+ *
+ * @param CLASS_PREFIX variable prefix for the class name
+ */
 
 art_parse_class('
 class [CLASS_PREFIX]TopicHandler extends XoopsPersistableObjectHandler

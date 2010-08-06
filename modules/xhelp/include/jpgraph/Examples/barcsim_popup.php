@@ -5,7 +5,7 @@ require_once ('jpgraph/jpgraph_bar.php');
 // Some random data to plot
 $datay=array(12,26,9,17,31);
 
-// Create the graph. 
+// Create the graph.
 $graph = new Graph(400,250);
 $graph->SetScale("textlin");
 
@@ -19,9 +19,9 @@ $targ=array();
 $alts=array();
 for($i=0; $i < $n; ++$i) {
     $targ[$i] = sprintf($fmtStr,$i+1);
-    $alts[$i] = 'val=%d'; 
-    // Note: The format placeholder val=%d will be replaced by the actual value in the ouput HTML by the 
-    // library so that when the user hoovers the mouse over the bar the actual numerical value of the bar 
+    $alts[$i] = 'val=%d';
+    // Note: The format placeholder val=%d will be replaced by the actual value in the ouput HTML by the
+    // library so that when the user hoovers the mouse over the bar the actual numerical value of the bar
     // will be dísplayed
 }
 $bplot->SetCSIMTargets($targ,$alts);
@@ -33,7 +33,7 @@ $graph->Add($bplot);
 $graph->title->Set("CSIM with popup windows");
 $graph->title->SetFont(FF_FONT2,FS_BOLD);
 // Assume we can give more details on the graph
-$graph->title->SetCSIMTarget(sprintf($fmtStr,-1),'Title for Bar'); 
+$graph->title->SetCSIMTarget(sprintf($fmtStr,-1),'Title for Bar');
 
 // Send back the HTML page which will call this script again to retrieve the image.
 $graph->StrokeCSIM();

@@ -57,9 +57,9 @@ $type_select = new XoopsFormSelect(_MA_MYSEARCH_TYPE, "andor", $andor);
 $type_select->addOptionArray(array("AND"=>_MA_MYSEARCH_ALL, "OR"=>_MA_MYSEARCH_ANY, "exact"=>_MA_MYSEARCH_EXACT));
 $search_form->addElement($type_select);
 if (!empty($mids)) {
-	$mods_checkbox = new XoopsFormCheckBox(_MA_MYSEARCH_SEARCHIN, "mids[]", $mids);
+    $mods_checkbox = new XoopsFormCheckBox(_MA_MYSEARCH_SEARCHIN, "mids[]", $mids);
 } else {
-	$mods_checkbox = new XoopsFormCheckBox(_MA_MYSEARCH_SEARCHIN, "mids[]", $mid);
+    $mods_checkbox = new XoopsFormCheckBox(_MA_MYSEARCH_SEARCHIN, "mids[]", $mid);
 }
 if (empty($modules)) {
     $criteria = new CriteriaCompo();
@@ -79,7 +79,7 @@ else {
 }
 $search_form->addElement($mods_checkbox);
 if ($xoopsModuleConfig['keyword_min'] > 0) {
-	$search_form->addElement(new XoopsFormLabel(_MA_MYSEARCH_SEARCHRULE, sprintf(_MA_MYSEARCH_KEYIGNORE, $xoopsModuleConfig['keyword_min'])));
+    $search_form->addElement(new XoopsFormLabel(_MA_MYSEARCH_SEARCHRULE, sprintf(_MA_MYSEARCH_KEYIGNORE, $xoopsModuleConfig['keyword_min'])));
 }
 $search_form->addElement(new XoopsFormHidden("action", "results"));
 $search_form->addElement(new XoopsFormHiddenToken('id'));

@@ -144,11 +144,11 @@ define('_MI_XHELP_DEPT_NEWOWNER_NOTIFYSBJ', '[{X_SITENAME}] Ticket Atribuido');
 define('_MI_XHELP_DEPT_NEWOWNER_NOTIFYTPL', 'dept_newowner_notify.tpl');
 
 /*
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFY', ' Reivindicação de novo Ticket');
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYCAP', 'Notificar sobre Reivindicação de novo Ticket');
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYDSC', 'Receba notificação sobre Reivindicação de novo Ticket');
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYSBJ', '[{X_SITENAME}] Reivindicação de novo Ticket');
-*/
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFY', ' Reivindicação de novo Ticket');
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYCAP', 'Notificar sobre Reivindicação de novo Ticket');
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYDSC', 'Receba notificação sobre Reivindicação de novo Ticket');
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYSBJ', '[{X_SITENAME}] Reivindicação de novo Ticket');
+ */
 
 define('_MI_XHELP_TICKET_REMOVEDTICKET_NOTIFY', 'Ticket: Apagado');
 define('_MI_XHELP_TICKET_REMOVEDTICKET_NOTIFYCAP', 'Notificar que um ticket foi apagado');

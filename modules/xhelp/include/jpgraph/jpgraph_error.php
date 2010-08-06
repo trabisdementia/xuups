@@ -8,7 +8,7 @@
  // Copyright (c) Aditus Consulting. All rights reserved.
  //========================================================================
  */
-   
+
 //===================================================
 // CLASS ErrorPlot
 // Description: Error plot with min/max value for
@@ -16,7 +16,7 @@
 //===================================================
 class ErrorPlot extends Plot {
     private $errwidth=2;
-    
+
     //---------------
     // CONSTRUCTOR
     function __construct($datay,$datax=false) {

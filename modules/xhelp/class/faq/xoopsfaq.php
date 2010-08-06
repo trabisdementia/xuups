@@ -20,7 +20,7 @@ class xhelpXoopsfaqAdapter extends xhelpFaqAdapter {
      * @access public
      */
     var $categoryType = XHELP_FAQ_CATEGORY_SING;
-    
+
     /**
      * Adapter Details
      * Required Values:
@@ -42,27 +42,27 @@ class xhelpXoopsfaqAdapter extends xhelpFaqAdapter {
         'tested_versions' => '1.1',
         'url' => 'http://xoops.org',
         'module_dir' => 'xoopsfaq');
-    
+
     function xhelpXoopsfaqAdapter()
     {
         parent::init();
     }
-    
+
     function &getCategories()
     {
         global $xoopsDB;
-        
+
         $ret = array();
         // Create an instance of the xhelpFaqCategoryHandler
         $hFaqCategory =& xhelpGetHandler('faqCategory');
-        
+
         $sql = sprintf("SELECT category_id, category_title FROM %s ORDER BY category_order", $xoopsDB->prefix("xoopsfaq_categories"));
         $result = $xoopsDB->query($sql);
-        
+
         if(!$result){
             return $ret;
         }
-        
+
         //Convert the module specific category to the
         //xhelpFaqCategory object for standarization
         while ($myrow = $xoopsDB->fetchArray($result)) {
@@ -72,17 +72,17 @@ class xhelpXoopsfaqAdapter extends xhelpFaqAdapter {
             $faqcat->setVar('parent', 0);
             $ret[] = $faqcat;
         }
-        
+
         return $ret;
     }
-    
+
     /**
      * @return bool true (success)/false (failure)
      */
     function storeFaq(&$faq)
     {
         global $xoopsDB, $xoopsUser;
-        
+
         // Set values before storing to db
         $newid = 0;
         $categories = $faq->getVar('categories');
@@ -94,17 +94,17 @@ class xhelpXoopsfaqAdapter extends xhelpFaqAdapter {
         $contents_nohtml = 0;
         $contents_nosmiley = 0;
         $contents_noxcode = 0;
-        
+
         $sql = "INSERT INTO ".$xoopsDB->prefix("xoopsfaq_contents")." (contents_id, category_id, contents_title, contents_contents, contents_time, contents_order, contents_visible, contents_nohtml, contents_nosmiley, contents_noxcode) VALUES (".$newid.", ".$category_id.", '".$title."', '".$contents."', ".time().", ".$contents_order.", ".$contents_visible.", ".$contents_nohtml.", ".$contents_nosmiley.", ".$contents_noxcode.")";
         $ret = $xoopsDB->query($sql);
-        
+
         $newid = $xoopsDB->getInsertId();   // Get new faq id from db
         if($ret){
             $faq->setVar('id', $newid);
         }
         return $ret;
     }
-    
+
     function makeFaqUrl(&$faq)
     {
         return XHELP_XFAQ_URL .'/index.php?cat_id='. $faq->getVar('categories') .'#q'. $faq->getVar('id');

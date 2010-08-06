@@ -9,17 +9,17 @@ $month=array(
 // Create datapoints where every point
 $steps=100;
 for($i=0; $i<$steps; ++$i) {
-	$datay[$i]=log(pow($i,$i/10)+1)*sin($i/15)+35;
-	$databarx[]=sprintf("198%d %s",floor($i/12),$month[$i%12]);
-	
-	// Simulate an accumulated value for every 5:th data point
-	if( $i % 6 == 0 ) {
-		$databary[]=abs(25*sin($i)+5);
-	}
-	else {
-		$databary[]=0;
-	}
-	
+    $datay[$i]=log(pow($i,$i/10)+1)*sin($i/15)+35;
+    $databarx[]=sprintf("198%d %s",floor($i/12),$month[$i%12]);
+
+    // Simulate an accumulated value for every 5:th data point
+    if( $i % 6 == 0 ) {
+        $databary[]=abs(25*sin($i)+5);
+    }
+    else {
+        $databary[]=0;
+    }
+
 }
 
 
@@ -40,7 +40,7 @@ $graph->title->SetFont(FF_FONT1,FS_BOLD);
 
 // Make the margin around the plot a little bit bigger
 // then default
-$graph->img->SetMargin(40,140,40,80);	
+$graph->img->SetMargin(40,140,40,80);
 
 // Slightly adjust the legend from it's default position in the
 // top right corner to middle right side

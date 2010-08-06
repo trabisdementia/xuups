@@ -1,0 +1,21 @@
+<div class="newsletter">
+
+	<div style="font-weight : bold; color : #000000; font-size : 11px; padding-top : 7px; "><{$smarty.const._NL_MB_NEWSLETTERS}></div>
+	<div style="font-size : 11px; color : #000000; padding-bottom : 5px;">
+		<{$smarty.const._NL_MB_SUBSCRIBE_HERE}>
+	</div>
+
+	<form action="<{$xoops_url}>/newsletter" method="post">
+		<input class="text" name="email" style="width : 140px;" onfocus="this.style.color='#000000'; this.value=''; this.style.fontSize='11px';"; value=" DIN E-MAIL"/><br />
+		<input class="button" type="submit" name="list" value="<{$smarty.const._NL_BK_NEWSLETTER_SUBSCRIBE}>" />
+		<input class="button" type="submit" name="list" value="<{$smarty.const._NL_BK_NEWSLETTER_UNSUBSCRIBE}>" style="margin-left : 15px;"/>
+	</form>
+
+	<div style="margin-bottom : 5px;">
+		<img src="<{$xoops_url}>/themes/theme_cw/images/arrow_blue_right.gif" width="10" height="7" alt="" /> <a href="/newsletter" style=""><{$smarty.const._NL_BK_NEWSLETTER_MORE_NEWSLETTERS}></a><br />
+	</div>
+
+	<div style="padding-bottom : 5px;">
+		<img style="vertical-align : bottom;" src="<{$xoops_url}>/themes/theme_cw/images/feed-icon-10x10.gif" width="10" height="10" /> <a href="/art/40">RSS-feeds</a><br />
+	</div>
+</div>

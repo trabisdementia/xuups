@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: functions.php 2283 2008-10-12 03:36:13Z phppp $
  */
- 
+
 if (!defined('XOOPS_ROOT_PATH')) { exit(); }
 
 include dirname(__FILE__) . "/vars.php";
@@ -37,7 +37,7 @@ mod_loadFunctions("recon", $GLOBALS["artdirname"]);
 
 /**
  * Function to display messages
- * 
+ *
  * @var mixed     $messages
  */
 function art_message( $message )
@@ -93,14 +93,14 @@ function art_getcookie($name, $isArray = false)
 
 /**
  * Get structured categories
- * 
+ *
  * @int integer     $pid    parent category ID
  *
  * @return array
  */
 function art_getSubCategory($pid = 0, $refresh = false)
 {
-    
+
     $list = @mod_loadCacheFile("category", $GLOBALS["artdirname"]);
     if ( !is_array($list) || $refresh ) {
         $list = art_createSubCategoryList();
@@ -109,7 +109,7 @@ function art_getSubCategory($pid = 0, $refresh = false)
     else return @$list[$pid];
 }
 
-function art_createSubCategoryList() 
+function art_createSubCategoryList()
 {
     $category_handler =& xoops_getModuleHandler("category", $GLOBALS["artdirname"]);
     $criteria =& new CriteriaCompo("1", 1);

@@ -1,19 +1,19 @@
 <?php
 /*=======================================================================
-// File:        JPGRAPH_MESHINTERPOLATE.INC.PHP
-// Description: Utility class to do mesh linear interpolation of a matrix
-// Created:     2009-03-09
-// Ver:         $Id: jpgraph_meshinterpolate.inc.php 1709 2009-07-30 08:00:08Z ljp $
-//
-// Copyright (c) Aditus Consulting. All rights reserved.
-//========================================================================
-*/
-  
+ // File:        JPGRAPH_MESHINTERPOLATE.INC.PHP
+ // Description: Utility class to do mesh linear interpolation of a matrix
+ // Created:     2009-03-09
+ // Ver:         $Id: jpgraph_meshinterpolate.inc.php 1709 2009-07-30 08:00:08Z ljp $
+ //
+ // Copyright (c) Aditus Consulting. All rights reserved.
+ //========================================================================
+ */
+
 /**
-* Utility function to do linear mesh interpolation
-* @param $aDat Matrix to interpolate
-* @param $aFactor Interpolation factor  
-*/
+ * Utility function to do linear mesh interpolation
+ * @param $aDat Matrix to interpolate
+ * @param $aFactor Interpolation factor
+ */
 function doMeshInterpolate( &$aData, $aFactor ) {
     $m = new MeshInterpolate();
     $aData = $m->Linear($aData,$aFactor);
@@ -26,18 +26,18 @@ function doMeshInterpolate( &$aData, $aFactor ) {
 class MeshInterpolate {
     private $data = array();
 
-   /**
-    * Calculate the mid points of the given rectangle which has its top left
-    * corner at $row,$col. The $aFactordecides how many spliots should be done.
-    * i.e. how many more divisions should be done recursively
-    *
-    * @param $row Top left corner of square to work with
-    * @param $col Top left corner of square to work with
-    * $param $aFactor In how many subsquare should we split this square. A value of 1 indicates that no action
-    */
+    /**
+     * Calculate the mid points of the given rectangle which has its top left
+     * corner at $row,$col. The $aFactordecides how many spliots should be done.
+     * i.e. how many more divisions should be done recursively
+     *
+     * @param $row Top left corner of square to work with
+     * @param $col Top left corner of square to work with
+     * $param $aFactor In how many subsquare should we split this square. A value of 1 indicates that no action
+     */
     function IntSquare( $aRow, $aCol, $aFactor ) {
         if ( $aFactor <= 1 )
-            return;
+        return;
 
         $step = pow( 2, $aFactor-1 );
 
@@ -101,5 +101,5 @@ class MeshInterpolate {
         return $this->data;
     }
 }
-  
+
 ?>

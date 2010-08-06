@@ -308,19 +308,19 @@ class MGraph {
         $this->_strokeBackgroundImage();
 
         if( $this->iDoFrame && ! $this->doshadow ) {
-           $image->SetColor($this->iFrameColor);
-           $image->SetLineWeight($this->iFrameWeight);
-           $image->Rectangle(0,0,$w-1,$h-1);
+            $image->SetColor($this->iFrameColor);
+            $image->SetLineWeight($this->iFrameWeight);
+            $image->Rectangle(0,0,$w-1,$h-1);
         }
 
         // Copy all sub graphs to the container
         for($i=0; $i < $this->iCnt; ++$i ) {
             $image->CopyMerge($this->iGraphs[$i][0],
-                            $this->iGraphs[$i][1]+$this->lm,$this->iGraphs[$i][2]+$this->tm,
-                            $this->iGraphs[$i][3],$this->iGraphs[$i][4],
-                            $this->iGraphs[$i][5],$this->iGraphs[$i][6],
-                            -1,-1, /* Full from width and height */
-                            $this->iGraphs[$i][7]);
+            $this->iGraphs[$i][1]+$this->lm,$this->iGraphs[$i][2]+$this->tm,
+            $this->iGraphs[$i][3],$this->iGraphs[$i][4],
+            $this->iGraphs[$i][5],$this->iGraphs[$i][6],
+            -1,-1, /* Full from width and height */
+            $this->iGraphs[$i][7]);
 
 
         }

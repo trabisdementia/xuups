@@ -12,7 +12,7 @@ define('_AM_XHELP_MENU_GROUP_PERM', 'Permissions des Groupes');
 define('_AM_XHELP_MENU_MIMETYPES', 'Gestion des types MIME');
 define('_AM_XHELP_MENU_PREFERENCES', 'Pr&eacute;f&eacute;rences');
 define('_AM_XHELP_MENU_ADD_STAFF', 'Ajouter une Equipe');
-define('_AM_XHELP_UPDATE_MODULE', 'Mise &agrave; Jour du Module'); 
+define('_AM_XHELP_UPDATE_MODULE', 'Mise &agrave; Jour du Module');
 define('_AM_XHELP_MENU_MANAGE_ROLES', 'Administation des Roles');
 define('_AM_XHELP_TEXT_MANAGE_NOTIFICATIONS', 'Gestion des notifications');
 define('_AM_XHELP_MENU_MANAGE_FAQ', 'Gestion de FAQ');
@@ -165,7 +165,7 @@ define('_AM_XHELP_TEXT_SEARCH_TEXT', 'Recherche de texte :');
 define('_AM_XHELP_TEXT_GO_BACK_SEARCH', 'Retour &agrave; la recherche');
 define('_AM_XHELP_TEXT_FIND_USERS', 'Trouver des utilisateurs');
 
-define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Date de d&eacute;but :');  
+define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Date de d&eacute;but :');
 define('_AM_XHELP_SEARCH_ENDDATE', 'Date de cloture :');
 
 define('_AM_XHELP_TEXT_ADD_STATUS', 'Ajouter un &eacute;tat');
@@ -223,7 +223,7 @@ define("_AM_XHELP_MIME_USERFINFO", "<b>Types Mime autoris&eacute;s pour l'envoi 
 define("_AM_XHELP_MIME_NOMIMEINFO", "Pas de type Mime s&eacute;lectionn&eacute;.");
 define("_AM_XHELP_MIME_FINDMIMETYPE", "Trouver un nouveau type Mime :");
 define("_AM_XHELP_MIME_EXTFIND", "Recherche Extension de fichier :<div style='padding-top: 8px;'><span style='font-weight: normal;'>Entrer l'extension recherch&eacute;e.</span></div>");
-define("_AM_XHELP_MIME_INFOTEXT", "<ul><li>Nouveau type Mime a cr&eacute;er, &eacute;diter ou supprimer via ce formulaire.</li> 
+define("_AM_XHELP_MIME_INFOTEXT", "<ul><li>Nouveau type Mime a cr&eacute;er, &eacute;diter ou supprimer via ce formulaire.</li>
 	<li>Rechercher de nouveaux types mime via un site web externe.</li> 
 	<li>Voir les types mime pour envoi de fichier des admins et des utilisateurs.</li> 
 	<li>Changer le statut d'envoi d'un type mime.</li></ul> 
@@ -245,7 +245,7 @@ define("_AM_XHELP_MIME_MODIFIED", "Information du type mime Modifi&eacute;e");
 define("_AM_XHELP_MINDEX_ACTION", "Action");
 define("_AM_XHELP_MINDEX_PAGE", "<b>Page :<b> ");
 
-//image admin icon 
+//image admin icon
 define("_AM_XHELP_ICO_EDIT","Editer cet &eacute;l&eacute;ment");
 define("_AM_XHELP_ICO_DELETE","Supprimer cet &eacute;l&eacute;ment");
 define("_AM_XHELP_ICO_ONLINE","En ligne");

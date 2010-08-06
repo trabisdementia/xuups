@@ -30,8 +30,8 @@ class Xmf_Template_Object_View extends Xmf_Template_Abstract
     var $_headerAsRow=true;
 
     /**
-    * Constructor
-    */
+     * Constructor
+     */
     function __construct(Xmf_Object $object, $userSide=false, $actions=array(), $headerAsRow=true)
     {
         parent::__construct($this);

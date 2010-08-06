@@ -8,7 +8,7 @@ $graph = new Graph(300,200);
 $graph->SetScale("textlin");
 
 $graph->SetShadow();
-$graph->img->SetMargin(40,40,40,40);		
+$graph->img->SetMargin(40,40,40,40);
 
 $graph->title->Set("Impuls plot, variant 2");
 $graph->title->SetFont(FF_FONT1,FS_BOLD);

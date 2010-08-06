@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -279,7 +279,7 @@ class PublisherMetagen
         $text = str_replace(';', ' ', $text);
 
         return $text;
-        }
+    }
 
 
     function html2text($document)
@@ -304,7 +304,7 @@ class PublisherMetagen
             "'&(cent|#162);'i",
             "'&(pound|#163);'i",
             "'&(copy|#169);'i",
-            //"'&#(\d+);'e"
+        //"'&#(\d+);'e"
         );// evaluate as php
 
         $replace = array(
@@ -317,11 +317,11 @@ class PublisherMetagen
             "<",
             ">",
             " ",
-            chr(161),
-            chr(162),
-            chr(163),
-            chr(169),
-            //"chr(\\1)"
+        chr(161),
+        chr(162),
+        chr(163),
+        chr(169),
+        //"chr(\\1)"
         );
 
         $text = preg_replace($search, $replace, $document);

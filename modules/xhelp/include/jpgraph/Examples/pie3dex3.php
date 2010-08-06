@@ -12,7 +12,7 @@ $graph->SetShadow();
 
 // Set A title for the plot
 $graph->title->Set("Example 3 3D Pie plot");
-$graph->title->SetFont(FF_VERDANA,FS_BOLD,18); 
+$graph->title->SetFont(FF_VERDANA,FS_BOLD,18);
 $graph->title->SetColor("darkblue");
 $graph->legend->Pos(0.1,0.2);
 

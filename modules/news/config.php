@@ -47,7 +47,7 @@ $cfg['meta_keywords_order'] = 0;
 /**
  * Does the module searches inside its own comments ?
  */
- $cfg['config_search_comments'] = true;
+$cfg['config_search_comments'] = true;
 
 /**
  * Only enable registred users to rate news ?

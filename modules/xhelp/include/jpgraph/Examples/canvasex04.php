@@ -8,7 +8,7 @@ require_once ('jpgraph/jpgraph_canvtools.php');
 $xmax=20;
 $ymax=20;
 
-// Setup a basic canvas we can work 
+// Setup a basic canvas we can work
 $g = new CanvasGraph(200,100,'auto');
 $g->SetMargin(5,11,6,11);
 $g->SetShadow();

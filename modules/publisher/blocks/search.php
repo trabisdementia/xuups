@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -32,7 +32,7 @@ function publisher_search_show ($options)
     $publisher =& PublisherPublisher::getInstance();
     $categories = $publisher->getHandler('category')->getCategoriesForSearch();
     if (count($categories) == 0) return $block;
-    
+
     xoops_loadLanguage('search');
 
     $andor = isset($_POST["andor"]) ? $_POST["andor"] : (isset($_GET["andor"]) ? $_GET["andor"] : "");
@@ -125,7 +125,7 @@ function publisher_search_show ($options)
     $block["search_user"] = $username;
     $block["publisher_url"] = PUBLISHER_URL;
 
-	return $block;
+    return $block;
 }
 
 ?>

@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -19,7 +19,7 @@
  * @author          The SmartFactory <www.smartfactory.ca>
  * @version         $Id: items_recent.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
@@ -29,66 +29,66 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 function publisher_items_recent_show($options)
 {
     $publisher =& PublisherPublisher::getInstance();
-	$myts =& MyTextSanitizer::getInstance();
+    $myts =& MyTextSanitizer::getInstance();
 
-	$block = array();
+    $block = array();
 
-	$selectedcatids = explode(',', $options[0]);
+    $selectedcatids = explode(',', $options[0]);
 
-	if (in_array(0, $selectedcatids)) {
-		$allcats = true;
-	} else {
-		$allcats = false;
-	}
-	
-	$sort = $options[1];
-	$order = publisher_getOrderBy($sort);
-	$limit = $options[2];
-	$start = 0;
-	
-	// creating the ITEM objects that belong to the selected category
-	if ($allcats) {
-		$criteria = null;
-	} else {
-		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('categoryid', '(' . $options[0] . ')', 'IN'));
-	}	
-	$itemsObj = $publisher->getHandler('item')->getItems($limit, $start, array(_PUBLISHER_STATUS_PUBLISHED), -1, $sort, $order, '', true, $criteria, true);
-	
-	$totalItems = count($itemsObj);
+    if (in_array(0, $selectedcatids)) {
+        $allcats = true;
+    } else {
+        $allcats = false;
+    }
 
-	if ($itemsObj) {
-		for ( $i = 0; $i < $totalItems; $i++ ) {
+    $sort = $options[1];
+    $order = publisher_getOrderBy($sort);
+    $limit = $options[2];
+    $start = 0;
 
-			$newItems['itemid']       = $itemsObj[$i]->itemid();
-			$newItems['title']        = $itemsObj[$i]->title();
-			$newItems['categoryname'] = $itemsObj[$i]->getCategoryName();
-			$newItems['categoryid']   = $itemsObj[$i]->categoryid();
-			$newItems['date']         = $itemsObj[$i]->datesub();
-			$newItems['poster']       = $itemsObj[$i]->linkedPosterName();
-			$newItems['itemlink']     = $itemsObj[$i]->getItemLink(false, isset($options[3]) ? $options[3] : 65);
-			$newItems['categorylink'] = $itemsObj[$i]->getCategoryLink();
+    // creating the ITEM objects that belong to the selected category
+    if ($allcats) {
+        $criteria = null;
+    } else {
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('categoryid', '(' . $options[0] . ')', 'IN'));
+    }
+    $itemsObj = $publisher->getHandler('item')->getItems($limit, $start, array(_PUBLISHER_STATUS_PUBLISHED), -1, $sort, $order, '', true, $criteria, true);
 
-			$block['items'][] = $newItems;
-		}
+    $totalItems = count($itemsObj);
 
-		$block['lang_title']     = _MB_PUBLISHER_ITEMS;
-		$block['lang_category']  = _MB_PUBLISHER_CATEGORY;
-		$block['lang_poster']    = _MB_PUBLISHER_POSTEDBY;
-		$block['lang_date']      = _MB_PUBLISHER_DATE;
-		$modulename              = $myts->displayTarea($publisher->getModule()->getVar('name'));
-		$block['lang_visitItem'] = _MB_PUBLISHER_VISITITEM . " " . $modulename;
-	}
+    if ($itemsObj) {
+        for ( $i = 0; $i < $totalItems; $i++ ) {
 
-	return $block;
+            $newItems['itemid']       = $itemsObj[$i]->itemid();
+            $newItems['title']        = $itemsObj[$i]->title();
+            $newItems['categoryname'] = $itemsObj[$i]->getCategoryName();
+            $newItems['categoryid']   = $itemsObj[$i]->categoryid();
+            $newItems['date']         = $itemsObj[$i]->datesub();
+            $newItems['poster']       = $itemsObj[$i]->linkedPosterName();
+            $newItems['itemlink']     = $itemsObj[$i]->getItemLink(false, isset($options[3]) ? $options[3] : 65);
+            $newItems['categorylink'] = $itemsObj[$i]->getCategoryLink();
+
+            $block['items'][] = $newItems;
+        }
+
+        $block['lang_title']     = _MB_PUBLISHER_ITEMS;
+        $block['lang_category']  = _MB_PUBLISHER_CATEGORY;
+        $block['lang_poster']    = _MB_PUBLISHER_POSTEDBY;
+        $block['lang_date']      = _MB_PUBLISHER_DATE;
+        $modulename              = $myts->displayTarea($publisher->getModule()->getVar('name'));
+        $block['lang_visitItem'] = _MB_PUBLISHER_VISITITEM . " " . $modulename;
+    }
+
+    return $block;
 }
 
 function publisher_items_recent_edit($options) {
 
     $form  = "<table border='0'>";
-	$form .= '<tr><td style="vertical-align: top; width: 250px;">' . _MB_PUBLISHER_SELECTCAT . '</td>';
-	$form .= '<td>'. publisher_createCategorySelect($options[0]) . '</td></tr>';
-		
+    $form .= '<tr><td style="vertical-align: top; width: 250px;">' . _MB_PUBLISHER_SELECTCAT . '</td>';
+    $form .= '<td>'. publisher_createCategorySelect($options[0]) . '</td></tr>';
+
     $form .= "<tr><td>" . _MB_PUBLISHER_ORDER . "</td>";
     $form .= "<td><select name='options[1]'>";
 

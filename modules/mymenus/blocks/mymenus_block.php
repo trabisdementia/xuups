@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -71,7 +71,7 @@ function mymenus_block_show($options)
     $builder = new MymenusBuilder($menus);
     $block = $builder->render();
 
-/*--------------------------------------------------------------*/
+    /*--------------------------------------------------------------*/
     //default files to load
     $css = array();
     $js = array();

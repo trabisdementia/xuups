@@ -345,7 +345,7 @@ class Image {
                 $bbox = $this->GetTTFBBox($tmp[$i],$angle);
                 $mm =  $bbox[2] - $bbox[0];
                 if( $mm > $m )
-                    $m = $mm;
+                $m = $mm;
             }
             return $m;
         }
@@ -354,11 +354,11 @@ class Image {
 
     // Draw text with a box around it
     function StrokeBoxedText($x,$y,$txt,$dir=0,$fcolor="white",$bcolor="black",
-                             $shadowcolor=false,$paragraph_align="left",
-                             $xmarg=6,$ymarg=4,$cornerradius=0,$dropwidth=3) {
+    $shadowcolor=false,$paragraph_align="left",
+    $xmarg=6,$ymarg=4,$cornerradius=0,$dropwidth=3) {
 
-		$oldx = $this->lastx;
-		$oldy = $this->lasty;
+        $oldx = $this->lastx;
+        $oldy = $this->lasty;
 
         if( !is_numeric($dir) ) {
             if( $dir=="h" ) $dir=0;
@@ -389,17 +389,17 @@ class Image {
         if( $shadowcolor ) {
             $this->PushColor($shadowcolor);
             $this->FilledRoundedRectangle($x-$xmarg+$dropwidth,$y-$ymarg+$dropwidth,
-                                          $x+$width+$dropwidth,$y+$height-$ymarg+$dropwidth,
-                                          $cornerradius);
+            $x+$width+$dropwidth,$y+$height-$ymarg+$dropwidth,
+            $cornerradius);
             $this->PopColor();
             $this->PushColor($fcolor);
             $this->FilledRoundedRectangle($x-$xmarg,$y-$ymarg,
-                                          $x+$width,$y+$height-$ymarg,
-                                          $cornerradius);
+            $x+$width,$y+$height-$ymarg,
+            $cornerradius);
             $this->PopColor();
             $this->PushColor($bcolor);
             $this->RoundedRectangle($x-$xmarg,$y-$ymarg,
-                                    $x+$width,$y+$height-$ymarg,$cornerradius);
+            $x+$width,$y+$height-$ymarg,$cornerradius);
             $this->PopColor();
         }
         else {
@@ -425,12 +425,12 @@ class Image {
         $this->StrokeText($x, $y, $txt, $dir, $paragraph_align,$debug);
 
         $bb = array($x-$xmarg,$y+$height-$ymarg,$x+$width,$y+$height-$ymarg,
-                    $x+$width,$y-$ymarg,$x-$xmarg,$y-$ymarg);
+        $x+$width,$y-$ymarg,$x-$xmarg,$y-$ymarg);
         $this->SetTextAlign($h,$v);
 
         $this->SetAngle($olda);
-		$this->lastx = $oldx;
-		$this->lasty = $oldy;
+        $this->lastx = $oldx;
+        $this->lasty = $oldy;
 
         return $bb;
     }
@@ -439,21 +439,21 @@ class Image {
     // with the text. The previous method will just make a larger enough non-rotated
     // box to hold the text inside.
     function StrokeBoxedText2($x,$y,$txt,$dir=0,$fcolor="white",$bcolor="black",
-                             $shadowcolor=false,$paragraph_align="left",
-                             $xmarg=6,$ymarg=4,$cornerradius=0,$dropwidth=3) {
+    $shadowcolor=false,$paragraph_align="left",
+    $xmarg=6,$ymarg=4,$cornerradius=0,$dropwidth=3) {
 
-       // This version of boxed text will stroke a rotated box round the text
-       // thta will follow the angle of the text.
-       // This has two implications:
-       // 1) This methos will only support TTF fonts
-       // 2) The only two alignment that makes sense are centered or baselined
+        // This version of boxed text will stroke a rotated box round the text
+        // thta will follow the angle of the text.
+        // This has two implications:
+        // 1) This methos will only support TTF fonts
+        // 2) The only two alignment that makes sense are centered or baselined
 
-       if( $this->font_family <= FF_FONT2+1 ) {
-           JpGraphError::RaiseL(25131);//StrokeBoxedText2() Only support TTF fonts and not built in bitmap fonts
-       }
+        if( $this->font_family <= FF_FONT2+1 ) {
+            JpGraphError::RaiseL(25131);//StrokeBoxedText2() Only support TTF fonts and not built in bitmap fonts
+        }
 
-		$oldx = $this->lastx;
-		$oldy = $this->lasty;
+        $oldx = $this->lastx;
+        $oldy = $this->lasty;
         $dir = $this->NormAngle($dir);
 
         if( !is_numeric($dir) ) {
@@ -474,7 +474,7 @@ class Image {
 
                 $x -= $rect_width/2;
                 $x += sin($dir*M_PI/180)*$height;
-                $y += $rect_height/2;                
+                $y += $rect_height/2;
 
             } elseif( $dir >= 270 && $dir <= 360 ) {
 
@@ -515,24 +515,24 @@ class Image {
             $y += 2;
         }
         else {
-          //  $y += $baseline_offset;
+            //  $y += $baseline_offset;
         }
 
         if( $shadowcolor ) {
             $this->PushColor($shadowcolor);
             $this->FilledRectangle($x-$xmarg+$dropwidth,$y+$ymarg+$dropwidth-$height,
-                                          $x+$width+$dropwidth,$y+$ymarg+$dropwidth);
-                                          //$cornerradius);
+            $x+$width+$dropwidth,$y+$ymarg+$dropwidth);
+            //$cornerradius);
             $this->PopColor();
             $this->PushColor($fcolor);
             $this->FilledRectangle($x-$xmarg, $y+$ymarg-$height,
-                                          $x+$width, $y+$ymarg);
-                                          //$cornerradius);
+            $x+$width, $y+$ymarg);
+            //$cornerradius);
             $this->PopColor();
             $this->PushColor($bcolor);
             $this->Rectangle($x-$xmarg,$y+$ymarg-$height,
-                                    $x+$width,$y+$ymarg);
-                                    //$cornerradius);
+            $x+$width,$y+$ymarg);
+            //$cornerradius);
             $this->PopColor();
         }
         else {
@@ -557,7 +557,7 @@ class Image {
         else {
 
             // Restore the original y before we stroke the text
-           // $y -= $baseline_offset;
+            // $y -= $baseline_offset;
 
         }
 
@@ -577,15 +577,15 @@ class Image {
         $this->StrokeText($x, $y, $txt, $dir, $paragraph_align,$debug);
 
         $bb = array($x-$xmarg, $y+$height-$ymarg,
-                    $x+$width, $y+$height-$ymarg,
-                    $x+$width, $y-$ymarg,
-                    $x-$xmarg, $y-$ymarg);
+        $x+$width, $y+$height-$ymarg,
+        $x+$width, $y-$ymarg,
+        $x-$xmarg, $y-$ymarg);
 
         $this->SetTextAlign($h,$v);
         $this->SetAngle($olda);
 
-		$this->lastx = $oldx;
-		$this->lasty = $oldy;
+        $this->lastx = $oldx;
+        $this->lasty = $oldy;
 
         return $bb;
     }
@@ -681,11 +681,11 @@ class Image {
         // Normalize angle in degrees
         // Normalize angle to be between 0-360
         while( $a > 360 )
-            $a -= 360;
+        $a -= 360;
         while( $a < -360 )
-            $a += 360;
+        $a += 360;
         if( $a < 0 )
-            $a = 360 + $a;
+        $a = 360 + $a;
         return $a;
     }
 
@@ -723,7 +723,7 @@ class Image {
         // box is sometimes coinciding with the first pixel of the text
         //$bbox[0] -= 1;
         //$bbox[6] -= 1;
-        
+
         // For roatated text we need to add extra width for rotated
         // text since the kerning and stroking of the TTF is not the same as for
         // text at a 0 degree angle
@@ -782,7 +782,7 @@ class Image {
     // Deprecated
     function GetTTFBBox($aTxt,$aAngle=0) {
         $bbox = $this->imagettfbbox_fixed($this->font_size,$aAngle,$this->font_file,$aTxt);
-         return $bbox;
+        return $bbox;
     }
 
     function GetBBoxTTF($aTxt,$aAngle=0) {
@@ -802,37 +802,37 @@ class Image {
         if( $aAngle >= 0 ) {
             if(  $aAngle <= 90 ) { //<=0
                 $bbox = array($bbox[6],$bbox[1],$bbox[2],$bbox[1],
-                              $bbox[2],$bbox[5],$bbox[6],$bbox[5]);
+                $bbox[2],$bbox[5],$bbox[6],$bbox[5]);
             }
             elseif(  $aAngle <= 180 ) { //<= 2
                 $bbox = array($bbox[4],$bbox[7],$bbox[0],$bbox[7],
-                              $bbox[0],$bbox[3],$bbox[4],$bbox[3]);
+                $bbox[0],$bbox[3],$bbox[4],$bbox[3]);
             }
             elseif(  $aAngle <= 270 )  { //<= 3
                 $bbox = array($bbox[2],$bbox[5],$bbox[6],$bbox[5],
-                              $bbox[6],$bbox[1],$bbox[2],$bbox[1]);
+                $bbox[6],$bbox[1],$bbox[2],$bbox[1]);
             }
             else {
                 $bbox = array($bbox[0],$bbox[3],$bbox[4],$bbox[3],
-                              $bbox[4],$bbox[7],$bbox[0],$bbox[7]);
+                $bbox[4],$bbox[7],$bbox[0],$bbox[7]);
             }
         }
         elseif(  $aAngle < 0 ) {
             if( $aAngle <= -270 ) { // <= -3
                 $bbox = array($bbox[6],$bbox[1],$bbox[2],$bbox[1],
-                              $bbox[2],$bbox[5],$bbox[6],$bbox[5]);
+                $bbox[2],$bbox[5],$bbox[6],$bbox[5]);
             }
             elseif( $aAngle <= -180 ) { // <= -2
                 $bbox = array($bbox[0],$bbox[3],$bbox[4],$bbox[3],
-                              $bbox[4],$bbox[7],$bbox[0],$bbox[7]);
+                $bbox[4],$bbox[7],$bbox[0],$bbox[7]);
             }
             elseif( $aAngle <= -90 ) { // <= -1
                 $bbox = array($bbox[2],$bbox[5],$bbox[6],$bbox[5],
-                              $bbox[6],$bbox[1],$bbox[2],$bbox[1]);
+                $bbox[6],$bbox[1],$bbox[2],$bbox[1]);
             }
             else {
                 $bbox = array($bbox[0],$bbox[3],$bbox[4],$bbox[3],
-                              $bbox[4],$bbox[7],$bbox[0],$bbox[7]);
+                $bbox[4],$bbox[7],$bbox[0],$bbox[7]);
             }
         }
         return $bbox;
@@ -876,7 +876,7 @@ class Image {
 
             if( $this->text_valign != 'basepoint' ) {
                 // Align x,y ot lower left corner of bbox
-                
+
 
                 if( $this->text_halign=='right' ) {
                     $x -= $width;
@@ -903,9 +903,9 @@ class Image {
                     // This is only support for text at 0 degree !!
                     // Do nothing the text is drawn at baseline by default
                 }
-            } 
+            }
             ImageTTFText ($this->img, $this->font_size, $dir, $x, $y,
-                          $this->current_color,$this->font_file,$txt);
+            $this->current_color,$this->font_file,$txt);
 
             // Calculate and return the co-ordinates for the bounding box
             $box = $this->imagettfbbox_fixed($this->font_size,$dir,$this->font_file,$txt);
@@ -921,7 +921,7 @@ class Image {
             // For text at 0 degrees the bounding box and bounding rectangle are the
             // same
             if( $debug ) {
-            // Draw the bounding rectangle and the bounding box
+                // Draw the bounding rectangle and the bounding box
 
                 $p = array();
                 $p1 = array();
@@ -1012,9 +1012,9 @@ class Image {
                 $yl = $y - $yadj;
                 //$xl = $xl- $xadj;
                 ImageTTFText($this->img, $this->font_size, $dir, $xl, $yl-($h-$fh)+$fh*$i,
-                             $this->current_color,$this->font_file,$tmp[$i]);
+                $this->current_color,$this->font_file,$tmp[$i]);
 
-               // echo "xl=$xl,".$tmp[$i]." <br>";
+                // echo "xl=$xl,".$tmp[$i]." <br>";
                 if( $debug  ) {
                     // Draw the bounding rectangle around each line
                     $box=@ImageTTFBBox($this->font_size,$dir,$this->font_file,$tmp[$i]);
@@ -1083,7 +1083,7 @@ class Image {
         $this->plotheight=$this->height - $this->top_margin-$this->bottom_margin ;
         if( $this->width  > 0 && $this->height > 0 ) {
             if( $this->plotwidth < 0  || $this->plotheight < 0 ) {
-            	JpGraphError::RaiseL(25130, $this->plotwidth, $this->plotheight);
+                JpGraphError::RaiseL(25130, $this->plotwidth, $this->plotheight);
                 //JpGraphError::raise("To small plot area. ($lm,$rm,$tm,$bm : $this->plotwidth x $this->plotheight). With the given image size and margins there is to little space left for the plot. Increase the plot size or reduce the margins.");
             }
         }
@@ -1126,7 +1126,7 @@ class Image {
 
 
     function SetLineWeight($weight) {
-    	$old = $this->line_weight;
+        $old = $this->line_weight;
         imagesetthickness($this->img,$weight);
         $this->line_weight = $weight;
         return $old;
@@ -1260,7 +1260,7 @@ class Image {
             // all if the weight > 1
             $oldaa = $this->GetAntiAliasing();
             if( $oldaa && $this->line_weight > 1 ) {
-                 $this->SetAntiAliasing(false);
+                $this->SetAntiAliasing(false);
             }
 
             switch( $aStyle ) {
@@ -1419,9 +1419,9 @@ class Image {
         for( $i=0; $i < $shadow_width; ++$i ) {
             $this->SetColor($shadow_color,$shadowAlpha);
             $this->Line($xr-$shadow_width+$i,   $yu+$shadow_width,
-                        $xr-$shadow_width+$i,   $yl-$shadow_width-1+$i);
+            $xr-$shadow_width+$i,   $yl-$shadow_width-1+$i);
             $this->Line($xl+$shadow_width,   $yl-$shadow_width+$i,
-                        $xr-$shadow_width+$i,   $yl-$shadow_width+$i);
+            $xr-$shadow_width+$i,   $yl-$shadow_width+$i);
             if( $useAlpha ) $shadowAlpha += 1.0/$shadow_width;
         }
 

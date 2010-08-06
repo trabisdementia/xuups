@@ -1,0 +1,51 @@
+<div style="float: right; width: 45%;">
+    <form action="<{$form.action}>" method="<{$form.method}>" id="<{$form.name}>">
+        <table>
+            <tr>
+                <th><{$smarty.const._NL_AM_WEEKDAY}></th>
+                <th><{$smarty.const._NL_AM_TIMEOFDAY}></th>
+                <th></th>
+            </tr>
+            <{foreach item=rule from=$rules}>
+                <tr class="<{cycle values='odd, even'}>">
+                    <td>
+                        <{$rule.ruleday}>
+                    </td>
+                    <td>
+                        <{$rule.rule_timeofday}>
+                    </td>
+                    <td>
+                        <input class="formButton" type="button" onclick="window.location.href='newsletterrule.php?op=delete&amp;id=<{$rule.rule_id}>'" value="<{$smarty.const._DELETE}>" />
+                    </td>
+                </tr>
+            <{/foreach}>
+            <tr class="<{cycle values='odd, even'}>">
+                <td><{$form.elements.rule_weekday.body}></td>
+                <td><{$form.elements.rule_timeofday.body}></td>
+                <td><{$form.elements.submit.body}></td>
+            </tr>
+        </table>
+        <input type="hidden" name="newsletterid" value="<{$newsletter.newsletter_id}>" />
+        <{$form.elements.op.body}>
+        <{$form.elements.id.body}>
+    </form>
+</div>
+
+<div style="float: left; width: 50%">
+    <h2><{$newsletter.newsletter_name}></h2>
+    <{$newsletter.newsletter_description}><br />
+    <br />
+    <{if $newsletter.newsletter_articlecount > 0 }>
+        <{$newsletter.newsletter_articlecount}> <{$smarty.const._NL_AM_ARTICLES}>
+    <{/if}>
+    <{if count($newsletter.sectionid) > 0 }>
+        <{$smarty.const._NL_AM_FROM}> <{$newsletter.sectionname}>
+    <{/if}>
+</div>
+
+<br style="clear: both;" />
+
+<div>
+	<{$output.html}>
+</div>
+<br style="clear: both;" />
