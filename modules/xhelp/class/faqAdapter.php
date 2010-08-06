@@ -67,7 +67,7 @@ class xhelpFaqAdapter {
     function &createFaq()
     {
         // Create an faq
-        $faq =& new xhelpFaq();
+        $faq = new xhelpFaq();
 
         return $faq;
     }

@@ -198,7 +198,7 @@ if($xhelp_isStaff) {
 	                            'status'=>xhelpGetStatus($ticket->getVar('status')),
 	                            'department'=>$dept,
 	                            'dept_url'=>($hasUrl ? XOOPS_URL . '/modules/xhelp/index.php?op=staffViewAll&amp;dept=' . $ticket->getVar('department') : ''),
-	                            'url'=>XOOPS_URL . '/modules/xhelp/ticket.php?id=' . $ticket->getVar('id')); 
+	                            'url'=>XOOPS_URL . '/modules/xhelp/ticket.php?id=' . $ticket->getVar('id'));
     }
     $has_lastTickets = count($lastTickets);
     unset($lastTickets);
@@ -207,7 +207,7 @@ if($xhelp_isStaff) {
 switch($op)
 {
     case "addEmail":
-         
+
         if($_POST['newEmail'] == ''){
             $message = _XHELP_MESSAGE_NO_EMAIL;
             redirect_header(XHELP_BASE_URL."/ticket.php?id=$xhelp_id", 3, $message);
@@ -347,7 +347,7 @@ switch($op)
 <script type=\"text/javascript\" src='".XHELP_SCRIPT_URL."/addTicketDeptChange.php?client'></script>
 <script type=\"text/javascript\">
 <!--
-function departments_onchange() 
+function departments_onchange()
 {
     dept = xoopsGetElementById('departments');
     var wl = new xhelpweblib(fieldHandler);
@@ -356,7 +356,7 @@ function departments_onchange()
 
 var fieldHandler = {
     editticketcustfields: function(result){
-        
+
         var tbl = gE('tblEditTicket');
         var staffCol = gE('staff');";
             $javascript.="var beforeele = gE('editButtons');\n";
@@ -372,7 +372,7 @@ function window_onload()
 
 xhelpDOMAddEvent(window, 'load', window_onload, true);
 //-->
-</script>";      
+</script>";
             if ($ticket =& $_xhelpSession->get('xhelp_ticket')) {
                 $xoopsTpl->assign('xhelp_ticketID', $xhelp_id);
                 $xoopsTpl->assign('xhelp_ticket_subject', $ticket['subject']);
@@ -388,7 +388,7 @@ xhelpDOMAddEvent(window, 'load', window_onload, true);
                 $xoopsTpl->assign('xhelp_departmenturl', 'index.php?op=staffViewAll&amp;dept='. $ticketInfo->getVar('department'));
                 $xoopsTpl->assign('xhelp_ticket_priority', $ticketInfo->getVar('priority'));
             }
-             
+
             //** BTW - why do we need xhelp_allowUpload in the template if it will be always set to 0?
             //$xoopsTpl->assign('xhelp_allowUpload', $xoopsModuleConfig['xhelp_allowUpload']);
             $xoopsTpl->assign('xhelp_allowUpload', 0);
@@ -596,7 +596,7 @@ xhelpDOMAddEvent(window, 'load', window_onload, true);
     case "print":
         $config_handler =& xoops_gethandler('config');
         $xoopsConfigMetaFooter =& $config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
-         
+
         $patterns = array();
         $patterns[] = '/pri:([1-5])/';
         $replacements = array();
@@ -731,7 +731,7 @@ xhelpDOMAddEvent(window, 'load', window_onload, true);
 
             //2. Update Ticket LastUpdated time
             $ticketInfo->setVar('lastUpdated', time());
-             
+
             //3. Add Response (if necessary)
             if ($addResponse == true) {
                 if ($ticketInfo->canAddResponse($xoopsUser)) {
@@ -741,18 +741,18 @@ xhelpDOMAddEvent(window, 'load', window_onload, true);
                     $responseError = !(is_object($newResponse));
                 }
             }
-             
+
             //4. Update Status (if necessary)
             if ($changeStatus == true) {
                 //Check if the current staff member can change status
                 if ($xhelp_staff->checkRoleRights(XHELP_SEC_TICKET_STATUS, $ticketInfo->getVar('department'))) {
                     $hStatus =& xhelpGetHandler('status');
                     $hStaff =& xhelpGetHandler('staff');
-                     
+
                     $oldStatus =& $hStatus->get($ticketInfo->getVar('status'));
                     $newStatus =& $hStatus->get(intval($_POST['status']));
                     $ticketInfo->setVar('status', $_POST['status']);
-                     
+
                     if($newStatus->getVar('state') == XHELP_STATE_RESOLVED && $oldStatus->getVar('state') == XHELP_STATE_UNRESOLVED){
                         //Closing the ticket
                         $ticketInfo->setVar('closedBy', $xoopsUser->getVar('uid'));
@@ -764,11 +764,11 @@ xhelpDOMAddEvent(window, 'load', window_onload, true);
                     }
                 }
             }
-             
+
             //5. Save Ticket
             $ticketError = !$hTickets->insert($ticketInfo);
-             
-             
+
+
             //6. Fire Necessary Events, set response messages
             if ($addResponse == true && $responseError == false) {
                 $_eventsrv->trigger('new_response', array(&$ticketInfo, &$newResponse));
@@ -776,7 +776,7 @@ xhelpDOMAddEvent(window, 'load', window_onload, true);
             } elseif ($addResponse == true && $responseError == true) {
                 $message .= _XHELP_MESSAGE_ADDRESPONSE_ERROR;
             }
-             
+
             if ($changeStatus == true && $ticketError == false) {
                 if ($statusClosed) {
                     $_eventsrv->trigger('close_ticket', array(&$ticketInfo));
@@ -1087,7 +1087,7 @@ xhelpDOMAddEvent(window, 'load', window_onload, true);
                                   'userIP'=>$response->getVar('userIP'),
                                   'rating'=>(isset($review)?xhelpGetRating($review->getVar('rating')):0),
                                   'user_sig'=>'',
-                                  'private'=>$response->getVar('private'), 
+                                  'private'=>$response->getVar('private'),
                                   'hasFiles' => $hasFiles,
                                   'user_avatar' => XOOPS_URL .'/uploads/blank.gif');
             //XOOPS_URL .'/uploads/' .(($responseOwner)?$responseOwner->getVar('user_avatar') : 'blank.gif'));

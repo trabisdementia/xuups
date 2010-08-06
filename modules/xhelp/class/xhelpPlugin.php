@@ -113,7 +113,7 @@ class xhelpPlugin {
 
         // If the instance is not there, create one
         if(!isset($instance)) {
-            $instance =& new $this->getMeta('classname');
+            $instance = new $this->getMeta('classname');
         }
         return($instance);
     }

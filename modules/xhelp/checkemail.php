@@ -9,8 +9,8 @@ require(XHELP_CLASS_PATH.'/msgStore.php');
 require(XHELP_CLASS_PATH.'/validator.php');
 
 //Initialize xhelp objects
-$msgParser  =& new xhelpEmailParser();
-$msgStore   =& new xhelpEmailStore();
+$msgParser  = new xhelpEmailParser();
+$msgStore   = new xhelpEmailStore();
 $hDeptBoxes =& xhelpGetHandler('departmentMailBox');
 $hMailEvent =& xhelpGetHandler('mailEvent');
 $hTicket    =& xhelpGetHandler('ticket');

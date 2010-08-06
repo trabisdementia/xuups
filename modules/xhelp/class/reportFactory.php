@@ -37,7 +37,7 @@ class xhelpReportFactory {
                     $classname = 'xhelp'.ucfirst($filename).'Report';
                     if(preg_match("|class $classname(.*)|i", $report_data) > 0){
                         include_once(XHELP_REPORT_PATH . "/$file");
-                        $aReports[$filename] =& new $classname();
+                        $aReports[$filename] = new $classname();
                     }
                     unset($report_data);
                 }

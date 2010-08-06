@@ -87,7 +87,7 @@ class xhelpEventService
 
         // If the instance is not there, create one
         if(!isset($instance)) {
-            $instance =& new xhelpEventService();
+            $instance = new xhelpEventService();
         }
         return($instance);
     }

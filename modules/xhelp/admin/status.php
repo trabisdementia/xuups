@@ -204,7 +204,7 @@ function manageStatus()
         $default_status = 1;
     }
     $form = new xhelpForm(_AM_XHELP_TEXT_DEFAULT_STATUS, 'default_status', xhelpMakeURI(XHELP_ADMIN_URL.'/status.php', array('op'=>'manageStatus')));
-    $status_select =& new XoopsFormSelect(_AM_XHELP_TEXT_STATUS, 'default', $default_status);
+    $status_select = new XoopsFormSelect(_AM_XHELP_TEXT_STATUS, 'default', $default_status);
     $status_select->addOptionArray($aStatuses);
     $btn_tray = new XoopsFormElementTray('');
     $btn_tray->addElement(new XoopsFormButton('', 'changeDefaultStatus', _AM_XHELP_BUTTON_SUBMIT, 'submit'));

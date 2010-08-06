@@ -67,7 +67,7 @@ class xhelpStaff extends XoopsObject {
             $depts = array();
             $depts[] = $dept_id;
         }
-         
+
         $_xhelpSession = new Session();
 
         if (!$rights = $_xhelpSession->get("xhelp_staffRights")) {
@@ -171,18 +171,19 @@ class xhelpStaffHandler extends xhelpBaseObjectHandler {
      */
     function &getByUid($uid)
     {
+        $ret = false;
         $uid = intval($uid);
         if($uid > 0) {
             $sql = $this->_selectQuery(new Criteria('uid', $uid));
             if(!$result = $this->_db->query($sql)) {
-                return false;
+                return $ret;
             }
             if($arr = $this->_db->fetchArray($result)) {
-                $obj = new $this->classname($arr);
-                return $obj;
+                $ret = new $this->classname($arr);
+                return $ret;
             }
         }
-        return false;
+        return $ret;
     }
 
     /**
@@ -319,7 +320,7 @@ class xhelpStaffHandler extends xhelpBaseObjectHandler {
         return $timeSpent;
     }
 
-     
+
     function &getByAllDepts()
     {
         $ret = $this->getObjects(new Criteria('allDepartments', 1), true);
@@ -428,7 +429,7 @@ class xhelpStaffHandler extends xhelpBaseObjectHandler {
         if(!$this->removeStaffRoles($obj->getVar('uid'))){
             return false;
         }
-         
+
         $ret = parent::delete($obj, $force);
         return $ret;
     }

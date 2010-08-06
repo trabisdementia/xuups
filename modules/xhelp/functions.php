@@ -372,7 +372,7 @@ function xhelpCheckRules(&$rules, &$errors)
         }
     }
     return $ret;
-     
+
 }
 
 /**
@@ -405,9 +405,10 @@ function xhelpTableExists($table)
     //Verifies that a MySQL table exists
     $xoopsDB =& Database::getInstance();
     $realname = $xoopsDB->prefix($table);
-    $ret = mysql_list_tables(XOOPS_DB_NAME, $xoopsDB->conn);
+    $dbname = XOOPS_DB_NAME;
+    $sql = "SHOW TABLES FROM $dbname";
+    $ret = $xoopsDB->queryF($sql);
     while (list($m_table)=$xoopsDB->fetchRow($ret)) {
-
         if ($m_table ==  $realname) {
             $bRetVal = true;
             break;
@@ -451,7 +452,8 @@ function xhelpGetMeta($key)
 function xhelpSetMeta($key, $value)
 {
     $xoopsDB =& Database::getInstance();
-    if($ret = xhelpGetMeta($key)){
+    $ret = xhelpGetMeta($key);
+    if($ret != false){
         $sql = sprintf("UPDATE %s SET metavalue = %s WHERE metakey = %s", $xoopsDB->prefix('xhelp_meta'), $xoopsDB->quoteString($value), $xoopsDB->quoteString($key));
     } else {
         $sql = sprintf("INSERT INTO %s (metakey, metavalue) VALUES (%s, %s)", $xoopsDB->prefix('xhelp_meta'), $xoopsDB->quoteString($key), $xoopsDB->quoteString($value));
@@ -569,7 +571,7 @@ function &xhelpXoopsAccountFromEmail($email, $name, &$password, $level)
         }
 
     }
-     
+
     $xuser =& $member_handler->createUser();
     $xuser->setVar("uname",$usernames[$i]);
     $xuser->setVar("loginname", $usernames[$i]);
@@ -801,7 +803,7 @@ function xhelpCreateStatuses()
 function xhelpPrettyBytes($bytes)
 {
     $bytes = intval($bytes);
-     
+
     if ($bytes >= 1099511627776) {
         $return = number_format($bytes / 1024 / 1024 / 1024 / 1024, 2);
         $suffix = _XHELP_SIZE_TB;
@@ -845,7 +847,7 @@ function xhelpAddDBField($table, $fieldname, $fieldtype='VARCHAR', $size=0, $att
         } else {
             $column_def .= ' NOT NULL';
         }
-         
+
         if (isset($attr['default'])) {
             $column_def .= ' DEFAULT '. $xoopsDB->quoteString($attr['default']);
         }
@@ -951,7 +953,7 @@ function &xhelpGetModuleConfig()
     if (!isset($_config)) {
         $hModConfig =& xoops_gethandler('config');
         $_module    =& xhelpGetModule();
-         
+
         $_config    =& $hModConfig->getConfigsByCat(0, $_module->getVar('mid'));
     }
     return $_config;
@@ -1033,7 +1035,7 @@ function xhelpCreateNotifications()
     array('id' => 8, 'staff' => XHELP_NOTIF_STAFF_OWNER, 'user'=>XHELP_NOTIF_USER_NO),
     array('id' => 9, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user'=>XHELP_NOTIF_USER_YES),
     array('id' => 10, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES));
-     
+
     foreach($notifications as $notif){
         $template =& $hNotification->create();
         $template->setVar('notif_id', $notif['id']);

@@ -7,7 +7,7 @@
 
 
 class Session {
-     
+
     /**
      * Session constructor<br />
      * Starts the session with session_start()
@@ -75,7 +75,7 @@ class Session {
         static $_sess;
 
         if (!isset($_sess)) {
-            $_sess =& new Session();
+            $_sess = new Session();
         }
         return $_sess;
     }

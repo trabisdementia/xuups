@@ -43,7 +43,8 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler {
      */
     function &create()
     {
-        return new $this->classname();
+        $obj = new $this->classname();
+        return $obj;
     }
 
     /**
@@ -54,11 +55,12 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler {
      */
     function &get($id)
     {
+        $ret = false;
         $id = intval($id);
         if($id > 0) {
             $sql = $this->_selectQuery(new Criteria($this->_idfield, $id));
             if(!$result = $this->_db->query($sql)) {
-                return false;
+                return $ret;
             }
             $numrows = $this->_db->getRowsNum($result);
             if($numrows == 1) {
@@ -66,7 +68,7 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler {
                 return $obj;
             }
         }
-        return false;
+        return $ret;
     }
 
     /**
@@ -173,7 +175,7 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler {
         }
         return $sql;
     }
-     
+
     /**
      * count objects matching a criteria
      *
