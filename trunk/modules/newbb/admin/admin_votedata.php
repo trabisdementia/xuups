@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -28,7 +28,7 @@ switch ($op)
         $topic_id = intval($_GET['topic_id']);
         $sql = $xoopsDB->queryF("DELETE FROM " . $xoopsDB->prefix('bb_votedata') . " WHERE ratingid = {$rid}");
         $xoopsDB->query($sql);
-        
+
         $query = "select rating FROM " . $xoopsDB -> prefix('bb_votedata') . " WHERE topic_id = {$topic_id}";
         $voteresult = $xoopsDB -> query($query);
         $votesDB = $xoopsDB -> getRowsNum($voteresult);
@@ -40,7 +40,7 @@ switch ($op)
         $finalrating = number_format($finalrating, 4);
         $sql = sprintf("UPDATE %s SET rating = %u, votes = %u WHERE topic_id = %u", $xoopsDB -> prefix('bb_topics'), $finalrating, $votesDB, $topic_id);
         $xoopsDB -> queryF($sql);
-        
+
         redirect_header("admin_votedata.php", 1, _AM_NEWBB_VOTEDELETED);
         break;
 
@@ -75,7 +75,7 @@ switch ($op)
         loadModuleAdminMenu(10, _AM_NEWBB_VOTE_RATINGINFOMATION);
 
 
-    echo "
+        echo "
         <fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_NEWBB_VOTE_DISPLAYVOTES . "</legend>\n
         <div style='padding: 8px;'>\n
         <div><strong>" . _AM_NEWBB_VOTE_USERAVG . ": </strong>{$useravgrating}</div>\n
@@ -105,7 +105,7 @@ switch ($op)
 
             $formatted_date = formatTimestamp($ratingtimestamp, _DATESTRING);
             $ratinguname = newbb_getUnameFromId($ratinguser, $xoopsModuleConfig['show_realname']);
-    echo "
+            echo "
         <tr>\n
         <td class='head' align='center'>{$ratingid}</td>\n
         <td class='even' align='center'>{$ratinguname}</td>\n

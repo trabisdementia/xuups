@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: view.archive.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 if (art_parse_args($args_num, $args, $args_str)) {
@@ -85,17 +85,17 @@ if ($month) {
         $criteria->add(new Criteria("DAY(FROM_UNIXTIME({$field_article_time} - {$timeoffset}))", $day));
     }
 }
-$articles_count = $article_handler->getCountByCategory($categories, $criteria);    
+$articles_count = $article_handler->getCountByCategory($categories, $criteria);
 
 $criteria->setSort($field_article_time);
 $criteria->setOrder("DESC");
 
 $articles_obj = $article_handler->getByCategory(
-    $categories,
-    $xoopsModuleConfig["articles_perpage"],
-    $start,
-    $criteria,
-    array("a.uid", "a.writer_id", "a.art_title", "a.art_time_publish", "a.cat_id", "a.art_categories", "a.art_summary", "a.art_counter")
+$categories,
+$xoopsModuleConfig["articles_perpage"],
+$start,
+$criteria,
+array("a.uid", "a.writer_id", "a.art_title", "a.art_time_publish", "a.cat_id", "a.art_categories", "a.art_summary", "a.art_counter")
 );
 
 $author_array = array();
@@ -133,7 +133,7 @@ foreach (array_keys($articles_obj) as $id) {
         "category"    => $_category,
         "summary"    => $article->getSummary(true)
     );
-    
+
     $cats = @array_diff($article->getCategories(), array($article->getVar("cat_id")));
     foreach ($cats as $catid) {
         if ($catid==0 || !isset($categories_obj[$catid])) continue;
@@ -150,7 +150,7 @@ if ( $articles_count > $xoopsModuleConfig["articles_perpage"]) {
     if ( !empty($month) )        $pagequery[] = "month={$month}";
     if ( !empty($day) )            $pagequery[] = "day={$day}";
     if ( !empty($category_id) )    $pagequery[] = "category={$category_id}";
-    
+
     $nav = new XoopsPageNav($articles_count, $xoopsModuleConfig["articles_perpage"], $start, "start", implode("&amp;", $pagequery));
     $pagenav = $nav->renderNav(4);
 } else {
@@ -178,20 +178,20 @@ if (empty($start)) {
     foreach (array_keys($categories_array) as $id) {
         $cat = $categories_array[$id];
         $_category = array(
-            // url of the current category
+        // url of the current category
             "url"    => XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/view.archive.php" . URL_DELIMITER . "c" . $id . "/" . $year,
-            // title of the current category
+        // title of the current category
             "title"    => $cat["prefix"] . $cat["cat_title"] . " (" . @intval($cats_counts[$id]) . ")"
-            ); 
-            
-        if ($cat["cat_pid"] == $cat_top) {
-            $categories[$id]["category"] = $_category;
-            $cat_pid = $id;
-        } else {
-            $categories[$cat_pid]["sub"][] = $_category;
-        }
+            );
+
+            if ($cat["cat_pid"] == $cat_top) {
+                $categories[$id]["category"] = $_category;
+                $cat_pid = $id;
+            } else {
+                $categories[$cat_pid]["sub"][] = $_category;
+            }
     }
-    
+
     $cats = empty($category_id) ? array_keys($categories_array) : array($category_id);
     $cat_criteria = " IN (" . implode( ",", $cats ) . ") ";
     // Get annual list
@@ -211,19 +211,19 @@ if (empty($start)) {
             $months[] = array(
                 "title"    => art_constant("MD_MONTH_" . intval($myrow["mon"])) . " (" . intval($myrow["count"]) . ")",
                 "url"    => XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/view.archive.php" . URL_DELIMITER . $year . "/" . $myrow["mon"],
-                );
+            );
         }
         $timenav["prev"] = array(
             "url"    => XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/view.archive.php" . URL_DELIMITER . ($year - 1),
             "title"    => sprintf(art_constant("MD_TIME_Y"), ($year - 1))
-            );
+        );
         if($year < date("Y")){
             $timenav["next"] = array(
                 "url"    => XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/view.archive.php" . URL_DELIMITER . ($year + 1),
                 "title" => sprintf(art_constant("MD_TIME_Y"), ($year + 1))
-                );
+            );
         }
-    // Get monthly list
+        // Get monthly list
     } elseif (empty($day)) {
         $sql =  "    SELECT " .
                 "        DAY( FROM_UNIXTIME(ac.ac_publish - $timeoffset)) AS day, " .
@@ -244,7 +244,7 @@ if (empty($start)) {
             $days[$i] = array(
                 "title"    => $days[$i]["count"],
                 "url"    => XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/view.archive.php" . URL_DELIMITER . $year . "/" . $month . "/" . $i
-                );
+            );
         }
         $calendar = art_getCalendar($year, $month, $days);
         $month_next = $month + 1;
@@ -261,12 +261,12 @@ if (empty($start)) {
         $timenav["prev"] = array(
             "url"    => XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/view.archive.php" . URL_DELIMITER . $year_prev . "/" . $month_prev,
             "title"    => art_constant("MD_MONTH_" . $month_prev)
-            );
+        );
         if ($year<date("Y") || $month < date("n")) {
             $timenav["next"] = array(
                 "url"    => XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/view.archive.php" . URL_DELIMITER . $year_next . "/" . $month_next,
                 "title"    => art_constant("MD_MONTH_" . $month_next)
-                );
+            );
         }
     }
 }
@@ -299,19 +299,19 @@ function art_getCalendar($year = null, $month = null, $days = null)
     $year = empty($year) ? date("Y") : $year;
     $month = empty($month) ? date("n") : $month;
     $unixmonth = mktime(0, 0 , 0, $month, 1, $year);
-    
+
     ob_start();
     echo '<table id="calendar">';
     echo '<caption>';
     printf(art_constant("MD_TIME_YM"), $year, art_constant("MD_MONTH_" . $month));
     echo '</caption>';
-    
+
     for ($i = 1; $i <= 7; $i++) {
         echo "\n\t\t<th abbr=\"" . art_constant("MD_WEEK_{$i}") . "\" scope=\"col\" title=\"" . art_constant("MD_WEEK_{$i}") . "\">" . art_constant("MD_WEEK_{$i}") . '</th>';
     }
 
     echo '<tr>';
-    
+
     // See how much we should pad in the beginning
     $week_begins = 1;
     $pad = art_calendar_week_mod( date('w', $unixmonth) - $week_begins );
@@ -349,8 +349,8 @@ function art_getCalendar($year = null, $month = null, $days = null)
 
     echo "\n\t</tr>\n\t</tbody>\n\t</table>";
     $calendar = ob_get_contents();
-    ob_end_clean();    
-    
+    ob_end_clean();
+
     return $calendar;
 }
 

@@ -18,19 +18,19 @@ define("_MI_NEWBB_BLOCK_AUTHOR", "作者");
 define("_MI_NEWBB_BLOCK_TAG_CLOUD", "Tag Cloud");
 define("_MI_NEWBB_BLOCK_TAG_TOP", "热门Tag");
 /*
-define("_MI_NEWBB_BNAME0", "最新回复话题");
-define("_MI_NEWBB_BNAME1", "最新话题");
-define("_MI_NEWBB_BNAME2", "浏览最多的话题");
-define("_MI_NEWBB_BNAME3", "回复最多的话题");
-define("_MI_NEWBB_BNAME4", "最新精华主题");
-define("_MI_NEWBB_BNAME5", "最新置顶主题");
-define("_MI_NEWBB_BNAME6", "最新帖子");
-define("_MI_NEWBB_BNAME7", "最多发帖作者");
-define("_MI_NEWBB_BNAME8", "最多回帖作者");
-define("_MI_NEWBB_BNAME9", "最多精华作者");
-define("_MI_NEWBB_BNAME10", "最多置顶作者");
-define("_MI_NEWBB_BNAME11", "最新帖子内容");
-*/
+ define("_MI_NEWBB_BNAME0", "最新回复话题");
+ define("_MI_NEWBB_BNAME1", "最新话题");
+ define("_MI_NEWBB_BNAME2", "浏览最多的话题");
+ define("_MI_NEWBB_BNAME3", "回复最多的话题");
+ define("_MI_NEWBB_BNAME4", "最新精华主题");
+ define("_MI_NEWBB_BNAME5", "最新置顶主题");
+ define("_MI_NEWBB_BNAME6", "最新帖子");
+ define("_MI_NEWBB_BNAME7", "最多发帖作者");
+ define("_MI_NEWBB_BNAME8", "最多回帖作者");
+ define("_MI_NEWBB_BNAME9", "最多精华作者");
+ define("_MI_NEWBB_BNAME10", "最多置顶作者");
+ define("_MI_NEWBB_BNAME11", "最新帖子内容");
+ */
 
 // Names of admin menu items
 define("_MI_NEWBB_ADMENU_INDEX", "管理首页");

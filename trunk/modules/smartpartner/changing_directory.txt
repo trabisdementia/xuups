@@ -1,0 +1,35 @@
+/**
+* $Id: changing_directory.txt,v 1.4 2005/03/28 15:28:56 malanciault Exp $
+* Module: SmartPartner
+* Author: The SmartFactory <www.smartfactory.ca>
+* Licence: GNU
+*/
+
+How could I change SmartPartner's directory ?
+============================================
+
+Currently, SmartPartner's module path is http://www.yousite.com/modules/smartpartner/. Since version 1.0.1, SmartPartner's code has been improved in order to make it easy for you to change the directory of the module to anything you would like !
+
+PLEASE NOTE : You need to perform these steps BEFORE installing the module
+
+Let's say you want to change the directory to 'clients'. Simply search for this line in the module : "This must contain the name of the folder in which reside SmartPartner".
+
+You will find it in these 5 files :
+- xoops_version.php
+- blocks/partner_list.php
+- include/common.php
+- include/notification.inc.php
+- include/search.inc.php
+
+Simply change the SMARTPARTNER_DIRNAME constant to "partners" in each of these files, like this :
+
+// This must contain the name of the folder in which reside SmartClient
+if( !defined("SMARTPARTNER_DIRNAME") ){
+    define("SMARTPARTNER_DIRNAME", 'partners');
+}
+
+And of course, you need to change the name of the folder containing the module to 'partners'. For example, you must change modules/smartpartner to modules/partners
+    
+And that's it !
+
+Enjoy !

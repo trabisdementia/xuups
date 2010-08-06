@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -81,7 +81,7 @@ function display_archive_forums($cat_id, $parent_forum = 0, $level=0)
             }
             $name = $myts->htmlSpecialChars($forum_name);
             for ($i = 0; $i<($level*4+4); $i++)
-                echo "&nbsp;";
+            echo "&nbsp;";
             echo "<a href='archive.php?forum=$forum_id'><b>$name</b></a><br />";
             $newlevel = $level+1;
             display_archive_forums($cat_id, $forum_id, $newlevel);
@@ -99,7 +99,7 @@ function display_forum_topics($forum)
     $q = "select * from ".$forumTable['forums']." WHERE forum_id=".$forum;
     $result = $db->query($q);
     if (!$result)
-        echo $db->error();
+    echo $db->error();
 
     $forumdata = $db->fetch_array($result);
     echo "<table border='0' width='100%' cellpadding='5'>";
@@ -172,15 +172,15 @@ function display_topic($forum, $topic_id, $content_only = 1)
 
     echo "</td></tr></table><br />";
 
-// =============== LINK HEADER ===============
-echo "<table border='0' width='640' cellpadding='5' cellspacing='0' bgcolor='#FFFFFF' align=center><tr><td>";
-echo "<h3>"._MD_FORUM." : ".$forumdata['forum_name']."</h3>";
-echo "<h3>"._MD_SUBJECT." : ".$topicdata['topic_title']."</h3>";
-echo "<i><strong>".$meta['copyright']."<br /><a href=".XOOPS_URL.">".XOOPS_URL."</a>
+    // =============== LINK HEADER ===============
+    echo "<table border='0' width='640' cellpadding='5' cellspacing='0' bgcolor='#FFFFFF' align=center><tr><td>";
+    echo "<h3>"._MD_FORUM." : ".$forumdata['forum_name']."</h3>";
+    echo "<h3>"._MD_SUBJECT." : ".$topicdata['topic_title']."</h3>";
+    echo "<i><strong>".$meta['copyright']."<br /><a href=".XOOPS_URL.">".XOOPS_URL."</a>
 <br /><br />"._MD_PRINT_TOPIC_LINK."<br />
 <a href='".XOOPS_URL."/modules/".$xoopsModule->dirname()."/viewtopic.php?topic_id=$topic_id&amp;forum=$forum'>".XOOPS_URL."/modules/".$xoopsModule->dirname()."/viewtopic.php?topic_id=$topic_id&amp;forum=$forum</a>
 </strong></i><br /><br />";
-// ============= END LINK HEADER =============
+    // ============= END LINK HEADER =============
 
     $forumpost = new ForumPosts();
     $forumpost->setOrder("post_time ASC");

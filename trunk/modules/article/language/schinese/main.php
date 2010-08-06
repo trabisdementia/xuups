@@ -11,7 +11,7 @@ if ( DIRECTORY_SEPARATOR != "/" ) $current_path = str_replace( strpos( $current_
 $url_arr = explode("/",strstr($current_path,"/modules/"));
 include XOOPS_ROOT_PATH."/modules/".$url_arr[2]."/include/vars.php";
 
-if(defined($GLOBALS["ART_VAR_PREFIXU"]."_LANG_GB_MAIN")) return; 
+if(defined($GLOBALS["ART_VAR_PREFIXU"]."_LANG_GB_MAIN")) return;
 define($GLOBALS["ART_VAR_PREFIXU"]."_LANG_GB_MAIN",1);
 
 
@@ -82,12 +82,12 @@ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_EDNOTE_DESC_TEXT", "");
 
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_FORUM", "论坛");
 /*
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_BLOG", "博客");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_PDF", "PDF");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_PRINT", "打印");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_BOOKMARK", "收藏");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_DC", "DC");
-*/
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_BLOG", "博客");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_PDF", "PDF");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_PRINT", "打印");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_BOOKMARK", "收藏");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_DC", "DC");
+ */
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRACKBACKS", "跟踪网址");
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TEMPLATE_SELECT", "选择模板");
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_CATEGORY_BASE", "基本分类");
@@ -249,13 +249,13 @@ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_LIST", "文章列表");
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_DRAFTS", "草稿");
 
 /*
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER", "工具箱");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER_DESC", "将该文章转到其他应用中");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER_DONE", "操作已成功执行: %s");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER", "工具箱");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER_DESC", "将该文章转到其他应用中");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_TRANSFER_DONE", "操作已成功执行: %s");
 
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_SELECTEDITOR", "选择编辑器");
-define($GLOBALS["ART_VAR_PREFIXU"]."_MD_REQUIRED", "必填项");
-*/
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_SELECTEDITOR", "选择编辑器");
+ define($GLOBALS["ART_VAR_PREFIXU"]."_MD_REQUIRED", "必填项");
+ */
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_REMOVE", "清除");
 
 define($GLOBALS["ART_VAR_PREFIXU"]."_MD_SAVE_BEFORE_SWITCH", "页面转换前注意保存数据");

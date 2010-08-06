@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
@@ -75,7 +75,7 @@ class MytabsBlockForm extends XoopsThemeForm
                                '86400' => _DAY,
                                '259200' => sprintf(_DAYS, 3),
                                '604800' => _WEEK
-                               );
+        );
         $cachetime->addOptionArray($cache_options);
         $this->addElement($cachetime);
         $this->addElement(new XoopsFormRadioYN(_AM_MYTABS_CACHEBYURL, 'cachebyurl', $target->getVar('cachebyurl', 'e')));

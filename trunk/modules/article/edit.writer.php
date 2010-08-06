@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: edit.writer.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 include_once XOOPS_ROOT_PATH . "/modules/" . $GLOBALS["artdirname"] . "/class/xoopsformloader.php";
@@ -38,39 +38,39 @@ $writer_handler =& xoops_getmodulehandler("writer", $GLOBALS["artdirname"]);
 
 if (!empty($_POST["submit_writer"])) {
     $writer_obj =& $writer_handler->get($writer_id);
-    
+
     if ( art_isAdministrator() || (is_object($xoopsUser) && ($writer_handler->getVar("uid") == $xoopsUser->getVar("uid") || $writer_obj->isNew()) )    ) {
         foreach (array(
             "writer_name", "writer_profile"
             ) as $tag) {
-            if (@$_POST[$tag] != $writer_obj->getVar($tag)) {
-                $writer_obj->setVar($tag, $_POST[$tag]);
-            }
-        }
-        
-        if (art_isAdministrator() && !empty($_FILES['userfile']['name'])) {
-            $error_upload = "";
-            $writer_avatar = "";
-            include_once XOOPS_ROOT_PATH . "/modules/" . $GLOBALS["artdirname"] . "/class/uploader.php";
-            $uploader = new art_uploader(
-                XOOPS_ROOT_PATH . "/" . $xoopsModuleConfig['path_image']
-            );
-            if ( $uploader->fetchMedia( $_POST['xoops_upload_file'][0]) ) {
-                if ( !$uploader->upload() ) {
-                    $error_upload = $uploader->getErrors();
-                } elseif ( file_exists( $uploader->getSavedDestination() )) {
-                    $writer_avatar = $uploader->getSavedFileName();
+                if (@$_POST[$tag] != $writer_obj->getVar($tag)) {
+                    $writer_obj->setVar($tag, $_POST[$tag]);
                 }
-            } else {
-                $error_upload = $uploader->getErrors();
             }
-        }
-        $writer_avatar = empty($writer_avatar) ? (empty($_POST['writer_avatar']) ? "" : $_POST['writer_avatar']) : $writer_avatar;
-        if ($writer_avatar != $writer_obj->getVar("writer_avatar")) {
-            $writer_obj->setVar("writer_avatar", $writer_avatar);
-        }
-        
-        $writer_id = $writer_handler->insert($writer_obj);
+
+            if (art_isAdministrator() && !empty($_FILES['userfile']['name'])) {
+                $error_upload = "";
+                $writer_avatar = "";
+                include_once XOOPS_ROOT_PATH . "/modules/" . $GLOBALS["artdirname"] . "/class/uploader.php";
+                $uploader = new art_uploader(
+                XOOPS_ROOT_PATH . "/" . $xoopsModuleConfig['path_image']
+                );
+                if ( $uploader->fetchMedia( $_POST['xoops_upload_file'][0]) ) {
+                    if ( !$uploader->upload() ) {
+                        $error_upload = $uploader->getErrors();
+                    } elseif ( file_exists( $uploader->getSavedDestination() )) {
+                        $writer_avatar = $uploader->getSavedFileName();
+                    }
+                } else {
+                    $error_upload = $uploader->getErrors();
+                }
+            }
+            $writer_avatar = empty($writer_avatar) ? (empty($_POST['writer_avatar']) ? "" : $_POST['writer_avatar']) : $writer_avatar;
+            if ($writer_avatar != $writer_obj->getVar("writer_avatar")) {
+                $writer_obj->setVar("writer_avatar", $writer_avatar);
+            }
+
+            $writer_id = $writer_handler->insert($writer_obj);
     }
 }
 
@@ -112,19 +112,19 @@ if (!empty($_REQUEST["search"])) {
     $select_form = new XoopsFormSelect("", $name_current, array(), 1);
     $select_form->addOption("", _SELECT);
     $select_form->addOptionArray($writer_handler->getList($criteria));
-    
+
     $user_select_tray = new XoopsFormElementTray(_MA_SEARCH_USERLIST, "<br />");
     $user_select_tray->addElement($select_form);
-    
-    $usercount = $writer_handler->getCount($criteria);    
+
+    $usercount = $writer_handler->getCount($criteria);
     $nav_extra = "query=" . $_REQUEST['query'] . "&amp;search=1";
     $nav = new XoopsPageNav($usercount, $limit, $start, "start", $nav_extra);
     $user_select_nav = new XoopsFormLabel(sprintf(_MA_SEARCH_COUNT, $usercount), $nav->renderNav(4));
     $user_select_tray->addElement($user_select_nav);
-    
+
     $add_button = new XoopsFormButton('', '', _ADD, 'button');
     $add_button->setExtra('onclick="javascript: addusers();"') ;
-    
+
     $edit_button = new XoopsFormButton('', 'edit', _EDIT, 'button');
     $edit_button->setExtra('onclick="this.submit();"') ;
 
@@ -138,10 +138,10 @@ if (!empty($_REQUEST["search"])) {
     $button_tray->addElement($close_button);
 
     $form_user->addElement($user_select_tray);
-    
+
     //$form_user->addElement(new XoopsFormHidden('target', $_REQUEST["target"]));
     $form_user->addElement($button_tray);
-    $form_user->display();        
+    $form_user->display();
 }
 
 $form_sel = new XoopsThemeForm(_MA_LOOKUP_USER, "searchuser", xoops_getenv('PHP_SELF'));
@@ -159,7 +159,7 @@ $button_tray->addElement($close_button);
 
 //$form_sel->addElement(new XoopsFormHidden('target', $_REQUEST["target"]));
 $form_sel->addElement($button_tray);
-$form_sel->display();   
+$form_sel->display();
 
 if (!empty($_POST["edit"]) && !empty($_POST[$name_current])) {
     $writer_id = intval($_POST[$name_current][0]);

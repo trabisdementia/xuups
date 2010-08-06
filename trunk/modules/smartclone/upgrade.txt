@@ -1,0 +1,25 @@
+/**
+* $Id: upgrade.txt,v 1.1 2006/11/02 17:25:04 marcan Exp $
+* Module: SmartHelp
+* Author: The SmartFactory <www.smartfactory.ca>
+* Licence: GNU
+*/
+
+How to uprade from SmartHelp prior to 0.9
+============================================
+
+Unfortunatley, you will need to uninstall the module and reinstall it.
+
+
+How to uprade from SmartHelp 0.9.x or 1.0 RC 1
+=================================================
+
+Upload the 'smartclone' folder into xoops_root/modules/ and update the module via System Admin > Modules > SmartHelp > Update.
+
+Also, the images folder holding the clients logo has changed so you need to do these extra steps :
+
+- Go in SmartHelp > Administrative Section
+- You will see the 'Module Path Configuration' block at the top of the page, asking you to create the image folder
+- Click on 'Create the folder'
+- Then, with an FTP client, move all the content of www.yoursite.com/images/smartclone/ to www.yoursite.com/uploads/smartclone/images/
+- Enjoy !

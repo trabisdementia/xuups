@@ -18,7 +18,7 @@ require_once('jpgraph_plotmark.inc.php');
 class RadarLogTicks extends Ticks {
 
     function __construct() {
-            // Empty
+        // Empty
     }
 
     function Stroke($aImg,&$grid,$aPos,$aAxisAngle,$aScale,&$aMajPos,&$aMajLabel) {
@@ -300,7 +300,7 @@ class RadarAxis extends AxisPrototype {
         $w=$this->img->GetTextWidth($title)*1.2;
 
         while( $aAxisAngle > 2*M_PI )
-            $aAxisAngle -= 2*M_PI;
+        $aAxisAngle -= 2*M_PI;
 
         // Around 3 a'clock
         if( $aAxisAngle>=7*M_PI/4 || $aAxisAngle <= M_PI/4 ) $dx=-0.15; // Small trimming to make the dist to the axis more even
@@ -378,13 +378,13 @@ class RadarGrid { //extends Grid {
             for($k=0; $k<$nbrpnts; ++$k ){
                 $l=($k+1)%$nbrpnts;
                 if( $this->type == 'solid' )
-                    $img->Line($pnts[$k*2],$pnts[$k*2+1],$pnts[$l*2],$pnts[$l*2+1]);
+                $img->Line($pnts[$k*2],$pnts[$k*2+1],$pnts[$l*2],$pnts[$l*2+1]);
                 elseif( $this->type == 'dotted' )
-                    $img->DashedLine($pnts[$k*2],$pnts[$k*2+1],$pnts[$l*2],$pnts[$l*2+1],1,6);
+                $img->DashedLine($pnts[$k*2],$pnts[$k*2+1],$pnts[$l*2],$pnts[$l*2+1],1,6);
                 elseif( $this->type == 'dashed' )
-                    $img->DashedLine($pnts[$k*2],$pnts[$k*2+1],$pnts[$l*2],$pnts[$l*2+1],2,4);
+                $img->DashedLine($pnts[$k*2],$pnts[$k*2+1],$pnts[$l*2],$pnts[$l*2+1],2,4);
                 elseif( $this->type == 'longdashed' )
-                    $img->DashedLine($pnts[$k*2],$pnts[$k*2+1],$pnts[$l*2],$pnts[$l*2+1],8,6);
+                $img->DashedLine($pnts[$k*2],$pnts[$k*2+1],$pnts[$l*2],$pnts[$l*2+1],8,6);
             }
             $pnts=array();
         }
@@ -514,17 +514,17 @@ class RadarPlot {
 
         // Add plotmarks on top
         if( $this->mark->show ) {
-			for($i=0; $i < $nbrpnts; ++$i) {
-	            if( isset($this->csimtargets[$i]) ) {
-	                $this->mark->SetCSIMTarget($this->csimtargets[$i]);
-	                $this->mark->SetCSIMAlt($this->csimalts[$i]);
-	                $this->mark->SetCSIMAltVal($pnts[$i*2], $pnts[$i*2+1]);
-	                $this->mark->Stroke($img, $pnts[$i*2], $pnts[$i*2+1]);
-	                $this->csimareas .= $this->mark->GetCSIMAreas();
-	            }
-	            else {
-					$this->mark->Stroke($img,$pnts[$i*2],$pnts[$i*2+1]);
-	            }
+            for($i=0; $i < $nbrpnts; ++$i) {
+                if( isset($this->csimtargets[$i]) ) {
+                    $this->mark->SetCSIMTarget($this->csimtargets[$i]);
+                    $this->mark->SetCSIMAlt($this->csimalts[$i]);
+                    $this->mark->SetCSIMAltVal($pnts[$i*2], $pnts[$i*2+1]);
+                    $this->mark->Stroke($img, $pnts[$i*2], $pnts[$i*2+1]);
+                    $this->csimareas .= $this->mark->GetCSIMAreas();
+                }
+                else {
+                    $this->mark->Stroke($img,$pnts[$i*2],$pnts[$i*2+1]);
+                }
             }
         }
 
@@ -634,16 +634,16 @@ class RadarGraph extends Graph {
 
     function SetCenter($px,$py=0.5) {
         if( $px >= 0 && $px <= 1 ) {
-        	$this->posx = $this->img->width*$px;
+            $this->posx = $this->img->width*$px;
         }
         else {
-        	$this->posx = $px;
+            $this->posx = $px;
         }
         if( $py >= 0 && $py <= 1 ) {
-        	$this->posy = $this->img->height*$py;
+            $this->posy = $this->img->height*$py;
         }
         else {
-        	$this->posy = $py;
+            $this->posy = $py;
         }
     }
 
@@ -656,7 +656,7 @@ class RadarGraph extends Graph {
     }
 
     function Add($aPlot) {
-    	if( $aPlot == null ) {
+        if( $aPlot == null ) {
             JpGraphError::RaiseL(25010);//("Graph::Add() You tried to add a null plot to the graph.");
         }
         if( is_array($aPlot) && count($aPlot) > 0 ) {
@@ -688,17 +688,17 @@ class RadarGraph extends Graph {
     }
 
     function StrokeIcons() {
-    	if( $this->iIcons != null ) {
-        	$n = count($this->iIcons);
-        	for( $i=0; $i < $n; ++$i ) {
-            	$this->iIcons[$i]->Stroke($this->img);
-        	}
-    	}
+        if( $this->iIcons != null ) {
+            $n = count($this->iIcons);
+            for( $i=0; $i < $n; ++$i ) {
+                $this->iIcons[$i]->Stroke($this->img);
+            }
+        }
     }
 
-	function StrokeTexts() {
+    function StrokeTexts() {
         if( $this->texts != null ) {
-			$n = count($this->texts);
+            $n = count($this->texts);
             for( $i=0; $i < $n; ++$i ) {
                 $this->texts[$i]->Stroke($this->img);
             }
@@ -731,7 +731,7 @@ class RadarGraph extends Graph {
             $this->yscale->AutoScale($this->img,0,$max,$this->len/$this->ytick_factor);
         }
         elseif( $this->yscale->IsSpecified() &&
-                ( $this->yscale->auto_ticks || !$this->yscale->ticks->IsSpecified()) ) {
+        ( $this->yscale->auto_ticks || !$this->yscale->ticks->IsSpecified()) ) {
 
             // The tick calculation will use the user suplied min/max values to determine
             // the ticks. If auto_ticks is false the exact user specifed min and max
@@ -741,8 +741,8 @@ class RadarGraph extends Graph {
             $min = $this->yscale->scale[0];
             $max = $this->yscale->scale[1];
             $this->yscale->AutoScale($this->img,$min,$max,
-                                     $this->len/$this->ytick_factor,
-                                     $this->yscale->auto_ticks);
+            $this->len/$this->ytick_factor,
+            $this->yscale->auto_ticks);
         }
 
         // Set start position end length of scale (in absolute pixels)
@@ -769,43 +769,43 @@ class RadarGraph extends Graph {
         }
 
         if( !$_csim ) {
-        	if( $this->background_image != '' ) {
-            	$this->StrokeFrameBackground();
-        	}
-        	else {
-            	$this->StrokeFrame();
-            	$this->StrokeBackgroundGrad();
-        	}
+            if( $this->background_image != '' ) {
+                $this->StrokeFrameBackground();
+            }
+            else {
+                $this->StrokeFrame();
+                $this->StrokeBackgroundGrad();
+            }
         }
         $astep=2*M_PI/$nbrpnts;
 
-		if( !$_csim ) {
-     		if( $this->iIconDepth == DEPTH_BACK ) {
-        		$this->StrokeIcons();
-        	}
-
-
-	        // Prepare legends
-    	    for($i=0; $i < $n; ++$i) {
-        	    $this->plots[$i]->Legend($this);
-	        }
-    	    $this->legend->Stroke($this->img);
-        	$this->footer->Stroke($this->img);
-		}
-
-		if( !$_csim ) {
-	        if( $this->grid_depth == DEPTH_BACK ) {
-	            // Draw axis and grid
-	            for( $i=0,$a=M_PI/2; $i < $nbrpnts; ++$i, $a += $astep ) {
-	                $this->axis->Stroke($this->posy,$a,$grid[$i],$this->axis_title[$i],$i==0);
-	            }
-                $this->grid->Stroke($this->img,$grid);
-	        }
+        if( !$_csim ) {
             if( $this->iIconDepth == DEPTH_BACK ) {
                 $this->StrokeIcons();
             }
 
-		}
+
+            // Prepare legends
+            for($i=0; $i < $n; ++$i) {
+                $this->plots[$i]->Legend($this);
+            }
+            $this->legend->Stroke($this->img);
+            $this->footer->Stroke($this->img);
+        }
+
+        if( !$_csim ) {
+            if( $this->grid_depth == DEPTH_BACK ) {
+                // Draw axis and grid
+                for( $i=0,$a=M_PI/2; $i < $nbrpnts; ++$i, $a += $astep ) {
+                    $this->axis->Stroke($this->posy,$a,$grid[$i],$this->axis_title[$i],$i==0);
+                }
+                $this->grid->Stroke($this->img,$grid);
+            }
+            if( $this->iIconDepth == DEPTH_BACK ) {
+                $this->StrokeIcons();
+            }
+
+        }
 
         // Plot points
         $a=M_PI/2;
@@ -817,17 +817,17 @@ class RadarGraph extends Graph {
             if( $this->grid_depth != DEPTH_BACK ) {
                 // Draw axis and grid
                 for( $i=0,$a=M_PI/2; $i < $nbrpnts; ++$i, $a += $astep ) {
-                   $this->axis->Stroke($this->posy,$a,$grid[$i],$this->axis_title[$i],$i==0);
+                    $this->axis->Stroke($this->posy,$a,$grid[$i],$this->axis_title[$i],$i==0);
                 }
                 $this->grid->Stroke($this->img,$grid);
             }
 
-        	$this->StrokeTitles();
-       		$this->StrokeTexts();
-       		if( $this->iIconDepth == DEPTH_FRONT ) {
-        		$this->StrokeIcons();
-        	}
-		}
+            $this->StrokeTitles();
+            $this->StrokeTexts();
+            if( $this->iIconDepth == DEPTH_FRONT ) {
+                $this->StrokeIcons();
+            }
+        }
 
         // Should we do any final image transformation
         if( $this->iImgTrans && !$_csim ) {
@@ -842,18 +842,18 @@ class RadarGraph extends Graph {
             $this->iImgTransBorder);
         }
 
-		if( !$_csim ) {
-	        // If the filename is given as the special "__handle"
-	        // then the image handler is returned and the image is NOT
-	        // streamed back
-	        if( $aStrokeFileName == _IMG_HANDLER ) {
-	            return $this->img->img;
-	        }
-	        else {
-	            // Finally stream the generated picture
-	            $this->cache->PutAndStream($this->img,$this->cache_name,$this->inline,$aStrokeFileName);
-	        }
-		}
+        if( !$_csim ) {
+            // If the filename is given as the special "__handle"
+            // then the image handler is returned and the image is NOT
+            // streamed back
+            if( $aStrokeFileName == _IMG_HANDLER ) {
+                return $this->img->img;
+            }
+            else {
+                // Finally stream the generated picture
+                $this->cache->PutAndStream($this->img,$this->cache_name,$this->inline,$aStrokeFileName);
+            }
+        }
     }
 } // Class
 

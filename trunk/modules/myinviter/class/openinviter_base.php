@@ -43,13 +43,13 @@ abstract class OpenInviter_Base
         libxml_use_internal_errors(false);
         $xpath=new DOMXPath($doc);$data=$xpath->query($query);
         if ($attribute)
-            foreach ($data as $node)
-            $search_val[]=$node->getAttribute($attribute);
+        foreach ($data as $node)
+        $search_val[]=$node->getAttribute($attribute);
         else
-            foreach ($data as $node)
-            $search_val[]=$node->nodeValue;
+        foreach ($data as $node)
+        $search_val[]=$node->nodeValue;
         if (empty($search_val))
-            return false;
+        return false;
         return $search_val;
     }
 
@@ -67,9 +67,9 @@ abstract class OpenInviter_Base
     protected function getElementString($string_to_search,$string_start,$string_end)
     {
         if (strpos($string_to_search,$string_start)===false)
-            return false;
+        return false;
         if (strpos($string_to_search,$string_end)===false)
-            return false;
+        return false;
         $start=strpos($string_to_search,$string_start)+strlen($string_start);$end=strpos($string_to_search,$string_end,$start);
         $return=substr($string_to_search,$start,$end-$start);
         return $return;
@@ -148,13 +148,13 @@ abstract class OpenInviter_Base
         $new_url=trim($this->getElementString($result,"Location: ",PHP_EOL));
         if (empty($new_url)) $new_url=trim($this->getElementString($result,"location: ",PHP_EOL));
         if (!empty($new_url))
-            if (strpos($new_url,'http')===false)
-            {
-                $temp=parse_url($old_url);
-                $new_url=$temp['scheme'].'://'.$temp['host'].($new_url[0]=='/'?'':'/').$new_url;
-            }
+        if (strpos($new_url,'http')===false)
+        {
+            $temp=parse_url($old_url);
+            $new_url=$temp['scheme'].'://'.$temp['host'].($new_url[0]=='/'?'':'/').$new_url;
+        }
         return $new_url;
-     }
+    }
 
     /**
      * Check for an active session
@@ -194,7 +194,7 @@ abstract class OpenInviter_Base
             $this->session_id=$session_id;
         }
         else
-            $this->session_id=$this->getSessionID();
+        $this->session_id=$this->getSessionID();
         return true;
     }
 
@@ -315,7 +315,7 @@ abstract class OpenInviter_Base
             {
                 $new_url=$this->followLocation($result,$url);
                 if (!empty($new_url))
-                    $result=$this->get($new_url,$follow,$header,$quiet,$url,$headers);
+                $result=$this->get($new_url,$follow,$header,$quiet,$url,$headers);
             }
             return $result;
         }
@@ -326,8 +326,8 @@ abstract class OpenInviter_Base
             $string_wget.=" --no-check-certificate";
             $string_wget.=" --load-cookies ".$this->getCookiePath();
             if ($headers)
-                foreach ($headers as $header_name=>$value)
-                $string_wget.=" --header=\"".escapeshellcmd($header_name).": ".escapeshellcmd($value)."\"";
+            foreach ($headers as $header_name=>$value)
+            $string_wget.=" --header=\"".escapeshellcmd($header_name).": ".escapeshellcmd($value)."\"";
             if ($header) $string_wget.=" --save-headers";
             if ($referer) $string_wget.=" --referer={$referer}";
             $string_wget.=" --save-cookies ".$this->getCookiePath();
@@ -335,7 +335,7 @@ abstract class OpenInviter_Base
             $string_wget.=" --output-document=-";
             $url=escapeshellcmd($url);
             if ($quiet)
-                $string_wget.=" --quiet";
+            $string_wget.=" --quiet";
             else
             {
                 $log_file=$this->getCookiePath().'_log';
@@ -374,14 +374,14 @@ abstract class OpenInviter_Base
     {
         $flag=false;
         if ($raw_data)
-            $elements=$post_elements;
+        $elements=$post_elements;
         else
         {
             $elements='';
             foreach ($post_elements as $name=>$value)
             {
                 if ($flag)
-                    $elements.='&';
+                $elements.='&';
                 $elements.="{$name}=".urlencode($value);
                 $flag=true;
             }
@@ -407,7 +407,7 @@ abstract class OpenInviter_Base
             {
                 $new_url=$this->followLocation($result,$url);
                 if ($new_url)
-                    $result=$this->get($new_url,$post_elements,$follow,$header,$url,$headers,$raw_data);
+                $result=$this->get($new_url,$post_elements,$follow,$header,$url,$headers,$raw_data);
             }
             return $result;
         }
@@ -418,8 +418,8 @@ abstract class OpenInviter_Base
             $string_wget.=" --no-check-certificate";
             $string_wget.=" --load-cookies ".$this->getCookiePath();
             if (!empty($headers))
-                foreach ($headers as $header_name=>$value)
-                $string_wget.=" --header=\"".escapeshellcmd($header_name).": ".escapeshellcmd($value)."\"";
+            foreach ($headers as $header_name=>$value)
+            $string_wget.=" --header=\"".escapeshellcmd($header_name).": ".escapeshellcmd($value)."\"";
             if ($header) $string_wget.=" --save-headers";
             if ($referer) $string_wget.=" --referer=\"{$referer}\"";
             $string_wget.=" --save-cookies ".$this->getCookiePath();
@@ -428,7 +428,7 @@ abstract class OpenInviter_Base
             $string_wget.=" --post-data=\"{$elements}\"";
             $string_wget.=" --output-document=-";
             if ($quiet)
-                $string_wget.=" --quiet";
+            $string_wget.=" --quiet";
             else
             {
                 $log_file=$this->getCookiePath().'_log';
@@ -457,7 +457,7 @@ abstract class OpenInviter_Base
     public function stopPlugin($graceful=false)
     {
         if ($this->settings['transport']=='curl')
-            curl_close($this->curl);
+        curl_close($this->curl);
         if (!$graceful) $this->endSession();
     }
 
@@ -530,12 +530,12 @@ abstract class OpenInviter_Base
             'method'=>$method
         );
         if ($elements)
-            foreach ($elements as $name=>$value)
-            $this->debug_buffer[$step]['elements'][$name]=$value;
+        foreach ($elements as $name=>$value)
+        $this->debug_buffer[$step]['elements'][$name]=$value;
         else
-            $this->debug_buffer[$step]['elements']=false;
+        $this->debug_buffer[$step]['elements']=false;
         if ($response)
-            $this->debug_buffer[$step]['response']='OK';
+        $this->debug_buffer[$step]['response']='OK';
         else
         {
             $this->debug_buffer[$step]['response']='FAILED';
@@ -569,8 +569,8 @@ abstract class OpenInviter_Base
             {
                 $debug_xml.="<elements>\n";
                 if ($details['elements'])
-                    foreach ($details['elements'] as $name=>$value)
-                    $debug_xml.="<element name='".urlencode($name)."' value='".urlencode($value)."'></element>\n";
+                foreach ($details['elements'] as $name=>$value)
+                $debug_xml.="<element name='".urlencode($name)."' value='".urlencode($value)."'></element>\n";
                 $debug_xml.="</elements>\n";
             }
             $debug_xml.="<response>{$details['response']}</response>\n";
@@ -610,7 +610,7 @@ abstract class OpenInviter_Base
                     $debug_human.="\t\t\t{$name}={$value}\n";
                 }
                 else
-                    $debug_human.="(no elements sent in this request)\n";
+                $debug_human.="(no elements sent in this request)\n";
             }
             $debug_human.="\t\tRESPONSE: {$details['response']}\n";
         }
@@ -687,9 +687,9 @@ abstract class OpenInviter_Base
         if ($this->has_errors)
         {
             if ($this->settings['local_debug']!==false)
-                $this->localDebug();
+            $this->localDebug();
             if ($this->settings['remote_debug'])
-                $this->remoteDebug();
+            $this->remoteDebug();
             return false;
         }
         elseif ($this->settings['local_debug']=='always')

@@ -10,10 +10,10 @@ function markCallback($y,$x) {
     // any value can be false, in that case the default value will
     // be used.
     // We only make one pushpin another color
-    if( $x == 54 ) 
-	return array(false,false,false,'red',0.8);
+    if( $x == 54 )
+    return array(false,false,false,'red',0.8);
     else
-	return array(false,false,false,'green',0.8);
+    return array(false,false,false,'green',0.8);
 }
 
 // Data arrays
@@ -52,7 +52,7 @@ $sp->mark->SetType(MARK_IMG_PUSHPIN,'blue',0.6);
 $sp->mark->SetCallbackYX('markCallback');
 
 // ...  and add it to the graph
-$graph->Add($sp);    
+$graph->Add($sp);
 
 // .. and output to browser
 $graph->Stroke();

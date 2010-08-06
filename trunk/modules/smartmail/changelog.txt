@@ -1,0 +1,3 @@
+<b><u>=> Version 0.8 Beta (2006-09-27)</u></b>
+
+- First public release

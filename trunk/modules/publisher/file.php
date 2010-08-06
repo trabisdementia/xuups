@@ -24,12 +24,12 @@ include_once dirname(__FILE__) . '/header.php';
 
 // if the user is not admin AND we don't allow user submission, exit
 if (!$publisher_isAdmin || (
-    $publisher->getConfig('perm_submit') &&
-    $publisher->getConfig('perm_submit') == 1 && (
-        is_object($xoopsUser) || (
-            $publisher->getConfig('perm_anon_submit') && $publisher->getConfig('perm_anon_submit') == 1)
-        )
-    )
+$publisher->getConfig('perm_submit') &&
+$publisher->getConfig('perm_submit') == 1 && (
+is_object($xoopsUser) || (
+$publisher->getConfig('perm_anon_submit') && $publisher->getConfig('perm_anon_submit') == 1)
+)
+)
 ) {
     redirect_header("index.php", 1, _NOPERM);
     exit();

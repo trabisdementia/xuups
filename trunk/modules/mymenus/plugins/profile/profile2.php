@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -27,7 +27,7 @@ class ProfileMymenusPluginItem extends MymenusPluginItem
     function __construct()
     {
         $this->friends_handler =& xoops_getModuleHandler('friends', 'profile', true);
-	}
+    }
 
     function eventHasAccess()
     {
@@ -77,14 +77,14 @@ class ProfileMymenusPluginItem extends MymenusPluginItem
             $criteria1->add(new Criteria('friend_uid', $registry->getEntry('user_uid')));
 
             $criteria2 = new CriteriaCompo();
-      	    $criteria2->add(new Criteria('self_uid', $registry->getEntry('user_uid')));
-      	    $criteria2->add(new Criteria('friend_uid', $registry->getEntry('get_uid')));
+            $criteria2->add(new Criteria('self_uid', $registry->getEntry('user_uid')));
+            $criteria2->add(new Criteria('friend_uid', $registry->getEntry('get_uid')));
 
             $criteria = new CriteriaCompo();
-      	    $criteria->add($criteria1);
-      	    $criteria->add($criteria2, 'OR');
+            $criteria->add($criteria1);
+            $criteria->add($criteria2, 'OR');
 
-	  	    $count = $handler->getCount($criteria);
+            $count = $handler->getCount($criteria);
             unset($criteria, $criteria1, $criteria2);
         }
 

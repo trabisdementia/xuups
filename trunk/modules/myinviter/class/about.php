@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
@@ -22,9 +22,9 @@
 defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
 /**
-* Class About is a simple class that lets you build an about page
-* @author The SmartFactory <www.smartfactory.ca>
-*/
+ * Class About is a simple class that lets you build an about page
+ * @author The SmartFactory <www.smartfactory.ca>
+ */
 class MyinviterAbout
 {
     var $_lang_aboutTitle;

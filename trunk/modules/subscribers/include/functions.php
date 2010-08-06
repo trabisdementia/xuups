@@ -4,58 +4,58 @@
 //  E-Mail: lusopoemas@gmail.com
 
 if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 function subscribers_adminMenu($currentoption = 0, $breadcrumb = '')
 {
-	include_once XOOPS_ROOT_PATH . '/class/template.php';
-	include XOOPS_ROOT_PATH . '/modules/subscribers/admin/menu.php';
+    include_once XOOPS_ROOT_PATH . '/class/template.php';
+    include XOOPS_ROOT_PATH . '/modules/subscribers/admin/menu.php';
 
     xoops_loadLanguage('admin', 'subscribers');
     xoops_loadLanguage('modinfo', 'subscribers');
 
-	$tpl =& new XoopsTpl();
-	$tpl->assign(array('modurl'	    => XOOPS_URL . '/modules/subscribers',
+    $tpl =& new XoopsTpl();
+    $tpl->assign(array('modurl'	    => XOOPS_URL . '/modules/subscribers',
 	                   'headermenu'	=> $subscribers_headermenu,
                        'adminmenu'	=> $subscribers_adminmenu,
 	                   'current'	=> $currentoption,
 	                   'breadcrumb'	=> $breadcrumb,
 	                   'headermenucount' => count($subscribers_headermenu)));
-	$tpl->display(XOOPS_ROOT_PATH . '/modules/subscribers/templates/static/subscribers_admin_menu.html');
+    $tpl->display(XOOPS_ROOT_PATH . '/modules/subscribers/templates/static/subscribers_admin_menu.html');
 }
 
 function &subscribers_getModuleHandler()
 {
-	static $handler;
+    static $handler;
 
-	if (!isset($handler)) {
-		global $xoopsModule;
-		if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'subscribers') {
-			$handler =& $xoopsModule;
-		} else {
-			$hModule =& xoops_gethandler('module');
-			$handler = $hModule->getByDirname('subscribers');
-		}
-	}
-	return $handler;
+    if (!isset($handler)) {
+        global $xoopsModule;
+        if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'subscribers') {
+            $handler =& $xoopsModule;
+        } else {
+            $hModule =& xoops_gethandler('module');
+            $handler = $hModule->getByDirname('subscribers');
+        }
+    }
+    return $handler;
 }
 
 function &subscribers_getModuleConfig()
 {
-	static $config;
+    static $config;
 
-	if (!$config) {
-		global $xoopsModule;
-		if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'subscribers') {
-			$config =& $GLOBALS['xoopsModuleConfig'];
-		} else {
-			$handler =& subscribers_getModuleHandler();
-			$hModConfig =& xoops_gethandler('config');
-			$config = $hModConfig->getConfigsByCat(0, $handler->getVar('mid'));
-		}
-	}
-	return $config;
+    if (!$config) {
+        global $xoopsModule;
+        if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'subscribers') {
+            $config =& $GLOBALS['xoopsModuleConfig'];
+        } else {
+            $handler =& subscribers_getModuleHandler();
+            $hModConfig =& xoops_gethandler('config');
+            $config = $hModConfig->getConfigsByCat(0, $handler->getVar('mid'));
+        }
+    }
+    return $config;
 }
 
 function subscribers_sendEmails()
@@ -76,13 +76,13 @@ function subscribers_sendEmails()
     if (($now - $last) <= $timebpacks) {
         return false;
     }
-    
+
     $this_handler =& xoops_getModuleHandler('waiting', 'subscribers');
-    
-	$criteria = new CriteriaCompo();
-	$criteria->setSort('wt_priority DESC, wt_created');
-	$criteria->setOrder('ASC');
-	$criteria->setLimit($emailsperpack);
+
+    $criteria = new CriteriaCompo();
+    $criteria->setSort('wt_priority DESC, wt_created');
+    $criteria->setOrder('ASC');
+    $criteria->setLimit($emailsperpack);
     $objs = $this_handler->getObjects($criteria);
     $count = count($objs);
     unset ($criteria);
@@ -92,7 +92,7 @@ function subscribers_sendEmails()
     }
 
     include_once XOOPS_ROOT_PATH . '/kernel/user.php';
-    
+
     $myts =& MyTextSanitizer::getInstance();
 
     $obj_delete = array();
@@ -107,16 +107,16 @@ function subscribers_sendEmails()
         $xoopsMailer->setBody($obj->getVar('wt_body'));
         $xoopsMailer->send(false);
         unset($xoopsMailer);
-        
+
 
         $obj_delete[] = $obj->getVar('wt_id');
     }
-    
+
     $criteria = new Criteria('wt_id', '(' . implode(',', $obj_delete). ')', 'IN');
     $this_handler->deleteAll($criteria, true);
-    
+
     subscribers_setLastTime($now);
-    
+
     return true;
 }
 
@@ -129,7 +129,7 @@ function subscribers_getLastTime()
         $ret = subscribers_setLastTime($time);
         return $ret;
     }
-    
+
     $ret = intval(file_get_contents($fileName));
     return $ret;
 }

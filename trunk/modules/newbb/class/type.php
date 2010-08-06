@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,12 +17,12 @@
  * @version         $Id: type.php 2169 2008-09-23 13:37:10Z phppp $
  */
 
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
 
-class NewbbType extends XoopsObject 
+class NewbbType extends XoopsObject
 {
     function NewbbType()
     {
@@ -41,25 +41,25 @@ class NewbbTypeHandler extends XoopsPersistableObjectHandler
     {
         $this->XoopsPersistableObjectHandler($db, 'bb_type', 'NewbbType', 'type_id', 'type_name');
     }
-    
+
     /**
      * Get types linked to a forum
-     * 
+     *
      * @param    mixed    $forums        single forum ID or an array of forum IDs
      * @return     array    associative array of types (name, color, order)
      */
     function getByForum($forums = null)
     {
         $ret = array();
-        
-        $forums = ( is_array($forums) 
-                    ? array_filter(array_map("intval", array_map("trim", $forums))) 
-                    : ( empty($forums)
-                        ? 0
-                        : array(intval($forums))
-                    )
-                );
-        
+
+        $forums = ( is_array($forums)
+        ? array_filter(array_map("intval", array_map("trim", $forums)))
+        : ( empty($forums)
+        ? 0
+        : array(intval($forums))
+        )
+        );
+
         $sql = "    SELECT o.type_id, o.type_name, o.type_color, l.type_order" .
                 "     FROM " . $this->db->prefix("bb_type_forum") . " AS l " .
                 "         LEFT JOIN {$this->table} AS o ON o.{$this->keyName} = l.{$this->keyName} " .
@@ -67,24 +67,24 @@ class NewbbTypeHandler extends XoopsPersistableObjectHandler
                 "        l.forum_id " . ( empty($forums) ? "IS NOT NULL" : "IN (" . implode(", ", $forums) . ")") .
                 "         ORDER BY l.type_order ASC"
                 ;
-        if ( ($result = $this->db->query($sql)) == false) {
-            return $ret;
-        }
-        
-        while ($myrow = $this->db->fetchArray($result)) {
-            $ret[$myrow[$this->keyName]] = array(
+                if ( ($result = $this->db->query($sql)) == false) {
+                    return $ret;
+                }
+
+                while ($myrow = $this->db->fetchArray($result)) {
+                    $ret[$myrow[$this->keyName]] = array(
                 "type_id"       => $myrow[$this->keyName],
                 "type_order"    => $myrow["type_order"],
                 "type_name"     => htmlspecialchars($myrow["type_name"]),
                 "type_color"    => htmlspecialchars($myrow["type_color"]),
-                );
-        }
-        return $ret;
+                    );
+                }
+                return $ret;
     }
-    
+
     /**
      * Update types linked to a forum
-     * 
+     *
      * @param    integer    $forum_id
      * @param    array    $types
      * @return     boolean
@@ -115,7 +115,7 @@ class NewbbTypeHandler extends XoopsPersistableObjectHandler
         $types_valid    = array_filter( $types_valid );
         $types_add      = array_filter( $types_add );
         $types_update   = array_filter( $types_update );
-      
+
         if (!empty($types_valid)) {
             $sql = "DELETE FROM " . $this->db->prefix("bb_type_forum") .
                     " WHERE " .
@@ -123,7 +123,7 @@ class NewbbTypeHandler extends XoopsPersistableObjectHandler
             if ( ($result = $this->db->queryF($sql)) == false) {
             }
         }
-        
+
         if (!empty($types_update)) {
             $type_query = array();
             foreach ($types_update as $key) {
@@ -136,7 +136,7 @@ class NewbbTypeHandler extends XoopsPersistableObjectHandler
                 }
             }
         }
-        
+
         if (!empty($types_add)) {
             $type_query = array();
             foreach ($types_add as $key) {
@@ -151,13 +151,13 @@ class NewbbTypeHandler extends XoopsPersistableObjectHandler
                 //xoops_error($this->db->error());
             }
         }
-        
+
         return true;
     }
-    
+
     /**
      * delete an object as well as links relying on it
-     * 
+     *
      * @param    object    $object        {@link NewbbType}
      * @param     bool     $force         flag to force the query execution despite security settings
      * @return     bool
@@ -166,7 +166,7 @@ class NewbbTypeHandler extends XoopsPersistableObjectHandler
     {
         if (!is_object($object) || !$object->getVar($this->keyName)) return false;
         $queryFunc = empty($force)?"query":"queryF";
-        
+
         /*
          * Remove forum-type links
          */
@@ -174,9 +174,9 @@ class NewbbTypeHandler extends XoopsPersistableObjectHandler
                 " FROM " . $this->db->prefix("bb_type_forum") . 
                 " WHERE  " . $this->keyName . " = " . $object->getVar($this->keyName);
         if ( ($result = $this->db->{$queryFunc}($sql)) == false) {
-           // xoops_error($this->db->error());
+            // xoops_error($this->db->error());
         }
-        
+
         /*
          * Reset topic type linked to this type
          */
@@ -187,13 +187,13 @@ class NewbbTypeHandler extends XoopsPersistableObjectHandler
         if ( ($result = $this->db->{$queryFunc}($sql)) == false) {
             //xoops_error($this->db->error());
         }
-        
+
         return parent::delete($object, $force);
     }
 
     /**
      * clean orphan links from database
-     * 
+     *
      * @return     bool    true on success
      */
     function cleanOrphan()
@@ -210,10 +210,10 @@ class NewbbTypeHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->queryF($sql)) {
             //xoops_error($this->db->error());
         }
-        
+
         /* reconcile topic-type link */
         if (version_compare( mysql_get_server_info(), "4.1.0", "ge" )):
-        $sql = "UPATE " . $this->db->prefix("bb_topics") . 
+        $sql = "UPATE " . $this->db->prefix("bb_topics") .
                 " SET {$this->keyName} = 0" .
                 " WHERE ({$this->keyName} NOT IN ( SELECT DISTINCT {$this->keyName} FROM {$this->table}) )";
         else:
@@ -225,7 +225,7 @@ class NewbbTypeHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->queryF($sql)) {
             //xoops_error($this->db->error());
         }
-        
+
         return true;
     }
 }

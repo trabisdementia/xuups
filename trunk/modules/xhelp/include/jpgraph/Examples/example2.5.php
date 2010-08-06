@@ -5,7 +5,7 @@ require_once ('jpgraph/jpgraph_line.php');
 $ydata = array(11,-3,-8,7,5,-1,9,13,5,-7);
 
 // Create the graph. These two calls are always required
-$graph = new Graph(300,200);	
+$graph = new Graph(300,200);
 $graph->SetScale("textlin");
 
 // Create the linear plot

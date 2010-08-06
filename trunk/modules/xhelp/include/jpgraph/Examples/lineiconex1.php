@@ -11,7 +11,7 @@ $datay3 = array(10,5,10,15,5,2,1);
 
 // Setup the graph
 $graph = new Graph(400,250);
-$graph->SetMargin(40,40,20,30);	
+$graph->SetMargin(40,40,20,30);
 $graph->SetScale("textlin");
 
 $graph->title->Set('Adding an icon ("tux") in the background');

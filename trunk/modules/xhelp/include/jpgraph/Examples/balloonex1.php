@@ -22,7 +22,7 @@ function FCallback($aVal) {
 // Setup a basic graph
 $graph = new Graph(400,300,'auto');
 $graph->SetScale("linlin");
-$graph->img->SetMargin(40,100,40,40);		
+$graph->img->SetMargin(40,100,40,40);
 $graph->SetShadow();
 $graph->title->Set("Example of ballon scatter plot");
 // Use a lot of grace to get large scales

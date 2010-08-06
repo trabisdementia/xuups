@@ -79,7 +79,7 @@ define('_AM_XHELP_EXISTING_DEPARTMENTS', 'Dipartimenti esistenti:');
 define('_AM_XHELP_MANAGE_DEPARTMENTS', 'Modifica Dipartimenti');
 define('_AM_XHELP_MANAGE_STAFF', 'Modifica Staff');
 define('_AM_XHELP_EXISTING_STAFF', 'Membri di staff esistenti:');
-define('_AM_XHELP_ADD_STAFF', 'Aggingi membri di Staff'); 
+define('_AM_XHELP_ADD_STAFF', 'Aggingi membri di Staff');
 define('_AM_XHELP_EDIT_STAFF', 'Modifica Membri di Staff');
 define('_AM_XHELP_INDEX', 'Indice'); //Index
 define('_AM_XHELP_ADMIN_GOTOMODULE', 'Vai al Modulo');
@@ -145,11 +145,11 @@ define('_AM_XHELP_TEXT_CUSTOMIZE', 'Personalizza');
 define('_AM_XHELP_TEXT_ACTIONS', 'Azioni:');
 define('_AM_XHELP_TEXT_ID', 'ID:');
 define('_AM_XHELP_TEXT_LOOKUP_USER', 'Trova utente');
-define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Data inizio:');  
+define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Data inizio:');
 define('_AM_XHELP_SEARCH_ENDDATE', 'Data fine:');
 
 define('_AM_XHELP_TEXT_MAIL_EVENTS', 'Eventi Posta');
-define('_AM_XHELP_TEXT_MAILBOX', 'Mailbox:'); 
+define('_AM_XHELP_TEXT_MAILBOX', 'Mailbox:');
 define('_AM_XHELP_TEXT_EVENT_CLASS', 'Eventi Classi:');
 define('_AM_XHELP_TEXT_TIME', 'Ora:');
 define('_AM_XHELP_NO_EVENTS', 'Nessun Evento Trovato');
@@ -179,7 +179,7 @@ define("_AM_XHELP_MIME_USERFINFO", "<b>Mimetypes che sono disponibili per upload
 define("_AM_XHELP_MIME_NOMIMEINFO", "Nessun mimetypes selezionato.");
 // define("_AM_XHELP_MIME_FINDMIMETYPE", "Trova nuovo Mimetype:");
 define("_AM_XHELP_MIME_EXTFIND", "Cerca Estensione File:<div style='padding-top: 8px;'><span style='font-weight: normal;'>Inserisci l'estensione che vuoi cercare.</span></div>");
-define("_AM_XHELP_MIME_INFOTEXT", "<ul><li>Tramite questo form &egrave possibile creare, modificare o cancellare facilmente i mimetypes.</li> 
+define("_AM_XHELP_MIME_INFOTEXT", "<ul><li>Tramite questo form &egrave possibile creare, modificare o cancellare facilmente i mimetypes.</li>
 	<li>Cerca nuovi mimetypes attraverso un sito web esterno.</li> 
 	<li>Vedi i mimetypes visualizzati per l'upload di Amministratore e Utente.</li> 
 	<li>Cambia lo stato dei mimetype per l'upload.</li></ul> 
@@ -201,7 +201,7 @@ define("_AM_XHELP_MIME_MODIFIED", "Information Mimetype Modificate");
 define("_AM_XHELP_MINDEX_ACTION", "Azione");
 define("_AM_XHELP_MINDEX_PAGE", "<b>Pagina:</b> ");
 
-//image admin icon 
+//image admin icon
 define("_AM_XHELP_ICO_EDIT","Modifica questo articolo");
 define("_AM_XHELP_ICO_DELETE","Cancella questo articolo");
 define("_AM_XHELP_ICO_ONLINE","Online");
@@ -217,7 +217,7 @@ define("_AM_XHELP_ICO_STATS","Stato");
 
 define("_AM_XHELP_ICO_IGNORE","Ignora");
 define("_AM_XHELP_ICO_ACK","Broken Report Acknowledged"); // *** WORKHERE ***
-define("_AM_XHELP_ICO_REPORT","Acknowledge Broken Report?"); // *** WORKHERE *** 
+define("_AM_XHELP_ICO_REPORT","Acknowledge Broken Report?"); // *** WORKHERE ***
 define("_AM_XHELP_ICO_CONFIRM","Broken Report Confirmed"); // *** WORKHERE ***
 define("_AM_XHELP_ICO_CONBROKEN","Confirm Broken Report?"); // *** WORKHERE ***
 
@@ -263,7 +263,7 @@ define('_AM_XHELP_MSG_NOT_REMOVE_TABLE', 'Errore: la tabella %s NON e\' stata ri
 define('_AM_XHELP_MSG_RENAME_TABLE', 'La tabella %s e\' stata rinominata %s.');
 define('_AM_XHELP_MSG_RENAME_TABLE_ERR', 'Errore: tabella %s non e\' stata rinominata.');
 
-//news in 0.75 version  
+//news in 0.75 version
 define('_AM_XHELP_ADMIN_ABOUT', 'Info su'); //About
 define('_AM_XHELP_TEXT_CONTRIB_INFO', 'Contributor Information'); //Contributor Information
 define('_AM_XHELP_TEXT_DEVELOPERS', 'Sviluppatori:');
@@ -290,12 +290,12 @@ define('_AM_XHELP_TEXT_EDIT_DEPT_PERMS', 'Department Visibility:'); // Departmen
 
 define('_AM_XHELP_SEC_TICKET_MERGE', 9);
 define('_AM_XHELP_SEC_TEXT_TICKET_MERGE', 'Unione Tickets'); // Merge Tickets
-define('_AM_XHELP_MSG_UPDATE_ROLE', '%s autorizzazioni aggiornate.'); 
+define('_AM_XHELP_MSG_UPDATE_ROLE', '%s autorizzazioni aggiornate.');
 define('_AM_XHELP_MSG_UPDATE_ROLE_ERR', 'Errore: %s autorizzazioni non aggiornate.');
 
 define('_AM_XHELP_TEXT_ADD_STATUS', 'Aggiungi Stato');
-define('_AM_XHELP_TEXT_STATE', 'Stato:'); // State 
-define('_AM_XHELP_MESSAGE_NO_DESC', 'Errore: non hai specificato una descrizione.'); 
+define('_AM_XHELP_TEXT_STATE', 'Stato:'); // State
+define('_AM_XHELP_MESSAGE_NO_DESC', 'Errore: non hai specificato una descrizione.');
 define('_AM_MESSAGE_ADD_STATUS_ERR', 'Errore: stato non aggiunto.');
 define('_AM_XHELP_TEXT_MANAGE_STATUSES', 'Gestisci gli stati');
 define('_AM_XHELP_TEXT_EDIT_STATUS', 'Modifica Stato');
@@ -343,7 +343,7 @@ define('_AM_XHELP_DEPARTMENT_EDIT_SERVER', 'Aggiorna Mailbox di Dipartimento');
 
 define('_AM_XHELP_MSG_ADD_CONFIG_ERR', 'Error: configuration value for department was not saved'); // *** ??? ***
 
-define('_AM_XHELP_MSG_UPDATE_CONFIG_ERR', 'Error: configuration value for department was not updated'); // *** ??? *** 
+define('_AM_XHELP_MSG_UPDATE_CONFIG_ERR', 'Error: configuration value for department was not updated'); // *** ??? ***
 // define('_AM_XHELP_TEXT_CONTROLTYPE', 'Tipo Controllo');
 // define('_AM_XHELP_TEXT_REQUIRED', 'Rischiesto');
 
@@ -512,6 +512,6 @@ define('_AM_XHELP_MSG_UPDATE_SEARCH', 'La ricerca salvata #%u e\' stata aggiorna
 define('_AM_XHELP_MSG_UPDATE_SEARCH_ERR', 'Errore: la ricerca salvata #%u non e\' stata aggiornata.');
 
 // 0.78
-define('_AM_XHELP_PATH_PERMSET', 'Permessi impostati sulla directory.'); 
+define('_AM_XHELP_PATH_PERMSET', 'Permessi impostati sulla directory.');
 define('_AM_XHELP_PATH_NOTPERMSET', 'Non sono stati impostati i permessi sulla directory.');
 ?>

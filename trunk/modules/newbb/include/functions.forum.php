@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,7 +22,7 @@ if (!defined('XOOPS_ROOT_PATH')) { exit(); }
 function newbb_forumSelectBox($value = null, $permission = "access", $delimitor_category = true)
 {
     $category_handler =& xoops_getmodulehandler('category', 'newbb');
-    $categories = $category_handler->getByPermission($permission, array("cat_id", "cat_order", "cat_title"), false);    
+    $categories = $category_handler->getByPermission($permission, array("cat_id", "cat_order", "cat_title"), false);
 
     require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.cache.php';
     if ($permission == "all" || !$forums = mod_loadCacheFile_byGroup("forumselect")) {
@@ -33,7 +33,7 @@ function newbb_forumSelectBox($value = null, $permission = "access", $delimitor_
             mod_createCacheFile_byGroup($forums, "forumselect");
         }
     }
-    
+
     $value = is_array($value) ? $value : array($value);
     $box = "";
     if ( count($forums)>0 ) {
@@ -51,10 +51,10 @@ function newbb_forumSelectBox($value = null, $permission = "access", $delimitor_
         $box .= "<option value=0>"._MD_NOFORUMINDB."</option>";
     }
     unset($forums, $categories);
-    
+
     return $box;
 }
-    
+
 function newbb_make_jumpbox($forum_id = 0)
 {
     $box = '<form name="forum_jumpbox" method="get" action="viewforum.php" onsubmit="javascript: if (document.forum_jumpbox.forum.value &lt; 1) {return false;}">';
@@ -69,10 +69,10 @@ function newbb_make_jumpbox($forum_id = 0)
 
 /**
  * Get structured forums
- * 
+ *
  * This is a temporary solultion
  * To be substituted with a new tree handler
- * 
+ *
  * @int integer     $pid    parent forum ID
  *
  * @return array
@@ -80,7 +80,7 @@ function newbb_make_jumpbox($forum_id = 0)
 function newbb_getSubForum($pid = 0, $refresh = false)
 {
     static $list;
-    
+
     if ( !isset($list) ) {
         require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.cache.php';
         $list = mod_loadCacheFile("forum_sub", "newbb");
@@ -92,7 +92,7 @@ function newbb_getSubForum($pid = 0, $refresh = false)
     else return @$list[$pid];
 }
 
-function newbb_createSubForumList() 
+function newbb_createSubForumList()
 {
     $forum_handler =& xoops_getModuleHandler("forum", "newbb");
     $criteria =& new CriteriaCompo("1", 1);
@@ -115,7 +115,7 @@ function newbb_createSubForumList()
 function newbb_getParentForum($forum_id = 0, $refresh = false)
 {
     static $list = null;
-    
+
     if ( !isset($list) ) {
         require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.cache.php';
         $list = mod_loadCacheFile("forum_parent", "newbb");
@@ -127,7 +127,7 @@ function newbb_getParentForum($forum_id = 0, $refresh = false)
     else return @$list[$forum_id];
 }
 
-function newbb_createParentForumList() 
+function newbb_createParentForumList()
 {
     $forum_handler =& xoops_getModuleHandler("forum", "newbb");
     $criteria =& new Criteria("1", 1);

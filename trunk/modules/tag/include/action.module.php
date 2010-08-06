@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code 
+ of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * XOOPS tag management module
@@ -34,14 +34,14 @@ function xoops_module_pre_install_tag(&$module)
         $module->setErrors( "The module only works for XOOPS 2.3+" );
         return false;
     }
-    
+
     /*
-    if (!file_exists(XOOPS_ROOT_PATH . "/Frameworks/art/functions.ini.php")) {
-        $module->setErrors( "The module requires /Frameworks/art/" );
-        return false;
-    }
-    */
-    
+     if (!file_exists(XOOPS_ROOT_PATH . "/Frameworks/art/functions.ini.php")) {
+     $module->setErrors( "The module requires /Frameworks/art/" );
+     return false;
+     }
+     */
+
     $mod_tables = $module->getInfo("tables");
     foreach ($mod_tables as $table) {
         $GLOBALS["xoopsDB"]->queryF("DROP TABLE IF EXISTS " .  $GLOBALS["xoopsDB"]->prefix($table) . ";");
@@ -63,11 +63,11 @@ function xoops_module_update_tag(&$module, $prev_version = null)
 {
     //load_functions("config");
     //mod_clearConfg($module->getVar("dirname", "n"));
-    
+
     if ($prev_version <= 150) {
         $GLOBALS['xoopsDB']->queryFromFile(XOOPS_ROOT_PATH . "/modules/" . $module->getVar("dirname") . "/sql/mysql.150.sql");
     }
-    
+
     /* Do some synchronization */
     include_once XOOPS_ROOT_PATH . "/modules/" . $module->getVar("dirname") . "/include/functions.recon.php";
     //mod_loadFunctions("recon", $module->getVar("dirname"));

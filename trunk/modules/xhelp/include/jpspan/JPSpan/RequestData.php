@@ -1,38 +1,38 @@
 <?php
 /**
-* @package JPSpan
-* @subpackage RequestData
-* @version $Id: RequestData.php,v 1.1 2005/06/21 15:31:20 eric_juden Exp $
-*/
+ * @package JPSpan
+ * @subpackage RequestData
+ * @version $Id: RequestData.php,v 1.1 2005/06/21 15:31:20 eric_juden Exp $
+ */
 //--------------------------------------------------------------------------------
 
 /**
-* Controls stripping of magic_quotes_gpc. Set to false if you're already
-* taking care of them
-*/
+ * Controls stripping of magic_quotes_gpc. Set to false if you're already
+ * taking care of them
+ */
 if ( !defined('JPSPAN_LISTENER_STRIPQUOTES') ) {
     define ('JPSPAN_LISTENER_STRIPQUOTES',TRUE);
 }
 
 /**
-* Include the unserializer
-*/
+ * Include the unserializer
+ */
 require_once JPSPAN . 'Unserializer.php';
 //--------------------------------------------------------------------------------
 
 /**
-* Fetches data from HTTP_RAW_POST_DATA
-* @package JPSpan
-* @subpackage RequestData
-* @public
-*/
+ * Fetches data from HTTP_RAW_POST_DATA
+ * @package JPSpan
+ * @subpackage RequestData
+ * @public
+ */
 class JPSpan_RequestData_RawPost {
     /**
-    * Returns the data, making sure they are unserialized
-    * @access public
-    * @return mixed
-    * @static
-    */
+     * Returns the data, making sure they are unserialized
+     * @access public
+     * @return mixed
+     * @static
+     */
     function fetch($encoding) {
         global $HTTP_RAW_POST_DATA;
         return JPSpan_Unserializer::unserialize($HTTP_RAW_POST_DATA, $encoding);
@@ -41,19 +41,19 @@ class JPSpan_RequestData_RawPost {
 //--------------------------------------------------------------------------------
 
 /**
-* Fetches data from HTTP POSTs (Content-Type: application/x-www-form-urlencoded)
-* @package JPSpan
-* @subpackage RequestData
-* @public
-*/
+ * Fetches data from HTTP POSTs (Content-Type: application/x-www-form-urlencoded)
+ * @package JPSpan
+ * @subpackage RequestData
+ * @public
+ */
 class JPSpan_RequestData_Post {
     /**
-    * Returns the data, making sure they are unserialized and removing magic
-    * quotes if enabled
-    * @access public
-    * @return mixed
-    * @static
-    */
+     * Returns the data, making sure they are unserialized and removing magic
+     * quotes if enabled
+     * @access public
+     * @return mixed
+     * @static
+     */
     function fetch($encoding) {
         $return = array();
         if ( JPSPAN_LISTENER_STRIPQUOTES ) {
@@ -79,19 +79,19 @@ class JPSpan_RequestData_Post {
 //--------------------------------------------------------------------------------
 
 /**
-* Fetches data from HTTP GETs
-* @package JPSpan
-* @subpackage RequestData
-* @public
-*/
+ * Fetches data from HTTP GETs
+ * @package JPSpan
+ * @subpackage RequestData
+ * @public
+ */
 class JPSpan_RequestData_Get {
     /**
-    * Returns the data, making sure they are unserialized and removing magic
-    * quotes if enabled
-    * @access public
-    * @return mixed
-    * @static
-    */
+     * Returns the data, making sure they are unserialized and removing magic
+     * quotes if enabled
+     * @access public
+     * @return mixed
+     * @static
+     */
     function fetch($encoding) {
         $return = array();
         if ( JPSPAN_LISTENER_STRIPQUOTES ) {

@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: transfer.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 if (art_parse_args($args_num, $args, $args_str)) {
@@ -92,19 +92,19 @@ if (empty($op)) {
     $data["source"] = $article_obj->getVar("art_source");
     $data["keywords"] = $article_obj->getVar("art_keywords");
     $data["url"] = XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/view.article.php" . URL_DELIMITER . "c" . $category_id . "/" . $article_obj->getVar("art_id");
-    
+
     if ( !$_author = $article_obj->getWriter() ) {
         $_author = $article_obj->getAuthor(true);
     }
     $data["author"] = $_author["name"];
-    
+
     $data["page"] = $page;
-    
+
     switch ($op) {
         // Use raw content
         case "pdf":
         case "print":
-    
+
             $data["subtitle"] = $category_obj->getVar("cat_title");
             $article_data["text"] = $article_obj->getText($page, "raw");
             if (!empty($article_data["text"]["title"])) {
@@ -126,15 +126,15 @@ if (empty($op)) {
                 $data["content"] .= art_constant("MD_SUMMARY") . ": " . $data["summary"] . "<br /><br />";
             }
             $data["content"]     .= $article_data["text"]["body"] . "<br />";
-    
+
             ${"{$op}_data"} = & $data;
-            
+
             break;
-        
-        // Use title
-        case "bookmark";    
-            break;
-        
+
+            // Use title
+        case "bookmark";
+        break;
+
         // Use if already linked to a forum topic, redirect to it
         case "newbb":
             $data["content"] = $data["summary"];
@@ -145,8 +145,8 @@ if (empty($op)) {
                 $data["forum_id"] =  $xoopsModuleConfig["forum"];
             }
             break;
-            
-        // Use regular content
+
+            // Use regular content
         default:
             $art_text =& $article_obj->getText($page);
             $data["content"] =& $art_text["body"];

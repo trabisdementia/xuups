@@ -54,17 +54,17 @@ $gperm_handler =& xoops_gethandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
 } else {
-	$groups = XOOPS_GROUP_ANONYMOUS;
+    $groups = XOOPS_GROUP_ANONYMOUS;
 }
 if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, $xoopsModule->getVar('mid'))) {
-	redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
-	exit();
+    redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
+    exit();
 }
 
 $sfiles->updateCounter();
 $url=XOOPS_UPLOAD_URL.'/'.$sfiles->getDownloadname();
 if (!preg_match("/^ed2k*:\/\//i", $url)) {
-	Header("Location: $url");
+    Header("Location: $url");
 }
 echo "<html><head><meta http-equiv=\"Refresh\" content=\"0; URL=".$myts->htmlSpecialChars($url)."\"></meta></head><body></body></html>";
 exit();

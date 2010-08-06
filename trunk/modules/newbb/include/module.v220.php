@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,7 +17,7 @@
  * @version         $Id: module.v220.php 2170 2008-09-23 13:40:23Z phppp $
  */
 
-function xoops_module_update_newbb_v220(&$module) 
+function xoops_module_update_newbb_v220(&$module)
 {
     $perms=array('post','view','reply','edit','delete','addpoll','vote','attach','noapprove');
     foreach ($perms as $perm) {
@@ -39,7 +39,7 @@ function xoops_module_update_newbb_v220(&$module)
     if (!$result) {
         $module->setErrors("Could not change category_access");
     }
-    
+
     $sql = "SELECT forum_id, forum_moderator FROM ".$GLOBALS['xoopsDB']->prefix('bb_forums');
     $result = $GLOBALS['xoopsDB']->query($sql);
     while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {

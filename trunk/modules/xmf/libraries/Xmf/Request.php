@@ -264,7 +264,7 @@ class Xmf_Request
         //If overwrite is true, makes sure the variable hasn't been set yet
         if (!$overwrite && array_key_exists($name, $_REQUEST)) {
             return $_REQUEST[$name];
-    }
+        }
 
         // Get the request hash value
         $hash = strtoupper($hash);
@@ -359,7 +359,7 @@ class Xmf_Request
 
             default:
                 $input = $_REQUEST;
-            break;
+                break;
         }
 
         $result = Xmf_Request::_cleanVar($input, $mask);
@@ -461,7 +461,7 @@ class Xmf_Request
                 $GLOBALS[$key] = $value;
             }
         }
-        }
+    }
 
     /**
      * Clean up an input variable.

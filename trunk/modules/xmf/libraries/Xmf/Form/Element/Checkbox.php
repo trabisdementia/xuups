@@ -216,13 +216,13 @@ class Xmf_Form_Element_Checkbox extends Xmf_Form_Element
      * Render custom javascript validation code
      *
      * @seealso XoopsForm::renderValidationJS
-    */
+     */
     function renderValidationJS()
     {
         // render custom validation code if any
         if ( !empty( $this->customValidationCode ) ) {
             return implode( "\n", $this->customValidationCode );
-        // generate validation code if required
+            // generate validation code if required
         } elseif ($this->isRequired()) {
             $eltname    = $this->getName();
             $eltcaption = $this->getCaption();

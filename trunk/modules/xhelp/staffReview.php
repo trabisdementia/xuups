@@ -15,7 +15,7 @@ if($xoopsUser){
             $responseid = intval($_POST['responseid']);
         }
         if(isset($_POST['rating'])){
-            $rating = intval($_POST['rating']);   
+            $rating = intval($_POST['rating']);
         }
         if(isset($_POST['comments'])){
             $comments = $_POST['comments'];
@@ -23,7 +23,7 @@ if($xoopsUser){
         $hStaffReview =& xhelpGetHandler('staffReview');
         $hTicket =& xhelpGetHandler('ticket');
         $hResponse =& xhelpGetHandler('responses');
-        
+
         $review =& $hStaffReview->create();
         $review->setVar('staffid', $staffid);
         $review->setVar('rating', $rating);
@@ -44,7 +44,7 @@ if($xoopsUser){
     } else {
         $xoopsOption['template_main'] = 'xhelp_staffReview.html';   // Set template
         require(XOOPS_ROOT_PATH.'/header.php');                     // Include
-        
+
         if(isset($_GET['staff'])){
             $xoopsTpl->assign('xhelp_staffid', intval($_GET['staff']));
         }
@@ -54,11 +54,11 @@ if($xoopsUser){
         if(isset($_GET['responseid'])){
             $xoopsTpl->assign('xhelp_responseid', intval($_GET['responseid']));
         }
-        
+
         $xoopsTpl->assign('xhelp_imagePath', XOOPS_URL . '/modules/xhelp/images/');
         $xoopsTpl->assign('xoops_module_header', $xhelp_module_header);
         $xoopsTpl->assign('xhelp_baseURL', XHELP_BASE_URL);
-        
+
         require(XOOPS_ROOT_PATH.'/footer.php');
     }
 } else {    // If not a user

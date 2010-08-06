@@ -44,7 +44,7 @@ class Xmf_Object_Dtype_Textbox extends Xmf_Object_Dtype_Abstract
 
     function getVar($obj, $key, $format, $ret)
     {
-         switch (strtolower($format)) {
+        switch (strtolower($format)) {
             case 's':
             case 'show':
             case 'e':
@@ -61,13 +61,13 @@ class Xmf_Object_Dtype_Textbox extends Xmf_Object_Dtype_Abstract
             case 'none':
             default:
                 break 1;
-         }
-         return $ret;
+        }
+        return $ret;
     }
 
     function getVarControl()
     {
-            return array('name' => 'text');
+        return array('name' => 'text');
     }
 
 }

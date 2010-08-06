@@ -1,13 +1,13 @@
 <?php
 /*=======================================================================
-// File:        JPGRAPH_CONTOUR.PHP
-// Description: Contour plot
-// Created:     2009-03-08
-// Ver:         $Id: jpgraph_contour.php 1870 2009-09-29 04:24:18Z ljp $
-//
-// Copyright (c) Aditus Consulting. All rights reserved.
-//========================================================================
-*/
+ // File:        JPGRAPH_CONTOUR.PHP
+ // Description: Contour plot
+ // Created:     2009-03-08
+ // Ver:         $Id: jpgraph_contour.php 1870 2009-09-29 04:24:18Z ljp $
+ //
+ // Copyright (c) Aditus Consulting. All rights reserved.
+ //========================================================================
+ */
 require_once('jpgraph_meshinterpolate.inc.php');
 define('HORIZ_EDGE',0);
 define('VERT_EDGE',1);
@@ -432,9 +432,9 @@ class ContourPlot extends Plot {
         $this->contour = new Contour($this->dataMatrix,$this->isobar,$aIsobarColors);
 
         if( is_array($aIsobar) )
-            $this->nbrContours = count($aIsobar);
+        $this->nbrContours = count($aIsobar);
         else
-            $this->nbrContours = $aIsobar;
+        $this->nbrContours = $aIsobar;
     }
 
 
@@ -498,7 +498,7 @@ class ContourPlot extends Plot {
     function Legend($aGraph) {
 
         if( ! $this->showLegend )
-            return;
+        return;
 
         if( $this->invertLegend ) {
             for ($i = 0; $i < $this->nbrContours; $i++) {

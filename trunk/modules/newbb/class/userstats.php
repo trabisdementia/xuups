@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -19,7 +19,7 @@
 
 if (!defined('XOOPS_ROOT_PATH')) { exit(); }
 
-class NewbbUserstats extends XoopsObject 
+class NewbbUserstats extends XoopsObject
 {
     function NewbbUserstats()
     {
@@ -44,7 +44,7 @@ class NewbbUserstatsHandler extends XoopsPersistableObjectHandler
     {
         $this->XoopsPersistableObjectHandler($db, 'bb_user_stats', 'NewbbUserstats', 'uid');
     }
-    
+
     function &instance($db = null)
     {
         static $instance;
@@ -53,7 +53,7 @@ class NewbbUserstatsHandler extends XoopsPersistableObjectHandler
         }
         return $instance;
     }
-    
+
     function getStats($id)
     {
         if (empty($id)) return null;
@@ -65,7 +65,7 @@ class NewbbUserstatsHandler extends XoopsPersistableObjectHandler
 
         return $row;
     }
-    
+
     function insert(&$object, $force = true)
     {
         if (!$object->isDirty()) {
@@ -78,7 +78,7 @@ class NewbbUserstatsHandler extends XoopsPersistableObjectHandler
             return $object->getVar($this->keyName);
         }
         $queryFunc = empty($force) ? "query" : "queryF";
-        
+
         $keys = array();
         foreach ($changedVars as $k => $v) {
             $keys[] = " {$k} = {$v}";

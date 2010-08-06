@@ -10,9 +10,9 @@ $k=0;
 for($i=0; $i < 480; ++$i) {
     $datay[$i] = rand(1,40);
     if( $i % DATAPERMONTH === 0 )
-        $months[$i] = $m[(int)($i/DATAPERMONTH)];
+    $months[$i] = $m[(int)($i/DATAPERMONTH)];
     else
-        $months[$i] = 'xx';
+    $months[$i] = 'xx';
 }
 
 

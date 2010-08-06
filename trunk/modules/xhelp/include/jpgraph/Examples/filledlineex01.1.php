@@ -6,7 +6,7 @@ $datay = array(1.23,1.9,1.6,3.1,3.4,2.8,2.1,1.9);
 $graph = new Graph(300,200);
 $graph->SetScale("textlin");
 
-$graph->img->SetMargin(40,40,40,40);	
+$graph->img->SetMargin(40,40,40,40);
 $graph->SetShadow();
 $graph->SetGridDepth(DEPTH_FRONT);
 

@@ -30,7 +30,7 @@ class Xmf_Object_Dtype_Timeonly extends Xmf_Object_Dtype_Abstract
 
     function getVar($obj, $key, $format, $ret)
     {
-         switch (strtolower($format)) {
+        switch (strtolower($format)) {
             case 's':
             case 'show':
             case 'p':
@@ -45,8 +45,8 @@ class Xmf_Object_Dtype_Timeonly extends Xmf_Object_Dtype_Abstract
             case 'edit':
             default:
                 break 1;
-         }
-         return $ret;
+        }
+        return $ret;
     }
 
     function getVarControl()

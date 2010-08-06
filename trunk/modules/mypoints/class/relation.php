@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
@@ -50,8 +50,8 @@ class MypointsRelationHandler extends XoopsPersistableObjectHandler
         $pid = intval($pid);
         $uid = intval($uid);
         $sql = 'SELECT * FROM '.$this->db->prefix('mypoints_relation')
-             . ' WHERE relationpid=' . $pid
-             . ' AND relationuid=' . $uid;
+        . ' WHERE relationpid=' . $pid
+        . ' AND relationuid=' . $uid;
         if (!$result = $this->db->query($sql)) {
             return $relation;
         }

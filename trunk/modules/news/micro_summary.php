@@ -41,7 +41,7 @@ include_once '../../mainfile.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 if(!news_getmoduleoption('firefox_microsummaries')) {
-	exit();
+    exit();
 }
 $story = new NewsStory();
 $restricted = news_getmoduleoption('restrictindex');
@@ -49,11 +49,11 @@ $sarray = array();
 // Get the last news from all topics according to the module's restrictions
 $sarray = $story->getAllPublished(1, 0, $restricted, 0);
 if (count($sarray)>0) {
-	$laststory = null;
-	$laststory = $sarray[0];
-	if(is_object($laststory)) {
-		header ('Content-Type:text;');
-		echo $laststory->title(). ' - '.$xoopsConfig['sitename'];
-	}
+    $laststory = null;
+    $laststory = $sarray[0];
+    if(is_object($laststory)) {
+        header ('Content-Type:text;');
+        echo $laststory->title(). ' - '.$xoopsConfig['sitename'];
+    }
 }
 ?>

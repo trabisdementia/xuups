@@ -18,37 +18,37 @@ class xhelpFormRegex extends XoopsFormElement
         $this->setValue($value);
         $this->setCaption($caption);
     }
-    
+
     function addOptionArray($regexArray)
     {
         $this->_select->addOptionArray($regexArray);
     }
-    
+
     function addOption($value, $name="")
     {
         $this->_select->addOption($value, $name);
     }
-    
+
     function setValue($value)
     {
         $this->_value = $value;
     }
-    
+
     function getValue()
     {
         return $this->_value;
     }
-    
+
     function getOptions()
     {
         return $this->_select->getOptions();
     }
-    
+
     function getCaption()
     {
         return $this->_caption;
     }
-       
+     
     function setCaption($caption)
     {
         $this->_caption = $caption;
@@ -58,19 +58,19 @@ class xhelpFormRegex extends XoopsFormElement
         //Determine value for selectbox
         $values = $this->_select->getOptions();
         $value = $this->getValue();
-                
+
         if (array_key_exists($value, $values)) {
-            
+
             $this->_select->setValue($value);
             $this->_txtbox->setValue('');
         } else {
             $this->_select->_value = array('0');
             $this->_txtbox->setValue($value);
         }
-               
+         
         $this->_tray->addElement($this->_select);
         $this->_tray->addElement($this->_txtbox);
-        return $this->_tray->render();        
+        return $this->_tray->render();
     }
 }
 ?>

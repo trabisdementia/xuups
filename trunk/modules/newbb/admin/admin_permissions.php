@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,27 +24,27 @@ include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 /**
  * TODO: synchronize cascade permissions for multi-level
  */
- 
+
 
 /**
  * Add category navigation to forum casscade structure
  * <ol>Special points:
  *    <li> Use negative values for category IDs to avoid conflict between category and forum
  *    <li> Disabled checkbox for categories to avoid unnecessary permission items for categories in forum permission table
- * </ol> 
- * 
+ * </ol>
+ *
  * Note: this is a __patchy__ solution. We should have a more extensible and flexible group permission management: not only for data architecture but also for management interface
  */
-  
+
 class newbb_XoopsGroupPermForm extends XoopsGroupPermForm
 {
     function newbb_XoopsGroupPermForm($title, $modid, $permname, $permdesc, $url = "")
     {
         $this->XoopsGroupPermForm($title, $modid, $permname, $permdesc, $url);
     }
-    
+
     function render()
-    { 
+    {
         // load all child ids for javascript codes
         foreach (array_keys($this->_itemTree)as $item_id) {
             $this->_itemTree[$item_id]['allchild'] = array();
@@ -94,24 +94,24 @@ class newbb_XoopsGroupFormCheckBox extends XoopsGroupFormCheckBox
     {
         $this->XoopsGroupFormCheckBox($caption, $name, $groupId, $values);
     }
-    
+
     function _renderOptionTree(&$tree, $option, $prefix, $parentIds = array())
     {
         if ($option['id'] > 0):
-        $tree .= $prefix . "<input type=\"checkbox\" name=\"" . $this->getName() . "[groups][" . $this->_groupId . "][" . $option['id'] . "]\" id=\"" . $this->getName() . "[groups][" . $this->_groupId . "][" . $option['id'] . "]\" onclick=\""; 
+        $tree .= $prefix . "<input type=\"checkbox\" name=\"" . $this->getName() . "[groups][" . $this->_groupId . "][" . $option['id'] . "]\" id=\"" . $this->getName() . "[groups][" . $this->_groupId . "][" . $option['id'] . "]\" onclick=\"";
         foreach ($parentIds as $pid) {
             if ($pid <= 0) continue;
             $parent_ele = $this->getName() . '[groups][' . $this->_groupId . '][' . $pid . ']';
             $tree .= "var ele = xoopsGetElementById('" . $parent_ele . "'); if (ele.checked != true) {ele.checked = this.checked;}";
-        } 
+        }
         foreach ($option['allchild'] as $cid) {
             $child_ele = $this->getName() . '[groups][' . $this->_groupId . '][' . $cid . ']';
             $tree .= "var ele = xoopsGetElementById('" . $child_ele . "'); if (this.checked != true) {ele.checked = false;}";
-        } 
+        }
         $tree .= '" value="1"';
         if (in_array($option['id'], $this->_value)) {
             $tree .= ' checked="checked"';
-        } 
+        }
         $tree .= " />" . $option['name'] . "<input type=\"hidden\" name=\"" . $this->getName() . "[parents][" . $option['id'] . "]\" value=\"" . implode(':', $parentIds). "\" /><input type=\"hidden\" name=\"" . $this->getName() . "[itemname][" . $option['id'] . "]\" value=\"" . htmlspecialchars($option['name']). "\" /><br />\n";
         else:
         $tree .= $prefix . $option['name'] . "<input type=\"hidden\" id=\"" . $this->getName() . "[groups][" . $this->_groupId . "][" . $option['id'] . "]\" /><br />\n";
@@ -146,10 +146,10 @@ switch($action) {
             "template"    => _AM_NEWBB_PERM_TEMPLATE, 
             "apply"        => _AM_NEWBB_PERM_TEMPLATEAPP,
             "default"    => _AM_NEWBB_PERM_SETBYGROUP
-            ));
+        ));
         $opform->addElement($op_select);
         $opform->display();
-        
+
         $member_handler =& xoops_gethandler('member');
         $glist =& $member_handler->getGroupList();
         $elements = array();
@@ -181,7 +181,7 @@ switch($action) {
         $tray->addElement(new XoopsFormHidden('action', 'template_save'));
         $tray->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $tray->addElement(new XoopsFormButton('', 'reset', _CANCEL, 'reset'));
-         $ret = '<h4>' . _AM_NEWBB_PERM_TEMPLATE . '</h4>' . _AM_NEWBB_PERM_TEMPLATE_DESC . '<br /><br /><br />';
+        $ret = '<h4>' . _AM_NEWBB_PERM_TEMPLATE . '</h4>' . _AM_NEWBB_PERM_TEMPLATE_DESC . '<br /><br /><br />';
         $ret .= "<form name='template' id='template' method='post'>\n<table width='100%' class='outer' cellspacing='1'>\n";
         $ret .= implode("\n", $elements);
         $ret .= '<tr align="left" valign="top"><td class="head"></td><td class="even">';
@@ -189,8 +189,8 @@ switch($action) {
         $ret .= '</td></tr>';
         $ret .= '</table></form>';
         echo $ret;
-        break;    
-        
+        break;
+
     case "template_save":
         $res = $newbbperm_handler->setTemplate($_POST['perms'], $groupid = 0);
         if ($res) {
@@ -199,13 +199,13 @@ switch($action) {
             redirect_header("admin_permissions.php?action=template", 2, _AM_NEWBB_PERM_TEMPLATE_ERROR);
         }
         break;
-        
+
     case "apply":
         $perm_template = $newbbperm_handler->getTemplate();
         if ($perm_template === null) {
             redirect_header("admin_permissions.php?action=template", 2, _AM_NEWBB_PERM_TEMPLATE);
         }
-        
+
         $opform = new XoopsSimpleForm(_AM_NEWBB_PERM_ACTION, 'actionform', 'admin_permissions.php', "get");
         $op_select = new XoopsFormSelect("", 'action');
         $op_select->setExtra('onchange="document.forms.actionform.submit()"');
@@ -215,12 +215,12 @@ switch($action) {
                             "apply"     => _AM_NEWBB_PERM_TEMPLATEAPP));
         $opform->addElement($op_select);
         $opform->display();
-        
+
         $category_handler =& xoops_getmodulehandler('category', 'newbb');
         $criteria_category = new CriteriaCompo(new criteria('1', 1));
         $criteria_category->setSort('cat_order');
         $categories = $category_handler->getList($criteria_category);
-        
+
         $forum_handler =& xoops_getmodulehandler('forum', 'newbb');
         $forums = $forum_handler->getTree(array_keys($categories), 0, "all");
         foreach (array_keys($forums) as $c) {
@@ -231,7 +231,7 @@ switch($action) {
             }
         }
         unset($forums, $categories);
-        
+
         $fmform = new XoopsThemeForm(_AM_NEWBB_PERM_TEMPLATEAPP, 'fmform', 'admin_permissions.php', "post");
         $fm_select = new XoopsFormSelect(_AM_NEWBB_PERM_FORUMS, 'forums', null, 10, true);
         $fm_select->addOptionArray($fm_options);
@@ -243,7 +243,7 @@ switch($action) {
         $fmform->addElement($tray);
         $fmform->display();
         break;
-        
+
     case "apply_save":
         if (empty($_POST["forums"])) break;
         foreach ($_POST["forums"] as $forum) {
@@ -252,9 +252,9 @@ switch($action) {
         }
         redirect_header("admin_permissions.php", 2, _AM_NEWBB_PERM_TEMPLATE_APPLIED);
         break;
-        
+
     default:
-        
+
         $opform = new XoopsSimpleForm(_AM_NEWBB_PERM_ACTION, 'actionform', 'admin_permissions.php', "get");
         $op_select = new XoopsFormSelect("", 'action');
         $op_select->setExtra('onchange="document.forms.actionform.submit()"');
@@ -263,17 +263,17 @@ switch($action) {
             "template"  => _AM_NEWBB_PERM_TEMPLATE, 
             "apply"     => _AM_NEWBB_PERM_TEMPLATEAPP,
             "default"   => _AM_NEWBB_PERM_SETBYGROUP
-            ));
+        ));
         $opform->addElement($op_select);
         $opform->display();
-        
+
         $op_options = array("category" => _AM_NEWBB_CAT_ACCESS);
         $fm_options = array("category" => array("title" => _AM_NEWBB_CAT_ACCESS, "item" => "category_access", "desc" => "", "anonymous" => true));
         foreach ($perms as $perm) {
             $op_options[$perm] = CONSTANT("_AM_NEWBB_CAN_".strtoupper($perm));
             $fm_options[$perm] = array("title" => CONSTANT("_AM_NEWBB_CAN_" . strtoupper($perm)), "item" => "forum_" . $perm, "desc" => "", "anonymous" => true);
         }
-        
+
         $op_keys = array_keys($op_options);
         $op = isset($_GET['op']) ? strtolower($_GET['op']) : (isset($_COOKIE['op']) ? strtolower($_COOKIE['op']) : "");
         if (empty($op)) {
@@ -282,18 +282,18 @@ switch($action) {
         } elseif (false !== ($key = array_search($op, $op_keys))) {
             setCookie("op", isset($op_keys[$key + 1]) ? $op_keys[$key + 1] : "");
         }
-        
+
         $opform = new XoopsSimpleForm('', 'opform', 'admin_permissions.php', "get");
         $op_select = new XoopsFormSelect("", 'op', $op);
         $op_select->setExtra('onchange="document.forms.opform.submit()"');
         $op_select->addOptionArray($op_options);
         $opform->addElement($op_select);
         $opform->display();
-        
+
         $perm_desc = "";
-        
+
         $form = new newbb_XoopsGroupPermForm($fm_options[$op]["title"], $module_id, $fm_options[$op]["item"], $fm_options[$op]["desc"], 'admin/admin_permissions.php', $fm_options[$op]["anonymous"]);
-        
+
         $category_handler = &xoops_getmodulehandler('category', 'newbb');
         $criteria_category = new CriteriaCompo(new criteria('1', 1));
         $criteria_category->setSort('cat_order');
@@ -314,14 +314,14 @@ switch($action) {
                     $form->addItem($f, $forums[$c][$f]["prefix"] . $forums[$c][$f]["forum_name"], $pid);
                 }
             }
-            unset($forums, $categories);        
+            unset($forums, $categories);
         }
         $form->display();
-        
+
         // Since we can not control the permission update, a trick is used here
         $permission_handler =& xoops_getmodulehandler("permission", "newbb");
         $permission_handler->createPermData();
-        
+
         break;
 }
 

@@ -77,7 +77,7 @@
  * @template_var 	string	lang_reads		fixed text : reads
  * @template_var 	string	lang_sendstory	fixed text : Send this Story to a Friend
  * @template_var 	string	 topic_select	contains the topics selector
-*/
+ */
 include_once '../../mainfile.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
@@ -87,11 +87,11 @@ include_once XOOPS_ROOT_PATH.'/class/tree.php';
 
 $storytopic=0;
 if(isset($_GET['storytopic'])) {
-	$storytopic=intval($_GET['storytopic']);
+    $storytopic=intval($_GET['storytopic']);
 } else {
-	if(isset($_GET['topic_id'])) {
-		$storytopic=intval($_GET['topic_id']);
-	}
+    if(isset($_GET['topic_id'])) {
+        $storytopic=intval($_GET['topic_id']);
+    }
 }
 
 if ($storytopic) {
@@ -101,23 +101,23 @@ if ($storytopic) {
         redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
         exit();
     }
-	$xoopsOption['storytopic'] = $storytopic;
+    $xoopsOption['storytopic'] = $storytopic;
 } else {
-	$xoopsOption['storytopic'] = 0;
+    $xoopsOption['storytopic'] = 0;
 }
 if (isset($_GET['storynum'])) {
-	$xoopsOption['storynum'] = intval($_GET['storynum']);
-	if ($xoopsOption['storynum'] > 30) {
-		$xoopsOption['storynum'] = $xoopsModuleConfig['storyhome'];
-	}
+    $xoopsOption['storynum'] = intval($_GET['storynum']);
+    if ($xoopsOption['storynum'] > 30) {
+        $xoopsOption['storynum'] = $xoopsModuleConfig['storyhome'];
+    }
 } else {
-	$xoopsOption['storynum'] = $xoopsModuleConfig['storyhome'];
+    $xoopsOption['storynum'] = $xoopsModuleConfig['storyhome'];
 }
 
 if (isset($_GET['start']) ) {
-	$start = intval($_GET['start']);
+    $start = intval($_GET['start']);
 } else {
-	$start = 0;
+    $start = 0;
 }
 
 if (empty($xoopsModuleConfig['newsdisplay']) || $xoopsModuleConfig['newsdisplay'] == 'Classic' || $xoopsOption['storytopic'] > 0) {
@@ -134,31 +134,31 @@ $column_count = $xoopsModuleConfig['columnmode'];
 
 if ($showclassic) {
     $xoopsOption['template_main'] = 'news_index.html';
-	include_once XOOPS_ROOT_PATH.'/header.php';
-	$xt = new NewsTopic();
+    include_once XOOPS_ROOT_PATH.'/header.php';
+    $xt = new NewsTopic();
 
     $xoopsTpl->assign('columnwidth', intval(1/$column_count*100));
-	if ($xoopsModuleConfig['ratenews']) {
-		$xoopsTpl->assign('rates', true);
-		$xoopsTpl->assign('lang_ratingc', _NW_RATINGC);
-		$xoopsTpl->assign('lang_ratethisnews', _NW_RATETHISNEWS);
-	} else {
-		$xoopsTpl->assign('rates', false);
-	}
+    if ($xoopsModuleConfig['ratenews']) {
+        $xoopsTpl->assign('rates', true);
+        $xoopsTpl->assign('lang_ratingc', _NW_RATINGC);
+        $xoopsTpl->assign('lang_ratethisnews', _NW_RATETHISNEWS);
+    } else {
+        $xoopsTpl->assign('rates', false);
+    }
 
-	if($xoopsOption['storytopic']) {
-		$xt->getTopic($xoopsOption['storytopic']);
-		$xoopsTpl->assign('topic_description', $xt->topic_description('S'));
-		$xoopsTpl->assign('topic_color', '#'.$xt->topic_color('S'));
-		$topictitle=$xt->topic_title();
-	}
+    if($xoopsOption['storytopic']) {
+        $xt->getTopic($xoopsOption['storytopic']);
+        $xoopsTpl->assign('topic_description', $xt->topic_description('S'));
+        $xoopsTpl->assign('topic_color', '#'.$xt->topic_color('S'));
+        $topictitle=$xt->topic_title();
+    }
 
-	if ($xoopsModuleConfig['displaynav'] == 1 ) {
+    if ($xoopsModuleConfig['displaynav'] == 1 ) {
         $xoopsTpl->assign('displaynav', true);
 
-		$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex']);
-		$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
-		$topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
+        $allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex']);
+        $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+        $topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
 
         $xoopsTpl->assign('topic_select', $topic_select);
         $storynum_options = '';
@@ -173,12 +173,12 @@ if ($showclassic) {
     } else {
         $xoopsTpl->assign('displaynav', false);
     }
-	if($xoopsOption['storytopic']==0) {
-		$topic_frontpage=true;
-	} else {
-		$topic_frontpage=false;
-	}
-	$sarray = NewsStory::getAllPublished($xoopsOption['storynum'], $start, $xoopsModuleConfig['restrictindex'], $xoopsOption['storytopic'], 0, true, 'published', $topic_frontpage);
+    if($xoopsOption['storytopic']==0) {
+        $topic_frontpage=true;
+    } else {
+        $topic_frontpage=false;
+    }
+    $sarray = NewsStory::getAllPublished($xoopsOption['storynum'], $start, $xoopsModuleConfig['restrictindex'], $xoopsOption['storytopic'], 0, true, 'published', $topic_frontpage);
 
     $scount = count($sarray);
     $xoopsTpl->assign('story_count', $scount);
@@ -186,43 +186,43 @@ if ($showclassic) {
     $columns = array();
     if($scount>0)
     {
-    	$storieslist=array();
-    	foreach ($sarray as $storyid => $thisstory) {
-    		$storieslist[]=$thisstory->storyid();
-    	}
-		$filesperstory = $sfiles->getCountbyStories($storieslist);
+        $storieslist=array();
+        foreach ($sarray as $storyid => $thisstory) {
+            $storieslist[]=$thisstory->storyid();
+        }
+        $filesperstory = $sfiles->getCountbyStories($storieslist);
 
-	    foreach ($sarray as $storyid => $thisstory) {
-	    	$filescount = array_key_exists($thisstory->storyid(),$filesperstory) ? $filesperstory[$thisstory->storyid()] : 0;
-        	$story = $thisstory->prepare2show($filescount);
-        	// The line below can be used to display a Permanent Link image
-        	// $story['title'] .= "&nbsp;&nbsp;<a href='".XOOPS_URL."/modules/news/article.php?storyid=".$sarray[$i]->storyid()."'><img src='".XOOPS_URL."/modules/news/images/x.gif' alt='Permanent Link' /></a>";
-        	$story['news_title'] = $story['title'];
-        	$story['title'] = $thisstory->textlink().'&nbsp;:&nbsp;'.$story['title'];
-        	$story['topic_title'] = $thisstory->textlink();
-        	$story['topic_color'] = '#'.$myts->displayTarea($thisstory->topic_color);
-	       	if($firsttitle=='') {
-       			$firsttitle=$thisstory->topic_title() . ' - ' .  $thisstory->title();
-       		}
-        	$columns[$k][] = $story;
-        	$k++;
-        	if ($k == $column_count) {
-	            $k = 0;
-        	}
-		}
-	}
-	$xoopsTpl->assign('columns', $columns);
-	unset($story);
+        foreach ($sarray as $storyid => $thisstory) {
+            $filescount = array_key_exists($thisstory->storyid(),$filesperstory) ? $filesperstory[$thisstory->storyid()] : 0;
+            $story = $thisstory->prepare2show($filescount);
+            // The line below can be used to display a Permanent Link image
+            // $story['title'] .= "&nbsp;&nbsp;<a href='".XOOPS_URL."/modules/news/article.php?storyid=".$sarray[$i]->storyid()."'><img src='".XOOPS_URL."/modules/news/images/x.gif' alt='Permanent Link' /></a>";
+            $story['news_title'] = $story['title'];
+            $story['title'] = $thisstory->textlink().'&nbsp;:&nbsp;'.$story['title'];
+            $story['topic_title'] = $thisstory->textlink();
+            $story['topic_color'] = '#'.$myts->displayTarea($thisstory->topic_color);
+            if($firsttitle=='') {
+                $firsttitle=$thisstory->topic_title() . ' - ' .  $thisstory->title();
+            }
+            $columns[$k][] = $story;
+            $k++;
+            if ($k == $column_count) {
+                $k = 0;
+            }
+        }
+    }
+    $xoopsTpl->assign('columns', $columns);
+    unset($story);
 
-	$totalcount = NewsStory::countPublishedByTopic($xoopsOption['storytopic'], $xoopsModuleConfig['restrictindex']);
+    $totalcount = NewsStory::countPublishedByTopic($xoopsOption['storytopic'], $xoopsModuleConfig['restrictindex']);
     if ( $totalcount > $scount ) {
         include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
-		$pagenav = new XoopsPageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'storytopic='.$xoopsOption['storytopic']);
-		if(news_isbot()) { 		// A bot is reading the news, we are going to show it all the links so that he can read everything
-        	$xoopsTpl->assign('pagenav', $pagenav->renderNav($totalcount));
+        $pagenav = new XoopsPageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'storytopic='.$xoopsOption['storytopic']);
+        if(news_isbot()) { 		// A bot is reading the news, we are going to show it all the links so that he can read everything
+            $xoopsTpl->assign('pagenav', $pagenav->renderNav($totalcount));
         } else {
             $xoopsTpl->assign('pagenav', $pagenav->renderNav());
-    	}
+        }
     } else {
         $xoopsTpl->assign('pagenav', '');
     }
@@ -230,36 +230,36 @@ if ($showclassic) {
     $xoopsOption['template_main'] = 'news_by_topic.html';
     include_once XOOPS_ROOT_PATH.'/header.php';
     $xoopsTpl->assign('columnwidth', intval(1/$column_count*100));
-	if ($xoopsModuleConfig['ratenews']) {
-		$xoopsTpl->assign('rates', true);
-		$xoopsTpl->assign('lang_ratingc', _NW_RATINGC);
-		$xoopsTpl->assign('lang_ratethisnews', _NW_RATETHISNEWS);
-	} else {
-		$xoopsTpl->assign('rates', false);
-	}
+    if ($xoopsModuleConfig['ratenews']) {
+        $xoopsTpl->assign('rates', true);
+        $xoopsTpl->assign('lang_ratingc', _NW_RATINGC);
+        $xoopsTpl->assign('lang_ratethisnews', _NW_RATETHISNEWS);
+    } else {
+        $xoopsTpl->assign('rates', false);
+    }
 
-	$xt = new NewsTopic();
+    $xt = new NewsTopic();
     $alltopics =& $xt->getTopicsList(true,$xoopsModuleConfig['restrictindex']);
     $smarty_topics = array();
     $topicstories = array();
 
     foreach ($alltopics as $topicid => $topic) {
-		$allstories = NewsStory::getAllPublished($xoopsModuleConfig['storyhome'], 0, $xoopsModuleConfig['restrictindex'], $topicid);
-    	$storieslist=array();
-    	foreach ($allstories as $thisstory) {
-    		$storieslist[]=$thisstory->storyid();
-    	}
-		$filesperstory = $sfiles->getCountbyStories($storieslist);
-		foreach ($allstories as $thisstory) {
-			$filescount = array_key_exists($thisstory->storyid(),$filesperstory) ? $filesperstory[$thisstory->storyid()] : 0;
-			$story = $thisstory->prepare2show($filescount);
-			$story['topic_title'] = $thisstory->textlink();
-			$story['news_title'] = $story['title'];
-			$topicstories[$topicid][] = $story;
-		}
-		if(isset($topicstories[$topicid])) {
-			$smarty_topics[$topicstories[$topicid][0]['posttimestamp']] = array('title' => $topic['title'], 'stories' => $topicstories[$topicid], 'id' => $topicid, 'topic_color'=>$topic['color']);
-		}
+        $allstories = NewsStory::getAllPublished($xoopsModuleConfig['storyhome'], 0, $xoopsModuleConfig['restrictindex'], $topicid);
+        $storieslist=array();
+        foreach ($allstories as $thisstory) {
+            $storieslist[]=$thisstory->storyid();
+        }
+        $filesperstory = $sfiles->getCountbyStories($storieslist);
+        foreach ($allstories as $thisstory) {
+            $filescount = array_key_exists($thisstory->storyid(),$filesperstory) ? $filesperstory[$thisstory->storyid()] : 0;
+            $story = $thisstory->prepare2show($filescount);
+            $story['topic_title'] = $thisstory->textlink();
+            $story['news_title'] = $story['title'];
+            $topicstories[$topicid][] = $story;
+        }
+        if(isset($topicstories[$topicid])) {
+            $smarty_topics[$topicstories[$topicid][0]['posttimestamp']] = array('title' => $topic['title'], 'stories' => $topicstories[$topicid], 'id' => $topicid, 'topic_color'=>$topic['color']);
+        }
     }
 
     krsort($smarty_topics);
@@ -290,32 +290,32 @@ news_CreateMetaDatas();
  * You can comment the code to optimize the requests count
  */
 if($xoopsOption['storytopic']) {
-	include_once XOOPS_ROOT_PATH.'/class/xoopstree.php';
-	$mytree = new XoopsTree($xoopsDB->prefix('topics'),'topic_id','topic_pid');
-	$topicpath = $mytree->getNicePathFromId($xoopsOption['storytopic'], 'topic_title', 'index.php?op=1');
-	$xoopsTpl->assign('topic_path', $topicpath);
-	unset($mytree);
+    include_once XOOPS_ROOT_PATH.'/class/xoopstree.php';
+    $mytree = new XoopsTree($xoopsDB->prefix('topics'),'topic_id','topic_pid');
+    $topicpath = $mytree->getNicePathFromId($xoopsOption['storytopic'], 'topic_title', 'index.php?op=1');
+    $xoopsTpl->assign('topic_path', $topicpath);
+    unset($mytree);
 }
 
 /**
  * Create a link for the RSS feed (if the module's option is activated)
  */
 if($xoopsModuleConfig['topicsrss'] && $xoopsOption['storytopic']) {
-	$link=sprintf("<a href='%s' title='%s'><img src='%s' border='0' alt='%s'></a>",XOOPS_URL.'/modules/news/backendt.php?topicid='.$xoopsOption['storytopic'], _NW_RSSFEED, XOOPS_URL.'/modules/news/images/rss.gif',_NW_RSSFEED);
-	$xoopsTpl->assign('topic_rssfeed_link',$link);
+    $link=sprintf("<a href='%s' title='%s'><img src='%s' border='0' alt='%s'></a>",XOOPS_URL.'/modules/news/backendt.php?topicid='.$xoopsOption['storytopic'], _NW_RSSFEED, XOOPS_URL.'/modules/news/images/rss.gif',_NW_RSSFEED);
+    $xoopsTpl->assign('topic_rssfeed_link',$link);
 }
 
 /**
  * Assign page's title
  */
 if($firsttitle!='') {
-	$xoopsTpl->assign('xoops_pagetitle', $firsttitle . ' - ' . $xoopsModule->name('s'));
+    $xoopsTpl->assign('xoops_pagetitle', $firsttitle . ' - ' . $xoopsModule->name('s'));
 } else {
-	if($topictitle!='') {
-		$xoopsTpl->assign('xoops_pagetitle', $topictitle);
-	} else {
-		$xoopsTpl->assign('xoops_pagetitle', $xoopsModule->name('s'));
-	}
+    if($topictitle!='') {
+        $xoopsTpl->assign('xoops_pagetitle', $topictitle);
+    } else {
+        $xoopsTpl->assign('xoops_pagetitle', $xoopsModule->name('s'));
+    }
 }
 
 $xoopsTpl->assign('lang_go', _GO);

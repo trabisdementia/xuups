@@ -1,13 +1,13 @@
 <?php
 
-/* 
-   IXR - The Inutio XML-RPC Library - (c) Incutio Ltd 2002
-   Version 1.62WP - Simon Willison, 11th July 2003 (htmlentities -> htmlspecialchars)
-           ^^^^^^ (We've made some changes)
-   Site:   http://scripts.incutio.com/xmlrpc/
-   Manual: http://scripts.incutio.com/xmlrpc/manual.php
-   Made available under the BSD License: http://www.opensource.org/licenses/bsd-license.php
-*/
+/*
+ IXR - The Inutio XML-RPC Library - (c) Incutio Ltd 2002
+ Version 1.62WP - Simon Willison, 11th July 2003 (htmlentities -> htmlspecialchars)
+ ^^^^^^ (We've made some changes)
+ Site:   http://scripts.incutio.com/xmlrpc/
+ Manual: http://scripts.incutio.com/xmlrpc/manual.php
+ Made available under the BSD License: http://www.opensource.org/licenses/bsd-license.php
+ */
 
 
 class IXR_Value {
@@ -50,7 +50,7 @@ class IXR_Value {
         }
         // If it is a normal PHP object convert it in to a struct
         if (is_object($this->data)) {
-            
+
             $this->data = get_object_vars($this->data);
             return 'struct';
         }
@@ -152,8 +152,8 @@ class IXR_Message {
         xml_set_character_data_handler($this->_parser, 'cdata');
         if (!xml_parse($this->_parser, $this->message)) {
             /* die(sprintf('XML error: %s at line %d',
-                xml_error_string(xml_get_error_code($this->_parser)),
-                xml_get_current_line_number($this->_parser))); */
+             xml_error_string(xml_get_error_code($this->_parser)),
+             xml_get_current_line_number($this->_parser))); */
             return false;
         }
         xml_parser_free($this->_parser);
@@ -172,7 +172,7 @@ class IXR_Message {
             case 'fault':
                 $this->messageType = $tag;
                 break;
-            /* Deal with stacks of arrays and structs */
+                /* Deal with stacks of arrays and structs */
             case 'data':    // data is to all intents and puposes more interesting than array
                 $this->_arraystructstypes[] = 'array';
                 $this->_arraystructs[] = array();
@@ -180,8 +180,8 @@ class IXR_Message {
             case 'struct':
                 $this->_arraystructstypes[] = 'struct';
                 $this->_arraystructs[] = array();
-                break;
-        }
+    break;
+}
     }
     function cdata($parser, $cdata) {
         $this->_currentTagContents .= $cdata;
@@ -229,7 +229,7 @@ class IXR_Message {
                 $this->_currentTagContents = '';
                 $valueFlag = true;
                 break;
-            /* Deal with stacks of arrays and structs */
+                /* Deal with stacks of arrays and structs */
             case 'data':
             case 'struct':
                 $value = array_pop($this->_arraystructs);
@@ -250,10 +250,10 @@ class IXR_Message {
         }
         if ($valueFlag) {
             /*
-            if (!is_array($value) && !is_object($value)) {
-                $value = trim($value);
-            }
-            */
+             if (!is_array($value) && !is_object($value)) {
+             $value = trim($value);
+             }
+             */
             if (count($this->_arraystructs) > 0) {
                 // Add value to struct or array
                 if ($this->_arraystructstypes[count($this->_arraystructstypes)-1] == 'struct') {
@@ -268,7 +268,7 @@ class IXR_Message {
                 $this->params[] = $value;
             }
         }
-    }       
+    }
 }
 
 
@@ -289,7 +289,7 @@ class IXR_Server {
         if (!$data) {
             global $HTTP_RAW_POST_DATA;
             if (!$HTTP_RAW_POST_DATA) {
-               die('XML-RPC server accepts POST requests only.');
+                die('XML-RPC server accepts POST requests only.');
             }
             $data = $HTTP_RAW_POST_DATA;
         }
@@ -314,15 +314,15 @@ class IXR_Server {
   <params>
     <param>
       <value>
-        $resultxml
+      $resultxml
       </value>
     </param>
   </params>
 </methodResponse>
 
 EOD;
-        // Send it
-        $this->output($xml);
+      // Send it
+      $this->output($xml);
     }
     function call($methodname, $args) {
         if (!$this->hasMethod($methodname)) {
@@ -346,9 +346,9 @@ EOD;
         } else {
             // It's a function - does it exist?
             if (is_array($method)) {
-            	if (!method_exists($method[0], $method[1])) {
-                return new IXR_Error(-32601, 'server error. requested object method "'.$method[1].'" does not exist.');
-            	}
+                if (!method_exists($method[0], $method[1])) {
+                    return new IXR_Error(-32601, 'server error. requested object method "'.$method[1].'" does not exist.');
+                }
             } else if (!function_exists($method)) {
                 return new IXR_Error(-32601, 'server error. requested function "'.$method.'" does not exist.');
             }
@@ -384,16 +384,16 @@ EOD;
             'xmlrpc' => array(
                 'specUrl' => 'http://www.xmlrpc.com/spec',
                 'specVersion' => 1
-            ),
+        ),
             'faults_interop' => array(
                 'specUrl' => 'http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php',
                 'specVersion' => 20010516
-            ),
+        ),
             'system.multicall' => array(
                 'specUrl' => 'http://www.xmlrpc.com/discuss/msgReader$1208',
                 'specVersion' => 1
-            ),
-        );   
+        ),
+        );
     }
     function getCapabilities($args) {
         return $this->capabilities;
@@ -672,27 +672,27 @@ class IXR_IntrospectionServer extends IXR_Server {
         $this->addCallback(
             'system.methodSignature', 
             'this:methodSignature', 
-            array('array', 'string'), 
+        array('array', 'string'),
             'Returns an array describing the return type and required parameters of a method'
-        );
-        $this->addCallback(
+            );
+            $this->addCallback(
             'system.getCapabilities', 
             'this:getCapabilities', 
-            array('struct'), 
+            array('struct'),
             'Returns a struct describing the XML-RPC specifications supported by this server'
-        );
-        $this->addCallback(
+            );
+            $this->addCallback(
             'system.listMethods', 
             'this:listMethods', 
-            array('array'), 
+            array('array'),
             'Returns an array of available methods on this server'
-        );
-        $this->addCallback(
+            );
+            $this->addCallback(
             'system.methodHelp', 
             'this:methodHelp', 
-            array('string', 'string'), 
+            array('string', 'string'),
             'Returns a documentation string for the specified method'
-        );
+            );
     }
     function addCallback($method, $callback, $args, $help) {
         $this->callbacks[$method] = $callback;

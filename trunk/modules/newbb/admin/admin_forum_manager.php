@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -54,7 +54,7 @@ switch ($op) {
                     $forums = array_map("intval", array_values($subforums));
                     $forum_handler->updateAll("cat_id", $cid, new Criteria("forum_id", "(" . implode(", ", $forums) . ")", "IN") );
                 }
-            
+
                 mod_clearCacheFile("forum", "newbb");
                 redirect_header('./admin_forum_manager.php?op=manage', 2, _AM_NEWBB_MSG_FORUM_MOVED);
             } else {
@@ -83,38 +83,38 @@ switch ($op) {
         loadModuleAdminMenu(2, "");
 
         if (!empty($_POST['dest_forum'])) {
-            $sql =  "    UPDATE " . $xoopsDB->prefix('bb_posts') . 
+            $sql =  "    UPDATE " . $xoopsDB->prefix('bb_posts') .
                     "    SET forum_id=" . intval($_POST['dest_forum']) . 
                     "    WHERE forum_id={$forum_id}";
             $result_post = $xoopsDB->queryF($sql);
-            
-            $sql =  "    UPDATE " . $xoopsDB->prefix('bb_topics') . 
+
+            $sql =  "    UPDATE " . $xoopsDB->prefix('bb_topics') .
                     "    SET forum_id=" . intval($_POST['dest_forum']) . 
                     "    WHERE forum_id={$forum_id}";
             $result_topic = $xoopsDB->queryF($sql);
 
             $forum_dest =& $forum_handler->get($_POST['dest_forum']);
             $cid = $forum_dest->getVar("cat_id");
-            
+
             $forum_obj =& $forum_handler->get($forum_id);
             $forum_handler->updateAll("parent_forum", intval($_POST['dest_forum']), new Criteria("parent_forum", $forum_id) );
             if ( $cid != $forum_obj->getVar("cat_id") && $subforums = newbb_getSubForum($forum_id) ) {
                 $forums = array_map("intval", array_values($subforums));
                 $forum_handler->updateAll("cat_id", $cid, new Criteria("forum_id", "(" . implode(", ", $forums) . ")", "IN") );
             }
-            
+
             $forum_handler->delete($forum_obj);
-            
+
             mod_clearCacheFile("forum", "newbb");
             $forum_handler->synchronization($forum_dest);
             unset($forum_dest);
-            
+
             mod_clearCacheFile("forum", "newbb");
 
             redirect_header('./admin_forum_manager.php?op=manage', 2, _AM_NEWBB_MSG_FORUM_MERGED);
             exit();
         } else {
-            
+
             $box = '<select name="dest_forum">';
             $box .= '<option value=0 selected>' . _SELECT . '</option>';
             $box .= newbb_forumSelectBox($forum_id, "all");
@@ -156,7 +156,7 @@ switch ($op) {
             $_POST['cat_id'] = $parent_obj->getVar("cat_id");
         }
         $forum_obj->setVar('cat_id', $_POST['cat_id']);
-        
+
         if ($forum_handler->insert($forum_obj)) {
             mod_clearCacheFile("forum", "newbb");
             if (!empty($_POST["perm_template"])) {
@@ -213,7 +213,7 @@ switch ($op) {
         loadModuleAdminMenu(2, _AM_NEWBB_CREATENEWFORUM);
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_NEWBB_CREATENEWFORUM . "</legend>";
         echo "<br />";
-        $parent_forum = @intval($_GET['forum']); 
+        $parent_forum = @intval($_GET['forum']);
         $cat_id = @intval($_GET['cat_id']);
         if (!$parent_forum && !$cat_id) {
             break;

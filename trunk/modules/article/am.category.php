@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: am.category.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 $isadmin = art_isAdministrator();
@@ -46,7 +46,7 @@ $message = art_constant("MD_ACTIONDONE");
 switch ($op) {
     case "delete":
         $category_obj =& $category_handler->get($category_id);
-        
+
         if (empty($_POST["confirm_submit"])) {
             $hiddens["category"] = $category_id;
             $hiddens["op"] = $op;
@@ -59,7 +59,7 @@ switch ($op) {
             include_once XOOPS_ROOT_PATH . "/footer.php";
             exit();
         }
-        
+
         $category_handler->delete($category_obj, true, @$xoopsModuleConfig["category_delete_forced"]);
         break;
     case "order":

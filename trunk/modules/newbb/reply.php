@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -63,7 +63,7 @@ if ( !$topic_handler->getPermission($forum_obj, $topic_status, 'reply')) {
     }
     $page_query = htmlspecialchars(implode("&", array_values($query_array)));
     unset($query_array);
-    
+
     redirect_header("viewtopic.php?{$page_query}", 2, _MD_NORIGHTTOREPLY);
     exit();
 }
@@ -86,7 +86,7 @@ $xoopsTpl->assign("parentforum", $forum_handler->getParents($forum_obj));
 $xoopsTpl->assign(array(
     'forum_id'      => $forum_obj->getVar('forum_id'), 
     'forum_name'    => $forum_obj->getVar('forum_name'), 
-    ));
+));
 
 if ($post_parent_obj->getVar('uid')) {
     $r_name = newbb_getUnameFromId( $post_parent_obj->getVar('uid'), $xoopsModuleConfig['show_realname'] );
@@ -105,7 +105,7 @@ if (!preg_match("/^(Re|" . _MD_RE . "):/i", $r_subject)) {
 
 $q_message = $post_parent_obj->getVar('post_text',"e");
 if ((!$xoopsModuleConfig['enable_karma']||!$post_parent_obj->getVar('post_karma'))
-    && (!$xoopsModuleConfig['allow_require_reply'] ||!$post_parent_obj->getVar('require_reply'))
+&& (!$xoopsModuleConfig['allow_require_reply'] ||!$post_parent_obj->getVar('require_reply'))
 ) {
     if (isset($_GET['quotedac']) && $_GET['quotedac'] == 1) {
         $message = "[quote]\n";
@@ -164,7 +164,7 @@ foreach ($posts_context_obj as $post_context_obj) {
                             "subject"   => $p_subject,
                             "meta"      => _MD_BY . " " . $p_name . " " . _MD_ON . " " . $p_date,
                             "content"   => $p_message,
-                            );
+    );
 }
 $xoopsTpl->assign_by_ref("posts_context", $posts_context);
 

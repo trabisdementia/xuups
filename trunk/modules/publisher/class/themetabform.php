@@ -59,14 +59,14 @@ class XoopsThemeTabForm extends XoopsForm
      {
      $class = ($class != '') ? " class='" . htmlspecialchars( $class, ENT_QUOTES ) . "'" : '';
      // Fix for $extra tag not showing
-      if ($extra) {
-      $extra = "<tr><td colspan='2' $class>$extra</td></tr>";
-      $this->addElement( $extra );
-      } else {
-      $extra = "<tr><td colspan='2' $class>&nbsp;</td></tr>";
-      $this->addElement( $extra );
-      }
-      }  */
+     if ($extra) {
+     $extra = "<tr><td colspan='2' $class>$extra</td></tr>";
+     $this->addElement( $extra );
+     } else {
+     $extra = "<tr><td colspan='2' $class>&nbsp;</td></tr>";
+     $this->addElement( $extra );
+     }
+     }  */
 
     /**
      * XoopsThemeTabForm::insertSplit()
@@ -74,15 +74,15 @@ class XoopsThemeTabForm extends XoopsForm
      * @param string $extra
      * @return
      */
-     /*function insertSplit( $extra = '' )
-      {
-      $extra = ( $extra ) ? $extra : '&nbsp;';
-      $ret = "<tr>\n<td colspan=\"2\" class=\"foot\">&nbsp;</td>\n</tr></table>\n<br />\n<br />\n
-      <table width=\"100%\" class=\"outer\" cellspacing=\"1\">
-      <tr>\n<th colspan=\"2\">$extra</th>\n</tr>\n";
-      $this->addElement($extra);
-      }
-      */
+    /*function insertSplit( $extra = '' )
+     {
+     $extra = ( $extra ) ? $extra : '&nbsp;';
+     $ret = "<tr>\n<td colspan=\"2\" class=\"foot\">&nbsp;</td>\n</tr></table>\n<br />\n<br />\n
+     <table width=\"100%\" class=\"outer\" cellspacing=\"1\">
+     <tr>\n<th colspan=\"2\">$extra</th>\n</tr>\n";
+     $this->addElement($extra);
+     }
+     */
     /**
      * create HTML to output the form as a theme-enabled table with validation.
      *

@@ -8,7 +8,7 @@ $y2data = array(354,200,265,99,111,91,198,225,293,251);
 $datax=array("Jan","Feb","Mar","Apr","Maj","Jun","Jul","Aug","Sep");
 
 // Create the graph. These two calls are always required
-$graph = new Graph(350,200);	
+$graph = new Graph(350,200);
 $graph->img->SetMargin(40,110,20,40);
 $graph->SetScale("textlog");
 $graph->SetY2Scale("log");

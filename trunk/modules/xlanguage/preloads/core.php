@@ -29,10 +29,10 @@ class XlanguageCorePreload extends XoopsPreloadItem
 {
     function eventCoreIncludeCommonLanguage($args)
     {
-         if (XlanguageCorePreload::isActive()) {
+        if (XlanguageCorePreload::isActive()) {
             global $xoopsConfig;
             include_once dirname(dirname(__FILE__)) . '/api.php';
-         }
+        }
     }
 
     function isActive()

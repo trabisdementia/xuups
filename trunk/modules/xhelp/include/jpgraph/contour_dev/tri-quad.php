@@ -40,9 +40,9 @@ class ContCanvas {
                 list($x1,$y1) = $this->scale->Translate($x,$y);
 
                 if( $datapoints[$y][$x] > 0 )
-                    $t->SetColor('blue');
+                $t->SetColor('blue');
                 else
-                    $t->SetColor('black');
+                $t->SetColor('black');
                 $t->SetFont(FF_ARIAL,FS_BOLD,8);
                 $t->Set($datapoints[$y][$x]);
                 $t->Stroke($this->g->img,$x1,$y1);
@@ -138,7 +138,7 @@ class SingleTestTriangle {
         //$this->g->InitFrame();
 
         self::$t = new Text();
-        self::$t->SetColor('black');        
+        self::$t->SetColor('black');
         self::$t->SetFont(FF_ARIAL,FS_BOLD,9);
         self::$t->SetAlign('center','center');
     }
@@ -182,7 +182,7 @@ class SingleTestTriangle {
             $this->shape->Polygon($p);
         }
     }
-    
+
     function GetNextHigherContourIdx($val) {
         for( $i=0; $i < count($this->cont); ++$i ) {
             if( $val < $this->cont[$i] ) return $i;
@@ -198,7 +198,7 @@ class SingleTestTriangle {
         }
         die('No contour value is larger or equal than : '.$v1);
     }
-    
+
     function GetColor($v) {
         return $this->contcolors[$this->GetNextHigherContourIdx($v)];
     }
@@ -213,11 +213,11 @@ class SingleTestTriangle {
 
 
         if( $x1 < 20 || $x1 > $w-20 )
-            return true;
+        return true;
 
         if( $y1 < 20 || $y1 > $h-20 )
-            return true;
-            
+        return true;
+
         if( !isset ($this->labels[$this->GetNextHigherContourIdx($v1)]) ) {
             return false;
         }
@@ -229,7 +229,7 @@ class SingleTestTriangle {
             $yp = $p[$i][1];
             $d = min($d, ($x1-$xp)*($x1-$xp) + ($y1-$yp)*($y1-$yp));
         }
-        
+
         $limit = $w*$h/9;
         $limit = max(min($limit,20000),3500);
         if( $d < $limit ) return true;
@@ -271,13 +271,13 @@ class SingleTestTriangle {
     function annotate($x1,$y1,$x2,$y2,$x1p,$y1p,$v1,$v2,$v1p) {
         if( !$this->showannotation ) return;
         /*
-        $this->g->img->SetColor('green');
-        $this->g->img->FilledCircle($this->scale->TranslateX($x1),$this->scale->TranslateY($y1), 4);
-        $this->g->img->FilledCircle($this->scale->TranslateX($x2),$this->scale->TranslateY($y2), 4);
+         $this->g->img->SetColor('green');
+         $this->g->img->FilledCircle($this->scale->TranslateX($x1),$this->scale->TranslateY($y1), 4);
+         $this->g->img->FilledCircle($this->scale->TranslateX($x2),$this->scale->TranslateY($y2), 4);
 
-        $this->g->img->SetColor('red');
-        $this->g->img->FilledCircle($this->scale->TranslateX($x1p),$this->scale->TranslateY($y1p), 4);
-*/
+         $this->g->img->SetColor('red');
+         $this->g->img->FilledCircle($this->scale->TranslateX($x1p),$this->scale->TranslateY($y1p), 4);
+         */
         //self::$t->Set(sprintf("%.1f",$v1,$this->VC($v1)));
         //self::$t->Stroke($this->g->img,$this->scale->TranslateX($x1),$this->scale->TranslateY($y1));
         //self::$t->Set(sprintf("%.1f",$v2,$this->VC($v2)));
@@ -331,7 +331,7 @@ class SingleTestTriangle {
     }
 
     function RectFill($v1,$v2,$v3,$v4,$x1,$y1,$x2,$y2,$x3,$y3,$x4,$y4,$depth) {
-         if( $depth >= self::$maxdepth ) {
+        if( $depth >= self::$maxdepth ) {
             // Abort and just appoximate the color of this area
             // with the average of the three values
             $color = $this->GetColor(($v1+$v2+$v3+$v4)/4);
@@ -349,7 +349,7 @@ class SingleTestTriangle {
             $vv4 = $this->GetNextHigherContourIdx($v4);
             $eps = 0.0001;
 
-           if( $vv1 == $vv2 && $vv2 == $vv3 && $vv3 == $vv4 ) {
+            if( $vv1 == $vv2 && $vv2 == $vv3 && $vv3 == $vv4 ) {
                 $color = $this->GetColor($v1);
                 $p = array($x1, $y1, $x2, $y2, $x3, $y3, $x4, $y4, $x1, $y1);
                 $this->FillPolygon($color,$p) ;
@@ -360,21 +360,21 @@ class SingleTestTriangle {
                 $dv2 = abs($vv2-$vv3);
                 $dv3 = abs($vv3-$vv4);
                 $dv4 = abs($vv1-$vv4);
-                
+
                 if( $dv1 == 1 ) {
                     list($x1p,$y1p,$v1p) = $this->interp2($x1,$y1,$x2,$y2,$v1,$v2);
                     $fcnt++;
                 }
-                
+
                 if( $dv2 == 1 ) {
                     list($x2p,$y2p,$v2p) = $this->interp2($x2,$y2,$x3,$y3,$v2,$v3);
                     $fcnt++;
                 }
-                
+
                 if( $dv3 == 1 ) {
                     list($x3p,$y3p,$v3p) = $this->interp2($x3,$y3,$x4,$y4,$v3,$v4);
                     $fcnt++;
-                }               
+                }
 
                 if( $dv4 == 1 ) {
                     list($x4p,$y4p,$v4p) = $this->interp2($x4,$y4,$x1,$y1,$v4,$v1);
@@ -382,7 +382,7 @@ class SingleTestTriangle {
                 }
 
                 $totdv = $dv1 + $dv2 + $dv3 + $dv4 ;
-                
+
                 if( ($fcnt == 2 && $totdv==2) || ($fcnt == 4 && $totdv==4) ) {
 
                     if( $fcnt == 2 && $totdv==2 ) {
@@ -576,18 +576,18 @@ class SingleTestTriangle {
 
                     // Top left
                     $this->RectFill(($v1+$v2)/2, $v2, ($v2+$v3)/2, $vc,
-                                    $x1,$yc, $x2,$y2, $xc,$y2, $xc,$yc, $depth+1);
+                    $x1,$yc, $x2,$y2, $xc,$y2, $xc,$yc, $depth+1);
                     // Top right
                     $this->RectFill($vc, ($v2+$v3)/2, $v3, ($v3+$v4)/2,
-                                    $xc,$yc, $xc,$y2, $x3,$y3, $x3,$yc, $depth+1);
+                    $xc,$yc, $xc,$y2, $x3,$y3, $x3,$yc, $depth+1);
 
                     // Bottom left
                     $this->RectFill($v1, ($v1+$v2)/2, $vc, ($v1+$v4)/2,
-                                    $x1,$y1, $x1,$yc, $xc,$yc, $xc,$y4, $depth+1);
+                    $x1,$y1, $x1,$yc, $xc,$yc, $xc,$y4, $depth+1);
 
                     // Bottom right
                     $this->RectFill(($v1+$v4)/2, $vc, ($v3+$v4)/2, $v4,
-                                    $xc,$y1, $xc,$yc, $x3,$yc, $x4,$y4, $depth+1);
+                    $xc,$y1, $xc,$yc, $x3,$yc, $x4,$y4, $depth+1);
 
                 }
             }
@@ -621,7 +621,7 @@ class SingleTestTriangle {
                 $color = $this->GetColor($v1);
                 $p = array($x1, $y1, $x2, $y2, $x3, $y3, $x1, $y1);
                 $this->FillPolygon($color,$p) ;
-            }             
+            }
             else {
                 $dv1 = abs($vv1-$vv2);
                 $dv2 = abs($vv2-$vv3);
@@ -658,9 +658,9 @@ class SingleTestTriangle {
                 }
 
                 if( $fcnt == 2 &&
-                    ((abs($v1p-$v2p) < $eps && $dv1 ==1 && $dv2==1 ) ||
-                    (abs($v1p-$v3p) < $eps && $dv1 ==1 && $dv3==1 ) ||
-                    (abs($v2p-$v3p) < $eps && $dv2 ==1 && $dv3==1 )) ) {
+                ((abs($v1p-$v2p) < $eps && $dv1 ==1 && $dv2==1 ) ||
+                (abs($v1p-$v3p) < $eps && $dv1 ==1 && $dv3==1 ) ||
+                (abs($v2p-$v3p) < $eps && $dv2 ==1 && $dv3==1 )) ) {
 
                     // This means that the contour line crosses exactly two sides
                     // and that the values of each vertice is such that only this
@@ -668,12 +668,12 @@ class SingleTestTriangle {
                     // We can now be smart. The cotour line will simply divide the
                     // area in two polygons that we can fill and then return. There is no
                     // need to recurse.
-                    
+
                     // First find out which two sides the contour is crossing
                     if( abs($v1p-$v2p) < $eps ) {
                         $p4 = array($x1,$y1,$x1p,$y1p,$x2p,$y2p,$x3,$y3,$x1,$y1);
                         $color4 = $this->GetColor($v1);
-                        
+
                         $p3 = array($x1p,$y1p,$x2,$y2,$x2p,$y2p,$x1p,$y1p);
                         $color3 = $this->GetColor($v2);
 
@@ -681,10 +681,10 @@ class SingleTestTriangle {
                         $color = $this->GetColor($v1p);
                         $v = $v1p;
                     }
-                    elseif( abs($v1p-$v3p) < $eps ) { 
+                    elseif( abs($v1p-$v3p) < $eps ) {
                         $p4 = array($x1p,$y1p,$x2,$y2,$x3,$y3,$x3p,$y3p,$x1p,$y1p);
                         $color4 = $this->GetColor($v2);
-                        
+
                         $p3 = array($x1,$y1,$x1p,$y1p,$x3p,$y3p,$x1,$y1);
                         $color3 = $this->GetColor($v1);
 
@@ -702,7 +702,7 @@ class SingleTestTriangle {
                         $p = array($x3p,$y3p,$x2p,$y2p);
                         $color = $this->GetColor($v3p);
                         $v = $v3p;
-                    }                    
+                    }
                     $this->FillPolygon($color4,$p4);
                     $this->FillPolygon($color3,$p3);
 
@@ -765,11 +765,11 @@ class SingleTestTriangle {
 }
 
 $meshdata = array(
-    array (12,12,10,10),
-    array (10,10,8,14),
-    array (7,7,13,17),
-    array (4,5,8,12),
-    array (10,8,7,8));
+array (12,12,10,10),
+array (10,10,8,14),
+array (7,7,13,17),
+array (4,5,8,12),
+array (10,8,7,8));
 
 $tt = new SingleTestTriangle(400,400,count($meshdata[0])-1,count($meshdata)-1);
 $tt->SetContours(array(4.7, 6.0, 7.2, 8.6, 9.9, 11.2, 12.5, 13.8, 15.1, 16.4));

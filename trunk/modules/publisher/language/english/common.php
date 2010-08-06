@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: common.php 331 2007-12-23 16:01:11Z malanciault $
-* Module: Publisher
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: common.php 331 2007-12-23 16:01:11Z malanciault $
+ * Module: Publisher
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 define("_CO_PUBLISHER_MESSAGE_FILE_ERROR", "Error: Unable to store uploaded file for the following reasons:<br />%s");
 define("_CO_PUBLISHER_MESSAGE_WRONG_MIMETYPE", "Error: filetype is not allowed. Please re-submit.");

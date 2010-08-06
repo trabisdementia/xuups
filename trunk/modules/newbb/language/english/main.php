@@ -453,10 +453,10 @@ define("_MD_PASSWORD", "Password");
 define("_MD_LOGIN", "Login");
 
 /*
-define("_MD_TRANSFER", "Transfer");
-define("_MD_TRANSFER_DESC", "Transfer the post to other applications");
-define("_MD_TRANSFER_DONE", "The action is done successully: %s");
-*/
+ define("_MD_TRANSFER", "Transfer");
+ define("_MD_TRANSFER_DESC", "Transfer the post to other applications");
+ define("_MD_TRANSFER_DONE", "The action is done successully: %s");
+ */
 
 define("_MD_APPROVE", "Approve");
 define("_MD_RESTORE", "Restore");
@@ -489,11 +489,11 @@ define("_MD_NEWBB_TYPE", "Topic type");
 
 //define("_MD_NEWBB_TAG", "Tag");
 /*
-// !!IMPORTANT!! insert '\' before any char among reserved chars: "a", "A", "B", "c", "d", "D", "F", "g", "G", "h", "H", "i", "I", "j", "l", "L", "m", "M", "n", "O", "r", "s", "S", "t", "T", "U", "w", "W", "Y", "y", "z", "Z"	
-// insert double '\' before 't', 'r', 'n'
-define("_MD_TODAY", "\T\o\d\a\y G:i:s");
-define("_MD_YESTERDAY", "\Y\e\s\\t\e\\r\d\a\y G:i:s");
-define("_MD_MONTHDAY", "n/j G:i:s");
-define("_MD_YEARMONTHDAY", "Y/n/j G:i");
-*/
+ // !!IMPORTANT!! insert '\' before any char among reserved chars: "a", "A", "B", "c", "d", "D", "F", "g", "G", "h", "H", "i", "I", "j", "l", "L", "m", "M", "n", "O", "r", "s", "S", "t", "T", "U", "w", "W", "Y", "y", "z", "Z"
+ // insert double '\' before 't', 'r', 'n'
+ define("_MD_TODAY", "\T\o\d\a\y G:i:s");
+ define("_MD_YESTERDAY", "\Y\e\s\\t\e\\r\d\a\y G:i:s");
+ define("_MD_MONTHDAY", "n/j G:i:s");
+ define("_MD_YEARMONTHDAY", "Y/n/j G:i");
+ */
 ?>

@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -45,10 +45,10 @@ if (! $GLOBALS['xoopsDB']->queryF("
         ) TYPE=MyISAM;
     ") 
 ) {
-        die("Can not create tmp table for `bb_type_tmp`");
+    die("Can not create tmp table for `bb_type_tmp`");
 }
 
-    
+
 if (! $GLOBALS['xoopsDB']->queryF("
         CREATE TABLE " . $GLOBALS['xoopsDB']->prefix("bb_type_forum_tmp") . " (
           `tf_id`               mediumint(4)        unsigned NOT NULL auto_increment,
@@ -62,8 +62,8 @@ if (! $GLOBALS['xoopsDB']->queryF("
         ) TYPE=MyISAM;
     ")
 ) {
-        $GLOBALS['xoopsDB']->queryF("DROP TABLE " . $GLOBALS['xoopsDB']->prefix("bb_type_tmp"));
-        die("Can not create tmp table for `bb_type_forum_tmp`");
+    $GLOBALS['xoopsDB']->queryF("DROP TABLE " . $GLOBALS['xoopsDB']->prefix("bb_type_tmp"));
+    die("Can not create tmp table for `bb_type_forum_tmp`");
 }
 
 $type_handler =& xoops_getmodulehandler('type', 'newbb');
@@ -98,7 +98,7 @@ if ($forums_type = $forum_handler->getIds(new Criteria("allow_subject_prefix", 1
         foreach ($types as $key => $order) {
             $type_query[] = "({$key}, {$forum_id}, {$order})";
         }
-        
+
         $sql = "INSERT INTO " . $GLOBALS['xoopsDB']->prefix("bb_type_forum_tmp") .
                 " (type_id, forum_id, type_order) " .
                 " VALUES " . implode(", ", $type_query);

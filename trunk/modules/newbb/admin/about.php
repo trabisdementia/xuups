@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -126,11 +126,11 @@ if ( $versioninfo->getInfo('warning') != '' ) {
     echo "<tr>";
     echo "<td class='bg3' align='left'><strong>" . _AM_NEWBB_MODULE_DISCLAIMER . "</strong></td>";
     echo "</tr>";
-    
+
     echo "<tr>";
     echo "<td class='even' align='left'>" . $versioninfo->getInfo('warning') . "</td>";
     echo "</tr>";
-    
+
     echo "</table>";
 }
 
@@ -142,12 +142,12 @@ if ( $versioninfo->getInfo('author_word') != '' ) {
     echo "<tr>";
     echo "<td class='bg3' align='left'><strong>" . _AM_NEWBB_AUTHOR_WORD . "</strong></td>";
     echo "</tr>";
-    
+
     $extra = defined('_AM_NEWBB_AUTHOR_WORD_EXTRA') ? _AM_NEWBB_AUTHOR_WORD_EXTRA : '';
     echo "<tr>";
     echo "<td class='even' align='left'>" . $versioninfo->getInfo('author_word') . "</td>";
     echo "</tr>";
-    
+
     echo "</table>";
 }
 

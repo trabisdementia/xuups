@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -61,9 +61,9 @@ if ( !empty($_POST['submit']) || !empty($_GET['submit']) || !empty($uname) || !e
     $start = isset($_GET['start']) ? $_GET['start'] : 0;
     $forum = isset($_POST['forum']) ? $_POST['forum'] : (isset($_GET['forum']) ? $_GET['forum'] : null);
     if (empty($forum) || $forum == 'all' || (is_array($forum) && in_array('all', $forum))) {
-       $forum = array();
+        $forum = array();
     } elseif (!is_array($forum)) {
-       $forum = array_map("intval", explode("|", $forum));
+        $forum = array_map("intval", explode("|", $forum));
     }
     $next_search['forum'] = implode("|", $forum);
 

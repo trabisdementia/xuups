@@ -181,7 +181,7 @@ class Xmf_Form_Element_Select extends Xmf_Form_Element
         foreach ( $ele_options as $value => $name ) {
             $ret .= "<option value='" . htmlspecialchars($value, ENT_QUOTES) . "'";
             if (count($ele_value) > 0 && in_array($value, $ele_value)) {
-                    $ret .= " selected='selected'";
+                $ret .= " selected='selected'";
             }
             $ret .= ">{$name}</option>\n";
         }
@@ -193,13 +193,13 @@ class Xmf_Form_Element_Select extends Xmf_Form_Element
      * Render custom javascript validation code
      *
      * @seealso XoopsForm::renderValidationJS
-    */
+     */
     function renderValidationJS()
     {
         // render custom validation code if any
         if (!empty($this->customValidationCode)) {
             return implode("\n", $this->customValidationCode);
-        // generate validation code if required
+            // generate validation code if required
         } else if ($this->isRequired()) {
             $eltname    = $this->getName();
             $eltcaption = $this->getCaption();

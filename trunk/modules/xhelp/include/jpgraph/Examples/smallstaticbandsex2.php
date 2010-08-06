@@ -6,12 +6,12 @@ require_once ('jpgraph/jpgraph_bar.php');
 
 $datay=array(10,29,3,6);
 
-// Create the graph. 
-$graph = new Graph(200,150);	
+// Create the graph.
+$graph = new Graph(200,150);
 $graph->SetScale("textlin");
 $graph->SetMargin(25,10,20,20);
 
-// Add 10% grace ("space") at top and botton of Y-scale. 
+// Add 10% grace ("space") at top and botton of Y-scale.
 $graph->yscale->SetGrace(10);
 
 // Create a bar pot

@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: digest.php 2175 2008-09-23 14:07:03Z phppp $
  */
- 
+
 // Why the skip-DB-security check defined only for XMLRPC? We also need it!!! ~_*
 if (!defined('XOOPS_XMLRPC')) define('XOOPS_XMLRPC', 1);
 ob_start();

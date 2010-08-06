@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: functions.author.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 if (!defined('XOOPS_ROOT_PATH')) { exit(); }
 
 include dirname(__FILE__) . "/vars.php";
@@ -27,7 +27,7 @@ define("ART_FUNCTIONS_AUTHOR", 1);
 
 /**
  * Function to a list of user names associated with their user IDs
- * 
+ *
  */
 function &art_getAuthorNameFromId( $userid, $usereal = 0, $linked = false )
 {
@@ -36,7 +36,7 @@ function &art_getAuthorNameFromId( $userid, $usereal = 0, $linked = false )
     }
     xoops_load("userUtility");
     $users = XoopsUserUtility::getUnameFromIds($userid, $usereal);
-    
+
     if (!empty($linked)) {
         mod_loadFunctions("url", $GLOBALS["artdirname"]);
         foreach (array_keys($users) as $uid) {
@@ -52,7 +52,7 @@ function &art_getWriterNameFromIds( $writer_ids, $linked = false )
         $writer_ids = array($writer_ids);
     }
     $userid = array_map("intval", array_filter($writer_ids));
-    
+
     $myts =& MyTextSanitizer::getInstance();
     $users = array();
     if (count($userid) > 0) {

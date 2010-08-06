@@ -391,15 +391,15 @@ class RectPattern3DPlane extends RectPattern {
         // of what this helpline does. BTW this mimics the way you would get the
         // perspective right when drawing on paper.
         /*
-        $x0 = $middle;
-        $y0 = $this->rect->ye;
-        $len=floor(($this->rect->ye-$this->rect->y)/$vls);
-        $x1 = $middle+round($len*$ds);
-        $y1 = $this->rect->ye-$len*$vls;
-        $aImg->PushColor("red");
-        $aImg->Line($x0,$y0,$x1,$y1);
-        $aImg->PopColor();
-        */
+         $x0 = $middle;
+         $y0 = $this->rect->ye;
+         $len=floor(($this->rect->ye-$this->rect->y)/$vls);
+         $x1 = $middle+round($len*$ds);
+         $y1 = $this->rect->ye-$len*$vls;
+         $aImg->PushColor("red");
+         $aImg->Line($x0,$y0,$x1,$y1);
+         $aImg->PopColor();
+         */
 
         $y -= $vls;
         $k=($this->rect->ye-($this->rect->ye-$vls))/($middle-($middle-$ds));

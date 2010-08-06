@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: functions.parse.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 if (!defined('XOOPS_ROOT_PATH')) { exit(); }
 
 include dirname(__FILE__) . "/vars.php";
@@ -27,7 +27,7 @@ define("ART_FUNCTIONS_PARSE", 1);
 
 /**
  * Function to parse arguments for a page according to $_SERVER['REQUEST_URI']
- * 
+ *
  * @var array $args_numeric    array of numeric variable values
  * @var array $args            array of indexed variables: name and value
  * @var array $args_string    array of string variable values
@@ -36,9 +36,9 @@ define("ART_FUNCTIONS_PARSE", 1);
  */
 
 /* known issues:
- * - "/" in a string 
- * - "&" in a string 
-*/
+ * - "/" in a string
+ * - "&" in a string
+ */
 function art_parse_args(&$args_numeric, &$args, &$args_string)
 {
     $args_abb = array(
@@ -50,35 +50,35 @@ function art_parse_args(&$args_numeric, &$args, &$args_string)
                         "t"    => "topic", 
                         "u"    => "uid"
                         );
-    $args = array();
-    $args_numeric = array();
-    $args_string = array();
-    if (preg_match("/[^\?]*\.php[\/|\?]([^\?]*)/i", $_SERVER['REQUEST_URI'], $matches)) {
-        $vars = preg_split("/[\/|&]/", $matches[1]);
-        $vars = array_map("trim", $vars);
-        if ( count($vars) > 0 ) {
-            foreach ($vars as $var) {
-                if (is_numeric($var)) {
-                    $args_numeric[] = $var;
-                } elseif (false === strpos($var, "=")) {
-                    if (is_numeric(substr($var, 1))) {
-                        $args[$args_abb[strtolower($var{0})]] = intval(substr($var, 1));
-                    } else {
-                        $args_string[] = urldecode($var);
-                    }
-                } else {
-                    parse_str($var, $args_tmp);
-                    $args = array_merge($args, $args_tmp);
-                }
-            }
-        }
-    }
-    return (count($args) + count($args_numeric) + count($args_string) == 0) ? null : true;
+                        $args = array();
+                        $args_numeric = array();
+                        $args_string = array();
+                        if (preg_match("/[^\?]*\.php[\/|\?]([^\?]*)/i", $_SERVER['REQUEST_URI'], $matches)) {
+                            $vars = preg_split("/[\/|&]/", $matches[1]);
+                            $vars = array_map("trim", $vars);
+                            if ( count($vars) > 0 ) {
+                                foreach ($vars as $var) {
+                                    if (is_numeric($var)) {
+                                        $args_numeric[] = $var;
+                                    } elseif (false === strpos($var, "=")) {
+                                        if (is_numeric(substr($var, 1))) {
+                                            $args[$args_abb[strtolower($var{0})]] = intval(substr($var, 1));
+                                        } else {
+                                            $args_string[] = urldecode($var);
+                                        }
+                                    } else {
+                                        parse_str($var, $args_tmp);
+                                        $args = array_merge($args, $args_tmp);
+                                    }
+                                }
+                            }
+                        }
+                        return (count($args) + count($args_numeric) + count($args_string) == 0) ? null : true;
 }
 
 /**
  * Function to parse class prefix
- * 
+ *
  * @var string     $class_string    string to be parsed
  * @var mixed     $pattern
  * @var mixed     $replacement
@@ -111,7 +111,7 @@ function art_parse_class($class_string, $pattern = "", $replacement = "")
 
 /**
  * Function to parse function prefix
- * 
+ *
  * @var string     $function_string    string to be parsed
  * @var mixed     $pattern
  * @var mixed     $replacement
@@ -144,7 +144,7 @@ function art_parse_function($function_string, $pattern = "", $replacement = "")
 
 /**
  * Function to parse links, links are delimited by link break, URL and title of a link are delimited by space
- * 
+ *
  * @var string     $text raw content
  *
  * @return array    associative array of link url and title
@@ -161,7 +161,7 @@ function &art_parseLinks($text)
         $links[] = array(
             "url"    => $url, 
             "title"    => $myts->htmlSpecialChars($title)
-            );
+        );
     }
     return $links;
 }

@@ -201,7 +201,7 @@ define('_XHELP_TEXT_AUTO_REFRESH2', 'Auto Aggiornamento ogni 5 minuti');
 define('_XHELP_TEXT_AUTO_REFRESH3', 'Auto Aggiornamento ogni 10 minuti');
 define('_XHELP_TEXT_AUTO_REFRESH4', 'Auto Aggiornamento ogni 30 minuti');
 define('_XHELP_AUTO_REFRESH0', 0);          // Change these to
-define('_XHELP_AUTO_REFRESH1', 60);         // adjust the values 
+define('_XHELP_AUTO_REFRESH1', 60);         // adjust the values
 define('_XHELP_AUTO_REFRESH2', 300);        // in the select box
 define('_XHELP_AUTO_REFRESH3', 600);
 define('_XHELP_AUTO_REFRESH4', 1800);
@@ -350,91 +350,91 @@ define('_XHELP_TEXT_UPDATE_COMP', 'Aggiornamento completato!');
 define('_XHELP_TEXT_TOPICS_ADDED', 'Topics Added'); // Topics Added
 define('_XHELP_TEXT_CLOSE_WINDOW', 'Chiude Finestra');
 define('_XHELP_MESSAGE_USER_NO_INFO', 'Errore: non hai inserito nessun altra informazione');
-      define('_XHELP_TEXT_EVENT', 'Evento');
-      define('_XHELP_TEXT_AVAIL_FILETYPES', 'Tipi files');
-      define('_XHELP_MESSAGE_VALIDATE_ERROR', 'Il tuo ticket e\' errato, controlla e riprova ancora.');
-      define('_XHELP_MESSAGE_UNAME_TAKEN', ' e\' ancora in uso.');
-      define('_XHELP_MESSAGE_INVALID', ' non e\' valido.');
-      define('_XHELP_MESSAGE_LONG', ' e\' troppo corto.');
-      define('_XHELP_MESSAGE_SHORT', ' e\' troppo lungo.');
-      define('_XHELP_MESSAGE_NOT_ENTERED', ' non e\' stato inserito.');
-      define('_XHELP_MESSAGE_NOT_NUMERIC', ' non e\' numerico.');
-      define('_XHELP_MESSAGE_RESERVED', ' e\' riservato.');
-      define('_XHELP_MESSAGE_NO_SPACES', ' non dovrebbe avere spazi');
-      define('_XHELP_MESSAGE_NOT_SAME', ' non e\' uguale.');
-      define('_XHELP_MESSAGE_NOT_SUPPLIED', ' non e\' stato fornito.');
+define('_XHELP_TEXT_EVENT', 'Evento');
+define('_XHELP_TEXT_AVAIL_FILETYPES', 'Tipi files');
+define('_XHELP_MESSAGE_VALIDATE_ERROR', 'Il tuo ticket e\' errato, controlla e riprova ancora.');
+define('_XHELP_MESSAGE_UNAME_TAKEN', ' e\' ancora in uso.');
+define('_XHELP_MESSAGE_INVALID', ' non e\' valido.');
+define('_XHELP_MESSAGE_LONG', ' e\' troppo corto.');
+define('_XHELP_MESSAGE_SHORT', ' e\' troppo lungo.');
+define('_XHELP_MESSAGE_NOT_ENTERED', ' non e\' stato inserito.');
+define('_XHELP_MESSAGE_NOT_NUMERIC', ' non e\' numerico.');
+define('_XHELP_MESSAGE_RESERVED', ' e\' riservato.');
+define('_XHELP_MESSAGE_NO_SPACES', ' non dovrebbe avere spazi');
+define('_XHELP_MESSAGE_NOT_SAME', ' non e\' uguale.');
+define('_XHELP_MESSAGE_NOT_SUPPLIED', ' non e\' stato fornito.');
 
-      define('_XHELP_MESSAGE_CREATE_USER_ERROR', 'Utente non creato');
-      define('_XHELP_MESSAGE_NO_REGISTER', 'Registrazione chiusa: In questo momento non sei autorizzato per l\'inserimento di un ticket.');
+define('_XHELP_MESSAGE_CREATE_USER_ERROR', 'Utente non creato');
+define('_XHELP_MESSAGE_NO_REGISTER', 'Registrazione chiusa: In questo momento non sei autorizzato per l\'inserimento di un ticket.');
 
-      define('_XHELP_SEC_TICKET_ADD', 0);
-      define('_XHELP_SEC_TICKET_EDIT', 1);
-      define('_XHELP_SEC_TICKET_DELETE', 2);
-      define('_XHELP_SEC_TICKET_OWNERSHIP', 3);
-      define('_XHELP_SEC_TICKET_STATUS', 4);
-      define('_XHELP_SEC_TICKET_PRIORITY', 5);
-      define('_XHELP_SEC_TICKET_LOGUSER', 6);
-      define('_XHELP_SEC_RESPONSE_ADD', 7);
-      define('_XHELP_SEC_RESPONSE_EDIT', 8);
+define('_XHELP_SEC_TICKET_ADD', 0);
+define('_XHELP_SEC_TICKET_EDIT', 1);
+define('_XHELP_SEC_TICKET_DELETE', 2);
+define('_XHELP_SEC_TICKET_OWNERSHIP', 3);
+define('_XHELP_SEC_TICKET_STATUS', 4);
+define('_XHELP_SEC_TICKET_PRIORITY', 5);
+define('_XHELP_SEC_TICKET_LOGUSER', 6);
+define('_XHELP_SEC_RESPONSE_ADD', 7);
+define('_XHELP_SEC_RESPONSE_EDIT', 8);
 
-      define('_XHELP_SEC_TEXT_TICKET_ADD', 'Inserisci Tickets');
-      define('_XHELP_SEC_TEXT_TICKET_EDIT', 'Modifica Tickets');
-      define('_XHELP_SEC_TEXT_TICKET_DELETE', 'Cancella Tickets');
-      define('_XHELP_SEC_TEXT_TICKET_OWNERSHIP', 'Cambia incarico Ticket');
-      define('_XHELP_SEC_TEXT_TICKET_STATUS', 'Cambia lo stato del Ticket'); 
-      define('_XHELP_SEC_TEXT_TICKET_PRIORITY', 'Change Ticket Priority');
-      define('_XHELP_SEC_TEXT_TICKET_LOGUSER', 'Inserisci Ticket per Utente');
-      define('_XHELP_SEC_TEXT_RESPONSE_ADD', 'Aggiungi Risposta');
-      define('_XHELP_SEC_TEXT_RESPONSE_EDIT', 'Modifica Risposta');
+define('_XHELP_SEC_TEXT_TICKET_ADD', 'Inserisci Tickets');
+define('_XHELP_SEC_TEXT_TICKET_EDIT', 'Modifica Tickets');
+define('_XHELP_SEC_TEXT_TICKET_DELETE', 'Cancella Tickets');
+define('_XHELP_SEC_TEXT_TICKET_OWNERSHIP', 'Cambia incarico Ticket');
+define('_XHELP_SEC_TEXT_TICKET_STATUS', 'Cambia lo stato del Ticket');
+define('_XHELP_SEC_TEXT_TICKET_PRIORITY', 'Change Ticket Priority');
+define('_XHELP_SEC_TEXT_TICKET_LOGUSER', 'Inserisci Ticket per Utente');
+define('_XHELP_SEC_TEXT_RESPONSE_ADD', 'Aggiungi Risposta');
+define('_XHELP_SEC_TEXT_RESPONSE_EDIT', 'Modifica Risposta');
 
-      //Removed
+//Removed
 //      define('_SEC_STAFF_ASSIGN_OWNER', '1');
 //      define('_SEC_STAFF_DELETE_RESPONSES', '2');
 //      define('_SEC_STAFF_DELETE_TICKETS', '3');
 //      define('_SEC_STAFF_LOG_USER_TICKETS', '4');
 //      define('_SEC_STAFF_MODIFY_RESPONSES', '5');
 //      define('_SEC_STAFF_MODIFY_TICKET_INFO', '6');
-      //End removed
+//End removed
 
-      define('_XHELP_MESSAGE_NO_ADD_TICKET', 'Non hai i permessi per inserire i tickets.');
-      define('_XHELP_MESSAGE_NO_DELETE_TICKET', 'Non hai i permessi per cancellare i tickets.');
-      define('_XHELP_MESSAGE_NO_EDIT_TICKET', 'Non hai i permessi per modificare i tickets.');
-      define('_XHELP_MESSAGE_NO_CHANGE_OWNER', 'Non hai i permessi per cambiare l\'incaricato.');
-      define('_XHELP_MESSAGE_NO_CHANGE_PRIORITY', 'Non hai i permessi per cambiare la priorita\'.');
-      define('_XHELP_MESSAGE_NO_CHANGE_STATUS', 'Non hai i permessi per cambiare lo stato.');
-      define('_XHELP_MESSAGE_NO_ADD_RESPONSE', 'Non hai i permessi per aggiungere le risposte.');
-      define('_XHELP_MESSAGE_NO_EDIT_RESPONSE', 'Non hai i permessi per modificare le risposte.');
+define('_XHELP_MESSAGE_NO_ADD_TICKET', 'Non hai i permessi per inserire i tickets.');
+define('_XHELP_MESSAGE_NO_DELETE_TICKET', 'Non hai i permessi per cancellare i tickets.');
+define('_XHELP_MESSAGE_NO_EDIT_TICKET', 'Non hai i permessi per modificare i tickets.');
+define('_XHELP_MESSAGE_NO_CHANGE_OWNER', 'Non hai i permessi per cambiare l\'incaricato.');
+define('_XHELP_MESSAGE_NO_CHANGE_PRIORITY', 'Non hai i permessi per cambiare la priorita\'.');
+define('_XHELP_MESSAGE_NO_CHANGE_STATUS', 'Non hai i permessi per cambiare lo stato.');
+define('_XHELP_MESSAGE_NO_ADD_RESPONSE', 'Non hai i permessi per aggiungere le risposte.');
+define('_XHELP_MESSAGE_NO_EDIT_RESPONSE', 'Non hai i permessi per modificare le risposte.');
 
-      define('_XHELP_ROLE_NAME1', 'Ticket Manager');
-      define('_XHELP_ROLE_NAME2', 'Support');
-      define('_XHELP_ROLE_NAME3', 'Browser');
-      define('_XHELP_ROLE_DSC1', 'Puo\' fare tutto su tutto');
-      define('_XHELP_ROLE_DSC2', 'Inserisce tickets and risposte, cambia stato e priorita\', inserisce tickets per un utente');
-      define('_XHELP_ROLE_DSC3', 'Non puo\' modificare Solo visualizzazione');
+define('_XHELP_ROLE_NAME1', 'Ticket Manager');
+define('_XHELP_ROLE_NAME2', 'Support');
+define('_XHELP_ROLE_NAME3', 'Browser');
+define('_XHELP_ROLE_DSC1', 'Puo\' fare tutto su tutto');
+define('_XHELP_ROLE_DSC2', 'Inserisce tickets and risposte, cambia stato e priorita\', inserisce tickets per un utente');
+define('_XHELP_ROLE_DSC3', 'Non puo\' modificare Solo visualizzazione');
 //      define('_XHELP_ROLE_VAL1', '511');
-      define('_XHELP_ROLE_VAL2', '241');
-      define('_XHELP_ROLE_VAL3', '0');
-      define("_XHELP_TICKET_MD5SIGNATURE", "Support Key:"); // da tradurre?
-      define('_XHELP_USER_REGISTER', 'User Registration');  // da tradurre?
+define('_XHELP_ROLE_VAL2', '241');
+define('_XHELP_ROLE_VAL3', '0');
+define("_XHELP_TICKET_MD5SIGNATURE", "Support Key:"); // da tradurre?
+define('_XHELP_USER_REGISTER', 'User Registration');  // da tradurre?
 
 
-      define('_XHELP_MESSAGE_NEW_USER_ERR', 'Errore: il tuo account non e\' stato creato.');
-      define('_XHELP_MESSAGE_EMAIL_USED', 'Errore: l\'email e\' stata gia\' registrata.');
+define('_XHELP_MESSAGE_NEW_USER_ERR', 'Errore: il tuo account non e\' stato creato.');
+define('_XHELP_MESSAGE_EMAIL_USED', 'Errore: l\'email e\' stata gia\' registrata.');
 
-      define('_XHELP_MAILEVENT_CLASS0', '0'); // Connection message
-      define('_XHELP_MAILEVENT_CLASS1', '1'); // Parse message
-      define('_XHELP_MAILEVENT_CLASS2', '2'); // Storage message
-      define('_XHELP_MAILEVENT_CLASS3', '3'); // General message
-      define('_XHELP_MAILEVENT_DESC0', 'Collegamento al server fallito.');
-      define('_XHELP_MAILEVENT_DESC1', 'Non e\' possibile trasferire il messaggio.');
-      define('_XHELP_MAILEVENT_DESC2', 'Non e\' possibile salvare il messaggio.');
-      define('_XHELP_MAILEVENT_DESC3', '');
+define('_XHELP_MAILEVENT_CLASS0', '0'); // Connection message
+define('_XHELP_MAILEVENT_CLASS1', '1'); // Parse message
+define('_XHELP_MAILEVENT_CLASS2', '2'); // Storage message
+define('_XHELP_MAILEVENT_CLASS3', '3'); // General message
+define('_XHELP_MAILEVENT_DESC0', 'Collegamento al server fallito.');
+define('_XHELP_MAILEVENT_DESC1', 'Non e\' possibile trasferire il messaggio.');
+define('_XHELP_MAILEVENT_DESC2', 'Non e\' possibile salvare il messaggio.');
+define('_XHELP_MAILEVENT_DESC3', '');
 
-      define('_XHELP_MESSAGE_UPLOAD_ALLOWED_ERR', 'L\'upload del modulo e\' disabilitato per il modulo.');
-      define('_XHELP_MESSAGE_UPLOAD_ERR', 'Il file %s da %s non e\' stato salvato perche\' %s.');
+define('_XHELP_MESSAGE_UPLOAD_ALLOWED_ERR', 'L\'upload del modulo e\' disabilitato per il modulo.');
+define('_XHELP_MESSAGE_UPLOAD_ERR', 'Il file %s da %s non e\' stato salvato perche\' %s.');
 
 
-// ver 0.75 
+// ver 0.75
 
 define('_XHELP_MISMATCH_EMAIL', '%s has been notified that their message was not stored. Support key matched, but message should have been sent from %s instead.');
 define('_XHELP_TEXT_MERGE_TICKET', 'Unione Ticket');

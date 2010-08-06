@@ -1,7 +1,7 @@
 <?php
 // $Id: faq.php,v 1.3 2005/12/02 23:16:09 ackbarr Exp $
 
-class xhelpFaq extends XoopsObject {    
+class xhelpFaq extends XoopsObject {
     function xhelpFaq()
     {
         $this->initVar('subject', XOBJ_DTYPE_TXTBOX, null, true, 100);      // Ticket subject

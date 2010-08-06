@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -67,9 +67,9 @@ $xoopsLogger->activated = false;
 if (!empty($GLOBALS["xoopsModuleConfig"]["download_direct"])):
 
 header("Cache-Control: no-store, no-cache, must-revalidate");
-header("Cache-Control: post-check=0, pre-check=0", false); 
-header("Pragma: no-cache"); 
-header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header("location: " . XOOPS_URL . '/' . $xoopsModuleConfig['dir_attachments'] . '/' . $attach['name_saved']);
 
@@ -100,8 +100,8 @@ header("Content-Transfer-Encoding: binary");
 
 $handle = fopen($file_saved, "rb");
 while (!feof($handle)) {
-   $buffer = fread($handle, 4096);
-   echo $buffer;
+    $buffer = fread($handle, 4096);
+    echo $buffer;
 }
 fclose($handle);
 

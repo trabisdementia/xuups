@@ -11,7 +11,7 @@
  * @version         $Id: dialogs.php 2264 2008-10-10 03:41:27Z phppp $
  */
 
- 
+
 /**
  * A textarea with wysiwyg buttons
  *
@@ -54,9 +54,9 @@ echo '<meta http-equiv="content-language" content="' . _LANGCODE . '" />';
 echo '<script type="text/javascript" src="' . $koivi_url . '/include/js/dialogs.js"></script>';
 
 switch ($dialog) {
-case 'smilies':
-    echo '<link rel="stylesheet" type="text/css" media="all" href="' . xoops_getcss($xoopsConfig['theme_set']) . '" />';
-    echo '</head><body style="width:100%;">
+    case 'smilies':
+        echo '<link rel="stylesheet" type="text/css" media="all" href="' . xoops_getcss($xoopsConfig['theme_set']) . '" />';
+        echo '</head><body style="width:100%;">
         <table width="100%" class="outer">
         <tr>
         <th colspan="3">' . _MSC_SMILIES . '</th>
@@ -66,73 +66,73 @@ case 'smilies':
         <td>' . _MSC_EMOTION . '</td>
         <td>' . _XK_IMAGE . '</td>
         </tr>';
-    if ($getsmiles = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix('smiles'))) {
-        $rcolor = 'even';
-        while ( $smile = $xoopsDB->fetchArray($getsmiles) ) {
-            echo "<tr class='$rcolor'><td>".$smile['code']."</td><td>".$smile['emotion']."</td><td><img onmouseover='style.cursor=\"hand\"' onclick=\"sendSmilie('".$id."','".XOOPS_UPLOAD_URL."/".$smile['smile_url']."')\" src='".XOOPS_UPLOAD_URL."/".$smile['smile_url']."' alt='' /></td></tr>";
-            $rcolor = ($rcolor == 'even') ? 'odd' : 'even';
+        if ($getsmiles = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix('smiles'))) {
+            $rcolor = 'even';
+            while ( $smile = $xoopsDB->fetchArray($getsmiles) ) {
+                echo "<tr class='$rcolor'><td>".$smile['code']."</td><td>".$smile['emotion']."</td><td><img onmouseover='style.cursor=\"hand\"' onclick=\"sendSmilie('".$id."','".XOOPS_UPLOAD_URL."/".$smile['smile_url']."')\" src='".XOOPS_UPLOAD_URL."/".$smile['smile_url']."' alt='' /></td></tr>";
+                $rcolor = ($rcolor == 'even') ? 'odd' : 'even';
+            }
+        } else {
+            echo "Could not retrieve data from the database.";
         }
-    } else {
-        echo "Could not retrieve data from the database.";
-    }
-    echo '</table>'._MSC_CLICKASMILIE;
-    echo '</body></html>';
-    break;
-    
-case 'pastespecial':
-    echo '
+        echo '</table>'._MSC_CLICKASMILIE;
+        echo '</body></html>';
+        break;
+
+    case 'pastespecial':
+        echo '
         <title>'._XK_PASTESPECIAL.'</title>
         <link href="' . $koivi_url . '/skins/' . $skin . '/' . $skin.'.css" rel="stylesheet" type="text/css" />
         </head>    
     <body scroll=no class="' . $skin.'PropsBody" onload="document.getElementById(\'iframe\').contentWindow.document.designMode=\'on\';">';
-    echo ''._XK_PASTEINSTRUCTIONS.'<br />
+        echo ''._XK_PASTEINSTRUCTIONS.'<br />
             <iframe class="' . $skin.'pasteSIframe" id="iframe" frameborder=0;></iframe>';
-    echo '<br />';
-    echo '<input class="' . $skin.'Input2" type="submit" value="'._XK_REMOVE_WORDF.'" onclick="XK_doClean(\'word\')">';
-    echo '<input class="' . $skin.'Input2" type="submit" value="'._XK_REMOVE_ALLF.'" onclick="XK_doClean(\'all\')">';
-    echo '<br /><input type="checkbox" id="checkClose" checked>'._XK_CLOSE_APASTE.'';
-    echo '<br /><br />';
-    echo '&nbsp;<input class="' . $skin.'SubmitInput" type="submit" value="Ok" onclick="XK_updateIframe(\'' . $id.'\')">&nbsp;
+        echo '<br />';
+        echo '<input class="' . $skin.'Input2" type="submit" value="'._XK_REMOVE_WORDF.'" onclick="XK_doClean(\'word\')">';
+        echo '<input class="' . $skin.'Input2" type="submit" value="'._XK_REMOVE_ALLF.'" onclick="XK_doClean(\'all\')">';
+        echo '<br /><input type="checkbox" id="checkClose" checked>'._XK_CLOSE_APASTE.'';
+        echo '<br /><br />';
+        echo '&nbsp;<input class="' . $skin.'SubmitInput" type="submit" value="Ok" onclick="XK_updateIframe(\'' . $id.'\')">&nbsp;
                 <input class="' . $skin.'SubmitInput" type="submit" value="Close" onclick="window.close();">';
-    echo '</body></html>';
-    break;    
-        
-case 'table':
-    echo '<link rel="stylesheet" type="text/css" media="all" href="'.xoops_getcss($xoopsConfig['theme_set']).'" />';
-    echo '<title>'._XK_INSERTTABLE.'</title>';
-    echo'</head><body style="width:100%;">';
+        echo '</body></html>';
+        break;
 
-    xoops_load("xoopsformloader");
-    $sform = new XoopsThemeForm( _XK_INSERTTABLE, "table", xoops_getenv( 'PHP_SELF' ) );
-    $sform->addElement( new XoopsFormText( _XK_ROWS, 'rows', 4, 4, '2' ), true );
-    $sform->addElement( new XoopsFormText( _XK_COLS, 'columns', 4, 4, '2' ), true );
-    $sform->addElement( new XoopsFormText( _XK_WIDTH, 'width_value', 4, 4, '100' ), true );
-    $sform->addElement( new XoopsFormText( _XK_HEIGHT, 'height_value', 4, 4, '100' ), true );
-    $sform->addElement( new XoopsFormText( _XK_BORDER, 'border', 4, 4, '1' ), true );
-    $sform->addElement( new XoopsFormText( _XK_SPACING, 'cell_spacing', 4, 4, '1' ), true );
-    $sform->addElement( new XoopsFormText( _XK_PADDING, 'cell_padding', 4, 4, '1' ), true );
-    $button_tray = new XoopsFormElementTray( '', '' );
-    $button_submit = new XoopsFormButton( '', '', _SUBMIT, 'button' );
-    $button_submit->setExtra( 'onclick="sendTable(\'' . $id.'\')"' );
-    $button_cancel = new XoopsFormButton( '', '', _CANCEL, 'button' );
-    $button_cancel->setExtra( 'onclick="window.close()"' );
-    $button_tray->addElement( $button_submit );
-    $button_tray->addElement( $button_cancel );
-    $sform->addElement( $button_tray );
-    $sform->display();
-    
-    echo '</body></html>';
+    case 'table':
+        echo '<link rel="stylesheet" type="text/css" media="all" href="'.xoops_getcss($xoopsConfig['theme_set']).'" />';
+        echo '<title>'._XK_INSERTTABLE.'</title>';
+        echo'</head><body style="width:100%;">';
 
-    break;
-    
-case 'cellProps':
-    include_once $koivi_path . "/class/colorpalette.class.php";
-    include_once $koivi_path . "/class/borderfieldset.class.php";
-    echo '    <title>'._XK_CELLPROPS.'</title>
+        xoops_load("xoopsformloader");
+        $sform = new XoopsThemeForm( _XK_INSERTTABLE, "table", xoops_getenv( 'PHP_SELF' ) );
+        $sform->addElement( new XoopsFormText( _XK_ROWS, 'rows', 4, 4, '2' ), true );
+        $sform->addElement( new XoopsFormText( _XK_COLS, 'columns', 4, 4, '2' ), true );
+        $sform->addElement( new XoopsFormText( _XK_WIDTH, 'width_value', 4, 4, '100' ), true );
+        $sform->addElement( new XoopsFormText( _XK_HEIGHT, 'height_value', 4, 4, '100' ), true );
+        $sform->addElement( new XoopsFormText( _XK_BORDER, 'border', 4, 4, '1' ), true );
+        $sform->addElement( new XoopsFormText( _XK_SPACING, 'cell_spacing', 4, 4, '1' ), true );
+        $sform->addElement( new XoopsFormText( _XK_PADDING, 'cell_padding', 4, 4, '1' ), true );
+        $button_tray = new XoopsFormElementTray( '', '' );
+        $button_submit = new XoopsFormButton( '', '', _SUBMIT, 'button' );
+        $button_submit->setExtra( 'onclick="sendTable(\'' . $id.'\')"' );
+        $button_cancel = new XoopsFormButton( '', '', _CANCEL, 'button' );
+        $button_cancel->setExtra( 'onclick="window.close()"' );
+        $button_tray->addElement( $button_submit );
+        $button_tray->addElement( $button_cancel );
+        $sform->addElement( $button_tray );
+        $sform->display();
+
+        echo '</body></html>';
+
+        break;
+
+    case 'cellProps':
+        include_once $koivi_path . "/class/colorpalette.class.php";
+        include_once $koivi_path . "/class/borderfieldset.class.php";
+        echo '    <title>'._XK_CELLPROPS.'</title>
             <link href="' . $koivi_url . '/skins/' . $skin.'/' . $skin.'.css" rel="stylesheet" type="text/css" />
             </head>';
-    echo '<body scroll=no class="' . $skin.'PropsBody" onload="initCellProps(\'' . $id.'\')" >';
-    $uni='<option value="px">px</option>
+        echo '<body scroll=no class="' . $skin.'PropsBody" onload="initCellProps(\'' . $id.'\')" >';
+        $uni='<option value="px">px</option>
             <option value="em">em</option>
             <option value="ex">ex</option>
             <option value="cm">cm</option>
@@ -140,20 +140,20 @@ case 'cellProps':
             <option value="pc">pc</option>
             <option value="in">in</option>
             <option value="pt">pt</option>';
-            
-    $units=$uni.'<option value="%">%</option>';
-    
-    $palette= new WysiwygColorPalette('XK_CC','', $koivi_url, $skin);
-    $palette->display();    
-    echo '<form name="form1" method="post" action="">';
-    $borders=new WysiwygBorderFieldset($koivi_url_relative,$skin,'cellPreview()');
-    
-    echo '
+
+        $units=$uni.'<option value="%">%</option>';
+
+        $palette= new WysiwygColorPalette('XK_CC','', $koivi_url, $skin);
+        $palette->display();
+        echo '<form name="form1" method="post" action="">';
+        $borders=new WysiwygBorderFieldset($koivi_url_relative,$skin,'cellPreview()');
+
+        echo '
     <div class="' . $skin.'selectedTab" onclick="SelectTab(this,\'a\',\'' . $skin.'\');">'._XK_OTHERS.'</div>
     <div class="' . $skin.'notSelectedTab" onclick="SelectTab(this,\'b\',\'' . $skin.'\');">'._XK_BORDERS.'</div>
     <div class="' . $skin.'notSelectedTab" onclick="SelectTab(this,\'c\',\'' . $skin.'\');">'._XK_CELLPADDING.'</div>
     <div class="' . $skin.'notSelectedTab" onclick="SelectTab(this,\'d\',\'' . $skin.'\');cellPreview();">'._XK_PREVIEW.'</div>';
-    echo '
+        echo '
     <div class="' . $skin.'downTabContainer">
         
         <div class="' . $skin.'divTabContent" id="a">
@@ -182,7 +182,7 @@ case 'cellProps':
             </div>
         
         <div class="' . $skin.'divTabContent" style="display:none" id="b">';
-            $borders->display();
+        $borders->display();
         echo'</div>
         
         <div class="' . $skin.'divTabContent" style="display:none" id="c">
@@ -217,34 +217,34 @@ case 'cellProps':
             </div> 
         </div>    
     </div>';
-                    
-    echo'<br style="clear:both;" />
+
+        echo'<br style="clear:both;" />
             <input class="' . $skin.'SubmitInput" type="button" value="Ok" onclick="sendCell(\'' . $id.'\')"/>
             <input class="' . $skin.'SubmitInput" type="reset" value="Reset" onclick="cellPreview()"/>
     </form>
     </body>
     </html>
     ';
-    
-    break;
-    
-case 'tableProps':
-    include_once $koivi_path . "/class/colorpalette.class.php";
-    echo '    <title>'._XK_TABLEPROPS.'</title>
+
+        break;
+
+    case 'tableProps':
+        include_once $koivi_path . "/class/colorpalette.class.php";
+        echo '    <title>'._XK_TABLEPROPS.'</title>
             <link href="' . $koivi_url.'/skins/' . $skin.'/' . $skin.'.css" rel="stylesheet" type="text/css" />
             </head>';
-    echo '<body scroll=no class="' . $skin.'PropsBody" onload="initTableProps(\'' . $id.'\')" >';
-    
-    $palette= new WysiwygColorPalette('XK_TableC','', $koivi_url, $skin);
-    $palette->display();    
-        
-    echo '<form name="form1" method="post" action="">';
-    echo '
+        echo '<body scroll=no class="' . $skin.'PropsBody" onload="initTableProps(\'' . $id.'\')" >';
+
+        $palette= new WysiwygColorPalette('XK_TableC','', $koivi_url, $skin);
+        $palette->display();
+
+        echo '<form name="form1" method="post" action="">';
+        echo '
     <div class="' . $skin.'selectedTab" onclick="SelectTab(this,\'a\',\'' . $skin.'\');">'._XK_OTHERS.'</div>
     <div class="' . $skin.'notSelectedTab" onclick="SelectTab(this,\'b\',\'' . $skin.'\');">'._XK_FORECOLOR.'</div>
     <div class="' . $skin.'notSelectedTab" onclick="SelectTab(this,\'c\',\'' . $skin.'\');tablePreview();">'._XK_PREVIEW.'</div>';
-            
-    echo'
+
+        echo'
         <div class="' . $skin.'downTabContainer">
                 
                 <div class="' . $skin.'divTabContent" id="a">
@@ -317,16 +317,16 @@ case 'tableProps':
             <input class="' . $skin.'SubmitInput" type="reset" value="Reset" onclick="tablePreview()"/>
         </form>
         </body></html>';
-    break;
-    
-case 'imageProps':
-    include_once $koivi_path . "/class/colorpalette.class.php";
-    include_once $koivi_path . "/class/borderfieldset.class.php";
-    echo '    <title>'._XK_IMAGEPROPS.'</title>
+        break;
+
+    case 'imageProps':
+        include_once $koivi_path . "/class/colorpalette.class.php";
+        include_once $koivi_path . "/class/borderfieldset.class.php";
+        echo '    <title>'._XK_IMAGEPROPS.'</title>
             <link href="' . $koivi_url . '/skins/' . $skin.'/' . $skin.'.css" rel="stylesheet" type="text/css" />
             </head>';
-    echo '<body scroll=no class="' . $skin.'PropsBody" onload="initImageProps(\'' . $id.'\')" >';
-    $units='<option value="px">px</option>
+        echo '<body scroll=no class="' . $skin.'PropsBody" onload="initImageProps(\'' . $id.'\')" >';
+        $units='<option value="px">px</option>
             <option value="em">em</option>
             <option value="ex">ex</option>
             <option value="cm" >cm</option>
@@ -334,19 +334,19 @@ case 'imageProps':
             <option value="pc">pc</option>
             <option value="in">in</option>
             <option value="pt">pt</option>';
-    $borders=new WysiwygBorderFieldset($koivi_url_relative, $skin, 'imagePreview()');
-    $palette= new WysiwygColorPalette('XK_ImgPrev','', $koivi_url, $skin);
-    $palette->display();
-    echo'<form name="form1" method="post" action="">';
-    
-    
-    echo '
+        $borders=new WysiwygBorderFieldset($koivi_url_relative, $skin, 'imagePreview()');
+        $palette= new WysiwygColorPalette('XK_ImgPrev','', $koivi_url, $skin);
+        $palette->display();
+        echo'<form name="form1" method="post" action="">';
+
+
+        echo '
         <div class="' . $skin.'selectedTab" onclick="SelectTab(this,\'a\',\'' . $skin.'\');">'._XK_OTHERS.'</div>
         <div class="' . $skin.'notSelectedTab" onclick="SelectTab(this,\'b\',\'' . $skin.'\');">'._XK_BORDERS.'</div>
         <div class="' . $skin.'notSelectedTab" onclick="SelectTab(this,\'c\',\'' . $skin.'\');">'._XK_MARGINS.'</div>
         <div class="' . $skin.'notSelectedTab" onclick="SelectTab(this,\'d\',\'' . $skin.'\');imagePreview();">'._XK_PREVIEW.'</div>';
-                    
-                echo'
+
+        echo'
                 <div class="' . $skin.'downTabContainer">
 
                     <div class="' . $skin.'divTabContent" id="a">
@@ -402,8 +402,8 @@ case 'imageProps':
                     </div>
                     
                     <div class="' . $skin.'divTabContent" style="display:none" id="b">';
-                        $borders->display();
-                    echo'</div>
+        $borders->display();
+        echo'</div>
                     
                     <div class="' . $skin.'divTabContent" style="display:none" id="c">
                         <table border="0" cellspacing="0" cellpadding="2">
@@ -447,37 +447,37 @@ case 'imageProps':
                     </form>
                 </body>
             </html>';
-    break;
-    
-case 'createLink':
-        
-    echo '<link rel="stylesheet" type="text/css" media="all" href="'.xoops_getcss($xoopsConfig['theme_set']).'" />';
-    echo'</head>
+        break;
+
+    case 'createLink':
+
+        echo '<link rel="stylesheet" type="text/css" media="all" href="'.xoops_getcss($xoopsConfig['theme_set']).'" />';
+        echo'</head>
     <body  class="' . $skin.'PropsBody" style="width:100%;" onLoad="XK_MakeAnchorSelect(\'' . $id.'\')">';
-    
-    xoops_load("xoopsformloader");
-    $sform = new XoopsThemeForm( _XK_EDITIMAGE, 'linkform', xoops_getenv( 'PHP_SELF' ) );
-    $sform->addElement( new XoopsFormText( 'Url', 'url', 20, 100, '' ), true );
-    $select= new XoopsFormSelect( 'Anchor', 'anchor', '', 1,false);
-    $select->setExtra( 'onchange="XK_disableUrlTextField(this.options[this.selectedIndex].value)"' );
-    $sform->addElement($select);
-    $sform->addElement( new XoopsFormSelect( 'Open', 'open', '', 1,false), true );
-    $button_tray = new XoopsFormElementTray( '', '' );
-    $button_submit = new XoopsFormButton( '', '', _SUBMIT, 'button' );
-    $button_submit->setExtra( 'onclick="sendLink(\'' . $id.'\')"' );
-    $button_cancel = new XoopsFormButton( '', '', _CANCEL, 'button' );
-    $button_cancel->setExtra( 'onclick="window.close()"' );
-    $button_tray->addElement( $button_submit );
-    $button_tray->addElement( $button_cancel );
-    $sform->addElement( $button_tray );
-    $sform->display();
-        
-    break;
-    
-default:
-    echo '</head><body onload="window.close()">';
-    echo 'ERROR';
-    echo '</body></html>';
-    break;
+
+        xoops_load("xoopsformloader");
+        $sform = new XoopsThemeForm( _XK_EDITIMAGE, 'linkform', xoops_getenv( 'PHP_SELF' ) );
+        $sform->addElement( new XoopsFormText( 'Url', 'url', 20, 100, '' ), true );
+        $select= new XoopsFormSelect( 'Anchor', 'anchor', '', 1,false);
+        $select->setExtra( 'onchange="XK_disableUrlTextField(this.options[this.selectedIndex].value)"' );
+        $sform->addElement($select);
+        $sform->addElement( new XoopsFormSelect( 'Open', 'open', '', 1,false), true );
+        $button_tray = new XoopsFormElementTray( '', '' );
+        $button_submit = new XoopsFormButton( '', '', _SUBMIT, 'button' );
+        $button_submit->setExtra( 'onclick="sendLink(\'' . $id.'\')"' );
+        $button_cancel = new XoopsFormButton( '', '', _CANCEL, 'button' );
+        $button_cancel->setExtra( 'onclick="window.close()"' );
+        $button_tray->addElement( $button_submit );
+        $button_tray->addElement( $button_cancel );
+        $sform->addElement( $button_tray );
+        $sform->display();
+
+        break;
+
+    default:
+        echo '</head><body onload="window.close()">';
+        echo 'ERROR';
+        echo '</body></html>';
+        break;
 }
 ?>

@@ -331,7 +331,7 @@ define('_XHELP_TEXT_AUTO_REFRESH2', 'Auto Actualizar cada 5 minutos');
 define('_XHELP_TEXT_AUTO_REFRESH3', 'Auto Actualizar cada 10 minutos');
 define('_XHELP_TEXT_AUTO_REFRESH4', 'Auto Actualizar cada 30 minutos');
 define('_XHELP_AUTO_REFRESH0', 0);          // Change these to
-define('_XHELP_AUTO_REFRESH1', 60);         // adjust the values 
+define('_XHELP_AUTO_REFRESH1', 60);         // adjust the values
 define('_XHELP_AUTO_REFRESH2', 300);        // in the select box
 define('_XHELP_AUTO_REFRESH3', 600);
 define('_XHELP_AUTO_REFRESH4', 1800);

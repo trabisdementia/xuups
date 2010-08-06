@@ -25,36 +25,36 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
+    die('XOOPS root path not defined');
 }
 
 function b_news_topics_show() {
-	global $storytopic;	// Don't know why this is used and where it's coming from ....
+    global $storytopic;	// Don't know why this is used and where it's coming from ....
     include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
     include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
-	include_once XOOPS_ROOT_PATH."/modules/news/class/tree.php";
+    include_once XOOPS_ROOT_PATH."/modules/news/class/tree.php";
 
-	$jump = XOOPS_URL.'/modules/news/index.php?storytopic=';
-	$storytopic = !empty($storytopic) ? intval($storytopic) : 0;
-	$restricted = news_getmoduleoption('restrictindex');
+    $jump = XOOPS_URL.'/modules/news/index.php?storytopic=';
+    $storytopic = !empty($storytopic) ? intval($storytopic) : 0;
+    $restricted = news_getmoduleoption('restrictindex');
 
-	$xt = new NewsTopic();
-	$allTopics = $xt->getAllTopics($restricted);
-	$topic_tree = new MyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
-	$additional = " onchange='location=\"".$jump."\"+this.options[this.selectedIndex].value'";
-	$block['selectbox'] = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', '', true, 0, $additional);
-	return $block;
+    $xt = new NewsTopic();
+    $allTopics = $xt->getAllTopics($restricted);
+    $topic_tree = new MyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+    $additional = " onchange='location=\"".$jump."\"+this.options[this.selectedIndex].value'";
+    $block['selectbox'] = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', '', true, 0, $additional);
+    return $block;
 }
 
 
 function b_news_topics_onthefly($options)
 {
-	$options = explode('|',$options);
-	$block = & b_news_topics_show($options);
+    $options = explode('|',$options);
+    $block = & b_news_topics_show($options);
 
-	$tpl = new XoopsTpl();
-	$tpl->assign('block', $block);
-	$tpl->display('db:news_block_topics.html');
+    $tpl = new XoopsTpl();
+    $tpl->assign('block', $block);
+    $tpl->display('db:news_block_topics.html');
 }
 
 ?>

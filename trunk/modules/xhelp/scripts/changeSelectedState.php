@@ -13,7 +13,7 @@ $server = & new JPSpan_Server_PostOffice();
 $server->addHandler(new xhelpWebLib());
 
 if (isset($_SERVER['QUERY_STRING']) &&
-        strcasecmp($_SERVER['QUERY_STRING'], 'client')==0) {
+strcasecmp($_SERVER['QUERY_STRING'], 'client')==0) {
 
     // Compress the output Javascript (e.g. strip whitespace)
     define('JPSPAN_INCLUDE_COMPRESS',TRUE);
@@ -35,7 +35,7 @@ class xhelpWebLib {
     {
         $state = intval($state);
         $hStatus =& xhelpGetHandler('status');
-        
+
         if($state == -1){   // If select all is chosen
             $statuses =& $hStatus->getObjects(null, true);
         } else {
@@ -44,12 +44,12 @@ class xhelpWebLib {
         $aStatuses = array();
         $aStatuses[] = array('key' => -1,
                              'value' => _XHELP_TEXT_SELECT_ALL);
-                             
+         
         foreach($statuses as $status){
             $aStatuses[] = array('key' => $status->getVar('id'),
                                  'value' => $status->getVar('description'));
         }
-        
+
         return $aStatuses;
     }
 }

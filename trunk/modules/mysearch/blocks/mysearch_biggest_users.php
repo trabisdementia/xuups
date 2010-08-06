@@ -26,23 +26,23 @@
 
 function b_mysearch_big_user_show()
 {
-	include_once XOOPS_ROOT_PATH."/modules/mysearch/include/functions.php";
-	$mysearch_handler =& xoops_getmodulehandler('searches', 'mysearch');
-	$block = array();
-	$visiblekeywords = mysearch_getmoduleoption('showindex');
-	if($visiblekeywords > 0) {
-		$tmpmysearch = new searches();
-		$keywords_count=mysearch_getmoduleoption('admincount');
+    include_once XOOPS_ROOT_PATH."/modules/mysearch/include/functions.php";
+    $mysearch_handler =& xoops_getmodulehandler('searches', 'mysearch');
+    $block = array();
+    $visiblekeywords = mysearch_getmoduleoption('showindex');
+    if($visiblekeywords > 0) {
+        $tmpmysearch = new searches();
+        $keywords_count=mysearch_getmoduleoption('admincount');
 
-		// Total keywords count
-		$block['total_keywords']=$mysearch_handler->getCount();
+        // Total keywords count
+        $block['total_keywords']=$mysearch_handler->getCount();
 
-		// Biggest users
-		$elements = $mysearch_handler->getBiggestContributors(0,$keywords_count);
-		foreach($elements as $oneuser => $onecount) {
-			$block['biggesusers'][]=array('uid'=>$oneuser,'uname'=>$tmpmysearch->uname($oneuser),'count'=>$onecount);
-		}
-	}
-	return $block;
+        // Biggest users
+        $elements = $mysearch_handler->getBiggestContributors(0,$keywords_count);
+        foreach($elements as $oneuser => $onecount) {
+            $block['biggesusers'][]=array('uid'=>$oneuser,'uname'=>$tmpmysearch->uname($oneuser),'count'=>$onecount);
+        }
+    }
+    return $block;
 }
 ?>

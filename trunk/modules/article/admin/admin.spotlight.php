@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: admin.spotlight.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 include_once XOOPS_ROOT_PATH . "/modules/" . $GLOBALS["artdirname"] . "/class/xoopsformloader.php";
 
@@ -42,13 +42,13 @@ if (!empty($_POST['submit'])) {
     }
     $sp_categories = empty($_POST["sp_categories"]) ? array() : $_POST["sp_categories"];
     $sp_note = $_POST["sp_note"];
-    
+
     $error_upload = "";
     $sp_image_file = "";
     if (!empty($_FILES['userfile']['name'])) {
         require_once XOOPS_ROOT_PATH . "/modules/" . $GLOBALS["artdirname"] . "/class/uploader.php";
         $uploader = new art_uploader(
-            XOOPS_ROOT_PATH . "/" . $xoopsModuleConfig['path_image']
+        XOOPS_ROOT_PATH . "/" . $xoopsModuleConfig['path_image']
         );
         if ( $uploader->fetchMedia( $_POST['xoops_upload_file'][0]) ) {
             if ( !$uploader->upload() ){
@@ -73,7 +73,7 @@ if (!empty($_POST['submit'])) {
             $spotlight_obj->setVar("sp_image", $sp_image);
         }
     }
-    
+
     if ($xoopsUser->getVar("uid") != $spotlight_obj->getVar("uid")) {
         $spotlight_obj->setVar("uid", $xoopsUser->getVar("uid"));
     }
@@ -82,11 +82,11 @@ if (!empty($_POST['submit'])) {
     }
     if ($sp_note != $spotlight_obj->getVar("sp_note")) {
         $spotlight_obj->setVar("sp_note", $sp_note);
-    }    
+    }
     if ($sp_image != $spotlight_obj->getVar("sp_image")) {
         $spotlight_obj->setVar("sp_image", $sp_image);
     }
-    
+
     if ($res = $spotlight_handler->insert($spotlight_obj)) {
         if ($art_id > 0 && !empty($xoopsModuleConfig['notification_enabled'])) {
             $notification_handler =& xoops_gethandler('notification');

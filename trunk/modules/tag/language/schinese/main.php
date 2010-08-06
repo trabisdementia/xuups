@@ -35,20 +35,20 @@ $GLOBALS["TAG_MD_ADDONS"] = array(
 	"google"	=> array(
 						"title"		=> "Google",
 						"link"		=> "http://www.google.com/search?q=%s",
-						),	
+),
 	"baidu"	=> array(
 						"title"		=> "°Ù¶È",
 						"link"		=> "http://www.baidu.com/s?wd=%s",
-						),	
+),
 	"techno"	=> array(
 						"title"		=> "Technorati",
 						"link"		=> "http://technorati.com/tag/%s/",
 						"function"	=> "xoops_utf8_encode",
-						),	
+),
 	"flickr"	=> array(
 						"title"		=> "Flickr",
 						"link"		=> "http://www.flickr.com/photos/tags/%s/",
 						"function"	=> "xoops_utf8_encode",
-						),	
-	);
+),
+);
 ?>

@@ -94,11 +94,11 @@ if ($error == false) {
                 $error = sprintf(_FAILSAVEIMG, $image->getVar('image_nicename'));
             }
         }
-     } else {
+    } else {
         $error = sprintf(_FAILFETCHIMG, 0) . "<br />" . implode("<br />", $uploader->getErrors(false));
     }
 }
-    
+
 if ($error) {
     $arr = array('error', publisher_convertCharset($error));
 } else {

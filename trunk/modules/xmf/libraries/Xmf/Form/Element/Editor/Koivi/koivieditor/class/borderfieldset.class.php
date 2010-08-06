@@ -34,14 +34,14 @@ class WysiwygBorderFieldset
     var $url;
     var $skin;
     var $onchange;
-    
+
     function WysiwygBorderFieldset($url,$skin,$onchange)
     {
         $this->setUrl($url);
         $this->setSkin($skin);
         $this->setOnchange($onchange);
     }
-    
+
     function getonchange(){return $this->onchange;}
     function setonchange($onchange){$this->onchange = $onchange;}
     function getUrl(){return $this->url;}
@@ -49,7 +49,7 @@ class WysiwygBorderFieldset
     function getSkin(){return $this->skin;}
     function setSkin($skin){$this->skin = $skin;}
     function display(){echo $this->_renderBorders();}
-    
+
     function _renderBorders()
     {
         $url=$this->getUrl();
@@ -72,8 +72,8 @@ class WysiwygBorderFieldset
                 <option value="pc">pc</option>
                 <option value="in">in</option>
                 <option value="pt">pt</option>';
-        
-        $borders='        
+
+        $borders='
                     <table border="0" cellspacing="0" cellpadding="2">
                           <tr>
                             <td>'._XK_BORDERLEFT.'</td>
@@ -116,8 +116,8 @@ class WysiwygBorderFieldset
                             </td>
                           </tr>
             </table>';
-    return $borders;
-}
+        return $borders;
+    }
 }
 
 

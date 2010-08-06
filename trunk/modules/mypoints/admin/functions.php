@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
@@ -15,7 +15,7 @@
  * @package         Mytabs
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
-.* @author          InstantZero http://xoops.instant-zero.com
+ .* @author          InstantZero http://xoops.instant-zero.com
  * @version         $Id: functions.php 0 2009-11-14 18:47:04Z trabis $
  */
 

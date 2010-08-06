@@ -1,17 +1,17 @@
 <?php
 /*
-Page:           rpc.php
-Created:        Aug 2006
-Last Mod:       Mar 18 2007
-This page handles the 'AJAX' type response if the user
-has Javascript enabled.
----------------------------------------------------------
-ryan masuga, masugadesign.com
-ryan@masugadesign.com
-Licensed under a Creative Commons Attribution 3.0 License.
-http://creativecommons.org/licenses/by/3.0/
-See ajaxrating.txt for full credit details.
---------------------------------------------------------- */
+ Page:           rpc.php
+ Created:        Aug 2006
+ Last Mod:       Mar 18 2007
+ This page handles the 'AJAX' type response if the user
+ has Javascript enabled.
+ ---------------------------------------------------------
+ ryan masuga, masugadesign.com
+ ryan@masugadesign.com
+ Licensed under a Creative Commons Attribution 3.0 License.
+ http://creativecommons.org/licenses/by/3.0/
+ See ajaxrating.txt for full credit details.
+ --------------------------------------------------------- */
 
 //  Author: Trabis
 //  URL: http://www.xuups.com

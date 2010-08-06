@@ -4,7 +4,7 @@
 //  E-Mail: lusopoemas@gmail.com
 
 if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 class SubscribersUser extends XoopsObject
@@ -20,7 +20,7 @@ class SubscribersUser extends XoopsObject
         $this->initVar("user_country", XOBJ_DTYPE_TXTAREA, null, false);
         $this->initVar("user_created", XOBJ_DTYPE_INT, null, false);
     }
-    
+
     function toArray()
     {
         $ret = array();

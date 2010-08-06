@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,9 +16,9 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: select.article.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 // Where to locate the file? Member search should be restricted
-// Limitation: Only work with javascript enabled 
+// Limitation: Only work with javascript enabled
 
 include "../../../mainfile.php";
 
@@ -69,7 +69,7 @@ echo $js_additem = '
 
 $form_article = new XoopsThemeForm(art_constant("MD_ARTICLE_SELECT"), "selectarticle", xoops_getenv('PHP_SELF'), "GET");
 
-$article_handler =& xoops_getmodulehandler("article", $GLOBALS["artdirname"]);   
+$article_handler =& xoops_getmodulehandler("article", $GLOBALS["artdirname"]);
 $criteria = new CriteriaCompo(new Criteria("cat_id", $category_id));
 $article_count = $article_handler->getCount($criteria);
 $criteria->setSort("art_id");
@@ -101,7 +101,7 @@ $form_article->addElement($select_tray);
 $form_article->addElement(new XoopsFormHidden('target', $_REQUEST["target"]));
 $form_article->addElement(new XoopsFormHidden('category', $_REQUEST["category"]));
 $form_article->addElement($button_tray);
-$form_article->display();        
+$form_article->display();
 
 include_once XOOPS_ROOT_PATH . "/footer.php";
 ?>

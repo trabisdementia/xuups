@@ -25,36 +25,36 @@
 //  ------------------------------------------------------------------------ //
 
 if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
+    die('XOOPS root path not defined');
 }
 
 function news_tag_block_cloud_show($options)
 {
-	require_once XOOPS_ROOT_PATH.'/modules/tag/blocks/block.php';
-	if(!isset($module_dirname)) {
-		$module_dirname = 'news';
-	}
-	return tag_block_cloud_show($options, $module_dirname);
+    require_once XOOPS_ROOT_PATH.'/modules/tag/blocks/block.php';
+    if(!isset($module_dirname)) {
+        $module_dirname = 'news';
+    }
+    return tag_block_cloud_show($options, $module_dirname);
 }
 
 function news_tag_block_cloud_edit($options)
 {
-	require_once XOOPS_ROOT_PATH.'/modules/tag/blocks/block.php';
-	return tag_block_cloud_edit($options);
+    require_once XOOPS_ROOT_PATH.'/modules/tag/blocks/block.php';
+    return tag_block_cloud_edit($options);
 }
 
 function news_tag_block_top_show($options)
 {
-	require_once XOOPS_ROOT_PATH.'/modules/tag/blocks/block.php';
-	if(!isset($module_dirname)) {
-		$module_dirname = 'news';
-	}
-	return tag_block_top_show($options, $module_dirname);
+    require_once XOOPS_ROOT_PATH.'/modules/tag/blocks/block.php';
+    if(!isset($module_dirname)) {
+        $module_dirname = 'news';
+    }
+    return tag_block_top_show($options, $module_dirname);
 }
 
 function news_tag_block_top_edit($options)
 {
-	require_once XOOPS_ROOT_PATH.'/modules/tag/blocks/block.php';
-	return tag_block_top_edit($options);
+    require_once XOOPS_ROOT_PATH.'/modules/tag/blocks/block.php';
+    return tag_block_top_edit($options);
 }
 ?>

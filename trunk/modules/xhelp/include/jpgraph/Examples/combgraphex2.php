@@ -14,7 +14,7 @@ $datax = array();
 $ts = time();
 $n=70; // Number of data points
 for($i=0; $i < $n; ++$i ) {
-    $datax[$i] = $ts+$i*150000; 
+    $datax[$i] = $ts+$i*150000;
     $datay[$i] = rand(5,60);
     $datay2[$i] = rand(1,8);
 }
@@ -34,7 +34,7 @@ $xmax = $datax[$n-1]+$grace;;
 // Overall width of graphs
 $w = 450;
 // Left and right margin for each graph
-$lm=25; $rm=15; 
+$lm=25; $rm=15;
 
 //----------------------
 // Setup the line graph

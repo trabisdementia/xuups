@@ -1,0 +1,70 @@
+/**
+* $Id: changelog.txt,v 1.13 2005/06/08 19:16:53 fx2024 Exp $
+* Module: SmartClient
+* Author: The SmartFactory <www.smartfactory.ca>
+* Licence: GNU
+*/
+
+=> Version 1.0.2 Final (2005-05-09)
+===================================
+
+- Keyword highlighting added in the search function
+- A few bugs from 1.0.1 were fixed
+
+=> Version 1.0.1 Final (2005-05-09)
+===================================
+
+- A bug was found in the logo url display, on the index and client's page
+- Undefined constants fixed
+- The View All link on the clients block was not pointing to the client page
+- A bug was found when uploading a logo from the user side
+- An error was fixed in the client's template
+
+=> Version 1.0.1 Beta 1 (2005-03-28)
+====================================
+
+- Keyword highlighting added in the search function
+- A bug was causing a fatal error in the user profile
+- The search feature had some bugs that are now fixed
+- The index page was not displaying the logo properly under IE
+- The upload of a jpg file is now fixed
+- The code of the module has been improve to facilitate the renaming of the module folder (see changing_directory.txt)
+
+=> Version 1.0 Final (2005-02-28)
+=================================
+
+- The images folder was changed to xoops_root/uploads/smartclient, for permissions reason.
+- A search feature with keywords highlighting has been introduced
+- Jpeg files upload has been fixed
+- Errors fixed in the admin index sort options
+- Anonymous submit bug fixed
+
+=> Version 1.0 RC1 (2004-12-22)
+===============================
+
+- The clients block random functionnality now works perfectly.
+- Error fixed when updating notification options on client.php.
+- If only the 'summary' field is completed, the client will be considered as a basic client and will not have a 'client' page. Links on the client logo will reflect this behavior.
+- <h2> and <h3> tags have been replaced by custom classes.
+- Any color definition has been removed from the module.
+- New config option to display a 'Back to clients index' link.
+- Changing the About page to use a class that create the page.
+
+=> Version 0.9 Beta 2 (2004-12-01)
+==================================
+
+- When creating a new client in the admin side, the status select box was not displayed, causing the client's status to be incorrectly set. This has been fixed.
+
+=> Version 0.9 Beta 1 (2004-11-30)
+==================================
+
+- As usual a lot of little bugs have been fixed.
+- The status of a client can now be set in the EditClient form.
+- Each client now has a page on the public side displaying the clients info + some contact informations.
+- The logo upload files are now held in xoops_root_path/uploads/smartclient.
+- The webmaster can create this folder directly in the admin side of the module (thanks to Newbb2 team:-) )
+
+=> Version 0.8 Beta 1 (2004-11-10)
+==================================
+
+- First public release of the module.

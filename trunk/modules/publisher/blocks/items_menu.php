@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -19,7 +19,7 @@
  * @author          The SmartFactory <www.smartfactory.ca>
  * @version         $Id: items_menu.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
@@ -29,49 +29,49 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 function publisher_items_menu_show($options)
 {
     global $xoopsModule;
-	$block = array();
-	
-	$publisher =& PublisherPublisher::getInstance();
+    $block = array();
+
+    $publisher =& PublisherPublisher::getInstance();
 
     // Getting all top cats
-	$block_categoriesObj = $publisher->getHandler('category')->getCategories(0, 0, 0);
+    $block_categoriesObj = $publisher->getHandler('category')->getCategories(0, 0, 0);
 
     if (count($block_categoriesObj) == 0) return $block;
 
-	// Are we in Publisher ?
-	$block['inModule'] = (isset($xoopsModule) && $xoopsModule->getVar('dirname') == $publisher->getModule()->getVar('dirname'));
+    // Are we in Publisher ?
+    $block['inModule'] = (isset($xoopsModule) && $xoopsModule->getVar('dirname') == $publisher->getModule()->getVar('dirname'));
 
-	$catlink_class = 'menuMain';
+    $catlink_class = 'menuMain';
 
-	$categoryid = 0;
+    $categoryid = 0;
 
-	if ($block['inModule']) {
-		// Are we in a category and if yes, in which one ?
-		$categoryid = isset($_GET['categoryid']) ? $_GET['categoryid'] : 0;
+    if ($block['inModule']) {
+        // Are we in a category and if yes, in which one ?
+        $categoryid = isset($_GET['categoryid']) ? $_GET['categoryid'] : 0;
 
-		if ($categoryid != 0) {
-			// if we are in a category, then the $categoryObj is already defined in publisher/category.php
-			global $categoryObj;
-			$block['currentcat'] = $categoryObj->getCategoryLink('menuTop');
-			$catlink_class = 'menuSub';
-		}
-	}
-	
-	$array_categoryids = array_keys($block_categoriesObj);
-	$categoryids = implode(', ', $array_categoryids);
+        if ($categoryid != 0) {
+            // if we are in a category, then the $categoryObj is already defined in publisher/category.php
+            global $categoryObj;
+            $block['currentcat'] = $categoryObj->getCategoryLink('menuTop');
+            $catlink_class = 'menuSub';
+        }
+    }
 
-	foreach ($block_categoriesObj as $catid => $block_categoryObj) {
-		if($catid != $categoryid){
-			$block['categories'][$catid]['categoryLink'] = $block_categoryObj->getCategoryLink($catlink_class);
-		}
-	}
+    $array_categoryids = array_keys($block_categoriesObj);
+    $categoryids = implode(', ', $array_categoryids);
 
-	return $block;
+    foreach ($block_categoriesObj as $catid => $block_categoryObj) {
+        if($catid != $categoryid){
+            $block['categories'][$catid]['categoryLink'] = $block_categoryObj->getCategoryLink($catlink_class);
+        }
+    }
+
+    return $block;
 }
 
 function publisher_items_menu_edit($options)
 {
-	$form = publisher_createCategorySelect($options[0]);
+    $form = publisher_createCategorySelect($options[0]);
 
     $form .= "&nbsp;<br>" . _MB_PUBLISHER_ORDER . "&nbsp;<select name='options[]'>";
 

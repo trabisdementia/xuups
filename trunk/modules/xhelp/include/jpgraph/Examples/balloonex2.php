@@ -2,13 +2,13 @@
 require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_scatter.php');
 
-// Each ballon is specificed by four values. 
+// Each ballon is specificed by four values.
 // (X,Y,Size,Color)
 $data = array(
-    array(1,12,10,'orange'),
-    array(3,41,15,'red'),
-    array(4,5,19,'lightblue'),
-    array(5,70,22,'yellow')
+array(1,12,10,'orange'),
+array(3,41,15,'red'),
+array(4,5,19,'lightblue'),
+array(5,70,22,'yellow')
 );
 
 
@@ -17,14 +17,14 @@ $data = array(
 // library from the above raw data.
 $n = count($data);
 for( $i=0; $i < $n; ++$i ) {
-    
+
     $datax[$i] = $data[$i][0];
     $datay[$i] = $data[$i][1];
 
     // Create a faster lookup array so we don't have to search
     // for the correct values in the callback function
     $format[strval($datax[$i])][strval($datay[$i])] = array($data[$i][2],$data[$i][3]);
-    
+
 }
 
 
@@ -35,13 +35,13 @@ for( $i=0; $i < $n; ++$i ) {
 function FCallback($aYVal,$aXVal) {
     global $format;
     return array($format[strval($aXVal)][strval($aYVal)][0],'',
-		 $format[strval($aXVal)][strval($aYVal)][1],'','');
+    $format[strval($aXVal)][strval($aYVal)][1],'','');
 }
 
 // Setup a basic graph
 $graph = new Graph(450,300,'auto');
 $graph->SetScale("intlin");
-$graph->SetMargin(40,40,40,40);		
+$graph->SetMargin(40,40,40,40);
 $graph->SetMarginColor('wheat');
 
 $graph->title->Set("Example of ballon scatter plot with X,Y callback");

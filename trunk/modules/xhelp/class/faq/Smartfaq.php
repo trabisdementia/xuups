@@ -18,7 +18,7 @@ require_once(XHELP_CLASS_PATH .'/faqAdapter.php');
 @include(XHELP_SMARTFAQ_PATH .'/include/functions.php');
 
 class xhelpSmartfaqAdapter extends xhelpFaqAdapter {
-    
+
     /**
      * Does application support categories?
      * Possible Values:
@@ -28,7 +28,7 @@ class xhelpSmartfaqAdapter extends xhelpFaqAdapter {
      * @access public
      */
     var $categoryType = XHELP_FAQ_CATEGORY_SING;
-    
+
     /**
      * Adapter Details
      * Required Values:
@@ -50,7 +50,7 @@ class xhelpSmartfaqAdapter extends xhelpFaqAdapter {
         'tested_versions' => '1.04',
         'url' => 'http://www.smartfactory.ca/',
         'module_dir' => 'smartfaq');
-    
+
     /**
      * Class Constructor (Required)
      * @return NULL
@@ -61,7 +61,7 @@ class xhelpSmartfaqAdapter extends xhelpFaqAdapter {
         // variables are initialized properly.
         parent::init();
     }
-    
+
     /**
      * getCategories: retrieve the categories for the module
      * @return ARRAY Array of xhelpFaqCategory
@@ -71,11 +71,11 @@ class xhelpSmartfaqAdapter extends xhelpFaqAdapter {
         $ret = array();
         // Create an instance of the xhelpFaqCategoryHandler
         $hFaqCategory =& xhelpGetHandler('faqCategory');
-        
+
         // Get all the categories for the application
         $hSmartCategory =& sf_gethandler('category');
         $categories =& $hSmartCategory->getCategories(0, 0, -1);
-        
+
         //Convert the module specific category to the
         //xhelpFaqCategory object for standarization
         foreach ($categories as $category)
@@ -87,10 +87,10 @@ class xhelpSmartfaqAdapter extends xhelpFaqAdapter {
             $ret[] = $faqcat;
         }
         unset ($categories);
-        
+
         return $ret;
     }
-    
+
     /**
      * storeFaq: store the FAQ in the application's specific database (required)
      * @param xhelpFaq $faq The faq to add
@@ -98,57 +98,57 @@ class xhelpSmartfaqAdapter extends xhelpFaqAdapter {
      * @access public
      */
     function storeFaq(&$faq)
-    {        
+    {
         global $xoopsUser;
         $uid = $xoopsUser->getVar('uid');
-        
+
         // Take xhelpFaq and create faq for smartfaq
         $hFaq =& sf_gethandler('faq');
         $hAnswer =& sf_gethandler('answer');
         $myFaq =& $hFaq->create();
         $myAnswer =& $hAnswer->create();            // Creating the answer object
-        
-        
+
+
         //$faq->getVar('categories') is an array. If your application
         //only supports single categories use the first element
         //in the array
         $categories = $faq->getVar('categories');
         $categories = intval($categories[0]);       // Change array of categories to 1 category
-        
+
         $myFaq->setVar('uid', $uid);
         $myFaq->setVar('question', $faq->getVar('problem'));
         $myFaq->setVar('datesub', time());
         $myFaq->setVar('categoryid', $categories);
         $myFaq->setVar('status', _SF_STATUS_PUBLISHED);
-        
+
         $ret = $hFaq->insert($myFaq);
         $faq->setVar('id', $myFaq->getVar('faqid'));
-        
+
         if($ret){   // If faq was stored, store answer
             // Trigger event for question being stored
-            
+
             $myAnswer->setVar('status', _SF_AN_STATUS_APPROVED);
-        	$myAnswer->setVar('faqid', $myFaq->faqid());
-        	$myAnswer->setVar('answer', $faq->getVar('solution'));
-        	$myAnswer->setVar('uid', $uid);
-        	
-        	$ret = $hAnswer->insert($myAnswer);
+            $myAnswer->setVar('faqid', $myFaq->faqid());
+            $myAnswer->setVar('answer', $faq->getVar('solution'));
+            $myAnswer->setVar('uid', $uid);
+             
+            $ret = $hAnswer->insert($myAnswer);
         }
-               
+         
         if($ret){
             // Set the new url for the saved FAQ
             $faq->setVar('url', $this->makeFaqUrl($faq));
-            
+
             // Trigger any module events
             $myFaq->sendNotifications(array(_SF_NOT_FAQ_PUBLISHED));
         }
-        
+
         return $ret;
     }
-    
+
     /**
      * Create the url going to the faq article
-     * 
+     *
      * @param $faq xhelpFaq object
      * @return string
      * @access private

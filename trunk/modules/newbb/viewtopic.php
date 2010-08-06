@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -94,12 +94,12 @@ $viewmode_cookie = newbb_getcookie("V");
 if (isset($_GET['viewmode']) && in_array($_GET['viewmode'], $valid_modes)) {
     newbb_setcookie("V", $_GET['viewmode'], $forumCookie['expire']);
 }
-$viewmode = isset($_GET['viewmode']) 
-            ? $_GET['viewmode'] 
-            : ( !empty($viewmode_cookie)
-                ? $viewmode_cookie
-                : @$valid_modes[$xoopsModuleConfig['view_mode'] - 1]
-             );
+$viewmode = isset($_GET['viewmode'])
+? $_GET['viewmode']
+: ( !empty($viewmode_cookie)
+? $viewmode_cookie
+: @$valid_modes[$xoopsModuleConfig['view_mode'] - 1]
+);
 $viewmode = @in_array($viewmode, $valid_modes) ? $viewmode : $valid_modes[0];
 $order = (isset($_GET['order']) && in_array(strtoupper($_GET['order']), array("DESC", "ASC"))) ? $_GET['order'] : "ASC";
 
@@ -151,7 +151,7 @@ $xoopsTpl->assign(array(
     'forum_name'         => $forum_obj->getVar('forum_name'), 
     'lang_nexttopic'     => _MD_NEXTTOPIC, 
     'lang_prevtopic'     => _MD_PREVTOPIC
-    ));
+));
 
 $category_handler =& xoops_getmodulehandler("category");
 $category_obj =& $category_handler->get($forum_obj->getVar("cat_id"), array("cat_title"));
@@ -234,7 +234,7 @@ if ($viewmode == "thread") {
     if (!empty($post_id)) {
         $post_handler =& xoops_getmodulehandler('post', 'newbb');
         $currentPost = $post_handler -> get($post_id);
-        
+
         if (!$isadmin && $currentPost->getVar('approved') < 0) {
             redirect_header("viewtopic.php?topic_id=" . $topic_id, 2, _MD_NORIGHTTOVIEW);
             exit();
@@ -247,7 +247,7 @@ if ($viewmode == "thread") {
     }
 
     $xoopsTpl->append('topic_posts', $currentPost->showPost($isadmin));
-    
+
     $postArray =& $topic_handler->getPostTree($postsArray);
     if ( count($postArray) > 0 ) {
         foreach ($postArray as $treeItem) {
@@ -347,7 +347,7 @@ if ($xoopsModuleConfig['show_permissiontable']) {
 ///////////////////////////////
 // show Poll
 if ( ( $topic_obj->getVar('topic_haspoll') && $topic_handler->getPermission($forum_obj, $topic_obj->getVar('topic_status'), "vote") )
-    || $topic_handler->getPermission($forum_obj, $topic_obj->getVar('topic_status'), "addpoll") ) {
+|| $topic_handler->getPermission($forum_obj, $topic_obj->getVar('topic_status'), "addpoll") ) {
     @include_once XOOPS_ROOT_PATH . "/modules/xoopspoll/class/xoopspoll.php";
     @include_once XOOPS_ROOT_PATH . "/modules/xoopspoll/class/xoopspolloption.php";
     @include_once XOOPS_ROOT_PATH . "/modules/xoopspoll/class/xoopspolllog.php";
@@ -396,7 +396,7 @@ if ( $topic_handler->getPermission($forum_obj, $topic_obj->getVar('topic_status'
             "image"    => $poll_restart,
             "name"    => _MD_RESTARTPOLL);
 
-        $xoopsTpl->assign_by_ref('adminpoll_actions', $adminpoll_actions);    
+        $xoopsTpl->assign_by_ref('adminpoll_actions', $adminpoll_actions);
     }
 }
 if (isset($poll)) unset($poll);
@@ -487,18 +487,18 @@ if ($viewmode=="thread") {
     }
 }
 switch ($status) {
-case 'active':
-    $current_status = '['._MD_TYPE_ADMIN.']';
-    break;
-case 'pending':
-    $current_status = '['._MD_TYPE_PENDING.']';
-    break;
-case 'deleted':
-    $current_status = '['._MD_TYPE_DELETED.']';
-    break;
-default:
-    $current_status = '';
-    break;
+    case 'active':
+        $current_status = '['._MD_TYPE_ADMIN.']';
+        break;
+    case 'pending':
+        $current_status = '['._MD_TYPE_PENDING.']';
+        break;
+    case 'deleted':
+        $current_status = '['._MD_TYPE_DELETED.']';
+        break;
+    default:
+        $current_status = '';
+        break;
 }
 $xoopsTpl->assign('topicstatus', $current_status);
 
@@ -523,7 +523,7 @@ if ( !empty($xoopsModuleConfig['quickreply_enabled']) && $topic_handler->getPerm
         require_once XOOPS_ROOT_PATH . "/Frameworks/compat/class/xoopsform/formeditor.php";
     }
 
-$xoopsLogger->startTime( 'XOOPS output module - topic - quickreply - form' );
+    $xoopsLogger->startTime( 'XOOPS output module - topic - quickreply - form' );
     $forum_form = new XoopsThemeForm(_MD_POSTREPLY, 'quick_reply', "post.php", 'post', true);
 
     if (!is_object($xoopsUser)) {
@@ -560,7 +560,7 @@ $xoopsLogger->startTime( 'XOOPS output module - topic - quickreply - form' );
     $forum_form->addElement(new XoopsFormHidden('attachsig', 1));
 
     $forum_form->addElement(new XoopsFormHidden('isreply', 1));
-    
+
     $forum_form->addElement(new XoopsFormHidden('subject', _MD_RE . ': ' . $topic_obj->getVar('topic_title', 'e')));
     $forum_form->addElement(new XoopsFormHidden('pid', empty($post_id) ? $topic_handler->getTopPostId($topic_id) : $post_id));
     $forum_form->addElement(new XoopsFormHidden('topic_id', $topic_id));
@@ -571,7 +571,7 @@ $xoopsLogger->startTime( 'XOOPS output module - topic - quickreply - form' );
 
     $forum_form->addElement(new XoopsFormHidden('notify', -1));
     $forum_form->addElement(new XoopsFormHidden('contents_submit', 1));
-    
+
     $submit_button = new XoopsFormButton('', 'quick_submit', _SUBMIT, "submit");
     $submit_button->setExtra('onclick="if (document.forms.quick_reply.message.value == \'RE\' || document.forms.quick_reply.message.value == \'\') { alert(\'' . _MD_QUICKREPLY_EMPTY . '\'); return false;} else { return true;}"');
     $forum_form->addElement($submit_button);
@@ -580,7 +580,7 @@ $xoopsLogger->startTime( 'XOOPS output module - topic - quickreply - form' );
     $display = (in_array('qr', $toggles)) ? 'none;' : 'block;';
     $xoopsTpl->assign('quickreply', array( 'show' => 1, 'display' => $display, 'icon' => newbb_displayImage('t_qr'), 'form' => $forum_form->render()));
     unset($forum_form);
-$xoopsLogger->stopTime( 'XOOPS output module - topic - quickreply - form' );
+    $xoopsLogger->stopTime( 'XOOPS output module - topic - quickreply - form' );
 } else {
     $xoopsTpl->assign('quickreply', array( 'show' => 0));
 }

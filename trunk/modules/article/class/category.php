@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: category.php 2283 2008-10-12 03:36:13Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
@@ -24,76 +24,76 @@ include_once dirname(dirname(__FILE__)) . "/include/vars.php";
 mod_loadFunctions("parse", $GLOBALS["artdirname"]);
 
 /**
- * Xcategory 
- * 
+ * Xcategory
+ *
  * @author D.J. (phppp)
  * @copyright copyright &copy; 2005 XoopsForge.com
  * @package module::article
  *
- * {@link XoopsObject} 
+ * {@link XoopsObject}
  **/
 if (!class_exists("Xcategory")) {
-class Xcategory extends XoopsObject
-{
-    /**
-     * Constructor
-     */
-    function Xcategory()
+    class Xcategory extends XoopsObject
     {
-        //$this->ArtObject();
-        //$this->table = art_DB_prefix("category");
-        $this->initVar("cat_id",             XOBJ_DTYPE_INT,     null, false);                // auto_increment unique ID
-        $this->initVar("cat_title",         XOBJ_DTYPE_TXTBOX,     "", true);                    // category title
-        $this->initVar("cat_pid",             XOBJ_DTYPE_INT,     0, false);                     // parent category ID
-        $this->initVar("cat_description",     XOBJ_DTYPE_TXTAREA,    "", false);                    // description
-        $this->initVar("cat_image",         XOBJ_DTYPE_SOURCE,    "", false);                    // header graphic (unique)
-        $this->initVar("cat_order",         XOBJ_DTYPE_INT,     99, false);                    // display order
-        $this->initVar("cat_entry",         XOBJ_DTYPE_INT,     0, false);                     // entry article ID for the category. If cat_entry is set, the article will substitute the category index page
-                                                                                            // Feature designed by Skalpa
-        $this->initVar("cat_template",         XOBJ_DTYPE_SOURCE,    "default", false);            // category-wide template
-        $this->initVar("cat_sponsor",         XOBJ_DTYPE_TXTAREA,    "", false);                    // sponsors: url[space]title
+        /**
+         * Constructor
+         */
+        function Xcategory()
+        {
+            //$this->ArtObject();
+            //$this->table = art_DB_prefix("category");
+            $this->initVar("cat_id",             XOBJ_DTYPE_INT,     null, false);                // auto_increment unique ID
+            $this->initVar("cat_title",         XOBJ_DTYPE_TXTBOX,     "", true);                    // category title
+            $this->initVar("cat_pid",             XOBJ_DTYPE_INT,     0, false);                     // parent category ID
+            $this->initVar("cat_description",     XOBJ_DTYPE_TXTAREA,    "", false);                    // description
+            $this->initVar("cat_image",         XOBJ_DTYPE_SOURCE,    "", false);                    // header graphic (unique)
+            $this->initVar("cat_order",         XOBJ_DTYPE_INT,     99, false);                    // display order
+            $this->initVar("cat_entry",         XOBJ_DTYPE_INT,     0, false);                     // entry article ID for the category. If cat_entry is set, the article will substitute the category index page
+            // Feature designed by Skalpa
+            $this->initVar("cat_template",         XOBJ_DTYPE_SOURCE,    "default", false);            // category-wide template
+            $this->initVar("cat_sponsor",         XOBJ_DTYPE_TXTAREA,    "", false);                    // sponsors: url[space]title
 
-        $this->initVar("cat_moderator",     XOBJ_DTYPE_ARRAY,     serialize(array()));        // moderators/editors
-        $this->initVar("cat_track",         XOBJ_DTYPE_ARRAY,     serialize(array()));         // track back to top category, for building Bread Crumbs
-        $this->initVar("cat_lastarticles",     XOBJ_DTYPE_ARRAY,     serialize(array()));         // last 10 article Ids
-    }
+            $this->initVar("cat_moderator",     XOBJ_DTYPE_ARRAY,     serialize(array()));        // moderators/editors
+            $this->initVar("cat_track",         XOBJ_DTYPE_ARRAY,     serialize(array()));         // track back to top category, for building Bread Crumbs
+            $this->initVar("cat_lastarticles",     XOBJ_DTYPE_ARRAY,     serialize(array()));         // last 10 article Ids
+        }
 
-    /**
-     * get a list of parsed sponsors of the category
-     * 
-     * @return     array
-     */
-    function &getSponsor()
-    {
-        $sponsors = art_parseLinks($this->getVar("cat_sponsor", "e"));
-        return $sponsors;
-    }
+        /**
+         * get a list of parsed sponsors of the category
+         *
+         * @return     array
+         */
+        function &getSponsor()
+        {
+            $sponsors = art_parseLinks($this->getVar("cat_sponsor", "e"));
+            return $sponsors;
+        }
 
-    /**
-     * get verified image url of the category
-     * 
-     * @return     string
-     */
-    function getImage()
-    {
-        mod_loadFunctions("url", $GLOBALS["artdirname"]);
-        $image = art_getImageUrl($this->getVar("cat_image"));
-        return $image;
+        /**
+         * get verified image url of the category
+         *
+         * @return     string
+         */
+        function getImage()
+        {
+            mod_loadFunctions("url", $GLOBALS["artdirname"]);
+            $image = art_getImageUrl($this->getVar("cat_image"));
+            return $image;
+        }
     }
-}
 }
 
 /**
-* Category object handler class.  
-* @package module::article
-*
-* @author  D.J. (phppp)
-* @copyright copyright &copy; 2005 The XOOPS Project
-*
-* {@link XoopsPersistableObjectHandler} 
-*
-* @param CLASS_PREFIX variable prefix for the class name
-*/
+ * Category object handler class.
+ * @package module::article
+ *
+ * @author  D.J. (phppp)
+ * @copyright copyright &copy; 2005 The XOOPS Project
+ *
+ * {@link XoopsPersistableObjectHandler}
+ *
+ * @param CLASS_PREFIX variable prefix for the class name
+ */
 
 art_parse_class('
 class [CLASS_PREFIX]CategoryHandler extends XoopsPersistableObjectHandler

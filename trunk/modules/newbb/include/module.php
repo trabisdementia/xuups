@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,17 +20,17 @@ if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
 
-function xoops_module_update_newbb(&$module, $oldversion = null) 
+function xoops_module_update_newbb(&$module, $oldversion = null)
 {
     require_once XOOPS_ROOT_PATH . "/modules/newbb/include/functions.config.php";
     $newbbConfig = newbb_loadConfig();
-    
+
     // NewBB 1.0
     if ($oldversion == 100) {
         include_once dirname(__FILE__) . "/module.v100.php";
         xoops_module_update_newbb_v100($module);
     }
-    
+
     // NewBB 2.* and CBB 1.*
     // change group permission name
     // change forum moderators
@@ -38,7 +38,7 @@ function xoops_module_update_newbb(&$module, $oldversion = null)
         include_once dirname(__FILE__) . "/module.v220.php";
         xoops_module_update_newbb_v220($module);
     }
-    
+
     if ($oldversion < 230) {
         $GLOBALS['xoopsDB']->queryFromFile(XOOPS_ROOT_PATH . "/modules/" . $module->getVar("dirname", "n") . "/sql/upgrade_230.sql");
     }
@@ -46,22 +46,22 @@ function xoops_module_update_newbb(&$module, $oldversion = null)
     if ($oldversion < 304) {
         $GLOBALS['xoopsDB']->queryFromFile(XOOPS_ROOT_PATH . "/modules/" . $module->getVar("dirname", "n") . "/sql/mysql.304.sql");
     }
-    
+
     if ($oldversion < 400) {
         $GLOBALS['xoopsDB']->queryFromFile(XOOPS_ROOT_PATH . "/modules/" . $module->getVar("dirname", "n") . "/sql/mysql.400.sql");
         include dirname(__FILE__) . "/module.v400.php";
         xoops_module_update_newbb_v400($module);
     }
-    
+
     if (!empty($newbbConfig["syncOnUpdate"])) {
         require_once XOOPS_ROOT_PATH . "/modules/newbb/include/functions.recon.php";
         newbb_synchronization();
     }
-    
+
     return true;
 }
 
-function xoops_module_pre_update_newbb(&$module) 
+function xoops_module_pre_update_newbb(&$module)
 {
     return newbb_setModuleConfig($module, true);
 }
@@ -100,7 +100,7 @@ function xoops_module_install_newbb(&$module)
     $forum->setVar('attach_ext', "zip|jpg|gif");
     $forum->setVar('hot_threshold', 20);
     $forum_id = $forum_handler->insert($forum);
-    
+
     /* Set corresponding permissions for the category and the forum */
     $module_id = $module->getVar("mid") ;
     $gperm_handler =& xoops_gethandler("groupperm");
@@ -117,7 +117,7 @@ function xoops_module_install_newbb(&$module)
             $gperm_handler->addRight("forum_" . $item, $forum_id, $group_id, $module_id);
         }
     }
-    
+
     /* Create a test post */
     require_once XOOPS_ROOT_PATH . "/modules/newbb/include/functions.user.php";
     $post_handler =& xoops_getmodulehandler('post', $module->getVar("dirname"));
@@ -136,11 +136,11 @@ function xoops_module_install_newbb(&$module)
     $forumpost->setVar('post_time', time());
     $forumpost->setVar('post_text', _MI_NEWBB_INSTALL_POST_TEXT, true);
     $postid = $post_handler->insert($forumpost);
-        
+
     return true;
 }
- 
-function newbb_setModuleConfig(&$module, $isUpdate = false) 
+
+function newbb_setModuleConfig(&$module, $isUpdate = false)
 {
     return true;
 }

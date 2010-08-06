@@ -43,7 +43,7 @@ class Xmf_Object_Dtype_Textarea extends Xmf_Object_Dtype_Abstract
 
     function getVar($obj, $key, $format, $ret)
     {
-         switch (strtolower($format)) {
+        switch (strtolower($format)) {
             case 's':
             case 'show':
                 $html = !empty($obj->vars['dohtml']['value']) ? 1 : 0;
@@ -81,7 +81,7 @@ class Xmf_Object_Dtype_Textarea extends Xmf_Object_Dtype_Abstract
 
     function getVarControl()
     {
-            return array('name' => 'textarea');
+        return array('name' => 'textarea');
     }
 
 }

@@ -5,11 +5,11 @@ require_once ('jpgraph/jpgraph_stock.php');
 
 // Data must be in the format : open,close,min,max
 $datay = array(
-    34,42,27,45,
-    55,25,14,59,
-    15,40,12,47,
-    62,38,25,65,
-    38,49,32,64);
+34,42,27,45,
+55,25,14,59,
+15,40,12,47,
+62,38,25,65,
+38,49,32,64);
 
 // Setup a simple graph
 $graph = new Graph(300,200);

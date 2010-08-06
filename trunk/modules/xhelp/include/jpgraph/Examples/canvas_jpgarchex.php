@@ -56,7 +56,7 @@ $t->Stroke($g->img,$scale);
 $t->Set("JPEG",$d+2*$s,$r+2,$s,1);
 $t->Stroke($g->img,$scale);
 $shape->IndentedRectangle($l,$r,$width,$h,$s*3,1,2,'lightgreen');
-$tt->Set("GD Basic library\n(1.8.x or 2.x)",$l,$r,$width,$h-1); 
+$tt->Set("GD Basic library\n(1.8.x or 2.x)",$l,$r,$width,$h-1);
 $tt->Stroke($g->img,$scale);
 
 
@@ -95,7 +95,7 @@ $t->Set("Radar\nGraph",$l+$w*2,$r,$w,$h);
 $t->Stroke($g->img,$scale);
 
 $shape->IndentedRectangle($l,$r,$width,3,4*$w,2,0,'gold1');
-$tt->Set("Base Graph\n(Orthogonal\ncoordinate system)",$l+4*$w,$r,$width-$w*4,3); 
+$tt->Set("Base Graph\n(Orthogonal\ncoordinate system)",$l+4*$w,$r,$width-$w*4,3);
 $tt->Stroke($g->img,$scale);
 
 $r -= 2;
@@ -111,14 +111,14 @@ $t->Set("2D\nPlot",$l+$w,$r,$w/2,$h);     $t->Stroke($g->img,$scale);
 $t->Set("3D\nPlot",$l+$w+$w/2,$r,$w/2,$h);$t->Stroke($g->img,$scale);
 $t->Set("Radar\nPlot",$l+2*$w,$r,$w,$h); $t->Stroke($g->img,$scale);
 
-$wp = ($width - 4*$w)/4; 
+$wp = ($width - 4*$w)/4;
 $t->Set("Error\nPlot",$l+4*$w,$r,$wp,$h); $t->Stroke($g->img,$scale);
 $t->Set("Line\nPlot",$l+4*$w+$wp,$r,$wp,$h); $t->Stroke($g->img,$scale);
 $t->Set("Bar\nPlot",$l+4*$w+2*$wp,$r,$wp,$h); $t->Stroke($g->img,$scale);
 $t->Set("Scatter\nPlot",$l+4*$w+3*$wp,$r,$wp,$h); $t->Stroke($g->img,$scale);
 
 // Show application top
-$r -= 2.5; $h=2; 
+$r -= 2.5; $h=2;
 $t->SetFillColor('blue');
 $t->SetFontColor('white');
 $t->SetFont(FF_ARIAL,FS_BOLD,20);
@@ -128,12 +128,12 @@ $t->Set("PHP Application",$l,$r,$width,$h); $t->Stroke($g->img,$scale);
 $r = 0.5;
 $tt->SetFontColor('black');
 $tt->SetFont(FF_TIMES,FS_BOLD,28);
-$tt->Set("JpGraph Architecture Overview",$l,$r,$width,1); 
+$tt->Set("JpGraph Architecture Overview",$l,$r,$width,1);
 $tt->Stroke($g->img,$scale);
 
 // Stroke footer
 $tt->SetFont(FF_VERDANA,FS_NORMAL,10);
-$tt->Set("Generated: ".date("ymd H:m",time()),0.1,$ymax*0.95); 
+$tt->Set("Generated: ".date("ymd H:m",time()),0.1,$ymax*0.95);
 $tt->Stroke($g->img,$scale);
 
 // .. and stream it all back

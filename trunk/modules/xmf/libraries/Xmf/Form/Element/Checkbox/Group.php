@@ -77,32 +77,32 @@ class Xmf_Form_Element_Checkbox_Group extends Xmf_Form_Element
      */
     function render()
     {
-    	$ele_name = $this->getName();
-		$ret = '<table class="outer"><tr><td class="odd"><table><tr>';
-		$cols = 1;
-		foreach ($this->_optionTree[0]['children'] as $topitem) {
-			if ($cols > 4) {
-				$ret .= '</tr><tr>';
-				$cols = 1;
-			}
-			$tree = '<td valign="top">';
-			$prefix = '';
-			$this->_renderOptionTree($tree, $this->_optionTree[$topitem], $prefix);
-			$ret .= $tree.'</td>';
-			$cols++;
-		}
-		$ret .= '</tr></table></td><td class="even" valign="top">';
-		$option_ids = array();
-		foreach (array_keys($this->_optionTree) as $id) {
-			if (!empty($id)) {
-				$option_ids[] = "'".$ele_name.'[groups]['.$this->_groupId.']['.$id.']'."'";
-			}
-		}
-		$checkallbtn_id = $ele_name.'[checkallbtn]['.$this->_groupId.']';
-		$option_ids_str = implode(', ', $option_ids);
-		$ret .= _ALL." <input id=\"".$checkallbtn_id."\" type=\"checkbox\" value=\"\" onclick=\"var optionids = new Array(".$option_ids_str."); xoopsCheckAllElements(optionids, '".$checkallbtn_id."');\" />";
-		$ret .= '</td></tr></table>';
-		return $ret;
+        $ele_name = $this->getName();
+        $ret = '<table class="outer"><tr><td class="odd"><table><tr>';
+        $cols = 1;
+        foreach ($this->_optionTree[0]['children'] as $topitem) {
+            if ($cols > 4) {
+                $ret .= '</tr><tr>';
+                $cols = 1;
+            }
+            $tree = '<td valign="top">';
+            $prefix = '';
+            $this->_renderOptionTree($tree, $this->_optionTree[$topitem], $prefix);
+            $ret .= $tree.'</td>';
+            $cols++;
+        }
+        $ret .= '</tr></table></td><td class="even" valign="top">';
+        $option_ids = array();
+        foreach (array_keys($this->_optionTree) as $id) {
+            if (!empty($id)) {
+                $option_ids[] = "'".$ele_name.'[groups]['.$this->_groupId.']['.$id.']'."'";
+            }
+        }
+        $checkallbtn_id = $ele_name.'[checkallbtn]['.$this->_groupId.']';
+        $option_ids_str = implode(', ', $option_ids);
+        $ret .= _ALL." <input id=\"".$checkallbtn_id."\" type=\"checkbox\" value=\"\" onclick=\"var optionids = new Array(".$option_ids_str."); xoopsCheckAllElements(optionids, '".$checkallbtn_id."');\" />";
+        $ret .= '</td></tr></table>';
+        return $ret;
     }
 
     /**
@@ -116,7 +116,7 @@ class Xmf_Form_Element_Checkbox_Group extends Xmf_Form_Element
      */
     function _renderOptionTree(&$tree, $option, $prefix, $parentIds = array())
     {
-    	$ele_name = $this->getName();
+        $ele_name = $this->getName();
         $tree .= $prefix . "<input type=\"checkbox\" name=\"" . $ele_name . "[groups][" . $this->_groupId . "][" . $option['id'] . "]\" id=\"" . $ele_name . "[groups][" . $this->_groupId . "][" . $option['id'] . "]\" onclick=\"";
         // If there are parent elements, add javascript that will
         // make them selecteded when this element is checked to make

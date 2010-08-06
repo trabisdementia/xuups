@@ -39,16 +39,16 @@
 
 function adminmenu($currentoption = 0, $breadcrumb = '')
 {
- 	global $xoopsModule, $xoopsConfig;
+    global $xoopsModule, $xoopsConfig;
 
 
-		$tblColors = array('','','','','','','','','');
-		if($currentoption>=0) {
-			$tblColors[$currentoption] = 'current';
-		}
+    $tblColors = array('','','','','','','','','');
+    if($currentoption>=0) {
+        $tblColors[$currentoption] = 'current';
+    }
 
-		/* Nice buttons styles */
-		echo "
+    /* Nice buttons styles */
+    echo "
 	    	<style type='text/css'>
     		#buttontop { float:left; width:100%; background: #e7e7e7; font-size:93%; line-height:normal; border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; margin: 0; }
     		#buttonbar { float:left; width:100%; background: #e7e7e7 url('" . XOOPS_URL . "/modules/membership/admin/img/bg.png') repeat-x left bottom; font-size:93%; line-height:normal; border-left: 1px solid black; border-right: 1px solid black; margin-bottom: 12px; }
@@ -67,23 +67,23 @@ function adminmenu($currentoption = 0, $breadcrumb = '')
 			</style>
     	";
 
-		echo "<div id='buttontop'>";
-		echo "<table style=\"width: 100%; padding: 0; \" cellspacing=\"0\"><tr>";
-		echo "<td style=\"width: 60%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\">
+    echo "<div id='buttontop'>";
+    echo "<table style=\"width: 100%; padding: 0; \" cellspacing=\"0\"><tr>";
+    echo "<td style=\"width: 60%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\">
         <a class=\"nobutton\" href=\"".XOOPS_URL."/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=".$xoopsModule->getVar('mid')."\">" . _AM_MSHIP_GENERALSET . "</a> |
         <a href=\"../index.php\">" . _AM_MSHIP_GOTOMOD . "</a> |
         <a href=\"#\">" . _AM_MSHIP_HELP . "</a>
         </td>
         ";
-		echo "<td style=\"width: 40%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;\"><b>" . $xoopsModule->name() . "</b> " . $breadcrumb . "</td>";
-		echo '</tr></table>';
-		echo '</div>';
+    echo "<td style=\"width: 40%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;\"><b>" . $xoopsModule->name() . "</b> " . $breadcrumb . "</td>";
+    echo '</tr></table>';
+    echo '</div>';
 
-		echo "<div id='buttonbar'>";
-		echo '<ul>';
-		echo "<li id='" . $tblColors[0] . "'><a href=\"index.php?op=import\"\"><span>". _AM_MSHIP_IMPORT ."</span></a></li>\n";
-		echo '</ul></div>';
-		echo '<br /><br /><pre>&nbsp;</pre><pre>&nbsp;</pre>';
+    echo "<div id='buttonbar'>";
+    echo '<ul>';
+    echo "<li id='" . $tblColors[0] . "'><a href=\"index.php?op=import\"\"><span>". _AM_MSHIP_IMPORT ."</span></a></li>\n";
+    echo '</ul></div>';
+    echo '<br /><br /><pre>&nbsp;</pre><pre>&nbsp;</pre>';
 
 }
 

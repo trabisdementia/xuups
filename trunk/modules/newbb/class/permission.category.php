@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -31,16 +31,16 @@ class NewbbPermissionCategoryHandler extends NewbbPermissionHandler
     {
         $this->NewbbPermissionHandler($db);
     }
-    
+
     function getValidItems($mid, $id = 0)
     {
         $full_items = array();
         if (empty($mid)) return $full_items;
-        
+
         $full_items[] = "'category_access'";
         return $full_items;
     }
-    
+
     function deleteByCategory($cat_id)
     {
         $cat_id = intval($cat_id);
@@ -75,7 +75,7 @@ class NewbbPermissionCategoryHandler extends NewbbPermissionHandler
         foreach ($ids_rmv as $group) {
             $this->deleteRight("category_access", $category, $group, $mid);
         }
-        
+
         return true;
     }
 }

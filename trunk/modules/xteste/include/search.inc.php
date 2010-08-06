@@ -28,7 +28,7 @@ function dummy_search_directory($dirname, $queryarray, &$ret, &$i) {
                 $data = trim($new[1]);
                 if (!empty($data)){
                     $ret[$i]['image'] = "images/image.gif";
-                    
+
                     //must fix this better because of double slashes in the url :(
                     $url = str_replace(XOOPS_ROOT_PATH, '', $dirname);
                     $url = str_replace('//', '/', $url);

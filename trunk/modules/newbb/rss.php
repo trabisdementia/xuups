@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -112,8 +112,8 @@ if (!$tpl->is_cached('db:newbb_rss.html', $xoopsCachedTemplateId)) {
             '    LEFT JOIN ' . $xoopsDB->prefix('bb_posts_text') . ' AS pt ON pt.post_id=p.post_id' .
             '    LEFT JOIN ' . $xoopsDB->prefix('bb_forums') . ' AS f ON f.forum_id=p.forum_id' .
             '    WHERE 1=1 ' .
-                $forum_criteria .
-                $approve_criteria .
+    $forum_criteria .
+    $approve_criteria .
                 ' ORDER BY p.post_id DESC';
 
     $limit = intval($xoopsModuleConfig['rss_maxitems'] * 1.5);
@@ -141,7 +141,7 @@ if (!$tpl->is_cached('db:newbb_rss.html', $xoopsCachedTemplateId)) {
         $type_handler =& xoops_getmodulehandler('type', 'newbb');
         $type_list = $type_handler->getList(new Criteria("type_id", "(".implode(", ", array_keys($types)).")", "IN"));
     }
-    
+
     foreach ($rows as $topic) {
         if ( $xoopsModuleConfig['enable_karma'] && $topic['post_karma'] > 0 ) continue;
         if ( $xoopsModuleConfig['allow_require_reply'] && $topic['require_reply']) continue;

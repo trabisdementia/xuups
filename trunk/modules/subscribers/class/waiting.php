@@ -4,7 +4,7 @@
 //  E-Mail: lusopoemas@gmail.com
 
 if (!defined("XOOPS_ROOT_PATH")) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 class SubscribersWaiting extends XoopsObject
@@ -22,15 +22,15 @@ class SubscribersWaiting extends XoopsObject
         $this->initVar("wt_toemail", XOBJ_DTYPE_TXTAREA, null, false);
         $this->initVar("wt_created", XOBJ_DTYPE_INT, null, false);
         $this->initVar("wt_priority", XOBJ_DTYPE_INT, null, false);
-        
+
         $this->initVar("dohtml", XOBJ_DTYPE_INT, 1);
         $this->initVar("doxcode", XOBJ_DTYPE_INT, 1);
         $this->initVar("dosmiley", XOBJ_DTYPE_INT, 1);
         $this->initVar("doimage", XOBJ_DTYPE_INT, 1);
         $this->initVar("dobr", XOBJ_DTYPE_INT, 1);
-        
+
     }
-    
+
     function toArray()
     {
         $ret = array();
@@ -54,6 +54,6 @@ class SubscribersWaitingHandler extends XoopsPersistableObjectHandler
     {
         parent::__construct($db, 'subscribers_waiting', 'SubscribersWaiting', 'wt_id', 'wt_subject');
     }
-    
+
 }
 ?>

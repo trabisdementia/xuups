@@ -172,9 +172,9 @@ class Xmf_Database_Updater
                 'stime',
                 'mtime',
                 'ltime',
-                //XMF_OBJ_DTYPE_TIME_ONLY,
-                //XMF_OBJ_DTYPE_URLLINK,
-                //XMF_OBJ_DTYPE_FILE
+            //XMF_OBJ_DTYPE_TIME_ONLY,
+            //XMF_OBJ_DTYPE_URLLINK,
+            //XMF_OBJ_DTYPE_FILE
             ))) {
                 return '0';
             } else {
@@ -204,16 +204,16 @@ class Xmf_Database_Updater
             foreach ($objectVars as $key => $var) {
                 $extra = '';
                 //if ($var['persistent']) {
-                    $type = $this->getFieldTypeFromVar($var);
-                    if ($key == $module_handler->keyName) {
-                        $extra = " not null auto_increment";
-                    } else if ($type != 'text') {
-                        $default = $this->getFieldDefaultFromVar($var);
-                        $extra = " not null default '$default'";
-                    } else {
-                        $extra = "";
-                    }
-                    $structure .= "`$key` $type$extra,";
+                $type = $this->getFieldTypeFromVar($var);
+                if ($key == $module_handler->keyName) {
+                    $extra = " not null auto_increment";
+                } else if ($type != 'text') {
+                    $default = $this->getFieldDefaultFromVar($var);
+                    $extra = " not null default '$default'";
+                } else {
+                    $extra = "";
+                }
+                $structure .= "`$key` $type$extra,";
                 //}
             }
             $structure .= "PRIMARY KEY  (`" . $module_handler->keyName . "`)";
@@ -227,34 +227,34 @@ class Xmf_Database_Updater
             $existingFieldsArray = $table->getExistingFieldsArray();
             foreach ($objectVars as $key => $var) {
                 //if ($var['persistent']) {
-                    $extra = '';
-                    if (!isset($existingFieldsArray[$key])) {
-                        // the fiels does not exist, let's create it
-                        $type = $this->getFieldTypeFromVar($var);
-                        $default =  $this->getFieldDefaultFromVar($var);
-                        if ($type != 'text') {
-                            $table->addNewField($key, "$type not null default '$default'");
-                        } else {
-                            $table->addNewField($key, "$type null");
-                        }
+                $extra = '';
+                if (!isset($existingFieldsArray[$key])) {
+                    // the fiels does not exist, let's create it
+                    $type = $this->getFieldTypeFromVar($var);
+                    $default =  $this->getFieldDefaultFromVar($var);
+                    if ($type != 'text') {
+                        $table->addNewField($key, "$type not null default '$default'");
                     } else {
-                        // if field already exists, let's check if the definition is correct
-                        $definition = strtolower($existingFieldsArray[$key]);
-                        $type = $this->getFieldTypeFromVar($var);
-                        if ($key == $module_handler->keyName) {
-                            $extra = " not null auto_increment";
-                        } else if ($type != 'text') {
-                            $default =  $this->getFieldDefaultFromVar($var, $key);
-                            $extra = " not null default '$default'";
-                        } else {
-                            $extra = "";
-                        }
-                        $actual_definition = "$type$extra";
-                        if ($definition != $actual_definition) {
-                            //exit ($definition . '-'.$actual_definition);
-                            $table->addAlteredField($key, $actual_definition);
-                        }
+                        $table->addNewField($key, "$type null");
                     }
+                } else {
+                    // if field already exists, let's check if the definition is correct
+                    $definition = strtolower($existingFieldsArray[$key]);
+                    $type = $this->getFieldTypeFromVar($var);
+                    if ($key == $module_handler->keyName) {
+                        $extra = " not null auto_increment";
+                    } else if ($type != 'text') {
+                        $default =  $this->getFieldDefaultFromVar($var, $key);
+                        $extra = " not null default '$default'";
+                    } else {
+                        $extra = "";
+                    }
+                    $actual_definition = "$type$extra";
+                    if ($definition != $actual_definition) {
+                        //exit ($definition . '-'.$actual_definition);
+                        $table->addAlteredField($key, $actual_definition);
+                    }
+                }
                 //}
             }
 

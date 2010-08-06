@@ -13,7 +13,7 @@ $server = & new JPSpan_Server_PostOffice();
 $server->addHandler(new xhelpWebLib());
 
 if (isset($_SERVER['QUERY_STRING']) &&
-        strcasecmp($_SERVER['QUERY_STRING'], 'client')==0) {
+strcasecmp($_SERVER['QUERY_STRING'], 'client')==0) {
 
     // Compress the output Javascript (e.g. strip whitespace)
     define('JPSPAN_INCLUDE_COMPRESS',TRUE);
@@ -36,15 +36,15 @@ class xhelpWebLib {
         $deptid = intval($deptid);
         $hFieldDept =& xhelpGetHandler('ticketFieldDepartment');
         $fields =& $hFieldDept->fieldsByDepartment($deptid);
-        
+
         $aFields = array();
         foreach ($fields as $field) {
             $aFields[] = $field->toArray();
         }
-        
+
         return $aFields;
     }
-    
+
     function editTicketCustFields($deptid, $ticketid)
     {
         $deptid = intval($deptid);
@@ -53,7 +53,7 @@ class xhelpWebLib {
         $ticket     =& $hTicket->get($ticketid);
         $custValues =& $ticket->getCustFieldValues();
         $fields =& $hFieldDept->fieldsByDepartment($deptid);
-        
+
         $aFields = array();
         foreach($fields as $field){
             $_arr =& $field->toArray();
@@ -62,20 +62,20 @@ class xhelpWebLib {
             $aFields[] = $_arr;
 
         }
-        
+
         return $aFields;
     }
-    
+
     function staffByDept($deptid)
     {
         $mc =& xhelpGetModuleConfig();
         $field = $mc['xhelp_displayName']== 1 ? 'uname':'name';
-        
-        
+
+
         $deptid = intval($deptid);
         $hMembership =& xhelpGetHandler('membership');
         $staff =& $hMembership->xoopsUsersByDept($deptid);
-        
+
         $aStaff = array();
         $aStaff[] = array('uid' => 0,
                           'name' => _XHELP_MESSAGE_NOOWNER);
@@ -83,7 +83,7 @@ class xhelpWebLib {
             $aStaff[] = array('uid' => $s->getVar('uid'),
                               'name' => $s->getVar($field));
         }
-        
+
         return $aStaff;
     }
 }

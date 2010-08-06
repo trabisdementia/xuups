@@ -165,7 +165,7 @@ define('_AM_XHELP_TEXT_SEARCH_TEXT', 'Search Text:');
 define('_AM_XHELP_TEXT_GO_BACK_SEARCH', 'Back to Search');
 define('_AM_XHELP_TEXT_FIND_USERS', 'Find User');
 
-define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Begin Date');  
+define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Begin Date');
 define('_AM_XHELP_SEARCH_ENDDATE', 'End Date');
 
 define('_AM_XHELP_TEXT_ADD_STATUS', 'Add Status');
@@ -223,7 +223,7 @@ define("_AM_XHELP_MIME_USERFINFO", "<b>Mimetypes that are available for User upl
 define("_AM_XHELP_MIME_NOMIMEINFO", "No mimetypes selected.");
 define("_AM_XHELP_MIME_FINDMIMETYPE", "Find New Mimetype?");
 define("_AM_XHELP_MIME_EXTFIND", "Search File Extension<div style='padding-top: 8px;'><span style='font-weight: normal;'>Enter file extension you wish to search.</span></div>");
-define("_AM_XHELP_MIME_INFOTEXT", "<ul><li>New mimetypes can be created, edit or deleted easily via this form.</li> 
+define("_AM_XHELP_MIME_INFOTEXT", "<ul><li>New mimetypes can be created, edit or deleted easily via this form.</li>
 	<li>Search for a new mimetypes via an external website.</li> 
 	<li>View displayed mimetypes for Admin and User uploads.</li> 
 	<li>Change mimetype upload status.</li></ul> 
@@ -245,7 +245,7 @@ define("_AM_XHELP_MIME_MODIFIED", "Mimetype Information Modified");
 define("_AM_XHELP_MINDEX_ACTION", "Action");
 define("_AM_XHELP_MINDEX_PAGE", "<b>Page</b> ");
 
-//image admin icon 
+//image admin icon
 define("_AM_XHELP_ICO_EDIT","Edit This Item");
 define("_AM_XHELP_ICO_DELETE","Delete This Item");
 define("_AM_XHELP_ICO_ONLINE","Online");

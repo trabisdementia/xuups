@@ -57,7 +57,7 @@ class Xmf_Form_Element_Editor_Koivi extends Xmf_Form_Element_Editor
         }
     }
 
-     function getOptions()
+    function getOptions()
     {
         if (empty($this->options) || count($this->options) == 0) {
             $this->options = array_filter(array_map("trim", explode(",", _XK_P_FULLTOOLBAR)));
@@ -81,10 +81,10 @@ class Xmf_Form_Element_Editor_Koivi extends Xmf_Form_Element_Editor
     }
 
     /**
-    * Prepare HTML for output
-    *
-    * @return string HTML
-    */
+     * Prepare HTML for output
+     *
+     * @return string HTML
+     */
     function render()
     {
         // include files

@@ -25,18 +25,18 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
+    die('XOOPS root path not defined');
 }
 
 function b_news_topicsnav_show($options) {
     include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
     include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
    	$myts =& MyTextSanitizer::getInstance();
-	$block = array();
-	$newscountbytopic=array();
-	$perms='';
-	$xt = new NewsTopic();
-	$restricted=news_getmoduleoption('restrictindex');
+   	$block = array();
+   	$newscountbytopic=array();
+   	$perms='';
+   	$xt = new NewsTopic();
+   	$restricted=news_getmoduleoption('restrictindex');
     if ($restricted) {
         global $xoopsUser;
         $module_handler =& xoops_gethandler('module');
@@ -45,30 +45,30 @@ function b_news_topicsnav_show($options) {
         $gperm_handler =& xoops_gethandler('groupperm');
         $topics = $gperm_handler->getItemIds('news_view', $groups, $newsModule->getVar('mid'));
         if(count($topics) >0 ) {
-        	$topics = implode(',', $topics);
-        	$perms = ' AND topic_id IN ('.$topics.') ';
+            $topics = implode(',', $topics);
+            $perms = ' AND topic_id IN ('.$topics.') ';
         } else {
-        	return '';
+            return '';
         }
     }
-	$topics_arr = $xt->getChildTreeArray(0,'topic_title', $perms);
-	if($options[0] == 1) {
-		$newscountbytopic=$xt->getNewsCountByTopic();
-	}
-	if(is_array($topics_arr) && count($topics_arr))	{
-		foreach ($topics_arr as $onetopic) {
-			if($options[0] == 1) {
-				$count = 0;
-				if(array_key_exists($onetopic['topic_id'],$newscountbytopic)) {
-					$count = $newscountbytopic[$onetopic['topic_id']];
-				}
-			} else {
-				$count = '';
-			}
-		    $block['topics'][] = array('id'=>$onetopic['topic_id'], 'news_count'=>$count, 'topic_color'=>'#'.$onetopic['topic_color'], 'title'=>$myts->displayTarea($onetopic['topic_title']));
-		}
-	}
-	return $block;
+    $topics_arr = $xt->getChildTreeArray(0,'topic_title', $perms);
+    if($options[0] == 1) {
+        $newscountbytopic=$xt->getNewsCountByTopic();
+    }
+    if(is_array($topics_arr) && count($topics_arr))	{
+        foreach ($topics_arr as $onetopic) {
+            if($options[0] == 1) {
+                $count = 0;
+                if(array_key_exists($onetopic['topic_id'],$newscountbytopic)) {
+                    $count = $newscountbytopic[$onetopic['topic_id']];
+                }
+            } else {
+                $count = '';
+            }
+            $block['topics'][] = array('id'=>$onetopic['topic_id'], 'news_count'=>$count, 'topic_color'=>'#'.$onetopic['topic_color'], 'title'=>$myts->displayTarea($onetopic['topic_title']));
+        }
+    }
+    return $block;
 }
 
 function b_news_topicsnav_edit($options) {
@@ -82,17 +82,17 @@ function b_news_topicsnav_edit($options) {
         $form .= " checked='checked'";
     }
     $form .= ' />'._NO;
-	return $form;
+    return $form;
 }
 
 function b_news_topicsnav_onthefly($options)
 {
-	$options = explode('|',$options);
-	$block = & b_news_topicsnav_show($options);
+    $options = explode('|',$options);
+    $block = & b_news_topicsnav_show($options);
 
-	$tpl = new XoopsTpl();
-	$tpl->assign('block', $block);
-	$tpl->display('db:news_block_topicnav.html');
+    $tpl = new XoopsTpl();
+    $tpl->assign('block', $block);
+    $tpl->display('db:news_block_topicnav.html');
 }
 
 ?>

@@ -13,9 +13,9 @@ $g->title->Set('Bezier line with control points');
 
 // Setup control point for bezier
 $p = array(3,6,
-	   6,9,
-	   5,3,
-	   7,4);
+6,9,
+5,3,
+7,4);
 
 // Visualize control points
 $shape->SetColor('blue');

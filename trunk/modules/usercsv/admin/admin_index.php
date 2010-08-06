@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -74,7 +74,7 @@ function usercsv_export()
         foreach (array_keys($users) as $k) {
             $userarray = array();
             foreach ($export_fields as $field) {
-                  $userarray[$field] = in_array($field, usercsv_getUserFields()) ? $users[$k][$field] : $profiles[$k][$field];
+                $userarray[$field] = in_array($field, usercsv_getUserFields()) ? $users[$k][$field] : $profiles[$k][$field];
             }
             $result[] = $userarray;
             unset($userarray);
@@ -85,7 +85,7 @@ function usercsv_export()
         foreach ($users as $user) {
             $userarray = array();
             foreach ($export_fields as $field) {
-                  $userarray[$field] = $user[$field];
+                $userarray[$field] = $user[$field];
             }
             $result[] = $userarray;
             unset($userarray);
@@ -247,7 +247,7 @@ function usercsv_isProfile()
 
 function usercsv_form()
 {
-	$form = new XoopsThemeForm(_AM_UCSV_EXPORT, 'index_form', basename(__FILE__), 'post', true);
+    $form = new XoopsThemeForm(_AM_UCSV_EXPORT, 'index_form', basename(__FILE__), 'post', true);
 
     $element = new XoopsFormCheckBox('', 'fields', null, '&nbsp;');
     $element->addOptionArray(usercsv_getFormFields());

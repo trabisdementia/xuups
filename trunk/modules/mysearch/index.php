@@ -34,21 +34,21 @@ $visiblekeywords = mysearch_getmoduleoption('showindex');
 $xoopsTpl->assign('visiblekeywords', $visiblekeywords);
 
 if($visiblekeywords > 0) {
-	$totalcount = $mysearch_handler->getCount();
-	$start = isset($_GET['start']) ? intval($_GET['start']) : 0;
-	$critere = new Criteria('keyword');
-	$critere->setSort('datesearch');
-	$critere->setLimit($visiblekeywords);
-	$critere->setStart($start);
-	$critere->setOrder('DESC');
-	include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
-	$pagenav = new XoopsPageNav($totalcount, $visiblekeywords, $start, 'start', '');
-	$xoopsTpl->assign('pagenav', $pagenav->renderNav());
+    $totalcount = $mysearch_handler->getCount();
+    $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
+    $critere = new Criteria('keyword');
+    $critere->setSort('datesearch');
+    $critere->setLimit($visiblekeywords);
+    $critere->setStart($start);
+    $critere->setOrder('DESC');
+    include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
+    $pagenav = new XoopsPageNav($totalcount, $visiblekeywords, $start, 'start', '');
+    $xoopsTpl->assign('pagenav', $pagenav->renderNav());
 
-	$elements = $mysearch_handler->getObjects($critere);
-	foreach($elements as $oneelement) {
-		$xoopsTpl->append('keywords',array('keyword' => $oneelement->getVar('keyword'),'date' => formatTimestamp(strtotime($oneelement->getVar('datesearch')))));
-	}
+    $elements = $mysearch_handler->getObjects($critere);
+    foreach($elements as $oneelement) {
+        $xoopsTpl->append('keywords',array('keyword' => $oneelement->getVar('keyword'),'date' => formatTimestamp(strtotime($oneelement->getVar('datesearch')))));
+    }
 }
 
 include_once XOOPS_ROOT_PATH . '/footer.php';

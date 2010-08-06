@@ -1,0 +1,20 @@
+/**
+* $Id: changelog.txt,v 1.3 2005/06/02 13:36:26 malanciault Exp $
+* Module: SmartMedia
+* Author: The SmartFactory <www.smartfactory.ca>
+* Licence: GNU
+*/
+
+=> Version 0.85 Beta (2005-06-14)
+====================================
+
+- Addition of a Clip Formats management functionality including support for all major multimedia format as well as the possibility to add, edit or delete any format
+- Addition of check database table functionnality, including  a new dbUpdater class that performs the db upgrade
+- Addition of a counter for clips and folders
+- Addidion of a recent clips block
+- The width and height of a clip can now be customize for each clip individually
+
+=> Version 0.75 Beta (2005-04-16)
+====================================
+
+- First Public release of the module

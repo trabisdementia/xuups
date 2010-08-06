@@ -4,18 +4,18 @@ require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_gantt.php');
 
 
-// 
+//
 // The data for the graphs
 //
 $data = array(
-    array(0,ACTYPE_GROUP,    "Phase 1",        "2001-10-26","2001-11-23",''),
-    array(1,ACTYPE_NORMAL,   "  Label 2",      "2001-11-01","2001-11-20",''),
-    array(2,ACTYPE_NORMAL,   "  Label 3",      "2001-10-26","2001-11-03",''),
-    array(3,ACTYPE_MILESTONE,"  Phase 1 Done", "2001-11-23",'M2') );
+array(0,ACTYPE_GROUP,    "Phase 1",        "2001-10-26","2001-11-23",''),
+array(1,ACTYPE_NORMAL,   "  Label 2",      "2001-11-01","2001-11-20",''),
+array(2,ACTYPE_NORMAL,   "  Label 3",      "2001-10-26","2001-11-03",''),
+array(3,ACTYPE_MILESTONE,"  Phase 1 Done", "2001-11-23",'M2') );
 
 // The constrains between the activities
 $constrains = array(array(2,1,CONSTRAIN_ENDSTART),
-		    array(1,3,CONSTRAIN_STARTSTART));
+array(1,3,CONSTRAIN_STARTSTART));
 
 $progress = array(array(1,0.4));
 

@@ -14,7 +14,7 @@
 
 class xhelpMailBoxIMAP extends xhelpMailBox
 {
-    
+
 }
 
 ?>

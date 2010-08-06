@@ -10,17 +10,17 @@ $ydata2 = array(10,70,40,120,200,60,80,40,20,5);
 // Get a list of month using the current locale
 $months = $gDateLocale->GetShortMonth();
 
-// Create the graph. 
-$graph = new Graph(300,200);	
+// Create the graph.
+$graph = new Graph(300,200);
 $graph->SetScale("textlin");
 $graph->SetMarginColor('white');
 
-// Adjust the margin slightly so that we use the 
+// Adjust the margin slightly so that we use the
 // entire area (since we don't use a frame)
 $graph->SetMargin(30,1,20,5);
 
 // Box around plotarea
-$graph->SetBox(); 
+$graph->SetBox();
 
 // No frame around the image
 $graph->SetFrame(false);

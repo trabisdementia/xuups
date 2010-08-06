@@ -41,25 +41,25 @@ class Xmf_Object_Dtype_Abstract
     {
         if ($obj->vars[$key]['options'] != '' && $ret != '') {
             switch (strtolower($format)) {
-            case 's':
-            case 'show':
-                $selected = explode('|', $ret);
-                $options = explode('|', $obj->vars[$key]['options']);
-                $i = 1;
-                $ret = array();
-                foreach ($options as $op) {
-                    if (in_array($i, $selected)) {
-                        $ret[] = $op;
+                case 's':
+                case 'show':
+                    $selected = explode('|', $ret);
+                    $options = explode('|', $obj->vars[$key]['options']);
+                    $i = 1;
+                    $ret = array();
+                    foreach ($options as $op) {
+                        if (in_array($i, $selected)) {
+                            $ret[] = $op;
+                        }
+                        $i++;
                     }
-                    $i++;
-                }
-                return implode(', ', $ret);
-            case 'e':
-            case 'edit':
-                $ret = explode('|', $ret);
-                break 1;
-            default:
-                break 1;
+                    return implode(', ', $ret);
+                case 'e':
+                case 'edit':
+                    $ret = explode('|', $ret);
+                    break 1;
+                default:
+                    break 1;
             }
         }
         return $ret;

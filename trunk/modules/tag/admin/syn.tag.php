@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code 
+ of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * XOOPS tag management module
@@ -71,7 +71,7 @@ $opform->display();
 if ( isset($_GET['start']) ) {
 
     $tag_handler =& xoops_getmodulehandler("tag", $xoopsModule->getVar("dirname"));
-    
+
     $criteria = new CriteriaCompo();
     $criteria->setStart($start);
     $criteria->setLimit($limit);
@@ -82,7 +82,7 @@ if ( isset($_GET['start']) ) {
     if (empty($tags)) {
         echo "<h2>" . TAG_AM_FINISHED . "</h2>";
     } else {
-        
+
         foreach (array_keys($tags) as $tag_id) {
             $tag_handler->update_stats($tag_id, ( $modid == -1 ) ? 0 : $tags[$tag_id]["modid"]);
         }

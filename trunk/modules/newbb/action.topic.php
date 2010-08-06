@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -57,7 +57,7 @@ switch($op) {
         }
         unset($topics_obj, $forums_obj);
         break;
-        
+
     case "approve":
         $forums = array();
         $topics_obj = $topic_handler->getAll(new Criteria("topic_id", "(" . implode(",", $topic_id) . ")", "IN"));
@@ -67,15 +67,15 @@ switch($op) {
             $topic_handler->synchronization($topic_obj);
             $forums[$topic_obj->getVar("forum_id")] = 1;
         }
-        
+
         $criteria_forum = new Criteria("forum_id", "(" . implode(",", array_keys($forums)) . ")", "IN");
         $forums_obj = $forum_handler->getAll($criteria_forum);
         foreach (array_keys($forums_obj) as $id) {
             $forum_handler->synchronization($forums_obj[$id]);
         }
-        
+
         if (empty($xoopsModuleConfig['notification_enabled'])) break;
-            
+
         include_once 'include/notification.inc.php';
         $notification_handler =& xoops_gethandler('notification');
         foreach (array_keys($topics_obj) as $id) {
@@ -100,7 +100,7 @@ switch($op) {
         }
         unset($topics_obj, $forums_obj);
         break;
-        
+
     case "delete":
         $forums = array();
         $topics_obj = $topic_handler->getAll(new Criteria("topic_id", "(" . implode(",", $topic_id) . ")", "IN"));
@@ -110,7 +110,7 @@ switch($op) {
             $topic_handler->synchronization($topic_obj);
             $forums[$topic_obj->getVar("forum_id")] = 1;
         }
-        
+
         $criteria_forum = new Criteria("forum_id", "(" . implode(",", array_keys($forums)) . ")", "IN");
         $forums_obj = $forum_handler->getAll($criteria_forum);
         foreach (array_keys($forums_obj) as $id) {
@@ -118,30 +118,30 @@ switch($op) {
         }
         unset($topics_obj, $forums_obj);
         break;
-        
+
     case "move":
         if (!empty($_POST["newforum"]) && $_POST["newforum"] != $forum_id
-            && $forum_handler->getPermission($_POST["newforum"], 'post')
+        && $forum_handler->getPermission($_POST["newforum"], 'post')
         ) {
             $criteria = new Criteria('topic_id', "(" . implode(",", $topic_id) . ")", "IN");
             $post_handler =& xoops_getmodulehandler('post', 'newbb');
             $post_handler->updateAll("forum_id", intval($_POST["newforum"]), $criteria, true);
             $topic_handler->updateAll("forum_id", intval($_POST["newforum"]), $criteria, true);
-            
+
             $forum_handler->synchronization($_POST["newforum"]);
             $forum_handler->synchronization($forum_id);
         } else {
             $category_handler =& xoops_getmodulehandler('category', 'newbb');
             $categories = $category_handler->getByPermission('access');
             $forums = $forum_handler->getForumsByCategory(array_keys($categories), 'post', false);
-        
+
             $box = '<select name="newforum" size="1">';
             if (count($categories) > 0 && count($forums) > 0) {
                 foreach (array_keys($forums) as $key) {
                     $box .= "<option value='-1'>[" . $categories[$key]->getVar('cat_title') . "]</option>";
                     foreach ($forums[$key] as $forumid => $_forum) {
                         $box .= "<option value='" . $forumid . "'>-- " . $_forum['title'] . "</option>";
-                        if ( !isset($_forum["sub"])) continue; 
+                        if ( !isset($_forum["sub"])) continue;
                         foreach (array_keys($_forum["sub"]) as $fid) {
                             $box .= "<option value='" . $fid . "'>---- " . $_forum["sub"][$fid]['title'] . "</option>";
                         }
@@ -152,13 +152,13 @@ switch($op) {
             }
             $box .="</select>";
             unset($forums, $categories);
-              
+
             echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='post'>";
             echo "<table border='0' cellpadding='1' cellspacing='0' align='center' width='95%'>";
             echo "<tr><td class='bg2'>";
             echo "<table border='0' cellpadding='1' cellspacing='1' width='100%'>";
             echo '<tr><td class="bg3">' . _MD_MOVETOPICTO . '</td><td class="bg1">';
-            echo $box;      
+            echo $box;
             echo '</td></tr>';
             echo '<tr class="bg3"><td colspan="2" align="center">';
             echo "<input type='hidden' name='op' value='move' />";

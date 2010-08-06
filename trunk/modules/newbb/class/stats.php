@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -41,8 +41,8 @@ class NewbbStatsHandler
     var $param = array (
             "type"      => array("topic", "post", "digest", "view"),
             "period"    => array("total", "day", "week", "month"),
-        );
-    
+    );
+
     function NewbbStatsHandler($db = null)
     {
         if (!$db) {
@@ -52,7 +52,7 @@ class NewbbStatsHandler
         }
         $this->table = $this->db->prefix("bb_stats");
     }
-    
+
     function &instance($db = null)
     {
         static $instance;
@@ -61,16 +61,16 @@ class NewbbStatsHandler
         }
         return $instance;
     }
-    
+
     function update($id, $type, $increment = 1)
     {
         $id = intval($id);
         $increment = intval($increment);
-        
+
         if (empty($increment) || false === ( $type = array_search($type, $this->param["type"]) )) {
             return false;
         }
-        
+
         $sql =  "    UPDATE {$this->table}" .
                 "    SET stats_value = CASE " .
                 "                    WHEN time_format = '' OR DATE_FORMAT(time_update, time_format) = DATE_FORMAT(NOW(), time_format)  THEN stats_value + '{$increment}' " .
@@ -80,7 +80,7 @@ class NewbbStatsHandler
                 "    WHERE " .
                 "        (stats_id = '0' OR stats_id = '{$id}') " .
                 "        AND stats_type='{$type}' "
-                ;
+        ;
         $result = $this->db->queryF($sql);
         $rows = $this->db->getAffectedRows();
         if ($rows == 0) {
@@ -92,7 +92,7 @@ class NewbbStatsHandler
                     "        ('0', '{$increment}', '{$type}', '" . array_search("week", $this->param["period"]) . "', NOW(), '%Y%u'), " .
                     "        ('0', '{$increment}', '{$type}', '" . array_search("month", $this->param["period"]) . "', NOW(), '%Y%m')"
                     ;
-            $result = $this->db->queryF($sql);
+                    $result = $this->db->queryF($sql);
         }
         if ($rows < 2 * count($this->param["period"]) && !empty($id)) {
             $sql =    "    INSERT INTO {$this->table}" .
@@ -103,10 +103,10 @@ class NewbbStatsHandler
                     "        ('{$id}', '{$increment}', '{$type}', '" . array_search("week", $this->param["period"]) . "', NOW(), '%Y%u'), " .
                     "        ('{$id}', '{$increment}', '{$type}', '" . array_search("month", $this->param["period"]) . "', NOW(), '%Y%m')"
                     ;
-            $result = $this->db->queryF($sql);
+                    $result = $this->db->queryF($sql);
         }
     }
-    
+
     /**
      * Get stats of "Today"
      *
@@ -117,7 +117,7 @@ class NewbbStatsHandler
     function getStats($ids = array(), $types = array(), $periods = array())
     {
         $ret = array();
-        
+
         $_types = array();
         foreach ($types as $type) {
             $_types[] = array_search($type, $this->param["type"]);
@@ -133,11 +133,11 @@ class NewbbStatsHandler
                 "        " . (empty($ids) ? "" : "AND stats_id IN (" . implode(", ", array_map("intval", $ids)) . ")") .
                 "        " . (empty($_types) ? "" : "AND stats_type IN (" . implode(", ", $_types) . ")") .
                 "        " . (empty($_periods) ? "" : "AND stats_period IN (" . implode(", ", $_periods) . ")")
-                ;
+        ;
         $result = $this->db->query($sql);
-        
+
         while($row = $this->db->fetchArray($result)) {
-            $ret[ strval($row["stats_id"]) ][ $this->param["type"][$row["stats_type"]] ][ $this->param["period"][$row["stats_period"]] ] = $row["stats_value"]; 
+            $ret[ strval($row["stats_id"]) ][ $this->param["type"][$row["stats_type"]] ][ $this->param["period"][$row["stats_period"]] ] = $row["stats_value"];
         }
         return $ret;
     }

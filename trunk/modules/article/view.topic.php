@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +16,11 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: view.topic.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 if (art_parse_args($args_num, $args, $args_str)) {
-	$args["topic"] = !empty($args["topic"]) ? $args["topic"] : @$args_num[0];
+    $args["topic"] = !empty($args["topic"]) ? $args["topic"] : @$args_num[0];
 }
 
 $topic_id = intval( empty($_GET["topic"])?@$args["topic"]:$_GET["topic"] );
@@ -42,7 +42,7 @@ if (!$category_handler->getPermission($category_obj, "access")) {
 
 // Disable cache for category moderators since we don't have proper cache handling way for them
 if (art_isModerator($category_obj)) {
-	$xoopsConfig["module_cache"][$xoopsModule->getVar("mid")] = 0;
+    $xoopsConfig["module_cache"][$xoopsModule->getVar("mid")] = 0;
 }
 $xoopsOption["xoops_pagetitle"] = $xoopsModule->getVar("name") . " - " . $topic_obj->getVar("top_title");
 $template = $topic_obj->getVar("top_template");
@@ -57,7 +57,7 @@ $articles_object = $topic_handler->getArticles($topic_obj, $xoopsModuleConfig["a
 $articles = array();
 $uids = array();
 foreach (array_keys($articles_object) as $id) {
-	$uids[$articles_object[$id]->getVar("uid")] = 1;
+    $uids[$articles_object[$id]->getVar("uid")] = 1;
 }
 
 $author_array = array_keys($uids);
@@ -65,23 +65,23 @@ $users = art_getUnameFromId($author_array);
 
 $articles = array();
 foreach ($articles_object as $id => $article) {
-	$author =& $article->getAuthor();
-	$author["name"] = $users[$article->getVar("uid")];
-	$articles[] = array(
+    $author =& $article->getAuthor();
+    $author["name"] = $users[$article->getVar("uid")];
+    $articles[] = array(
 		"id"		=> $id,
 		"title"		=> $article->getVar("art_title"),
 		"author"	=> $author,
 		"time"		=> $article->getTime($xoopsModuleConfig["timeformat"])
-		);
+    );
 }
 
 $count_article = $topic_handler->getArticleCount($topic_id);
 if ( $count_article > $xoopsModuleConfig["articles_perpage"]) {
-	include XOOPS_ROOT_PATH . "/class/pagenav.php";
-	$nav = new XoopsPageNav($count_article, $xoopsModuleConfig["articles_perpage"], $start, "start", "topic=" . $topic_id);
-	$pagenav = $nav->renderNav(4);
+    include XOOPS_ROOT_PATH . "/class/pagenav.php";
+    $nav = new XoopsPageNav($count_article, $xoopsModuleConfig["articles_perpage"], $start, "start", "topic=" . $topic_id);
+    $pagenav = $nav->renderNav(4);
 } else {
-	$pagenav = "";
+    $pagenav = "";
 }
 
 $topic_data = array();

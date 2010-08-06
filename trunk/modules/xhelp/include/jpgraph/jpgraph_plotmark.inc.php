@@ -450,11 +450,11 @@ class ImgData {
     protected $index  = array(); // Index for colors
     protected $maxidx = 0 ;  // Max color index
     protected $anchor_x=0.5, $anchor_y=0.5 ;    // Where is the center of the image
-    
+
     function __construct() {
         // Empty
     }
-    
+
     // Create a GD image from the data and return a GD handle
     function GetImg($aMark,$aIdx) {
         $n = $this->an[$aMark];
@@ -472,7 +472,7 @@ class ImgData {
         $idx = $aIdx ;
         return Image::CreateFromString(base64_decode($this->{$n}[$idx][1]));
     }
-    
+
     function GetAnchor() {
         return array($this->anchor_x,$this->anchor_y);
     }
@@ -488,7 +488,7 @@ $_gFlagCache=array(
 );
 // Only supposed to b called as statics
 class FlagCache {
-    
+
     static function GetFlagImgByName($aSize,$aName) {
         global $_gFlagCache;
         require_once('jpgraph_flags.php');

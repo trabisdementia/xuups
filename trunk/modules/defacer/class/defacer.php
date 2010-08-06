@@ -125,10 +125,10 @@ class DefacerDefacer
     }
 
     function initHandler($name)
-        {
+    {
         $this->addLog('INIT ' . $name . ' HANDLER');
         $this->handler[$name . '_handler'] =& xoops_getModuleHandler($name, $this->dirname);
-        }
+    }
 
     function addLog($log)
     {

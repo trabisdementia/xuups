@@ -41,13 +41,13 @@
  *
  * @template_name		This page does not use any template
  *
-*/
+ */
 include_once '../../mainfile.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 $storyid = isset($_GET['storyid']) ? intval($_GET['storyid']) : 0;
 if ( empty($storyid) ) {
-	redirect_header(XOOPS_URL.'/modules/news/index.php',2,_NW_NOSTORY);
+    redirect_header(XOOPS_URL.'/modules/news/index.php',2,_NW_NOSTORY);
 }
 
 // Verify that the article is published
@@ -70,11 +70,11 @@ $gperm_handler =& xoops_gethandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
 } else {
-	$groups = XOOPS_GROUP_ANONYMOUS;
+    $groups = XOOPS_GROUP_ANONYMOUS;
 }
 if (!$gperm_handler->checkRight('news_view', $story->topicid(), $groups, $xoopsModule->getVar('mid'))) {
-	redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
-	exit();
+    redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
+    exit();
 }
 
 $xoops_meta_keywords='';
@@ -82,40 +82,41 @@ $xoops_meta_description='';
 
 
 if(trim($story->keywords()) != '') {
-	$xoops_meta_keywords = $story->keywords();
+    $xoops_meta_keywords = $story->keywords();
 } else {
-	$xoops_meta_keywords = news_createmeta_keywords($story->hometext().' '.$story->bodytext());
+    $xoops_meta_keywords = news_createmeta_keywords($story->hometext().' '.$story->bodytext());
 }
 
 if(trim($story->description())!='') {
-	$xoops_meta_description = $story->description();
+    $xoops_meta_description = $story->description();
 } else {
-	$xoops_meta_description=strip_tags($story->title());
+    $xoops_meta_description=strip_tags($story->title());
 }
 
 
 function PrintPage()
 {
-	global $xoopsConfig, $xoopsModule, $story, $xoops_meta_keywords,$xoops_meta_description;
-	$myts =& MyTextSanitizer::getInstance();
+    global $xoopsConfig, $xoopsModule, $story, $xoops_meta_keywords,$xoops_meta_description;
+    $myts =& MyTextSanitizer::getInstance();
     $datetime = formatTimestamp($story->published(),news_getmoduleoption('dateformat'));
-?>
-	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo _LANGCODE; ?>" lang="<?php echo _LANGCODE; ?>">
-<?php
-	echo "<head>\n";
-	echo '<title>'.$myts->htmlSpecialChars($story->title()) . ' - ' . _NW_PRINTER . ' - ' . $myts->htmlSpecialChars($story->topic_title()) . ' - ' . $xoopsConfig['sitename'].'</title>';
-	echo '<meta http-equiv="Content-Type" content="text/html; charset='._CHARSET.'" />';
-	echo '<meta name="AUTHOR" content="'.$xoopsConfig['sitename'].'" />';
-	echo '<meta name="keywords" content="'.$xoops_meta_keywords.'" />';
-	echo '<meta name="COPYRIGHT" content="Copyright (c) 2006 by '.$xoopsConfig['sitename'].'" />';
-	echo '<meta name="DESCRIPTION" content="'.$xoops_meta_description.'" />';
-	echo '<meta name="GENERATOR" content="XOOPS" />';
-	$supplemental = '';
-	if(news_getmoduleoption('footNoteLinks')) {
-		$supplemental = "footnoteLinks('content','content'); ";
-?>
-  <script type="text/javascript">
+    ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xml:lang="<?php echo _LANGCODE; ?>" lang="<?php echo _LANGCODE; ?>">
+    <?php
+    echo "<head>\n";
+    echo '<title>'.$myts->htmlSpecialChars($story->title()) . ' - ' . _NW_PRINTER . ' - ' . $myts->htmlSpecialChars($story->topic_title()) . ' - ' . $xoopsConfig['sitename'].'</title>';
+    echo '<meta http-equiv="Content-Type" content="text/html; charset='._CHARSET.'" />';
+    echo '<meta name="AUTHOR" content="'.$xoopsConfig['sitename'].'" />';
+    echo '<meta name="keywords" content="'.$xoops_meta_keywords.'" />';
+    echo '<meta name="COPYRIGHT" content="Copyright (c) 2006 by '.$xoopsConfig['sitename'].'" />';
+    echo '<meta name="DESCRIPTION" content="'.$xoops_meta_description.'" />';
+    echo '<meta name="GENERATOR" content="XOOPS" />';
+    $supplemental = '';
+    if(news_getmoduleoption('footNoteLinks')) {
+        $supplemental = "footnoteLinks('content','content'); ";
+        ?>
+<script type="text/javascript">
 	// <![CDATA[
     /*------------------------------------------------------------------------------
     Function:       footnoteLinks()
@@ -182,7 +183,7 @@ function PrintPage()
     }
 	// ]]>
   </script>
-  <script type="text/javascript">
+<script type="text/javascript">
 	// <![CDATA[
     /*------------------------------------------------------------------------------
     Excerpts from the jsUtilities Library
@@ -248,15 +249,15 @@ function PrintPage()
     }
 	// ]]>
   </script>
-  <style type="text/css" media="screen">
-    .printOnly {
-      display: none;
+<style type="text/css" media="screen">
+.printOnly {
+	display: none;
+}
+</style>
+        <?php
     }
-  </style>
-<?php
-	}
-	echo '</head>';
-	echo '<body bgcolor="#ffffff" text="#000000" onload="'.$supplemental.' window.print()">
+    echo '</head>';
+    echo '<body bgcolor="#ffffff" text="#000000" onload="'.$supplemental.' window.print()">
 		<div id="content">
     	<table border="0"><tr><td align="center">
     	<table border="0" width="100%" cellpadding="0" cellspacing="1" bgcolor="#000000"><tr><td>
@@ -264,16 +265,16 @@ function PrintPage()
     	<img src="'.XOOPS_URL.'/images/logo.gif" border="0" alt="" /><br /><br />
     	<h3>'.$story->title().'</h3>
     	<small><b>'._NW_DATE.'</b>&nbsp;'.$datetime.' | <b>'._NW_TOPICC.'</b>&nbsp;'.$myts->htmlSpecialChars($story->topic_title()).'</small><br /><br /></td></tr>';
-	echo '<tr valign="top" style="font:12px;"><td>'.$story->hometext().'<br />';
-	$bodytext = $story->bodytext();
-	$bodytext = str_replace('[pagebreak]',"<br style=\"page-break-after:always;\" />",$bodytext);
-	if ( $bodytext != '' ){
-    		echo $bodytext.'<br /><br />';
-	}
-	echo '</td></tr></table></td></tr></table>
+    echo '<tr valign="top" style="font:12px;"><td>'.$story->hometext().'<br />';
+    $bodytext = $story->bodytext();
+    $bodytext = str_replace('[pagebreak]',"<br style=\"page-break-after:always;\" />",$bodytext);
+    if ( $bodytext != '' ){
+        echo $bodytext.'<br /><br />';
+    }
+    echo '</td></tr></table></td></tr></table>
 	<br /><br />';
-	printf(_NW_THISCOMESFROM,htmlspecialchars($xoopsConfig['sitename'],ENT_QUOTES));
-	echo '<br /><a href="'.XOOPS_URL.'/">'.XOOPS_URL.'</a><br /><br />
+    printf(_NW_THISCOMESFROM,htmlspecialchars($xoopsConfig['sitename'],ENT_QUOTES));
+    echo '<br /><a href="'.XOOPS_URL.'/">'.XOOPS_URL.'</a><br /><br />
     	'._NW_URLFORSTORY.' <!-- Tag below can be used to display Permalink image --><!--img src="'.XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/images/x.gif" /--><br />
     	<a class="ignore" href="'.XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/article.php?storyid='.$story->storyid().'">'.XOOPS_URL.'/modules/news/article.php?storyid='.$story->storyid().'</a>
     	</td></tr></table></div>

@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,12 +16,12 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: read.php 2169 2008-09-23 13:37:10Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
 
-class Read extends XoopsObject 
+class Read extends XoopsObject
 {
     function Read($type = '')
     {
@@ -46,7 +46,7 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
      * @var string
      */
     var $type;
-    
+
     /**
      * seconds records will persist.
      * assigned from $xoopsModuleConfig["read_expire"]
@@ -58,7 +58,7 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
      * @var integer
      */
     var $lifetime;
-    
+
     /**
      * storage mode for records.
      * assigned from $xoopsModuleConfig["read_mode"]
@@ -71,7 +71,7 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
      * @var integer
      */
     var $mode;
-    
+
     function NewbbReadHandler(&$db, $type)
     {
         $type = ("forum" == $type) ? "forum" : "topic";
@@ -85,7 +85,7 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
 
     /**
      * Clear garbage
-     * 
+     *
      * Delete all expired and duplicated records
      */
     function clearGarbage()
@@ -93,7 +93,7 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
         $expire = time() - intval($this->lifetime);
         $sql = "DELETE FROM {$this->table} WHERE read_time < {$expire}";
         $this->db->queryF($sql);
-        
+
         /* for MySQL 4.1+ */
         if (version_compare( mysql_get_server_info(), "4.1.0", "ge" )):
         $sql =     "DELETE bb FROM {$this->table} AS bb" .
@@ -118,7 +118,7 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
         if ($this->mode == 1) return $this->getRead_cookie($read_item);
         else return $this->getRead_db($read_item, $uid);
     }
-        
+
     function getRead_cookie($item_id)
     {
         $cookie_name = ($this->type == "forum") ? "LF" : "LT";
@@ -126,7 +126,7 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
         $lastview = newbb_getcookie($cookie_name);
         return @$lastview[$cookie_var];
     }
-    
+
     function getRead_db($read_item, $uid)
     {
         if (empty($uid)) {
@@ -146,14 +146,14 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
         list($post_id) = $this->db->fetchRow($result);
         return $post_id;
     }
-    
+
     function setRead($read_item, $post_id, $uid = null)
     {
         if (empty($this->mode)) return true;
         if ($this->mode == 1) return $this->setRead_cookie($read_item, $post_id);
         else return $this->setRead_db($read_item, $post_id, $uid);
     }
-        
+
     function setRead_cookie($read_item, $post_id)
     {
         $cookie_name = ($this->type == "forum") ? "LF" : "LT";
@@ -161,7 +161,7 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
         $lastview[$read_item] = time();
         newbb_setcookie($cookie_name, $lastview);
     }
-    
+
     function setRead_db($read_item, $post_id, $uid)
     {
         if (empty($uid)) {
@@ -171,7 +171,7 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
                 return false;
             }
         }
-        
+
         $sql = "UPDATE " . $this->table .
                 " SET post_id = " . intval($post_id) . "," .
                 "     read_time =" . time() .
@@ -187,34 +187,34 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
         $object->setVar("read_time", time(), true);
         return parent::insert($object);
     }
-    
+
     function isRead_items(&$items, $uid = null)
     {
         $ret = null;
         if (empty($this->mode)) return $ret;
-        
+
         if ($this->mode == 1) $ret = $this->isRead_items_cookie($items);
         else $ret = $this->isRead_items_db($items, $uid);
         return $ret;
     }
-        
+
     function isRead_items_cookie(&$items)
     {
         $cookie_name = ($this->type == "forum")?"LF":"LT";
         $cookie_vars = newbb_getcookie($cookie_name, true);
-        
+
         $ret = array();
         foreach ($items as $key => $last_update) {
             $ret[$key] = (max(@$GLOBALS['last_visit'], @$cookie_vars[$key]) >= $last_update);
         }
         return $ret;
     }
-    
+
     function isRead_items_db(&$items, $uid)
     {
         $ret = array();
         if (empty($items)) return $ret;
-        
+
         if (empty($uid)) {
             if (is_object($GLOBALS["xoopsUser"])) {
                 $uid = $GLOBALS["xoopsUser"]->getVar("uid");
@@ -222,22 +222,22 @@ class NewbbReadHandler extends XoopsPersistableObjectHandler
                 return $ret;
             }
         }
-        
+
         $criteria = new CriteriaCompo(new Criteria("uid", $uid));
         $criteria->add(new Criteria("read_item", "(" . implode(", ", array_map("intval", array_keys($items))) . ")", "IN"));
         $items_obj = $this->getAll($criteria, array("read_item", "post_id"));
-        
+
         $items_list = array();
         foreach (array_keys($items_obj) as $key) {
             $items_list[$items_obj[$key]->getVar("read_item")] = $items_obj[$key]->getVar("post_id");
         }
         unset($items_obj);
-        
+
         foreach ($items as $key => $last_update) {
             $ret[$key] = (@$items_list[$key] >= $last_update);
         }
         return $ret;
     }
-    
+
 }
 ?>

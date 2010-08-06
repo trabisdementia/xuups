@@ -106,7 +106,7 @@ switch ($op) {
             $image_name = $myrow['image_name'];
             $id = $myrow['image_id'];
             if ($image_name == $image_featured) {
-                 $itemObj->setVar('image', $id);
+                $itemObj->setVar('image', $id);
             }
             if (in_array($image_name, $image_item)) {
                 $image_item_ids[] = $id;

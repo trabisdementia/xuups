@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,10 +16,10 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: index.list.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
-if (!defined('XOOPS_ROOT_PATH') || !is_object($xoopsModule)) { 
+
+if (!defined('XOOPS_ROOT_PATH') || !is_object($xoopsModule)) {
     return false;
-    exit(); 
+    exit();
 }
 
 // Instantiate the handlers
@@ -98,7 +98,7 @@ foreach (array_keys($articles_obj) as $id) {
         "image"        => $articles_obj[$id]->getImage(),
         "counter"    => $articles_obj[$id]->getVar("art_counter"),
         "summary"    => $articles_obj[$id]->getSummary( !empty($xoopsModuleConfig["display_summary"]) )
-        );
+    );
     $cats = $articles_obj[$id]->getCategories();
     foreach($cats as $catid){
         if($catid==0 || !isset($categories_obj[$catid])) continue;

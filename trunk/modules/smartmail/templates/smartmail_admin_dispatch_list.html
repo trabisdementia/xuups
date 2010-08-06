@@ -1,0 +1,70 @@
+<form action="dispatchlist.php" method="post" >
+    <{$smarty.const._ADD}>&nbsp;
+    <input type="text" name="number" value="1" size="3" />
+    <{$smarty.const._NL_AM_ADD_DISPATCHES_FOR}>
+    <select name="newsletterid">
+        <{html_options options=$newsletterlist}>
+    </select>
+    <input type="submit" name="add" value="<{$smarty.const._SUBMIT}>" class="formButton" />
+</form>
+<table>
+    <tr>
+        <th></th>
+        <th><{$smarty.const._NL_AM_STATUS}></th>
+        <th><{$smarty.const._NL_AM_TIME}></th>
+        <th><{$smarty.const._NL_AM_SUBJECT}></th>
+        <th></th>
+    </tr>
+    <{foreach item=dispatch from=$objects}>
+        <tr class="<{cycle values='odd, even'}>">
+            <td>
+                <{$newsletterlist[$dispatch.newsletterid]}>
+            </td>
+            <td>
+                <{if $dispatch.dispatch_status == 0}>
+                    <{$smarty.const._NL_AM_NOTREADY}>
+                <{elseif $dispatch.dispatch_status == 1}>
+                    <{$smarty.const._NL_AM_READY}>
+                <{elseif $dispatch.dispatch_status == 2}>
+                    <{$smarty.const._NL_AM_DISPATCHED}>
+                <{/if}>
+            </td>
+            <td><{$dispatch.dispatch_time|date_format:"%D %H:%M"}></td>
+            <td><{$dispatch.dispatch_subject}></td>
+            <td>
+                <a href="dispatch.php?op=edit&amp;id=<{$dispatch.dispatch_id}>"><{$smarty.const._EDIT}></a><br />
+                <a href="dispatch.php?op=delete&amp;id=<{$dispatch.dispatch_id}>"><{$smarty.const._DELETE}></a><br />
+                <a href="javascript: openWithSelfMain('newsletterpreview.php?id=<{$dispatch.dispatch_id}>', 'preview', '1000', '700');"><{$smarty.const._NL_AM_PREVIEW}></a><br />
+            </td>
+        </tr>
+    <{/foreach}>
+</table>
+
+<h2><{$smarty.const._NL_AM_LATESTDISPATCHES}></h2>
+<table>
+    <tr>
+        <th></th>
+        <th><{$smarty.const._NL_AM_TIME}></th>
+        <th><{$smarty.const._NL_AM_SUBJECT}></th>
+        <th><{$smarty.const._NL_AM_RECEIVERS}></th>
+        <th></th>
+    </tr>
+    <{foreach item=dispatch from=$dispatched}>
+        <tr class="<{cycle values='odd, even'}>">
+            <td>
+                <{$newsletterlist[$dispatch.newsletterid]}>
+            </td>
+            <td><{$dispatch.dispatch_time|date_format:"%D %H:%M"}></td>
+            <td><{$dispatch.dispatch_subject}></td>
+            <td><{$dispatch.dispatch_receivers}></td>
+            <td>
+                <a href="dispatch.php?op=edit&amp;id=<{$dispatch.dispatch_id}>"><{$smarty.const._EDIT}></a><br />
+                <a href="dispatch.php?op=delete&amp;id=<{$dispatch.dispatch_id}>"><{$smarty.const._DELETE}></a><br />
+                <a href="javascript: openWithSelfMain('newsletterpreview.php?id=<{$dispatch.dispatch_id}>', 'preview', '1000', '700');"><{$smarty.const._NL_AM_PREVIEW}></a><br />
+            </td>
+        </tr>
+    <{/foreach}>
+</table>
+<div>
+    <{$pagenav}>
+</div>

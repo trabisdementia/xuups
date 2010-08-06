@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,14 +20,14 @@ include_once dirname(__FILE__) . '/read.php';
 
 /**
  * A handler for read/unread handling
- * 
+ *
  * @package     newbb/cbb
- * 
+ *
  * @author        D.J. (phppp, http://xoopsforge.com)
  * @copyright    copyright (c) 2005 XOOPS.org
  */
 
-class Readforum extends Read 
+class Readforum extends Read
 {
     function Readforum()
     {
@@ -41,26 +41,26 @@ class NewbbReadforumHandler extends NewbbReadHandler
     {
         $this->NewbbReadHandler($db, "forum");
     }
-    
+
     /**
      * clean orphan items from database
-     * 
+     *
      * @return     bool    true on success
      */
     function cleanOrphan()
     {
         parent::cleanOrphan($this->db->prefix("bb_posts"), "post_id");
         return parent::cleanOrphan($this->db->prefix("bb_forums"), "forum_id", "read_item");
-    }    
-    
+    }
+
     function setRead_items($status = 0, $uid = null)
     {
         if (empty($this->mode)) return true;
-        
+
         if ($this->mode == 1) return $this->setRead_items_cookie($status);
         else return $this->setRead_items_db($status, $uid);
     }
-        
+
     function setRead_items_cookie($status, $items)
     {
         $cookie_name = "LF";
@@ -75,7 +75,7 @@ class NewbbReadforumHandler extends NewbbReadHandler
         newbb_setcookie($cookie_name, $items);
         return true;
     }
-    
+
     function setRead_items_db($status, $uid)
     {
         if (empty($uid)) {
@@ -96,7 +96,7 @@ class NewbbReadforumHandler extends NewbbReadHandler
             $this->setRead_db($key, $items_obj[$key]->getVar("forum_last_post_id"), $uid);
         }
         unset($items_obj);
-        
+
         return true;
     }
 }

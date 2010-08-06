@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: trackback.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
@@ -24,36 +24,36 @@ include_once dirname(dirname(__FILE__)) . "/include/vars.php";
 mod_loadFunctions("parse", $GLOBALS["artdirname"]);
 
 if (!class_exists("Trackback")) {
-class Trackback extends XoopsObject
-{
-
-    function Trackback($id = null)
+    class Trackback extends XoopsObject
     {
-        //$this->ArtObject();
-        //$this->table = art_DB_prefix("trackback");
-        $this->initVar("tb_id",            XOBJ_DTYPE_INT, null);
-        $this->initVar("art_id",        XOBJ_DTYPE_INT, 0, true);
-        $this->initVar("tb_status",        XOBJ_DTYPE_INT, 0);
-        $this->initVar("tb_time",        XOBJ_DTYPE_INT);
-        $this->initVar("tb_title",        XOBJ_DTYPE_TXTBOX);
-        $this->initVar("tb_url",        XOBJ_DTYPE_TXTBOX);
-        $this->initVar("tb_excerpt",    XOBJ_DTYPE_TXTBOX);
-        $this->initVar("tb_blog_name",    XOBJ_DTYPE_TXTBOX);
-        $this->initVar("tb_ip",            XOBJ_DTYPE_INT);
-    }
 
-    function getTime($format = "s")
-    {
-        mod_loadFunctions("time", $GLOBALS["artdirname"]);
-        $time = art_formatTimestamp($this->getVar("tb_time"), $format);
-        return $time;
-    }
+        function Trackback($id = null)
+        {
+            //$this->ArtObject();
+            //$this->table = art_DB_prefix("trackback");
+            $this->initVar("tb_id",            XOBJ_DTYPE_INT, null);
+            $this->initVar("art_id",        XOBJ_DTYPE_INT, 0, true);
+            $this->initVar("tb_status",        XOBJ_DTYPE_INT, 0);
+            $this->initVar("tb_time",        XOBJ_DTYPE_INT);
+            $this->initVar("tb_title",        XOBJ_DTYPE_TXTBOX);
+            $this->initVar("tb_url",        XOBJ_DTYPE_TXTBOX);
+            $this->initVar("tb_excerpt",    XOBJ_DTYPE_TXTBOX);
+            $this->initVar("tb_blog_name",    XOBJ_DTYPE_TXTBOX);
+            $this->initVar("tb_ip",            XOBJ_DTYPE_INT);
+        }
 
-    function getIp()
-    {
-        return long2ip($this->getVar("tb_ip"));
+        function getTime($format = "s")
+        {
+            mod_loadFunctions("time", $GLOBALS["artdirname"]);
+            $time = art_formatTimestamp($this->getVar("tb_time"), $format);
+            return $time;
+        }
+
+        function getIp()
+        {
+            return long2ip($this->getVar("tb_ip"));
+        }
     }
-}
 }
 
 art_parse_class('

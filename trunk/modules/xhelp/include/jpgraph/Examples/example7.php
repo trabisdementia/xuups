@@ -7,7 +7,7 @@ $ydata = array(11,3,8,12,5,1,9,13,5,7);
 $y2data = array(354,70,265,29,111,91,198,225,593,251);
 
 // Create the graph.
-$graph = new Graph(350,200);	
+$graph = new Graph(350,200);
 $graph->SetScale("textlin");
 $graph->SetY2Scale("log");
 $graph->SetShadow();

@@ -165,7 +165,7 @@ define('_AM_XHELP_TEXT_SEARCH_TEXT', 'Suche Text:');
 define('_AM_XHELP_TEXT_GO_BACK_SEARCH', 'Zurück zur Suche');
 define('_AM_XHELP_TEXT_FIND_USERS', 'Finde Benutzer');
 
-define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Anfangsdatum:');  
+define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Anfangsdatum:');
 define('_AM_XHELP_SEARCH_ENDDATE', 'Enddatum:');
 
 define('_AM_XHELP_TEXT_ADD_STATUS', 'Status hinzufügen');
@@ -223,7 +223,7 @@ define('_AM_XHELP_MIME_USERFINFO', '<b>Mimetypen, die Benutzer hochladen dürfen:
 define('_AM_XHELP_MIME_NOMIMEINFO', 'Keine Mimetypen ausgewählt.');
 define('_AM_XHELP_MIME_FINDMIMETYPE', 'Neuen Mimetyp finden:');
 define('_AM_XHELP_MIME_EXTFIND', "Suche Dateierweiterung:<div style='padding-top: 8px;'><span style='font-weight: normal;'>Gesuchte Dateierweiterung eingeben.</span></div>'");
-define('_AM_XHELP_MIME_INFOTEXT', "<ul><li>Neue Mimetypen können mit diesem Form erzeugt, geändert oder gelöschtwerden.</li> 
+define('_AM_XHELP_MIME_INFOTEXT', "<ul><li>Neue Mimetypen können mit diesem Form erzeugt, geändert oder gelöschtwerden.</li>
 	<li>Nach neuem Mimetyp über eine externe Website suchen.</li> 
 	<li>Zeige Mimetypen für Admin und Benutzer Uploads.</li> 
 	<li>Ändere Mimetyp upload Status.</li></ul> 
@@ -245,7 +245,7 @@ define('_AM_XHELP_MIME_MODIFIED', 'Mimetyp Information geändert');
 define('_AM_XHELP_MINDEX_ACTION', 'Aktion');
 define('_AM_XHELP_MINDEX_PAGE', '<b>Seite:</b> ');
 
-//image admin icon 
+//image admin icon
 define('_AM_XHELP_ICO_EDIT', 'Ändere dieses Objekt');
 define('_AM_XHELP_ICO_DELETE', 'Lösche dieses Objekt');
 define('_AM_XHELP_ICO_ONLINE', 'Online');

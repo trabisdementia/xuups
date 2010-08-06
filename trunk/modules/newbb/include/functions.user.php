@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -21,7 +21,7 @@ if (!defined('XOOPS_ROOT_PATH')) { exit(); }
 
 /**
  * Function to a list of user names associated with their user IDs
- * 
+ *
  */
 function &newbb_getUnameFromIds( $uid, $usereal = 0, $linked = false )
 {
@@ -66,14 +66,14 @@ function newbb_isAdministrator( $user = -1, $mid = 0 )
             unset($newbb_module);
         }
     }
-    
+
     if ( is_object($xoopsModule) && $mid == $xoopsModule->getVar("mid", "n") && is_object($xoopsUser) && $uid == $xoopsUser->getVar("uid", "n") ) {
         return $GLOBALS["xoopsUserIsAdmin"];
     }
 
     $member_handler =& xoops_gethandler('member');
     $groups = $member_handler->getGroupsByUser($uid);
-    
+
     $moduleperm_handler =& xoops_gethandler('groupperm');
     return $moduleperm_handler->checkRight('module_admin', $mid, $groups);
 }
@@ -113,9 +113,9 @@ function newbb_isAdmin($forum = 0)
     static $_cachedModerators;
 
     if (empty($forum)) return $GLOBALS["xoopsUserIsAdmin"];
-    
+
     if (!is_object($xoopsUser)) return false;
-    
+
     if ($GLOBALS["xoopsUserIsAdmin"] && $xoopsModule->getVar("dirname") == "newbb") {
         return true;
     }
@@ -139,7 +139,7 @@ function newbb_isModuleAdministrators($uid = array())
 
     if (empty($uid)) return $module_administrators;
     $mid = $xoopsModule->getVar("mid");
-    
+
     $sql = "SELECT COUNT(l.groupid) AS count, l.uid FROM " . $xoopsDB->prefix('groups_users_link') . " AS l" .
             " LEFT JOIN " . $xoopsDB->prefix('group_permission') . " AS p ON p.gperm_groupid=l.groupid" .
             " WHERE l.uid IN (" . implode(", ", array_map("intval", $uid)) . ")" .
@@ -162,7 +162,7 @@ function newbb_isForumModerators($uid = array(), $mid = 0)
     $forum_moderators = array();
 
     if (empty($uid)) return $forum_moderators;
-    
+
     $sql = "SELECT forum_moderator FROM " . $xoopsDB->prefix('bb_forums');
     if ($result = $xoopsDB->query($sql)) {
         while ($myrow = $xoopsDB->fetchArray($result)) {

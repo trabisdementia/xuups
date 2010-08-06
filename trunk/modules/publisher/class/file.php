@@ -92,7 +92,7 @@ class PublisherFile extends XoopsObject
             $errors = array_merge($errors, $uploader->getErrors(false));
             return false;
         }
-        }
+    }
 
     function storeUpload($post_field, $allowed_mimetypes = null, &$errors)
     {
@@ -201,7 +201,7 @@ class PublisherFile extends XoopsObject
     }
 
     function getNameFromFilename()
-   {
+    {
         $ret = $this->filename();
         $sep_pos = strpos($ret, '_');
         $ret = substr($ret, $sep_pos + 1, strlen($ret) - $sep_pos);
@@ -231,7 +231,7 @@ class PublisherFileHandler extends XoopsPersistableObjectHandler
     function __construct(&$db)
     {
         parent::__construct($db, "publisher_files", 'PublisherFile', "fileid", "name");
-     }
+    }
 
     /**
      * delete a file from the database

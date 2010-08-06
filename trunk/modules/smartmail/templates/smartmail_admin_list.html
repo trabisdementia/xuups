@@ -1,0 +1,28 @@
+<div>
+    <a href="newsletter.php?op=new"><{$smarty.const._ADD}> <{$typetitle}></a>
+</div>
+<table>
+    <tr>
+        <th><{$smarty.const._NL_AM_NEWSLETTER}></th>
+        <th></th>
+        <th></th>
+        <th><{$smarty.const._NL_AM_SUBSCRIBERS}></th>
+        <th></th>
+    </tr>
+    <{foreach item=newsletter from=$objects}>
+        <tr class="<{cycle values='odd, even'}>">
+            <td><a href="newsletter.php?id=<{$newsletter.newsletter_id}>"><{$newsletter.newsletter_name}></a></td>
+            <td><a href="dispatchlist.php?id=<{$newsletter.newsletter_id}>"><{$smarty.const._NL_AM_DISPATCHES}></a></td>
+            <td><a href="blocks.php?id=<{$newsletter.newsletter_id}>&amp;op=blocks"><{$smarty.const._NL_AM_BLOCKS}></a></td>
+            <td><a href="subscribers.php?id=<{$newsletter.newsletter_id}>"><{$receiver_counts[$newsletter.newsletter_id]|default:"0"}></a></td>
+            <td>
+                <a href="newsletter.php?op=edit&amp;id=<{$newsletter.newsletter_id}>"><{$smarty.const._EDIT}></a><br />
+                <a href="newsletter.php?op=delete&amp;id=<{$newsletter.newsletter_id}>"><{$smarty.const._DELETE}></a>
+            </td>
+        </tr>
+    <{/foreach}>
+</table>
+
+<div>
+    <{$pagenav}>
+</div>

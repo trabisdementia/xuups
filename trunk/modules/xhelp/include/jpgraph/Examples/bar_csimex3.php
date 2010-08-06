@@ -13,8 +13,8 @@ $graph->SetAngle(90);
 $graph->SetScale("textlin");
 
 // The negative margins are necessary since we
-// have rotated the image 90 degress and shifted the 
-// meaning of width, and height. This means that the 
+// have rotated the image 90 degress and shifted the
+// meaning of width, and height. This means that the
 // left and right margins now becomes top and bottom
 // calculated with the image width and not the height.
 $graph->img->SetMargin(-80,-80,210,210);

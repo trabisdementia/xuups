@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -36,8 +36,8 @@ function newbb_attachmentImage($source)
 
     if ($xoopsModuleConfig['max_img_width'] > 0) {
         if (
-        ( $xoopsModuleConfig['max_image_width'] > 0 && $imginfo[0] > $xoopsModuleConfig['max_image_width'] ) 
-        || 
+        ( $xoopsModuleConfig['max_image_width'] > 0 && $imginfo[0] > $xoopsModuleConfig['max_image_width'] )
+        ||
         ( $xoopsModuleConfig['max_image_height'] > 0 && $imginfo[1] > $xoopsModuleConfig['max_image_height'] )
         ) {
             if ($imginfo[0] > $xoopsModuleConfig['max_img_width']) {
@@ -115,7 +115,7 @@ function newbb_createThumbnail($source, $thumb_width)
 
         @passthru($magick_command);
         if (file_exists($new_file)) {
-                return true;
+            return true;
         }
     }
 
@@ -131,7 +131,7 @@ function newbb_createThumbnail($source, $thumb_width)
 
         @exec($cmd, $output, $retval);
         if (file_exists($new_file)) {
-                return true;
+            return true;
         }
     }
 
@@ -156,7 +156,7 @@ function newbb_createThumbnail($source, $thumb_width)
                 imagedestroy($im);
                 imagedestroy($new_im);
                 break;
-                
+
             case 2 :
                 $im = imagecreatefromjpeg($src_file);
                 $new_im = $imageCreateFunction($newWidth, $newHeight);
@@ -165,7 +165,7 @@ function newbb_createThumbnail($source, $thumb_width)
                 imagedestroy($im);
                 imagedestroy($new_im);
                 break;
-                
+
             case 3 :
                 $im = imagecreatefrompng($src_file);
                 $new_im = $imageCreateFunction($newWidth, $newHeight);

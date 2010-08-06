@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
@@ -49,7 +49,7 @@ class MytabsTab extends XoopsObject
         return ($this->getVar('tabshowalways') == "yes" || ($this->getVar('tabshowalways') == "time" && $this->getVar('tabfromdate') <= time() && $this->getVar('tabtodate') >= time()));
     }
 
-     /**
+    /**
      * Get the form for adding or editing tabs
      *
      * @return MytabsTabForm
@@ -68,9 +68,9 @@ class MytabsTab extends XoopsObject
 
         // PM detection and conversion
         if (preg_match('/{pm_new}/i', $title)
-            || preg_match('/{pm_readed}/i', $title)
-            || preg_match('/{pm_total}/i', $title)
-            ) {
+        || preg_match('/{pm_readed}/i', $title)
+        || preg_match('/{pm_total}/i', $title)
+        ) {
             if (is_object($GLOBALS['xoopsUser'])) {
                 $new_messages = 0;
                 $old_messages = 0;
@@ -84,7 +84,7 @@ class MytabsTab extends XoopsObject
                 $criteria_old = new CriteriaCompo(new Criteria('read_msg', 1));
                 $criteria_old->add(new Criteria('to_userid', $GLOBALS['xoopsUser']->getVar('uid')));
                 $old_messages = $pm_handler->getCount($criteria_old);
-	            $som =  $old_messages +  $new_messages;
+                $som =  $old_messages +  $new_messages;
                 if ($new_messages > 0) {
                     $title = preg_replace('/\{pm_new\}/',    '(<span style="color: rgb(255, 0, 0); font-weight: bold;">'.$new_messages.'</span>)', $title);
                 }
@@ -98,7 +98,7 @@ class MytabsTab extends XoopsObject
             $title = preg_replace('/\{pm_new\}/',    '', $title);
             $title = preg_replace('/\{pm_readed\}/', '', $title);
             $title = preg_replace('/\{pm_total\}/',  '', $title);
-	    }
+        }
         return trim($title);
     }
 
@@ -110,10 +110,10 @@ class MytabsTab extends XoopsObject
         $user_id = $GLOBALS['xoopsUser'] ? $GLOBALS['xoopsUser']->getVar('uid') : 0;
         // Link type, taken from multimenu module
         if ((eregi("mailto:", $link))  ||
-            (eregi("http://", $link))  ||
-            (eregi("https://", $link)) ||
-            (eregi("file://", $link))  ||
-            (eregi("ftp://", $link))){
+        (eregi("http://", $link))  ||
+        (eregi("https://", $link)) ||
+        (eregi("file://", $link))  ||
+        (eregi("ftp://", $link))){
 
             $link = preg_replace('/\{user_id\}/', $user_id, $link);
         } else {

@@ -30,96 +30,96 @@
 // ------------------------------------------------------------------------- //
 
 /*
-function getMainfile($url)
-{
-	
-	$mpath='';
-	for ($i=0;$i<strlen($url);$i++)
-	{
-		if ($url[$i]=='/')$mpath.='../';
-	}
-	return $mpath.'mainfile.php';
-}
+ function getMainfile($url)
+ {
 
-function getLanguage($url)
-{
-	global $xoopsConfig;
-	if(file_exists(XOOPS_ROOT_PATH.''.$url.'/language/'.$xoopsConfig['language'].'.php')) 
-	return ''.XOOPS_ROOT_PATH.''.$url.'/language/'.$xoopsConfig['language'].'.php';
-	else return ''.XOOPS_ROOT_PATH.''.$url.'/language/english.php'; 
-}
+ $mpath='';
+ for ($i=0;$i<strlen($url);$i++)
+ {
+ if ($url[$i]=='/')$mpath.='../';
+ }
+ return $mpath.'mainfile.php';
+ }
+
+ function getLanguage($url)
+ {
+ global $xoopsConfig;
+ if(file_exists(XOOPS_ROOT_PATH.''.$url.'/language/'.$xoopsConfig['language'].'.php'))
+ return ''.XOOPS_ROOT_PATH.''.$url.'/language/'.$xoopsConfig['language'].'.php';
+ else return ''.XOOPS_ROOT_PATH.''.$url.'/language/english.php';
+ }
 
 
-function CheckBrowser($get_isie=true)
-{
-	global $_SERVER;
+ function CheckBrowser($get_isie=true)
+ {
+ global $_SERVER;
 
-		$comp=false;
-		$isie=false;
-		
-		if(eregi("msie",$_SERVER['HTTP_USER_AGENT']) && !eregi("opera",$_SERVER['HTTP_USER_AGENT']) )
-		{
-			$val = explode(" ",stristr($_SERVER['HTTP_USER_AGENT'],"msie"));
-			if((float)str_replace(";","",$val[1])>=5.5)$comp=true;
-			$isie=true;
-		}
-		elseif(eregi("mozilla",$_SERVER['HTTP_USER_AGENT']) && eregi("rv:[0-9]\.[0-9]\.[0-9]",$_SERVER['HTTP_USER_AGENT']) && !eregi("netscape",$_SERVER['HTTP_USER_AGENT']))
-		{
-			$val = explode(" ",stristr($_SERVER['HTTP_USER_AGENT'],"rv:"));
-			eregi("rv:[0-9]\.[0-9]\.[0-9]",$_SERVER['HTTP_USER_AGENT'],$val);
-			$version = str_replace("rv:","",$val[0]);
-			if ($version>1.3)$comp=true;
-		}
-		elseif(eregi("mozilla",$_SERVER['HTTP_USER_AGENT']) && eregi("rv:[0-9].[0-9][a-b]",$_SERVER['HTTP_USER_AGENT']) && !eregi("netscape",$_SERVER['HTTP_USER_AGENT']))
-		{
-			$val = explode(" ",stristr($_SERVER['HTTP_USER_AGENT'],"rv:"));
-			eregi("rv:[0-9].[0-9][a-b]",$_SERVER['HTTP_USER_AGENT'],$val);
-			$version = str_replace("rv:","",$val[0]);
-			if ($version>1.3)$comp=true;
-		}
-		elseif(eregi("netscape",$_SERVER['HTTP_USER_AGENT']))
-		{
-			$val = explode("Netscape/",$_SERVER['HTTP_USER_AGENT']);
-			$version = str_replace(" (ax)","",$val[1]);
-			if($version>=7.1)$comp=true;
-		}
-	
-	if($get_isie)return($isie);
-	else return $comp;
-}*/
+ $comp=false;
+ $isie=false;
+
+ if(eregi("msie",$_SERVER['HTTP_USER_AGENT']) && !eregi("opera",$_SERVER['HTTP_USER_AGENT']) )
+ {
+ $val = explode(" ",stristr($_SERVER['HTTP_USER_AGENT'],"msie"));
+ if((float)str_replace(";","",$val[1])>=5.5)$comp=true;
+ $isie=true;
+ }
+ elseif(eregi("mozilla",$_SERVER['HTTP_USER_AGENT']) && eregi("rv:[0-9]\.[0-9]\.[0-9]",$_SERVER['HTTP_USER_AGENT']) && !eregi("netscape",$_SERVER['HTTP_USER_AGENT']))
+ {
+ $val = explode(" ",stristr($_SERVER['HTTP_USER_AGENT'],"rv:"));
+ eregi("rv:[0-9]\.[0-9]\.[0-9]",$_SERVER['HTTP_USER_AGENT'],$val);
+ $version = str_replace("rv:","",$val[0]);
+ if ($version>1.3)$comp=true;
+ }
+ elseif(eregi("mozilla",$_SERVER['HTTP_USER_AGENT']) && eregi("rv:[0-9].[0-9][a-b]",$_SERVER['HTTP_USER_AGENT']) && !eregi("netscape",$_SERVER['HTTP_USER_AGENT']))
+ {
+ $val = explode(" ",stristr($_SERVER['HTTP_USER_AGENT'],"rv:"));
+ eregi("rv:[0-9].[0-9][a-b]",$_SERVER['HTTP_USER_AGENT'],$val);
+ $version = str_replace("rv:","",$val[0]);
+ if ($version>1.3)$comp=true;
+ }
+ elseif(eregi("netscape",$_SERVER['HTTP_USER_AGENT']))
+ {
+ $val = explode("Netscape/",$_SERVER['HTTP_USER_AGENT']);
+ $version = str_replace(" (ax)","",$val[1]);
+ if($version>=7.1)$comp=true;
+ }
+
+ if($get_isie)return($isie);
+ else return $comp;
+ }*/
 
 function checkBrowser($get_isie = true)
 {
-	global $_SERVER;
+    global $_SERVER;
 
-		$comp=false;
-		$isie=false;
-		
-		if(eregi("opera",$_SERVER['HTTP_USER_AGENT']))
-		{
-			$comp=false;
-			$isie=false;
-		}
-		elseif(eregi("msie",$_SERVER['HTTP_USER_AGENT']))
-		{
-			$val = explode(" ",stristr($_SERVER['HTTP_USER_AGENT'],"msie"));
-			if((float)str_replace(";","",$val[1])>=5.5)$comp=true;
-			$isie=true;
-		}
-		elseif(eregi("mozilla",$_SERVER['HTTP_USER_AGENT']))
-		{
-			$comp=true;
-			$isie=false;
-		}
-		elseif(eregi("netscape",$_SERVER['HTTP_USER_AGENT']))
-		{
-			$val = explode("Netscape/",$_SERVER['HTTP_USER_AGENT']);
-			$version = str_replace(" (ax)","",$val[1]);
-			if($version>=7.1)$comp=true;
-			$isie=false;
-		}
-	
-	if($get_isie) return($isie);
-	else return $comp;
+    $comp=false;
+    $isie=false;
+
+    if(eregi("opera",$_SERVER['HTTP_USER_AGENT']))
+    {
+        $comp=false;
+        $isie=false;
+    }
+    elseif(eregi("msie",$_SERVER['HTTP_USER_AGENT']))
+    {
+        $val = explode(" ",stristr($_SERVER['HTTP_USER_AGENT'],"msie"));
+        if((float)str_replace(";","",$val[1])>=5.5)$comp=true;
+        $isie=true;
+    }
+    elseif(eregi("mozilla",$_SERVER['HTTP_USER_AGENT']))
+    {
+        $comp=true;
+        $isie=false;
+    }
+    elseif(eregi("netscape",$_SERVER['HTTP_USER_AGENT']))
+    {
+        $val = explode("Netscape/",$_SERVER['HTTP_USER_AGENT']);
+        $version = str_replace(" (ax)","",$val[1]);
+        if($version>=7.1)$comp=true;
+        $isie=false;
+    }
+
+    if($get_isie) return($isie);
+    else return $comp;
 }
 ?>

@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: main.php 331 2007-12-23 16:01:11Z malanciault $
-* Module: Publisher
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: main.php 331 2007-12-23 16:01:11Z malanciault $
+ * Module: Publisher
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 define("_MD_PUBLISHER_ADD_FILE_INTRO", "Please fill this form in order to attach a file to this this article : '%s'.");
 define("_MD_PUBLISHER_ADD_FILE_TITLE", "Add a file to an article");

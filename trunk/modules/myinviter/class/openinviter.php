@@ -124,8 +124,8 @@ class OpenInviter
             if ($op = opendir($dir)) {
                 while (false !== ($file = readdir($op))) {
                     if (($file != ".") AND ($file != "..")
-                                     AND (strpos($file, '.php') !== false)
-                                     AND (!isset($this->ignoredFiles[$file]))
+                    AND (strpos($file, '.php') !== false)
+                    AND (!isset($this->ignoredFiles[$file]))
                     ) {
                         $array_file[$file] = $file;
                     }
@@ -173,7 +173,7 @@ class OpenInviter
         } else {
             return $this->plugin->sendMessage($session_id, $message, $contacts);
         }
-   }
+    }
 
     /**
      * Find out if the contacts should be displayed

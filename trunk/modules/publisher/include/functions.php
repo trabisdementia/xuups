@@ -212,10 +212,10 @@ function publisher_html2text($document)
         "<",
         ">",
         " ",
-        chr(161),
-        chr(162),
-        chr(163),
-        chr(169),
+    chr(161),
+    chr(162),
+    chr(163),
+    chr(169),
     "chr(\\1)");
 
     $text = preg_replace($search, $replace, $document);
@@ -414,7 +414,7 @@ function publisher_getEditor($caption, $name, $value, $dhtml = true)
                 $editor = new XoopsFormTextArea($caption, $name, $value, 7, 60);
             }
 
-        break;
+            break;
     }
 
     return $editor;

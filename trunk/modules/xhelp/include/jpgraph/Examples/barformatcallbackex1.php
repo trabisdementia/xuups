@@ -11,8 +11,8 @@ function cbFmtPercentage($aVal) {
     return sprintf("%.1f%%",100*$aVal); // Convert to string
 }
 
-// Create the graph. 
-$graph = new Graph(400,300);	
+// Create the graph.
+$graph = new Graph(400,300);
 $graph->SetScale("textlin");
 
 // Create a bar plots

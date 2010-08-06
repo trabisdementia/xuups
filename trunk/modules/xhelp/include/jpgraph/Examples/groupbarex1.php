@@ -7,7 +7,7 @@ $datay1=array(35,160,0,0,0,0);
 $datay2=array(35,190,190,190,190,190);
 $datay3=array(20,70,70,140,230,260);
 
-$graph = new Graph(450,200,'auto');	
+$graph = new Graph(450,200,'auto');
 $graph->SetScale("textlin");
 $graph->SetShadow();
 $graph->img->SetMargin(40,30,40,40);

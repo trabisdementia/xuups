@@ -7,12 +7,12 @@ $k=0.05;
 
 // Create some data points
 for($i=0; $i<$numpoints; ++$i) {
-	$datay[$i]=exp(-$k*$i)*cos(2*M_PI/10*$i);
+    $datay[$i]=exp(-$k*$i)*cos(2*M_PI/10*$i);
 }
 
 // A format callbakc function
 function mycallback($l) {
-	return sprintf("%02.2f",$l);
+    return sprintf("%02.2f",$l);
 }
 
 // Setup the basic parameters for the graph

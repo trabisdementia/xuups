@@ -25,54 +25,54 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
+    die('XOOPS root path not defined');
 }
 
 function b_news_bigstory_show() {
-	include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
+    include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
     include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
     $myts =& MyTextSanitizer::getInstance();
-	$restricted=news_getmoduleoption('restrictindex');
-	$dateformat=news_getmoduleoption('dateformat');
-	$infotips=news_getmoduleoption('infotips');
+    $restricted=news_getmoduleoption('restrictindex');
+    $dateformat=news_getmoduleoption('dateformat');
+    $infotips=news_getmoduleoption('infotips');
 
-	$block = array();
+    $block = array();
     $onestory = new NewsStory();
-	$stories = $onestory->getBigStory(1,0,$restricted,0,1, true, 'counter');
-	if(count($stories)==0) {
-		$block['message'] = _MB_NEWS_NOTYET;
-	} else {
-		foreach ( $stories as $key => $story ) {
-			$htmltitle='';
-			if($infotips>0) {
-				$block['infotips'] = news_make_infotips($story->hometext());
-				$htmltitle=' title="'.$block['infotips'].'"';
-			}
-			$block['htmltitle']=$htmltitle;
-			$block['message'] = _MB_NEWS_TMRSI;
-			$block['story_title'] = $story->title('Show');
-			$block['story_id'] = $story->storyid();
-			$block['story_date'] = formatTimestamp($story->published(), $dateformat);
-			$block['story_hits'] = $story->counter();
+    $stories = $onestory->getBigStory(1,0,$restricted,0,1, true, 'counter');
+    if(count($stories)==0) {
+        $block['message'] = _MB_NEWS_NOTYET;
+    } else {
+        foreach ( $stories as $key => $story ) {
+            $htmltitle='';
+            if($infotips>0) {
+                $block['infotips'] = news_make_infotips($story->hometext());
+                $htmltitle=' title="'.$block['infotips'].'"';
+            }
+            $block['htmltitle']=$htmltitle;
+            $block['message'] = _MB_NEWS_TMRSI;
+            $block['story_title'] = $story->title('Show');
+            $block['story_id'] = $story->storyid();
+            $block['story_date'] = formatTimestamp($story->published(), $dateformat);
+            $block['story_hits'] = $story->counter();
             $block['story_rating'] = $story->rating();
             $block['story_votes'] = $story->votes();
             $block['story_author']= $story->uname();
             $block['story_text']= $story->hometext();
             $block['story_topic_title']= $story->topic_title();
             $block['story_topic_color']= '#'.$myts->displayTarea($story->topic_color);
-		}
-	}
-	return $block;
+        }
+    }
+    return $block;
 }
 
 function b_news_bigstory_onthefly($options)
 {
-	$options = explode('|',$options);
-	$block = & b_news_bigstory_show($options);
+    $options = explode('|',$options);
+    $block = & b_news_bigstory_show($options);
 
-	$tpl = new XoopsTpl();
-	$tpl->assign('block', $block);
-	$tpl->display('db:news_block_bigstory.html');
+    $tpl = new XoopsTpl();
+    $tpl->assign('block', $block);
+    $tpl->display('db:news_block_bigstory.html');
 }
 
 ?>

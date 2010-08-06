@@ -1,14 +1,14 @@
 <?php
 /*=======================================================================
-// File: 	PROD.INC.PHP
-// Description: Special localization file with the same error messages
-//              for all errors.
-// Created: 	2006-02-18
-// Ver:		$Id: prod.inc.php 1886 2009-10-01 23:30:16Z ljp $
-//
-// Copyright (c) Aditus Consulting. All rights reserved.
-//========================================================================
-*/
+ // File: 	PROD.INC.PHP
+ // Description: Special localization file with the same error messages
+ //              for all errors.
+ // Created: 	2006-02-18
+ // Ver:		$Id: prod.inc.php 1886 2009-10-01 23:30:16Z ljp $
+ //
+ // Copyright (c) Aditus Consulting. All rights reserved.
+ //========================================================================
+ */
 
 // The single error message for all errors
 DEFINE('DEFAULT_ERROR_MESSAGE','We are sorry but the system could not generate the requested image. Please contact site support to resolve this problem. Problem no: #');
@@ -17,8 +17,8 @@ DEFINE('DEFAULT_ERROR_MESSAGE','We are sorry but the system could not generate t
 $_jpg_messages = array(
 
 /*
-** Headers already sent error. This is formatted as HTML different since this will be sent back directly as text
-*/
+ ** Headers already sent error. This is formatted as HTML different since this will be sent back directly as text
+ */
 10  => array('<table border=1><tr><td><font color=darkred size=4><b>JpGraph Error:</b>
 HTTP headers have already been sent.<br>Caused by output from file <b>%s</b> at line <b>%d</b>.</font></td></tr><tr><td><b>Explanation:</b><br>HTTP headers have already been sent back to the browser indicating the data as text before the library got a chance to send it\'s image HTTP header to this browser. This makes it impossible for the library to send back image data to the browser (since that would be interpretated as text by the browser and show up as junk text).<p>Most likely you have some text in your script before the call to <i>Graph::Stroke()</i>. If this texts gets sent back to the browser the browser will assume that all data is plain text. Look for any text, even spaces and newlines, that might have been sent back to the browser. <p>For example it is a common mistake to leave a blank line before the opening "<b>&lt;?php</b>".</td></tr></table>',2),
 

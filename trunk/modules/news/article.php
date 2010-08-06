@@ -151,11 +151,11 @@ $gperm_handler =& xoops_gethandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
 } else {
-	$groups = XOOPS_GROUP_ANONYMOUS;
+    $groups = XOOPS_GROUP_ANONYMOUS;
 }
 if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, $xoopsModule->getVar('mid'))) {
-	redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
-	exit();
+    redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
+    exit();
 }
 
 $storypage = isset($_GET['page']) ? intval($_GET['page']) : 0;
@@ -166,15 +166,15 @@ $hcontent='';
  * update counter only when viewing top page and when you are not the author or an admin
  */
 if (empty($_GET['com_id']) && $storypage == 0) {
-	if(is_object($xoopsUser)) {
-		if( ($xoopsUser->getVar('uid')==$article->uid()) || news_is_admin_group()) {
-			// nothing ! ;-)
-		} else {
-    		$article->updateCounter();
-    	}
+    if(is_object($xoopsUser)) {
+        if( ($xoopsUser->getVar('uid')==$article->uid()) || news_is_admin_group()) {
+            // nothing ! ;-)
+        } else {
+            $article->updateCounter();
+        }
     } else {
         $article->updateCounter();
-	}
+    }
 }
 $xoopsOption['template_main'] = 'news_article.html';
 include_once XOOPS_ROOT_PATH.'/header.php';
@@ -191,16 +191,16 @@ $bodytext = $article->bodytext();
 
 if (xoops_trim($bodytext) != '') {
     $articletext = array();
-	if(news_getmoduleoption('enhanced_pagenav')) {
-	    $articletext = preg_split('/(\[pagebreak:|\[pagebreak)(.*)(\])/iU', $bodytext);
-	    $arr_titles = array();
-		$auto_summary = $article->auto_summary($bodytext, $arr_titles);
-		$bodytext = str_replace('[summary]', $auto_summary, $bodytext);
-		$articletext[$storypage] = str_replace('[summary]', $auto_summary, $articletext[$storypage]);
-		$story['text'] = str_replace('[summary]', $auto_summary, $story['text']);
-	} else {
-		$articletext = explode('[pagebreak]', $bodytext);
-	}
+    if(news_getmoduleoption('enhanced_pagenav')) {
+        $articletext = preg_split('/(\[pagebreak:|\[pagebreak)(.*)(\])/iU', $bodytext);
+        $arr_titles = array();
+        $auto_summary = $article->auto_summary($bodytext, $arr_titles);
+        $bodytext = str_replace('[summary]', $auto_summary, $bodytext);
+        $articletext[$storypage] = str_replace('[summary]', $auto_summary, $articletext[$storypage]);
+        $story['text'] = str_replace('[summary]', $auto_summary, $story['text']);
+    } else {
+        $articletext = explode('[pagebreak]', $bodytext);
+    }
 
     $story_pages = count($articletext);
 
@@ -208,14 +208,14 @@ if (xoops_trim($bodytext) != '') {
         include_once XOOPS_ROOT_PATH.'/modules/news/include/pagenav.php';
         $pagenav = new XoopsPageNav($story_pages, 1, $storypage, 'page', 'storyid='.$storyid);
         if(news_isbot()) { 		// A bot is reading the articles, we are going to show him all the links to the pages
-        	$xoopsTpl->assign('pagenav', $pagenav->renderNav($story_pages));
+            $xoopsTpl->assign('pagenav', $pagenav->renderNav($story_pages));
         } else {
-			if(news_getmoduleoption('enhanced_pagenav')) {
-				$xoopsTpl->assign('pagenav', $pagenav->renderEnhancedSelect(true, $arr_titles));
-			} else {
-				$xoopsTpl->assign('pagenav', $pagenav->renderNav());
-			}
-    	}
+            if(news_getmoduleoption('enhanced_pagenav')) {
+                $xoopsTpl->assign('pagenav', $pagenav->renderEnhancedSelect(true, $arr_titles));
+            } else {
+                $xoopsTpl->assign('pagenav', $pagenav->renderNav());
+            }
+        }
 
         if ($storypage == 0) {
             $story['text'] = $story['text'].'<br />'.news_getmoduleoption('advertisement').'<br />'.$articletext[$storypage];
@@ -231,11 +231,11 @@ $xoopsTpl->assign('advertisement', news_getmoduleoption('advertisement'));
 
 // ****************************************************************************************************************
 function my_highlighter ($matches) {
-	$color = news_getmoduleoption('highlightcolor');
-	if(substr($color,0,1)!='#') {
-		$color='#'.$color;
-	}
-	return '<span style="font-weight: bolder; background-color: '.$color.';">' . $matches[0] . '</span>';
+    $color = news_getmoduleoption('highlightcolor');
+    if(substr($color,0,1)!='#') {
+        $color='#'.$color;
+    }
+    return '<span style="font-weight: bolder; background-color: '.$color.';">' . $matches[0] . '</span>';
 }
 
 $highlight = false;
@@ -243,9 +243,9 @@ $highlight = news_getmoduleoption('keywordshighlight');
 
 if($highlight && isset($_GET['keywords']))
 {
-	$keywords=$myts->htmlSpecialChars(trim(urldecode($_GET['keywords'])));
-	$h= new keyhighlighter ($keywords, true , 'my_highlighter');
-	$story['text'] = $h->highlight($story['text']);
+    $keywords=$myts->htmlSpecialChars(trim(urldecode($_GET['keywords'])));
+    $h= new keyhighlighter ($keywords, true , 'my_highlighter');
+    $story['text'] = $h->highlight($story['text']);
 }
 // ****************************************************************************************************************
 
@@ -269,7 +269,7 @@ if ( $story['poster'] ) {
     $story['poster_url'] = '';
     $story['poster_from'] = '';
     if(news_getmoduleoption('displayname')!=3) {
-    	$story['poster'] = $xoopsConfig['anonymous'];
+        $story['poster'] = $xoopsConfig['anonymous'];
     }
 }
 $story['morelink'] = '';
@@ -277,9 +277,9 @@ $story['adminlink'] = '';
 unset($isadmin);
 
 if(is_object($xoopsUser)) {
-	if( $xoopsUser->isAdmin($xoopsModule->getVar('mid')) || (news_getmoduleoption('authoredit') && $article->uid() == $xoopsUser->getVar('uid')) ) {
-    	$isadmin = true;
-    	$story['adminlink'] = $article->adminlink();
+    if( $xoopsUser->isAdmin($xoopsModule->getVar('mid')) || (news_getmoduleoption('authoredit') && $article->uid() == $xoopsUser->getVar('uid')) ) {
+        $isadmin = true;
+        $story['adminlink'] = $article->adminlink();
     }
 }
 $story['topicid'] = $article->topicid();
@@ -302,9 +302,9 @@ $xoopsTpl->assign('lang_reads', _READS);
 $xoopsTpl->assign('mail_link', 'mailto:?subject='.sprintf(_NW_INTARTICLE,$xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/news/article.php?storyid='.$article->storyid());
 
 if(xoops_trim($article->picture()) != '') {
-	$xoopsTpl->assign('articlePicture', XOOPS_URL.'/modules/news/images/topics/'.$article->picture());
+    $xoopsTpl->assign('articlePicture', XOOPS_URL.'/modules/news/images/topics/'.$article->picture());
 } else {
-	$xoopsTpl->assign('articlePicture', '');
+    $xoopsTpl->assign('articlePicture', '');
 }
 
 $xoopsTpl->assign('lang_attached_files',_NW_ATTACHEDFILES);
@@ -314,23 +314,23 @@ $filesarr=$sfiles->getAllbyStory($storyid);
 $filescount=count($filesarr);
 $xoopsTpl->assign('attached_files_count',$filescount);
 if($filescount>0) {
-	foreach ($filesarr as $onefile)	{
-		$newsfiles[]=Array('file_id'=>$onefile->getFileid(), 'visitlink' => XOOPS_URL.'/modules/news/visit.php?fileid='.$onefile->getFileid(),'file_realname'=>$onefile->getFileRealName(), 'file_attacheddate'=>formatTimestamp($onefile->getDate(),$dateformat), 'file_mimetype'=>$onefile->getMimetype(), 'file_downloadname'=>XOOPS_UPLOAD_URL.'/'.$onefile->getDownloadname());
-	}
-	$xoopsTpl->assign('attached_files',$newsfiles);
+    foreach ($filesarr as $onefile)	{
+        $newsfiles[]=Array('file_id'=>$onefile->getFileid(), 'visitlink' => XOOPS_URL.'/modules/news/visit.php?fileid='.$onefile->getFileid(),'file_realname'=>$onefile->getFileRealName(), 'file_attacheddate'=>formatTimestamp($onefile->getDate(),$dateformat), 'file_mimetype'=>$onefile->getMimetype(), 'file_downloadname'=>XOOPS_UPLOAD_URL.'/'.$onefile->getDownloadname());
+    }
+    $xoopsTpl->assign('attached_files',$newsfiles);
 }
 
 /**
  * Create page's title
-*/
+ */
 $complement = '';
 if(news_getmoduleoption('enhanced_pagenav') && (isset($arr_titles) && is_array($arr_titles) && isset($arr_titles,$storypage) && $storypage>0)) {
-	$complement = ' - '.$arr_titles[$storypage];
+    $complement = ' - '.$arr_titles[$storypage];
 }
 $xoopsTpl->assign('xoops_pagetitle', $article->title() . $complement. ' - ' . $article->topic_title() . ' - ' . $xoopsModule->name('s'));
 
 if(news_getmoduleoption('newsbythisauthor')) {
-	$xoopsTpl->assign('news_by_the_same_author_link',sprintf("<a href='%s?uid=%d'>%s</a>",XOOPS_URL.'/modules/news/newsbythisauthor.php',$article->uid(),_NW_NEWSSAMEAUTHORLINK));
+    $xoopsTpl->assign('news_by_the_same_author_link',sprintf("<a href='%s?uid=%d'>%s</a>",XOOPS_URL.'/modules/news/newsbythisauthor.php',$article->uid(),_NW_NEWSSAMEAUTHORLINK));
 }
 
 /**
@@ -339,10 +339,10 @@ if(news_getmoduleoption('newsbythisauthor')) {
  * Uncomment the code to be able to use it
  */
 if($cfg['create_clickable_path']) {
-	$mytree = new XoopsTree($xoopsDB->prefix('topics'),'topic_id','topic_pid');
-	$topicpath = $mytree->getNicePathFromId($article->topicid(), 'topic_title', 'index.php?op=1');
-	$xoopsTpl->assign('topic_path', $topicpath);
-	unset($mytree);
+    $mytree = new XoopsTree($xoopsDB->prefix('topics'),'topic_id','topic_pid');
+    $topicpath = $mytree->getNicePathFromId($article->topicid(), 'topic_title', 'index.php?op=1');
+    $xoopsTpl->assign('topic_path', $topicpath);
+    unset($mytree);
 }
 
 
@@ -358,29 +358,29 @@ if($cfg['create_clickable_path']) {
  * this you (the webmaster) select if users can see restricted stories or not.
  */
 if (news_getmoduleoption('showsummarytable')) {
-	$xoopsTpl->assign('showsummary', true);
-	$xoopsTpl->assign('lang_other_story',_NW_OTHER_ARTICLES);
-	$count=0;
-	$tmparticle = new NewsStory();
-	$infotips=news_getmoduleoption('infotips');
-	$sarray = $tmparticle->getAllPublished($cfg['article_summary_items_count'], 0, $xoopsModuleConfig['restrictindex']);
-	if(count($sarray)>0) {
-		foreach ($sarray as $onearticle) {
-			$count++;
-			$htmltitle='';
-			$tooltips='';
-			$htmltitle='';
-			if($infotips>0) {
-				$tooltips = news_make_infotips($onearticle->hometext());
-				$htmltitle=' title="'.$tooltips.'"';
-			}
- 			$xoopsTpl->append('summary', array('story_id'=>$onearticle->storyid(), 'htmltitle'=>$htmltitle, 'infotips'=>$tooltips, 'story_title'=>$onearticle->title(), 'story_hits'=>$onearticle->counter(), 'story_published'=>formatTimestamp($onearticle->published,$dateformat)));
-   		}
+    $xoopsTpl->assign('showsummary', true);
+    $xoopsTpl->assign('lang_other_story',_NW_OTHER_ARTICLES);
+    $count=0;
+    $tmparticle = new NewsStory();
+    $infotips=news_getmoduleoption('infotips');
+    $sarray = $tmparticle->getAllPublished($cfg['article_summary_items_count'], 0, $xoopsModuleConfig['restrictindex']);
+    if(count($sarray)>0) {
+        foreach ($sarray as $onearticle) {
+            $count++;
+            $htmltitle='';
+            $tooltips='';
+            $htmltitle='';
+            if($infotips>0) {
+                $tooltips = news_make_infotips($onearticle->hometext());
+                $htmltitle=' title="'.$tooltips.'"';
+            }
+            $xoopsTpl->append('summary', array('story_id'=>$onearticle->storyid(), 'htmltitle'=>$htmltitle, 'infotips'=>$tooltips, 'story_title'=>$onearticle->title(), 'story_hits'=>$onearticle->counter(), 'story_published'=>formatTimestamp($onearticle->published,$dateformat)));
+        }
    	}
    	$xoopsTpl->assign('summary_count',$count);
-	unset($tmparticle);
+   	unset($tmparticle);
 } else {
-	$xoopsTpl->assign('showsummary', false);
+    $xoopsTpl->assign('showsummary', false);
 }
 
 
@@ -393,40 +393,40 @@ if (news_getmoduleoption('showsummarytable')) {
  * restricted stories
  */
 if (news_getmoduleoption('showprevnextlink')) {
-	$xoopsTpl->assign('nav_links', true);
-	$tmparticle = new NewsStory();
-	$nextId = $previousId = -1;
-	$next = $previous = array();
-	$previousTitle = $nextTitle = '';
+    $xoopsTpl->assign('nav_links', true);
+    $tmparticle = new NewsStory();
+    $nextId = $previousId = -1;
+    $next = $previous = array();
+    $previousTitle = $nextTitle = '';
 
-	$next = $tmparticle->getNextArticle($storyid, $xoopsModuleConfig['restrictindex']);
-	if(count($next) > 0) {
-		$nextId = $next['storyid'];
-		$nextTitle = $next['title'];
-	}
+    $next = $tmparticle->getNextArticle($storyid, $xoopsModuleConfig['restrictindex']);
+    if(count($next) > 0) {
+        $nextId = $next['storyid'];
+        $nextTitle = $next['title'];
+    }
 
-	$previous = $tmparticle->getPreviousArticle($storyid, $xoopsModuleConfig['restrictindex']);
-	if(count($previous) > 0) {
-		$previousId = $previous['storyid'];
-		$previousTitle = $previous['title'];
-	}
+    $previous = $tmparticle->getPreviousArticle($storyid, $xoopsModuleConfig['restrictindex']);
+    if(count($previous) > 0) {
+        $previousId = $previous['storyid'];
+        $previousTitle = $previous['title'];
+    }
 
    	$xoopsTpl->assign('previous_story_id',$previousId);
    	$xoopsTpl->assign('next_story_id',$nextId);
    	if($previousId > 0) {
-   		$xoopsTpl->assign('previous_story_title',$previousTitle);
-   		$hcontent.=sprintf("<link rel=\"Prev\" title=\"%s\" href=\"%s/\" />\n", $previousTitle,XOOPS_URL.'/modules/news/article.php?storyid='.$previousId);
+   	    $xoopsTpl->assign('previous_story_title',$previousTitle);
+   	    $hcontent.=sprintf("<link rel=\"Prev\" title=\"%s\" href=\"%s/\" />\n", $previousTitle,XOOPS_URL.'/modules/news/article.php?storyid='.$previousId);
    	}
 
    	if($nextId > 0) {
-   		$xoopsTpl->assign('next_story_title',$nextTitle);
-   		$hcontent.=sprintf("<link rel=\"Next\" title=\"%s\" href=\"%s/\" />\n", $nextTitle,XOOPS_URL.'/modules/news/article.php?storyid='.$nextId);
+   	    $xoopsTpl->assign('next_story_title',$nextTitle);
+   	    $hcontent.=sprintf("<link rel=\"Next\" title=\"%s\" href=\"%s/\" />\n", $nextTitle,XOOPS_URL.'/modules/news/article.php?storyid='.$nextId);
    	}
    	$xoopsTpl->assign('lang_previous_story',_NW_PREVIOUS_ARTICLE);
    	$xoopsTpl->assign('lang_next_story',_NW_NEXT_ARTICLE);
    	unset($tmparticle);
 } else {
-	$xoopsTpl->assign('nav_links', false);
+    $xoopsTpl->assign('nav_links', false);
 }
 
 /**
@@ -440,10 +440,10 @@ news_CreateMetaDatas($article);
  * Show a "Bookmark this article at these sites" block ?
  */
 if(news_getmoduleoption('bookmarkme')) {
-	$xoopsTpl->assign('bookmarkme', true);
-	$xoopsTpl->assign('encoded_title', rawurlencode($article->title()));
+    $xoopsTpl->assign('bookmarkme', true);
+    $xoopsTpl->assign('encoded_title', rawurlencode($article->title()));
 } else {
-	$xoopsTpl->assign('bookmarkme', false);
+    $xoopsTpl->assign('bookmarkme', false);
 }
 
 
@@ -456,36 +456,36 @@ if(news_getmoduleoption('bookmarkme')) {
  */
 $other_test = true;
 if($cfg['config_rating_registred_only']) {
-	if(isset($xoopsUser) && is_object($xoopsUser)) {
-		$other_test = true;
-	} else {
-		$other_test = false;
-	}
+    if(isset($xoopsUser) && is_object($xoopsUser)) {
+        $other_test = true;
+    } else {
+        $other_test = false;
+    }
 }
 
 if (news_getmoduleoption('ratenews') && $other_test) {
-	$xoopsTpl->assign('rates', true);
-	$xoopsTpl->assign('lang_ratingc', _NW_RATINGC);
-	$xoopsTpl->assign('lang_ratethisnews', _NW_RATETHISNEWS);
-	$story['rating'] = number_format($article->rating(), 2);
-	if ($article->votes == 1) {
-		$story['votes'] = _NW_ONEVOTE;
-	} else {
-		$story['votes'] = sprintf(_NW_NUMVOTES,$article->votes);
-	}
+    $xoopsTpl->assign('rates', true);
+    $xoopsTpl->assign('lang_ratingc', _NW_RATINGC);
+    $xoopsTpl->assign('lang_ratethisnews', _NW_RATETHISNEWS);
+    $story['rating'] = number_format($article->rating(), 2);
+    if ($article->votes == 1) {
+        $story['votes'] = _NW_ONEVOTE;
+    } else {
+        $story['votes'] = sprintf(_NW_NUMVOTES,$article->votes);
+    }
 } else {
-	$xoopsTpl->assign('rates', false);
+    $xoopsTpl->assign('rates', false);
 }
 
 $xoopsTpl->assign('story', $story);
 
 // Added in version 1.63, TAGS
 if(news_getmoduleoption('tags')) {
-	require_once XOOPS_ROOT_PATH.'/modules/tag/include/tagbar.php';
-	$xoopsTpl->assign('tags', true);
-	$xoopsTpl->assign('tagbar', tagBar($storyid, 0));
+    require_once XOOPS_ROOT_PATH.'/modules/tag/include/tagbar.php';
+    $xoopsTpl->assign('tags', true);
+    $xoopsTpl->assign('tagbar', tagBar($storyid, 0));
 } else {
-	$xoopsTpl->assign('tags', false);
+    $xoopsTpl->assign('tags', false);
 }
 
 include_once XOOPS_ROOT_PATH.'/include/comment_view.php';

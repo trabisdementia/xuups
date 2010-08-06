@@ -4,7 +4,7 @@ require_once ('jpgraph/jpgraph_bar.php');
 
 $datay=array(12,26,9,17,31);
 
-// Create the graph. 
+// Create the graph.
 // One minute timeout for the cached image
 // INLINE_NO means don't stream it back to the browser.
 $graph = new Graph(310,250,'auto');

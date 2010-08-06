@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -31,8 +31,8 @@ $xoTheme->addScript(PUBLISHER_URL . '/js/jquery.popeye-0.2.1.js');
 $xoTheme->addScript(PUBLISHER_URL . '/js/publisher.js');
 
 $xoopsTpl->assign("xoops_module_header", '<link rel="alternate" type="application/rss+xml" title="'
-                                       . $publisher->getModule()->name() . '" href="' . PUBLISHER_URL . '/backend.php" />'
-                                       . @$xoopsTpl->get_template_vars("xoops_module_header"));
+. $publisher->getModule()->name() . '" href="' . PUBLISHER_URL . '/backend.php" />'
+. @$xoopsTpl->get_template_vars("xoops_module_header"));
 
 $xoopsTpl->assign("publisher_adminpage", "<a href='" . PUBLISHER_URL . "/admin/index.php'>" ._MD_PUBLISHER_ADMIN_PAGE . "</a>");
 $xoopsTpl->assign("isAdmin", $publisher_isAdmin);

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -18,7 +18,7 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: comment_reply.php 0 2009-06-11 18:47:04Z trabis $
  */
- 
+
 include_once '../../mainfile.php';
 include_once XOOPS_ROOT_PATH . '/include/comment_reply.php';
 

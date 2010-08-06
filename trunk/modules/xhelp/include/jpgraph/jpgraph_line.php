@@ -45,7 +45,7 @@ class LinePlot extends Plot{
     // PUBLIC METHODS
 
     function SetFilled($aFlg=true) {
-		$this->filled = $aFlg;
+        $this->filled = $aFlg;
     }
 
     function SetBarCenter($aFlag=true) {
@@ -73,7 +73,7 @@ class LinePlot extends Plot{
     }
 
     function SetFillColor($aColor,$aFilled=true) {
-    	//$this->color = $aColor;
+        //$this->color = $aColor;
         $this->fill_color=$aColor;
         $this->filled=$aFilled;
     }
@@ -187,7 +187,7 @@ class LinePlot extends Plot{
         if( isset($this->coords[1]) ) {
             if( count($this->coords[1])!=$numpoints ) {
                 JpGraphError::RaiseL(2003,count($this->coords[1]),$numpoints);
-            //("Number of X and Y points are not equal. Number of X-points:".count($this->coords[1])." Number of Y-points:$numpoints");
+                //("Number of X and Y points are not equal. Number of X-points:".count($this->coords[1])." Number of Y-points:$numpoints");
             }
             else {
                 $exist_x = true;
@@ -375,7 +375,7 @@ class LinePlot extends Plot{
                 $img->SetColor($this->fill_color);
                 $img->FilledPolygon($cord);
             }
-            if( $this->weight > 0 ) { 
+            if( $this->weight > 0 ) {
                 $img->SetLineWeight($this->weight);
                 $img->SetColor($this->color);
                 // Remove first and last coordinate before drawing the line

@@ -176,16 +176,16 @@ if ($op == 'go') {
 
             /*
              // HTML Wrap
-              if ($arrArticle['htmlpage']) {
-              $pagewrap_filename	= XOOPS_ROOT_PATH . "/modules/wfsection/html/" .$arrArticle['htmlpage'];
-              if (file_exists($pagewrap_filename)) {
-              if (copy($pagewrap_filename, XOOPS_ROOT_PATH . "/uploads/publisher/content/" . $arrArticle['htmlpage'])) {
-              $itemObj->setVar('body', "[pagewrap=" . $arrArticle['htmlpage'] . "]");
-              echo sprintf("&nbsp;&nbsp;&nbsp;&nbsp;" . _AM_PUBLISHER_IMPORT_ARTICLE_WRAP, $arrArticle['htmlpage']) . "<br/>";
-              }
-              }
-              }
-              */
+             if ($arrArticle['htmlpage']) {
+             $pagewrap_filename	= XOOPS_ROOT_PATH . "/modules/wfsection/html/" .$arrArticle['htmlpage'];
+             if (file_exists($pagewrap_filename)) {
+             if (copy($pagewrap_filename, XOOPS_ROOT_PATH . "/uploads/publisher/content/" . $arrArticle['htmlpage'])) {
+             $itemObj->setVar('body', "[pagewrap=" . $arrArticle['htmlpage'] . "]");
+             echo sprintf("&nbsp;&nbsp;&nbsp;&nbsp;" . _AM_PUBLISHER_IMPORT_ARTICLE_WRAP, $arrArticle['htmlpage']) . "<br/>";
+             }
+             }
+             }
+             */
 
             if (!$itemObj->store()) {
                 echo sprintf("  " . _AM_PUBLISHER_IMPORT_ARTICLE_ERROR, $arrArticle['title']) . "<br/>";
@@ -193,32 +193,32 @@ if ($op == 'go') {
             } else {
                 /*
                  // Linkes files
-                  $sql = "SELECT * FROM ".$xoopsDB->prefix("wfs_files")." WHERE articleid=" . $arrArticle['articleid'];
-                  $resultFiles = $xoopsDB->query ($sql);
-                  $allowed_mimetypes = '';
-                  while ($arrFile = $xoopsDB->fetchArray ($resultFiles)) {
+                 $sql = "SELECT * FROM ".$xoopsDB->prefix("wfs_files")." WHERE articleid=" . $arrArticle['articleid'];
+                 $resultFiles = $xoopsDB->query ($sql);
+                 $allowed_mimetypes = '';
+                 while ($arrFile = $xoopsDB->fetchArray ($resultFiles)) {
 
-                  $filename = XOOPS_ROOT_PATH . "/modules/wfsection/cache/uploaded/" . $arrFile['filerealname'];
-                  if (file_exists($filename)) {
-                  if (copy($filename, XOOPS_ROOT_PATH . "/uploads/publisher/" . $arrFile['filerealname'])) {
-                  $fileObj = $publisher_file_handler->create();
-                  $fileObj->setVar('name', $arrFile['fileshowname']);
-                  $fileObj->setVar('description', $arrFile['filedescript']);
-                  $fileObj->setVar('status', _PUBLISHER_STATUS_FILE_ACTIVE);
-                  $fileObj->setVar('uid', $arrArticle['uid']);
-                  $fileObj->setVar('itemid', $itemObj->itemid());
-                  $fileObj->setVar('mimetype', $arrFile['minetype']);
-                  $fileObj->setVar('datesub', $arrFile['date']);
-                  $fileObj->setVar('counter', $arrFile['counter']);
-                  $fileObj->setVar('filename', $arrFile['filerealname']);
+                 $filename = XOOPS_ROOT_PATH . "/modules/wfsection/cache/uploaded/" . $arrFile['filerealname'];
+                 if (file_exists($filename)) {
+                 if (copy($filename, XOOPS_ROOT_PATH . "/uploads/publisher/" . $arrFile['filerealname'])) {
+                 $fileObj = $publisher_file_handler->create();
+                 $fileObj->setVar('name', $arrFile['fileshowname']);
+                 $fileObj->setVar('description', $arrFile['filedescript']);
+                 $fileObj->setVar('status', _PUBLISHER_STATUS_FILE_ACTIVE);
+                 $fileObj->setVar('uid', $arrArticle['uid']);
+                 $fileObj->setVar('itemid', $itemObj->itemid());
+                 $fileObj->setVar('mimetype', $arrFile['minetype']);
+                 $fileObj->setVar('datesub', $arrFile['date']);
+                 $fileObj->setVar('counter', $arrFile['counter']);
+                 $fileObj->setVar('filename', $arrFile['filerealname']);
 
-                  if ($fileObj->store($allowed_mimetypes, true, false)) {
-                  echo "&nbsp;&nbsp;&nbsp;&nbsp;"  . sprintf(_AM_PUBLISHER_IMPORTED_ARTICLE_FILE, $arrFile['filerealname']) . "<br />";
-                  }
-                  }
-                  }
-                  }
-                  */
+                 if ($fileObj->store($allowed_mimetypes, true, false)) {
+                 echo "&nbsp;&nbsp;&nbsp;&nbsp;"  . sprintf(_AM_PUBLISHER_IMPORTED_ARTICLE_FILE, $arrFile['filerealname']) . "<br />";
+                 }
+                 }
+                 }
+                 }
+                 */
                 $newArticleArray[$arrArticle['storyid']] = $itemObj->itemid();
                 echo "&nbsp;&nbsp;" . sprintf(_AM_PUBLISHER_IMPORTED_ARTICLE, $itemObj->title()) . "<br />";
                 $cnt_imported_articles++;

@@ -10,17 +10,17 @@ include_once 'functions.php';
 // **********************************************************************************************************************************************
 $op = 'default';
 if(isset($_POST['op'])) {
- $op=$_POST['op'];
+    $op=$_POST['op'];
 } else {
-	if(isset($_GET['op'])) {
-		$op=$_GET['op'];
-	}
+    if(isset($_GET['op'])) {
+        $op=$_GET['op'];
+    }
 }
 
 
 switch ($op) {
-	case 'import':
-	    xoops_cp_header();
+    case 'import':
+        xoops_cp_header();
         adminmenu(1);
         echo '<h4>' . _AM_MSHIP_IMPORT . '</h4>';
         echo"<table width='100%' border='0' cellspacing='1' class='outer'><tr><td class=\"odd\">";

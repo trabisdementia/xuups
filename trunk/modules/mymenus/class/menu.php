@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -85,26 +85,26 @@ class MymenusMenuHandler extends XoopsPersistableObjectHandler
     function update_weights(&$obj)
     {
         $sql = "UPDATE " . $this->table
-            . " SET weight = weight+1"
-            . " WHERE weight >= " . $obj->getVar('weight')
-            . " AND id <> " . $obj->getVar('id')
-            /*. " AND pid = " . $obj->getVar('pid')*/
-            . " AND mid = " . $obj->getVar('mid')
-            ;
+        . " SET weight = weight+1"
+        . " WHERE weight >= " . $obj->getVar('weight')
+        . " AND id <> " . $obj->getVar('id')
+        /*. " AND pid = " . $obj->getVar('pid')*/
+        . " AND mid = " . $obj->getVar('mid')
+        ;
         $this->db->queryF($sql);
 
         $sql = "SELECT id FROM " . $this->table
-            . " WHERE mid = " . $obj->getVar('mid')
-            /*. " AND pid = " . $obj->getVar('pid')*/
-            . " ORDER BY weight ASC"
-            ;
+        . " WHERE mid = " . $obj->getVar('mid')
+        /*. " AND pid = " . $obj->getVar('pid')*/
+        . " ORDER BY weight ASC"
+        ;
         $result = $this->db->query($sql);
         $i = 1;  //lets start at 1 please!
         while (list($id) = $this->db->fetchrow($result)) {
             $sql = "UPDATE " . $this->table
-                . " SET weight = {$i}"
-                . " WHERE id = {$id}"
-                ;
+            . " SET weight = {$i}"
+            . " WHERE id = {$id}"
+            ;
             $this->db->queryF($sql);
             $i++;
         }

@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -69,12 +69,12 @@ $totalrejected = $publisher->getHandler('item')->getItemsCount(-1, array(_PUBLIS
 
 // Check Path Configuration
 if ((publisher_getPathStatus('root', true) < 0) ||
-    (publisher_getPathStatus('images', true) < 0) ||
-    (publisher_getPathStatus('images/category', true) < 0) ||
-    (publisher_getPathStatus('images/item', true) < 0) ||
-    (publisher_getPathStatus('content', true) < 0)) {
+(publisher_getPathStatus('images', true) < 0) ||
+(publisher_getPathStatus('images/category', true) < 0) ||
+(publisher_getPathStatus('images/item', true) < 0) ||
+(publisher_getPathStatus('content', true) < 0)) {
 
-	createDir();
+    createDir();
 }
 
 publisher_openCollapsableBar('inventorytable', 'inventoryicon', _AM_PUBLISHER_INVENTORY);
@@ -115,68 +115,68 @@ $ordertxtasc='';
 $ordertxtdesc='';
 
 switch ($sortsel) {
-	case 'title':
-	$sorttxttitle = "selected='selected'";
-	break;
+    case 'title':
+        $sorttxttitle = "selected='selected'";
+        break;
 
-	case 'datesub':
-	$sorttxtcreated = "selected='selected'";
-	break;
+    case 'datesub':
+        $sorttxtcreated = "selected='selected'";
+        break;
 
-	case 'weight':
-	$sorttxtweight = "selected='selected'";
-	break;
+    case 'weight':
+        $sorttxtweight = "selected='selected'";
+        break;
 
-	default :
-	$sorttxtitemid = "selected='selected'";
-	break;
+    default :
+        $sorttxtitemid = "selected='selected'";
+        break;
 }
 
 switch ($ordersel) {
-	case 'ASC':
-	$ordertxtasc = "selected='selected'";
-	break;
+    case 'ASC':
+        $ordertxtasc = "selected='selected'";
+        break;
 
-	default :
-	$ordertxtdesc = "selected='selected'";
-	break;
+    default :
+        $ordertxtdesc = "selected='selected'";
+        break;
 }
 
 switch ($statussel) {
-	case _PUBLISHER_STATUS_ALL :
-	$selectedtxt0 = "selected='selected'";
-	$caption = _AM_PUBLISHER_ALL;
-	$cond = "";
-	$status_explaination = _AM_PUBLISHER_ALL_EXP;
-	break;
+    case _PUBLISHER_STATUS_ALL :
+        $selectedtxt0 = "selected='selected'";
+        $caption = _AM_PUBLISHER_ALL;
+        $cond = "";
+        $status_explaination = _AM_PUBLISHER_ALL_EXP;
+        break;
 
-	case _PUBLISHER_STATUS_SUBMITTED :
-	$selectedtxt1 = "selected='selected'";
-	$caption = _CO_PUBLISHER_SUBMITTED;
-	$cond = " WHERE status = " . _PUBLISHER_STATUS_SUBMITTED . " ";
-	$status_explaination = _AM_PUBLISHER_SUBMITTED_EXP;
-	break;
+    case _PUBLISHER_STATUS_SUBMITTED :
+        $selectedtxt1 = "selected='selected'";
+        $caption = _CO_PUBLISHER_SUBMITTED;
+        $cond = " WHERE status = " . _PUBLISHER_STATUS_SUBMITTED . " ";
+        $status_explaination = _AM_PUBLISHER_SUBMITTED_EXP;
+        break;
 
-	case _PUBLISHER_STATUS_PUBLISHED :
-	$selectedtxt2 = "selected='selected'";
-	$caption = _CO_PUBLISHER_PUBLISHED;
-	$cond = " WHERE status = " . _PUBLISHER_STATUS_PUBLISHED . " ";
-	$status_explaination = _AM_PUBLISHER_PUBLISHED_EXP;
-	break;
+    case _PUBLISHER_STATUS_PUBLISHED :
+        $selectedtxt2 = "selected='selected'";
+        $caption = _CO_PUBLISHER_PUBLISHED;
+        $cond = " WHERE status = " . _PUBLISHER_STATUS_PUBLISHED . " ";
+        $status_explaination = _AM_PUBLISHER_PUBLISHED_EXP;
+        break;
 
-	case _PUBLISHER_STATUS_OFFLINE :
-	$selectedtxt3 = "selected='selected'";
-	$caption = _CO_PUBLISHER_OFFLINE;
-	$cond = " WHERE status = " . _PUBLISHER_STATUS_OFFLINE . " ";
-	$status_explaination = _AM_PUBLISHER_OFFLINE_EXP;
-	break;
+    case _PUBLISHER_STATUS_OFFLINE :
+        $selectedtxt3 = "selected='selected'";
+        $caption = _CO_PUBLISHER_OFFLINE;
+        $cond = " WHERE status = " . _PUBLISHER_STATUS_OFFLINE . " ";
+        $status_explaination = _AM_PUBLISHER_OFFLINE_EXP;
+        break;
 
-	case _PUBLISHER_STATUS_REJECTED :
-	$selectedtxt4 = "selected='selected'";
-	$caption = _CO_PUBLISHER_REJECTED;
-	$cond = " WHERE status = " . _PUBLISHER_STATUS_REJECTED . " ";
-	$status_explaination = _AM_PUBLISHER_REJECTED_ITEM_EXP;
-	break;
+    case _PUBLISHER_STATUS_REJECTED :
+        $selectedtxt4 = "selected='selected'";
+        $caption = _CO_PUBLISHER_REJECTED;
+        $cond = " WHERE status = " . _PUBLISHER_STATUS_REJECTED . " ";
+        $status_explaination = _AM_PUBLISHER_REJECTED_ITEM_EXP;
+        break;
 }
 
 /* -- Code to show selected terms -- */
@@ -225,78 +225,78 @@ buildTable();
 
 if ($numrows > 0) {
 
-	for ( $i = 0; $i < $totalItemsOnPage; $i++ ) {
-		// Creating the category object to which this item is linked
-		$categoryObj =& $itemsObj[$i]->category();
-		$approve = '';
+    for ( $i = 0; $i < $totalItemsOnPage; $i++ ) {
+        // Creating the category object to which this item is linked
+        $categoryObj =& $itemsObj[$i]->category();
+        $approve = '';
 
-		switch ($itemsObj[$i]->status()) {
+        switch ($itemsObj[$i]->status()) {
 
-			case _PUBLISHER_STATUS_SUBMITTED :
-			$statustxt = _CO_PUBLISHER_SUBMITTED;
-			$approve = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/approve.gif' title='" . _AM_PUBLISHER_SUBMISSION_MODERATE . "' alt='" . _AM_PUBLISHER_SUBMISSION_MODERATE . "' /></a>&nbsp;";
-			$clone = '';
-			$delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
-			$modify = "";
-			break;
+            case _PUBLISHER_STATUS_SUBMITTED :
+                $statustxt = _CO_PUBLISHER_SUBMITTED;
+                $approve = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/approve.gif' title='" . _AM_PUBLISHER_SUBMISSION_MODERATE . "' alt='" . _AM_PUBLISHER_SUBMISSION_MODERATE . "' /></a>&nbsp;";
+                $clone = '';
+                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
+                $modify = "";
+                break;
 
-			case _PUBLISHER_STATUS_PUBLISHED :
-			$statustxt = _CO_PUBLISHER_PUBLISHED;
-			$approve = "";
-			$clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" .  _AM_PUBLISHER_CLONE_ITEM  . "' /></a>&nbsp;";
-			$modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_ITEM_EDIT . "' alt='" . _AM_PUBLISHER_ITEM_EDIT . "' /></a>&nbsp;";
-			$delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
-			break;
+            case _PUBLISHER_STATUS_PUBLISHED :
+                $statustxt = _CO_PUBLISHER_PUBLISHED;
+                $approve = "";
+                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" .  _AM_PUBLISHER_CLONE_ITEM  . "' /></a>&nbsp;";
+                $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_ITEM_EDIT . "' alt='" . _AM_PUBLISHER_ITEM_EDIT . "' /></a>&nbsp;";
+                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
+                break;
 
-			case _PUBLISHER_STATUS_OFFLINE :
-			$statustxt = _CO_PUBLISHER_OFFLINE;
-			$approve = "";
-			$clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" .  _AM_PUBLISHER_CLONE_ITEM  . "' /></a>&nbsp;";
-			$modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_ITEM_EDIT . "' alt='" . _AM_PUBLISHER_ITEM_EDIT . "' /></a>&nbsp;";
-			$delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
-			break;
+            case _PUBLISHER_STATUS_OFFLINE :
+                $statustxt = _CO_PUBLISHER_OFFLINE;
+                $approve = "";
+                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" .  _AM_PUBLISHER_CLONE_ITEM  . "' /></a>&nbsp;";
+                $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_ITEM_EDIT . "' alt='" . _AM_PUBLISHER_ITEM_EDIT . "' /></a>&nbsp;";
+                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
+                break;
 
-			case _PUBLISHER_STATUS_REJECTED :
-			$statustxt = _CO_PUBLISHER_REJECTED;
-			$approve = "";
-			$clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" . _AM_PUBLISHER_CLONE_ITEM . "' /></a>&nbsp;";
-			$modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_REJECTED_EDIT . "' alt='" . _AM_PUBLISHER_REJECTED_EDIT . "' /></a>&nbsp;";
-			$delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
-			break;
+            case _PUBLISHER_STATUS_REJECTED :
+                $statustxt = _CO_PUBLISHER_REJECTED;
+                $approve = "";
+                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" . _AM_PUBLISHER_CLONE_ITEM . "' /></a>&nbsp;";
+                $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_REJECTED_EDIT . "' alt='" . _AM_PUBLISHER_REJECTED_EDIT . "' /></a>&nbsp;";
+                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
+                break;
 
-			case "default" :
-			default :
-			$statustxt = _AM_PUBLISHER_STATUS0;
-			$approve = "";
-			$clone = '';
-			$modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_REJECTED_EDIT . "' alt='" . _AM_PUBLISHER_REJECTED_EDIT . "' /></a>&nbsp;";
-			$delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
-			break;
-		}
+            case "default" :
+            default :
+                $statustxt = _AM_PUBLISHER_STATUS0;
+                $approve = "";
+                $clone = '';
+                $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_REJECTED_EDIT . "' alt='" . _AM_PUBLISHER_REJECTED_EDIT . "' /></a>&nbsp;";
+                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
+                break;
+        }
 
-		echo "<tr>";
-		echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
-		echo "<td class='even' align='left'>" . $categoryObj->getCategoryLink() . "</td>";
-		echo "<td class='even' align='left'>" . $itemsObj[$i]->getItemLink() . "</td>";
-		echo "<td class='even' align='center'>" . $itemsObj[$i]->datesub() . "</td>";
-		echo "<td class='even' align='center'>" . $statustxt . "</td>";
-		echo "<td class='even' align='center'> ". $approve .$clone. $modify . $delete . "</td>";
-		echo "</tr>";
-	}
+        echo "<tr>";
+        echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
+        echo "<td class='even' align='left'>" . $categoryObj->getCategoryLink() . "</td>";
+        echo "<td class='even' align='left'>" . $itemsObj[$i]->getItemLink() . "</td>";
+        echo "<td class='even' align='center'>" . $itemsObj[$i]->datesub() . "</td>";
+        echo "<td class='even' align='center'>" . $statustxt . "</td>";
+        echo "<td class='even' align='center'> ". $approve .$clone. $modify . $delete . "</td>";
+        echo "</tr>";
+    }
 } else {
-	// that is, $numrows = 0, there's no entries yet
-	echo "<tr>";
-	echo "<td class='head' align='center' colspan= '7'>" . _AM_PUBLISHER_NOITEMSSEL . "</td>";
-	echo "</tr>";
+    // that is, $numrows = 0, there's no entries yet
+    echo "<tr>";
+    echo "<td class='head' align='center' colspan= '7'>" . _AM_PUBLISHER_NOITEMSSEL . "</td>";
+    echo "</tr>";
 }
 echo "</table>\n";
 echo "<span style=\"color: #567; margin: 3px 0 18px 0; font-size: small; display: block; \">$status_explaination</span>";
 $pagenav = new XoopsPageNav($numrows, $publisher->getConfig('idxcat_perpage'), $startentry, 'startentry', "statussel=$statussel&amp;sortsel=$sortsel&amp;ordersel=$ordersel");
 
 if ($publisher->getConfig('format_image_nav') == 1) {
-	echo '<div style="text-align:right; background-color: white; margin: 10px 0;">' . $pagenav->renderImageNav() . '</div>';
+    echo '<div style="text-align:right; background-color: white; margin: 10px 0;">' . $pagenav->renderImageNav() . '</div>';
 } else {
-	echo '<div style="text-align:right; background-color: white; margin: 10px 0;">' . $pagenav->renderNav() . '</div>';
+    echo '<div style="text-align:right; background-color: white; margin: 10px 0;">' . $pagenav->renderNav() . '</div>';
 }
 // ENDs code to show active entries
 publisher_closeCollapsableBar('allitemstable', 'allitemsicon');
@@ -312,65 +312,65 @@ function createDir()
     // auto crate folders
     $thePath = publisher_getUploadDir();
 
-	if (publisher_getPathStatus('root', true) < 0) {
-		$thePath = publisher_getUploadDir();
-		$res = publisher_mkdir($thePath);
-		$msg = $res ? _AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
-	}
+    if (publisher_getPathStatus('root', true) < 0) {
+        $thePath = publisher_getUploadDir();
+        $res = publisher_mkdir($thePath);
+        $msg = $res ? _AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
+    }
 
-	if (publisher_getPathStatus('images', true) < 0) {
-		$thePath = publisher_getImageDir();
-		$res = publisher_mkdir($thePath);
+    if (publisher_getPathStatus('images', true) < 0) {
+        $thePath = publisher_getImageDir();
+        $res = publisher_mkdir($thePath);
 
-		if ($res) {
-			$source = PUBLISHER_ROOT_PATH . "/images/blank.png";
-			$dest = $thePath . "blank.png";
-			publisher_copyr($source, $dest);
-		}
-		$msg = $res ?_AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
-	}
+        if ($res) {
+            $source = PUBLISHER_ROOT_PATH . "/images/blank.png";
+            $dest = $thePath . "blank.png";
+            publisher_copyr($source, $dest);
+        }
+        $msg = $res ?_AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
+    }
 
-	if (publisher_getPathStatus('images/category', true) < 0) {
-		$thePath = publisher_getImageDir('category');
-		$res = publisher_mkdir($thePath);
+    if (publisher_getPathStatus('images/category', true) < 0) {
+        $thePath = publisher_getImageDir('category');
+        $res = publisher_mkdir($thePath);
 
-		if ($res) {
-			$source = PUBLISHER_ROOT_PATH . '/images/blank.png';
-			$dest = $thePath . 'blank.png';
-			publisher_copyr($source, $dest);
-		}
-		$msg = $res ?_AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
-	}
+        if ($res) {
+            $source = PUBLISHER_ROOT_PATH . '/images/blank.png';
+            $dest = $thePath . 'blank.png';
+            publisher_copyr($source, $dest);
+        }
+        $msg = $res ?_AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
+    }
 
-	if (publisher_getPathStatus('images/item', true) < 0) {
-		$thePath = publisher_getImageDir('item');
-		$res = publisher_mkdir($thePath);
+    if (publisher_getPathStatus('images/item', true) < 0) {
+        $thePath = publisher_getImageDir('item');
+        $res = publisher_mkdir($thePath);
 
-		if ($res) {
-			$source = PUBLISHER_ROOT_PATH . '/images/blank.png';
-			$dest = $thePath . 'blank.png';
-			publisher_copyr($source, $dest);
-		}
-		$msg = $res ?_AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
-	}
+        if ($res) {
+            $source = PUBLISHER_ROOT_PATH . '/images/blank.png';
+            $dest = $thePath . 'blank.png';
+            publisher_copyr($source, $dest);
+        }
+        $msg = $res ?_AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
+    }
 
-	if (publisher_getPathStatus('content', true) < 0) {
-		$thePath = publisher_getUploadDir(true, 'content');
-		$res = publisher_mkdir($thePath);
-		$msg = $res ? _AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
-	}
+    if (publisher_getPathStatus('content', true) < 0) {
+        $thePath = publisher_getUploadDir(true, 'content');
+        $res = publisher_mkdir($thePath);
+        $msg = $res ? _AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
+    }
 }
 
 function buildTable()
 {
-	echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'>";
-	echo "<tr>";
-	echo "<td width='40px' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMID . "</b></td>";
-	echo "<td width='100px' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMCAT . "</b></td>";
-	echo "<td class='bg3' align='center'><b>" . _AM_PUBLISHER_TITLE . "</b></td>";
-	echo "<td width='90px' class='bg3' align='center'><b>" . _AM_PUBLISHER_CREATED . "</b></td>";
-	echo "<td width='90px' class='bg3' align='center'><b>" . _CO_PUBLISHER_STATUS . "</b></td>";
-	echo "<td width='90px' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
-	echo "</tr>";
+    echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'>";
+    echo "<tr>";
+    echo "<td width='40px' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMID . "</b></td>";
+    echo "<td width='100px' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMCAT . "</b></td>";
+    echo "<td class='bg3' align='center'><b>" . _AM_PUBLISHER_TITLE . "</b></td>";
+    echo "<td width='90px' class='bg3' align='center'><b>" . _AM_PUBLISHER_CREATED . "</b></td>";
+    echo "<td width='90px' class='bg3' align='center'><b>" . _CO_PUBLISHER_STATUS . "</b></td>";
+    echo "<td width='90px' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+    echo "</tr>";
 }
 ?>

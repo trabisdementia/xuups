@@ -3,7 +3,7 @@
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
+    die('XOOPS root path not defined');
 }
 
 include dirname(__FILE__) . '/include/common.php';
@@ -26,8 +26,8 @@ $modversion['onUpdate'] = "include/onupdate.inc.php";
 $modversion['object_items'][1] = 'post';
 $modversion['object_items'][2] = 'category';
 /*
-$modversion["tables"] = xmf_getTablesArray($modversion['dirname'], $modversion['object_items']);
-*/
+ $modversion["tables"] = xmf_getTablesArray($modversion['dirname'], $modversion['object_items']);
+ */
 $modversion["tables"][0] = 'xtest_post';
 $modversion["tables"][0] = 'xtest_category';
 

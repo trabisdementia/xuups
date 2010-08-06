@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -117,13 +117,13 @@ if (!empty($forums_available)) {
     $crit_forum = new Criteria("forum_id", "(" . implode(", ", $forums_available) . ")", "IN");
     $crit_forum->setSort("cat_id ASC, parent_forum ASC, forum_order");
     $crit_forum->setOrder("ASC");
-$xoopsLogger->startTime( 'XOOPS output module - bb - forum - prepare' );
+    $xoopsLogger->startTime( 'XOOPS output module - bb - forum - prepare' );
     $forums = $forum_handler->getAll($crit_forum, null, false);
-$xoopsLogger->stopTime( 'XOOPS output module - bb - forum - prepare' );
-    
-$xoopsLogger->startTime( 'XOOPS output module - bb - forum - display' );
+    $xoopsLogger->stopTime( 'XOOPS output module - bb - forum - prepare' );
+
+    $xoopsLogger->startTime( 'XOOPS output module - bb - forum - display' );
     $forums_array = $forum_handler->display($forums, $xoopsModuleConfig["length_title_index"], $xoopsModuleConfig["count_subforum"]);
-$xoopsLogger->stopTime( 'XOOPS output module - bb - forum - display' );
+    $xoopsLogger->stopTime( 'XOOPS output module - bb - forum - display' );
 }
 
 if (count($forums_array)>0) {
@@ -142,12 +142,12 @@ $icon_handler = newbb_getIconHandler();
 $category_icon = array(
     "expand"    => $icon_handler->getImageSource("minus"),
     "collapse"  => $icon_handler->getImageSource("plus")
-    );
+);
 
 foreach (array_keys($categories) as $id) {
     $forums = array();
     $onecat =& $categories[$id];
-    
+
     $cat_element_id = "cat_" . $onecat['cat_id'];
     $expand = (count($toggles) > 0) ? ( (in_array($cat_element_id, $toggles)) ? false : true ) : true;
     $cat_display = ($expand) ? 'block;' : 'none;';
@@ -180,7 +180,7 @@ foreach (array_keys($categories) as $id) {
         'cat_display'       => $cat_display,
         'cat_icon_display'  => $cat_icon_display,
         'forums'            => $forums
-        );
+    );
 }
 unset($categories, $forums_array, $forumsByCat);
 $xoopsTpl->assign_by_ref("category_icon", $category_icon);
@@ -189,7 +189,7 @@ $xoopsTpl->assign_by_ref("categories", $category_array);
 $xoopsTpl->assign(array(
     "index_title"   => sprintf(_MD_WELCOME, htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES)), 
     "index_desc"    => _MD_TOSTART, 
-    ));
+));
 
 /* display user stats */
 $userstats = array();
@@ -243,7 +243,7 @@ $xoopsTpl->assign(array(
     "img_forum_new" => newbb_displayImage('forum_new', _MD_NEWPOSTS),
     "img_forum" => newbb_displayImage('forum', _MD_NONEWPOSTS),
     'img_subforum' => newbb_displayImage('subforum')));
-    
+
 $xoopsLogger->stopTime( 'XOOPS output module - bb' );
 
 include_once XOOPS_ROOT_PATH . '/footer.php';

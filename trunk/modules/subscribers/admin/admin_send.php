@@ -22,12 +22,12 @@ switch ($op){
 
 function send_form()
 {
-	global $xoopsModuleConfig;
-	include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+    global $xoopsModuleConfig;
+    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
     $this_handler =& xoops_getModuleHandler('user', 'subscribers');
 
-	$form = new XoopsThemeForm(_AM_SUBSCRIBERS_SEND, 'send_form', 'admin_send.php', "post");
+    $form = new XoopsThemeForm(_AM_SUBSCRIBERS_SEND, 'send_form', 'admin_send.php', "post");
 
     $element = new XoopsFormLabel(_MI_SUBSCRIBERS_CONF_FROMNAME,  $xoopsModuleConfig['fromname']);
     $form->addElement($element);
@@ -36,7 +36,7 @@ function send_form()
     $element = new XoopsFormLabel(_MI_SUBSCRIBERS_CONF_FROMEMAIL,  $xoopsModuleConfig['fromemail']);
     $form->addElement($element);
     unset($element);
-    
+
     // Country
     include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
     $countries = array("ALL" => _AM_SUBSCRIBERS_ALL_COUNTRIES);
@@ -45,9 +45,9 @@ function send_form()
     $countries += $countries2;
 
     $element = new XoopsFormSelect(_AM_SUBSCRIBERS_COUNTRY, 'country', 'ALL');
-	$element->addOptionArray($countries);
-	$form->addElement($element);
-	unset($element, $countries);
+    $element->addOptionArray($countries);
+    $form->addElement($element);
+    unset($element, $countries);
 
     // Subject
     $form->addElement(new XoopsFormText(_AM_SUBSCRIBERS_EMAIL_SUBJECT, 'subject', 75, 150, ''), true);
@@ -66,25 +66,25 @@ function send_form()
     unset($element);
 
     // Priority
-	$priorities = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-	unset($priorities[0]);
-	$element = new XoopsFormSelect(_AM_SUBSCRIBERS_EMAIL_PRIORITY, 'priority', 5);
-	$element->setDescription(_AM_SUBSCRIBERS_EMAIL_PRIORITY_DSC);
-	$element->addOptionArray($priorities);
-	$form->addElement($element);
-	unset($element, $priorities);
+    $priorities = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    unset($priorities[0]);
+    $element = new XoopsFormSelect(_AM_SUBSCRIBERS_EMAIL_PRIORITY, 'priority', 5);
+    $element->setDescription(_AM_SUBSCRIBERS_EMAIL_PRIORITY_DSC);
+    $element->addOptionArray($priorities);
+    $form->addElement($element);
+    unset($element, $priorities);
 
-	// Groups
-	$groups = array(_AM_SUBSCRIBERS_SUBSCRIBERS, _AM_SUBSCRIBERS_USERS, _AM_SUBSCRIBERS_BOTH);
-	$element = new XoopsFormSelect(_AM_SUBSCRIBERS_EMAIL_GROUPS, 'groups', 0);
-	$element->setDescription(_AM_SUBSCRIBERS_EMAIL_GROUPS_DSC);
-	$element->addOptionArray($groups);
-	$form->addElement($element);
-	unset($element, $groups);
+    // Groups
+    $groups = array(_AM_SUBSCRIBERS_SUBSCRIBERS, _AM_SUBSCRIBERS_USERS, _AM_SUBSCRIBERS_BOTH);
+    $element = new XoopsFormSelect(_AM_SUBSCRIBERS_EMAIL_GROUPS, 'groups', 0);
+    $element->setDescription(_AM_SUBSCRIBERS_EMAIL_GROUPS_DSC);
+    $element->addOptionArray($groups);
+    $form->addElement($element);
+    unset($element, $groups);
 
     // Buttons
-	$tray = new XoopsFormElementTray('' ,'');
-	$tray->addElement(new XoopsFormButton('', 'submit_button', _SUBMIT, 'submit'));
+    $tray = new XoopsFormElementTray('' ,'');
+    $tray->addElement(new XoopsFormButton('', 'submit_button', _SUBMIT, 'submit'));
 
     $btn = new XoopsFormButton('', 'reset', _CANCEL, 'button');
     $btn->setExtra('onclick="document.location.href=\'admin_send.php\'"');
@@ -94,7 +94,7 @@ function send_form()
 
     $form->addElement(new XoopsFormHidden('op', 'email'));
 
-	return $form->render();
+    return $form->render();
 }
 
 function send_email()

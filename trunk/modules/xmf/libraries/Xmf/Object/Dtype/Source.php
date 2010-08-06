@@ -37,7 +37,7 @@ class Xmf_Object_Dtype_Source extends Xmf_Object_Dtype_Abstract
 
     function getVar($obj, $key, $format, $ret)
     {
-         switch (strtolower($format)) {
+        switch (strtolower($format)) {
             case 's':
             case 'show':
                 break 1;
@@ -57,13 +57,13 @@ class Xmf_Object_Dtype_Source extends Xmf_Object_Dtype_Abstract
             case 'none':
             default:
                 break 1;
-         }
-         return $ret;
+        }
+        return $ret;
     }
 
     function getVarControl()
     {
-            return array('name' => 'textarea');
+        return array('name' => 'textarea');
     }
 
 }

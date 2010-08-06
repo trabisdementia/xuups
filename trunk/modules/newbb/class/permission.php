@@ -21,15 +21,15 @@ if (!class_exists("XoopsGroupPermHandler")) {
     require_once XOOPS_ROOT_PATH . '/kernel/groupperm.php';
 }
 
-class NewbbPermissionHandler extends XoopsGroupPermHandler 
+class NewbbPermissionHandler extends XoopsGroupPermHandler
 {
     var $_handler;
-    
+
     function NewbbPermissionHandler(&$db)
     {
         $this->XoopsGroupPermHandler($db);
     }
-    
+
     function &_loadHandler($name)
     {
         if ( !isset($this->_handler[$name]) ) {
@@ -39,7 +39,7 @@ class NewbbPermissionHandler extends XoopsGroupPermHandler
         }
         return $this->_handler[$name];
     }
-    
+
     function getValidForumPerms($fullname = false)
     {
         $handler =& $this->_loadHandler("forum");
@@ -52,14 +52,14 @@ class NewbbPermissionHandler extends XoopsGroupPermHandler
         $perm = $handler->permission_table($forum, $topic_locked, $isadmin);
         return $perm;
     }
-    
+
     function deleteByForum($forum_id)
     {
         mod_clearCacheFile("permission_forum", "newbb");
         $handler =& $this->_loadHandler("forum");
         return $handler->deleteByForum($forum_id);
     }
-    
+
     function deleteByCategory($cat_id)
     {
         mod_clearCacheFile("permission_category", "newbb");
@@ -77,16 +77,16 @@ class NewbbPermissionHandler extends XoopsGroupPermHandler
     function getPermission($type, $gperm_name = "access", $id = 0)
     {
         global $xoopsUser, $xoopsModule;
-        
+
         if ($GLOBALS["xoopsUserIsAdmin"] && $xoopsModule->getVar("dirname") == "newbb") {
             return true;
         }
-        
+
         $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
         if ( !$groups ) return false;
 
         if ( !$allowed_groups = $this->getGroups("{$type}_{$gperm_name}", $id) ) return false;
-        
+
         return count(array_intersect($allowed_groups, $groups));
     }
 
@@ -114,18 +114,18 @@ class NewbbPermissionHandler extends XoopsGroupPermHandler
         if (!$_cachedPerms = $this->loadPermData($perm_name, $type)) {
             return $ret;
         }
-        
+
         $allowed_items = array();
         foreach ($_cachedPerms as $id => $allowed_groups) {
             if ($id == 0 || empty($allowed_groups)) continue;
-            
+
             if (array_intersect($groups, $allowed_groups)) {
                 $allowed_items[$id] = 1;
             }
         }
         unset($_cachedPerms);
         $ret = array_keys($allowed_items);
-        
+
         return $ret;
     }
 
@@ -149,26 +149,26 @@ class NewbbPermissionHandler extends XoopsGroupPermHandler
             $modid = $module->getVar("mid") ;
             unset($module);
         }
-        
+
         if ( in_array($perm_name, array("forum_all", "category_all")) ) {
             $member_handler =& xoops_gethandler('member');
             $groups = array_keys( $member_handler->getGroupList() );
-            
+
             $type = ($perm_name == "category_all") ? "category" : "forum";
             $object_handler =& xoops_getmodulehandler($type, 'newbb');
             $object_ids = $object_handler->getIds();
             foreach ($object_ids as $item_id) {
                 $perms[$perm_name][$item_id] = $groups;
             }
-            
+
         } else {
             $gperm_handler =& xoops_gethandler("groupperm");
             $criteria = new CriteriaCompo(new Criteria('gperm_modid', $modid));
-            if (!empty($perm_name) && $perm_name != "forum_all" && $perm_name != "category_all") {            
+            if (!empty($perm_name) && $perm_name != "forum_all" && $perm_name != "category_all") {
                 $criteria->add(new Criteria('gperm_name', $perm_name));
             }
             $permissions =& $this->getObjects($criteria);
-            
+
             $perms = array();
             foreach ($permissions as $gperm) {
                 $item_id = $gperm->getVar('gperm_itemid');
@@ -180,7 +180,7 @@ class NewbbPermissionHandler extends XoopsGroupPermHandler
         foreach (array_keys($perms) as $perm) {
             mod_createCacheFile($perms[$perm], "permission_{$perm}", "newbb");
         }
-        
+
         $ret = !empty($perm_name) ? @$perms[$perm_name] : $perms;
         return $ret;
     }
@@ -190,10 +190,10 @@ class NewbbPermissionHandler extends XoopsGroupPermHandler
         if (!$perms = mod_loadCacheFile("permission_{$perm_name}", "newbb")) {
             $perms = $this->createPermData($perm_name);
         }
-        
+
         return $perms;
     }
-    
+
     function validateRight($perm, $itemid, $groupid, $mid = null)
     {
         if (empty($mid)) {
@@ -213,12 +213,12 @@ class NewbbPermissionHandler extends XoopsGroupPermHandler
 
     /**
      * Check permission (directly)
-     * 
+     *
      * @param    string    $gperm_name       Name of permission
      * @param    int       $gperm_itemid     ID of an item
      * @param    int/array $gperm_groupid    A group ID or an array of group IDs
      * @param    int       $gperm_modid      ID of a module
-     * 
+     *
      * @return    bool    TRUE if permission is enabled
      */
     function _checkRight($gperm_name, $gperm_itemid, $gperm_groupid, $gperm_modid = 1)
@@ -243,7 +243,7 @@ class NewbbPermissionHandler extends XoopsGroupPermHandler
         }
         return false;
     }
-    
+
     function deleteRight($perm, $itemid, $groupid, $mid = null)
     {
         mod_clearCacheFile("permission", "newbb");
@@ -273,22 +273,22 @@ class NewbbPermissionHandler extends XoopsGroupPermHandler
             unset($criteria, $perms_obj);
         }
         return true;
-    }        
-        
+    }
+
     function applyTemplate($forum, $mid = 0)
     {
         mod_clearCacheFile("permission_forum", "newbb");
         $handler =& $this->_loadHandler("forum");
         return $handler->applyTemplate($forum, $mid);
     }
-    
+
     function &getTemplate()
     {
         $handler =& $this->_loadHandler("forum");
         $template = $handler->getTemplate();
         return $template;
     }
-    
+
     function setTemplate($perms)
     {
         $handler =& $this->_loadHandler("forum");

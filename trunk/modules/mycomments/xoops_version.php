@@ -60,12 +60,12 @@ $i = 0;
 global $xoopsUser;
 if (is_object($xoopsUser)) {
     $i++;
-	$modversion['sub'][$i]['name'] = _MI_MYCOM_COM_RECIEVED;
-	$modversion['sub'][$i]['url'] = "index.php?view=0";
+    $modversion['sub'][$i]['name'] = _MI_MYCOM_COM_RECIEVED;
+    $modversion['sub'][$i]['url'] = "index.php?view=0";
 
     $i++;
     $modversion['sub'][$i]['name'] = _MI_MYCOM_COM_SENT;
-	$modversion['sub'][$i]['url'] = "index.php?view=1";
+    $modversion['sub'][$i]['url'] = "index.php?view=1";
 }
 
 

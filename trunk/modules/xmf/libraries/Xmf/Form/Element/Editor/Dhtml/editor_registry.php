@@ -15,5 +15,5 @@ return $config = array(
         "title"     =>    _XOOPS_EDITOR_DHTMLTEXTAREA,
         "order"     =>    2,
         "nohtml"    =>    1
-    );
+);
 ?>

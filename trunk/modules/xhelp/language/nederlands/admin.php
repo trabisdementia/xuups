@@ -141,7 +141,7 @@ define('_AM_XHELP_TEXT_CUSTOMIZE', 'Aanpassen');
 define('_AM_XHELP_TEXT_ACTIONS', 'Acties:');
 define('_AM_XHELP_TEXT_ID', 'ID:');
 define('_AM_XHELP_TEXT_LOOKUP_USER', 'Zoek Gebruiker');
-define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Begin Datum:');  
+define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Begin Datum:');
 define('_AM_XHELP_SEARCH_ENDDATE', 'Eind Datum:');
 
 define('_AM_XHELP_TEXT_MAIL_EVENTS', 'Mail Gebeurtenissen');
@@ -172,7 +172,7 @@ define("_AM_XHELP_MIME_USERFINFO", "<b>Mimetypes die beschikbaar zijn voor gebru
 define("_AM_XHELP_MIME_NOMIMEINFO", "Geen mimetypes geselecteerd.");
 define("_AM_XHELP_MIME_FINDMIMETYPE", "Zoek nieuw Mimetype:");
 define("_AM_XHELP_MIME_EXTFIND", "Zoek Bestands Extentie:<div style='padding-top: 8px;'><span style='font-weight: normal;'>Vul de bestands extentie in die je zoekt.</span></div>");
-define("_AM_XHELP_MIME_INFOTEXT", "<ul><li>Niewe mimetypes kunnen makkelijk worden gecreeerd, gewijzigd of verwijderd met behulp van dit formulier.</li> 
+define("_AM_XHELP_MIME_INFOTEXT", "<ul><li>Niewe mimetypes kunnen makkelijk worden gecreeerd, gewijzigd of verwijderd met behulp van dit formulier.</li>
 	<li>Search for a new mimetypes via an external website.</li> 
 	<li>View displayed mimetypes for Admin and User uploads.</li> 
 	<li>Change mimetype upload status.</li></ul> 
@@ -194,7 +194,7 @@ define("_AM_XHELP_MIME_MODIFIED", "Mimetype Information Bijgewerkt");
 define("_AM_XHELP_MINDEX_ACTION", "Actie");
 define("_AM_XHELP_MINDEX_PAGE", "<b>Pagina:</b> ");
 
-//image admin icon 
+//image admin icon
 define("_AM_XHELP_ICO_EDIT","Bewerk dit item");
 define("_AM_XHELP_ICO_DELETE","Verwijder dit Item");
 define("_AM_XHELP_ICO_ONLINE","Online");

@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,19 +24,19 @@ if (!defined('XOOPS_ROOT_PATH')) {
 /**#@+
  * Function to display tag cloud
  */
-function newbb_tag_block_cloud_show($options) 
+function newbb_tag_block_cloud_show($options)
 {
     if (!@include_once XOOPS_ROOT_PATH."/modules/tag/blocks/block.php") {
-        return null; 
-    } 
+        return null;
+    }
     $block_content = tag_block_cloud_show($options, "newbb");
     return $block_content;
 }
 
-function newbb_tag_block_cloud_edit($options) 
+function newbb_tag_block_cloud_edit($options)
 {
     if (!@include_once XOOPS_ROOT_PATH."/modules/tag/blocks/block.php") {
-        return null; 
+        return null;
     }
     $form = tag_block_cloud_edit($options);
     return $form;
@@ -45,10 +45,10 @@ function newbb_tag_block_cloud_edit($options)
 /**#@+
  * Function to display top tag list
  */
-function newbb_tag_block_top_show($options) 
+function newbb_tag_block_top_show($options)
 {
     if (!@include_once XOOPS_ROOT_PATH."/modules/tag/blocks/block.php") {
-        return null; 
+        return null;
     }
     $block_content = tag_block_top_show($options, "newbb");
     return $block_content;
@@ -56,8 +56,8 @@ function newbb_tag_block_top_show($options)
 
 function newbb_tag_block_top_edit($options) {
     if (!@include_once XOOPS_ROOT_PATH."/modules/tag/blocks/block.php") {
-        return null; 
-    } 
+        return null;
+    }
     $form = tag_block_top_edit($options);
     return $form;
 }

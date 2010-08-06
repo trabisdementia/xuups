@@ -25,37 +25,37 @@ $graph->scale->week->SetFont(FF_FONT1);
 
 
 $data = array(
-	array(0,"Group 1\tJohan", "2002-1-23","2002-01-28",FF_FONT1,FS_BOLD,8),
-	array(1,"  Label 2", "2001-10-26","2001-11-16"),
-	array(2,"  Label 3", "2001-11-30","2001-12-01"),
-	array(4,"Group 2", "2001-11-30","2001-12-22",FF_FONT1,FS_BOLD,8),
-	array(5,"  Label 4", "2001-11-30","2001-12-1"),
-	array(6,"  Label 5", "2001-12-6","2001-12-8"),
-	array(8,"    Label 8", "2001-11-30","2002-01-02")			
-	);
+array(0,"Group 1\tJohan", "2002-1-23","2002-01-28",FF_FONT1,FS_BOLD,8),
+array(1,"  Label 2", "2001-10-26","2001-11-16"),
+array(2,"  Label 3", "2001-11-30","2001-12-01"),
+array(4,"Group 2", "2001-11-30","2001-12-22",FF_FONT1,FS_BOLD,8),
+array(5,"  Label 4", "2001-11-30","2001-12-1"),
+array(6,"  Label 5", "2001-12-6","2001-12-8"),
+array(8,"    Label 8", "2001-11-30","2002-01-02")
+);
 
 
 // make up some fictionary activity bars
 for($i=0; $i<count($data); ++$i) {
-	$bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[5%]",10);
-	if( count($data[$i])>4 )
-		$bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
-		
-	$bar->rightMark->Show();
-	$bar->rightMark->SetType(MARK_FILLEDCIRCLE);
-	$bar->rightMark->SetWidth(8);
-	$bar->rightMark->SetColor("red");
-	$bar->rightMark->SetFillColor("red");
-	$bar->rightMark->title->Set($i+1);
-	$bar->rightMark->title->SetFont(FF_ARIAL,FS_BOLD,12);
-	$bar->rightMark->title->SetColor("white");
+    $bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[5%]",10);
+    if( count($data[$i])>4 )
+    $bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
 
-	$bar->SetPattern(BAND_RDIAG,"yellow");
-	$bar->SetFillColor("red");
-	$bar->progress->Set($i/10);
-	$bar->progress->SetPattern(GANTT_SOLID,"darkgreen");
-	
-	$graph->Add($bar);
+    $bar->rightMark->Show();
+    $bar->rightMark->SetType(MARK_FILLEDCIRCLE);
+    $bar->rightMark->SetWidth(8);
+    $bar->rightMark->SetColor("red");
+    $bar->rightMark->SetFillColor("red");
+    $bar->rightMark->title->Set($i+1);
+    $bar->rightMark->title->SetFont(FF_ARIAL,FS_BOLD,12);
+    $bar->rightMark->title->SetColor("white");
+
+    $bar->SetPattern(BAND_RDIAG,"yellow");
+    $bar->SetFillColor("red");
+    $bar->progress->Set($i/10);
+    $bar->progress->SetPattern(GANTT_SOLID,"darkgreen");
+
+    $graph->Add($bar);
 }
 
 

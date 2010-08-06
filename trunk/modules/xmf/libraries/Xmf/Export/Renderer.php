@@ -50,7 +50,7 @@ class Xmf_Export_Renderer
     function arrayToCsvString($dataArray, $separator, $trim = 'both', $removeEmptyLines = TRUE)
     {
         if (!is_array($dataArray) || empty ($dataArray))
-            return '';
+        return '';
         switch ($trim) {
             case 'none' :
                 $trimFunction = FALSE;
@@ -77,7 +77,7 @@ class Xmf_Export_Renderer
     function valToCsvHelper($val, $separator, $trimFunction)
     {
         if ($trimFunction)
-            $val = $trimFunction ($val);
+        $val = $trimFunction ($val);
         //If there is a separator (;) or a quote (") or a linebreak in the string, we need to quote it.
         $needQuote = FALSE;
         do {
@@ -115,7 +115,7 @@ class Xmf_Export_Renderer
                 foreach($this->data['rows'] as $cols) {
                     $exportFileData .= $this->arrayToCsvString($cols, $separator) . "\r\n";
                 }
-            break;
+                break;
         }
         $this->saveExportFile($exportFileData);
     }
@@ -125,7 +125,7 @@ class Xmf_Export_Renderer
         switch ($this->format) {
             case 'csv':
                 $this->saveCsv($content);
-            break;
+                break;
         }
     }
 

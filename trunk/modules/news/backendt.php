@@ -46,16 +46,16 @@ error_reporting(0);
 $GLOBALS['xoopsLogger']->activated = false;
 
 if(!news_getmoduleoption('topicsrss')) {
-	exit();
+    exit();
 }
 
 $topicid = isset($_GET['topicid']) ? intval($_GET['topicid']) : 0;
 if($topicid == 0) {
-	exit();
+    exit();
 }
 
 if (function_exists('mb_http_output')) {
-	mb_http_output('pass');
+    mb_http_output('pass');
 }
 
 $restricted = news_getmoduleoption('restrictindex');
@@ -69,42 +69,42 @@ $tpl = new XoopsTpl();
 $tpl->xoops_setCaching(2);
 $tpl->xoops_setCacheTime(3600);								// Change this to the value you want
 if (!$tpl->is_cached('db:news_rss.html', $topicid)) {
-	$xt = new NewsTopic($topicid);
-	$sarray = $story->getAllPublished($newsnumber, 0, $restricted, $topicid);
-	if (is_array($sarray) && count($sarray)>0) {
-		$sitename = htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES);
-		$slogan = htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES);
-		$tpl->assign('channel_title', xoops_utf8_encode($sitename));
-		$tpl->assign('channel_link', XOOPS_URL.'/');
-		$tpl->assign('channel_desc', xoops_utf8_encode($slogan));
-		$tpl->assign('channel_lastbuild', formatTimestamp(time(), 'rss'));
-		$tpl->assign('channel_webmaster', checkEmail($xoopsConfig['adminmail'],true));	// Fed up with spam
-		$tpl->assign('channel_editor', checkEmail($xoopsConfig['adminmail'],true));	// Fed up with spam
-		$tpl->assign('channel_category', $xt->topic_title());
-		$tpl->assign('channel_generator', 'XOOPS');
-		$tpl->assign('channel_language', _LANGCODE);
-		$tpl->assign('image_url', XOOPS_URL.'/images/logo.gif');
-		$dimention = getimagesize(XOOPS_ROOT_PATH.'/images/logo.gif');
-		if (empty($dimention[0])) {
-			$width = 88;
-		} else {
-			$width = ($dimention[0] > 144) ? 144 : $dimention[0];
-		}
-		if (empty($dimention[1])) {
-			$height = 31;
-		} else {
-			$height = ($dimention[1] > 400) ? 400 : $dimention[1];
-		}
-		$tpl->assign('image_width', $width);
-		$tpl->assign('image_height', $height);
-		$count = $sarray;
-		foreach ($sarray as $story) {
-			$storytitle = $story->title();
+    $xt = new NewsTopic($topicid);
+    $sarray = $story->getAllPublished($newsnumber, 0, $restricted, $topicid);
+    if (is_array($sarray) && count($sarray)>0) {
+        $sitename = htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES);
+        $slogan = htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES);
+        $tpl->assign('channel_title', xoops_utf8_encode($sitename));
+        $tpl->assign('channel_link', XOOPS_URL.'/');
+        $tpl->assign('channel_desc', xoops_utf8_encode($slogan));
+        $tpl->assign('channel_lastbuild', formatTimestamp(time(), 'rss'));
+        $tpl->assign('channel_webmaster', checkEmail($xoopsConfig['adminmail'],true));	// Fed up with spam
+        $tpl->assign('channel_editor', checkEmail($xoopsConfig['adminmail'],true));	// Fed up with spam
+        $tpl->assign('channel_category', $xt->topic_title());
+        $tpl->assign('channel_generator', 'XOOPS');
+        $tpl->assign('channel_language', _LANGCODE);
+        $tpl->assign('image_url', XOOPS_URL.'/images/logo.gif');
+        $dimention = getimagesize(XOOPS_ROOT_PATH.'/images/logo.gif');
+        if (empty($dimention[0])) {
+            $width = 88;
+        } else {
+            $width = ($dimention[0] > 144) ? 144 : $dimention[0];
+        }
+        if (empty($dimention[1])) {
+            $height = 31;
+        } else {
+            $height = ($dimention[1] > 400) ? 400 : $dimention[1];
+        }
+        $tpl->assign('image_width', $width);
+        $tpl->assign('image_height', $height);
+        $count = $sarray;
+        foreach ($sarray as $story) {
+            $storytitle = $story->title();
             //if we are allowing html, we need to use htmlspecialchars or any bug will break the output
-			$description = htmlspecialchars($story->hometext());
-			$tpl->append('items', array('title' => xoops_utf8_encode($storytitle), 'link' => XOOPS_URL.'/modules/news/article.php?storyid='.$story->storyid(), 'guid' => XOOPS_URL.'/modules/news/article.php?storyid='.$story->storyid(), 'pubdate' => formatTimestamp($story->published(), 'rss'), 'description' => xoops_utf8_encode($description)));
-		}
-	}
+            $description = htmlspecialchars($story->hometext());
+            $tpl->append('items', array('title' => xoops_utf8_encode($storytitle), 'link' => XOOPS_URL.'/modules/news/article.php?storyid='.$story->storyid(), 'guid' => XOOPS_URL.'/modules/news/article.php?storyid='.$story->storyid(), 'pubdate' => formatTimestamp($story->published(), 'rss'), 'description' => xoops_utf8_encode($description)));
+        }
+    }
 }
 $tpl->display('db:news_rss.html', $topicid);
 ?>

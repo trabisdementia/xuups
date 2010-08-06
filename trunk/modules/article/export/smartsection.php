@@ -13,7 +13,7 @@
  */
 
 
-$sql =	
+$sql =
 			"	INSERT INTO ".$GLOBALS['xoopsDB']->prefix("smartsection_categories").
 			"		(categoryid,	name,			parentid,	description)".
 			"	SELECT ".
@@ -22,11 +22,11 @@ $sql =
 			"		ORDER BY cat_id ASC"
 			;
 
-$result = $xoopsDB->queryF($sql);
-xoops_result("succeed with building CATEGORY table: ". $count = $xoopsDB->getAffectedRows());
+			$result = $xoopsDB->queryF($sql);
+			xoops_result("succeed with building CATEGORY table: ". $count = $xoopsDB->getAffectedRows());
 
 
-$sql =	
+			$sql =
 			"	INSERT INTO ".$GLOBALS['xoopsDB']->prefix("smartsection_items").
 			"		(itemid,		title,		categoryid,		uid,	meta_keywords, 	summary,		datesub,				counter,		comments,		status,".
 			"		body, 			dohtml,		dosmiley,		dobr,	doimage,	doxcode)".
@@ -38,7 +38,7 @@ $sql =
 			"		ORDER BY art_id ASC"
 			;
 
-$result = $xoopsDB->queryF($sql);
-xoops_result("succeed with building ARTICLE table: ".$count = $xoopsDB->getAffectedRows());
+			$result = $xoopsDB->queryF($sql);
+			xoops_result("succeed with building ARTICLE table: ".$count = $xoopsDB->getAffectedRows());
 
-?>
+			?>

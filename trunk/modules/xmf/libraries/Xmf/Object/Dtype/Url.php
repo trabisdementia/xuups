@@ -63,13 +63,13 @@ class Xmf_Object_Dtype_Url extends Xmf_Object_Dtype_Abstract
             case 'none':
             default:
                 break 1;
-         }
-         return $ret;
+        }
+        return $ret;
     }
 
     function getVarControl()
     {
-            return array('name' => 'text');
+        return array('name' => 'text');
     }
 
 }

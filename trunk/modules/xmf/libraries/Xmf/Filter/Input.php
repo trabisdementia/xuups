@@ -43,7 +43,7 @@ class Xmf_Filter_Input
         $this->tagsMethod   = $tagsMethod;
         $this->attrMethod   = $attrMethod;
         $this->xssAuto      = $xssAuto;
-        }
+    }
 
     /**
      * Returns a reference to an input filter object, only creating it if it doesn't already exist.
@@ -158,26 +158,26 @@ class Xmf_Filter_Input
                 } else {
                     $filter =& Xmf_Filter_Input::getInstance();
                 }
-            // Are we dealing with an array?
-            if (is_array($source)) {
-                foreach ($source as $key => $value) {
-                    // filter element for XSS and other 'bad' code etc.
-                    if (is_string($value)) {
-                        $source[$key] = $filter->_remove($filter->_decode($value));
+                // Are we dealing with an array?
+                if (is_array($source)) {
+                    foreach ($source as $key => $value) {
+                        // filter element for XSS and other 'bad' code etc.
+                        if (is_string($value)) {
+                            $source[$key] = $filter->_remove($filter->_decode($value));
+                        }
+                    }
+                    $result = $source;
+                } else {
+                    // Or a string?
+                    if (is_string($source) && !empty ($source)) {
+                        // filter source for XSS and other 'bad' code etc.
+                        $result = $filter->_remove($filter->_decode($source));
+                    } else {
+                        // Not an array or string.. return the passed parameter
+                        $result = $source;
                     }
                 }
-                $result = $source;
-            } else {
-                // Or a string?
-                if (is_string($source) && !empty ($source)) {
-                    // filter source for XSS and other 'bad' code etc.
-                    $result = $filter->_remove($filter->_decode($source));
-                } else {
-                    // Not an array or string.. return the passed parameter
-                    $result = $source;
-                }
-            }
-            break;
+                break;
         }
         return $result;
     }
@@ -213,7 +213,7 @@ class Xmf_Filter_Input
             $loopCounter ++;
         }
         return $source;
-        }
+    }
 
     /**
      * Internal method to strip a string of certain tags

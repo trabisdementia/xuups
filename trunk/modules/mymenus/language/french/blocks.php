@@ -15,7 +15,7 @@ define('_MB_MYMENUS_DISPLAY_METHOD_BLOCK', "Afficher ce bloc");
 define('_MB_MYMENUS_DISPLAY_METHOD_TEMPLATE', "Assigner au gabarit");
 
 define('_MB_MYMENUS_HOME', "Accueil");
- =======
+=======
 <?php
 //  Author: Trabis
 //  URL: http://www.xuups.com
@@ -32,4 +32,4 @@ define('_MB_MYMENUS_DISPLAY_METHOD_BLOCK', "Afficher ce bloc");
 define('_MB_MYMENUS_DISPLAY_METHOD_TEMPLATE', "Assigner au gabarit");
 
 define('_MB_MYMENUS_HOME', "Accueil");
- >>>>>>> .r127
+>>>>>>> .r127

@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: search.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 $xoopsOption["pagetype"] = "search";
 include "header.php";
 //$xoopsModule->loadLanguage("main");
@@ -108,8 +108,8 @@ if ( !( empty($_POST["submit"]) && empty($_GET["term"])) ) {
 
     $next_search["sortby"] = $sortby;
     $next_search["searchin"] = implode("|", $searchin);
-    
-    /* To be added: year-month 
+
+    /* To be added: year-month
      * see view.archive.php
      */
     if (!empty($time)) {
@@ -128,11 +128,11 @@ if ( !( empty($_POST["submit"]) && empty($_GET["term"])) ) {
         $results[] = array("text"=> _SR_NOMATCH);
     }
     /*
-    if ( count($results) < 1 ) {
-        redirect_header("javascript:history.go(-1);", 2, _SR_NOMATCH);
-    }
-    else 
-    */
+     if ( count($results) < 1 ) {
+     redirect_header("javascript:history.go(-1);", 2, _SR_NOMATCH);
+     }
+     else
+     */
     {
         $xoopsTpl->assign("results", $results);
 
@@ -172,9 +172,9 @@ if ( !( empty($_POST["submit"]) && empty($_GET["term"])) ) {
 }
 
 /*
-$permission_handler =& xoops_getmodulehandler("permission", $GLOBALS["artdirname"]);
-$allowed_ids = $permission_handler->getCategories();
-*/
+ $permission_handler =& xoops_getmodulehandler("permission", $GLOBALS["artdirname"]);
+ $allowed_ids = $permission_handler->getCategories();
+ */
 
 /* type */
 $type_select = "<select name=\"andor\">";

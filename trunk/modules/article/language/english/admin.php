@@ -68,17 +68,17 @@ define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERM_SEARCH", "Search");
 define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERM_HTML", "Use HTML");
 define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERM_UPLOAD", "Upload");
 
-define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERMISSION_DESC", 
+define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERMISSION_DESC",
 	"Available category permissions: ".
-	art_constant("AM_PERM_ACCESS").", ".
-	art_constant("AM_PERM_VIEW").", ".
-	art_constant("AM_PERM_SUBMIT").", ".
-	art_constant("AM_PERM_RATE").", ".
-	art_constant("AM_PERM_MODERATE")."<br />". 
+art_constant("AM_PERM_ACCESS").", ".
+art_constant("AM_PERM_VIEW").", ".
+art_constant("AM_PERM_SUBMIT").", ".
+art_constant("AM_PERM_RATE").", ".
+art_constant("AM_PERM_MODERATE")."<br />".
 	"Available global permissions: ".
-	art_constant("AM_PERM_SEARCH").", ".
-	art_constant("AM_PERM_HTML").", ".
-	art_constant("AM_PERM_UPLOAD")
+art_constant("AM_PERM_SEARCH").", ".
+art_constant("AM_PERM_HTML").", ".
+art_constant("AM_PERM_UPLOAD")
 );
 
 define($GLOBALS["ART_VAR_PREFIXU"]."_AM_PERMISSION_TEMPLATE","Set default permission template");

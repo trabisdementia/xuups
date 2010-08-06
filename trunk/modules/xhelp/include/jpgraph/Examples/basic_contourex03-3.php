@@ -5,11 +5,11 @@ require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_contour.php');
 
 $data = array(
-            array ( 12,7,3,15 ),
-            array ( 18,5,1, 9 ),
-            array ( 13,9,5,12),
-            array (  5,3,8, 9 ),
-            array (  1,8,5, 7 ));
+array ( 12,7,3,15 ),
+array ( 18,5,1, 9 ),
+array ( 13,9,5,12),
+array (  5,3,8, 9 ),
+array (  1,8,5, 7 ));
 
 
 // Basic contour graph

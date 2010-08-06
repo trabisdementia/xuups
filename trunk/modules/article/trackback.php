@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: trackback.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 // trackback is done by a POST
@@ -37,7 +37,7 @@ if ( !strlen( $title.$url.$blog_name ) ) {
 
 
 if ( !empty($article_id) && !empty($url)) {
-    
+
     $trackback_handler =& xoops_getmodulehandler("trackback", $GLOBALS["artdirname"]);
     $criteria = new CriteriaCompo(new Criteria("art_id", $article_id));
     $criteria->add(new Criteria("tb_url", $url));
@@ -50,7 +50,7 @@ if ( !empty($article_id) && !empty($url)) {
     $excerpt = XoopsLocal::convert_encoding($excerpt, _CHARSET, $charset);
     $blog_name = XoopsLocal::convert_encoding($blog_name, _CHARSET, $charset);
     $tb_status = intval($xoopsModuleConfig["trackback_option"]);
-    
+
     $trackback_obj = $trackback_handler->create();
     $trackback_obj->setVar("art_id", $article_id);
     $trackback_obj->setVar("tb_time", time());
@@ -71,8 +71,8 @@ if ( !empty($article_id) && !empty($url)) {
     if ($count > $article_obj->getVar("art_trackbacks")) {
         $article_obj->setVar("art_trackbacks", $count);
         $article_handler->insert($article_obj);
-    }    
-    
+    }
+
     art_trackback_response(0);
 
     if (!empty($xoopsModuleConfig["notification_enabled"]) && $result) {

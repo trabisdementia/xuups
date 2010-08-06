@@ -21,7 +21,7 @@ for( $i=0; $i < $n; ++$i ) {
 
 // Setup the basic graph
 $graph = new Graph(324,250);
-$graph->SetMargin(40,40,30,70);	
+$graph->SetMargin(40,40,30,70);
 $graph->title->Set('Date: '.date('Y-m-d',$now));
 $graph->SetAlphaBlending();
 

@@ -9,7 +9,7 @@ $data2y = array(11,41,"-",33,"-",63);
 
 // Setup graph
 $graph = new Graph(400,250);
-$graph->img->SetMargin(40,150,40,80);	
+$graph->img->SetMargin(40,150,40,80);
 $graph->SetScale("textlin");
 $graph->SetShadow();
 

@@ -23,12 +23,12 @@ $graph->scale->actinfo->SetFont(FF_ARIAL,FS_BOLD,11);
 
 // Some "dummy" data to be dsiplayed
 $data = array(
-    array(0,'Group 1', '2001-11-27','2001-12-05'),
-    array(1,'  Activity 1', '2001-11-27','2001-11-29'),
-    array(2,'  Activity 2', '2001-11-28','2001-12-05'),
-    array(3,'Group 2', '2001-11-29','2001-12-10'),
-    array(4,'  Activity 1', '2001-11-29','2001-12-03'),
-    array(5,'  Activity 2', '2001-12-01','2001-12-10'),
+array(0,'Group 1', '2001-11-27','2001-12-05'),
+array(1,'  Activity 1', '2001-11-27','2001-11-29'),
+array(2,'  Activity 2', '2001-11-28','2001-12-05'),
+array(3,'Group 2', '2001-11-29','2001-12-10'),
+array(4,'  Activity 1', '2001-11-29','2001-12-03'),
+array(5,'  Activity 2', '2001-12-01','2001-12-10'),
 
 );
 
@@ -58,7 +58,7 @@ for($i=0; $i < $n; ++$i) {
     }
     // Default font
     $bar->title->SetFont(FF_ARIAL,FS_NORMAL,10);
-	$graph->Add($bar);
+    $graph->Add($bar);
 }
 
 // Send back the graph to the client

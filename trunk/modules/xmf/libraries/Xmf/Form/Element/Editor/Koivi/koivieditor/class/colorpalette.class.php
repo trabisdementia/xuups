@@ -45,7 +45,7 @@ class WysiwygColorPalette
         $this->setId($id);
         $this->setSkin($skin);
     }
-    
+
     function getonclick(){return $this->onclick;}
     function setonclick($onclick){$this->onclick = $onclick;}
     function getId(){return $this->id;}
@@ -54,7 +54,7 @@ class WysiwygColorPalette
     function setUrl($url){$this->url = $url;}
     function getSkin(){return $this->skin;}
     function setSkin($skin){$this->skin = $skin;}
-    
+
     function _renderColorPalette()
     {
         $id=$this->getId();
@@ -62,19 +62,19 @@ class WysiwygColorPalette
         $skin=$this->getSkin();
         $imgurl=$this->getUrl().'/skins/'.$skin;
         $colors=Array('#000000','#993300','#333300','#003300','#333366','#000099','#333399','#333333','#660000','#FF6600','#999900','#009900','#009999','#0000FF','#666699','#666666','#FF0000','#FF9900','#99CC00','#339966','#33CCCC','#3366FF','#660099','#999999','#FF00FF','#FFCC00','#FFFF00','#00FF00','#00FFFF','#00CCFF','#993366','#CCCCCC','#FF99CC','#FFCC99','#FFFF99','#CCFFCC','#CCFFFF','#99CCFF','#CC99FF','#FFFFFF');
-        
+
         $text='<div name="XoopsKToolbarDivs" id="colorPalette'.$id.'" class="'.$skin.'ColorPickerD" style="display:none;">';
-        
+
         $text.='    <div style="float:left;">';
         $text.='        <input class="'.$skin.'colorpickerPreview" type="text" id="colortextf'.$id.'" size="8" maxlength="8" />';
         $text.='        <input class="'.$skin.'colorpickerHEX" type="text" id="showc'.$id.'" maxlength="8" />';
         $text.='    </div>';
-        
+
         $text.='    <img style="float:right;margin:2px;" alt="" src="'.$imgurl.'/none.gif" onmousedown="'.$function.'(\''.$id.'\',\'\')"/>';
-        
+
         $text.='    <br style="clear:both;" />
                     <div class="'.$skin.'ColorsContainer">';
-                    
+
         foreach ($colors as $color)
         {
             $text.='
@@ -82,11 +82,11 @@ class WysiwygColorPalette
         }
         $text.='    </div>
                 </div>';
-        
+
         $text.='<input type="hidden" id="coloroption'.$id.'"/>';
         return $text;
     }
-    
+
     function display(){echo $this->_renderColorPalette();}
 }
 ?>

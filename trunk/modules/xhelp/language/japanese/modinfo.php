@@ -1,6 +1,6 @@
 <?php
-     
- /**
+
+/**
  *    $Id: modinfo.php,v 1.4 2005/04/08 15:47:29 eric_juden Exp $
  *
  *    Japanese Translation by : Seibu Tsushin KK www.seibu-tsushin.co.jp
@@ -9,7 +9,7 @@
  *    Mizukoshi Norio <opensource@seibu-tsushin.co.jp>
  *
  */
- 
+
 define('_MI_XHELP_NAME', 'Xhelp');
 define('_MI_XHELP_DESC', '¥¯¥é¥¤¥¢¥ó¥È¡¡¼ÁÌä¤ËÂÐ¤¹¤ë²óÅú');
 
@@ -129,11 +129,11 @@ define('_MI_XHELP_DEPT_NEWOWNER_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE} Ã´Åö¼Ô¤¬Ê
 define('_MI_XHELP_DEPT_NEWOWNER_NOTIFYTPL', 'dept_newowner_notify.tpl');
 
 /*
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFY', '¥«¥Æ¥´¥ê¡¼: ¿·Ã´Åö¼Ô');
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYCAP', '¼ÁÌä¤ÎÃ´Åö¼Ô¤¬¤¤¤ÄÍ×µá¤µ¤ì¤ë¤«»ä¤ËÄÌÃÎ¤·¤Þ¤¹¡£');
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYDSC', '¼ÁÌä¤ÎÃ´Åö¼Ô¤¬Í×µá¤µ¤ì¤ë¾ì¹ç¡¢ÄÌÃÎ¤ò¼õ¤±¼è¤ê¤Þ¤¹¡£');
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE} Ã´Åö¼Ô¤¬ÊÑ¹¹¤µ¤ì¤Þ¤·¤¿');
-*/
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFY', '¥«¥Æ¥´¥ê¡¼: ¿·Ã´Åö¼Ô');
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYCAP', '¼ÁÌä¤ÎÃ´Åö¼Ô¤¬¤¤¤ÄÍ×µá¤µ¤ì¤ë¤«»ä¤ËÄÌÃÎ¤·¤Þ¤¹¡£');
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYDSC', '¼ÁÌä¤ÎÃ´Åö¼Ô¤¬Í×µá¤µ¤ì¤ë¾ì¹ç¡¢ÄÌÃÎ¤ò¼õ¤±¼è¤ê¤Þ¤¹¡£');
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE} Ã´Åö¼Ô¤¬ÊÑ¹¹¤µ¤ì¤Þ¤·¤¿');
+ */
 
 define('_MI_XHELP_TICKET_REMOVEDTICKET_NOTIFY', '¥æ¡¼¥¶¡¼: ¼ÁÌä¤òºï½ü¤µ¤ì¤Þ¤·¤¿');
 define('_MI_XHELP_TICKET_REMOVEDTICKET_NOTIFYCAP', '¤³¤Î¼ÁÌä¤¬¤¤¤Äºï½ü¤µ¤ì¤ë¤«»ä¤ËÄÌÃÎ¤·¤Þ¤¹¡£');
@@ -209,12 +209,12 @@ define('_MI_XHELP_BNAME4_DESC', '¥¹¥¿¥Ã¥Õ¤¬¼ÁÌä¤Ë¤Ç¤­¤ë¥¢¥¯¥·¥ç¥ó¤òÉ½¼¨¡£');
 
 define('_MI_XHELP_STAFF_ACTIONS', '¥¹¥¿¥Ã¥Õ¤Î¥¢¥¯¥·¥ç¥ó');
 define('_MI_XHELP_STAFF_ACTIONS_DSC', 'What style would you like the staff actions to show up as? Inline is the default, Block-Style requires you to enable the Staff Actions block.');
- 
+
 define('_MI_XHELP_TEMP_ANON_ADDTICKET', 'Template for anonymous user add ticket page');
 define('_MI_XHELP_TEMP_ERROR', 'Template for error page');
- 
+
 define('_MI_XHELP_MENU_MANAGE_ROLES', 'Manage Roles');
- 
+
 define('_MI_XHELP_DEFAULT_DEPT', 'Default Department');
 define('_MI_XHELP_DEFAULT_DEPT_DSC', "This will be the default department that is selected in the list when adding a ticket. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the departments.");
 define('_MI_XHELP_ACTION1', 'Inline-Style');
@@ -227,7 +227,7 @@ define('_MI_XHELP_TICKET_NEWUSER_NOTIFYCAP', 'Notify user that a new account has
 define('_MI_XHELP_TICKET_NEWUSER_NOTIFYDSC', 'Receive notification when a new user is created from an email submission');
 define('_MI_XHELP_TICKET_NEWUSER_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE} New User Created');
 define('_MI_XHELP_TICKET_NEWUSER_NOTIFYTPL', 'ticket_new_user_byemail.tpl');
-define('_MI_XHELP_MENU_CHECK_TABLES', 'Check tables'); 
+define('_MI_XHELP_MENU_CHECK_TABLES', 'Check tables');
 
 define('_MI_XHELP_ALLOW_ANON', 'Allow Anonymous User Ticket Submission');
 define('_MI_XHELP_ALLOW_ANON_DSC', 'This allows anyone to create a ticket on your site. When an anonymous user submits a ticket, they are also prompted to create an account.');
@@ -280,4 +280,4 @@ define('_MI_XHELP_TEXT_NOTIFICATIONS', 'Manage Notifications');
 define('_MI_XHELP_TICKET_NEWTICKET_EMAIL_NOTIFY', '¥æ¡¼¥¶¡¼:¿·¼ÁÌä (email)');
 
 
- ?>
+?>

@@ -10,23 +10,23 @@
  * @depreciated
  * @package xhelp
  */
-class xhelpTicketMailParser 
+class xhelpTicketMailParser
 {
     /**
      * Instance of Ticket Object
      * @access private
      */
     var $_ticket;
-  
+
     /**
      * Class Constructor
      * @access public
-     */  
-    function xhelpTicketMailParser() 
+     */
+    function xhelpTicketMailParser()
     {
         //any inits?
     }
-  
+
     /**
      * Create a new ticket object
      * @param object Reference to a {@link xhelpEmailParser} object
@@ -36,7 +36,7 @@ class xhelpTicketMailParser
      * @return bool
      * @access public
      */
-    function createTicket(&$mailParser, &$xoopsUser, &$department, &$server) 
+    function createTicket(&$mailParser, &$xoopsUser, &$department, &$server)
     {
         //get ticket handler
         $hTicket =& xhelpGetHandler('ticket');
@@ -59,12 +59,12 @@ class xhelpTicketMailParser
             return false;
         }
     }
-    
+
     /**
      * Returns the ticket object for this email
      * @return object {@link xhelpTicket} Ticket Object
      */
-    function &getTicket() 
+    function &getTicket()
     {
         return $this->_ticket;
     }

@@ -21,9 +21,9 @@ class xhelpUnresolvedTicketsByOwnerReport extends xhelpReport {
         $this->initVar('hasResults', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('hasGraph', XOBJ_DTYPE_INT, 1, false);
     }
-    
+
     var $name = 'unresolvedTicketsByOwner';
-    
+
     var $meta = array(
         'name' => _XHELP_UTBO_NAME,
         'author' => 'Eric Juden',
@@ -39,9 +39,9 @@ class xhelpUnresolvedTicketsByOwnerReport extends xhelpReport {
             'totalTimeSpent' => _XHELP_UTBO_DB6,
             'postTime' => _XHELP_UTBO_DB7)
     );
-    
+
     var $parameters = array(
-        _XHELP_UTBO_PARAM1 => array(
+    _XHELP_UTBO_PARAM1 => array(
             'controltype' => XHELP_CONTROL_DATETIME,
             'fieldname' => 'startDate',
             'value' => '',      // last month
@@ -49,7 +49,7 @@ class xhelpUnresolvedTicketsByOwnerReport extends xhelpReport {
             'fieldlength' => 25,
             'dbfield' => 't.posted',
             'dbaction' => '>'),
-        _XHELP_UTBO_PARAM2 => array (
+    _XHELP_UTBO_PARAM2 => array (
             'controltype' => XHELP_CONTROL_DATETIME,
             'fieldname' => 'endDate',
             'value' => '',      // today
@@ -58,44 +58,44 @@ class xhelpUnresolvedTicketsByOwnerReport extends xhelpReport {
             'dbfield' => 't.posted',
             'dbaction' => '<=')
     );
-    
+
     function generateReport()
-    {         
+    {
         global $paramVals;
          
         if($this->getVar('hasResults') == 0){
             $this->_setResults();
         }
         $aResults = $this->getVar('results');
-        
+
         if(empty($aResults)){       // If no records found
             $myReport = $this->generateReportNoData();
             return $myReport;
         }
-        
+
         $params = '';
         foreach($paramVals as $key=>$value){
             $params .= "&$key=$value";
         }
-        
+
         // Print graph
         $myReport = '';
         $myReport .= "<div id='xhelp_graph'>";
         $myReport .= "<img src='".XHELP_BASE_URL."/report.php?op=graph&name=unresolvedTicketsByOwner".$params."' align='center' width='500' height='300' />";
         $myReport .= "</div>";
-        
+
         // Display report
         $myReport .= "<br />";
         $myReport .= "<div id='xhelp_report'>";
         $myReport .= "<table>";
         $myReport .= "<tr>";
         $dbFields = $this->meta['dbFields'];
-        
+
         foreach($dbFields as $dbField=>$field){
-            $myReport .= "<th>".$field."</th>";    
+            $myReport .= "<th>".$field."</th>";
         }
         $myReport .= "</tr>";
-        
+
         $owner = '';
         foreach($aResults as $result){
             if($result['owner'] != $owner){
@@ -111,24 +111,24 @@ class xhelpUnresolvedTicketsByOwnerReport extends xhelpReport {
                           <td>".$result['totalTimeSpent']."</td>
                           <td>".$result['postTime']."</td></tr>";
         }
-        
+
         $myReport .= "</table>";
         $myReport .= "</div>";
-        
+
         return $myReport;
     }
-    
+
     function generateGraph()
     {
         if($this->getVar('hasGraph') == 0){
             return false;
         }
-    
+
         if($this->getVar('hasResults') == 0){
             $this->_setResults();
         }
         $aResults = $this->getVar('results');
-        
+
         $i = 0;
         $data = array();
         foreach($aResults as $result){
@@ -146,24 +146,24 @@ class xhelpUnresolvedTicketsByOwnerReport extends xhelpReport {
             }
             $i++;
         }
-        
+
         $this->generatePie3D($data, 0, 1, XHELP_IMAGE_PATH .'/graph_bg.jpg');
-        
+
     }
-    
+
     function _setResults()
     {
         global $xoopsDB;
-        
-        
+
+
         $sSQL = sprintf("SELECT t.subject, d.department, s.description AS status, t.totalTimeSpent, t.posted, t.id, FROM_UNIXTIME(t.posted) AS postTime, u.name AS owner FROM %s d, %s t, %s u, %s s WHERE (d.id = t.department) AND (t.ownership = u.uid) AND (t.status = s.id) AND (s.state = 1) %s",
-                        $xoopsDB->prefix('xhelp_departments'), $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('users'), $xoopsDB->prefix('xhelp_status'), $this->extraWhere);
-        
+        $xoopsDB->prefix('xhelp_departments'), $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('users'), $xoopsDB->prefix('xhelp_status'), $this->extraWhere);
+
         $result = $xoopsDB->query($sSQL);
         $aResults = $this->_arrayFromData($result);
         $this->setVar('results', serialize($aResults));
         $this->setVar('hasResults', 1);
-        
+
         return true;
     }
 }

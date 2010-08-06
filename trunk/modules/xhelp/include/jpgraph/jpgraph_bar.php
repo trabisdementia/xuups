@@ -110,7 +110,7 @@ class BarPlot extends Plot {
             $color = array($p1,$p2,$p3,$this->fill_color);
             // A kludge: Too mark that we add a pattern we use a type value of < 100
             $graph->legend->Add($this->legend,$color,"",-101,
-                                $this->legendcsimtarget,$this->legendcsimalt,$this->legendcsimwintarget);
+            $this->legendcsimtarget,$this->legendcsimalt,$this->legendcsimwintarget);
         }
         elseif( $this->fill_color && $this->legend!="" ) {
             if( is_array($this->fill_color) ) {
@@ -305,7 +305,7 @@ class BarPlot extends Plot {
         if( isset($this->coords[1]) ) {
             if( count($this->coords[1])!=$numpoints ) {
                 JpGraphError::RaiseL(2003,count($this->coords[1]),$numpoints);
-            //"Number of X and Y points are not equal. Number of X-points:".count($this->coords[1])."Number of Y-points:$numpoints");
+                //"Number of X and Y points are not equal. Number of X-points:".count($this->coords[1])."Number of Y-points:$numpoints");
             }
             else {
                 $exist_x = true;
@@ -358,13 +358,13 @@ class BarPlot extends Plot {
             // Comment Note: This confuses the positioning when using acc together with
             // grouped bars. Workaround for fixing #191
             /*
-            if( !$xscale->textscale ) {
-            if($this->align=="center")
-            $x -= $abswidth/2;
-            elseif($this->align=="right")
-            $x -= $abswidth;
-            }
-            */
+             if( !$xscale->textscale ) {
+             if($this->align=="center")
+             $x -= $abswidth/2;
+             elseif($this->align=="right")
+             $x -= $abswidth;
+             }
+             */
             // Stroke fill color and fill gradient
             $pts=array(
             $x,$zp,
@@ -401,8 +401,8 @@ class BarPlot extends Plot {
                         $style = $this->grad_fromcolor[$i % $ng][2];
                     }
                     $grad->FilledRectangle($pts[2],$pts[3],
-                                           $pts[6],$pts[7],
-                                           $fromcolor,$tocolor,$style);
+                    $pts[6],$pts[7],
+                    $fromcolor,$tocolor,$style);
                 }
                 else {
                     $grad->FilledRectangle($pts[2],$pts[3],
@@ -936,7 +936,7 @@ class AccBarPlot extends BarPlot {
                         $ng = count($this->plots[$j]->grad_fromcolor);
                         if( $ng === 3 ) {
                             if( is_numeric($this->plots[$j]->grad_fromcolor[0]) && $this->plots[$j]->grad_fromcolor[0] > 0 &&
-                                 $this->plots[$j]->grad_fromcolor[0] < 256 ) {
+                            $this->plots[$j]->grad_fromcolor[0] < 256 ) {
                                 // RGB Triple
                                 $fromcolor = $this->plots[$j]->grad_fromcolor;
                                 $tocolor = $this->plots[$j]->grad_tocolor;
@@ -954,15 +954,15 @@ class AccBarPlot extends BarPlot {
                             $style = $this->plots[$j]->grad_fromcolor[$i % $ng][2];
                         }
                         $grad->FilledRectangle($pts[2],$pts[3],
-                                               $pts[6],$pts[7],
-                                               $fromcolor,$tocolor,$style);
+                        $pts[6],$pts[7],
+                        $fromcolor,$tocolor,$style);
                     }
                     else {
                         $grad->FilledRectangle($pts[2],$pts[3],
-                                               $pts[6],$pts[7],
-                                               $this->plots[$j]->grad_fromcolor,
-                                               $this->plots[$j]->grad_tocolor,
-                                               $this->plots[$j]->grad_style);
+                        $pts[6],$pts[7],
+                        $this->plots[$j]->grad_fromcolor,
+                        $this->plots[$j]->grad_tocolor,
+                        $this->plots[$j]->grad_style);
                     }
                 } else {
                     if (is_array($this->plots[$j]->fill_color) ) {

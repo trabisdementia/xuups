@@ -113,14 +113,14 @@ class Xmf_Model_Read extends Xmf_Model_Abstract
     }
 
     /**
-    * Retrieve a list of objects data
-    *
-    * @param object $criteria {@link CriteriaElement} conditions to be met
-    * @param int   $limit      Max number of objects to fetch
-    * @param int   $start      Which record to start at
-    *
-    * @return array
-    */
+     * Retrieve a list of objects data
+     *
+     * @param object $criteria {@link CriteriaElement} conditions to be met
+     * @param int   $limit      Max number of objects to fetch
+     * @param int   $start      Which record to start at
+     *
+     * @return array
+     */
     function getList($criteria = null, $limit = 0, $start = 0)
     {
         $ret = array();

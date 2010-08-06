@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -43,43 +43,43 @@ function publisher_latest_news_show($options)
     $letters = $options[2];
     $selected_stories = $options[3];
     $sort = $options[7];
-	$order = publisher_getOrderBy($sort);
+    $order = publisher_getOrderBy($sort);
     $imgwidth = $options[9];
     $imgheight = $options[10];
     $border = $options[11];
     $bordercolor = $options[12];
 
-	$block['spec']['columnwidth'] = intval(1 / $column_count * 100);
+    $block['spec']['columnwidth'] = intval(1 / $column_count * 100);
 
-	$selectedcatids = explode(',', $options[26]);
+    $selectedcatids = explode(',', $options[26]);
 
     $allcats = false;
-	if (in_array(0, $selectedcatids)) {
-		$allcats = true;
-	}
+    if (in_array(0, $selectedcatids)) {
+        $allcats = true;
+    }
 
-	// creating the ITEM objects that belong to the selected category
-	if ($allcats) {
-		$criteria = null;
-	} else {
-		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('categoryid', '(' . $options[26] . ')', 'IN'));
-	}
+    // creating the ITEM objects that belong to the selected category
+    if ($allcats) {
+        $criteria = null;
+    } else {
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('categoryid', '(' . $options[26] . ')', 'IN'));
+    }
 
-	// Use specific ITEMS
-	if ($selected_stories != 0) {
+    // Use specific ITEMS
+    if ($selected_stories != 0) {
         unset($criteria); //removes category option
-		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('itemid', '(' . $selected_stories . ')', 'IN'));
-	}
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('itemid', '(' . $selected_stories . ')', 'IN'));
+    }
 
     $itemsObj = $publisher->getHandler('item')->getItems($limit, $start, array(_PUBLISHER_STATUS_PUBLISHED), -1, $sort, $order, '', true, $criteria, 'itemid');
 
     $scount = count($itemsObj);
 
     if ($scount == 0) {
-	   return false;
-	}
+        return false;
+    }
 
     $k = 0;
     $columns = array();
@@ -88,7 +88,7 @@ function publisher_latest_news_show($options)
     foreach ($itemsObj as $itemid => $itemObj) {
 
         $files = $itemObj->getFiles();
-	    $filescount = count($files);
+        $filescount = count($files);
 
         $item = array();
 
@@ -132,20 +132,20 @@ function publisher_latest_news_show($options)
         if (is_object($xoopsUser) && $xoopsUser->isAdmin(-1)) {
             $item['admin']  = "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $itemObj->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "' /></a>&nbsp;";
             $item['admin'] .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=del&amp;itemid=" . $itemObj->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/delete.gif'" . " title='" . _CO_PUBLISHER_DELETE . "' alt='" . _CO_PUBLISHER_DELETE . "' /></a>";
-		} else {
+        } else {
             $item['admin'] = '';
         }
 
         $block['topiclink'] = '';
         /*
-        if ($options[14] == 1) {
-            $block['topiclink'] = '| <a href="'.XOOPS_URL.'/modules/news/topics_directory.php">'._AM_NEWS_TOPICS_DIRECTORY.'</a> ';
-        }
-        */
+         if ($options[14] == 1) {
+         $block['topiclink'] = '| <a href="'.XOOPS_URL.'/modules/news/topics_directory.php">'._AM_NEWS_TOPICS_DIRECTORY.'</a> ';
+         }
+         */
         $block['archivelink'] = '';
         /*if ($options[15] == 1) {
-            $block['archivelink'] = '| <a href="'.XOOPS_URL.'/modules/news/archive.php">'._MB_PUBLISHER_NEWSARCHIVES.'</a> ';
-        } */
+         $block['archivelink'] = '| <a href="'.XOOPS_URL.'/modules/news/archive.php">'._MB_PUBLISHER_NEWSARCHIVES.'</a> ';
+         } */
 
 
         //TODO: Should we not show link to Anonymous?
@@ -176,7 +176,7 @@ function publisher_latest_news_show($options)
 
         $item['more'] = '';
         if ($itemObj->body() != '' || $itemObj->comments() > 0){
-      		$item['more'] = '<a href="' . $itemObj->getItemUrl() . '">' . _MB_PUBLISHER_READMORE . '</a>';
+            $item['more'] = '<a href="' . $itemObj->getItemUrl() . '">' . _MB_PUBLISHER_READMORE . '</a>';
         }
 
         $comments = $itemObj->comments();
@@ -207,8 +207,8 @@ function publisher_latest_news_show($options)
         $item['email'] = '';
         if ($options[24] == 1 && xoops_isActiveModule('tellafriend')) {
             $subject  = sprintf(_CO_PUBLISHER_INTITEMFOUND, $xoopsConfig['sitename']);
-	        $subject  = $itemObj->_convert_for_japanese($subject);
-	        $maillink = publisher_tellafriend($subject);
+            $subject  = $itemObj->_convert_for_japanese($subject);
+            $maillink = publisher_tellafriend($subject);
 
             $item['email'] = '<a href="' . $maillink . '"><img src="' . PUBLISHER_URL . '/images/links/friend.gif" title="' . _CO_PUBLISHER_MAIL . '" alt="' . _CO_PUBLISHER_MAIL . '" /></a>&nbsp;';
         }
@@ -220,7 +220,7 @@ function publisher_latest_news_show($options)
 
         $block['latestnews_scroll'] = false;
         if ($options[4] == 1) {
-		    $block['latestnews_scroll'] = true;
+            $block['latestnews_scroll'] = true;
         }
 
         $block['scrollheight'] = $options[5];
@@ -247,8 +247,8 @@ function publisher_latest_news_edit($options)
     $tabletag4 = '</td></tr>';
 
     $form  = "<table border='0' cellpadding='0' cellspacing='0'>";
-	$form .= $tabletag3 . _MB_PUBLISHER_GENERALCONFIG . $tabletag4; // General Options
-	$form .= $tabletag1 . _MB_PUBLISHER_DISP . $tabletag2;
+    $form .= $tabletag3 . _MB_PUBLISHER_GENERALCONFIG . $tabletag4; // General Options
+    $form .= $tabletag1 . _MB_PUBLISHER_DISP . $tabletag2;
     $form .= "<input type='text' name='options[]' value='" . $options[0] . "' size='4'>&nbsp;" . _MB_PUBLISHER_ITEMS . "</td></tr>";
     $form .=  $tabletag1 . _MB_PUBLISHER_COLUMNS . $tabletag2;
     $form .= "<input type='text' name='options[]' value='" . $options[1] . "' size='4'>&nbsp;" . _MB_PUBLISHER_COLUMN . "</td></tr>";
@@ -285,7 +285,7 @@ function publisher_latest_news_edit($options)
 
     $form .= "</select></td></tr>";
 
-	$form .= $tabletag3 . _MB_PUBLISHER_PHOTOSCONFIG . $tabletag4; // Photos Options
+    $form .= $tabletag3 . _MB_PUBLISHER_PHOTOSCONFIG . $tabletag4; // Photos Options
     $form .= $tabletag1 . _MB_PUBLISHER_IMGDISPLAY . $tabletag2;
     $form .= publisher_mk_chkbox($options, 8);
     $form .=  $tabletag1 . _MB_PUBLISHER_IMGWIDTH . $tabletag2;
@@ -296,7 +296,7 @@ function publisher_latest_news_edit($options)
     $form .= "<input type='text' name='options[]' value='" . $options[11] . "' size='4'>&nbsp;" . _MB_PUBLISHER_PIXEL . "</td></tr>";
     $form .=  $tabletag1 . _MB_PUBLISHER_BORDERCOLOR . $tabletag2;
     $form .= "<input type='text' name='options[]' value='" . $options[12] . "' size='8'></td></tr>";
-	$form .= $tabletag1 . _MB_PUBLISHER_IMGPOSITION . $tabletag2;
+    $form .= $tabletag1 . _MB_PUBLISHER_IMGPOSITION . $tabletag2;
     $form .= "<select name='options[]'>";
     $form .= "<option value='LEFT'";
     if ( $options[13] == 'LEFT' ) {
@@ -317,7 +317,7 @@ function publisher_latest_news_edit($options)
     $form .= '>' . _RIGHT . '</option>';
     $form .= "</select></td></tr>";
 
-	$form .= $tabletag3 . _MB_PUBLISHER_LINKSCONFIG . $tabletag4; // Links Options
+    $form .= $tabletag3 . _MB_PUBLISHER_LINKSCONFIG . $tabletag4; // Links Options
     $form .= $tabletag1 . _MB_PUBLISHER_DISPLAY_TOPICLINK . $tabletag2;
     $form .= publisher_mk_chkbox($options, 14);
     $form .= $tabletag1 . _MB_PUBLISHER_DISPLAY_ARCHIVELINK . $tabletag2;
@@ -344,8 +344,8 @@ function publisher_latest_news_edit($options)
     $form .= publisher_mk_chkbox($options, 25);
 
     //Select Which Categories To Show
-	$form .= $tabletag3 . _MB_PUBLISHER_TOPICSCONFIG . $tabletag4; // Topics Options
-	$form .= $tabletag1 . _MB_PUBLISHER_TOPICSDISPLAY . $tabletag2;
+    $form .= $tabletag3 . _MB_PUBLISHER_TOPICSCONFIG . $tabletag4; // Topics Options
+    $form .= $tabletag1 . _MB_PUBLISHER_TOPICSDISPLAY . $tabletag2;
     $form .= publisher_createCategorySelect($options[26], 0, true, 'options[26]');
     $form .= '</td></tr>';
 
@@ -355,35 +355,35 @@ function publisher_latest_news_edit($options)
 
 function publisher_mk_chkbox($options, $number)
 {
-	$chk = "";
-	if ($options[$number] == 1) {
-		$chk = " checked='checked'";
-	}
-	$chkbox = "<input type='radio' name='options[{$number}]' value='1'" . $chk . " />&nbsp;" . _YES . "&nbsp;&nbsp;";
-	$chk    = "";
-	if ($options[$number] == 0) {
-		$chk = " checked='checked'";
-	}
-	$chkbox .= "<input type='radio' name='options[{$number}]' value='0'" . $chk . " />&nbsp;" . _NO . "</td></tr>";
-	return $chkbox;
+    $chk = "";
+    if ($options[$number] == 1) {
+        $chk = " checked='checked'";
+    }
+    $chkbox = "<input type='radio' name='options[{$number}]' value='1'" . $chk . " />&nbsp;" . _YES . "&nbsp;&nbsp;";
+    $chk    = "";
+    if ($options[$number] == 0) {
+        $chk = " checked='checked'";
+    }
+    $chkbox .= "<input type='radio' name='options[{$number}]' value='0'" . $chk . " />&nbsp;" . _NO . "</td></tr>";
+    return $chkbox;
 }
 
 function publisher_mk_select($options, $number)
 {
-	$slc = "";
-	if ($options[$number] == 2) {
-		$slc = " checked='checked'";
-	}
-	$select = "<input type='radio' name='options[{$number}]' value='2'" . $slc . " />&nbsp;" . _LEFT . "&nbsp;&nbsp;";
-	$slc    = "";
-	if ($options[$number] == 1) {
-		$slc = " checked='checked'";
-	}
-	$select = "<input type='radio' name='options[{$number}]' value='1'" . $slc . " />&nbsp;" . _CENTER . "&nbsp;&nbsp;";
-	$slc    = "";
-	if ($options[$number] == 0) {
-		$slc = " checked='checked'";
-	}
-	$select .= "<input type='radio' name='options[{$number}]' value='0'" . $slc . " />&nbsp;" . _RIGHT . "</td></tr>";
-	return $select;
+    $slc = "";
+    if ($options[$number] == 2) {
+        $slc = " checked='checked'";
+    }
+    $select = "<input type='radio' name='options[{$number}]' value='2'" . $slc . " />&nbsp;" . _LEFT . "&nbsp;&nbsp;";
+    $slc    = "";
+    if ($options[$number] == 1) {
+        $slc = " checked='checked'";
+    }
+    $select = "<input type='radio' name='options[{$number}]' value='1'" . $slc . " />&nbsp;" . _CENTER . "&nbsp;&nbsp;";
+    $slc    = "";
+    if ($options[$number] == 0) {
+        $slc = " checked='checked'";
+    }
+    $select .= "<input type='radio' name='options[{$number}]' value='0'" . $slc . " />&nbsp;" . _RIGHT . "</td></tr>";
+    return $select;
 }

@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  *  Publisher form class
@@ -80,7 +80,7 @@ class PublisherFileForm extends XoopsThemeForm
 
         // itemid
         $this->addElement(new XoopsFormHidden('itemid', $this->targetObject->itemid()));
-}
+    }
 
     function createButtons()
     {

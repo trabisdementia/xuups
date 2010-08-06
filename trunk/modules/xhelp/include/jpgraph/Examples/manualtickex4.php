@@ -7,7 +7,7 @@ require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_line.php');
 require_once ('jpgraph/jpgraph_utils.inc.php');
 
-// 
+//
 // Create some random data for the plot. We use the current time for the
 // first X-position
 //
@@ -22,9 +22,9 @@ $tickLabels[0] = '0';
 for($i=1; $i/2*M_PI < 11 ; ++$i ) {
     $tickPositions[$i] = $i/2*M_PI;
     if( $i % 2 )
-	$tickLabels[$i] = $i.'/2'.SymChar::Get('pi');
+    $tickLabels[$i] = $i.'/2'.SymChar::Get('pi');
     else
-	$tickLabels[$i] = ($i/2).SymChar::Get('pi');
+    $tickLabels[$i] = ($i/2).SymChar::Get('pi');
 }
 
 $n = count($datax);

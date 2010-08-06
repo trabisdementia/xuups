@@ -28,18 +28,18 @@ function salat_getInfos() {
 
 function salat_getModuleConfig($dirname = 'salat')
 {
-	static $config;
-	if (!$config) {
-		global $xoopsModule;
-		if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $dirname) {
-			global $xoopsModuleConfig;
-			$config =& $xoopsModuleConfig;
-		} else {
-			$hModule =& xoops_gethandler('module');
-			$module = $hModule->getByDirname($dirname);
-			$hConfig =& xoops_gethandler('config');
-			$config = $hConfig->getConfigsByCat(0, $module->getVar('mid'));
-		}
-	}
-	return $config;
+    static $config;
+    if (!$config) {
+        global $xoopsModule;
+        if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $dirname) {
+            global $xoopsModuleConfig;
+            $config =& $xoopsModuleConfig;
+        } else {
+            $hModule =& xoops_gethandler('module');
+            $module = $hModule->getByDirname($dirname);
+            $hConfig =& xoops_gethandler('config');
+            $config = $hConfig->getConfigsByCat(0, $module->getVar('mid'));
+        }
+    }
+    return $config;
 }

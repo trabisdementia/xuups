@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: vars.php 2170 2008-09-23 13:40:23Z phppp $
  */
- 
+
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
@@ -24,18 +24,18 @@ require_once XOOPS_ROOT_PATH . "/modules/newbb/include/functions.session.php";
 
 // NewBB cookie structure
 /* NewBB cookie storage
-    Long term cookie: (configurable, generally one month)
-        LV - Last Visit
-        M - Menu mode
-        V - View mode
-        G - Toggle
-    Short term cookie: (same as session life time)
-        ST - Stored Topic IDs for mark
-        LP - Last Post
-        LF - Forum Last view
-        LT - Topic Last read
-        LVT - Last Visit Temp
-*/
+ Long term cookie: (configurable, generally one month)
+ LV - Last Visit
+ M - Menu mode
+ V - View mode
+ G - Toggle
+ Short term cookie: (same as session life time)
+ ST - Stored Topic IDs for mark
+ LP - Last Post
+ LF - Forum Last view
+ LT - Topic Last read
+ LVT - Last Visit Temp
+ */
 
 /* -- Cookie settings -- */
 $forumCookie['domain'] = "";

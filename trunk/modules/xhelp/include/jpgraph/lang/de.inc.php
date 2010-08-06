@@ -1,35 +1,35 @@
 <?php
 /*=======================================================================
-// File:        DE.INC.PHP
-// Description: German language file for error messages
-// Created:     2006-03-06
-// Author:      Timo Leopold (timo@leopold-hh.de)
-//              Johan Persson (ljp@localhost.nil)
-// Ver:         $Id: de.inc.php 1886 2009-10-01 23:30:16Z ljp $
-//
-// Copyright (c)
-//========================================================================
-*/
+ // File:        DE.INC.PHP
+ // Description: German language file for error messages
+ // Created:     2006-03-06
+ // Author:      Timo Leopold (timo@leopold-hh.de)
+ //              Johan Persson (ljp@localhost.nil)
+ // Ver:         $Id: de.inc.php 1886 2009-10-01 23:30:16Z ljp $
+ //
+ // Copyright (c)
+ //========================================================================
+ */
 
 // Notiz: Das Format fuer jede Fehlermeldung ist array(<Fehlermeldung>,<Anzahl der Argumente>)
 $_jpg_messages = array(
 
 /*
-** Headers wurden bereits gesendet - Fehler. Dies wird als HTML formatiert, weil es direkt als text zurueckgesendet wird
-*/
+ ** Headers wurden bereits gesendet - Fehler. Dies wird als HTML formatiert, weil es direkt als text zurueckgesendet wird
+ */
 10  => array('<table border="1"><tr><td style="color:darkred;font-size:1.2em;"><b>JpGraph Fehler:</b>
 HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zeile <b>%d</b>.</td></tr><tr><td><b>Erklärung:</b><br>HTTP header wurden bereits zum Browser gesendet, wobei die Daten als Text gekennzeichnet wurden, bevor die Bibliothek die Chance hatte, seinen Bild-HTTP-Header zum Browser zu schicken. Dies verhindert, dass die Bibliothek Bilddaten zum Browser schicken kann (weil sie vom Browser als Text interpretiert würden und daher nur Mist dargestellt würde).<p>Wahrscheinlich steht Text im Skript bevor <i>Graph::Stroke()</i> aufgerufen wird. Wenn dieser Text zum Browser gesendet wird, nimmt dieser an, dass die gesamten Daten aus Text bestehen. Such nach irgendwelchem Text, auch nach Leerzeichen und Zeilenumbrüchen, die eventuell bereits zum Browser gesendet wurden. <p>Zum Beispiel ist ein oft auftretender Fehler, eine Leerzeile am Anfang der Datei oder vor <i>Graph::Stroke()</i> zu lassen."<b>&lt;?php</b>".</td></tr></table>',2),
 
 /*
-** Setup Fehler
-*/
+ ** Setup Fehler
+ */
 11 => array('Es wurde kein Pfad für CACHE_DIR angegeben. Bitte gib einen Pfad CACHE_DIR in der Datei jpg-config.inc an.',0),
 12 => array('Es wurde kein Pfad für TTF_DIR angegeben und der Pfad kann nicht automatisch ermittelt werden. Bitte gib den Pfad in der Datei jpg-config.inc an.',0),
 13 => array('The installed PHP version (%s) is not compatible with this release of the library. The library requires at least PHP version %s',2),
 
 /*
-**  jpgraph_bar
-*/
+ **  jpgraph_bar
+ */
 
 2001 => array('Die Anzahl der Farben ist nicht gleich der Anzahl der Vorlagen in BarPlot::SetPattern().',0),
 2002 => array('Unbekannte Vorlage im Aufruf von BarPlot::SetPattern().',0),
@@ -49,20 +49,20 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 
 
 /*
-**  jpgraph_date
-*/
+ **  jpgraph_date
+ */
 
 3001 => array('Es ist nur möglich, entweder SetDateAlign() oder SetTimeAlign() zu benutzen, nicht beides!',0),
 
 /*
-**  jpgraph_error
-*/
+ **  jpgraph_error
+ */
 
 4002 => array('Fehler bei den Eingabedaten von LineErrorPlot. Die Anzahl der Datenpunkte mus ein Mehrfaches von drei sein!',0),
 
 /*
-**  jpgraph_flags
-*/
+ **  jpgraph_flags
+ */
 
 5001 => array('Unbekannte Flaggen-Größe (%d).',1),
 5002 => array('Der Flaggen-Index %s existiert nicht.',1),
@@ -71,8 +71,8 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 
 
 /*
-**  jpgraph_gantt
-*/
+ **  jpgraph_gantt
+ */
 
 6001 => array('Interner Fehler. Die Höhe für ActivityTitles ist < 0.',0),
 6002 => array('Es dürfen keine negativen Werte für die Gantt-Diagramm-Dimensionen angegeben werden. Verwende 0, wenn die Dimensionen automatisch ermittelt werden sollen.',0),
@@ -106,14 +106,14 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 6033 => array('Array of fonts must contain arrays with 3 elements, i.e. (Family, Style, Size)',0),
 
 /*
-**  jpgraph_gradient
-*/
+ **  jpgraph_gradient
+ */
 
 7001 => array('Unbekannter Gradiententyp (=%d).',1),
 
 /*
-**  jpgraph_iconplot
-*/
+ **  jpgraph_iconplot
+ */
 
 8001 => array('Der Mix-Wert für das Icon muss zwischen 0 und 100 sein.',0),
 8002 => array('Die Ankerposition für Icons muss entweder "top", "bottom", "left", "right" oder "center" sein.',0),
@@ -121,21 +121,21 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 8004 => array('Wenn Du Landesflaggen benutzen willst, musst Du die Datei "jpgraph_flags.php" hinzufügen (per include).',0),
 
 /*
-**  jpgraph_imgtrans
-*/
+ **  jpgraph_imgtrans
+ */
 
 9001 => array('Der Wert für die Bildtransformation ist außerhalb des zulässigen Bereichs. Der verschwindende Punkt am Horizont muss als Wert zwischen 0 und 1 angegeben werden.',0),
 
 /*
-**  jpgraph_lineplot
-*/
+ **  jpgraph_lineplot
+ */
 
 10001 => array('Die Methode LinePlot::SetFilled() sollte nicht mehr benutzt werden. Benutze lieber SetFillColor()',0),
 10002 => array('Der Plot ist zu kompliziert für FastLineStroke. Benutze lieber den StandardStroke()',0),
 10003 => array('Each plot in an accumulated lineplot must have the same number of data points.',0),
 /*
-**  jpgraph_log
-*/
+ **  jpgraph_log
+ */
 
 11001 => array('Deine Daten enthalten nicht-numerische Werte.',0),
 11002 => array('Negative Werte können nicht für logarithmische Achsen verwendet werden.',0),
@@ -144,8 +144,8 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 11005 => array('Das Tick-Intervall für die logarithmische Achse ist nicht definiert. Lösche jeden Aufruf von SetTextLabelStart() oder SetTextTickInterval() bei der logarithmischen Achse.',0),
 
 /*
-**  jpgraph_mgraph
-*/
+ **  jpgraph_mgraph
+ */
 
 12001 => array("Du benutzt GD 2.x und versuchst ein Nicht-Truecolor-Bild als Hintergrundbild zu benutzen. Um Hintergrundbilder mit GD 2.x zu benutzen, ist es notwendig Truecolor zu aktivieren, indem die USE_TRUECOLOR-Konstante auf TRUE gesetzt wird. Wegen eines Bugs in GD 2.0.1 ist die Qualität der Truetype-Schriften sehr schlecht, wenn man Truetype-Schriften mit Truecolor-Bildern verwendet.",0),
 12002 => array('Ungültiger Dateiname für MGraph::SetBackgroundImage() : %s. Die Datei muss eine gültige Dateierweiterung haben (jpg,gif,png), wenn die automatische Typerkennung verwendet wird.',1),
@@ -161,8 +161,8 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 12012 => array('Es konnte kein Bild erzeugt werden. Überprüfe, ob Du wirklich die GD2-Bibliothek installiert hast.',0),
 
 /*
-**  jpgraph_pie3d
-*/
+ **  jpgraph_pie3d
+ */
 
 14001 => array('Pie3D::ShowBorder(). Missbilligte Funktion. Benutze Pie3D::SetEdge(), um die Ecken der Tortenstücke zu kontrollieren.',0),
 14002 => array('PiePlot3D::SetAngle() 3D-Torten-Projektionswinkel muss zwischen 5 und 85 Grad sein.',0),
@@ -173,8 +173,8 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 14007 => array('Die Breite für das 3D-Tortendiagramm ist 0. Gib eine Breite > 0 an.',0),
 
 /*
-**  jpgraph_pie
-*/
+ **  jpgraph_pie
+ */
 
 15001 => array('PiePLot::SetTheme() Unbekannter Stil: %s',1),
 15002 => array('Argument für PiePlot::ExplodeSlice() muss ein Integer-Wert sein',0),
@@ -189,8 +189,8 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 15011 => array('Um Bildtransformationen benutzen zu können, muss die Datei jpgraph_imgtrans.php eingefügt werden (per include).',0),
 
 /*
-**  jpgraph_plotband
-*/
+ **  jpgraph_plotband
+ */
 
 16001 => array('Die Dichte für das Pattern muss zwischen 1 und 100 sein. (Du hast %f eingegeben)',1),
 16002 => array('Es wurde keine Position für das Pattern angegeben.',0),
@@ -199,8 +199,8 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 
 
 /*
-**  jpgraph_polar
-*/
+ **  jpgraph_polar
+ */
 
 17001 => array('PolarPlots müssen eine gerade Anzahl von Datenpunkten haben. Jeder Datenpunkt ist ein Tupel (Winkel, Radius).',0),
 17002 => array('Unbekannte Ausrichtung für X-Achsen-Titel. (%s)',1),
@@ -208,8 +208,8 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 17004 => array('Unbekannter Achsentyp für PolarGraph. Er muss entweder \'lin\' oder \'log\' sein.',0),
 
 /*
-**  jpgraph_radar
-*/
+ **  jpgraph_radar
+ */
 
 18001 => array('ClientSideImageMaps werden für RadarPlots nicht unterstützt.',0),
 18002 => array('RadarGraph::SupressTickMarks() sollte nicht mehr verwendet werden. Benutze stattdessen HideTickMarks().',0),
@@ -221,46 +221,46 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 18008 => array('Jeder RadarPlot muss die gleiche Anzahl von Datenpunkten haben.',0),
 
 /*
-**  jpgraph_regstat
-*/
+ **  jpgraph_regstat
+ */
 
 19001 => array('Spline: Anzahl der X- und Y-Koordinaten muss gleich sein.',0),
 19002 => array('Ungültige Dateneingabe für Spline. Zwei oder mehr aufeinanderfolgende X-Werte sind identisch. Jeder eigegebene X-Wert muss unterschiedlich sein, weil vom mathematischen Standpunkt ein Eins-zu-Eins-Mapping vorliegen muss, d.h. jeder X-Wert korrespondiert mit exakt einem Y-Wert.',0),
 19003 => array('Bezier: Anzahl der X- und Y-Koordinaten muss gleich sein.',0),
 
 /*
-**  jpgraph_scatter
-*/
+ **  jpgraph_scatter
+ */
 
 20001 => array('Fieldplots müssen die gleiche Anzahl von X und Y Datenpunkten haben.',0),
 20002 => array('Bei Fieldplots muss ein Winkel für jeden X und Y Datenpunkt angegeben werden.',0),
 20003 => array('Scatterplots müssen die gleiche Anzahl von X- und Y-Datenpunkten haben.',0),
 
 /*
-**  jpgraph_stock
-*/
+ **  jpgraph_stock
+ */
 
 21001 => array('Die Anzahl der Datenwerte für Stock-Charts müssen ein Mehrfaches von %d Datenpunkten sein.',1),
 
 /*
-**  jpgraph_plotmark
-*/
+ **  jpgraph_plotmark
+ */
 
 23001 => array('Der Marker "%s" existiert nicht in der Farbe: %d',2),
 23002 => array('Der Farb-Index ist zu hoch für den Marker "%s"',1),
 23003 => array('Ein Dateiname muss angegeben werden, wenn Du den Marker-Typ auf MARK_IMG setzt.',0),
 
 /*
-**  jpgraph_utils
-*/
+ **  jpgraph_utils
+ */
 
 24001 => array('FuncGenerator : Keine Funktion definiert. ',0),
 24002 => array('FuncGenerator : Syntax-Fehler in der Funktionsdefinition ',0),
 24003 => array('DateScaleUtils: Unknown tick type specified in call to GetTicks()',0),
 24004 => array('ReadCSV2: Die anzahl der spalten fehler in %s reihe %d',2),
 /*
-**  jpgraph
-*/
+ **  jpgraph
+ */
 
 25001 => array('Diese PHP-Installation ist nicht mit der GD-Bibliothek kompiliert. Bitte kompiliere PHP mit GD-Unterstützung neu, damit JpGraph funktioniert. (Weder die Funktion imagetypes() noch imagecreatefromstring() existiert!)',0),
 25002 => array('Diese PHP-Installation scheint nicht die benötigte GD-Bibliothek zu unterstützen. Bitte schau in der PHP-Dokumentation nach, wie man die GD-Bibliothek installiert und aktiviert.',0),
@@ -407,21 +407,21 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 25131 => array('StrokeBoxedText2() only supports TTF fonts and not built-in bitmap fonts.',0),
 
 /*
-**  jpgraph_led
-*/
+ **  jpgraph_led
+ */
 
 25500 => array('Multibyte strings must be enabled in the PHP installation in order to run the LED module so that the function mb_strlen() is available. See PHP documentation for more information.',0),
 
 
 /*
-**---------------------------------------------------------------------------------------------
-** Pro-version strings
-**---------------------------------------------------------------------------------------------
-*/
+ **---------------------------------------------------------------------------------------------
+ ** Pro-version strings
+ **---------------------------------------------------------------------------------------------
+ */
 
 /*
-**  jpgraph_table
-*/
+ **  jpgraph_table
+ */
 
 27001 => array('GTextTable: Ungültiges Argument für Set(). Das Array-Argument muss 2-- dimensional sein.',0),
 27002 => array('GTextTable: Ungültiges Argument für Set()',0),
@@ -440,8 +440,8 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 27015 => array('GTextTable: Der Zellenbildbedingungstyp muss entweder TIMG_WIDTH oder TIMG_HEIGHT sein.',0),
 
 /*
-**  jpgraph_windrose
-*/
+ **  jpgraph_windrose
+ */
 
 22001 => array('Die Gesamtsumme der prozentualen Anteile aller Windrosenarme darf 100%% nicht überschreiten!\n(Aktuell max: %d)',1),
 22002 => array('Das Bild ist zu klein für eine Skala. Bitte vergrößere das Bild.',0),
@@ -465,15 +465,15 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 22021 => array('It is only possible to add Text, IconPlot or WindrosePlot to a Windrose Graph',0),
 
 /*
-**  jpgraph_odometer
-*/
+ **  jpgraph_odometer
+ */
 
 13001 => array('Unbekannter Nadeltypstil (%d).',1),
 13002 => array('Ein Wert für das Odometer (%f) ist außerhalb des angegebenen Bereichs [%f,%f]',3),
 
 /*
-**  jpgraph_barcode
-*/
+ **  jpgraph_barcode
+ */
 
 1001 => array('Unbekannte Kodier-Specifikation: %s',1),
 1002 => array('datenvalidierung schlug fehl. [%s] kann nicht mittels der Kodierung "%s" kodiert werden',2),
@@ -488,8 +488,8 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 1011 => array('Nicht untrstütztes Barcode-Backend für den Typ %s',1),
 
 /*
-** PDF417
-*/
+ ** PDF417
+ */
 
 26000 => array('PDF417: The PDF417 module requires that the PHP installation must support the function bcmod(). This is normally enabled at compile time. See documentation for more information.',0),
 26001 => array('PDF417: Die Anzahl der Spalten muss zwischen 1 und 30 sein.',0),
@@ -511,8 +511,8 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 
 
 /*
-** jpgraph_contour
-*/
+ ** jpgraph_contour
+ */
 
 28001 => array('Dritten parameter fur Contour muss ein vector der fargen sind.',0),
 28002 => array('Die anzahlen der farges jeder isobar linien muss gleich sein.',0),
@@ -525,7 +525,7 @@ HTTP header wurden bereits gesendet.<br>Fehler in der Datei <b>%s</b> in der Zei
 
 /*
  * jpgraph_matrix and colormap
-*/
+ */
 29201 => array('Min range value must be less or equal to max range value for colormaps',0),
 29202 => array('The distance between min and max value is too small for numerical precision',0),
 29203 => array('Number of color quantification level must be at least %d',1),

@@ -7,7 +7,7 @@ require_once ('jpgraph/jpgraph_line.php');
 DEFINE('NDATAPOINTS',500);
 
 // Assume data points are sample every 10th second
-DEFINE('SAMPLERATE',10); 
+DEFINE('SAMPLERATE',10);
 
 // Callback formatting function for the X-scale to convert timestamps
 // to hour and minutes.

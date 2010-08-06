@@ -57,11 +57,11 @@ class Xmf_Object_Form extends Xmf_Form_Theme
      * @todo to be implented later...
      */
     /*
-    function addCaptcha() {
-        include_once(SMARTOBJECT_ROOT_PATH . 'include/captcha/formcaptcha.php');
-        $this->addElement(new XoopsFormCaptcha(), true);
-    }
-    */
+     function addCaptcha() {
+     include_once(SMARTOBJECT_ROOT_PATH . 'include/captcha/formcaptcha.php');
+     $this->addElement(new XoopsFormCaptcha(), true);
+     }
+     */
 
     /**
      * Sets variables for adding custom button
@@ -82,10 +82,10 @@ class Xmf_Object_Form extends Xmf_Form_Theme
     /**
      * Add an element to the form
      *
-   * @param object  &$formElement   reference to a {@link XoopsFormElement}
-   * @param string  $key            encrypted key string for the form
-   * @param string  $var            some form variables?
-   * @param bool    $required       is this a "required" element?
+     * @param object  &$formElement   reference to a {@link XoopsFormElement}
+     * @param string  $key            encrypted key string for the form
+     * @param string  $var            some form variables?
+     * @param bool    $required       is this a "required" element?
      */
     function addElement(&$formElement, $key=false, $var=false, $required='notset'){
         if ($key) {
@@ -122,10 +122,10 @@ class Xmf_Object_Form extends Xmf_Form_Theme
     /**
      * Adds an element to the form
      *
-   * gets all variables from &targetobject (@todo, which object will be passed here?)
+     * gets all variables from &targetobject (@todo, which object will be passed here?)
      * that was set during the construction of this object (in the constructor)
-   * loops through all variables and determines what data type the key has
-   * adds an element for each key based on the datatype
+     * loops through all variables and determines what data type the key has
+     * adds an element for each key based on the datatype
      */
     function createElements()
     {
@@ -150,9 +150,9 @@ class Xmf_Object_Form extends Xmf_Form_Theme
                 }
                 if ($control = $this->targetObject->getVarControl($key)) {
                     /* If the control has name, it's because it's an object already present in the script
-                    * for example, "user"
-                    * If the field does not have a name, than we will use a "select" (ie XoopsFormSelect)
-                    */
+                     * for example, "user"
+                     * If the field does not have a name, than we will use a "select" (ie XoopsFormSelect)
+                     */
                     if (!isset($control['name']) || !$control['name']) {
                         $control['name'] = 'select';
                     }
@@ -183,21 +183,21 @@ class Xmf_Object_Form extends Xmf_Form_Theme
                             $this->targetObject->setControl($key, array(
                                 'name' => 'text',
                                 'size' => '5'
-                            ));
-                            $form_text = $this->getControl("text", $key);
-                            $this->addElement($form_text, $key, $var);
-                            unset($form_text);
-                            break;
+                                ));
+                                $form_text = $this->getControl("text", $key);
+                                $this->addElement($form_text, $key, $var);
+                                unset($form_text);
+                                break;
 
                         case 'float':
                             $this->targetObject->setControl($key, array(
                                 'name' => 'text',
                                 'size' => '5'
-                            ));
-                            $form_text = $this->getControl("text", $key);
-                            $this->addElement($form_text, $key, $var);
-                            unset($form_text);
-                            break;
+                                ));
+                                $form_text = $this->getControl("text", $key);
+                                $this->addElement($form_text, $key, $var);
+                                unset($form_text);
+                                break;
 
                         case 'ltime':
                             $form_date_time = $this->getControl('datetime', $key);
@@ -221,11 +221,11 @@ class Xmf_Object_Form extends Xmf_Form_Theme
                             $this->targetObject->setControl($key, array(
                                 'name' => 'text',
                                 'size' => '15'
-                            ));
-                            $form_currency = $this->getControl("text", $key);
-                            $this->addElement($form_currency, $key, $var);
-                            unset($form_currency);
-                            break;
+                                ));
+                                $form_currency = $this->getControl("text", $key);
+                                $this->addElement($form_currency, $key, $var);
+                                unset($form_currency);
+                                break;
 
                         case 'urllink':
                             $form_urllink = $this->getControl("urllink", $key);
@@ -275,30 +275,30 @@ class Xmf_Object_Form extends Xmf_Form_Theme
      * Creates Permission Controls
      */
     /*function createPermissionControls() {
-        $xoopsModuleConfig = $this->targetObject->handler->getModuleConfig();
-        /*
-         $permissions = $this->targetObject->handler->getPermissions();
+     $xoopsModuleConfig = $this->targetObject->handler->getModuleConfig();
+     /*
+     $permissions = $this->targetObject->handler->getPermissions();
 
-         if ($permissions) {
-         $member_handler = &xoops_gethandler('member');
-         $group_list = $member_handler->getGroupList();
-         asort($group_list);
-         foreach($permissions as $permission) {
-         $groups_value = false;
-         if ($this->targetObject->isNew()) {
-         if (isset($xoopsModuleConfig['def_perm_' . $permission['perm_name']])) {
-         $groups_value = $xoopsModuleConfig['def_perm_' . $permission['perm_name']];
-         }
-         } else {
-         $groups_value = $this->targetObject->getGroupPerm($permission['perm_name']);
-         }
-         $groups_select = new XoopsFormSelect($permission['caption'], $permission['perm_name'], $groups_value, 4, true);
-         $groups_select->setDescription($permission['description']);
-         $groups_select->addOptionArray($group_list);
-         $this->addElement($groups_select);
-         unset($groups_select);
-         }
-         }   */
+     if ($permissions) {
+     $member_handler = &xoops_gethandler('member');
+     $group_list = $member_handler->getGroupList();
+     asort($group_list);
+     foreach($permissions as $permission) {
+     $groups_value = false;
+     if ($this->targetObject->isNew()) {
+     if (isset($xoopsModuleConfig['def_perm_' . $permission['perm_name']])) {
+     $groups_value = $xoopsModuleConfig['def_perm_' . $permission['perm_name']];
+     }
+     } else {
+     $groups_value = $this->targetObject->getGroupPerm($permission['perm_name']);
+     }
+     $groups_select = new XoopsFormSelect($permission['caption'], $permission['perm_name'], $groups_value, 4, true);
+     $groups_select->setDescription($permission['description']);
+     $groups_select->addOptionArray($group_list);
+     $this->addElement($groups_select);
+     unset($groups_select);
+     }
+     }   */
     /*}*/
 
     /**
@@ -453,16 +453,16 @@ class Xmf_Object_Form extends Xmf_Form_Theme
             case 'hidden':
                 return new Xmf_Form_Element_Hidden($key, $this->targetObject->vars[$key]['value']);
                 break;
-            /*case 'readonly';
-                $control =  new Xmf_Form_Element_Hidden($key, $this->targetObject->vars[$key]['value']);
-                $control->setExtra('disabled="disabled"');
-                $control->setName($key . '-readonly');
-                return $control;
-                break;*/
+                /*case 'readonly';
+                 $control =  new Xmf_Form_Element_Hidden($key, $this->targetObject->vars[$key]['value']);
+                 $control->setExtra('disabled="disabled"');
+                 $control->setName($key . '-readonly');
+                 return $control;
+                 break;*/
             default:
                 $classname = "Xmf_Object_Form_Element_" . ucfirst($controlName)."";
-            return new $classname($this->targetObject, $key);
-            break;
+                return new $classname($this->targetObject, $key);
+                break;
         }
     }
 
@@ -650,7 +650,7 @@ class Xmf_Object_Form extends Xmf_Form_Theme
 
             }else{
                 $js .= "if ( myform.{$eltname}.value == \"\" ) "
-                    . "{ window.alert(\"{$eltmsg}\"); myform.{$eltname}.focus(); return false; }\n";
+                . "{ window.alert(\"{$eltmsg}\"); myform.{$eltname}.focus(); return false; }\n";
             }
         }
         // Now, handle custom validation code
@@ -676,10 +676,10 @@ class Xmf_Object_Form extends Xmf_Form_Theme
         $elements = $this->getRequired();
         foreach ( $elements as $elt ) {
             if(!empty($rules))
-                $rules .= ",";
+            $rules .= ",";
             $rules .= '\''.$elt->getName().'\': { required: true }';
             if(!empty($titles))
-                $titles .= ",";
+            $titles .= ",";
             $titles .= $elt->getName().': "'._REQUIRED.'"';
         }
         $xoTheme->addScript('', array('type' => 'text/javascript'), 'alert($());$().ready(function() { $("#'.$this->getName().'").validate({

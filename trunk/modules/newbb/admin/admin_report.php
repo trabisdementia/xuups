@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -35,14 +35,14 @@ switch ($op) {
         foreach ($report_ids as $rid => $value) {
             if (!$value) continue;
             $report_obj = $report_handler->get($rid);
-            $report_obj->setVar("report_result", 1);                    
-            $report_obj->setVar("report_memo", $report_memos[$rid]);                    
+            $report_obj->setVar("report_result", 1);
+            $report_obj->setVar("report_memo", $report_memos[$rid]);
             $report_handler->insert($report_obj);
         }
         redirect_header( "admin_report.php?item={$item}" . (empty($start) ? "" : "&start={$start}"), 1);
 
         break;
-        
+
     case "delete":
         $report_ids = $_POST['report_id'];
         foreach ($report_ids as $rid => $value) {
@@ -59,7 +59,7 @@ switch ($op) {
     default:
         include_once XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar("dirname", "n") . "/class/xoopsformloader.php";
         require_once XOOPS_ROOT_PATH . "/modules/newbb/include/functions.user.php";
-        
+
         if ($item != 'processed') {
             $process_result = 0;
             $item_other = 'processed';

@@ -5,7 +5,7 @@ require_once ('jpgraph/jpgraph_line.php');
 
 $datay=array(5,3,11,6,3);
 
-$graph = new Graph(400,300,'auto');	
+$graph = new Graph(400,300,'auto');
 $graph->SetScale("textlin");
 
 $graph->title->Set('Images on top of bars');

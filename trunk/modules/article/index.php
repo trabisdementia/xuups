@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,10 +16,10 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: index.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
-/* 
+/*
  * Set groups for cache purposes
  * Group-based cache is available with XOOPS 2.2*
  * Will be re-implemented in 2.30+
@@ -39,7 +39,7 @@ $xoopsOption["xoops_module_header"] = $xoops_module_header;
 include_once XOOPS_ROOT_PATH . "/header.php";
 include XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar("dirname") . "/include/vars.php";
 
-// Dispatch upon templates 
+// Dispatch upon templates
 if (!empty($xoopsModuleConfig["template"]) && "default" != $xoopsModuleConfig["template"]) {
     if (@include XOOPS_ROOT_PATH . "/modules/" . $xoopsModule->getVar("dirname") . "/index." . $xoopsModuleConfig["template"] . ".php") {
         include "footer.php";
@@ -60,7 +60,7 @@ $categories_id = array();
 $categories_obj = $category_handler->getChildCategories();
 if (!empty($categories_obj)):
 $categories_id = array_keys($categories_obj);
-if ( !empty($xoopsModuleConfig["articles_category"]) ) { 
+if ( !empty($xoopsModuleConfig["articles_category"]) ) {
     foreach ($categories_obj as $id => $cat_obj) {
         $articles_category_id = array_merge($articles_category_id, $category_handler->getLastArticleIds($cat_obj, $xoopsModuleConfig["articles_category"]));
     }
@@ -132,7 +132,7 @@ foreach (array_keys($articles_obj) as $id) {
         "image"        => $articles_obj[$id]->getImage(),
         "counter"    => $articles_obj[$id]->getVar("art_counter"),
         "summary"    => $articles_obj[$id]->getSummary( !empty($xoopsModuleConfig["display_summary"]) )
-        );
+    );
     $cats = $articles_obj[$id]->getCategories();
     foreach ($cats as $catid) {
         if ($catid==0 || !isset($categories_obj[$catid])) continue;
@@ -221,7 +221,7 @@ if (count($categories_obj) > 0) {
         $topics[] = array(
             "id"     => $topic->getVar("top_id"),
             "title" => $topic->getVar("top_title")
-            //"description" =>  $topic->getVar("top_description")
+        //"description" =>  $topic->getVar("top_description")
         );
     }
     unset($topics_obj);

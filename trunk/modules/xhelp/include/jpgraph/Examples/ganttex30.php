@@ -28,46 +28,46 @@ $graph->scale->year->SetFont(FF_ARIAL,FS_BOLD,12);
 
 // Setup some data for the gantt bars
 $data = array(
-        array(0,"Group 1", "2001-10-29","2001-11-27",FF_FONT1,FS_BOLD,8),
-        array(1,"  Label 2", "2001-11-8","2001-12-14"),
-        array(2,"  Label 3", "2001-11-01","2001-11-8"),
-        array(4,"Group 2", "2001-11-07","2001-12-19",FF_FONT1,FS_BOLD,8),
-        array(5,"  Label 4", "2001-11-8","2001-12-19"),
-        array(6,"  Label 5", "2001-11-01","2001-11-8")
-        );
+array(0,"Group 1", "2001-10-29","2001-11-27",FF_FONT1,FS_BOLD,8),
+array(1,"  Label 2", "2001-11-8","2001-12-14"),
+array(2,"  Label 3", "2001-11-01","2001-11-8"),
+array(4,"Group 2", "2001-11-07","2001-12-19",FF_FONT1,FS_BOLD,8),
+array(5,"  Label 4", "2001-11-8","2001-12-19"),
+array(6,"  Label 5", "2001-11-01","2001-11-8")
+);
 
 for($i=0; $i<count($data); ++$i) {
-        $bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[50%]",0.5);
-        if( count($data[$i])>4 )
-                $bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
+    $bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[50%]",0.5);
+    if( count($data[$i])>4 )
+    $bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
 
-        // If you like each bar can have a shadow
-        // $bar->SetShadow(true,"darkgray");
+    // If you like each bar can have a shadow
+    // $bar->SetShadow(true,"darkgray");
 
-        // For illustration lets make each bar be red with yellow diagonal stripes
-        $bar->SetPattern(BAND_RDIAG,"yellow");
-        $bar->SetFillColor("red");
+    // For illustration lets make each bar be red with yellow diagonal stripes
+    $bar->SetPattern(BAND_RDIAG,"yellow");
+    $bar->SetFillColor("red");
 
-        // To indicate progress each bar can have a smaller bar within
-        // For illustrative purpose just set the progress to 50% for each bar
-        $bar->progress->Set(0.5);
+    // To indicate progress each bar can have a smaller bar within
+    // For illustrative purpose just set the progress to 50% for each bar
+    $bar->progress->Set(0.5);
 
-        // Each bar may also have optional left and right plot marks
-        // As illustration lets put a filled circle with a number at the end
-        // of each bar
-        $bar->rightMark->SetType(MARK_FILLEDCIRCLE);
-        $bar->rightMark->SetFillColor("red");
-        $bar->rightMark->SetColor("red");
-        $bar->rightMark->SetWidth(10);
+    // Each bar may also have optional left and right plot marks
+    // As illustration lets put a filled circle with a number at the end
+    // of each bar
+    $bar->rightMark->SetType(MARK_FILLEDCIRCLE);
+    $bar->rightMark->SetFillColor("red");
+    $bar->rightMark->SetColor("red");
+    $bar->rightMark->SetWidth(10);
 
-        // Title for the mark
-        $bar->rightMark->title->Set("".$i+1);
-        $bar->rightMark->title->SetColor("white");
-        $bar->rightMark->title->SetFont(FF_ARIAL,FS_BOLD,10);
-        $bar->rightMark->Show();
+    // Title for the mark
+    $bar->rightMark->title->Set("".$i+1);
+    $bar->rightMark->title->SetColor("white");
+    $bar->rightMark->title->SetFont(FF_ARIAL,FS_BOLD,10);
+    $bar->rightMark->Show();
 
-        // ... and add the bar to the gantt chart
-        $graph->Add($bar);
+    // ... and add the bar to the gantt chart
+    $graph->Add($bar);
 }
 
 // Create a milestone mark

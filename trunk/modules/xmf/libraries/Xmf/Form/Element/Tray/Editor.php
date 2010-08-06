@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * A select box with available editors
@@ -23,43 +23,43 @@
 
 class Xmf_Form_Element_Tray_Editor extends Xmf_Form_Element_Tray
 {
-	var $allowed_editors = array();
-	var $form;
-	var $value;
-	var $name;
-	var $nohtml;
+    var $allowed_editors = array();
+    var $form;
+    var $value;
+    var $name;
+    var $nohtml;
 
-	/**
-	 * Constructor
-	 *
-	 * @param	object	$form	the form calling the editor selection
-	 * @param	string	$name	editor name
-	 * @param	string	$value	Pre-selected text value
+    /**
+     * Constructor
+     *
+     * @param	object	$form	the form calling the editor selection
+     * @param	string	$name	editor name
+     * @param	string	$value	Pre-selected text value
      * @param	bool	$noHtml	dohtml disabled
-	 */
-	function __construct(&$form, $name = "editor", $value = null, $nohtml = false, $allowed_editors = array())
-	{
-		parent::__construct(_SELECT);
-		$this->allowed_editors = $allowed_editors;
-		$this->form		=& $form;
-		$this->name		= $name;
-		$this->value	= $value;
-		$this->nohtml	= $nohtml;
-	}
+     */
+    function __construct(&$form, $name = "editor", $value = null, $nohtml = false, $allowed_editors = array())
+    {
+        parent::__construct(_SELECT);
+        $this->allowed_editors = $allowed_editors;
+        $this->form		=& $form;
+        $this->name		= $name;
+        $this->value	= $value;
+        $this->nohtml	= $nohtml;
+    }
 
-	function render()
-	{
-		$editor_handler = Xmf_Form_Element_Editor_Handler::getInstance();
-		$editor_handler->allowed_editors = $this->allowed_editors;
-		$option_select = new Xmf_Form_Element_Select("", $this->name, $this->value);
-		$extra = 'onchange="if(this.options[this.selectedIndex].value.length > 0 ){
+    function render()
+    {
+        $editor_handler = Xmf_Form_Element_Editor_Handler::getInstance();
+        $editor_handler->allowed_editors = $this->allowed_editors;
+        $option_select = new Xmf_Form_Element_Select("", $this->name, $this->value);
+        $extra = 'onchange="if(this.options[this.selectedIndex].value.length > 0 ){
 			window.document.forms.'.$this->form->getName().'.submit();
 			}"';
-		$option_select->setExtra($extra);
-		$option_select->addOptionArray($editor_handler->getList($this->nohtml));
+        $option_select->setExtra($extra);
+        $option_select->addOptionArray($editor_handler->getList($this->nohtml));
 
-		$this->addElement($option_select);
+        $this->addElement($option_select);
 
-		return parent::render();
-	}
+        return parent::render();
+    }
 }

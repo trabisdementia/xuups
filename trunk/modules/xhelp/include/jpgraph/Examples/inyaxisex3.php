@@ -27,7 +27,7 @@ for($i=0; $i<$n; ++$i) {
 $graph = new Graph(400,300);
 $graph->SetScale("linlin");
 $graph->SetY2Scale("lin");
-$graph->SetMargin(50,50,60,40);	
+$graph->SetMargin(50,50,60,40);
 $graph->SetMarginColor('darkblue');
 $graph->SetColor('darkblue');
 

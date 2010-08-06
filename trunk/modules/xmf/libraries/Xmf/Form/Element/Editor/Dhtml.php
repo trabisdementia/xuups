@@ -3,7 +3,7 @@
  * Formatted textarea form
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,12 +17,12 @@
  * @author          Kazumi Ono <onokazu@xoops.org>
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id$
- */ 
+ */
 
 
 class Xmf_Form_Element_Editor_Dhtml extends Xmf_Form_Element_Editor
 {
-     /**
+    /**
      * Extended HTML editor
      *
      * <p>If an extended HTML editor is set, the renderer will be replaced by the specified editor, usually a visual or WYSIWYG editor.</p>
@@ -53,15 +53,15 @@ class Xmf_Form_Element_Editor_Dhtml extends Xmf_Form_Element_Editor
      * @access    private
      */
     var $_hiddenText = "xoopsHiddenText";
-    
+
     function __construct($options = array())
     {
         //parent::__construct($options);
         $this->rootPath .= "/" . basename(dirname(__FILE__));
         $hiddenText = isset($this->configs["hiddenText"]) ? $this->configs["hiddenText"] : $this->_hiddenText;
-   }
-    
-      /**
+    }
+
+    /**
      * Prepare HTML for output
      *
      * @return    string  HTML

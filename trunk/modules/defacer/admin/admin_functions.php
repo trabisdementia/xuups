@@ -72,5 +72,5 @@ function defacer_adminMenu($currentoption = 0, $breadcrumb = '')
     echo "<li id='" . $tblColors[3] . "'><a href=\"admin_permission.php\"\"><span>" . _MI_DEFACER_PERMISSIONMANAGER . "</span></a></li>\n";
     echo "<li id='" . $tblColors[4] . "'><a href=\"admin_about.php\"\"><span>" . _MI_DEFACER_ABOUT . "</span></a></li>\n";
     echo "</ul></div><div>&nbsp;</div>";
-    }
+}
 ?>

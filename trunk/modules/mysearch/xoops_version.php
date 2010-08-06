@@ -24,7 +24,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 if (!defined('XOOPS_ROOT_PATH')) {
-	die('XOOPS root path not defined');
+    die('XOOPS root path not defined');
 }
 
 $modversion['name'] = _MI_MYSEARCH_NAME;
@@ -119,7 +119,7 @@ $modversion['hasComments'] = 0;
 
 /**
  * Show last searches on the module's index page ?
-*/
+ */
 $i = 0;
 $i++;
 $modversion['config'][$i]['name'] = 'showindex';
@@ -131,7 +131,7 @@ $modversion['config'][$i]['default'] = 10;
 
 /**
  * Groups that should not be recorded
-*/
+ */
 $member_handler =& xoops_gethandler('member');
 $i++;
 $modversion['config'][$i]['name'] = 'bannedgroups';
@@ -144,7 +144,7 @@ $modversion['config'][$i]['options'] = array_flip($member_handler->getGroupList(
 
 /**
  * How many keywords to see at a time in the admin's part of the module ?
-*/
+ */
 $i++;
 $modversion['config'][$i]['name'] = 'admincount';
 $modversion['config'][$i]['title'] = '_MI_MYSEARCH_OPT2';

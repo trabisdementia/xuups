@@ -19,13 +19,13 @@ require_once(XHELP_CLASS_PATH.'/mailboxPOP3.php');
  * @access public
  * @package xhelp
  */
-class xhelpDepartmentMailBox extends XoopsObject 
+class xhelpDepartmentMailBox extends XoopsObject
 {
     var $_mBox;
     var $_errors;
     var $_msgCount;
     var $_curMsg;
-    
+
     /**
      * Class Constructor
      *
@@ -33,28 +33,28 @@ class xhelpDepartmentMailBox extends XoopsObject
      * @access public
      * @return void
      */
-    function xhelpDepartmentMailBox($id = null) 
+    function xhelpDepartmentMailBox($id = null)
     {
 
-      $this->initVar('id', XOBJ_DTYPE_INT, null, false);
-      $this->initVar('emailaddress',XOBJ_DTYPE_TXTBOX, null, false, 255);
-      $this->initVar('departmentid', XOBJ_DTYPE_INT, null, true);
-      $this->initVar('server', XOBJ_DTYPE_TXTBOX, null, false, 50);
-      $this->initVar('serverport', XOBJ_DTYPE_INT, null, false);
-      $this->initVar('username', XOBJ_DTYPE_TXTBOX, null, false, 50);
-      $this->initVar('password', XOBJ_DTYPE_TXTBOX, null, false, 50);
-      $this->initVar('priority', XOBJ_DTYPE_INT, null, false);
-      $this->initVar('mboxtype', XOBJ_DTYPE_INT, _XHELP_MAILBOXTYPE_POP3, false);
-      $this->initVar('active', XOBJ_DTYPE_INT, true, true);
-      
-      if (isset($id)) {
-       if (is_array($id)) {
-         $this->assignVars($id);
-       }
-      } else {
-        $this->setNew();
-      }
-      $this->_errors = array();
+        $this->initVar('id', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('emailaddress',XOBJ_DTYPE_TXTBOX, null, false, 255);
+        $this->initVar('departmentid', XOBJ_DTYPE_INT, null, true);
+        $this->initVar('server', XOBJ_DTYPE_TXTBOX, null, false, 50);
+        $this->initVar('serverport', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('username', XOBJ_DTYPE_TXTBOX, null, false, 50);
+        $this->initVar('password', XOBJ_DTYPE_TXTBOX, null, false, 50);
+        $this->initVar('priority', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('mboxtype', XOBJ_DTYPE_INT, _XHELP_MAILBOXTYPE_POP3, false);
+        $this->initVar('active', XOBJ_DTYPE_INT, true, true);
+
+        if (isset($id)) {
+            if (is_array($id)) {
+                $this->assignVars($id);
+            }
+        } else {
+            $this->setNew();
+        }
+        $this->_errors = array();
     }
 
     /**
@@ -62,7 +62,7 @@ class xhelpDepartmentMailBox extends XoopsObject
      *
      * @return bool True if connected, False on Errors
      * @access public
-     */    
+     */
     function connect()
     {
         //Create an instance of the Proper xhelpMailBox object
@@ -76,7 +76,7 @@ class xhelpDepartmentMailBox extends XoopsObject
             $this->setErrors(_XHELP_MAILEVENT_DESC0);
             return false;
         }
-        
+
         if (!$this->_mBox->login($this->getVar('username'), $this->getVar('password'))) {
             $this->setErrors(_XHELP_MBOX_ERR_LOGIN);
             return false;
@@ -84,20 +84,20 @@ class xhelpDepartmentMailBox extends XoopsObject
         //Reset Message Pointer/Message Count
         unset ($this->_msgCount);
         $this->_curMsg = 0;
-        
+
         return true;
     }
-    
+
     function disconnect()
     {
         return ($this->_mBox->disconnect());
     }
-    
+
     function hasMessages()
     {
         return ($this->messageCount() > 0);
     }
-    
+
     function &getMessage()
     {
         $msg = array();
@@ -108,12 +108,12 @@ class xhelpDepartmentMailBox extends XoopsObject
         $msg['index']   = $this->_curMsg;
         //$msg['headers'] = $this->_mBox->getHeaders($this->_curMsg);
         $msg['msg']     = $this->_mBox->getMsg($this->_curMsg);
-        
+
         //$msg['body']     = $this->_mBox->getBody($this->_curMsg);
-        
-        return $msg;        
+
+        return $msg;
     }
-    
+
     function messageCount()
     {
         if (! isset($this->_msgCount) ) {
@@ -126,17 +126,17 @@ class xhelpDepartmentMailBox extends XoopsObject
     function _getMailBox($mboxType)
     {
         switch ($mboxType) {
-        case _XHELP_MAILBOXTYPE_IMAP:
-            return new xhelpMailBoxIMAP;
-            break;
-        case _XHELP_MAILBOXTYPE_POP3:
-            return new xhelpMailBoxPOP3;
-            break;
-        default:
-            return false;
-        } 
+            case _XHELP_MAILBOXTYPE_IMAP:
+                return new xhelpMailBoxIMAP;
+                break;
+            case _XHELP_MAILBOXTYPE_POP3:
+                return new xhelpMailBoxPOP3;
+                break;
+            default:
+                return false;
+        }
     }
-    
+
     function deleteMessage($msg)
     {
         if (is_array($msg)) {
@@ -146,13 +146,13 @@ class xhelpDepartmentMailBox extends XoopsObject
         } else {
             $msgid = intval($msg);
         }
-        
+
         if (!isset($msgid)) {
             return false;
         }
-        
+
         return $this->_mBox->deleteMessage($msgid);
-    }  
+    }
 }
 
 /**
@@ -165,7 +165,7 @@ class xhelpDepartmentMailBox extends XoopsObject
  * @access public
  * @package xhelp
  */
-class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler 
+class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
 {
     /**
      * Name of child class
@@ -182,7 +182,7 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
      * @access private
      */
     var $_dbtable = 'xhelp_department_mailbox';
-    
+
     /**
      * Constructor
      *
@@ -192,7 +192,7 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
     {
         parent::init($db);
     }
-    
+
     /**
      * retrieve server list by department
      * @param int $depid department id
@@ -213,14 +213,14 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
             }
         }
     }
-    
+
     function &getActiveMailboxes()
     {
         $crit = new Criteria('active', 1);
         $ret =& $this->getObjects($crit);
         return $ret;
     }
-    
+
     /**
      * creates new email server entry for department
      *
@@ -232,7 +232,7 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
         $server->setVar('departmentid', $depid);
         return $this->insert($server);
     }
-    
+
     /**
      * remove an email server
      *
@@ -247,10 +247,10 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
         $hMailEvent =& xhelpGetHandler('mailEvent');
         $crit = new Criteria('mbox_id', $obj->getVar('id'));
         $hMailEvent->deleteAll($crit);
-        
+
         $ret = parent::delete($obj, $force);
         return $ret;
-        
+
     }
 
     function _insertQuery(&$obj)
@@ -259,26 +259,26 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
         foreach ($obj->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-        
+
         $sql = sprintf( 'insert into %s (id, departmentid, server, serverport, username, password, priority, emailaddress, mboxtype, active) values (%u, %u, %s, %u, %s, %s, %u, %s, %u, %u)',
-            $this->_db->prefix($this->_dbtable), $id, $departmentid, $this->_db->quoteString($server), $serverport, $this->_db->quoteString($username), $this->_db->quoteString($password), $priority, $this->_db->quoteString($emailaddress), $mboxtype, $active);
-        
-        return $sql;            
+        $this->_db->prefix($this->_dbtable), $id, $departmentid, $this->_db->quoteString($server), $serverport, $this->_db->quoteString($username), $this->_db->quoteString($password), $priority, $this->_db->quoteString($emailaddress), $mboxtype, $active);
+
+        return $sql;
     }
-    
+
     function _updateQuery(&$obj)
     {
         // Copy all object vars into local variables
         foreach ($obj->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-                
+
         $sql = sprintf( 'UPDATE %s set departmentid = %u, server = %s, serverport = %u, username = %s, password = %s, priority = %u, emailaddress = %s, mboxtype = %u, active = %u where id = %u',
-                $this->_db->prefix($this->_dbtable), $departmentid, $this->_db->quoteString($server), $serverport, $this->_db->quoteString($username), $this->_db->quoteString($password), $priority, $this->_db->quoteString($emailaddress), $mboxtype, $active, $id);
+        $this->_db->prefix($this->_dbtable), $departmentid, $this->_db->quoteString($server), $serverport, $this->_db->quoteString($username), $this->_db->quoteString($password), $priority, $this->_db->quoteString($emailaddress), $mboxtype, $active, $id);
 
         return $sql;
     }
-    
+
     function _deleteQuery(&$obj)
     {
         $sql = sprintf('DELETE FROM %s WHERE id = %u', $this->_db->prefix($this->_dbtable), $obj->getVar('id'));

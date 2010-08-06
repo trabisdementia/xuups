@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -80,7 +80,7 @@ function newbb_getButton($link, $button, $alt = "", $asImage = true, $extra = "c
     } else {
         $button = "<input type='button' name='{$button}' {$extra} value='{$alt}' onclick='window.location.href={$link}' />";
     }
-    
+
     return $button;
 }
 
@@ -107,17 +107,17 @@ function newbb_getIconHandler()
 {
     global $xoTheme, $xoopsConfig;
     static $icon_handler;
-    
+
     if (isset($icon_handler)) return $icon_handler;
 
     if (!class_exists("NewbbIconHandler")) {
         require_once dirname(dirname(__FILE__)) . "/class/icon.php";
     }
-    
+
     $icon_handler = NewbbIconHandler::instance();
     $icon_handler->template =& $xoTheme->template;
     $icon_handler->init($xoopsConfig["language"]);
-    
+
     return $icon_handler;
 }
 ?>

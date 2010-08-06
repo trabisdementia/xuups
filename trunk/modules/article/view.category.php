@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: view.category.php 2283 2008-10-12 03:36:13Z phppp $
  */
- 
+
 include "header.php";
 
 /**
@@ -76,9 +76,9 @@ if (!empty($REQUEST_URI_parsed)) {
     if (!empty($list)) {
         $args_REQUEST_URI[] = "list=1";
     }
-    $_SERVER["REQUEST_URI"] = substr($_SERVER["REQUEST_URI"], 0, strpos($_SERVER["REQUEST_URI"], "/modules/" . $GLOBALS["artdirname"] . "/view.category.php")) . 
+    $_SERVER["REQUEST_URI"] = substr($_SERVER["REQUEST_URI"], 0, strpos($_SERVER["REQUEST_URI"], "/modules/" . $GLOBALS["artdirname"] . "/view.category.php")) .
         "/modules/" . $GLOBALS["artdirname"] . "/view.category.php" .
-        (empty($args_REQUEST_URI) ? "" : "?" . implode("&", $args_REQUEST_URI));
+    (empty($args_REQUEST_URI) ? "" : "?" . implode("&", $args_REQUEST_URI));
 }
 
 // Disable cache for category moderators since we don't have proper cache handling way for them
@@ -109,7 +109,7 @@ if (empty($list) && empty($featured)) {
             "title"            => $cat->getVar("cat_title"),
             "articles"        => @intval($counts_article[$cat->getVar("cat_id")]),
             "categories"    => @intval($counts_category[$cat->getVar("cat_id")])
-            );
+        );
     }
     unset($criteria);
     $criteria = new CriteriaCompo(new Criteria("ac.ac_feature", 0, ">"));
@@ -179,7 +179,7 @@ foreach ($articles_id as $id) {
         "counter"    => $articles_obj[$id]->getVar("art_counter"),
         "comments"    => $articles_obj[$id]->getVar("art_comments"),
         "trackbacks"=> $articles_obj[$id]->getVar("art_trackbacks")
-        );
+    );
     if (!empty($xoopsModuleConfig["display_summary"])) {
         $_article["summary"] = $articles_obj[$id]->getSummary(true);
     }

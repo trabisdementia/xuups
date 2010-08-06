@@ -8,4 +8,4 @@ define('_XHELP_SRD_DB1', 'Nombre');
 define('_XHELP_SRD_DB2', 'Role');
 define('_XHELP_SRD_DB3', 'Departamento');
 
-?> 
+?>

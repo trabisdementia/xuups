@@ -179,7 +179,7 @@ class Xmf_Object_Helper_Form extends Xmf_Object_Helper_Abstract
 
     function _initVars($key)
     {
-       $this->assignVarDisplay($key, true);
+        $this->assignVarDisplay($key, true);
     }
 
     function _initControls($key, $title = '', $description = '')
@@ -189,12 +189,12 @@ class Xmf_Object_Helper_Form extends Xmf_Object_Helper_Abstract
     }
 
     /**
-    * Create the form for this object
-    *
-    * @return a {@link SmartobjectForm} object for this object
-    *
-    * @see IcmsPersistableObjectForm::IcmsPersistableObjectForm()
-    */
+     * Create the form for this object
+     *
+     * @return a {@link SmartobjectForm} object for this object
+     *
+     * @see IcmsPersistableObjectForm::IcmsPersistableObjectForm()
+     */
     function getForm($title, $form_name, $form_action=false, $submit_button_caption = _XMF_SUBMIT, $cancel_js_action=false, $captcha=false)
     {
         $form = new Xmf_Object_Form($this->object, $form_name, $title, $form_action, null, $submit_button_caption, $cancel_js_action, $captcha);
@@ -202,12 +202,12 @@ class Xmf_Object_Helper_Form extends Xmf_Object_Helper_Abstract
     }
 
     /**
-    * Create the secure form for this object
-    *
-    * @return a {@link SmartobjectForm} object for this object
-    *
-    * @see IcmsPersistableObjectForm::IcmsPersistableObjectForm()
-    */
+     * Create the secure form for this object
+     *
+     * @return a {@link SmartobjectForm} object for this object
+     *
+     * @see IcmsPersistableObjectForm::IcmsPersistableObjectForm()
+     */
     function getSecureForm($title, $form_name, $form_action=false, $submit_button_caption = _XMF_SUBMIT, $cancel_js_action=false, $captcha=false)
     {
         $form = new Xmf_Object_Form_Secure($this, $form_name, $title, $form_action, null, $submit_button_caption, $cancel_js_action, $captcha);

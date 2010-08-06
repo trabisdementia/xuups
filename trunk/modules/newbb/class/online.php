@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: online.php 2169 2008-09-23 13:37:10Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
@@ -30,7 +30,7 @@ class NewbbOnlineHandler
     var $forum_object;
     var $topic_id;
     var $user_ids = array();
-    
+
     function init($forum = null, $forumtopic = null)
     {
         $this->db =& $GLOBALS['xoopsDB'];
@@ -132,7 +132,7 @@ class NewbbOnlineHandler
             }
             $online["users"][] = $user;
         }
-        
+
         $xoopsTpl->assign_by_ref("online", $online);
     }
 
@@ -228,7 +228,7 @@ class NewbbOnlineHandler
             //xoops_error($this->db->error());
             return false;
         }
-        
+
         $mysql_version = substr(trim(mysql_get_server_info()), 0, 3);
         /* for MySQL 4.1+ */
         if ($mysql_version >= "4.1"):
@@ -237,7 +237,7 @@ class NewbbOnlineHandler
                 " WHERE" .
                 " ( online_uid > 0 AND online_uid NOT IN ( SELECT online_uid FROM " . $this->db->prefix('online') . " WHERE online_module =" . $xoopsModule->getVar('mid') . " ) )" .
                 " OR ( online_uid = 0 AND online_ip NOT IN ( SELECT online_ip FROM " . $this->db->prefix('online') . " WHERE online_module =" . $xoopsModule->getVar('mid') . " AND online_uid = 0 ) )";
-        
+
         if ($result = $this->db->queryF($sql)) {
             return true;
         } else {
@@ -245,8 +245,8 @@ class NewbbOnlineHandler
             return false;
         }
 
-        
-        else: 
+
+        else:
         $sql =  "DELETE " . $this->db->prefix('bb_online') . " FROM " . $this->db->prefix('bb_online') .
                 " LEFT JOIN " . $this->db->prefix('online') . " AS aa " .
                 " ON " . $this->db->prefix('bb_online') . ".online_uid = aa.online_uid WHERE " . $this->db->prefix('bb_online') . ".online_uid > 0 AND aa.online_uid IS NULL";
@@ -319,7 +319,7 @@ class NewbbOnlineHandler
             if (!empty($uids)) {
                 $sql .= ' WHERE online_uid IN (' . implode(", ",array_map("intval", $uids)) . ')';
             }
-                    
+
             $result = $this->db->query($sql);
             if (!$result) {
                 return $ret;
@@ -335,7 +335,7 @@ class NewbbOnlineHandler
         }
         return $ret;
     }
-    
+
     /**
      * Count the number of online users
      *

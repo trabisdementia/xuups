@@ -8,7 +8,7 @@ $datay = array(20,22,12,13,17,20,16,19,30,31,40,43);
 $graph = new Graph(300,200);
 $graph->SetScale("linlin");
 
-$graph->Set90AndMargin(40,40,40,40);		
+$graph->Set90AndMargin(40,40,40,40);
 $graph->SetShadow();
 
 $graph->title->Set("A 90 degrees rotated scatter plot");

@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -67,16 +67,16 @@ if ($isMessage && ($isUser || $isAnonymous)) {
         } else {
             $uname = shoutbox_makeGuestName();
         }
-       /* if ($xoopsModuleConfig['captcha_enable']) {
-            xoops_load('XoopsCaptcha');
-            $xoopsCaptcha = XoopsCaptcha::getInstance();
-            if (!$xoopsCaptcha->verify()) {
-                $xoopsTpl->assign('captcha_error', $xoopsCaptcha->getMessage());
-                $xoopsTpl->assign('message', $message);
-                $xoopsTpl->assign('uname', $uname);
-                $addit = false;
-            }
-        }*/
+        /* if ($xoopsModuleConfig['captcha_enable']) {
+         xoops_load('XoopsCaptcha');
+         $xoopsCaptcha = XoopsCaptcha::getInstance();
+         if (!$xoopsCaptcha->verify()) {
+         $xoopsTpl->assign('captcha_error', $xoopsCaptcha->getMessage());
+         $xoopsTpl->assign('message', $message);
+         $xoopsTpl->assign('uname', $uname);
+         $addit = false;
+         }
+         }*/
     } else {
         $uname = $xoopsUser->getVar('uname');
         $uid = $xoopsUser->getVar('uid');
@@ -104,36 +104,36 @@ if ($isMessage && ($isUser || $isAnonymous)) {
 }
 
 /*
-if($shouts = file($shoutbox->csvfile))
-{
-    $totalshouts = count($shouts);
-}
+ if($shouts = file($shoutbox->csvfile))
+ {
+ $totalshouts = count($shouts);
+ }
 
-// Check or there is a new message
-if(!empty($shouts))
-{
-    $oneline = explode("|", $shouts[$totalshouts-1]);
+ // Check or there is a new message
+ if(!empty($shouts))
+ {
+ $oneline = explode("|", $shouts[$totalshouts-1]);
 
-    /*
-     echo '$_COOKIE["shoutcookie"] ='.$_COOKIE["shoutcookie"]."<br \>\n";
-     echo '$online[2] ='.$oneline[2]."<br \>\n";
-     echo '$time() ='.time()."<br \>\n";
-     */
+ /*
+ echo '$_COOKIE["shoutcookie"] ='.$_COOKIE["shoutcookie"]."<br \>\n";
+ echo '$online[2] ='.$oneline[2]."<br \>\n";
+ echo '$time() ='.time()."<br \>\n";
+ */
 /*
-    if($xoopsUser && $xoopsUser->uname() == $oneline[0])
-    {
-        $lastmine=1;
-    }elseif(!empty($username) && $username == $oneline[0])
-    {
-        $lastmine=1;
-    }
+ if($xoopsUser && $xoopsUser->uname() == $oneline[0])
+ {
+ $lastmine=1;
+ }elseif(!empty($username) && $username == $oneline[0])
+ {
+ $lastmine=1;
+ }
 
-    if(shoutbox_setCookie($oneline[2]) && $lastmine==0)
-    {
-        $newmessage = 1;
-    }
-}
-*/
+ if(shoutbox_setCookie($oneline[2]) && $lastmine==0)
+ {
+ $newmessage = 1;
+ }
+ }
+ */
 $shouts = $shoutbox->getShouts(1, $xoopsModuleConfig['allow_bbcode'], $xoopsModuleConfig['maxshouts_view']);
 
 if (!empty($shouts)) {

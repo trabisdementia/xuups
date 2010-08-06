@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: view.list.php 2178 2008-09-26 08:34:09Z phppp $
  */
- 
+
 include "header.php";
 
 // Valid types of articles for regular applications, except author view
@@ -25,8 +25,8 @@ $valid_types = array(
     "f"        => art_constant("MD_FEATURED"),
     "s"        => art_constant("MD_SPOTLIGHT"), 
     "a"        => _ALL,
-    );
-    
+);
+
 // Valid sort criteria for articles for regular applications, except spotlight
 $valid_sorts = array(
     "id"            => array(
@@ -51,12 +51,12 @@ $valid_sorts = array(
     "trackbacks"    => array(
                             "key"     => "art_trackbacks", 
                             "title" => art_constant("MD_TRACKBACKS") ), 
-    );
+);
 // Sort order
 $valid_orders = array(
     "DESC"    => art_constant("MD_DESC"), 
     "ASC"    => art_constant("MD_ASC")
-    );
+);
 
 /*
  * Parse the variables
@@ -89,7 +89,7 @@ if (!empty($topic_id)) {
     $tracks_extra[] = array(
                             "title"    => $topic_obj->getVar("top_title"),
                             "link"    => XOOPS_URL . "/modules/" . $GLOBALS["artdirname"] . "/view.topic.php" . URL_DELIMITER . $topic_id
-                            );
+    );
 }
 if (!empty($category_id)) {
     $category_obj =& $category_handler->get($category_id);
@@ -132,8 +132,8 @@ if ( !empty($uid) ) {
     $tracks_extra[] = array(
                             "title"    => $author_obj->getVar("uname"),
                             "link"    => XOOPS_URL . "/userinfo.php?uid={$uid}"
-                            );
-    
+    );
+
     unset($valid_types["s"]);
     $valid_types_author = array();
     if ($xoopsuser_is_author) {
@@ -141,12 +141,12 @@ if ( !empty($uid) ) {
             "c"        => art_constant("MD_CREATED"), 
             "m"        => art_constant("MD_SUBMITTED"), 
             "r"        => art_constant("MD_REGISTERED"), 
-            );
+        );
     } elseif ($xoopsuser_is_admin) {
         $valid_types_author = array(
             "m"        => art_constant("MD_SUBMITTED"), 
             "r"        => art_constant("MD_REGISTERED"), 
-            );
+        );
     }
     $valid_types = array_merge( $valid_types_author, $valid_types );
 }
@@ -154,14 +154,14 @@ if ( !empty($uid) ) {
 $type = in_array( $type, array_keys($valid_types) ) ? $type : "a" ;
 $byCategory = true;
 switch (strtolower($type)) {
-        
+
     case "created":
     case "c":
         $art_criteria = new CriteriaCompo( new Criteria("art_time_submit", 0) );
         $art_criteria->add( new Criteria("cat_id", 0), "OR" );
         $byCategory = false;
         break;
-        
+
     case "submitted":
     case "m":
         $art_criteria = new CriteriaCompo( new Criteria("art_time_publish", 0) );
@@ -169,23 +169,23 @@ switch (strtolower($type)) {
         $art_criteria->add( new Criteria("cat_id", 0, ">") );
         $byCategory = false;
         break;
-        
+
     case "registered":
     case "r":
         $art_criteria = new CriteriaCompo( new Criteria("ac.ac_publish", 0) );
         break;
-        
+
     case "published":
     case "p":
         $art_criteria = new CriteriaCompo( new Criteria("ac.ac_publish", 0, ">") );
         $art_criteria->add( new Criteria("ac.ac_feature", 0) );
         break;
-        
+
     case "featured":
     case "f":
         $art_criteria = new CriteriaCompo( new Criteria("ac.ac_feature", 0, ">") );
         break;
-        
+
     case "spotlight":
     case "s":
         $art_criteria = new CriteriaCompo( new Criteria("art_id", 0, ">") );
@@ -195,7 +195,7 @@ switch (strtolower($type)) {
         $valid_sorts = array( "id" => $_sort );
         $byCategory = false;
         break;
-        
+
     default:
         $art_criteria = new CriteriaCompo(new Criteria("ac.ac_publish", 0, ">"));
         $type = "a";
@@ -207,11 +207,11 @@ $type_title = $valid_types[$type];
 if ($xoopsuser_is_author) {
     $xoopsConfig["module_cache"][$xoopsModule->getVar("mid")] = 0;
 }
-$xoopsOption["xoops_pagetitle"] =   $xoopsModule->getVar("name") . 
-                                    ( empty($category_obj) ? "" : " - " . $category_obj->getVar("cat_title") ) . " - " . 
-                                    ( empty($author_obj) ? "" : " - " . $author_obj->getVar("uname") ) . " - " . 
-                                    art_constant("MD_LIST") . " - " . $type_title;
-                                    
+$xoopsOption["xoops_pagetitle"] =   $xoopsModule->getVar("name") .
+( empty($category_obj) ? "" : " - " . $category_obj->getVar("cat_title") ) . " - " .
+( empty($author_obj) ? "" : " - " . $author_obj->getVar("uname") ) . " - " .
+art_constant("MD_LIST") . " - " . $type_title;
+
 $xoopsOption["template_main"] = art_getTemplate("list", $xoopsModuleConfig["template"]);
 $xoopsOption["xoops_module_header"] = art_getModuleHeader($xoopsModuleConfig["template"]);
 include_once XOOPS_ROOT_PATH . "/header.php";
@@ -228,7 +228,7 @@ $sp_data = array();
 $articles_id = array();
 if ($type == "s") {
     $spotlight_handler =& xoops_getmodulehandler("spotlight", $GLOBALS["artdirname"]);
-    $articles_count = $spotlight_handler->getCount($art_criteria);    
+    $articles_count = $spotlight_handler->getCount($art_criteria);
     $art_criteria->setSort($valid_sorts[$sort]["key"]);
     $art_criteria->setOrder($order);
     $art_criteria->setStart($start);
@@ -238,20 +238,20 @@ if ($type == "s") {
         $articles_id[$spotlights_obj[$sid]->getVar("art_id")] = 1;
         $sp_data[$spotlights_obj[$sid]->getVar("art_id")] = array(
             "id"        => $spotlights_obj[$sid]->getVar("art_id"),
-            //"image"        => $spotlights_obj[$sid]->getImage(),
+        //"image"        => $spotlights_obj[$sid]->getImage(),
             "time"        => $spotlights_obj[$sid]->getTime($xoopsModuleConfig["timeformat"]),
             "sp_note"    => $spotlights_obj[$sid]->getVar("sp_note")
-            );
+        );
     }
     $articles_id = array_keys($articles_id);
 } elseif ($byCategory) {
-    $articles_count = $article_handler->getCountByCategory($categories_id, $art_criteria);    
+    $articles_count = $article_handler->getCountByCategory($categories_id, $art_criteria);
     $art_criteria->setSort($valid_sorts[$sort]["key"]);
     $art_criteria->setOrder($order);
     $articles_id = $article_handler->getIdsByCategory($categories_id, $xoopsModuleConfig["articles_perpage"], $start, $art_criteria);
 } else {
     $art_criteria->add( new Criteria("cat_id", "(" . implode(", ", $categories_id) . ")", "IN") );
-    $articles_count = $article_handler->getCount($art_criteria);    
+    $articles_count = $article_handler->getCount($art_criteria);
     $art_criteria->setSort($valid_sorts[$sort]["key"]);
     $art_criteria->setOrder($order);
     $art_criteria->setLimit($xoopsModuleConfig["articles_perpage"]);
@@ -373,16 +373,16 @@ if (empty($start)) {
     $criteria->add( new Criteria("uid", $uid) );
     $count_articles = $article_handler->getCount($criteria);
     unset($criteria);
-    
+
     $criteria = new CriteriaCompo( new Criteria("a.uid", intval($uid)) );
     $criteria->add( new Criteria("ac.ac_feature", 0, ">") );
     $count_featured = $article_handler->getCountByCategory($categories_id, $criteria);
     unset($criteria);
-    
+
     $criteria = new CriteriaCompo( new Criteria("uid", $uid) );
     $count_topic = $article_handler->getCountByTopic($uid, $criteria);
     unset($criteria);
-    
+
     $mods = array();
     if ($xoopsuser_is_admin) {
         $mods[] = array(
@@ -406,18 +406,18 @@ if (empty($start)) {
 endif;
 // End of author profile
 
-$pagequery =    
-    ( !empty($topic_id) ? "t{$topic_id}/" :  ( !empty($category_id) ? "c{$category_id}/" : "" ) ) .
-    ( empty($uid) ? "" : "u{$uid}/" );
+$pagequery =
+( !empty($topic_id) ? "t{$topic_id}/" :  ( !empty($category_id) ? "c{$category_id}/" : "" ) ) .
+( empty($uid) ? "" : "u{$uid}/" );
 
 if ( $articles_count > $xoopsModuleConfig["articles_perpage"]) {
     include XOOPS_ROOT_PATH . "/class/pagenav.php";
     $_query = $pagequery.
-        ( empty($uid) ? "" : "u{$uid}/" ).
-        ( empty($type) ? "a/" : "{$type}/" ).
-        ( empty($sort) ? "id" : "{$sort}/" ).
-        ( empty($order) ? "" : "{$order}/" );
-    
+    ( empty($uid) ? "" : "u{$uid}/" ).
+    ( empty($type) ? "a/" : "{$type}/" ).
+    ( empty($sort) ? "id" : "{$sort}/" ).
+    ( empty($order) ? "" : "{$order}/" );
+
     $nav = new XoopsPageNav($articles_count, $xoopsModuleConfig["articles_perpage"], $start, "start", $pagequery);
     $pagenav = $nav->renderNav(4);
 } else {

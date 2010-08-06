@@ -1,15 +1,15 @@
-div.dropdown .menu, div.dropdown .userbar {
-  position: absolute;
-  left: 0px;
-  top: 2px;
-  visibility: hidden;
+div.dropdown .menu,div.dropdown .userbar {
+	position: absolute;
+	left: 0px;
+	top: 2px;
+	visibility: hidden;
 }
 
-div.dropdown .userbar .item{
-  padding: 2px 5px;
+div.dropdown .userbar .item {
+	padding: 2px 5px;
 }
 
-div.dropdown .menubar{
+div.dropdown .menubar {
 	float: left;
 	padding: 5px 10px;
 	margin: 0px 1px;
@@ -17,5 +17,5 @@ div.dropdown .menubar{
 }
 
 div.dropdown a.item {
-  	display: block;
+	display: block;
 }

@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
@@ -67,10 +67,10 @@ function mypoints_index()
     echo "<form action ='index.php?op=submit' method=post>";
     echo "<table border = '0' cellpadding = '2' cellspacing = '1' width=100% class = outer>";
     echo "<tr class = bg3><td>" . _AM_MYPOINTS_MODULENAME . "</td><td>"
-        . _AM_MYPOINTS_PLUGINTYPE . "</td><td>"
-        . _AM_MYPOINTS_PLUGINNAME . "</td><td>"
-        . _AM_MYPOINTS_STATUS . "</td><td>&nbsp;</td><td>"
-        . _AM_MYPOINTS_POINTS . "</td></tr>";
+    . _AM_MYPOINTS_PLUGINTYPE . "</td><td>"
+    . _AM_MYPOINTS_PLUGINNAME . "</td><td>"
+    . _AM_MYPOINTS_STATUS . "</td><td>&nbsp;</td><td>"
+    . _AM_MYPOINTS_POINTS . "</td></tr>";
 
     foreach ($items_plugins as $moduleid => $module) {
         $plugin = $plugin_handler->getByModuleType($moduleid, 'items');

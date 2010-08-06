@@ -20,7 +20,7 @@
  */
 
 if (!defined("XOOPS_ROOT_PATH")) {
- 	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 include_once dirname(__FILE__) . '/common.php';
@@ -30,10 +30,10 @@ function publisher_seo_title($title = '', $withExt = true) {
     /**
      * if XOOPS ML is present, let's sanitize the title with the current language
      */
-     $myts = MyTextSanitizer::getInstance();
-     if (method_exists($myts, 'formatForML')) {
-     	$title = $myts->formatForML($title);
-     }
+    $myts = MyTextSanitizer::getInstance();
+    if (method_exists($myts, 'formatForML')) {
+        $title = $myts->formatForML($title);
+    }
 
     // Transformation de la chaine en minuscule
     // Codage de la chaine afin d'éviter les erreurs 500 en cas de caractères imprévus
@@ -65,7 +65,7 @@ function publisher_seo_genUrl($op, $id, $short_url = "") {
     $publisher =& PublisherPublisher::getInstance();
     if ($publisher->getConfig('seo_url_rewrite') != 'none')
     {
-    	if (! empty($short_url)) $short_url = $short_url . '.html';
+        if (! empty($short_url)) $short_url = $short_url . '.html';
 
         if ($publisher->getConfig('seo_url_rewrite') == 'htaccess') {
             // generate SEO url using htaccess
@@ -77,15 +77,15 @@ function publisher_seo_genUrl($op, $id, $short_url = "") {
             die('Unknown SEO method.');
         }
     } else {
-       // generate classic url
+        // generate classic url
         switch ($op) {
             case 'category':
-               return PUBLISHER_URL . "/${op}.php?categoryid=${id}";
-            case 'item':
-            case 'print':
-               return PUBLISHER_URL . "/${op}.php?itemid=${id}";
-            default:
-                die('Unknown SEO operation.');
+                return PUBLISHER_URL . "/${op}.php?categoryid=${id}";
+case 'item':
+case 'print':
+    return PUBLISHER_URL . "/${op}.php?itemid=${id}";
+default:
+    die('Unknown SEO operation.');
         }
     }
 }

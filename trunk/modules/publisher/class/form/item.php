@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  *  Publisher form class
@@ -135,10 +135,10 @@ class PublisherItemForm extends XoopsThemeTabForm {
 
         // VARIOUS OPTIONS
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOHTML)
-                || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOSMILEY)
-                || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOXCODE)
-                || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOIMAGE)
-                || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOLINEBREAK)) {
+        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOSMILEY)
+        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOXCODE)
+        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOIMAGE)
+        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOLINEBREAK)) {
             if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOHTML)) {
                 $html_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOHTML, 'dohtml', $obj->dohtml(), _YES , _NO);
                 $this->addElement($html_radio);
@@ -191,9 +191,9 @@ class PublisherItemForm extends XoopsThemeTabForm {
             $uid_select->addOptionArray($users_array);
             $this->addElement($uid_select);
         }/* else {
-            $hidden = new XoopsFormHidden('uid', $obj->uid());
-            $this->addElement($hidden);
-            unset($hidden);
+        $hidden = new XoopsFormHidden('uid', $obj->uid());
+        $this->addElement($hidden);
+        unset($hidden);
         }*/
 
         // Author ALias
@@ -207,9 +207,9 @@ class PublisherItemForm extends XoopsThemeTabForm {
         // STATUS
         if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_STATUS)) {
             $options = array(_PUBLISHER_STATUS_PUBLISHED => _CO_PUBLISHER_PUBLISHED,
-                _PUBLISHER_STATUS_OFFLINE   => _CO_PUBLISHER_OFFLINE,
-                _PUBLISHER_STATUS_SUBMITTED =>_CO_PUBLISHER_SUBMITTED,
-                _PUBLISHER_STATUS_REJECTED  =>_CO_PUBLISHER_REJECTED);
+            _PUBLISHER_STATUS_OFFLINE   => _CO_PUBLISHER_OFFLINE,
+            _PUBLISHER_STATUS_SUBMITTED =>_CO_PUBLISHER_SUBMITTED,
+            _PUBLISHER_STATUS_REJECTED  =>_CO_PUBLISHER_REJECTED);
             $status_select = new XoopsFormSelect(_CO_PUBLISHER_STATUS, 'status', $obj->getVar('status'));
             $status_select->addOptionArray($options);
             $status_select->setDescription(_CO_PUBLISHER_STATUS_DSC);
@@ -411,7 +411,7 @@ $publisher(document).ready(function(){
             $groups_checkbox->setDescription(_CO_PUBLISHER_PERMISSIONS_ITEM_DSC);
             foreach ($group_list as $group_id => $group_name) {
                 //if ($group_id != XOOPS_GROUP_ADMIN) {
-                    $groups_checkbox->addOption($group_id, $group_name);
+                $groups_checkbox->addOption($group_id, $group_name);
                 //}
             }
             $this->addElement($groups_checkbox);

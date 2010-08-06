@@ -31,7 +31,7 @@
 
 // For end users
 if (!defined('XOOPS_ROOT_PATH')) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 $valid_pfd_charset = 'ISO-8859-1';
@@ -40,7 +40,7 @@ $pdf_config['margin'] = array(
 	'left'=>25,
 	'top'=>25,
 	'right'=>25
-	);
+);
 
 $pdf_config['logo'] = array(
 	'path'=>'images/news_slogo.png',
@@ -48,55 +48,55 @@ $pdf_config['logo'] = array(
 	'top'=>5,
 	'width'=>0,
 	'height'=>0
-	);
+);
 
 $pdf_config['font']['slogan'] = array(
 	'family'=>'Arial',
 	'style'=>'bi',
 	'size'=>8
-	);
+);
 
 $pdf_config['font']['title'] = array(
 	'family'=>'Arial',
 	'style'=>'biu',
 	'size'=>12
-	);
+);
 
 $pdf_config['font']['subject'] = array(
 	'family'=>'Arial',
 	'style'=>'b',
 	'size'=>11
-	);
+);
 
 $pdf_config['font']['author'] = array(
 	'family'=>'Arial',
 	'style'=>'',
 	'size'=>10
-	);
+);
 
 $pdf_config['font']['subtitle'] = array(
 	'family'=>'Arial',
 	'style'=>'b',
 	'size'=>11
-	);
+);
 
 $pdf_config['font']['subsubtitle'] = array(
 	'family'=>'Arial',
 	'style'=>'b',
 	'size'=>10
-	);
+);
 
 $pdf_config['font']['content'] = array(
 	'family'=>'Arial',
 	'style'=>'',
 	'size'=>10
-	);
+);
 
 $pdf_config['font']['footer'] = array(
 	'family'=>'Arial',
 	'style'=>'',
 	'size'=>8
-	);
+);
 
 $pdf_config['action_on_error'] = 0; // 0 - continue; 1 - die
 $pdf_config['creator'] = 'NEWS BASED ON FPDF v1.53';
@@ -118,40 +118,40 @@ define('NEWS_PDF_DATE', _MD_POSTEDON);
 // For more details, refer to: http://fpdf.org
 class PDF_language extends FPDF
 {
-	function PDF_language($orientation='P',$unit='mm',$format='A4')
-	{
-	    //Call parent constructor
-	    $this->FPDF($orientation,$unit,$format);
-	}
+    function PDF_language($orientation='P',$unit='mm',$format='A4')
+    {
+        //Call parent constructor
+        $this->FPDF($orientation,$unit,$format);
+    }
 
-	function Error($msg)
-	{
-		global $pdf_config;
-		if($pdf_config['action_on_error']){
-			//Fatal error
-			die('<B>FPDF error: </B>'.$msg);
-		}
-	}
+    function Error($msg)
+    {
+        global $pdf_config;
+        if($pdf_config['action_on_error']){
+            //Fatal error
+            die('<B>FPDF error: </B>'.$msg);
+        }
+    }
 
-	function encoding(&$text, $in_charset)
-	{
-		$out_charset = $GLOBALS["valid_pfd_charset"];
-	    if (empty($in_charset) || empty($out_charset) || !strcasecmp($out_charset, $in_charset)) return;
+    function encoding(&$text, $in_charset)
+    {
+        $out_charset = $GLOBALS["valid_pfd_charset"];
+        if (empty($in_charset) || empty($out_charset) || !strcasecmp($out_charset, $in_charset)) return;
 
-	    if(is_array($text) && count($text)>0){
-		    foreach($text as $key=>$val){
-		    	$this->_encoding($text[$key], $in_charset, $out_charset);
-	    	}
-    	}else{
-		    $this->_encoding($text, $in_charset, $out_charset);
-	    }
-	}
+        if(is_array($text) && count($text)>0){
+            foreach($text as $key=>$val){
+                $this->_encoding($text[$key], $in_charset, $out_charset);
+            }
+        }else{
+            $this->_encoding($text, $in_charset, $out_charset);
+        }
+    }
 
-	function _encoding(&$text, $in_charset, $out_charset)
+    function _encoding(&$text, $in_charset, $out_charset)
     {
         $xconv_handler = @xoops_getmodulehandler('xconv', 'xconv', true);
         if($xconv_handler &&
-            $converted_text = @$xconv_handler->convert_encoding($text, $out_charset, $in_charset)
+        $converted_text = @$xconv_handler->convert_encoding($text, $out_charset, $in_charset)
         ){
             $text = $converted_text;
             return;

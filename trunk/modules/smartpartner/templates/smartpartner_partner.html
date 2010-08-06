@@ -1,0 +1,105 @@
+<!-- Thank you for keeping this line in the template :-) //-->
+<div style="display: none;"><{$ref_smartpartner}></div>
+
+<{if $backtoindex}>
+  <div class="smartpartner_backlink"><a href="<{$modulepath}>"><{$lang_backtoindex}></a></div>
+<{/if}>
+<span class="smartpartner_infotitle"><{$lang_partnerstitle}></span>
+<table class='inner' cellspacing='1' width='98%'>
+  <tr>
+    <td width="60%" valign="top">
+      <div class="smartpartner_partnertitle">
+      	<{$partner.urllink}><img style='float: right; padding: 10px;' src='<{$partner.image}>' alt='<{$partner.clean_title}>' title='<{$partner.clean_title}>' align='right' border='5px'/></a>
+        <{$partner.title}>
+        <{if $isAdmin}>
+          <a href="<{$smartpartner_url}>admin/partner.php?op=mod&id=<{$partner.id}>"><img src="<{$smartpartner_url}>images/links/edit.gif" title="<{$lang_edit}>" alt="<{$lang_edit}>"/></a>
+          <a href="<{$smartpartner_url}>admin/partner.php?op=del&id=<{$partner.id}>"><img src="<{$smartpartner_url}>images/links/delete.gif" title="<{$lang_delete}>" alt="<{$lang_delete}>"/></a>
+        <{/if}>
+      </div>
+      <div class="smartpartner_partnersummary">
+        <{$partner.description}>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<br />
+
+<table width="100%">
+  <tr>
+    <td>
+	  <{if $partner.contact_name || $partner.contact_email || $partner.contact_phone || $partner.adress || $partner.url}>
+        <table width="49%" style="font-size: 10px;" class='outer' cellspacing='1'>
+          <tr>
+            <td class="itemHead" colspan="2"><b><{$lang_partner_informations}></b></td>
+		  </tr>
+	  	  <{if $partner.contact_name}>
+          <tr>
+            <td class="even" width="80px"><div style="font-weight: bold; text-align: center;"><{$lang_contact}></div></td>
+            <td class="odd"><{$partner.contact_name}></td>
+          </tr>
+          <{/if}>
+          <{if $partner.contact_email}>
+          <tr>
+            <td class="even" width="80px"><div style="font-weight: bold; text-align: center;"><{$lang_email}></div></td>
+            <td class="odd"><a href="mailto:<{$partner.contact_email}>"><{$partner.contact_email}></a></td>
+          </tr>
+          <{/if}>
+          <{if $partner.contact_phone}>
+          <tr>
+            <td class="even" width="80px"><div style="font-weight: bold; text-align: center;"><{$lang_phone}></div></td>
+            <td class="odd"><{$partner.contact_phone}></td>
+          </tr>
+          <{/if}>
+          <{if $partner.adress}>
+          <tr>
+            <td class="even" width="80px" valign="top"><div style="font-weight: bold; text-align: center;"><{$lang_adress}></div></td>
+            <td class="odd"><{$partner.adress}></td>
+          </tr>
+          <{/if}>     
+          <{if $partner.url}>
+          <tr>
+            <td class="even" width="80px"><div style="font-weight: bold; text-align: center;"><{$lang_website}></div></td>
+            <td class="odd"><a href="vpartner.php?id=<{$partner.id}>" target="_blank"><{$partner.url}></a></td>
+          </tr>
+          <{/if}>  
+        </table>   
+      <{/if}>
+    </td>
+  	<{if $show_stats_block}>
+  	<td width="2%">
+  	  &nbsp;
+  	</td>
+  	<td valign="top">
+      <table style="text-align: right; font-size: 10px;" class='outer' cellspacing='1'>             
+        <tr>
+          <td class="itemHead"><b><{$lang_stats}></b></td>
+		</tr>
+        <tr>
+          <td class="odd"><{$lang_page_been_seen}> <{$partner.hits_page}> <b><{$lang_times}></b></td>
+		</tr>
+		<tr>
+          <td class="odd"><{$lang_url_been_visited}> <{$partner.hits}> <b><{$lang_times}></b></td>
+        </tr>
+	  </table>
+  	</td>
+	   <{else}>
+  	<td valign="top">
+  		  <table>             
+          <tr>
+            <td>&nbsp;</td>
+		  </tr>
+	    </table>	   
+	</td>
+	<{/if}>
+  </tr>
+</table>
+
+<br />
+<{if $isAdmin == 1}>
+<div class="smartpartner_adminlinks"><{$smartpartner_adminpage}></div>
+<{/if}>
+<{if $smarttie==1}>
+	<{include file='db:smarttie_links.html'}>
+<{/if}>
+<{include file='db:system_notification_select.html'}>

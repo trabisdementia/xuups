@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -29,8 +29,8 @@ foreach (array("topic_id", "rate", "forum") as $var) {
 $topic_handler =& xoops_getmodulehandler('topic', 'newbb');
 $topic_obj =& $topic_handler->get($topic_id);
 if (!$topic_handler->getPermission($topic_obj->getVar("forum_id"), $topic_obj->getVar('topic_status'), "post")
-    &&
-    !$topic_handler->getPermission($topic_obj->getVar("forum_id"), $topic_obj->getVar('topic_status'), "reply")
+&&
+!$topic_handler->getPermission($topic_obj->getVar("forum_id"), $topic_obj->getVar('topic_status'), "reply")
 ) {
     redirect_header("javascript:history.go(-1);", 2, _NOPERM);
 }
@@ -75,7 +75,7 @@ $rate_obj->setVar("ratinghostname", $ip);
 $rate_obj->setVar("ratingtimestamp", time());
 
 $ratingid = $rate_handler->insert($rate_obj);;
-        
+
 $query = "select rating FROM " . $xoopsDB -> prefix('bb_votedata') . " WHERE topic_id = " . $topic_id . "";
 $voteresult = $xoopsDB->query($query);
 $votesDB = $xoopsDB->getRowsNum($voteresult);

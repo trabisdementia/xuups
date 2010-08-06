@@ -145,11 +145,11 @@ define('_MI_XHELP_DEPT_NEWOWNER_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE} Eigenaar 
 define('_MI_XHELP_DEPT_NEWOWNER_NOTIFYTPL', 'dept_newowner_notify.tpl');
 
 /*
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFY', 'Claim Ticket Owner');
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYCAP', 'Notify me when the owner of a ticket is claimed');
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYDSC', 'Receive notification when the owner of a ticket is claimed');
-define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE} Ticket ownership claimed');
-*/
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFY', 'Claim Ticket Owner');
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYCAP', 'Notify me when the owner of a ticket is claimed');
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYDSC', 'Receive notification when the owner of a ticket is claimed');
+ define('_MI_XHELP_DEPT_CLAIMOWNER_NOTIFYSBJ', '[{X_SITENAME}] {X_MODULE} Ticket ownership claimed');
+ */
 
 define('_MI_XHELP_TICKET_REMOVEDTICKET_NOTIFY', 'Melding: Verwijderd');
 define('_MI_XHELP_TICKET_REMOVEDTICKET_NOTIFYCAP', 'Stel me op de hoogte als een melding wordt verwijderd');

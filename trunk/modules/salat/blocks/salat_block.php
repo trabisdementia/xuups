@@ -27,8 +27,8 @@ function salat_block_show($options) {
     $city = isset($default) ? $default : '';
     $date = time();
     $timezone = 0;
-    
-    
+
+
     // City
     $element = new XoopsFormSelect(_MA_SALAT_SELECT_CITY, 'city', $city);
     $element->addOptionArray($options);

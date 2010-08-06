@@ -37,97 +37,97 @@ switch ($op) {
 
 function waiting_index($start = 0)
 {
-	global $xoopsTpl, $xoopsUser, $xoopsConfig, $limit;
+    global $xoopsTpl, $xoopsUser, $xoopsConfig, $limit;
 
-	include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
     include_once XOOPS_ROOT_PATH . '/modules/subscribers/include/functions.php';
-    
+
     subscribers_sendEmails();
 
-	$this_handler =& xoops_getModuleHandler('waiting', 'subscribers');
+    $this_handler =& xoops_getModuleHandler('waiting', 'subscribers');
 
     $count = $this_handler->getCount();
-	$xoopsTpl->assign('count', $count);
-	
-	$criteria = new CriteriaCompo();
-	$criteria->setSort('wt_priority DESC, wt_created');
-	$criteria->setOrder('ASC');
-	$criteria->setStart($start);
-	$criteria->setLimit($limit);
-	$objs = $this_handler->getObjects($criteria);
+    $xoopsTpl->assign('count', $count);
 
-	if ($count > 0){
-		if ($count > $limit) {
-			include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-			$nav = new XoopsPageNav($count, $limit, $start, 'start', 'op=list');
-			$xoopsTpl->assign('pag', '<div style="float:left; padding-top:2px;" align="center">' . $nav->renderNav() . '</div>');
-		}else{
-			$xoopsTpl->assign('pag', '');
-		}
-	}else{
-		$xoopsTpl->assign('pag', '');
-	}
+    $criteria = new CriteriaCompo();
+    $criteria->setSort('wt_priority DESC, wt_created');
+    $criteria->setOrder('ASC');
+    $criteria->setStart($start);
+    $criteria->setLimit($limit);
+    $objs = $this_handler->getObjects($criteria);
+
+    if ($count > 0){
+        if ($count > $limit) {
+            include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+            $nav = new XoopsPageNav($count, $limit, $start, 'start', 'op=list');
+            $xoopsTpl->assign('pag', '<div style="float:left; padding-top:2px;" align="center">' . $nav->renderNav() . '</div>');
+        }else{
+            $xoopsTpl->assign('pag', '');
+        }
+    }else{
+        $xoopsTpl->assign('pag', '');
+    }
 
     include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
     $countries = XoopsLists::getCountryList();
 
-	foreach ($objs as $obj){
+    foreach ($objs as $obj){
         $objArray = $obj->toArray();
         $objArray['wt_created'] = formatTimestamp($objArray['wt_created']);
-		$xoopsTpl->append('objs', $objArray);
+        $xoopsTpl->append('objs', $objArray);
         unset($objArray);
-	}
+    }
 
-	return $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/subscribers/templates/static/subscribers_admin_waiting.html');
+    return $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/subscribers/templates/static/subscribers_admin_waiting.html');
 }
 
 function waiting_del($id, $redir = null)
 {
-	if (!$GLOBALS['xoopsSecurity']->check()) {
-		redirect_header('admin_waiting.php',1, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-	}
-	
-	if ($id <= 0) {
-		redirect_header('admin_waiting.php',1);
-	}
-	
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header('admin_waiting.php',1, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+    }
+
+    if ($id <= 0) {
+        redirect_header('admin_waiting.php',1);
+    }
+
     $this_handler =& xoops_getModuleHandler('waiting' , 'subscribers');
-	$obj = $this_handler->get($id);
-	if (!is_object($obj)) {
-		redirect_header('admin_waiting.php', 1);
-	}
+    $obj = $this_handler->get($id);
+    if (!is_object($obj)) {
+        redirect_header('admin_waiting.php', 1);
+    }
 
-	if (!$this_handler->delete($obj)) {
-		xoops_cp_header();
-		xoops_error(_AM_SUBSCRIBERS_ERROR, $obj->getVar('id'));
-		xoops_cp_footer();
-		exit();
-	}
+    if (!$this_handler->delete($obj)) {
+        xoops_cp_header();
+        xoops_error(_AM_SUBSCRIBERS_ERROR, $obj->getVar('id'));
+        xoops_cp_footer();
+        exit();
+    }
 
-	redirect_header(!is_null($redir) ? base64_decode($redir) : 'admin_waiting.php' , 2, _AM_SUBSCRIBERS_SUCCESS);
+    redirect_header(!is_null($redir) ? base64_decode($redir) : 'admin_waiting.php' , 2, _AM_SUBSCRIBERS_SUCCESS);
 }
 
 function waiting_delall($redir = null)
 {
-	if (!$GLOBALS['xoopsSecurity']->check()) {
-		redirect_header('admin_waiting.php',1, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
-	}
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header('admin_waiting.php',1, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+    }
 
     $this_handler =& xoops_getModuleHandler('waiting' , 'subscribers');
 
-	if (!$this_handler->deleteAll()) {
+    if (!$this_handler->deleteAll()) {
         redirect_header(!is_null($redir) ? base64_decode($redir) : 'admin_waiting.php' , 2, _AM_SUBSCRIBERS_ERROR);
-	}
+    }
 
-	redirect_header(!is_null($redir) ? base64_decode($redir) : 'admin_waiting.php' , 2, _AM_SUBSCRIBERS_SUCCESS);
+    redirect_header(!is_null($redir) ? base64_decode($redir) : 'admin_waiting.php' , 2, _AM_SUBSCRIBERS_SUCCESS);
 }
 
 function waiting_confirmdel($id, $redir = null, $op = 'delok')
 {
-	global $xoopsConfig;
+    global $xoopsConfig;
 
     $this_handler =& xoops_getModuleHandler('waiting' , 'subscribers');
-	$obj = $this_handler->get($id);
+    $obj = $this_handler->get($id);
 
     xoops_cp_header();
 
@@ -137,7 +137,7 @@ function waiting_confirmdel($id, $redir = null, $op = 'delok')
     if (!is_null($redir)){
         $arr['redir'] = $redir;
     }
-    
+
     xoops_confirm($arr, 'admin_waiting.php', _AM_SUBSCRIBERS_AYS);
 
     xoops_cp_footer();

@@ -51,14 +51,14 @@ switch ($op) {
 
         // WF-Section
         /*$wfs_version = 0;
-         $moduleObj = $module_handler->getByDirname('wfsection');
-         if ($moduleObj) {
-         $from_module_version = round($moduleObj->getVar('version') / 100, 2);
-         if (($from_module_version == 1.5) || $from_module_version == 1.04 || $from_module_version == 1.01 || $from_module_version == 2.07 || $from_module_version == 2.06) {
-         $importfile_select_array["wfsection"] = "WF-Section " . $from_module_version;
-         $wfs_version = $from_module_version;
-         }
-         } */
+        $moduleObj = $module_handler->getByDirname('wfsection');
+        if ($moduleObj) {
+        $from_module_version = round($moduleObj->getVar('version') / 100, 2);
+        if (($from_module_version == 1.5) || $from_module_version == 1.04 || $from_module_version == 1.01 || $from_module_version == 2.07 || $from_module_version == 2.06) {
+        $importfile_select_array["wfsection"] = "WF-Section " . $from_module_version;
+        $wfs_version = $from_module_version;
+        }
+        } */
 
         // News
         $news_version = 0;
@@ -84,14 +84,14 @@ switch ($op) {
 
         //  XF-Section
         /*$xfs_version = 0;
-         $moduleObj = $module_handler->getByDirname('xfsection');
-         If ($moduleObj) {
-         $from_module_version = round($moduleObj->getVar('version') / 100, 2);
-         if ($from_module_version > 1.00) {
-         $importfile_select_array["xfsection"] = "XF-Section " . $from_module_version;
-         $xfs_version = $from_module_version;
-         }
-         } */
+        $moduleObj = $module_handler->getByDirname('xfsection');
+        If ($moduleObj) {
+        $from_module_version = round($moduleObj->getVar('version') / 100, 2);
+        if ($from_module_version > 1.00) {
+        $importfile_select_array["xfsection"] = "XF-Section " . $from_module_version;
+        $xfs_version = $from_module_version;
+        }
+        } */
 
 
         if (isset($importfile_select_array) && count($importfile_select_array) > 0 ) {
@@ -122,7 +122,7 @@ switch ($op) {
 
             $sform->addElement($button_tray);
             /*$sform->addElement(new XoopsFormHidden('xfs_version', $xfs_version));
-            $sform->addElement(new XoopsFormHidden('wfs_version', $wfs_version));*/
+             $sform->addElement(new XoopsFormHidden('wfs_version', $wfs_version));*/
             $sform->addElement(new XoopsFormHidden('news_version', $news_version));
             $sform->addElement(new XoopsFormHidden('smartsection_version', $smartsection_version));
             $sform->display();

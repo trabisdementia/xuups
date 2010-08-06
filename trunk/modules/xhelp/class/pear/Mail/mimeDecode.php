@@ -35,38 +35,38 @@
 require_once XHELP_PEAR_PATH.'/PEAR.php';
 
 /**
-*  +----------------------------- IMPORTANT ------------------------------+
-*  | Usage of this class compared to native php extensions such as        |
-*  | mailparse or imap, is slow and may be feature deficient. If available|
-*  | you are STRONGLY recommended to use the php extensions.              |
-*  +----------------------------------------------------------------------+
-*
-* Mime Decoding class
-*
-* This class will parse a raw mime email and return
-* the structure. Returned structure is similar to
-* that returned by imap_fetchstructure().
-*
-* USAGE: (assume $input is your raw email)
-*
-* $decode = new Mail_mimeDecode($input, "\r\n");
-* $structure = $decode->decode();
-* print_r($structure);
-*
-* Or statically:
-*
-* $params['input'] = $input;
-* $structure = Mail_mimeDecode::decode($params);
-* print_r($structure);
-*
-* TODO:
-*  - Implement further content types, eg. multipart/parallel,
-*    perhaps even message/partial.
-*
-* @author  Richard Heyes <richard@phpguru.org>
-* @version $Revision: 1.2 $
-* @package Mail
-*/
+ *  +----------------------------- IMPORTANT ------------------------------+
+ *  | Usage of this class compared to native php extensions such as        |
+ *  | mailparse or imap, is slow and may be feature deficient. If available|
+ *  | you are STRONGLY recommended to use the php extensions.              |
+ *  +----------------------------------------------------------------------+
+ *
+ * Mime Decoding class
+ *
+ * This class will parse a raw mime email and return
+ * the structure. Returned structure is similar to
+ * that returned by imap_fetchstructure().
+ *
+ * USAGE: (assume $input is your raw email)
+ *
+ * $decode = new Mail_mimeDecode($input, "\r\n");
+ * $structure = $decode->decode();
+ * print_r($structure);
+ *
+ * Or statically:
+ *
+ * $params['input'] = $input;
+ * $structure = Mail_mimeDecode::decode($params);
+ * print_r($structure);
+ *
+ * TODO:
+ *  - Implement further content types, eg. multipart/parallel,
+ *    perhaps even message/partial.
+ *
+ * @author  Richard Heyes <richard@phpguru.org>
+ * @version $Revision: 1.2 $
+ * @package Mail
+ */
 
 class Mail_mimeDecode extends PEAR
 {
@@ -115,11 +115,11 @@ class Mail_mimeDecode extends PEAR
     var $_decode_headers;
 
     /**
-    * If invoked from a class, $this will be set. This has problematic
-    * connotations for calling decode() statically. Hence this variable
-    * is used to determine if we are indeed being called statically or
-    * via an object.
-    */
+     * If invoked from a class, $this will be set. This has problematic
+     * connotations for calling decode() statically. Hence this variable
+     * is used to determine if we are indeed being called statically or
+     * via an object.
+     */
     var $mailMimeDecode;
 
     /**
@@ -140,7 +140,7 @@ class Mail_mimeDecode extends PEAR
         $this->_body           = $body;
         $this->_decode_bodies  = false;
         $this->_include_bodies = true;
-        
+
         $this->mailMimeDecode  = true;
     }
 
@@ -170,11 +170,11 @@ class Mail_mimeDecode extends PEAR
             $obj = new Mail_mimeDecode($params['input']);
             $structure = $obj->decode($params);
 
-        // Called statically but no input
+            // Called statically but no input
         } elseif (!isset($this->mailMimeDecode)) {
             return PEAR::raiseError('Called statically and no input given');
 
-        // Called via an object
+            // Called via an object
         } else {
             $this->_include_bodies = isset($params['include_bodies'])  ? $params['include_bodies']  : false;
             $this->_decode_bodies  = isset($params['decode_bodies'])   ? $params['decode_bodies']   : false;
@@ -284,7 +284,7 @@ class Mail_mimeDecode extends PEAR
                         list($part_header, $part_body) = $this->_splitBodyHeader($parts[$i]);
                         $part = $this->_decode($part_header, $part_body, $default_ctype);
                         if($part === false)
-                            $part = $this->raiseError($this->_error);
+                        $part = $this->raiseError($this->_error);
                         $return->parts[] = $part;
                     }
                     break;
@@ -297,7 +297,7 @@ class Mail_mimeDecode extends PEAR
 
                 default:
                     if(!isset($content_transfer_encoding['value']))
-                        $content_transfer_encoding['value'] = '7bit';
+                    $content_transfer_encoding['value'] = '7bit';
                     $this->_include_bodies ? $return->body = ($this->_decode_bodies ? $this->_decodeBody($body, $content_transfer_encoding['value']) : $body) : null;
                     break;
             }
@@ -330,7 +330,7 @@ class Mail_mimeDecode extends PEAR
             }
             for ($i = 0; $i < count($structure->parts); $i++) {
 
-            
+
                 if (!empty($structure->headers['content-type']) AND substr(strtolower($structure->headers['content-type']), 0, 8) == 'message/') {
                     $prepend      = $prepend . $mime_number . '.';
                     $_mime_number = '';
@@ -350,7 +350,7 @@ class Mail_mimeDecode extends PEAR
             $structure->mime_id = $prepend . $mime_number;
             $no_refs ? $return[$prepend . $mime_number] = '' : $return[$prepend . $mime_number] = &$structure;
         }
-        
+
         return $return;
     }
 
@@ -393,12 +393,12 @@ class Mail_mimeDecode extends PEAR
                 $hdr_name = substr($value, 0, $pos = strpos($value, ':'));
                 $hdr_value = substr($value, $pos+1);
                 if($hdr_value[0] == ' ')
-                    $hdr_value = substr($hdr_value, 1);
+                $hdr_value = substr($hdr_value, 1);
 
                 $return[] = array(
                                   'name'  => $hdr_name,
                                   'value' => $this->_decode_headers ? $this->_decodeHeader($hdr_value) : $hdr_value
-                                 );
+                );
             }
         } else {
             $return = array();
@@ -501,7 +501,7 @@ class Mail_mimeDecode extends PEAR
                     $text = str_replace('_', ' ', $text);
                     preg_match_all('/=([a-f0-9]{2})/i', $text, $matches);
                     foreach($matches[1] as $value)
-                        $text = str_replace('='.$value, chr(hexdec($value)), $text);
+                    $text = str_replace('='.$value, chr(hexdec($value)), $text);
                     break;
             }
 
@@ -554,7 +554,7 @@ class Mail_mimeDecode extends PEAR
         $input = preg_replace("/=\r?\n/", '', $input);
 
         // Replace encoded characters
-		$input = preg_replace('/=([a-f0-9]{2})/ie', "chr(hexdec('\\1'))", $input);
+        $input = preg_replace('/=([a-f0-9]{2})/ie', "chr(hexdec('\\1'))", $input);
 
         return $input;
     }
@@ -636,7 +636,7 @@ class Mail_mimeDecode extends PEAR
 
     /**
      * getSendArray() returns the arguments required for Mail::send()
-     * used to build the arguments for a mail::send() call 
+     * used to build the arguments for a mail::send() call
      *
      * Usage:
      * $mailtext = Full email (for example generated by a template)
@@ -670,7 +670,7 @@ class Mail_mimeDecode extends PEAR
                 case "bcc":
                     $to = ",".$item['value'];
                 default:
-                   break;
+                    break;
             }
         }
         if ($to == "") {
@@ -678,7 +678,7 @@ class Mail_mimeDecode extends PEAR
         }
         $to = substr($to,1);
         return array($to,$header,$this->_body);
-    } 
+    }
 
 
 
@@ -711,7 +711,7 @@ class Mail_mimeDecode extends PEAR
         $output  = '<?xml version=\'1.0\'?>' . $crlf .
                    '<!DOCTYPE email SYSTEM "http://www.phpguru.org/xmail/xmail.dtd">' . $crlf .
                    '<email>' . $crlf .
-                   Mail_mimeDecode::_getXML($input) .
+        Mail_mimeDecode::_getXML($input) .
                    '</email>';
 
         return $output;
@@ -742,7 +742,7 @@ class Mail_mimeDecode extends PEAR
                     $output .= Mail_mimeDecode::_getXML_helper($hdr_name, $hdr_value[$i], $indent);
                 }
 
-            // Only one header of this sort
+                // Only one header of this sort
             } else {
                 $output .= Mail_mimeDecode::_getXML_helper($hdr_name, $hdr_value, $indent);
             }
@@ -751,12 +751,12 @@ class Mail_mimeDecode extends PEAR
         if (!empty($input->parts)) {
             for ($i = 0; $i < count($input->parts); $i++) {
                 $output .= $crlf . str_repeat($htab, $indent) . '<mimepart>' . $crlf .
-                           Mail_mimeDecode::_getXML($input->parts[$i], $indent+1) .
-                           str_repeat($htab, $indent) . '</mimepart>' . $crlf;
+                Mail_mimeDecode::_getXML($input->parts[$i], $indent+1) .
+                str_repeat($htab, $indent) . '</mimepart>' . $crlf;
             }
         } elseif (isset($input->body)) {
             $output .= $crlf . str_repeat($htab, $indent) . '<body><![CDATA[' .
-                       $input->body . ']]></body>' . $crlf;
+            $input->body . ']]></body>' . $crlf;
         }
 
         return $output;
@@ -784,9 +784,9 @@ class Mail_mimeDecode extends PEAR
         if (!empty($new_hdr_value['other'])) {
             foreach ($new_hdr_value['other'] as $paramname => $paramvalue) {
                 $params[] = str_repeat($htab, $indent) . $htab . '<parameter>' . $crlf .
-                            str_repeat($htab, $indent) . $htab . $htab . '<paramname>' . htmlspecialchars($paramname) . '</paramname>' . $crlf .
-                            str_repeat($htab, $indent) . $htab . $htab . '<paramvalue>' . htmlspecialchars($paramvalue) . '</paramvalue>' . $crlf .
-                            str_repeat($htab, $indent) . $htab . '</parameter>' . $crlf;
+                str_repeat($htab, $indent) . $htab . $htab . '<paramname>' . htmlspecialchars($paramname) . '</paramname>' . $crlf .
+                str_repeat($htab, $indent) . $htab . $htab . '<paramvalue>' . htmlspecialchars($paramvalue) . '</paramvalue>' . $crlf .
+                str_repeat($htab, $indent) . $htab . '</parameter>' . $crlf;
             }
 
             $params = implode('', $params);
@@ -795,10 +795,10 @@ class Mail_mimeDecode extends PEAR
         }
 
         $return = str_repeat($htab, $indent) . '<header>' . $crlf .
-                  str_repeat($htab, $indent) . $htab . '<headername>' . htmlspecialchars($new_hdr_name) . '</headername>' . $crlf .
-                  str_repeat($htab, $indent) . $htab . '<headervalue>' . htmlspecialchars($new_hdr_value['value']) . '</headervalue>' . $crlf .
-                  $params .
-                  str_repeat($htab, $indent) . '</header>' . $crlf;
+        str_repeat($htab, $indent) . $htab . '<headername>' . htmlspecialchars($new_hdr_name) . '</headername>' . $crlf .
+        str_repeat($htab, $indent) . $htab . '<headervalue>' . htmlspecialchars($new_hdr_value['value']) . '</headervalue>' . $crlf .
+        $params .
+        str_repeat($htab, $indent) . '</header>' . $crlf;
 
         return $return;
     }

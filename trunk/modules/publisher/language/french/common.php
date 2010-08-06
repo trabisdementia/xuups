@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: common.php 836 2009-09-14 23:29:42Z Dugris $
-* Module: Publisher
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: common.php 836 2009-09-14 23:29:42Z Dugris $
+ * Module: Publisher
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 define("_CO_PUBLISHER_MESSAGE_FILE_ERROR", "Erreur : Impossible de charger le fichier pour les raisons suivantes: <br />%s");
 define("_CO_PUBLISHER_MESSAGE_WRONG_MIMETYPE", "Erreur : Type de fichier non permis. Essayez à nouveau.");
@@ -114,5 +114,5 @@ define("_CO_PUBLISHER_IMAGE_CAT_NOPERM", "Vous n'avez pas les permissions d'util
  * @specification   _CHARSET: UTF-8
  *
  * @version         $Id: common.php 836 2009-09-14 23:29:42Z Dugris $
-**/
+ **/
 ?>

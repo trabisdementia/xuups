@@ -4,7 +4,7 @@
 //                - XOOPS block admin for each modules -                     //
 //                          GIJOE <http://www.peak.ne.jp/>                   //
 // ------------------------------------------------------------------------- //
-include_once('../../../include/cp_header.php'); 
+include_once('../../../include/cp_header.php');
 include_once("admin_header.php");
 include_once(XOOPS_ROOT_PATH."/class/xoopsblock.php");
 //include_once XOOPS_ROOT_PATH."/modules/".$xoopsModule->dirname()."/include/functions.php";
@@ -25,7 +25,7 @@ error_reporting( $error_reporting_level ) ;
 
 $group_defs = file( "$xoops_system_path/language/$language/admin/groups.php" ) ;
 foreach( $group_defs as $def ) {
-	if( strstr( $def , '_AM_ACCESSRIGHTS' ) || strstr( $def , '_AM_ACTIVERIGHTS' ) ) eval( $def ) ;
+    if( strstr( $def , '_AM_ACCESSRIGHTS' ) || strstr( $def , '_AM_ACTIVERIGHTS' ) ) eval( $def ) ;
 }
 
 // check $xoopsModule
@@ -41,19 +41,19 @@ $block_arr =& XoopsBlock::getByModule( $xoopsModule->mid() ) ;
 
 function list_blocks()
 {
-	global $block_arr, $xoopsModule ;
-	
-	// cachetime options
-	$cachetimes = array('0' => _NOCACHE, '30' => sprintf(_SECONDS, 30), '60' => _MINUTE, '300' => sprintf(_MINUTES, 5), '1800' => sprintf(_MINUTES, 30), '3600' => _HOUR, '18000' => sprintf(_HOURS, 5), '86400' => _DAY, '259200' => sprintf(_DAYS, 3), '604800' => _WEEK, '2592000' => _MONTH);
-	
-	// displaying TH
+    global $block_arr, $xoopsModule ;
+
+    // cachetime options
+    $cachetimes = array('0' => _NOCACHE, '30' => sprintf(_SECONDS, 30), '60' => _MINUTE, '300' => sprintf(_MINUTES, 5), '1800' => sprintf(_MINUTES, 30), '3600' => _HOUR, '18000' => sprintf(_HOURS, 5), '86400' => _DAY, '259200' => sprintf(_DAYS, 3), '604800' => _WEEK, '2592000' => _MONTH);
+
+    // displaying TH
     //smartclient_collapsableBar('toptable', 'toptableicon');
     //echo "<img id='toptableicon' src=" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/close12.gif alt='' /></a>&nbsp;" . _AM_SCLIENT_BLOCKS . "</h3>";
     //echo "<div id='toptable'>";
     //echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . _AM_SCLIENT_BLOCKSTXT . "</span>";
 
-	
-	echo "
+
+    echo "
 	<form action='admin.php' name='blockadmin' method='post'>
 		<table width='100%' class='outer' cellpadding='4' cellspacing='1'>
 		<tr valign='middle'>
@@ -64,79 +64,79 @@ function list_blocks()
 			<th align='center'>"._AM_BCACHETIME."</th>
 			<th align='center'>"._AM_ACTION."</th>
 		</tr>\n" ;
-	
-	// blocks displaying loop
-	$class = 'even' ;
-	foreach( array_keys( $block_arr ) as $i ) {
-		$sseln = $ssel0 = $ssel1 = $ssel2 = $ssel3 = $ssel4 = "";
-		
-		$weight = $block_arr[$i]->getVar("weight") ;
-		$title = $block_arr[$i]->getVar("title") ;
-		$name = $block_arr[$i]->getVar("name") ;
-		$bcachetime = $block_arr[$i]->getVar("bcachetime") ;
-		$bid = $block_arr[$i]->getVar("bid") ;
-		
-		// visible and side
-		if ( $block_arr[$i]->getVar("visible") != 1 ) {
-			$sseln = " checked='checked' style='background-color:#FF0000;'";
-		} else switch( $block_arr[$i]->getVar("side") ) {
-			default :
-			case XOOPS_SIDEBLOCK_LEFT :
-			$ssel0 = " checked='checked' style='background-color:#00FF00;'";
-			break ;
-			case XOOPS_SIDEBLOCK_RIGHT :
-			$ssel1 = " checked='checked' style='background-color:#00FF00;'";
-			break ;
-			case XOOPS_CENTERBLOCK_LEFT :
-			$ssel2 = " checked='checked' style='background-color:#00FF00;'";
-			break ;
-			case XOOPS_CENTERBLOCK_RIGHT :
-			$ssel4 = " checked='checked' style='background-color:#00FF00;'";
-			break ;
-			case XOOPS_CENTERBLOCK_CENTER :
-			$ssel3 = " checked='checked' style='background-color:#00FF00;'";
-			break ;
-		}
-		
-		// bcachetime
-		$cachetime_options = '' ;
-		foreach( $cachetimes as $cachetime => $cachetime_name ) {
-			if( $bcachetime == $cachetime ) {
-				$cachetime_options .= "<option value='$cachetime' selected='selected'>$cachetime_name</option>\n" ;
-			} else {
-				$cachetime_options .= "<option value='$cachetime'>$cachetime_name</option>\n" ;
-			}
-		}
-		
-		// target modules
-		$db =& Database::getInstance();
-		$result = $db->query( "SELECT module_id FROM ".$db->prefix('block_module_link')." WHERE block_id='$bid'" ) ;
-		$selected_mids = array();
-		while ( list( $selected_mid ) = $db->fetchRow( $result ) ) {
-			$selected_mids[] = intval( $selected_mid ) ;
-		}
-		$module_handler =& xoops_gethandler('module');
-		$criteria = new CriteriaCompo(new Criteria('hasmain', 1));
-		$criteria->add(new Criteria('isactive', 1));
-		$module_list =& $module_handler->getList($criteria);
-		$module_list[-1] = _AM_TOPPAGE;
-		$module_list[0] = _AM_ALLPAGES;
-		ksort($module_list);
-		$module_options = '' ;
-		$myts = &MyTextSanitizer::getInstance();
-		foreach( $module_list as $mid => $mname ) {
-			if( in_array( $mid , $selected_mids ) ) {
-				$module_options .= "<option value='$mid' selected='selected'>" . $myts->displayTarea($mname) . "</option>\n" ;
-			} else {
-				$module_options .= "<option value='$mid'>" . $myts->displayTarea($mname) . "</option>\n" ;
-			}
-		}
-		
-		// displaying part
-		echo "
+
+    // blocks displaying loop
+    $class = 'even' ;
+    foreach( array_keys( $block_arr ) as $i ) {
+        $sseln = $ssel0 = $ssel1 = $ssel2 = $ssel3 = $ssel4 = "";
+
+        $weight = $block_arr[$i]->getVar("weight") ;
+        $title = $block_arr[$i]->getVar("title") ;
+        $name = $block_arr[$i]->getVar("name") ;
+        $bcachetime = $block_arr[$i]->getVar("bcachetime") ;
+        $bid = $block_arr[$i]->getVar("bid") ;
+
+        // visible and side
+        if ( $block_arr[$i]->getVar("visible") != 1 ) {
+            $sseln = " checked='checked' style='background-color:#FF0000;'";
+        } else switch( $block_arr[$i]->getVar("side") ) {
+            default :
+            case XOOPS_SIDEBLOCK_LEFT :
+                $ssel0 = " checked='checked' style='background-color:#00FF00;'";
+                break ;
+            case XOOPS_SIDEBLOCK_RIGHT :
+                $ssel1 = " checked='checked' style='background-color:#00FF00;'";
+                break ;
+            case XOOPS_CENTERBLOCK_LEFT :
+                $ssel2 = " checked='checked' style='background-color:#00FF00;'";
+                break ;
+            case XOOPS_CENTERBLOCK_RIGHT :
+                $ssel4 = " checked='checked' style='background-color:#00FF00;'";
+                break ;
+            case XOOPS_CENTERBLOCK_CENTER :
+                $ssel3 = " checked='checked' style='background-color:#00FF00;'";
+                break ;
+        }
+
+        // bcachetime
+        $cachetime_options = '' ;
+        foreach( $cachetimes as $cachetime => $cachetime_name ) {
+            if( $bcachetime == $cachetime ) {
+                $cachetime_options .= "<option value='$cachetime' selected='selected'>$cachetime_name</option>\n" ;
+            } else {
+                $cachetime_options .= "<option value='$cachetime'>$cachetime_name</option>\n" ;
+            }
+        }
+
+        // target modules
+        $db =& Database::getInstance();
+        $result = $db->query( "SELECT module_id FROM ".$db->prefix('block_module_link')." WHERE block_id='$bid'" ) ;
+        $selected_mids = array();
+        while ( list( $selected_mid ) = $db->fetchRow( $result ) ) {
+            $selected_mids[] = intval( $selected_mid ) ;
+        }
+        $module_handler =& xoops_gethandler('module');
+        $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
+        $criteria->add(new Criteria('isactive', 1));
+        $module_list =& $module_handler->getList($criteria);
+        $module_list[-1] = _AM_TOPPAGE;
+        $module_list[0] = _AM_ALLPAGES;
+        ksort($module_list);
+        $module_options = '' ;
+        $myts = &MyTextSanitizer::getInstance();
+        foreach( $module_list as $mid => $mname ) {
+            if( in_array( $mid , $selected_mids ) ) {
+                $module_options .= "<option value='$mid' selected='selected'>" . $myts->displayTarea($mname) . "</option>\n" ;
+            } else {
+                $module_options .= "<option value='$mid'>" . $myts->displayTarea($mname) . "</option>\n" ;
+            }
+        }
+
+        // displaying part
+        echo "
 		<tr valign='middle'>
 			<td class='$class'>
-				$name
+			$name
 				<br />
 				<input type='text' name='title[$bid]' value='$title' size='20' />
 			</td>
@@ -152,12 +152,12 @@ function list_blocks()
 			</td>
 			<td class='$class' align='center'>
 				<select name='bmodule[$bid][]' size='5' multiple='multiple'>
-					$module_options
+				$module_options
 				</select>
 			</td>
 			<td class='$class' align='center'>
 				<select name='bcachetime[$bid]' size='1'>
-					$cachetime_options
+				$cachetime_options
 				</select>
 			</td>
 			<td class='$class' align='center'>
@@ -165,11 +165,11 @@ function list_blocks()
 				<input type='hidden' name='bid[$bid]' value='$bid' />
 			</td>
 		</tr>\n" ;
-		
-		$class = ( $class == 'even' ) ? 'odd' : 'even' ;
-	}
-	
-	echo "
+
+				$class = ( $class == 'even' ) ? 'odd' : 'even' ;
+    }
+
+    echo "
 		<tr>
 			<td class='foot' align='center' colspan='6'>
 				<input type='hidden' name='fct' value='blocksadmin' />
@@ -179,34 +179,34 @@ function list_blocks()
 		</tr>
 		</table>
 	</form>\n" ;
-	//echo "</div>";
+    //echo "</div>";
 }
 
 
 function list_groups()
 {
-	global $xoopsModule , $block_arr ;
-	$myts = &MyTextSanitizer::getInstance();
-	
+    global $xoopsModule , $block_arr ;
+    $myts = &MyTextSanitizer::getInstance();
+
     //smartclient_collapsableBar('bottomtable', 'bottomtableicon');
-    
-	foreach( array_keys( $block_arr ) as $i ) {
-		$item_list[ $block_arr[$i]->getVar("bid") ] = $block_arr[$i]->getVar("title") ;
-	}
-	
-	$form = new MyXoopsGroupPermForm('' , 1 , 'block_read' , "<img id='bottomtableicon' src=" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/close12.gif alt='' /></a>&nbsp;" . _AM_SCLIENT_GROUPS . "</h3><div id='bottomtable'><span style=\"color: #567; margin: 3px 0 0 0; font-size: small; display: block; \">" . _AM_SCLIENT_GROUPSINFO . "</span>") ;
-	$form->addAppendix('module_admin',$xoopsModule->mid(),$myts->displayTarea($xoopsModule->name()).' '._AM_ACTIVERIGHTS);
-	$form->addAppendix('module_read',$xoopsModule->mid(),$myts->displayTarea($xoopsModule->name()).' '._AM_ACCESSRIGHTS);
-	foreach( $item_list as $item_id => $item_name) {
-		$form->addItem( $item_id , $myts->displayTarea($item_name) ) ;
-	}
-	echo $form->render() ;
-    echo "</div>";	
+
+    foreach( array_keys( $block_arr ) as $i ) {
+        $item_list[ $block_arr[$i]->getVar("bid") ] = $block_arr[$i]->getVar("title") ;
+    }
+
+    $form = new MyXoopsGroupPermForm('' , 1 , 'block_read' , "<img id='bottomtableicon' src=" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/close12.gif alt='' /></a>&nbsp;" . _AM_SCLIENT_GROUPS . "</h3><div id='bottomtable'><span style=\"color: #567; margin: 3px 0 0 0; font-size: small; display: block; \">" . _AM_SCLIENT_GROUPSINFO . "</span>") ;
+    $form->addAppendix('module_admin',$xoopsModule->mid(),$myts->displayTarea($xoopsModule->name()).' '._AM_ACTIVERIGHTS);
+    $form->addAppendix('module_read',$xoopsModule->mid(),$myts->displayTarea($xoopsModule->name()).' '._AM_ACCESSRIGHTS);
+    foreach( $item_list as $item_id => $item_name) {
+        $form->addItem( $item_id , $myts->displayTarea($item_name) ) ;
+    }
+    echo $form->render() ;
+    echo "</div>";
 }
 
 if(!empty($_POST['submit'])) {
-	include_once( "$xoops_system_path/language/$language/admin.php" ) ;
-	redirect_header( XOOPS_URL."/modules/".$xoopsModule->dirname()."/admin/myblocksadmin.php" , 1 , _AM_DBUPDATED );
+    include_once( "$xoops_system_path/language/$language/admin.php" ) ;
+    redirect_header( XOOPS_URL."/modules/".$xoopsModule->dirname()."/admin/myblocksadmin.php" , 1 , _AM_DBUPDATED );
 }
 if (!ob_get_length()) {
     xoops_cp_header() ;

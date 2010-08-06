@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -78,8 +78,8 @@ switch ($publisher->getConfig('format_order_by')) {
 
     default :
         $sort = 'weight';
-    $order = 'ASC';
-    break;
+        $order = 'ASC';
+        break;
 }
 
 $itemsObj = $publisher->getHandler('item')->getAllPublished($publisher->getConfig('idxcat_index_perpage'), $start, $categoryid, $sort, $order);

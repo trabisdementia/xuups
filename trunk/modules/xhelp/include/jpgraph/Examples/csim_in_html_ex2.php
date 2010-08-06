@@ -30,31 +30,29 @@ echo $imgmap2;
 
 <?php
 if( empty($_GET['clickedon']) ) {
-   echo '<b style="color:darkred;">Clicked on bar: &lt;none></b>';
+    echo '<b style="color:darkred;">Clicked on bar: &lt;none></b>';
 }
 else {
-   echo '<b style="color:darkred;">Clicked on bar: '.$_GET['clickedon'].'</b>';
+    echo '<b style="color:darkred;">Clicked on bar: '.$_GET['clickedon'].'</b>';
 }
 echo '<p />';
 if( empty($_GET['pie_clickedon']) ) {
-   echo '<b style="color:darkred;">Clicked on pie slice: &lt;none></b>';
+    echo '<b style="color:darkred;">Clicked on pie slice: &lt;none></b>';
 }
 else {
-   echo '<b style="color:darkred;">Clicked on pie slice: '.$_GET['pie_clickedon'].'</b>';
+    echo '<b style="color:darkred;">Clicked on pie slice: '.$_GET['pie_clickedon'].'</b>';
 }
 echo '<p />';
 ?>
 
-<p>First we need to get hold of the image maps and include them in the HTML
-  page.</p>
+<p>First we need to get hold of the image maps and include them in the
+HTML page.</p>
 <p>For these graphs the maps are:</p>
 <?php
 // The we display the image map as well
 echo '<small><pre>'.htmlentities($imgmap1).'</pre></small>';
 ?>
-<p>
-and
-</p>
+<p>and</p>
 <?php
 // The we display the image map as well
 echo '<small><pre>'.htmlentities($imgmap2).'</pre></small>';
@@ -65,36 +63,34 @@ echo '<small><pre>'.htmlentities($imgmap2).'</pre></small>';
 $imgtag1 = $graph->GetCSIMImgHTML($_mapname1,$_graphfilename1);
 $imgtag2 = $piegraph->GetCSIMImgHTML($_mapname2,$_graphfilename2);
 ?>
-<p>The graphs are then displayed as shown in figure 1 &amp; 2. With the following
-  created &lt;img> tags:</p>
+<p>The graphs are then displayed as shown in figure 1 &amp; 2. With the
+following created &lt;img> tags:</p>
 <small><pre>
-<?php 
-echo htmlentities($imgtag1); 
-echo htmlentities($imgtag2); 
+<?php
+echo htmlentities($imgtag1);
+echo htmlentities($imgtag2);
 ?>
 </pre></small>
 
-<p>
-Note: For the Pie the center is counted as the first slice.
-</p>
+<p>Note: For the Pie the center is counted as the first slice.</p>
 
 <p>
 <table border=0>
-<tr><td valign="bottom">
-<?php
-echo $imgtag1;
-?>
-<br><b>Figure 1. </b>The included Bar CSIM graph.
-</p>
-</td>
-<td valign="bottom">
-<?php
-echo $imgtag2;
-?>
-<br><b>Figure 2. </b>The included Pie CSIM graph.
-</p>
-</td>
-</tr>
+	<tr>
+		<td valign="bottom"><?php
+		echo $imgtag1;
+		?> <br>
+		<b>Figure 1. </b>The included Bar CSIM graph.
+		</p>
+		</td>
+		<td valign="bottom"><?php
+		echo $imgtag2;
+		?> <br>
+		<b>Figure 2. </b>The included Pie CSIM graph.
+		</p>
+		</td>
+	</tr>
 </table>
+
 </body>
 </html>

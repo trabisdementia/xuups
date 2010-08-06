@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: category.php 2169 2008-09-23 13:37:10Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
@@ -48,7 +48,7 @@ class NewbbCategoryHandler extends XoopsPersistableObjectHandler
         $perm_handler = xoops_getmodulehandler('permission', 'newbb');
         return $perm_handler->getCategories($perm);
     }
-    
+
     function &getByPermission($permission = "access", $tags = null, $asObject = true)
     {
         $categories = array();
@@ -103,13 +103,13 @@ class NewbbCategoryHandler extends XoopsPersistableObjectHandler
         $perm_handler =& xoops_getmodulehandler('permission', 'newbb');
         return $perm_handler->getPermission("category", $perm, $cat_id);
     }
-        
+
     function deletePermission(&$category)
     {
         $perm_handler =& xoops_getmodulehandler('permission', 'newbb');
         return $perm_handler->deleteByCategory($category->getVar("cat_id"));
     }
-    
+
     function applyPermissionTemplate(&$category)
     {
         $perm_handler =& xoops_getmodulehandler('permission', 'newbb');

@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: admin.php 836 2009-09-14 23:29:42Z Dugris $
-* Module: Publisher
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: admin.php 836 2009-09-14 23:29:42Z Dugris $
+ * Module: Publisher
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 define("_AM_PUBLISHER_ABOUT", "à propos");
 define("_AM_PUBLISHER_ACTION", "Action");
@@ -340,5 +340,5 @@ define("_AM_PUBLISHER_CATEGORY_MODERATOR_DSC", "Un modérateur peut accéder et 
  * @specification   _CHARSET: UTF-8
  *
  * @version         $Id: admin.php 836 2009-09-14 23:29:42Z Dugris $
-**/
+ **/
 ?>

@@ -24,6 +24,6 @@ class Xmf_Abstract
 {
     function __toString()
     {
-         return Xmf_Debug::dump($this, false);
+        return Xmf_Debug::dump($this, false);
     }
 }

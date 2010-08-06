@@ -3,7 +3,7 @@
  * Article module for XOOPS
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  * @version         $Id: xml.php 2283 2008-10-12 03:36:13Z phppp $
  */
- 
+
 if (!defined("XOOPS_ROOT_PATH")) {
     exit();
 }
@@ -25,38 +25,38 @@ include dirname(dirname(__FILE__)) . "/include/functions.parse.php";
 xoops_load("xoopslocal");
 
 /*** GENERAL USAGE *********************************************************
-$xml_handler =& xoops_getmodulehandler("xml", $xoopsModule->getVar("dirname"));
-$xml = $xml_handler->create("RSS0.91");
-$xml->setVar("title", $title);
-$xml->setVar("description", $description);
-$xml->setVar("descriptionHtmlSyndicated", true);
-$xml->setVar("link", $link);
-$xml->setVar("syndicationURL", $syndicationURL);
+ $xml_handler =& xoops_getmodulehandler("xml", $xoopsModule->getVar("dirname"));
+ $xml = $xml_handler->create("RSS0.91");
+ $xml->setVar("title", $title);
+ $xml->setVar("description", $description);
+ $xml->setVar("descriptionHtmlSyndicated", true);
+ $xml->setVar("link", $link);
+ $xml->setVar("syndicationURL", $syndicationURL);
 
-$image = array(
-    "width" => $imagewidth,
-    "height" => $height,
-    "title" => $imagetitle,
-    "url" => $imageurl,
-    "link" => $imagelink,
-    "description" => $imagedesc
-    );
+ $image = array(
+ "width" => $imagewidth,
+ "height" => $height,
+ "title" => $imagetitle,
+ "url" => $imageurl,
+ "link" => $imagelink,
+ "description" => $imagedesc
+ );
 
-$item = array(
-    "title" => $datatitle,
-    "link" => $dataurl,
-    "description" => $datadesc,
-    "descriptionHtmlSyndicated" => true,
-    "date" => $datadate,
-    "source" => $datasource,
-    "author" => $dataauthor
-    );
+ $item = array(
+ "title" => $datatitle,
+ "link" => $dataurl,
+ "description" => $datadesc,
+ "descriptionHtmlSyndicated" => true,
+ "date" => $datadate,
+ "source" => $datasource,
+ "author" => $dataauthor
+ );
 
-$xml->setImage($image);
-$xml->addItem($item);
+ $xml->setImage($image);
+ $xml->addItem($item);
 
-$xml_handler->display($xml);
-*/
+ $xml_handler->display($xml);
+ */
 
 // your local timezone, set to "" to disable or for GMT
 // To be used in feedcreator.class.php
@@ -78,66 +78,66 @@ require_once dirname(__FILE__) . "/feedcreator.class.php";
  * @link
  */
 if (!class_exists("Xmlfeed")) {
-class Xmlfeed extends UniversalFeedCreator
-{
-    var $version;
-    var $filename= "";
+    class Xmlfeed extends UniversalFeedCreator
+    {
+        var $version;
+        var $filename= "";
 
-    function Xmlfeed($version)
-    {
-        $this->filename = XOOPS_CACHE_PATH . "/article.feed.{$version}.xml";
-        $this->version = $version;
-    }
+        function Xmlfeed($version)
+        {
+            $this->filename = XOOPS_CACHE_PATH . "/article.feed.{$version}.xml";
+            $this->version = $version;
+        }
 
-    function setVar($var, $val, $encoding = false)
-    {
-        if (!empty($encoding)) $val = $this->convert_encoding($val);
-        $this->$var = $val;
-    }
-    
-    function convert_encoding($val)    
-    {
-        if (is_array($val)) {
-            foreach(array_keys($val) as $key) {
-                $val[$key] = $this->convert_encoding($val[$key]);
+        function setVar($var, $val, $encoding = false)
+        {
+            if (!empty($encoding)) $val = $this->convert_encoding($val);
+            $this->$var = $val;
+        }
+
+        function convert_encoding($val)
+        {
+            if (is_array($val)) {
+                foreach(array_keys($val) as $key) {
+                    $val[$key] = $this->convert_encoding($val[$key]);
+                }
+            } else {
+                $val = XoopsLocal::convert_encoding($val, $this->encoding, _CHARSET);
             }
-        } else {
-            $val = XoopsLocal::convert_encoding($val, $this->encoding, _CHARSET);
+            return $val;
         }
-        return $val;
-    }
 
-    function getVar($var)
-    {
-        return $this->$var;
-    }
-
-    function setImage(&$img)
-    {
-        $image = new FeedImage();
-        foreach ($img as $key => $val) {
-            $image->$key = $this->convert_encoding($val);
+        function getVar($var)
+        {
+            return $this->$var;
         }
-        $this->setVar("image", $image);
-    }
 
-    function _addItem(&$itm)
-    {
-        $item = new FeedItem();
-        foreach ($itm as $key => $val) {
-            $item->$key = $this->convert_encoding($val);
+        function setImage(&$img)
+        {
+            $image = new FeedImage();
+            foreach ($img as $key => $val) {
+                $image->$key = $this->convert_encoding($val);
+            }
+            $this->setVar("image", $image);
         }
-        $this->addItem($item);
-    }
 
-    function addItems(&$items)
-    {
-        if (!is_array($items) || count($items) == 0) return;
-        foreach ($items as $item) {
-            $this->_addItem($item);
+        function _addItem(&$itm)
+        {
+            $item = new FeedItem();
+            foreach ($itm as $key => $val) {
+                $item->$key = $this->convert_encoding($val);
+            }
+            $this->addItem($item);
+        }
+
+        function addItems(&$items)
+        {
+            if (!is_array($items) || count($items) == 0) return;
+            foreach ($items as $item) {
+                $this->_addItem($item);
+            }
         }
     }
-}
 }
 
 art_parse_class('

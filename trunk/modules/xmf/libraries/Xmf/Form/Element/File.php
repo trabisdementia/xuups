@@ -8,15 +8,15 @@
  * @author	    Kazumi Ono	<onokazu@xoops.org>
  * @copyright	copyright (c) 2000-2003 XOOPS.org
  */
- /**
-  * A file upload field
-  *
-  * @author	Kazumi Ono	<onokazu@xoops.org>
-  * @copyright	copyright (c) 2000-2003 XOOPS.org
-  *
-  * @package		kernel
-  * @subpackage	form
-  */
+/**
+ * A file upload field
+ *
+ * @author	Kazumi Ono	<onokazu@xoops.org>
+ * @copyright	copyright (c) 2000-2003 XOOPS.org
+ *
+ * @package		kernel
+ * @subpackage	form
+ */
 class Xmf_Form_Element_File extends Xmf_Form_Element
 {
     /**

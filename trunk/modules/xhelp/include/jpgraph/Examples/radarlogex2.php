@@ -9,7 +9,7 @@ $data = array(242,58,500,12,397,810,373);
 // Create the graph
 $graph = new RadarGraph(200,200);
 
-// Uncomment the following line to use anti-aliasing 
+// Uncomment the following line to use anti-aliasing
 // Note: Enabling this results in a very noticable slow
 // down of the image generation! And more load on your
 // server. Use it wisly!!
@@ -30,7 +30,7 @@ $graph->SetScale("log");
 // slightly less noticable
 $graph->yscale->ticks->SetMarkColor("black","darkgray");
 
-// Set the axis title font 
+// Set the axis title font
 $graph->axis->title->SetFont(FF_ARIAL,FS_BOLD,12);
 
 // Use blue axis

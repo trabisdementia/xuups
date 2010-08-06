@@ -11,7 +11,7 @@ if ( DIRECTORY_SEPARATOR != "/" ) $current_path = str_replace( strpos( $current_
 $url_arr = explode("/",strstr($current_path,"/modules/"));
 include XOOPS_ROOT_PATH."/modules/".$url_arr[2]."/include/vars.php";
 
-if(defined($GLOBALS["ART_VAR_PREFIXU"]."_LANG_GB_BLOCKS")) return; 
+if(defined($GLOBALS["ART_VAR_PREFIXU"]."_LANG_GB_BLOCKS")) return;
 define($GLOBALS["ART_VAR_PREFIXU"]."_LANG_GB_BLOCKS",1);
 
 define($GLOBALS["ART_VAR_PREFIXU"]."_MB_TYPE", "¿‡–Õ");

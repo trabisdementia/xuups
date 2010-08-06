@@ -49,8 +49,8 @@ if (!copy($image_path, $avatar_path)) {
     $userHandler = new XoopsUserHandler($xoopsDB);
 
     /**
-    * Verifying who's the owner to allow changes
-    */
+     * Verifying who's the owner to allow changes
+     */
     if ($uid == $image->getVar('uid')) {
         if ($userHandler->insert($xoopsUser)) {
             redirect_header('index.php', 2, _MD_MYPICS_AVATAR_EDITED);

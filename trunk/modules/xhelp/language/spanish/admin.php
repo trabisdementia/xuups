@@ -177,7 +177,7 @@ define('_AM_XHELP_TEXT_SEARCH_TEXT', 'Buscar texto:');
 define('_AM_XHELP_TEXT_GO_BACK_SEARCH', 'Vover a Buscar');
 define('_AM_XHELP_TEXT_FIND_USERS', 'Encontrar Usuario');
 
-define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Fecha de inicio');  
+define('_AM_XHELP_SEARCH_BEGINEGINDATE', 'Fecha de inicio');
 define('_AM_XHELP_SEARCH_ENDDATE', 'Fecha de Fin');
 
 define('_AM_XHELP_TEXT_ADD_STATUS', 'Añadir Estado');
@@ -232,7 +232,7 @@ define("_AM_XHELP_MIME_USERFINFO", "<b>Los tipos de archivo que están permitido
 define("_AM_XHELP_MIME_NOMIMEINFO", "Sin extensiones encontradas.");
 define("_AM_XHELP_MIME_FINDMIMETYPE", "Encontrar nuevos tipos de archivo?");
 define("_AM_XHELP_MIME_EXTFIND", "Buscar Extensiones<div style='padding-top: 8px;'><span style='font-weight: normal;'>Introduce la extensión que deseas buscar.</span></div>");
-define("_AM_XHELP_MIME_INFOTEXT", "<ul><li>Los nuevos tipos de archivo pueden ser creados/editados/borrados mediantes esta formulario.</li> 
+define("_AM_XHELP_MIME_INFOTEXT", "<ul><li>Los nuevos tipos de archivo pueden ser creados/editados/borrados mediantes esta formulario.</li>
 	<li>Buscar nuevos tipos de archivo fuera de este website.</li> 
 	<li>Ver tipos de archivo permitidos para las subidas del Admiistrador y Usuarios.</li> 
 	<li>Cambiar el estado de los tipos de archivo de las subidas.</li></ul> 
@@ -254,7 +254,7 @@ define("_AM_XHELP_MIME_MODIFIED", "Información de tipo de archivo modificada");
 define("_AM_XHELP_MINDEX_ACTION", "Acción");
 define("_AM_XHELP_MINDEX_PAGE", "<b>Página</b> ");
 
-//image admin icon 
+//image admin icon
 define("_AM_XHELP_ICO_EDIT","Editar");
 define("_AM_XHELP_ICO_DELETE","Borrar");
 define("_AM_XHELP_ICO_ONLINE","Online");

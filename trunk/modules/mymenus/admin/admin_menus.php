@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+ */
 
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
@@ -49,7 +49,7 @@ switch ($op) {
     case 'delok':
         mymenus_admin_del($id, $redir);
         break;
-     case 'delall':
+    case 'delall':
         mymenus_admin_confirmdel(null, $redir, 'delallok');
         break;
     case 'delallok':

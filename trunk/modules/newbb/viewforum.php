@@ -3,7 +3,7 @@
  * Newbb module
  *
  * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code 
+ * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -49,7 +49,7 @@ if (isset($_GET['mark'])) {
     redirect_header($url, 2, $markresult);
 }
 
-    
+
 $forum_id = intval($_GET['forum']);
 $type = @intval($_GET['type']);
 $status = (!empty($_GET['status']) && in_array($_GET['status'], array("active", "pending", "deleted", "digest", "unreplied", "unread"))) ? $_GET['status'] : "";
@@ -106,7 +106,7 @@ if ($forum_handler->getPermission($forum_obj, "post")) {
     if ($forum_handler->getPermission($forum_obj, "addpoll")) {
         $t_poll = newbb_displayImage('t_poll', _MD_ADDPOLL);
         $xoopsTpl->assign('forum_addpoll', "<a href=\"newtopic.php?op=add&amp;forum={$forum_id}\">{$t_poll}</a>");
-     }
+    }
 } else {
     if ( !empty($GLOBALS["xoopsModuleConfig"]["show_reg"]) && !is_object($xoopsUser)) {
         $redirect = preg_replace("|(.*)\/modules\/newbb\/(.*)|", "\\1/modules/newbb/newtopic.php?forum=" . $forum_id, htmlspecialchars($xoopsRequestUri));
@@ -256,27 +256,27 @@ $xoopsTpl->assign('digest_link', "viewforum.php?{$page_query_status}&amp;status=
 $xoopsTpl->assign('unreplied_link', "viewforum.php?{$page_query_status}&amp;status=unreplied");
 $xoopsTpl->assign('unread_link', "viewforum.php?{$page_query_status}&amp;status=unread");
 switch($status) {
-case 'digest':
-    $current_status = _MD_DIGEST;
-    break;
-case 'unreplied':
-    $current_status = _MD_UNREPLIED;
-    break;
-case 'unread':
-    $current_status = _MD_UNREAD;
-    break;
-case 'active':
-    $current_status = _MD_TYPE_ADMIN;
-    break;
-case 'pending':
-    $current_status = _MD_TYPE_PENDING;
-    break;
-case 'deleted':
-    $current_status = _MD_TYPE_DELETED;
-    break;
-default:
-    $current_status = '';
-    break;
+    case 'digest':
+        $current_status = _MD_DIGEST;
+        break;
+    case 'unreplied':
+        $current_status = _MD_UNREPLIED;
+        break;
+    case 'unread':
+        $current_status = _MD_UNREAD;
+        break;
+    case 'active':
+        $current_status = _MD_TYPE_ADMIN;
+        break;
+    case 'pending':
+        $current_status = _MD_TYPE_PENDING;
+        break;
+    case 'deleted':
+        $current_status = _MD_TYPE_DELETED;
+        break;
+    default:
+        $current_status = '';
+        break;
 }
 $xoopsTpl->assign('forum_topicstatus', $current_status);
 

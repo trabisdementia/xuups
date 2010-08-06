@@ -26,20 +26,20 @@ if (isset($xoopsModule) && $xoopsModule->getVar('dirname') == basename(dirname(d
     $subscribers_url = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname');
 
     $i = 0;
-	$subscribers_headermenu[$i]['title'] = _AM_SUBSCRIBERS_GOMOD;
-	$subscribers_headermenu[$i]['link'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname');
+    $subscribers_headermenu[$i]['title'] = _AM_SUBSCRIBERS_GOMOD;
+    $subscribers_headermenu[$i]['link'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname');
 
     $i++;
     $subscribers_headermenu[$i]['title'] = _AM_SUBSCRIBERS_BLOCKS;
-	$subscribers_headermenu[$i]['link'] = '../../system/admin.php?fct=blocksadmin&amp;selvis=-1&amp;selmod=-2&amp;selgrp=-1&amp;selgen=' . $xoopsModule->getVar('mid');
+    $subscribers_headermenu[$i]['link'] = '../../system/admin.php?fct=blocksadmin&amp;selvis=-1&amp;selmod=-2&amp;selgrp=-1&amp;selgen=' . $xoopsModule->getVar('mid');
 
     $i++;
     $subscribers_headermenu[$i]['title'] = _PREFERENCES;
     $subscribers_headermenu[$i]['link'] = '../../system/admin.php?fct=preferences&op=showmod&amp;mod='. $xoopsModule->getVar('mid');
 
     $i++;
-	$subscribers_headermenu[$i]['title'] = _AM_SUBSCRIBERS_UPDATE_MODULE;
-	$subscribers_headermenu[$i]['link'] = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&amp;op=update&amp;module=' . $xoopsModule->getVar('dirname');
+    $subscribers_headermenu[$i]['title'] = _AM_SUBSCRIBERS_UPDATE_MODULE;
+    $subscribers_headermenu[$i]['link'] = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&amp;op=update&amp;module=' . $xoopsModule->getVar('dirname');
 
 }
 ?>

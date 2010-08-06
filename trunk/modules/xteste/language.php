@@ -10,9 +10,9 @@ include XOOPS_ROOT_PATH . '/header.php';
 $helper = Xmf_Module_Helper::getInstance('xteste');
 $helper->setDebug(true);
 /**
-* Alternative methodto load language
-* Xmf_Language::load('manifesto', 'xteste');
-*/
+ * Alternative methodto load language
+ * Xmf_Language::load('manifesto', 'xteste');
+ */
 
 $helper->loadLanguage('badmanifesto'); //trows error on log because language was not found
 $helper->loadLanguage('manifesto');
