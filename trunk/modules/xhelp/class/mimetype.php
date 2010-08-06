@@ -36,7 +36,7 @@ class xhelpMimetype extends XoopsObject {
         $this->initVar('mime_name', XOBJ_DTYPE_TXTBOX, NULL, true, 255);
         $this->initVar('mime_admin', XOBJ_DTYPE_INT, null, false);
         $this->initVar('mime_user', XOBJ_DTYPE_INT, null, false);
-         
+
         if (isset($id)) {
             if (is_array($id)) {
                 $this->assignVars($id);
@@ -82,11 +82,12 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
      */
     function &get($id)
     {
+        $ret = false;
         $id = intval($id);
         if ($id > 0) {
             $sql = $this->_selectQuery(new Criteria('mime_id', $id));
             if (!$result = $this->_db->query($sql)) {
-                return false;
+                return $ret;
             }
             $numrows = $this->_db->getRowsNum($result);
             if ($numrows == 1) {
@@ -94,7 +95,7 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
                 return $obj;
             }
         }
-        return false;
+        return $ret;
     }
 
     /**
@@ -138,7 +139,7 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
     function getArray($mime_ext = null)
     {
         global $xoopsUser, $xoopsModule, $xhelp_isStaff;
-         
+
         $ret = array();
         if ($xoopsUser && !$xhelp_isStaff){
             // For user uploading
@@ -160,7 +161,7 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
         }
 
         foreach($result as $mime){
-            $line = split(" ", $mime->getVar('mime_types'));
+            $line = explode(" ", $mime->getVar('mime_types'));
             foreach($line as $row){
                 $allowed_mimetypes[] = array('type'=>$row, 'ext'=>$mime->getVar('mime_ext'));
             }
@@ -178,7 +179,7 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
         $fname = $_FILES[$post_field]['name'];
         $farray = explode('.', $fname);
         $fextension = strtolower($farray[count($farray) -1]);
-         
+
         $allowed_mimetypes = $this->getArray();
         if(empty($allowed_mimetypes)){
             return false;
@@ -239,7 +240,7 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
         }
 
         $sql = sprintf("UPDATE %s SET mime_ext = %s, mime_types = %s, mime_name = %s, mime_admin = %u, mime_user = %u WHERE
-               mime_id = %u", $this->_db->prefix($this->_dbtable), $this->_db->quoteString($mime_ext), 
+               mime_id = %u", $this->_db->prefix($this->_dbtable), $this->_db->quoteString($mime_ext),
         $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user, $mime_id);
         return $sql;
     }

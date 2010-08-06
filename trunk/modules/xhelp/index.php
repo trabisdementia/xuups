@@ -259,7 +259,7 @@ function setdept_display()
     $all_users   = array();
     $j = 0;
 
-    $sortedTickets = _makeBatchTicketArray(&$oTickets, &$depts, &$all_users, &$j, XHELP_SEC_TICKET_EDIT);
+    $sortedTickets = _makeBatchTicketArray($oTickets, $depts, $all_users, $j, XHELP_SEC_TICKET_EDIT);
     unset($oTickets);
 
     $tplDepts = array();
@@ -275,7 +275,7 @@ function setdept_display()
     } else {
         $users = array();
     }
-    $sortedTickets =& _updateBatchTicketInfo(&$sortedTickets, &$users, &$j);
+    $sortedTickets =& _updateBatchTicketInfo($sortedTickets, $users, $j);
 
     $xoopsOption['template_main'] = 'xhelp_setdept.html';   // Set template
     require(XOOPS_ROOT_PATH.'/header.php');                  // Include the page header
@@ -336,7 +336,7 @@ function setpriority_display()
     $all_users   = array();
     $j = 0;
 
-    $sortedTickets = _makeBatchTicketArray(&$oTickets, &$depts, &$all_users, &$j, XHELP_SEC_TICKET_PRIORITY);
+    $sortedTickets = _makeBatchTicketArray($oTickets, $depts, $all_users, $j, XHELP_SEC_TICKET_PRIORITY);
     unset($oTickets);
 
     //Retrieve all member information for the current page
@@ -346,7 +346,7 @@ function setpriority_display()
     } else {
         $users = array();
     }
-    $sortedTickets =& _updateBatchTicketInfo(&$sortedTickets, &$users, &$j);
+    $sortedTickets =& _updateBatchTicketInfo($sortedTickets, $users, $j);
 
     //Get Array of priorities/descriptions
     $aPriority  = array(1 => _XHELP_PRIORITY1, 2 => _XHELP_PRIORITY2, 3 => _XHELP_PRIORITY3, 4 => _XHELP_PRIORITY4, 5 => _XHELP_PRIORITY5);
@@ -422,7 +422,7 @@ function setstatus_display()
     $all_users   = array();
     $j = 0;
 
-    $sortedTickets = _makeBatchTicketArray(&$oTickets, &$depts, &$all_users, &$j, XHELP_SEC_TICKET_STATUS);
+    $sortedTickets = _makeBatchTicketArray($oTickets, $depts, $all_users, $j, XHELP_SEC_TICKET_STATUS);
     unset($oTickets);
 
     //Retrieve all member information for the current page
@@ -432,7 +432,7 @@ function setstatus_display()
     } else {
         $users = array();
     }
-    $sortedTickets =& _updateBatchTicketInfo(&$sortedTickets, &$users, &$j);
+    $sortedTickets =& _updateBatchTicketInfo($sortedTickets, $users, $j);
 
     //Get Array of Status/Descriptions
     $aStatus = array();
@@ -476,7 +476,7 @@ function setowner_action()
         redirect_header(XHELP_BASE_URL."/".basename(__FILE__), 3, _XHELP_MESSAGE_NO_CHANGE_OWNER);
     }
     $ret      = xhelpSetOwner($tickets, $_POST['owner']);
-     
+
     if ($ret) {
         $_eventsrv->trigger('batch_owner', array(&$oTickets, $_POST['owner']));
         redirect_header(XHELP_BASE_URL."/".basename(__FILE__), 3, _XHELP_MESSAGE_ASSIGN_OWNER);
@@ -493,7 +493,7 @@ function setowner_display()
     if (!isset($_POST['tickets'])) {
         redirect_header(XHELP_BASE_URL."/".basename(__FILE__), 3, _XHELP_MESSAGE_NO_TICKETS);
     }
-     
+
     $hTickets     =& xhelpGetHandler('ticket');
     $hMember      =& xhelpGetHandler('membership');
     $hXoopsMember =& xoops_gethandler('member');
@@ -504,7 +504,7 @@ function setowner_display()
     $all_users   = array();
     $j = 0;
 
-    $sortedTickets = _makeBatchTicketArray(&$oTickets, &$depts, &$all_users, &$j, XHELP_SEC_TICKET_OWNERSHIP);
+    $sortedTickets = _makeBatchTicketArray($oTickets, $depts, $all_users, $j, XHELP_SEC_TICKET_OWNERSHIP);
     unset($oTickets);
 
     //Retrieve all member information for the current page
@@ -514,7 +514,7 @@ function setowner_display()
     } else {
         $users = array();
     }
-    $sortedTickets =& _updateBatchTicketInfo(&$sortedTickets, &$users, &$j);
+    $sortedTickets =& _updateBatchTicketInfo($sortedTickets, $users, $j);
 
     $aOwners = array();
     foreach($users as $uid=>$user){
@@ -607,7 +607,7 @@ function addresponse_display()
     $all_users   = array();
     $j = 0;
 
-    $sortedTickets = _makeBatchTicketArray(&$oTickets, &$depts, &$all_users, &$j, XHELP_SEC_RESPONSE_ADD);
+    $sortedTickets = _makeBatchTicketArray($oTickets, $depts, $all_users, $j, XHELP_SEC_RESPONSE_ADD);
     unset($oTickets);
 
     //Retrieve all member information for the current page
@@ -617,7 +617,7 @@ function addresponse_display()
     } else {
         $users = array();
     }
-    $sortedTickets =& _updateBatchTicketInfo(&$sortedTickets, &$users, &$j);
+    $sortedTickets =& _updateBatchTicketInfo($sortedTickets, $users, $j);
 
     //Store tickets in session so they won't be in URL
     $_xhelpSession->set($ticketVar, $tickets);
@@ -664,7 +664,7 @@ function addresponse_display()
 
     //Private Message?
     $xoopsTpl->assign('xhelp_private', ($private = $_xhelpSession->get('xhelp_batch_private') ? $private : false));
-     
+
     require(XOOPS_ROOT_PATH.'/footer.php');
 }
 
@@ -713,7 +713,7 @@ function delete_display()
     $all_users   = array();
     $j = 0;
 
-    $sortedTickets = _makeBatchTicketArray(&$oTickets, &$depts, &$all_users, &$j, XHELP_SEC_TICKET_DELETE);
+    $sortedTickets = _makeBatchTicketArray($oTickets, $depts, $all_users, $j, XHELP_SEC_TICKET_DELETE);
     unset($oTickets);
 
     //Retrieve all member information for the current page
@@ -723,7 +723,7 @@ function delete_display()
     } else {
         $users = array();
     }
-    $sortedTickets =& _updateBatchTicketInfo(&$sortedTickets, &$users, &$j);
+    $sortedTickets =& _updateBatchTicketInfo($sortedTickets, $users, $j);
 
     $hiddenvars = array('delete' => _XHELP_BUTTON_SET,		//'tickets' => implode($_POST['tickets'], ','),
         'op' => 'delete');
@@ -750,7 +750,7 @@ function getAnnouncements($topicid, $limit=5, $start=0)
 {
     global $xoopsUser, $xoopsConfig, $xoopsModule, $xoopsTpl;
     $module_handler = xoops_gethandler('module');
-     
+
     if(!$count =& $module_handler->getByDirname('news') || $topicid == 0){
         $xoopsTpl->assign('xhelp_useAnnouncements', false);
         return false;
@@ -767,7 +767,7 @@ function getAnnouncements($topicid, $limit=5, $start=0)
         default:
             $sarray = NewsStory::getAllPublished($limit, $start, false, $topicid);
     }
-     
+
     $scount = count($sarray);
     for ( $i = 0; $i < $scount; $i++ ) {
         $story = array();
@@ -1067,7 +1067,7 @@ function staffviewall_display()
     $crit->setStart($start);
     $crit->setSort($sort);
     $crit->setOrder($order);
-     
+
     //Setup Column Sorting Vars
     $tpl_cols = array();
     foreach ($sort_columns as $col=>$initsort) {
@@ -1086,7 +1086,7 @@ function staffviewall_display()
                         'sortdir' => strtolower($col_qs['order']));
     }
 
-     
+
     $allTickets  = $hTickets->getObjectsByStaff($crit, true);
     $count       = $hTickets->getCountByStaff($crit);
     $nav         = new XoopsPageNav($count, $limit, $start, 'start', "op=staffViewAll&amp;limit=$limit&amp;sort=$sort&amp;order=$order&amp;dept=$dept&amp;status=$status&amp;ownership=$ownership");
@@ -1347,7 +1347,7 @@ function userviewall_display()
     $crit->setStart($start);
     $crit->setSort($sort);
     $crit->setOrder($order);
-     
+
     //Setup Column Sorting Vars
     $tpl_cols = array();
     foreach ($sort_columns as $col => $initsort) {
@@ -1381,7 +1381,7 @@ function userviewall_display()
                         'status'=>xhelpGetStatus($ticket->getVar('status')),
                         'department'=>_safeDepartmentName($depts[$ticket->getVar('department')]),
                         'departmentid'=> $ticket->getVar('department'),
-                        'departmenturl'=>xhelpMakeURI(basename(__FILE__), array('op' => 'userViewAll', 'dept'=> $ticket->getVar('department'))),                        
+                        'departmenturl'=>xhelpMakeURI(basename(__FILE__), array('op' => 'userViewAll', 'dept'=> $ticket->getVar('department'))),
                         'priority'=>$ticket->getVar('priority'),
                         'posted'=>$ticket->posted(),
                         'elapsed'=>$ticket->elapsed());

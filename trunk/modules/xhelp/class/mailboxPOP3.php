@@ -31,7 +31,7 @@ class xhelpMailBoxPOP3 extends xhelpMailBox
      */
     function xhelpMailBoxPOP3()
     {
-        $this->_pop3 =& new Net_POP3();
+        $this->_pop3 = new Net_POP3();
     }
 
     /**

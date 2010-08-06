@@ -28,7 +28,7 @@ switch ( $op )
     case "editfield":
         editField();
         break;
-         
+
     case "clearAddSession":
         clearAddSession();
         break;
@@ -40,7 +40,7 @@ switch ( $op )
     case "setFieldRequired":
         setFieldRequired();
         break;
-         
+
     case "manageFields":
     default:
         manageFields();
@@ -55,7 +55,7 @@ function manageFields()
     $session     =& Session::singleton();
     $regex_array =& _getRegexArray();
     $hFields     =& xhelpGetHandler('ticketField');
-     
+
     $start = $limit = 0;
 
     if (isset($_GET['limit'])) {
@@ -144,6 +144,7 @@ function manageFields()
 
         $hDepts =& xhelpGetHandler('department');
         $depts =& $hDepts->getObjects();
+        $deptarr = array();
 
         foreach($depts as $obj) {
             $deptarr[$obj->getVar('id')] = $obj->getVar('department');
@@ -184,7 +185,7 @@ function manageFields()
 
         //Add Field Form
         $controls = xhelpGetControlArray();
-        $control_select =& new XoopsFormSelect(_AM_XHELP_TEXT_CONTROLTYPE, 'fld_controltype', $fld_controltype);
+        $control_select = new XoopsFormSelect(_AM_XHELP_TEXT_CONTROLTYPE, 'fld_controltype', $fld_controltype);
         foreach($controls as $key=>$control) {
             $control_select->addOption($key, $control['label']);
         }
@@ -195,12 +196,12 @@ function manageFields()
         _XHELP_DATATYPE_NUMBER_INT => _XHELP_DATATYPE_NUMBER_INT,
         _XHELP_DATATYPE_NUMBER_DEC => _XHELP_DATATYPE_NUMBER_DEC);
 
-        $datatype_select =& new XoopsFormSelect(_AM_XHELP_TEXT_DATATYPE, 'fld_datatype', $fld_datatype);
+        $datatype_select = new XoopsFormSelect(_AM_XHELP_TEXT_DATATYPE, 'fld_datatype', $fld_datatype);
         $datatype_select->addOptionArray($datatypes);
 
 
 
-        $dept_select =& new XoopsFormSelect(_AM_XHELP_TEXT_DEPARTMENTS, 'fld_departments', $fld_departments, 5, true);
+        $dept_select = new XoopsFormSelect(_AM_XHELP_TEXT_DEPARTMENTS, 'fld_departments', $fld_departments, 5, true);
         foreach($depts as $obj) {
             $dept_select->addOptionArray($deptarr);
         }
@@ -219,11 +220,11 @@ function manageFields()
         $descriptionEle = new XoopsFormTextArea(_AM_XHELP_TEXT_DESCRIPTION, 'fld_description', $fld_description, 5, 60);
         $descriptionEle->setDescription(_AM_XHELP_TEXT_DESCRIPTION_DESC);
         $form->addElement($descriptionEle);
-         
+
         $dept_select->setDescription(_AM_XHELP_TEXT_DEPT_DESC);
         $control_select->setDescription(_AM_XHELP_TEXT_CONTROLTYPE_DESC);
         $datatype_select->setDescription(_AM_XHELP_TEXT_DATATYPE_DESC);
-         
+
         $form->addElement($dept_select);
         $form->addElement($control_select);
         $form->addElement($datatype_select);
@@ -240,7 +241,7 @@ function manageFields()
         $form->addElement($lengthEle);
         $form->addElement($weightEle);
 
-        $regex_control =& new xhelpFormRegex(_AM_XHELP_TEXT_VALIDATION, 'fld_valid', $fld_validation);
+        $regex_control = new xhelpFormRegex(_AM_XHELP_TEXT_VALIDATION, 'fld_valid', $fld_validation);
         $regex_control->addOptionArray($regex_array);
         $regex_control->setDescription(_AM_XHELP_TEXT_VALIDATION_DESC);
 
@@ -262,7 +263,7 @@ function manageFields()
 
         xhelpAdminFooter();
         xoops_cp_footer();
-         
+
     } else {
         //Validate Field Information
         $has_errors = false;
@@ -286,7 +287,7 @@ function manageFields()
         }
 
         $fld_fieldname = sanitizeFieldName($_POST['fld_fieldname']);
-         
+
         //fieldname filled
         if (trim($fld_fieldname) == '') {
             $has_errors = true;
@@ -371,7 +372,7 @@ function manageFields()
         $field->addDepartments($_POST['fld_departments']);
 
 
-         
+
         if ($hField->insert($field)) {
             _clearAddSessionVars();
             redirect_header(xhelpMakeURI(XHELP_ADMIN_URL.'/fields.php'), 3, _AM_XHELP_MSG_FIELD_ADD_OK);
@@ -483,7 +484,7 @@ function editField()
     if (! $field =& $hField->get($fld_id)) {
         redirect_header(xhelpMakeURI(XHELP_ADMIN_URL.'/fields.php', array('op'=> 'manageDepartments'), false), 3, _AM_XHELP_MESSAGE_NO_FIELD);
     }
-     
+
     if (!isset($_POST ['editField'])) {
         //Get Custom Field From session (if exists)
         $field_info = $session->get('xhelp_editField_'.$fld_id);
@@ -527,7 +528,7 @@ function editField()
         //Edit Field Form
 
         $controls = xhelpGetControlArray();
-        $control_select =& new XoopsFormSelect(_AM_XHELP_TEXT_CONTROLTYPE, 'fld_controltype', $fld_controltype);
+        $control_select = new XoopsFormSelect(_AM_XHELP_TEXT_CONTROLTYPE, 'fld_controltype', $fld_controltype);
         $control_select->setDescription(_AM_XHELP_TEXT_CONTROLTYPE_DESC);
         foreach($controls as $key=>$control) {
             $control_select->addOption($key, $control['label']);
@@ -538,13 +539,13 @@ function editField()
         _XHELP_DATATYPE_NUMBER_INT => _XHELP_DATATYPE_NUMBER_INT,
         _XHELP_DATATYPE_NUMBER_DEC => _XHELP_DATATYPE_NUMBER_DEC);
 
-        $datatype_select =& new XoopsFormSelect(_AM_XHELP_TEXT_DATATYPE, 'fld_datatype', $fld_datatype);
+        $datatype_select = new XoopsFormSelect(_AM_XHELP_TEXT_DATATYPE, 'fld_datatype', $fld_datatype);
         $datatype_select->setDescription(_AM_XHELP_TEXT_DATATYPE_DESC);
         $datatype_select->addOptionArray($datatypes);
 
         $hDepts =& xhelpGetHandler('department');
         $depts =& $hDepts->getObjects();
-        $dept_select =& new XoopsFormSelect(_AM_XHELP_TEXT_DEPARTMENTS, 'fld_departments', $fld_departments, 5, true);
+        $dept_select = new XoopsFormSelect(_AM_XHELP_TEXT_DEPARTMENTS, 'fld_departments', $fld_departments, 5, true);
         $dept_select->setDescription(_AM_XHELP_TEXT_DEPT_DESC);
         foreach($depts as $obj) {
             $dept_select->addOption($obj->getVar('id'), $obj->getVar('department'));
@@ -568,7 +569,7 @@ function editField()
         $descriptionEle = new XoopsFormTextArea(_AM_XHELP_TEXT_DESCRIPTION, 'fld_description', $fld_description, 5, 60);
         $descriptionEle->setDescription(_AM_XHELP_TEXT_DESCRIPTION_DESC);
         $form->addElement($descriptionEle);
-         
+
         $form->addElement($dept_select);
         $form->addElement($control_select);
         $form->addElement($datatype_select);
@@ -585,7 +586,7 @@ function editField()
         $widthEle->setDescription(_AM_XHELP_TEXT_WEIGHT_DESC);
         $form->addElement($widthEle);
 
-        $regex_control =& new xhelpFormRegex(_AM_XHELP_TEXT_VALIDATION, 'fld_valid', $fld_validation);
+        $regex_control = new xhelpFormRegex(_AM_XHELP_TEXT_VALIDATION, 'fld_valid', $fld_validation);
         $regex_control->setDescription(_AM_XHELP_TEXT_VALIDATION_DESC);
         $regex_control->addOptionArray($regex_array);
 

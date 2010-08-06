@@ -11,9 +11,9 @@ class xhelpFormRegex extends XoopsFormElement
     function xhelpFormRegex($caption, $name, $value)
     {
         $select_js = 'onchange="'. $name.'_txtbox.value = this.options[this.selectedIndex].value"';
-        $this->_tray =& new XoopsFormElementTray('', '<br /><br />', $name);
-        $this->_select =& new XoopsFormSelect('', $name.'_select', '');
-        $this->_txtbox =& new XoopsFormText('', $name.'_txtbox', 30, 255, '');
+        $this->_tray = new XoopsFormElementTray('', '<br /><br />', $name);
+        $this->_select = new XoopsFormSelect('', $name.'_select', '');
+        $this->_txtbox = new XoopsFormText('', $name.'_txtbox', 30, 255, '');
         $this->_select->setExtra($select_js);
         $this->setValue($value);
         $this->setCaption($caption);

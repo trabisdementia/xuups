@@ -350,11 +350,11 @@ function editDepartment()
 
         echo '<script type="text/javascript" src="'.XOOPS_URL.'/modules/xhelp/include/functions.js"></script>';
         $form = new xhelpForm(_AM_XHELP_EDIT_DEPARTMENT, 'edit_dept', xhelpMakeURI(XHELP_ADMIN_URL.'/department.php', array('op'=>'editDepartment', 'deptid' => $deptID)));
-        $dept_name =& new XoopsFormText(_AM_XHELP_TEXT_EDIT_DEPT, 'newDept', 20, 35, $fld_newDept);
-        $group_select =& new XoopsFormSelect(_AM_XHELP_TEXT_EDIT_DEPT_PERMS, 'groups', $fld_groups, 6, true);
+        $dept_name = new XoopsFormText(_AM_XHELP_TEXT_EDIT_DEPT, 'newDept', 20, 35, $fld_newDept);
+        $group_select = new XoopsFormSelect(_AM_XHELP_TEXT_EDIT_DEPT_PERMS, 'groups', $fld_groups, 6, true);
         $group_select->addOptionArray($aGroups);
         $defaultDeptID = xhelpGetMeta("default_department");
-        $defaultDept =& new xhelpFormCheckbox(_AM_XHELP_TEXT_DEFAULT_DEPT, 'defaultDept', (($defaultDeptID == $deptID) ? 1 : 0), 'defaultDept');
+        $defaultDept = new xhelpFormCheckbox(_AM_XHELP_TEXT_DEFAULT_DEPT, 'defaultDept', (($defaultDeptID == $deptID) ? 1 : 0), 'defaultDept');
         $defaultDept->addOption(1, "");
         $btn_tray = new XoopsFormElementTray('');
         $btn_tray->addElement(new XoopsFormButton('', 'updateDept', _AM_XHELP_BUTTON_SUBMIT, 'submit'));
@@ -479,7 +479,7 @@ function editDepartment()
                    <td> <a href="'. $activ_link.'" title="'. $activ_title.'">'. $activ_img.'</a>
                         <a href="'.XHELP_ADMIN_URL.'/department.php?op=EditDepartmentServer&amp;id='.$server->GetVar('id').'">'.$imagearray['editimg'].'</a>
                         <a href="'.XHELP_ADMIN_URL.'/department.php?op=DeleteDepartmentServer&amp;id='.$server->GetVar('id').'">'.$imagearray['deleteimg'].'</a>
-                        
+
                    </td>
                  </tr>';
             }
@@ -492,38 +492,38 @@ function editDepartment()
                               'email_text', 'btn_tray');
         $form = new xhelpForm(_AM_XHELP_DEPARTMENT_ADD_SERVER, 'add_server', xhelpMakeURI(XHELP_ADMIN_URL.'/department.php', array('op'=>'AddDepartmentServer', 'id' => $deptID)));
 
-        $type_select =& new XoopsFormSelect(_AM_XHELP_DEPARTMENT_SERVERS_TYPE, 'mboxtype');
+        $type_select = new XoopsFormSelect(_AM_XHELP_DEPARTMENT_SERVERS_TYPE, 'mboxtype');
         $type_select->setExtra("id='mboxtype'");
         $type_select->addOption(_XHELP_MAILBOXTYPE_POP3, _AM_XHELP_MBOX_POP3);
 
-        $server_text =& new XoopsFormText(_AM_XHELP_DEPARTMENT_SERVERS_SERVERNAME, 'server', 40, 50);
+        $server_text = new XoopsFormText(_AM_XHELP_DEPARTMENT_SERVERS_SERVERNAME, 'server', 40, 50);
         $server_text->setExtra("id='txtServer'");
 
-        $port_text =& new XoopsFormText(_AM_XHELP_DEPARTMENT_SERVERS_PORT, 'port', 5, 5, "110");
+        $port_text = new XoopsFormText(_AM_XHELP_DEPARTMENT_SERVERS_PORT, 'port', 5, 5, "110");
         $port_text->setExtra("id='txtPort'");
 
-        $username_text =& new XoopsFormText(_AM_XHELP_DEPARTMENT_SERVER_USERNAME, 'username', 25, 50);
+        $username_text = new XoopsFormText(_AM_XHELP_DEPARTMENT_SERVER_USERNAME, 'username', 25, 50);
         $username_text->setExtra("id='txtUsername'");
 
-        $pass_text =& new XoopsFormText(_AM_XHELP_DEPARTMENT_SERVER_PASSWORD, 'password', 25, 50);
+        $pass_text = new XoopsFormText(_AM_XHELP_DEPARTMENT_SERVER_PASSWORD, 'password', 25, 50);
         $pass_text->setExtra("id='txtPassword'");
 
-        $priority_radio =& new xhelpFormRadio(_AM_XHELP_DEPARTMENT_SERVERS_PRIORITY, 'priority', XHELP_DEFAULT_PRIORITY);
+        $priority_radio = new xhelpFormRadio(_AM_XHELP_DEPARTMENT_SERVERS_PRIORITY, 'priority', XHELP_DEFAULT_PRIORITY);
         $priority_array = array('1' => "<label for='priority1'><img src='".XHELP_IMAGE_URL."/priority1.png' title='". xhelpGetPriority(1)."' alt='priority1' /></label>",
-                                '2' => "<label for='priority2'><img src='".XHELP_IMAGE_URL."/priority2.png' title='". xhelpGetPriority(2)."' alt='priority2' /></label>", 
+                                '2' => "<label for='priority2'><img src='".XHELP_IMAGE_URL."/priority2.png' title='". xhelpGetPriority(2)."' alt='priority2' /></label>",
                                 '3' => "<label for='priority3'><img src='".XHELP_IMAGE_URL."/priority3.png' title='". xhelpGetPriority(3)."' alt='priority3' /></label>",
-                                '4' => "<label for='priority4'><img src='".XHELP_IMAGE_URL."/priority4.png' title='". xhelpGetPriority(4)."' alt='priority4' /></label>", 
+                                '4' => "<label for='priority4'><img src='".XHELP_IMAGE_URL."/priority4.png' title='". xhelpGetPriority(4)."' alt='priority4' /></label>",
                                 '5' => "<label for='priority5'><img src='".XHELP_IMAGE_URL."/priority5.png' title='". xhelpGetPriority(5)."' alt='priority5' /></label>");
         $priority_radio->addOptionArray($priority_array);
 
-        $email_text =& new XoopsFormText(_AM_XHELP_DEPARTMENT_SERVER_EMAILADDRESS, 'emailaddress', 50, 255);
+        $email_text = new XoopsFormText(_AM_XHELP_DEPARTMENT_SERVER_EMAILADDRESS, 'emailaddress', 50, 255);
         $email_text->setExtra("id='txtEmailaddress'");
 
         $btn_tray = new XoopsFormElementTray('');
-        $test_button =& new XoopsFormButton('', 'email_test', _AM_XHELP_BUTTON_TEST, 'button');
+        $test_button = new XoopsFormButton('', 'email_test', _AM_XHELP_BUTTON_TEST, 'button');
         $test_button->setExtra("id='test'");
-        $submit_button =& new XoopsFormButton('', 'updateDept2', _AM_XHELP_BUTTON_SUBMIT, 'submit');
-        $cancel2_button =& new XoopsFormButton('', 'cancel2', _AM_XHELP_BUTTON_CANCEL, 'button');
+        $submit_button = new XoopsFormButton('', 'updateDept2', _AM_XHELP_BUTTON_SUBMIT, 'submit');
+        $cancel2_button = new XoopsFormButton('', 'cancel2', _AM_XHELP_BUTTON_CANCEL, 'button');
         $cancel2_button->setExtra("onclick='history.go(-1)'");
         $btn_tray->addElement($test_button);
         $btn_tray->addElement($submit_button);
@@ -548,11 +548,11 @@ function editDepartment()
             frm.submit();
             frm.action = oldaction;
             frm.target = \"main\";
-            
+
           }
-          
+
           xhelpDOMAddEvent(xoopsGetElementById(\"email_test\"), \"click\", xhelpEmailTest, false);
-          
+
           //-->
           </script>";
         xhelpAdminFooter();
@@ -591,7 +591,7 @@ function EditDepartmentServer()
         echo $oAdminButton->renderButtons('manDept');
         echo '<script type="text/javascript" src="'.XOOPS_URL.'/modules/xhelp/include/functions.js"></script>';
         echo "<form method='post' id='edit_server' action='department.php?op=EditDepartmentServer&amp;id=".$id."'>
-               <table width='100%' cellspacing='1' class='outer'>   
+               <table width='100%' cellspacing='1' class='outer'>
                  <tr>
                    <th colspan='2'><label>". _AM_XHELP_DEPARTMENT_EDIT_SERVER ."</label></th>
                  </tr>
@@ -607,7 +607,7 @@ function EditDepartmentServer()
                  <tr>
                    <td class='head'><label for='txtServer'>"._AM_XHELP_DEPARTMENT_SERVERS_SERVERNAME."</label></td>
                    <td class='even'><input type='text' id='txtServer' name='server' value='".$deptServer->getVar('server')."' size='40' maxlength='50' />
-                 </tr>                 
+                 </tr>
                  <tr>
                    <td class='head'><label for='txtPort'>"._AM_XHELP_DEPARTMENT_SERVERS_PORT."</label></td>
                    <td class='even'><input type='text' id='txtPort' name='port' maxlength='5' size='5' value='".$deptServer->getVar('serverport')."' />
@@ -619,7 +619,7 @@ function EditDepartmentServer()
                  <tr>
                    <td class='head'><label for='txtPassword'>"._AM_XHELP_DEPARTMENT_SERVER_PASSWORD."</label></td>
                    <td class='even'><input type='text' id='txtPassword' name='password' value='".$deptServer->getVar('password')."' size='25' maxlength='50' />
-                 </tr>                 
+                 </tr>
                  <tr>
                    <td width='38%' class='head'><label for='txtPriority'>"._AM_XHELP_DEPARTMENT_SERVERS_PRIORITY."</label></td>
                    <td width='62%' class='even'>";
@@ -650,7 +650,7 @@ function EditDepartmentServer()
 
         echo "</td>
                  </tr>
-    
+
                  <tr class='foot'>
                    <td colspan='2'><div align='right'><span >
                        <input type='button' id='email_test' name='test' value='"._AM_XHELP_BUTTON_TEST."' class='formButton' />
@@ -673,11 +673,11 @@ function EditDepartmentServer()
             frm.submit();
             frm.action = oldaction;
             frm.target = \"main\";
-            
+
           }
-          
+
           xhelpDOMAddEvent(xoopsGetElementById(\"email_test\"), \"click\", xhelpEmailTest, false);
-          
+
           //-->
           </script>";
         xhelpAdminFooter();

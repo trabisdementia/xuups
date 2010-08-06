@@ -152,7 +152,7 @@ class xhelpTicket extends XoopsObject {
             return $arr;
         }
         $hResponses =& xhelpGetHandler('responses');
-        $criteria   =& new CriteriaCompo(new Criteria('ticketid', $id));
+        $criteria   = new CriteriaCompo(new Criteria('ticketid', $id));
         $criteria->setSort('updateTime');
         $criteria->setOrder('DESC');
         $criteria->setLimit($limit);

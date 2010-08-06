@@ -53,7 +53,9 @@ if(isset($_REQUEST['deleteDept'])){
             foreach($depts as $dpt){
                 $aDepts[] = $dpt->getVar('id');
             }
-            xhelpSetMeta("default_department", $aDepts[0]);
+            if (isset($aDepts[0])) {
+                xhelpSetMeta("default_department", $aDepts[0]);
+            }
         } else {
             $message = _XHELP_MESSAGE_DEPT_DELETE_ERROR . $dept->getHtmlErrors();
         }
@@ -82,6 +84,6 @@ if(isset($_REQUEST['deleteDept'])){
         }
     }
 
-     
+
 }
 ?>

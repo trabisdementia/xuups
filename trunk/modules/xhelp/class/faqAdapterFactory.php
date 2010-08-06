@@ -31,7 +31,7 @@ Class xhelpFaqAdapterFactory {
                     $classname = 'xhelp'.ucfirst($modname).'Adapter';
                     if(preg_match("|class $classname(.*)|i", $adapter_data) > 0){
                         include_once(XHELP_FAQ_ADAPTER_PATH . "/$file");
-                        $aAdapters[$modname] =& new $classname();
+                        $aAdapters[$modname] = new $classname();
                     }
                     unset($adapter_data);
                 }
@@ -47,10 +47,11 @@ Class xhelpFaqAdapterFactory {
     function &getFaqAdapter($name = '')
     {
         // Step 1 - Retrieve configured faq application
+        $ret = false;
         if($name == ''){
             $name = xhelpGetMeta('faq_adapter');
             if($name == ''){
-                return false;
+                return $ret;
             }
         }
 
@@ -65,9 +66,10 @@ Class xhelpFaqAdapterFactory {
             $classname = 'xhelp'.$name.'Adapter';
 
             // Step 4 - return adapter class
-            return new $classname();
+            $ret = new $classname();
+            return $ret;
         } else {
-            return false;
+            return $ret;
         }
     }
 

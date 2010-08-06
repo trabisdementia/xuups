@@ -201,6 +201,7 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
      */
     function &getByDepartment($depid)
     {
+        $ret = null;
         $depid = intval($depid);
         if ($depid > 0) {
             $crit = new Criteria('departmentid',$depid);
@@ -212,6 +213,7 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
                 return $ret;
             }
         }
+        return $ret;
     }
 
     function &getActiveMailboxes()
