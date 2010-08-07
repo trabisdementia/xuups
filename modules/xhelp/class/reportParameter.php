@@ -37,7 +37,8 @@ class xhelpReportParameter{
      */
     function &create()
     {
-        return new xhelpReportParameter();
+        $ret = new xhelpReportParameter();
+        return $ret;
     }
 
     /**
@@ -141,7 +142,7 @@ class xhelpReportParameter{
                 return "<label for='".$this->fieldname."'>".$this->name."</label>".
                        "<input type='text' name='".$this->fieldname."' id='".$this->fieldname."' value='".$this->value."' maxlength='".$this->maxlength."' size='".$this->fieldlength."' />";
                 break;
-                 
+
             default:
                 return "<label for='".$this->fieldname."'>".$this->name."</label>".
                        "<input type='text' name='".$this->fieldname."' id='".$this->fieldname."' value='".$this->value."' maxlength='".$this->maxlength."' size='".$this->fieldlength."' />";
