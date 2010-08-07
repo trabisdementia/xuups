@@ -59,15 +59,18 @@ function mymenus_getModuleConfig($dirname = 'mymenus')
 
 function mymenus_getSkinInfo($skin, $skin_from_theme)
 {
+    $error = false;
     if ($skin_from_theme) {
         $path = "themes/" . $GLOBALS['xoopsConfig']['theme_set'] . "/menu";
         if (!file_exists($GLOBALS['xoops']->path("{$path}/skin_version.php"))) {
-            $skin = 'default';
+            $error = true;
         }
     }
-    if ($skin != 'skin_from_theme') {
+
+    if ($error) {
         $path = "modules/mymenus/skins/{$skin}";
     }
+
     $file = $GLOBALS['xoops']->path("{$path}/skin_version.php");
     $info = array();
 
