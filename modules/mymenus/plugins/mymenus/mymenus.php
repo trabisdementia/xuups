@@ -112,18 +112,20 @@ class MymenusMymenusPluginItem extends MymenusPluginItem
         if ($validator == 'user') {
             $user = $registry->getEntry('user');
             $value = isset($user[$value]) ? $user[$value] : self::getExtraValue('user', $value);
+            $string = str_replace($expression, $value, $string);
         }
 
         if ($validator == 'uri') {
             $value = isset($_GET[$value]) ? $_GET[$value] : 0;
+            $string = str_replace($expression, $value, $string);
         }
 
         if ($validator == 'owner') {
             $owner = $registry->getEntry('owner');
             $value = isset($owner[$value]) ? $owner[$value] : self::getExtraValue('owner', $value);
+            $string = str_replace($expression, $value, $string);
         }
 
-        $string = str_replace($expression, $value, $string);
         return $string;
     }
 

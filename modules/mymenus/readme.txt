@@ -10,10 +10,11 @@ You can use DECORATORS for links, title, and alt_title.
 The decorators follow this sintax: 
 {decorator|value}
 
-There are 3 decorators available:
+There are 4 decorators available:
 USER -> gets info for the user that is seing the page
 OWNER -> gets info for the user that match uid on the url(if given)
 URI -> gets info about the url arguments
+MODULE -> gets dynamic menu from a module (Used in title field only)
 
 Some sintax examples
 {USER|UNAME} gets the username of this user, returns anonymous if not a user
@@ -48,4 +49,8 @@ Example on titles using decorators:
 {OWNER|UNAME} profile
 You have searched for {URI|SEARCH}
 
-
+Poupulating menus with modules information:
+{MODULE|NEWS}
+{MODULE|XHELP}
+{MODULE|MYLINKS}
+{MODULE|TDMDOWNLOADS}

@@ -44,7 +44,7 @@ function mymenus_block_show($options)
     $criteria->setSort('weight');
     $criteria->setOrder('ASC');
     //get menus as an array with ids as keys
-    $menus = $this_handler->getAll($criteria, null, false, true);
+    $menus = $this_handler->getAll($criteria, null, false, false);
     unset($criteria);
 
     foreach ($menus as $key => $menu) {
@@ -67,6 +67,10 @@ function mymenus_block_show($options)
         $plugin->triggerEvent('ImageDecoration');
         $menus[$key] = $registry->getEntry('link_array');
     }
+
+    $registry->setEntry('menus', $menus);
+    $plugin->triggerEvent('End');
+    $menus = $registry->getEntry('menus');
 
     $builder = new MymenusBuilder($menus);
     $block = $builder->render();
@@ -122,8 +126,8 @@ function mymenus_block_show($options)
     $blockTpl = new XoopsTpl();
     $blockTpl->assign('block', $block);
     $blockTpl->assign('config', $skin_info['config']);
-    $blockTpl->assign('skinurl', $GLOBALS['xoops']->url("modules/mymenus/skins/{$skin}"));
-    $blockTpl->assign('skinpath', $GLOBALS['xoops']->path("modules/mymenus/skins/{$skin}"));
+    $blockTpl->assign('skinurl', $skin_info['url']);
+    $blockTpl->assign('skinpath', $skin_info['path']);
 
     $block['content'] = $blockTpl->fetch($skin_info['template']);
 
