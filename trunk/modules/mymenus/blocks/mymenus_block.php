@@ -78,7 +78,7 @@ function mymenus_block_show($options)
 
     //get extra files from skins
     $skin = $options[1];
-    $skin_info = mymenus_getSkinInfo($skin);
+    $skin_info = mymenus_getSkinInfo($skin, $options[2]);
 
     if (isset($skin_info['css'])) {
         $css = array_merge($css, $skin_info['css']);
@@ -121,16 +121,14 @@ function mymenus_block_show($options)
 
     $blockTpl = new XoopsTpl();
     $blockTpl->assign('block', $block);
-    //$blockTpl->assign('block2', $block2);
-    //$blockTpl->assign('skin', $skin);
     $blockTpl->assign('config', $skin_info['config']);
     $blockTpl->assign('skinurl', $GLOBALS['xoops']->url("modules/mymenus/skins/{$skin}"));
     $blockTpl->assign('skinpath', $GLOBALS['xoops']->path("modules/mymenus/skins/{$skin}"));
 
     $block['content'] = $blockTpl->fetch($skin_info['template']);
 
-    if ($options[2] == 'template') {
-        $xoopsTpl->assign('xoops_menu_' . $options[3] , $block['content']);
+    if ($options[3] == 'template') {
+        $xoopsTpl->assign('xoops_menu_' . $options[4] , $block['content']);
         $block = array();
     }
 
@@ -152,7 +150,7 @@ function mymenus_block_edit($options)
     $criteria = new CriteriaCompo();
     $criteria->setSort('title');
     $criteria->setOrder('ASC');
-    $menus = $menus_handler->getObjects($criteria);
+    $menus = $menus_handler->getList($criteria);
     unset($criteria);
 
     if (count($menus) == 0) {
@@ -162,49 +160,48 @@ function mymenus_block_edit($options)
 
     xoops_load('XoopsFormLoader');
 
-    $form = "<b>" . _MB_MYMENUS_SELECT_MENU . "</b>&nbsp;<select name='options[0]'>";
-    foreach ($menus as $menu) {
-        $form .= "<option value='" . $menu->getVar('id') . "'";
-        if ($options[0] == $menu->getVar('id')) {
-            $form .= " selected='selected'";
-        }
-        $form .= '>' . $menu->getVar('title') . "</option>\n";
-    }
-    $form .= "</select>\n<br /><br />";
+    //Menu
+    $form = "<b>" . _MB_MYMENUS_SELECT_MENU . "</b>&nbsp;";
+    $element = new XoopsFormSelect('', 'options[0]', $options[0], 1);
+    $element->addOptionArray($menus);
+    $form .= $element->render();
+    $form .= "</select>\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_SELECT_MENU_DSC . "</i><br /><br />";
 
+    //Skin
     xoops_load('XoopsLists');
     $temp_skins = XoopsLists::getDirListAsArray(XOOPS_ROOT_PATH . "/modules/mymenus/skins/", "");
-    $skins[] = 'skin_from_theme';
+    $skins_options = array();
     foreach ($temp_skins as $key => $skin) {
         if (file_exists($GLOBALS['xoops']->path('modules/mymenus/skins/' . $skin . '/skin_version.php'))) {
-            $skins[] = $skin;
+            $skins_options[$skin] = $skin;
         }
     }
-
     $form .= "<b>" . _MB_MYMENUS_SELECT_SKIN . "</b>&nbsp;";
-    $form .= "<select name='options[1]'>";
-    foreach ($skins as $skin) {
-        $form .= "<option value='" . $skin . "'";
-        if ( $options[1] == $skin ) {
-            $form .= " selected='selected'";
-        }
-        $form .= '>' . $skin . "</option>\n";
-    }
+    $element = new XoopsFormSelect('', 'options[1]', $options[1], 1);
+    $element->addOptionArray($skins_options);
+    $form .= $element->render();
     $form .= "</select>\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_SELECT_SKIN_DSC . "</i><br /><br />";
 
+    //Use skin from,theme
+    $form .= "<b>" . _MB_MYMENUS_USE_THEME_SKIN . "</b>&nbsp;";
+    $element = new XoopsFormRadioYN('', 'options[2]', $options[2]);
+    $form .= $element->render();
+    $form .= "</select>\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_USE_THEME_SKIN_DSC . "</i><br /><br />";
+
+    //Display method
     $display_options = array(
         'block'    => _MB_MYMENUS_DISPLAY_METHOD_BLOCK,
         'template' => _MB_MYMENUS_DISPLAY_METHOD_TEMPLATE
     );
-
     $form .= "<b>" . _MB_MYMENUS_DISPLAY_METHOD . "</b>&nbsp;";
-    $element = new XoopsFormSelect('', 'options[2]', $options[2], 1);
+    $element = new XoopsFormSelect('', 'options[3]', $options[3], 1);
     $element->addOptionArray($display_options);
     $form .= $element->render();
     $form .= "</select>\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_DISPLAY_METHOD_DSC . "</i><br /><br />";
 
+    //Unique ID
     $form .= "<b>" . _MB_MYMENUS_UNIQUEID . "</b>&nbsp;";
-    $element = new XoopsFormText('', 'options[3]', 10, 50, $options[3]);
+    $element = new XoopsFormText('', 'options[4]', 10, 50, $options[4]);
     $form .= $element->render();
     $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_UNIQUEID_DSC . "</i><br /><br />";
 
