@@ -73,5 +73,5 @@ $modversion['blocks'][$i]['name'] = _MI_MYMENUS_BLK;
 $modversion['blocks'][$i]['description'] = _MI_MYMENUS_BLK_DSC;
 $modversion['blocks'][$i]['show_func'] = "mymenus_block_show";
 $modversion['blocks'][$i]['edit_func'] = "mymenus_block_edit";
-$modversion['blocks'][$i]['options'] = "0|superfish|block|0";
+$modversion['blocks'][$i]['options'] = "0|default|0|block|0";
 $modversion['blocks'][$i]['template'] = "mymenus_block.html";

@@ -215,7 +215,7 @@ function mymenus_admin_add()
     $criteria->setLimit(1);
     $menus = $this_handler->getObjects($criteria);
     $weight = 1;
-    if (is_object($menus[0])) {
+    if (isset($menus[0]) && is_object($menus[0])) {
         $weight = $menus[0]->getVar('weight') + 1;
     }
 
