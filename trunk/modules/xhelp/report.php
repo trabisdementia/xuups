@@ -47,19 +47,19 @@ switch($op)
 
     default:        // Display list of reports
         $reports = xhelpReportFactory::getReports();
-         
+
         $rptNames = array();
         foreach($reports as $rpt=>$obj){
             $rptNames[] = $rpt;
         }
-         
+
         displayReports();
         break;
 }
 
 function displayReports()
 {
-    global $xoopsOption, $xoopsTpl;
+    global $xoopsOption, $xoopsTpl, $xoopsConfig, $xoopsUser;
 
     $xoopsOption['template_main'] = 'xhelp_report.html';   // Set template
     require(XOOPS_ROOT_PATH.'/header.php');                 // Include page header
@@ -86,7 +86,7 @@ function _getReportsMeta()
 
 function runReport($reportName)
 {
-    global $xoopsOption, $xoopsTpl, $xhelp_module_header, $paramVals;
+    global $xoopsOption, $xoopsTpl, $xoopsConfig, $xoopsUser, $xhelp_module_header, $paramVals;
 
     $classname = 'xhelp'.$reportName.'Report';
     include_once(XHELP_REPORT_PATH .'/'.$reportName.'.php');

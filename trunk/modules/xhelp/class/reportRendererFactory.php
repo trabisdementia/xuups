@@ -13,8 +13,9 @@ class xhelpReportRendererFactory {
 
     function &getRenderer($type, &$report)
     {
+        $ret = false;
         if($type == ''){
-            return false;
+            return $ret;
         }
 
         // Check rendererValid function
@@ -28,13 +29,11 @@ class xhelpReportRendererFactory {
             $classname = 'xhelp'.$type.'ReportRenderer';
 
             // Step 4 - return adapter class
-            return new $classname($report);
+            $ret = new $classname($report);
+            return $ret;
         } else {
-            return false;
+            return $ret;
         }
-
-
-
         //XHELP_RPT_RENDERER_PATH
     }
 
