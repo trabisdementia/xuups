@@ -67,7 +67,7 @@ function mymenus_getSkinInfo($skin, $skin_from_theme)
         }
     }
 
-    if ($error) {
+    if ($error || !$skin_from_theme) {
         $path = "modules/mymenus/skins/{$skin}";
     }
 
@@ -78,6 +78,9 @@ function mymenus_getSkinInfo($skin, $skin_from_theme)
         include $file;
         $info =& $skinversion;
     }
+
+    $info['path'] = $GLOBALS['xoops']->path($path);
+    $info['url'] = $GLOBALS['xoops']->url($path);
 
     if (!isset($info['template'])) {
         $info['template'] = $GLOBALS['xoops']->path("modules/mymenus/templates/static/blocks/mymenus_block.html");
