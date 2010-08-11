@@ -1,56 +1,32 @@
-Important to know:
-
-Links and images are relative to the root of your site:
-modules/profile
-search.php
-uploads/blank.gif
+What is mymenus module (v1.0) ?
+======================
+Mymenus is menu manager module that allows you to display dynamic or static menus in your website.
 
 
-You can use DECORATORS for links, title, and alt_title.
-The decorators follow this sintax: 
-{decorator|value}
+Features
+======================
+- pluggable skins (skins are menu layouts, they can be navigation menus, breadcrumbs or sitemaps)
+- pluggable plugins (title and links decorators for integration of module features)
+- infinite menus levels(nested menus)
+- auto selected menus(menus are highlighted depending on the page you are in)
+- ability to assign a menu to a smarty variable(you can use my menus has a block or use it inside your theme or templates)
+- ability to get a skin from the current theme folder(theme/mytheme/menu/scripts go here)
+- and much more
 
-There are 4 decorators available:
-USER -> gets info for the user that is seing the page
-OWNER -> gets info for the user that match uid on the url(if given)
-URI -> gets info about the url arguments
-MODULE -> gets dynamic menu from a module (Used in title field only)
 
-Some sintax examples
-{USER|UNAME} gets the username of this user, returns anonymous if not a user
-{USER|UID} gets the uid of this user, returns 0 if not a user
-{USER|REGDATE} gets the regdate of this user, returns empty if not a user
-{USER|any other field of the user table} yes! You can get what you need!
+Requirements
+====================
+Requires xoops 2.4.x and php5
 
-Some special fields you may use
-{USER|PM_NEW} Show number of private messages not readed
-{USER|PM_READED}
-{USER|PM_TOTAL}
 
-The same is valid for OWNER:
-{OWNER|UNAME}
-{OWNER|UID}
-etc..
+How to install mymenus
+====================
+Copy mymenus folder into the /modules directory of your website. 
+Log in to your site as administrator, go to System Admin > Modules, look for the mymenus
+icon in the list of uninstalled modules and click in the install icon. 
+Follow the directions in the screen and you'll be ready to go.
 
-And you can get any paramater on the uri with:
-{URI|UID}
-{URI|ID}
-{URI|SEARCH}
-{URI|ITEMID}
-{URI|CATID}
-etc...
 
-Example of links using decorators:
-modules/profile/userinfo.php?uid={USER|UID}
-modules/yogurt/pictures.php?uid={OWNER|UID}
-
-Example on titles using decorators:
-{USER|UNAME}
-{OWNER|UNAME} profile
-You have searched for {URI|SEARCH}
-
-Poupulating menus with modules information:
-{MODULE|NEWS}
-{MODULE|XHELP}
-{MODULE|MYLINKS}
-{MODULE|TDMDOWNLOADS}
+Usage and developing documentation
+======================
+Please refer to docs folder for more information.

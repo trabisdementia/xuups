@@ -1,0 +1,2 @@
+<b><u>=> Version 1.0 (2010-08-11)</u></b>
+- First public release of the module.

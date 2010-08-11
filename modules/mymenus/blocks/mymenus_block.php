@@ -74,6 +74,9 @@ function mymenus_block_show($options)
 
     $builder = new MymenusBuilder($menus);
     $block = $builder->render();
+    echo"<pre>";
+    print_R($block);
+    echo'</pre>';
 
     /*--------------------------------------------------------------*/
     //default files to load
