@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code
+ of supporting developers from this source code or any supporting source code 
  which is considered copyrighted (c) material of the original comment or credit authors.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- */
+*/
 
 /**
  * XOOPS tag management module
@@ -62,7 +62,7 @@ foreach (array_keys($tags) as $key) {
                     "level" => empty($count_max) ? 0 : floor( ($tags[$key]["count"] - $count_min) * $level_limit / $count_max ),
                     "term"  => $tags[$key]["term"],
                     "count" => $tags[$key]["count"],
-    );
+                    );
 }
 unset($tags, $tags_term);
 $pagenav = "<a href=\"" . XOOPS_URL . "/modules/tag/list.tag.php\">" . _MORE . "</a>";

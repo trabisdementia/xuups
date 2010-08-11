@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code
+ of supporting developers from this source code or any supporting source code 
  which is considered copyrighted (c) material of the original comment or credit authors.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- */
+*/
 
 /**
  * XOOPS tag management module
@@ -27,18 +27,18 @@ xoops_loadLanguage("main", $xoopsModule->getVar("dirname"));
 
 $myts =& MyTextSanitizer::getInstance();
 
-IF (!@ include_once XOOPS_ROOT_PATH . "/Frameworks/art/functions.admin.php"):
+IF (!@ include_once XOOPS_ROOT_PATH . "/Frameworks/art/functions.admin.php"):    
 
 function loadModuleAdminMenu($currentoption, $breadcrumb = "")
 {
     if (!$adminmenu = $GLOBALS["xoopsModule"]->getAdminMenu()) {
         return false;
     }
-
+        
     $breadcrumb = empty($breadcrumb) ? $adminmenu[$currentoption]["title"] : $breadcrumb;
     $module_link = XOOPS_URL . "/modules/" . $GLOBALS["xoopsModule"]->getVar("dirname") . "/";
     $image_link = XOOPS_URL . "/modules/" . $GLOBALS["xoopsModule"]->getVar("dirname") . "/images";
-
+    
     $adminmenu_text ='
     <style type="text/css">
     <!--
@@ -81,9 +81,9 @@ function loadModuleAdminMenu($currentoption, $breadcrumb = "")
      </ul>
     </div>
     <br style="clear:both;" />';
-
+    
     echo $adminmenu_text;
 }
-
+    
 ENDIF;
 ?>

@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code
+ of supporting developers from this source code or any supporting source code 
  which is considered copyrighted (c) material of the original comment or credit authors.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- */
+*/
 
 /**
  * XOOPS tag management module
@@ -19,7 +19,7 @@
  * @version         $Id: admin.tag.php 2292 2008-10-12 04:53:18Z phppp $
  * @package         tag
  */
-
+ 
 include 'header.php';
 require_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
 
@@ -120,7 +120,7 @@ if (empty($tags)) {
     }
     if (  !empty($start) || count($tags) >= $limit ) {
         $count_tag = $tag_handler->getCount($criteria);
-
+    
         include XOOPS_ROOT_PATH . "/class/pagenav.php";
         $nav = new XoopsPageNav($count_tag, $limit, $start, "start", "modid={$modid}&amp;status={$status}");
         $form_tags .= "<tr><td colspan='4' align='right'>" . $nav->renderNav(4) . "</td></tr>";

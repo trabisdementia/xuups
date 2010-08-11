@@ -1,3 +1,7 @@
+2.3 Final
+August 11th, 2010
+Fixed footer.php file inclusion
+
 2.30 RC
 October 12th, 2008
 For XOOPS 2.3+

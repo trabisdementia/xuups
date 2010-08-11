@@ -7,7 +7,7 @@
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- */
+*/
 
 /**
  * XOOPS tag management module
@@ -177,5 +177,5 @@ $xoopsTpl->assign_by_ref("pagenav", $pagenav);
 $xoopsTpl -> assign("xoops_pagetitle", $xoopsOption["xoops_pagetitle"]);
 $xoopsTpl -> assign("xoops_module_header", $xoopsOption["xoops_module_header"]);
 
-include_once XOOPS_ROOT_PATH . "/footer.php";
+include_once dirname(__FILE__) . "/footer.php";
 ?>
