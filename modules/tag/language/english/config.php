@@ -13,7 +13,7 @@
 if (!defined('XOOPS_ROOT_PATH')) { exit(); }
 
 
-/*
+/* 
  * Due to the difference of word boundary for different languages, delimiters also depend on languages
  * You need specify all possbile deimiters here, (",", ";", " ", "|") will be taken if no delimiter is set
  *

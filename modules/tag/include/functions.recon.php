@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code
+ of supporting developers from this source code or any supporting source code 
  which is considered copyrighted (c) material of the original comment or credit authors.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- */
+*/
 
 /**
  * XOOPS tag management module
@@ -34,10 +34,10 @@ function tag_synchronization()
     $criteria = new CriteriaCompo(new Criteria("isactive", 1));
     $criteria->add(new Criteria("dirname", "('system', 'tag')", "NOT IN"));
     $modules_obj = $module_handler->getObjects($criteria, true);
-
+    
     $link_handler =& xoops_getmodulehandler("link", "tag");
     $link_handler->deleteAll(new Criteria("tag_modid", "(" . implode(", ", array_keys($modules_obj)) . ")", "NOT IN"), true);
-
+    
     foreach(array_keys($modules_obj) as $mid) {
         $dirname = $modules_obj[$mid]->getVar("dirname");
         if (!@include_once XOOPS_ROOT_PATH . "/modules/{$dirname}/include/plugin.tag.php") {
@@ -51,7 +51,7 @@ function tag_synchronization()
         }
         $res = $func_tag($mid);
     }
-
+    
     tag_cleanOrphan();
     return true;
 }
@@ -59,7 +59,7 @@ function tag_synchronization()
 function tag_cleanOrphan()
 {
     $tag_handler =& xoops_getmodulehandler("tag", "tag");
-
+    
     /* clear item-tag links */
     if (version_compare( mysql_get_server_info(), "4.1.0", "ge" )):
     $sql =  "DELETE FROM {$tag_handler->table_link}" .
@@ -72,14 +72,14 @@ function tag_cleanOrphan()
     if (!$result = $tag_handler->db->queryF($sql)) {
         //xoops_error($tag_handler->db->error());
     }
-
+    
     /* remove empty stats-tag links */
     $sql = "DELETE FROM {$tag_handler->table_stats}" .
             " WHERE tag_count = 0";
     if (!$result = $tag_handler->db->queryF($sql)) {
         //xoops_error($tag_handler->db->error());
     }
-
+    
     /* clear stats-tag links */
     if (version_compare( mysql_get_server_info(), "4.1.0", "ge" )):
     $sql =  "DELETE FROM {$tag_handler->table_stats}" .
@@ -92,7 +92,7 @@ function tag_cleanOrphan()
     if (!$result = $tag_handler->db->queryF($sql)) {
         //xoops_error($tag_handler->db->error());
     }
-
+    
     if (version_compare( mysql_get_server_info(), "4.1.0", "ge" )):
     $sql =  "    DELETE FROM {$tag_handler->table_stats}" .
             "    WHERE NOT EXISTS ( SELECT * FROM {$tag_handler->table_link} " .
@@ -111,7 +111,7 @@ function tag_cleanOrphan()
     if (!$result = $tag_handler->db->queryF($sql)) {
         //xoops_error($tag_handler->db->error());
     }
-
+    
     /* clear empty tags */
     if (version_compare( mysql_get_server_info(), "4.1.0", "ge" )):
     $sql =  "DELETE FROM {$tag_handler->table}" .
@@ -124,7 +124,7 @@ function tag_cleanOrphan()
     if (!$result = $tag_handler->db->queryF($sql)) {
         //xoops_error($tag_handler->db->error());
     }
-
+    
     return true;
 }
 

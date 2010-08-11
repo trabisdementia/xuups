@@ -1,13 +1,13 @@
 <?php
 /*
  You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code
+ of supporting developers from this source code or any supporting source code 
  which is considered copyrighted (c) material of the original comment or credit authors.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- */
+*/
 
 /**
  * XOOPS tag management module
@@ -31,7 +31,7 @@ function &tag_getTagHandler()
 {
     static $tag_handler;
     if (isset($tag_handler)) return $tag_handler;
-
+    
     $tag_handler = null;
     if (!is_object($GLOBALS["xoopsModule"]) || "tag" != $GLOBALS["xoopsModule"]->getVar("dirname")) {
         $module_handler =& xoops_gethandler('module');
@@ -46,7 +46,7 @@ function &tag_getTagHandler()
 
 /**
  * Function to parse arguments for a page according to $_SERVER['REQUEST_URI']
- *
+ * 
  * @var array $args_numeric    array of numeric variable values
  * @var array $args            array of indexed variables: name and value
  * @var array $args_string    array of string variable values
@@ -55,9 +55,9 @@ function &tag_getTagHandler()
  */
 
 /* known issues:
- * - "/" in a string
- * - "&" in a string
- */
+ * - "/" in a string 
+ * - "&" in a string 
+*/
 function tag_parse_args(&$args_numeric, &$args, &$args_string)
 {
     $args_abb = array(
@@ -65,7 +65,7 @@ function tag_parse_args(&$args_numeric, &$args, &$args_string)
                         "m"    => "modid", 
                         "s"    => "start", 
                         "t"    => "tag", 
-    );
+                        );
     $args = array();
     $args_numeric = array();
     $args_string = array();
@@ -93,7 +93,7 @@ function tag_parse_args(&$args_numeric, &$args, &$args_string)
 
 /**
  * Function to parse tags(keywords) upon defined delimiters
- *
+ * 
  * @var        string    $text_tag    text to be parsed
  *
  * @return    array    tags
@@ -102,11 +102,11 @@ function tag_parse_tag($text_tag)
 {
     $tags = array();
     if (empty($text_tag)) return $tags;
-
+    
     $delimiters = tag_get_delimiter();
     $tags_raw = explode(",", str_replace($delimiters, ",", $text_tag));
     $tags = array_filter(array_map("trim", $tags_raw));
-
+    
     return $tags;
 }
 
