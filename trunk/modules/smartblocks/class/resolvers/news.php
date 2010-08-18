@@ -121,5 +121,5 @@ class NewsResolver extends SmartblocksResolver {
     }
 }
 
-$resolver=& new NewsResolver();
+$resolver= new NewsResolver();
 ?>

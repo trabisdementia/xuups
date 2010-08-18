@@ -101,7 +101,7 @@ class sfFaq extends XoopsObject
 		$this->initVar("partialview", XOBJ_DTYPE_INT, 0, false);
 
 		if (isset($id)) {
-			$faq_handler =& new sfFaqHandler($this->db);
+			$faq_handler = new sfFaqHandler($this->db);
 			$faq =& $faq_handler->get($id);
 			foreach ($faq->vars as $k => $v) {
 				$this->assignVar($k, $v['value']);
@@ -295,7 +295,7 @@ class sfFaq extends XoopsObject
 
 	function answer()
 	{
-		$answer_handler =& new sfAnswerHandler($this->db);
+		$answer_handler = new sfAnswerHandler($this->db);
 		switch ($this->status()) {
 			case _SF_STATUS_SUBMITTED :
 			$theAnswers =& $answer_handler->getAllAnswers($this->faqid(), _SF_AN_STATUS_APPROVED, 1, 0);
@@ -338,19 +338,19 @@ class sfFaq extends XoopsObject
 
 	function getAllAnswers()
 	{
-		$answer_handler =& new sfAnswerHandler($this->db);
+		$answer_handler = new sfAnswerHandler($this->db);
 		return $answer_handler->getAllAnswers($this->faqid());
 	}
 
 	function updateCounter()
 	{
-		$faq_handler =& new sfFaqHandler($this->db);
+		$faq_handler = new sfFaqHandler($this->db);
 		return $faq_handler->updateCounter($this->faqid());
 	}
 
 	function store($force = true)
 	{
-		$faq_handler =& new sfFaqHandler($this->db);
+		$faq_handler = new sfFaqHandler($this->db);
 		return $faq_handler->insert($this, $force);
 	}
 
@@ -673,7 +673,7 @@ class sfFaqHandler extends XoopsObjectHandler
 		}
 
 		// Deleting the answers
-		$answer_handler =& new sfAnswerHandler($this->db);
+		$answer_handler = new sfAnswerHandler($this->db);
 		If (!$answer_handler->deleteFaqAnswers($faq)) {
 			// error msg...
 			echo "error while deleteing an answer";
@@ -733,7 +733,7 @@ class sfFaqHandler extends XoopsObjectHandler
 			return false;
 		}
 
-		If (count($result) == 0) {
+		if (count($result) == 0) {
 			return false;
 		}
 

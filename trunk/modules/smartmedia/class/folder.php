@@ -124,7 +124,7 @@ class SmartmediaFolder extends XoopsObject {
         $this->folder_text =& $smartmedia_folder_text_handler->get($this->getVar('folderid'), $this->languageid);
 
         if (!$this->folder_text) {
-            $this->folder_text =& new SmartmediaFolder_text();
+            $this->folder_text = new SmartmediaFolder_text();
             $this->folder_text->setVar('folderid', $this->folderid());
             $this->folder_text->setVar('languageid', $languageid);
 

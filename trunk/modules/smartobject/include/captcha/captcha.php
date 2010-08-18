@@ -30,7 +30,7 @@ class XoopsCaptcha {
     {
         static $instance;
         if(!isset($instance)) {
-            $instance =& new XoopsCaptcha();
+            $instance = new XoopsCaptcha();
         }
         return $instance;
     }
@@ -157,7 +157,7 @@ class XoopsCaptcha {
     {
         require_once dirname(__FILE__)."/".$this->mode.".php";
         $class = "XoopsCaptcha".ucfirst($this->mode);
-        $captcha_handler =& new $class();
+        $captcha_handler = new $class();
         if(method_exists($captcha_handler, "destroyGarbage")) {
             $captcha_handler->loadConfig($this->config);
             $captcha_handler->destroyGarbage();
@@ -206,7 +206,7 @@ class XoopsCaptcha {
     {
         require_once dirname(__FILE__)."/".$this->mode.".php";
         $class = "XoopsCaptcha".ucfirst($this->mode);
-        $captcha_handler =& new $class();
+        $captcha_handler = new $class();
         $captcha_handler->loadConfig($this->config);
 
         $form = $captcha_handler->render();

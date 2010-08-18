@@ -130,7 +130,7 @@ class SmartmediaClip extends XoopsObject {
         $smartmedia_clip_text_handler =& smartmedia_gethandler('clip_text');
         $this->clip_text =& $smartmedia_clip_text_handler->get($this->getVar('clipid'), $this->languageid);
         if (!$this->clip_text) {
-            $this->clip_text =& new SmartmediaClip_text();
+            $this->clip_text = new SmartmediaClip_text();
             $this->clip_text->setVar('clipid', $this->clipid());
             $this->clip_text->setVar('languageid', $languageid);
 

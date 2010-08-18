@@ -50,7 +50,7 @@ class sfCategory extends XoopsObject
 			if (is_array($id)) {
 				$this->assignVars($id);
 			} else {
-				$category_handler =& new sfCategoryHandler($this->db);
+				$category_handler = new sfCategoryHandler($this->db);
 				$category =& $category_handler->get($id);
 				foreach ($category->vars as $k => $v) {
 					$this->assignVar($k, $v['value']);
@@ -108,7 +108,7 @@ class sfCategory extends XoopsObject
 	{
 		$ret = $this->getVar("name", $format);
 		If (($format=='s') || ($format=='S') || ($format=='show')) {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts =& MyTextSanitizer::getInstance();
 			$ret = $myts->displayTarea($ret);
 		}
 		return $ret;
@@ -165,7 +165,7 @@ class sfCategory extends XoopsObject
 
 	function store($sendNotifications = true, $force = true )
 	{
-		$category_handler =& new sfCategoryHandler($this->db);
+		$category_handler = new sfCategoryHandler($this->db);
 
 		$ret = $category_handler->insert($this, $force);
 		If ( $sendNotifications && $ret && ($this->isNew()) ) {
@@ -183,7 +183,7 @@ class sfCategory extends XoopsObject
 		$notification_handler = &xoops_gethandler('notification');
 
 		$tags = array();
-		$tags['MODULE_NAME'] = $myts->makeTareaData4Show($smartModule->getVar('name'));
+		$tags['MODULE_NAME'] = $myts->htmlSpecialChars($smartModule->getVar('name'));
 		$tags['CATEGORY_NAME'] = $this->name();
 		$tags['CATEGORY_URL'] = XOOPS_URL . '/modules/' . $smartModule->getVar('dirname') . '/category.php?categoryid=' . $this->categoryid();
 
@@ -322,7 +322,7 @@ class sfCategoryHandler extends XoopsObjectHandler
 		}
 
 		// Deleting the FAQs
-		$faq_handler =& new sfFaqHandler($this->db);
+		$faq_handler = new sfFaqHandler($this->db);
 		if (!$faq_handler->deleteAll(new Criteria('categoryid', $category->categoryid()))) {
 		    return false;
 		}

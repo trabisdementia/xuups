@@ -49,7 +49,7 @@ class NewbbUserstatsHandler extends XoopsPersistableObjectHandler
     {
         static $instance;
         if (!isset($instance)) {
-            $instance =& new NewbbUserstatsHandler($db);
+            $instance = new NewbbUserstatsHandler($db);
         }
         return $instance;
     }

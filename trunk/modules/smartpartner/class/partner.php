@@ -48,7 +48,7 @@ class SmartpartnerPartner extends XoopsObject
         $this->initVar("dohtml", XOBJ_DTYPE_INT, 1, false);
 
         if (isset($id)) {
-            $partner_handler =& new SmartpartnerPartnerHandler($this->_db);
+            $partner_handler = new SmartpartnerPartnerHandler($this->_db);
             $partner =& $partner_handler->get($id);
             foreach ($partner->vars as $k => $v) {
                 $this->assignVar($k, $v['value']);
@@ -293,7 +293,7 @@ class SmartpartnerPartner extends XoopsObject
 
     function store($force = true)
     {
-        $partner_handler =& new SmartpartnerPartnerHandler($this->_db);
+        $partner_handler = new SmartpartnerPartnerHandler($this->_db);
         return $partner_handler->insert($this, $force);
     }
 

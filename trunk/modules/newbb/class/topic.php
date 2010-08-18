@@ -201,7 +201,7 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
                 $approved = 1;
                 break;
         }
-        $criteria =& new CriteriaCompo(new Criteria("topic_id", $topic->getVar('topic_id')));
+        $criteria = new CriteriaCompo(new Criteria("topic_id", $topic->getVar('topic_id')));
         $criteria->add(new Criteria("approved", $approved));
         $post_handler =& xoops_getmodulehandler("post", "newbb");
         $count = $post_handler->getCount($criteria);
@@ -404,7 +404,7 @@ class NewbbTopicHandler extends XoopsPersistableObjectHandler
      */
     function cleanExpires($expire = 0)
     {
-        $crit_expire =& new CriteriaCompo(new Criteria("approved", 0, "<="));
+        $crit_expire = new CriteriaCompo(new Criteria("approved", 0, "<="));
         $crit_expire->add(new Criteria("topic_time", time() - intval($expire), "<"));
         return $this->deleteAll($crit_expire, true/*, true*/);
     }

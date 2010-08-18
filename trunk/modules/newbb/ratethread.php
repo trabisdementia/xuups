@@ -42,7 +42,7 @@ if (empty($rate)) {
 $rate_handler =& xoops_getmodulehandler("rate", $xoopsModule->getVar("dirname"));
 if ($ratinguser != 0) {
     // Check if Topic POSTER is voting (UNLESS Anonymous users allowed to post)
-    $crit_post =& New CriteriaCompo(new Criteria("topic_id", $topic_id));
+    $crit_post = new CriteriaCompo(new Criteria("topic_id", $topic_id));
     $crit_post->add(new Criteria("post_uid", $ratinguser));
     $post_handler =& xoops_getmodulehandler("post", $xoopsModule->getVar("dirname"));
     if ($post_handler->getCount($crit_post)) {
@@ -50,7 +50,7 @@ if ($ratinguser != 0) {
         exit();
     }
     // Check if REG user is trying to vote twice.
-    $crit_rate =& New CriteriaCompo(new Criteria("topic_id", $topic_id));
+    $crit_rate = new CriteriaCompo(new Criteria("topic_id", $topic_id));
     $crit_rate->add(new Criteria("ratinguser", $ratinguser));
     if ($rate_handler->getCount($crit_rate)) {
         redirect_header("viewtopic.php?topic_id=" . $topic_id . "&amp;forum=" . $forum, 4, _MD_VOTEONCE);
@@ -58,7 +58,7 @@ if ($ratinguser != 0) {
     }
 } else {
     // Check if ANONYMOUS user is trying to vote more than once per day.
-    $crit_rate =& New CriteriaCompo(new Criteria("topic_id", $topic_id));
+    $crit_rate = new CriteriaCompo(new Criteria("topic_id", $topic_id));
     $crit_rate->add(new Criteria("ratinguser", $ratinguser));
     $crit_rate->add(new Criteria("ratinghostname", $ip));
     $crit_rate->add(new Criteria("ratingtimestamp", time() - (86400 * $anonwaitdays), ">"));

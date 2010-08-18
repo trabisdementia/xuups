@@ -36,6 +36,7 @@ $modversion = array(
 
     // Is performing module install/update?
     $isModuleAction = ( !empty($_POST["fct"]) && "modulesadmin" == $_POST["fct"] ) ? true : false;
+    $isModuleAction = ( !empty($_POST["module"]) ) ? true : $isModuleAction;
 
     // database tables
     $modversion["sqlfile"]["mysql"] = "sql/mysql.sql";

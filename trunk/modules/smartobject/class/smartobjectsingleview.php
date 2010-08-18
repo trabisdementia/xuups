@@ -83,7 +83,7 @@ class SmartObjectSingleView {
     {
         include_once XOOPS_ROOT_PATH . '/class/template.php';
 
-        $this->_tpl =& new XoopsTpl();
+        $this->_tpl = new XoopsTpl();
         $vars = $this->_object->vars;
         $smartobject_object_array = array();
 

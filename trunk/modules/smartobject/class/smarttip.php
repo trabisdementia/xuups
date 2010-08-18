@@ -25,7 +25,7 @@ class SmartTip
         $this->caption = $caption;
         $this->message = $message;
         $this->visible = $visible;
-        $this->_tpl =& new XoopsTpl();
+        $this->_tpl = new XoopsTpl();
     }
 
     function render($outputNow=true) {

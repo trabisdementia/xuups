@@ -41,7 +41,7 @@ class SmartPrinterFriendly
 
         include_once XOOPS_ROOT_PATH . '/class/template.php';
 
-        $this->_tpl =& new XoopsTpl();
+        $this->_tpl = new XoopsTpl();
 
         $this->_tpl->assign('smartobject_print_pageTitle', $this->_pageTitle ? $this->_pageTitle : $this->_title);
         $this->_tpl->assign('smartobject_print_title', $this->_title);

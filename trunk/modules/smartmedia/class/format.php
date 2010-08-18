@@ -40,7 +40,7 @@ class SmartmediaFormat extends XoopsObject
         $this->initVar("ext", XOBJ_DTYPE_TXTBOX, null, false);
 
         if (isset($id)) {
-            $objHandler =& new SmartmediaFormatHandler($this->_db);
+            $objHandler = new SmartmediaFormatHandler($this->_db);
             $obj =& $objHandler->get($id);
             foreach ($obj->vars as $k => $v) {
                 $this->assignVar($k, $v['value']);
@@ -91,7 +91,7 @@ class SmartmediaFormat extends XoopsObject
      */
     function store($force = true)
     {
-        $format_handler =& new SmartmediaFormatHandler($this->_db);
+        $format_handler = new SmartmediaFormatHandler($this->_db);
         return $format_handler->insert($this, $force);
     }
 

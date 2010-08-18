@@ -112,7 +112,7 @@ function art_getSubCategory($pid = 0, $refresh = false)
 function art_createSubCategoryList()
 {
     $category_handler =& xoops_getModuleHandler("category", $GLOBALS["artdirname"]);
-    $criteria =& new CriteriaCompo("1", 1);
+    $criteria = new CriteriaCompo("1", 1);
     $criteria->setSort("cat_pid ASC, cat_order");
     $criteria->setOrder("ASC");
     $categories_obj = $category_handler->getObjects($criteria);

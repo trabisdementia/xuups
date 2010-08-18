@@ -91,7 +91,7 @@ class NewbbReadtopicHandler extends NewbbReadHandler
         $cookie_vars = newbb_getcookie($cookie_name, true);
 
         $item_handler =& xoops_getmodulehandler('topic', 'newbb');
-        $criteria =& new CriteriaCompo(new Criteria("forum_id", $forum_id));
+        $criteria = new CriteriaCompo(new Criteria("forum_id", $forum_id));
         $criteria->setSort("topic_last_post_id");
         $criteria->setOrder("DESC");
         $criteria->setLimit($this->items_per_forum);
@@ -119,18 +119,18 @@ class NewbbReadtopicHandler extends NewbbReadHandler
         }
 
         $item_handler =& xoops_getmodulehandler('topic', 'newbb');
-        $criteria_topic =& new CriteriaCompo(new Criteria("forum_id", $forum_id));
+        $criteria_topic = new CriteriaCompo(new Criteria("forum_id", $forum_id));
         $criteria_topic->setSort("topic_last_post_id");
         $criteria_topic->setOrder("DESC");
         $criteria_topic->setLimit($this->items_per_forum);
-        $criteria_sticky =& new CriteriaCompo(new Criteria("forum_id", $forum_id));
+        $criteria_sticky = new CriteriaCompo(new Criteria("forum_id", $forum_id));
         $criteria_sticky->add(new Criteria("topic_sticky", 1));
 
         if (empty($status)) {
             $items_id = $item_handler->getIds($criteria_topic);
             $sticky_id = $item_handler->getIds($criteria_sticky);
             $items =  $items_id+$sticky_id;
-            $criteria =& new CriteriaCompo(new Criteria("uid", $uid));
+            $criteria = new CriteriaCompo(new Criteria("uid", $uid));
             $criteria->add(new Criteria("read_item", "(" . implode(", ", $items) . ")", "IN"));
             $this->deleteAll($criteria, true);
             return true;

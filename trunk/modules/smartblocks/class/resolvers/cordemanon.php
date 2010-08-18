@@ -211,5 +211,5 @@ class CordemanonResolver extends SmartblocksResolver
     }
 }
 
-$resolver=& new CordemanonResolver();
+$resolver= new CordemanonResolver();
 ?>

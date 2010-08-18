@@ -206,7 +206,7 @@ switch ($op) {
 
 	// Creating the FAQ
 	If ($faqid != -1) {
-		$faqObj =& new sfFaq($faqid);
+		$faqObj = new sfFaq($faqid);
 	} else {
 		$faqObj = $faq_handler->create();
 	}

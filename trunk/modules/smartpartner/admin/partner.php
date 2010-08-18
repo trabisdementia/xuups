@@ -257,7 +257,7 @@ switch ($op) {
 
         // Creating the partner object
         If ($id != 0) {
-            $partnerObj =& new SmartpartnerPartner($id);
+            $partnerObj = new SmartpartnerPartner($id);
         } else {
             $partnerObj = $partner_handler->create();
         }

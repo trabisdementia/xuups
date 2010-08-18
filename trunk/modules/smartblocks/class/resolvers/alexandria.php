@@ -126,5 +126,5 @@ class AlexandriaResolver extends SmartblocksResolver {
     }
 }
 
-$resolver=& new AlexandriaResolver();
+$resolver= new AlexandriaResolver();
 ?>
