@@ -177,7 +177,7 @@ If ($xoopsModuleConfig['useimagenavpage'] == 1) {
 $xoopsTpl->assign('category', $category);
 
 // Page Title Hack by marcan
-$module_name = $myts->makeTboxData4Show($xoopsModule->getVar('name'));
+$module_name = $myts->htmlSpecialChars($xoopsModule->getVar('name'));
 $xoopsTpl->assign('xoops_pagetitle', $module_name . ' - ' . $category['name']);
 // End Page Title Hack by marcan
 

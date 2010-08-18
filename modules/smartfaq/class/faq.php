@@ -547,7 +547,7 @@ class sfFaq extends XoopsObject
 		$faq['comments'] = $this->comments();
 		$faq['datesub'] = $this->datesub();
 		if (isset($category)) {
-			if (strtolower(get_class($category)) == 'sfcategory') {
+			if (is_object($category) && strtolower(get_class($category)) == 'sfcategory') {
 				$categoryObj = $category;
 			} elseif (is_array($category)) {
 				$categoryObj = $category[$this->categoryid()];

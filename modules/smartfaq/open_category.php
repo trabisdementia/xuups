@@ -112,7 +112,7 @@ if ($faqsObj) {
 	}
 }
 // Language constants
-$xoopsTpl->assign('whereInSection', $myts->makeTboxData4Show($xoopsModule->getVar('name')) . " > <a href='open_index.php'>" . _MD_SF_OPEN_SECTION . "</a>");
+$xoopsTpl->assign('whereInSection', $myts->htmlSpecialChars($xoopsModule->getVar('name')) . " > <a href='open_index.php'>" . _MD_SF_OPEN_SECTION . "</a>");
 $xoopsTpl->assign('modulename', $xoopsModule->dirname());
 
 $xoopsTpl->assign('displaylastfaqs', true);
@@ -140,7 +140,7 @@ If ($xoopsModuleConfig['useimagenavpage'] == 1) {
 $xoopsTpl->assign('category', $category);
 
 // Page Title Hack by marcan
-$module_name = $myts->makeTboxData4Show($xoopsModule->getVar('name'));
+$module_name = $myts->htmlSpecialChars($xoopsModule->getVar('name'));
 $xoopsTpl->assign('xoops_pagetitle', $module_name . ' - ' . $category['name']);
 // End Page Title Hack by marcan
 

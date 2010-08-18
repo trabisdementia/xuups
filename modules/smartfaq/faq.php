@@ -97,7 +97,7 @@ $xoopsTpl->assign('lang_hits', _MD_SF_READS);
 $xoopsTpl->assign('lang_comments', _MD_SF_COMMENTS);
 
 // Page Title Hack by marcan
-$module_name = $myts->makeTboxData4Show($xoopsModule->getVar('name'));
+$module_name = $myts->htmlSpecialChars($xoopsModule->getVar('name'));
 $xoopsTpl->assign('xoops_pagetitle', $module_name . ' - ' . $categoryObj->name() . ' - ' . $faq['question']);
 // End Page Title Hack by marcan
 

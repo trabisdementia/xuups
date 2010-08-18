@@ -97,7 +97,7 @@ $pdf_config['action_on_error'] = 0; // 0 - continue; 1 - die
 $pdf_config['creator'] = 'FPDF v1.52';
 $pdf_config['url'] = XOOPS_URL;
 $pdf_config['mail'] = 'mailto:'.$xoopsConfig['adminmail'];
-$pdf_config['slogan']=xoops_substr($myts->makeTboxData4Show( $xoopsConfig['slogan'] ),0,20);
+$pdf_config['slogan']=xoops_substr($myts->htmlSpecialChars( $xoopsConfig['slogan'] ),0,20);
 // Or set your own slogan:
 //$pdf_config['slogan']="Éè¶¨ÍøÕ¾¿ÚºÅ";
 $pdf_config['scale'] = '0.8';

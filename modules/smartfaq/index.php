@@ -96,10 +96,11 @@ foreach ($categoriesObj as $cat_id => $category) {
 			$categories[$cat_id] = array();
 		}
 	}
-	$categories[$cat_id] = $category->toArray($categories[$cat_id]);
-	$categories[$cat_id]['categoryPath'] = $category->getCategoryPath();
+
+    $categories[$cat_id] = $category->toArray(@$categories[$cat_id]);
+    $categories[$cat_id]['categoryPath'] = $category->getCategoryPath();
 	//}replacé ligne 97
-	
+
 }
 /*echo sizeof($categories);
 echo "<br>";
@@ -121,32 +122,32 @@ if ($displaylastfaqs) {
 		}
 		$answer_handler =& sf_gethandler('answer');
 		$allanswers = $answer_handler->getLastPublishedByFaq($faqids);
-		
+
 		foreach ($allanswers as $key => $thisanswer) {
 			$userids[$thisanswer->uid()] = 1;
 		}
-		
+
 		$member_handler = &xoops_gethandler('member');
 		$users = $member_handler->getUsers(new Criteria('uid', "(".implode(',', array_keys($userids)).")", "IN"), true);
 		for ( $i = 0; $i < $totalQnasOnPage; $i++ ) {
 			$faq = $faqsObj[$i]->toArray(null, $allcategories);
-			
+
 			// Creating the answer object
 			$answerObj =& $allanswers[$faqsObj[$i]->faqid()];
-			
+
 		    $answerObj->setVar('dohtml', $faqsObj[$i]->getVar('html'));
     		$answerObj->setVar('doxcode', $faqsObj[$i]->getVar('xcodes'));
 	    	$answerObj->setVar('dosmiley', $faqsObj[$i]->getVar('smiley'));
 		    $answerObj->setVar('doimage', $faqsObj[$i]->getVar('image'));
 		    $answerObj->setVar('dobr', $faqsObj[$i]->getVar('linebreak'));
-            
+
 			$faq['answer'] = $answerObj->answer();
 			$faq['answerid'] = $answerObj->answerid();
 			$faq['datesub'] = $faqsObj[$i]->datesub();
 			$faq['adminlink'] = sf_getAdminLinks($faqsObj[$i]->faqid());
-			
+
 			$faq['who_when'] = $faqsObj[$i]->getWhoAndWhen($answerObj, $users);
-			
+
 			$xoopsTpl->append('faqs', $faq);
 		}
 	}
@@ -196,7 +197,7 @@ If ($xoopsModuleConfig['useimagenavpage'] == 1) {
 }
 
 // Page Title Hack by marcan
-$module_name = $myts->makeTboxData4Show($xoopsModule->getVar('name'));
+$module_name = $myts->htmlSpecialChars($xoopsModule->getVar('name'));
 $xoopsTpl->assign('xoops_pagetitle', $module_name);
 // End Page Title Hack by marcan
 
