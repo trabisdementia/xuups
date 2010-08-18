@@ -41,7 +41,7 @@ if (isset($smartobject_config['enable_currencyman']) && $smartobject_config['ena
 }
 
 global $xoopsModule;
-if (isset($xoopsModule)) {
+if (isset($xoopsModule) && $xoopsModule->getVar('dirname') == 'smartobject') {
     $i = -1;
 
     $i++;

@@ -211,7 +211,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler {
      * @return object {@link SmartObject}
      */
     function &create($isNew = true) {
-        $obj =& new $this->className($this);
+        $obj = new $this->className($this);
         $obj->setImageDir($this->getImageUrl(), $this->getImagePath());
         if (!$obj->handler) {
             $obj->handler =& $this;

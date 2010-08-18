@@ -7,6 +7,7 @@
  * Licence: GNU
  */
 
-define('_MI_SCLONE_MODULE_DESC', 'Easily clone a module');
+define('_MI_SCLONE_MODULE_DESC', "Easily clone a module");
+define('_MI_SCLONE_CLONE_A_MODULE', "Clone a module");
 
 ?>

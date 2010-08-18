@@ -28,7 +28,7 @@ $modversion['status_version'] = "Beta";
 $modversion['status'] = "Beta";
 $modversion['date'] = "Unreleased";
 
-$modversion['warning'] = _AM_SOBJECT_WARNING_BETA;
+$modversion['warning'] = ""; //_AM_SOBJECT_WARNING_BETA;
 
 $modversion['demo_site_url'] = "";
 $modversion['demo_site_name'] = "";

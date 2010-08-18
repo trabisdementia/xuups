@@ -42,7 +42,7 @@ switch ($op) {
         smart_collapsableBar('sentlinks', _AM_SOBJECT_SENT_LINK_DISPLAY, _AM_SOBJECT_SENT_LINK_DISPLAY_INFO);
 
         include_once XOOPS_ROOT_PATH . '/class/template.php';
-        $xoopsTpl =& new XoopsTpl();
+        $xoopsTpl = new XoopsTpl();
         $xoopsTpl->assign('link', $linkObj->toArray());
         $xoopsTpl->display( 'db:smartobject_sentlink_display.html' );
 
