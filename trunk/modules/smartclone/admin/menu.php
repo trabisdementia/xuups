@@ -8,10 +8,10 @@
  */
 
 
-$adminmenu[0]['title'] = _AM_SCLONE_CLONE_A_MODULE;
+$adminmenu[0]['title'] = _MI_SCLONE_CLONE_A_MODULE;
 $adminmenu[0]['link'] = "admin/index.php";
 
-if (isset($xoopsModule)) {
+if (isset($xoopsModule) && $xoopsModule->getVar('dirname') == 'smartclone') {
     $headermenu[0]['title'] = _PREFERENCES;
     $headermenu[0]['link'] = '../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule->getVar('mid');
 

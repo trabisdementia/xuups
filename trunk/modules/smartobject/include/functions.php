@@ -477,14 +477,16 @@ function smart_adminMenu($currentoption = 0, $breadcrumb = '', $submenus = false
     } else {
         include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/admin.php';
     }
+    $headermenu = array();
+    $adminmenu = array();
     include XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/menu.php';
-    $tpl = & new XoopsTpl();
+    $tpl = new XoopsTpl();
     $tpl->assign(array (
-		'headermenu' => $headermenu,
-		'adminmenu' => $adminmenu,
-		'current' => $currentoption,
-		'breadcrumb' => $breadcrumb,
-		'headermenucount' => count($headermenu
+        'headermenu' => $headermenu,
+        'adminmenu' => $adminmenu,
+        'current' => $currentoption,
+        'breadcrumb' => $breadcrumb,
+        'headermenucount' => count($headermenu
     ), 'submenus' => $submenus, 'currentsub' => $currentsub, 'submenuscount' => count($submenus)));
     $tpl->display('db:smartobject_admin_menu.html');
 }
@@ -645,7 +647,7 @@ function smart_modFooter() {
     global $xoopsConfig, $xoopsModule, $xoopsModuleConfig;
 
     include_once XOOPS_ROOT_PATH . '/class/template.php';
-    $tpl =& new XoopsTpl();
+    $tpl = new XoopsTpl();
 
     $hModule = & xoops_gethandler('module');
     $versioninfo = & $hModule->get($xoopsModule->getVar('mid'));
@@ -739,7 +741,7 @@ function & smart_getcorehandler($name, $optional = false) {
         }
         $class = 'Xoops' . ucfirst($name) . 'Handler';
         if (class_exists($class)) {
-            $handlers[$name] = & new $class ($GLOBALS['xoopsDB'], 'xoops');
+            $handlers[$name] = new $class ($GLOBALS['xoopsDB'], 'xoops');
         }
     }
     if (!isset ($handlers[$name]) && !$optional) {

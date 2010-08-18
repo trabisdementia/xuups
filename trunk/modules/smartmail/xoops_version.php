@@ -56,7 +56,7 @@ $modversion['people']['testers'][] = "Andy Cleff";
 
 //$modversion['people']['other'][] = "other 1";
 
-$modversion['warning'] = _CO_SOBJECT_WARNING_BETA;
+$modversion['warning'] = "";//_CO_SOBJECT_WARNING_BETA;
 
 $modversion['demo_site_url'] = "http://inboxfactory.net/smartmail";
 $modversion['demo_site_name'] = "SmartMail Sandbox";

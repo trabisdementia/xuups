@@ -144,9 +144,9 @@ class SmartObjectTable {
 
     function addActionButton($op, $caption=false, $text=false) {
         $action = array(
-					'op' => $op,
-					'caption' => $caption,
-					'text' => $text
+            'op' => $op,
+            'caption' => $caption,
+            'text' => $text
         );
         $this->_actionButtons[] = $action;
     }
@@ -509,7 +509,7 @@ class SmartObjectTable {
     {
         include_once XOOPS_ROOT_PATH . '/class/template.php';
 
-        $this->_tpl =& new XoopsTpl();
+        $this->_tpl = new XoopsTpl();
 
         /**
          * We need access to the vars of the SmartObject for a few things in the table creation.
@@ -646,13 +646,14 @@ class SmartObjectTable {
         $aColumns = array();
 
         foreach ($this->_columns as $column) {
+            $qs_param = '';
             $aColumn = array();
             $aColumn['width'] = $column->getWidth();
             $aColumn['align'] = $column->getAlign();
             $aColumn['key'] = $column->getKeyName();
             if($column->_keyname == 'checked'){
                 $aColumn['caption'] = '<input type ="checkbox" id="checkall_smartobjects" name="checkall_smartobjects"' .
-						' value="checkall_smartobjects" onclick="smartobject_checkall(window.document.form_'.$this->_id.', \'selected_smartobjects\');" />';
+                        ' value="checkall_smartobjects" onclick="smartobject_checkall(window.document.form_'.$this->_id.', \'selected_smartobjects\');" />';
             }elseif($column->getCustomCaption()){
                 $aColumn['caption'] = $column->getCustomCaption();
             }else{
