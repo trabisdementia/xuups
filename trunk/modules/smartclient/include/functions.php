@@ -132,7 +132,7 @@ function smartclient_imageResize($src, $maxWidth, $maxHeight)
             $width = $maxWidth;
             $height = $width * $height / $originalWidth;
         }
-         
+
         If ($height > $maxHeight) {
             $originalHeight = $height;
             $height = $maxHeight;
@@ -144,9 +144,10 @@ function smartclient_imageResize($src, $maxWidth, $maxHeight)
     return array($width, $height, $type, $attr);
 }
 
-function &smartclient_gethandler($name, $optional = false )
+function smartclient_gethandler($name, $optional = false )
 {
     static $handlers;
+    $ret = false;
     $name = strtolower(trim($name));
     if (!isset($handlers[$name])) {
         if ( file_exists( $hnd_file = SMARTCLIENT_ROOT_PATH.'class/'.$name.'.php' ) ) {
@@ -160,7 +161,7 @@ function &smartclient_gethandler($name, $optional = false )
     if (!isset($handlers[$name]) && !$optional ) {
         trigger_error('Class <b>'.$class.'</b> does not exist<br />Handler Name: '.$name . ' | Module path : ' . SMARTCLIENT_ROOT_PATH, E_USER_ERROR);
     }
-    return isset($handlers[$name]) ? $handlers[$name] : false;
+    return isset($handlers[$name]) ? $handlers[$name] : $ret;
 }
 
 
@@ -250,7 +251,7 @@ function smartclient_collapsableBar($tablename = '', $iconname = '')
 	{
 		window.location.href = object.options[object.selectedIndex].value;
 	}
-	
+
 	function toggle(id)
 	{
 		if (document.getElementById) { obj = document.getElementById(id); }
@@ -265,12 +266,12 @@ function smartclient_collapsableBar($tablename = '', $iconname = '')
 		}
 		return false;
 	}
-	
+
 	var iconClose = new Image();
 	iconClose.src = '../images/icon/close12.gif';
 	var iconOpen = new Image();
 	iconOpen.src = '../images/icon/open12.gif';
-	
+
 	function toggleIcon ( iconName )
 	{
 		if ( document.images[iconName].src == window.iconOpen.src ) {
@@ -280,7 +281,7 @@ function smartclient_collapsableBar($tablename = '', $iconname = '')
 		}
 		return;
 	}
-	
+
 	//-->
 	</script>
     <?php

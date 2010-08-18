@@ -75,7 +75,7 @@ function b_faqs_recent_show($options)
 		$block['lang_category'] = _MB_SF_CATEGORY;
 		$block['lang_poster'] = _MB_SF_ANSWEREDBY;
 		$block['lang_date'] = _MB_SF_DATE;
-		$modulename = $myts->makeTboxData4Show($smartModule->getVar('name'));
+		$modulename = $myts->htmlSpecialChars($smartModule->getVar('name'));
 		$block['lang_visitfaq'] = _MB_SF_VISITFAQ . " " . $modulename;
 		
 	}

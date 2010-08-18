@@ -17,7 +17,7 @@ $xurl=XOOPS_URL;
 $xmail=('mailto:'.$xoopsConfig['adminmail']);
 
 //the slogan of your site
-$xslogan=xoops_substr($myts->makeTboxData4Show( $xoopsConfig['slogan'] ),0,20);
+$xslogan=xoops_substr($myts->htmlSpecialChars( $xoopsConfig['slogan'] ),0,20);
 
 
 //your logo name, located in .../makepdf/ (if you wish)

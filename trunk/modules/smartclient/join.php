@@ -186,7 +186,7 @@ switch ($op) {
         $xoopsTpl->assign(array("lang_main_client" => _MD_SCLIENT_CLIENTS, "lang_join" => _MD_SCLIENT_JOIN));
         $xoopsTpl->assign('lang_intro_title', _MD_SCLIENT_JOIN);
         $xoopsTpl->assign('lang_intro_text', sprintf(_MD_SCLIENT_INTRO_JOIN, $xoopsConfig['sitename']));
-        $xoopsTpl->assign('xoops_pagetitle', $myts->makeTboxData4Show($xoopsModule->name()) . ' - ' . _MD_SCLIENT_JOIN);
+        $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($xoopsModule->name()) . ' - ' . _MD_SCLIENT_JOIN);
         break;
 }
 

@@ -127,7 +127,7 @@ switch ($op) {
 	
 	$name = ($xoopsUser)? (ucwords($xoopsUser->getVar("uname"))) : 'Anonymous';
 	
-	$sectionname = $myts->makeTboxData4Show($xoopsModule->getVar('name'));
+	$sectionname = $myts->htmlSpecialChars($xoopsModule->getVar('name'));
 	
 	include_once 'include/request.inc.php';
 	

@@ -171,7 +171,7 @@ switch ($op) {
 
         $name = ($xoopsUser) ? (ucwords($xoopsUser->getVar("uname"))) : 'Anonymous';
 
-        $sectionname = $myts->makeTboxData4Show($xoopsModule->getVar('name'));
+        $sectionname = $myts->htmlSpecialChars($xoopsModule->getVar('name'));
 
         echo "<table width='100%' style='padding: 0; margin: 0; border-bottom: 1px solid #2F5376;'><tr>";
         echo "<td width='50%'><span style='font-size: 10px; line-height: 18px;'><a href='" . XOOPS_URL . "'>" . _MD_SMEDIA_HOME . "</a> > <a href='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/index.php'>" . $sectionname . "</a> > " . _MD_SMEDIA_SUBMIT . "</span></td>";
