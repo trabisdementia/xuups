@@ -48,7 +48,7 @@ class SmartclientClient extends XoopsObject
         $this->initVar("dohtml", XOBJ_DTYPE_INT, 1, false);
 
         if (isset($id)) {
-            $client_handler =& new SmartclientClientHandler($this->_db);
+            $client_handler = new SmartclientClientHandler($this->_db);
             $client =& $client_handler->get($id);
             foreach ($client->vars as $k => $v) {
                 $this->assignVar($k, $v['value']);
@@ -293,7 +293,7 @@ class SmartclientClient extends XoopsObject
 
     function store($force = true)
     {
-        $client_handler =& new SmartclientClientHandler($this->_db);
+        $client_handler = new SmartclientClientHandler($this->_db);
         return $client_handler->insert($this, $force);
     }
 

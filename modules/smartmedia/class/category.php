@@ -108,7 +108,7 @@ class SmartmediaCategory extends XoopsObject {
         $this->category_text =& $smartmedia_category_text_handler->get($this->getVar('categoryid'), $this->languageid);
 
         if (!$this->category_text) {
-            $this->category_text =& new SmartmediaCategory_text();
+            $this->category_text = new SmartmediaCategory_text();
             $this->category_text->setVar('categoryid', $this->categoryid());
             $this->category_text->setVar('languageid', $languageid);
              

@@ -113,7 +113,7 @@ include XOOPS_ROOT_PATH."/Frameworks/fpdf/init.php";
 error_reporting(0);
 ob_end_clean();
 
-$pdf =& new xoopsPDF($xoopsConfig["language"], _CHARSET);
+$pdf = new xoopsPDF($xoopsConfig["language"], _CHARSET);
 $pdf->initialize();
 $pdf->output($pdf_data);
 ?>

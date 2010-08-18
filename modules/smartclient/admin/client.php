@@ -257,7 +257,7 @@ switch ($op) {
 
         // Creating the client object
         If ($id != 0) {
-            $clientObj =& new SmartclientClient($id);
+            $clientObj = new SmartclientClient($id);
         } else {
             $clientObj = $client_handler->create();
         }

@@ -95,7 +95,7 @@ function newbb_getSubForum($pid = 0, $refresh = false)
 function newbb_createSubForumList()
 {
     $forum_handler =& xoops_getModuleHandler("forum", "newbb");
-    $criteria =& new CriteriaCompo("1", 1);
+    $criteria = new CriteriaCompo("1", 1);
     $criteria->setSort("cat_id ASC, parent_forum ASC, forum_order");
     $criteria->setOrder("ASC");
     $forums_obj = $forum_handler->getObjects($criteria);
@@ -130,7 +130,7 @@ function newbb_getParentForum($forum_id = 0, $refresh = false)
 function newbb_createParentForumList()
 {
     $forum_handler =& xoops_getModuleHandler("forum", "newbb");
-    $criteria =& new Criteria("1", 1);
+    $criteria = new Criteria("1", 1);
     $criteria->setSort("parent_forum");
     $criteria->setOrder("ASC");
     $forums_obj = $forum_handler->getObjects($criteria);

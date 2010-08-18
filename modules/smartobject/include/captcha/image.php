@@ -17,7 +17,7 @@ class XoopsCaptchaImage {
     {
         static $instance;
         if(!isset($instance)) {
-            $instance =& new XoopsCaptchaImage();
+            $instance = new XoopsCaptchaImage();
         }
         return $instance;
     }

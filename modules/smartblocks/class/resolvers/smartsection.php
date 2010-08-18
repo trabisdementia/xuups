@@ -129,5 +129,5 @@ class SmartSectionResolver extends SmartblocksResolver {
     }
 }
 
-$resolver=& new SmartSectionResolver();
+$resolver= new SmartSectionResolver();
 ?>

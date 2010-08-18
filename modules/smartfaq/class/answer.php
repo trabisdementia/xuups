@@ -50,7 +50,7 @@ class sfAnswer extends XoopsObject
 			if (is_array($id)) {
 				$this->assignVars($id);
 			} else {
-				$answer_handler =& new sfAnswerHandler($this->db);
+				$answer_handler = new sfAnswerHandler($this->db);
 				$answer =& $answer_handler->get($id);
 				foreach ($answer->vars as $k => $v) {
 					$this->assignVar($k, $v['value']);
@@ -61,7 +61,7 @@ class sfAnswer extends XoopsObject
 
 	function store($force = true)
 	{
-		$answer_handler =& new sfAnswerHandler($this->db);
+		$answer_handler = new sfAnswerHandler($this->db);
 
 		If ($this->status() == _SF_AN_STATUS_APPROVED) {
 			$criteria = new CriteriaCompo(new criteria('faqid', $this->faqid()));

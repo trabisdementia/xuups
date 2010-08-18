@@ -126,5 +126,5 @@ class SmartContentResolver extends SmartblocksResolver {
     }
 }
 
-$resolver=& new SmartContentResolver();
+$resolver= new SmartContentResolver();
 ?>

@@ -161,7 +161,7 @@ class NewbbPermissionForumHandler extends NewbbPermissionHandler
         $forum_id = intval($forum_id);
         if (empty($forum_id)) return false;
         $gperm_handler =& xoops_gethandler('groupperm');
-        $criteria =& new CriteriaCompo(new Criteria('gperm_modid', $GLOBALS["xoopsModule"]->getVar('mid')));
+        $criteria = new CriteriaCompo(new Criteria('gperm_modid', $GLOBALS["xoopsModule"]->getVar('mid')));
         $items = $this->getValidPerms(true);
         $criteria->add(new Criteria('gperm_name', "('" . implode("', '", $items) . "')", 'IN'));
         $criteria->add(new Criteria('gperm_itemid', $forum_id));

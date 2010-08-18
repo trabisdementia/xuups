@@ -125,7 +125,7 @@ switch ($op) {
 
         // Creating the format object
         If ($id != 0) {
-            $formatObj =& new SmartmediaFormat($id);
+            $formatObj = new SmartmediaFormat($id);
             $action = 'edit';
         } else {
             $formatObj = $smartmedia_format_handler->create();

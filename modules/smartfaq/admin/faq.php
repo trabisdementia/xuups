@@ -47,7 +47,7 @@ function editfaq($showmenu = false, $faqid = -1, $answerid = -1, $merge=false)
 				$answerObj = $answer_handler->create();
 			}
 		} else {
-			$answerObj =& new sfAnswer($answerid);
+			$answerObj = new sfAnswer($answerid);
 			$originalAnswerObj =& $faqObj->answer();
 		}
 
@@ -371,8 +371,8 @@ switch ($op) {
 	$answerer_uid = (isset($_POST['answerer_uid']))? intval($_POST['answerer_uid']) : 0;
 
 	// Creating the FAQ and answer objects
-	If ($faqid != -1) {
-		$faqObj =& new sfFaq($faqid);
+	if ($faqid != -1) {
+		$faqObj = new sfFaq($faqid);
 		$answerObj =& $faqObj -> answer();
 		// If the FAQ does not have an answer, then it's an answered opened question
 		if (!$answerObj) {

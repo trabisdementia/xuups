@@ -35,7 +35,7 @@ class NewbbPermissionHandler extends XoopsGroupPermHandler
         if ( !isset($this->_handler[$name]) ) {
             require_once dirname(__FILE__) . "/permission.{$name}.php";
             $className = "NewbbPermission{$name}Handler";
-            $this->_handler[$name] =& new $className($this->db);
+            $this->_handler[$name] = new $className($this->db);
         }
         return $this->_handler[$name];
     }

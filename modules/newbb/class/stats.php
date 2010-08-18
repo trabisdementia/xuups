@@ -57,7 +57,7 @@ class NewbbStatsHandler
     {
         static $instance;
         if (!isset($instance)) {
-            $instance =& new NewbbStatsHandler($db);
+            $instance = new NewbbStatsHandler($db);
         }
         return $instance;
     }

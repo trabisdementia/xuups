@@ -38,7 +38,7 @@ function newbb_updateStats($id, $type, $increment = 1)
 function newbb_getTotalTopics($forum_id = "")
 {
     $topic_handler =& xoops_getmodulehandler('topic', 'newbb');
-    $criteria =& new CriteriaCompo(new Criteria("approved", 0, ">"));
+    $criteria = new CriteriaCompo(new Criteria("approved", 0, ">"));
     if ( $forum_id ) {
         $criteria->add(new Criteria("forum_id", intval($forum_id)));
     }
@@ -52,7 +52,7 @@ function newbb_getTotalTopics($forum_id = "")
 function newbb_getTotalPosts($id = 0, $type = "all")
 {
     $post_handler =& xoops_getmodulehandler('post', 'newbb');
-    $criteria =& new CriteriaCompo(new Criteria("approved", 0, ">"));
+    $criteria = new CriteriaCompo(new Criteria("approved", 0, ">"));
     switch ( $type ) {
         case 'forum':
             if ($id > 0) $criteria->add(new Criteria("forum_id", intval($id)));

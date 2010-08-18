@@ -880,7 +880,7 @@ class NewbbPostHandler extends XoopsPersistableObjectHandler
      */
     function cleanExpires($expire = 0)
     {
-        $crit_expire =& new CriteriaCompo(new Criteria("approved", 0, "<="));
+        $crit_expire = new CriteriaCompo(new Criteria("approved", 0, "<="));
         //if (!empty($expire)) {
         $crit_expire->add(new Criteria("post_time", time()-intval($expire), "<"));
         //}
