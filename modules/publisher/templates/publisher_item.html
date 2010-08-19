@@ -20,45 +20,42 @@
       <div class="itemText">
         <{if $item.image_path || $item.images}>
         
-        <div class="ppy" id="ppy1">
+        <div class="ppy" id="ppy3">
           <ul class="ppy-imglist">
             <{if $item.image_path}>
             <li>
               <a href="<{$item.image_path}>">
-                <img src="<{$item.image_path}>" alt="<{$item.image_name}>" width="<{$item.image_width}>" height="<{$item.image_height}>"/>
+                <img src="<{$item.image_path}>" alt="<{$item.image_name}>" />
               </a>
-              <span class="ppy-extcaption">
-                <strong><{$item.image_name}></strong>
-              </span>   
             </li>
             <{/if}>
             <{foreach item=image from=$item.images}>
             <li>
               <a href="<{$image.path}>">
-                <img src="<{$image.path}>" alt="<{$image.name}>" width="<{$image.width}>" height="<{$image.height}>"/>
+                <img src="<{$image.path}>" alt="<{$image.name}>" />
               </a>
-              <span class="ppy-extcaption">
-                <strong><{$item.image_name}></strong>
-              </span> 
             </li>
             <{/foreach}>
           </ul>
             <div class="ppy-outer">
                 <div class="ppy-stage">
                     <div class="ppy-nav">
+                        <div class="nav-wrap">
                         <a class="ppy-prev" title="<{$smarty.const._MD_PUBLISHER_PREVIOUSIMG}>"><{$smarty.const._MD_PUBLISHER_PREVIOUSIMG}></a>
                         <a class="ppy-switch-enlarge" title="<{$smarty.const._MD_PUBLISHER_ENLARGEIMG}>"><{$smarty.const._MD_PUBLISHER_ENLARGEIMG}></a>
                         <a class="ppy-switch-compact" title="<{$smarty.const._MD_PUBLISHER_CLOSE}>"><{$smarty.const._MD_PUBLISHER_CLOSE}></a>
                         <a class="ppy-next" title="<{$smarty.const._MD_PUBLISHER_NEXTIMG}>"><{$smarty.const._MD_PUBLISHER_NEXTIMG}></a>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="ppy-counter">
+                        <strong class="ppy-current"></strong> <{$smarty.const._MD_PUBLISHER_OF}> <strong class="ppy-total"></strong> 
+                    </div>
             </div>
-            <div class="ppy-caption">
-                <div class="ppy-counter">
-                    Image <strong class="ppy-current"></strong><{$smarty.const._MD_PUBLISHER_OF}><strong class="ppy-total"></strong> 
+                <div class="ppy-caption">
+                    <span class="ppy-text"></span>
                 </div>
-                <span class="ppy-text"></span>
-            </div>
+           </div>
         </div>
         <{/if}>
 	  	  <{$item.maintext}>
@@ -193,7 +190,7 @@
             caption:    'permanent'
         }
 
-        $publisher('#ppy1').popeye(options);
+        $publisher('#ppy3').popeye(options);
     });
     //]]>-->
 </script>
