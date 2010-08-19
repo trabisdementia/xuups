@@ -21,7 +21,7 @@
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 $modversion['name'] = _MI_MYMENUS_MD_NAME;
-$modversion['version'] = 1.00;
+$modversion['version'] = 1.1;
 $modversion['description'] = _MI_MYMENUS_MD_DESC;
 $modversion['credits'] = "Xuups";
 $modversion['author'] = "Xuups";
@@ -62,8 +62,10 @@ $modversion['config'][$i]['description'] = '_MI_MENUS_CONF_ASSIGN_METHOD_DSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'xotheme';
-$modversion['config'][$i]['options'] = array(_MI_MENUS_CONF_ASSIGN_METHOD_XOOPSTPL   => 'xoopstpl',
-_MI_MENUS_CONF_ASSIGN_METHOD_XOTHEME => 'xotheme');
+$modversion['config'][$i]['options'] = array(
+    _MI_MENUS_CONF_ASSIGN_METHOD_XOOPSTPL   => 'xoopstpl',
+    _MI_MENUS_CONF_ASSIGN_METHOD_XOTHEME    => 'xotheme'
+);
 
 // Blocks
 $i = 0;
