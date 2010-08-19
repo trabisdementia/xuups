@@ -57,7 +57,7 @@ function editfaq($showmenu = false, $faqid = -1)
 		// Creating the category of this FAQ
 		$categoryObj =& $category_handler->get($faqObj->categoryid());
 
-		If ($showmenu) {
+		if ($showmenu) {
 			sf_adminMenu(3, _AM_SF_OPEN_QUESTIONS . " > " . $breadcrumb_action);
 		}
 
@@ -74,7 +74,7 @@ function editfaq($showmenu = false, $faqid = -1)
 
 		$breadcrumb_action = _AM_SF_CREATINGNEW;
 		$button_caption = _AM_SF_CREATE;
-		If ($showmenu) {
+		if ($showmenu) {
 			sf_adminMenu(3, _AM_SF_OPEN_QUESTIONS . " > " . $breadcrumb_action);
 		}
 		sf_collapsableBar('bottomtable', 'bottomtableicon');
@@ -109,7 +109,7 @@ function editfaq($showmenu = false, $faqid = -1)
 	$group_list = &$member_handler->getGroupList();
 	$groups_checkbox = new XoopsFormCheckBox(_AM_SF_PERMISSIONS_QUESTION, 'groups[]', $faqObj->getGroups_read());
 	foreach ($group_list as $group_id => $group_name) {
-		If ($group_id != XOOPS_GROUP_ADMIN) {
+		if ($group_id != XOOPS_GROUP_ADMIN) {
 			$groups_checkbox->addOption($group_id, $group_name);
 		}
 	}
@@ -205,7 +205,7 @@ switch ($op) {
 	$faqid = (isset($_POST['faqid']))? intval($_POST['faqid']) : -1;
 
 	// Creating the FAQ
-	If ($faqid != -1) {
+	if ($faqid != -1) {
 		$faqObj = new sfFaq($faqid);
 	} else {
 		$faqObj = $faq_handler->create();
@@ -246,13 +246,13 @@ switch ($op) {
 	$faqObj->setVar('status', $status);
 
 	// Storing the FAQ
-	If ( !$faqObj->store() ) {
+	if ( !$faqObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 3, _AM_SF_ERROR . sf_formatErrors($faqObj->getErrors()));
 		exit;
 	}
 
 	// Send notifications
-	If (!empty($notifToDo)) {
+	if (!empty($notifToDo)) {
 		$faqObj->sendNotifications($notifToDo);
 	}
 
@@ -276,7 +276,7 @@ switch ($op) {
 	$question = (isset($_POST['question']))? $_POST['question'] : '';
 
 	if ($confirm) {
-		If ( !$faq_handler->delete($faqObj)) {
+		if ( !$faq_handler->delete($faqObj)) {
 			redirect_header("question.php", 2, _AM_SF_FAQ_DELETE_ERROR);
 			exit;
 		}

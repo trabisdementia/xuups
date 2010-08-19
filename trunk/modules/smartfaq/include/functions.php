@@ -107,7 +107,7 @@ function sf_addCategoryOption($categoryObj, $selectedid=0, $level = 0, $ret='')
 function sf_createCategorySelect($selectedid=0, $parentcategory=0, $allCatOption=true)
 {
 	$ret = "" . _MB_SF_SELECTCAT . "&nbsp;<select name='options[]'>";
-	If ($allCatOption) {
+	if ($allCatOption) {
 		$ret .= "<option value='0'";
 		$ret .= ">" . _MB_SF_ALLCAT . "</option>\n";
 	}
@@ -145,13 +145,13 @@ function sf_moderator ()
 {
 	global $xoopsUser;
 
-	If (!$xoopsUser) {
+	if (!$xoopsUser) {
 		$result = false;
 	} else {
 	    $smartPermHandler =& xoops_getmodulehandler('permission', 'smartfaq');
 
 		$categories = $smartPermHandler->getPermissions('moderation');
-		If (count($categories) == 0) {
+		if (count($categories) == 0) {
 			$result = false;
 		} else {
 			$result = true;
@@ -223,13 +223,13 @@ function faqAccessGranted($faqObj)
 		$module_id = $smartModule->getVar('mid');
 
 		// Do we have access to the parent category
-		If ($gperm_handler->checkRight('category_read', $faqObj->categoryid(), $groups, $module_id)) {
+		if ($gperm_handler->checkRight('category_read', $faqObj->categoryid(), $groups, $module_id)) {
 			// Do we have access to the faq?
-			If ($gperm_handler->checkRight('item_read', $faqObj->faqid(), $groups, $module_id)) {
+			if ($gperm_handler->checkRight('item_read', $faqObj->faqid(), $groups, $module_id)) {
 				$result = 1;
 			} else { // No we don't !
 				// Check to see if we have partial view access
-				If (!is_object($xoopsUser) && $faqObj->partialView()) {
+				if (!is_object($xoopsUser) && $faqObj->partialView()) {
 					return 0;
 				}
 			}
@@ -464,8 +464,8 @@ function sf_getLinkedUnameFromId($userid = 0, $name = 0, $users = array())
 function sf_getxoopslink($url = '')
 {
 	$xurl = $url;
-	If (strlen($xurl) > 0) {
-		If ($xurl[0] = '/') {
+	if (strlen($xurl) > 0) {
+		if ($xurl[0] = '/') {
 			$xurl = str_replace('/', '', $xurl);
 		}
 		$xurl = str_replace('{SITE_URL}', XOOPS_URL, $xurl);

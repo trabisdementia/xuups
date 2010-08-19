@@ -11,7 +11,7 @@ include_once 'header.php';
 
 $faqid = isset($_GET['faqid'])? intval($_GET['faqid']) : 0;
 
-If ($faqid == 0) {
+if ($faqid == 0) {
 	redirect_header("javascript:history.go(-1)", 1, _MD_SF_NOFAQSELECTED);
 	exit();
 }
@@ -23,7 +23,7 @@ $faq_handler =& sf_gethandler('faq');
 $faqObj = new sfFaq($faqid);
 
 // If the selected FAQ was not found, exit
-If ($faqObj->notLoaded()) {
+if ($faqObj->notLoaded()) {
 	redirect_header("javascript:history.go(-1)", 1, _MD_SF_NOFAQSELECTED);
 	exit();
 }

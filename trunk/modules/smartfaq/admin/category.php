@@ -223,7 +223,7 @@ switch ($op) {
 
 	$categoryid = (isset($_POST['categoryid']))? intval($_POST['categoryid']) : 0;
 
-	If ($categoryid != 0) {
+	if ($categoryid != 0) {
 		$categoryObj = new sfCategory($categoryid);
 	} else {
 		$categoryObj = $category_handler->create();
@@ -237,7 +237,7 @@ switch ($op) {
 	$categoryObj->setVar('weight', (isset($_POST['weight']))? intval($_POST['weight']) : 1);
 
 	// Groups and permissions
-	if(isset($_POST['groups_read'])){
+	if (isset($_POST['groups_read'])){
 		$categoryObj->setGroups_read($_POST['groups_read']);
 	}
 	else{
@@ -257,7 +257,7 @@ switch ($op) {
 		$redirect_to = 'category.php';
 	}
 
-	If ( !$categoryObj->store() ) {
+	if ( !$categoryObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 3, _AM_SF_CATEGORY_SAVE_ERROR . sf_formatErrors($categoryObj->getErrors()));
 		exit;
 	}
@@ -291,7 +291,7 @@ switch ($op) {
 	$name = (isset($_POST['name']))? $_POST['name'] : '';
 
 	if ($confirm) {
-		If ( !$category_handler->delete($categoryObj)) {
+		if ( !$category_handler->delete($categoryObj)) {
 			redirect_header("category.php", 1, _AM_SF_DELETE_CAT_ERROR);
 			exit;
 		}

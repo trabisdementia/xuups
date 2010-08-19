@@ -157,7 +157,7 @@ switch ($op) {
 	}
 	
 	// Storing the FAQ object in the database
-	If ( !$newFaqObj->store() ) {
+	if ( !$newFaqObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 2, _MD_SF_SUBMIT_ERROR);
 		exit();
 	}
@@ -169,7 +169,7 @@ switch ($op) {
 	$newAnswerObj->setVar('uid', $uid);
 	
 	// Storing the answer object in the database
-	If ( !$newAnswerObj->store() ) {
+	if ( !$newAnswerObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 2, _MD_SF_SUBMIT_ERROR);
 		exit();
 	}
@@ -178,7 +178,7 @@ switch ($op) {
 	$categoryObj =& $newFaqObj->category();
 	
 	// If autoapprove_submitted_faq
-	If ($isAdmin) {
+	if ($isAdmin) {
 		// We do not not subscribe user to notification on publish since we publish it right away
 		
 		// Send notifications

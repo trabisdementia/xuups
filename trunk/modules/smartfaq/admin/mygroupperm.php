@@ -54,7 +54,7 @@ if (is_array($HTTP_POST_VARS['perms']) && !empty($HTTP_POST_VARS['perms'])) {
 			// var_dump( $HTTP_POST_VARS['perms'] ) ;
 			// exit ;
 			if (false != myDeleteByModule($gperm_handler->db,$modid,$perm_name,$item_id)) {
-				if( empty( $perm_data['groups'] ) ) continue ;
+				if ( empty( $perm_data['groups'] ) ) continue ;
 				foreach ($perm_data['groups'] as $group_id => $item_ids) {
 	//				foreach ($item_ids as $item_id => $selected) {
 					$selected = isset( $item_ids[ $item_id ] )? $item_ids[ $item_id ] : 0 ;

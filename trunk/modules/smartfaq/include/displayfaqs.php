@@ -10,7 +10,7 @@
 global $xoopsUser, $xoopsUser, $xoopsConfig, $xoopsDB, $xoopsModuleConfig, $xoopsModule;
 
 echo "<br />\n";
-If (!isset($categoryid) || ($categoryid < 1)) {
+if (!isset($categoryid) || ($categoryid < 1)) {
 	$faqs_title = _AM_SF_PUBLISHEDFAQS;
 	$faqs_info = _AM_SF_PUBLISHED_DSC;
 	$sel_cat = -1;

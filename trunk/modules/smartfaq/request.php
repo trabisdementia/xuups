@@ -66,21 +66,21 @@ switch ($op) {
 	$newFaqObj->setVar('notifypub', $notifypub);
 	
 	// Setting the status of the FAQ
-	If ( $xoopsModuleConfig['autoapprove_request'] ==  1) {
+	if ( $xoopsModuleConfig['autoapprove_request'] ==  1) {
 		$newFaqObj->setVar('status', _SF_STATUS_OPENED);
 	} else {
 		$newFaqObj->setVar('status', _SF_STATUS_ASKED);
 	}
 	
 	// Storing the FAQ object in the database
-	If ( !$newFaqObj->store() ) {
+	if ( !$newFaqObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 3, _MD_SF_REQUEST_ERROR . sf_formatErrors($newFaqObj->getErrors()));
 		exit();
 	}
 	
 	// Get the cateopry object related to that FAQ
 	// If autoapprove_requested
-	If ( $xoopsModuleConfig['autoapprove_request'] ==  1) {
+	if ( $xoopsModuleConfig['autoapprove_request'] ==  1) {
 		// We do not not subscribe user to notification on publish since we publish it right away
 		
 		// Send notifications

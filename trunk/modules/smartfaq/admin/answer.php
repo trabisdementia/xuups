@@ -83,7 +83,7 @@ function editfaq($faqid = '')
 	          <td class='head' width='100px'>" . _AM_SF_QUESTION . "</td>
 	          <td class='even'>" . $faqObj->question() . "</td>
 	        </tr>";
-	If ($official_answer) {
+	if ($official_answer) {
 		echo "
 	        <tr>
 	          <td class='head' width='100px'>" . _AM_SF_ANSWER_OFFICIAL . "</td>
@@ -187,24 +187,24 @@ switch ($op) {
 	}
 
 	// Storing the FAQ object in the database
-	If ( !$faqObj->store() ) {
+	if ( !$faqObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 2, _AM_SF_ERROR_FAQ_NOT_SAVED);
 		exit();
 	}
 
 	// Storing the answer object in the database
-	If ( !$answerObj->store() ) {
+	if ( !$answerObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 2, _AM_SF_ERROR_ANSWER_NOT_SAVED);
 		exit();
 	}
 
 	// Send FAQ notifications
-	If (!empty($notifToDo_faq)) {
+	if (!empty($notifToDo_faq)) {
 		$faqObj->sendNotifications($notifToDo_faq);
 	}
 
 	// Send answer notifications
-	If (!empty($notifToDo_answer)) {
+	if (!empty($notifToDo_answer)) {
 		$answerObj->sendNotifications($notifToDo_answer);
 	}
 
@@ -237,7 +237,7 @@ switch ($op) {
 
 			case _SF_STATUS_NEW_ANSWER :
 			$proposed_answers = $answer_handler->getAllAnswers($faqid, _SF_AN_STATUS_PROPOSED);
-			If (count($proposed_answers) > 0) {
+			if (count($proposed_answers) > 0) {
 				// This question has other proposed answer
 				$redirect_page = "answer.php?op=mod&faqid=" . $faqid;
 				$redirect_msg = _AM_SF_ANSWER_REJECTED;

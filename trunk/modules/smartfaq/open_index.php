@@ -29,7 +29,7 @@ $faq_handler =& sf_gethandler('faq');
 
 // Total number of published FAQ in the module
 $totalFaqs = $faq_handler->getFaqsCount(-1, _SF_STATUS_OPENED);
-If ($totalFaqs  == 0 ) {
+if ($totalFaqs  == 0 ) {
 	redirect_header("request.php", 2, _MD_SF_NO_OPEN_QUESTION);
 	exit;
 }
@@ -39,7 +39,7 @@ $categoriesObj = $category_handler->getCategories($xoopsModuleConfig['catperpage
 
 // If no categories are found, exit
 $totalCategoriesOnPage = count($categoriesObj);
-If ($totalCategoriesOnPage  == 0 ) {
+if ($totalCategoriesOnPage  == 0 ) {
 	redirect_header("javascript:history.go(-1)", 2, _AM_SF_NO_CAT_EXISTS);
 	exit;
 }
@@ -98,7 +98,7 @@ if ($displaylastfaqs) {
 	$faqsObj = $faq_handler->getFaqs($xoopsModuleConfig['indexperpage'], $start, _SF_STATUS_OPENED);
 	$totalQnasOnPage = count($faqsObj);
 	
-	If ($faqsObj) {
+	if ($faqsObj) {
 		$userids = array();
 		foreach ($faqsObj as $key => $thisfaq) {
 			$faqids[] = $thisfaq->getVar('faqid');
@@ -148,7 +148,7 @@ $xoopsTpl->assign('lang_category', _MD_SF_CATEGORY);
 // Category Navigation Bar
 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 $pagenav = new XoopsPageNav($totalCategories, $xoopsModuleConfig['catperpage'], $catstart, 'catstart', '');
-If ($xoopsModuleConfig['useimagenavpage'] == 1) {
+if ($xoopsModuleConfig['useimagenavpage'] == 1) {
 	$xoopsTpl->assign('catnavbar', '<div style="text-align:right;">' . $pagenav->renderImageNav() . '</div>');
 } else {
 	$xoopsTpl->assign('catnavbar', '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>');
@@ -156,7 +156,7 @@ If ($xoopsModuleConfig['useimagenavpage'] == 1) {
 
 // FAQ Navigation Bar
 $pagenav = new XoopsPageNav($totalFaqs, $xoopsModuleConfig['indexperpage'], $start, 'start', '');
-If ($xoopsModuleConfig['useimagenavpage'] == 1) {
+if ($xoopsModuleConfig['useimagenavpage'] == 1) {
 	$xoopsTpl->assign('navbar', '<div style="text-align:right;">' . $pagenav->renderImageNav() . '</div>');
 } else {
 	$xoopsTpl->assign('navbar', '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>');

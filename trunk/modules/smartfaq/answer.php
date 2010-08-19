@@ -28,7 +28,7 @@ $faqid = isset($_GET['faqid'])? intval($_GET['faqid']) : 0;
 $faqid = isset($_POST['faqid'])? intval($_POST['faqid']) : $faqid;
 
 // If no FAQ is selected, exit
-If ($faqid == 0) {
+if ($faqid == 0) {
 	redirect_header("javascript:history.go(-1)", 1, _MD_SF_NOFAQSELECTED);
 	exit();
 }
@@ -61,7 +61,7 @@ switch ($op) {
 	$faqObj = new sfFaq($faqid);
 
 	// If the selected FAQ was not found, exit
-	If ($faqObj->notLoaded()) {
+	if ($faqObj->notLoaded()) {
 		redirect_header("javascript:history.go(-1)", 1, _MD_SF_NOFAQSELECTED);
 		exit();
 	}
@@ -83,7 +83,7 @@ switch ($op) {
 	{
 		// This is an Open Question
 		case _SF_STATUS_OPENED :
-		If ( $xoopsModuleConfig['autoapprove_answer'] == 1) {
+		if ( $xoopsModuleConfig['autoapprove_answer'] == 1) {
 			// We automatically approve submitted answer for Open Question, so the question become a Submitted Q&A
 			if ( $xoopsModuleConfig['autoapprove_submitted_faq'] == 1) {
 				// We automatically approve Submitted Q&A
@@ -111,7 +111,7 @@ switch ($op) {
 		// This is a published FAQ for which a user submitted a new answer
 		case _SF_STATUS_PUBLISHED :
 		case _SF_STATUS_NEW_ANSWER :
-		If ( $xoopsModuleConfig['autoapprove_answer_new'] == 1) {
+		if ( $xoopsModuleConfig['autoapprove_answer_new'] == 1) {
 			// We automatically approve new submitted answer for already published FAQ
 			$redirect_msg = '4';
 			$faqObj->setVar('status', _SF_STATUS_SUBMITTED);
@@ -128,13 +128,13 @@ switch ($op) {
 	}
 
 	// Storing the FAQ object in the database
-	If ( !$faqObj->store() ) {
+	if ( !$faqObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 3, _MD_SF_SUBMIT_ERROR . sf_formatErrors($faqObj->getErrors()));
 		exit();
 	}
 
 	// Storing the answer object in the database
-	If ( !$newAnswerObj->store() ) {
+	if ( !$newAnswerObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 3, _MD_SF_SUBMIT_ERROR . sf_formatErrors($newAnswerObj->getErrors()));
 		exit();
 	}
@@ -199,7 +199,7 @@ switch ($op) {
 	$faqObj = new sfFaq($faqid);
 
 	// If the selected FAQ was not found, exit
-	If ($faqObj->notLoaded()) {
+	if ($faqObj->notLoaded()) {
 		redirect_header("javascript:history.go(-1)", 1, _MD_SF_NOFAQSELECTED);
 		exit();
 	}

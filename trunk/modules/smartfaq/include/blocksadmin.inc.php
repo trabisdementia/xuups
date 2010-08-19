@@ -130,7 +130,7 @@ if ( $op == "list" ) {
 
 if ( $op == "order" ) {
 	foreach (array_keys($bid) as $i) {
-		if( $side[$i] < 0 ) {
+		if ( $side[$i] < 0 ) {
 			$visible[$i] = 0 ;
 			$side[$i] = -1 ;
 		} else {
@@ -194,7 +194,7 @@ if ( $op == "edit" ) {
 		}
 		$myblock = new XoopsBlock($bid);
 		// $myblock->setVar('side', $bside); GIJ -
-		if( $bside >= 0 ) $myblock->setVar('side', $bside); // GIJ +
+		if ( $bside >= 0 ) $myblock->setVar('side', $bside); // GIJ +
 		$myblock->setVar('weight', $bweight);
 		$myblock->setVar('visible', $bvisible);
 		$myblock->setVar('title', $btitle);
