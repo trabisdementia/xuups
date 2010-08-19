@@ -48,7 +48,7 @@ if ($op == 'start')
 		$result = $xoopsDB->query ("select count(*) from ".$xoopsDB->prefix("xoopsfaq_contents"));
 		list ($totalFAQ) = $xoopsDB->fetchRow ($result);
 		
-		If ($totalFAQ == 0) {
+		if ($totalFAQ == 0) {
 			echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . sprintf(_AM_SF_IMPORT_MODULE_FOUND_NO_FAQ, $importFromModuleName, $totalCat) . "</span>";
 		} else {
 			
@@ -117,7 +117,7 @@ if ($op == 'go')
 	include_once("admin_header.php");
 	
 	$import_category = (isset($_POST['import_category'])? ($_POST['import_category']) : null);
-	If (!$import_category) {
+	if (!$import_category) {
 		redirect_header($scriptname, 2, _AM_SF_NOCATSELECTED);
 		exit;
 	}
@@ -187,7 +187,7 @@ if ($op == 'go')
 		{
 			extract ($arrFAQ, EXTR_PREFIX_ALL, 'xfaq');
 			
-			If ($xfaq_contents_visible != 1) {
+			if ($xfaq_contents_visible != 1) {
 				$qstatus = _SF_STATUS_OFFLINE;
 			} elseif ($autoaprove) {
 				$qstatus = _SF_STATUS_PUBLISHED;

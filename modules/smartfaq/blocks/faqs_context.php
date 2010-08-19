@@ -16,7 +16,7 @@ function b_faqs_context_show($options)
 	
 	$block = array();
 	
-	If ($options[0] == 0) {
+	if ($options[0] == 0) {
 		$categoryid = -1;
 	} else {
 		$categoryid = $options[0];
@@ -31,7 +31,7 @@ function b_faqs_context_show($options)
 	$faqsObj = $faq_handler->getContextualFaqs($limit);
 	$totalfaqs = count($faqsObj);
 	
-	If ($faqsObj) {
+	if ($faqsObj) {
 		for ( $i = 0; $i < $totalfaqs; $i++ ) {
                 $faq = array();
                 $faq['id'] = $faqsObj[$i]->faqid();

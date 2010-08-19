@@ -22,7 +22,7 @@ function b_faqs_random_diduno_show()
     // creating the FAQ object
 	$faqsObj = $faq_handler->getRandomFaq('diduno', array(_SF_STATUS_PUBLISHED, _SF_STATUS_NEW_ANSWER));
     
-    If ($faqsObj) {
+    if ($faqsObj) {
        	$block['content'] = $faqsObj->diduno();
        	$block['id'] = $faqsObj->faqid();
        	$block['lang_answer'] = _MB_SF_MOREDETAILS;

@@ -18,7 +18,7 @@ $category_handler =& sf_gethandler('category');
 $categoryObj = new sfCategory($categoryid);
 
 // If the selected category was not found, exit
-If ($categoryObj->notLoaded()) {
+if ($categoryObj->notLoaded()) {
 	redirect_header("javascript:history.go(-1)", 1, _MD_SF_NOCATEGORYSELECTED);
 	exit();
 }
@@ -30,7 +30,7 @@ if (!$categoryObj->checkPermission()) {
 }
 $totalQnas = $category_handler->publishedFaqsCount($categoryid);
 // If there is no FAQ under this categories or the sub-categories, exit
-If (!isset($totalQnas[$categoryid]) || $totalQnas[$categoryid] == 0) {
+if (!isset($totalQnas[$categoryid]) || $totalQnas[$categoryid] == 0) {
 	//redirect_header("index.php", 1, _MD_SF_MAINNOFAQS);
 	//exit;
 }
@@ -46,7 +46,7 @@ $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 $faq_handler =& sf_gethandler('faq');
 
 // creating the FAQ objects that belong to the selected category
-If ($xoopsModuleConfig['orderbydate'] == 1) {
+if ($xoopsModuleConfig['orderbydate'] == 1) {
 	$sort = 'datesub';
 	$order = 'DESC';
 } else {
@@ -55,7 +55,7 @@ If ($xoopsModuleConfig['orderbydate'] == 1) {
 }
 $faqsObj = $faq_handler->getAllPublished($xoopsModuleConfig['indexperpage'], $start, $categoryid, $sort, $order);
 
-If ($faqsObj) {
+if ($faqsObj) {
 	$totalQnasOnPage = count($faqsObj);
 } else {
 	$totalQnasOnPage = 0;
@@ -80,11 +80,11 @@ $lastfaqsize = intval($xoopsModuleConfig['lastfaqsize']);
 $subcatsObj = $category_handler->getCategories(0, 0, $categoryid);
 $total_subcats = count($subcatsObj);
 $total_faqs = 0;
-If ($total_subcats != 0) {
+if ($total_subcats != 0) {
 	$subcat_keys = array_keys($subcatsObj);
 	foreach ( $subcat_keys as $i) {
 		$subcat_id = $subcatsObj[$i]->getVar('categoryid');
-		If (isset($totalQnas[$subcat_id]) && $totalQnas[$subcat_id] > 0 ) {
+		if (isset($totalQnas[$subcat_id]) && $totalQnas[$subcat_id] > 0 ) {
 			if (isset($last_qnaObj[$subcat_id])) {
 				$subcatsObj[$i]->setVar('last_faqid', $last_qnaObj[$subcat_id]->getVar('faqid'));
 				$subcatsObj[$i]->setVar('last_question_link', "<a href='faq.php?faqid=" . $last_qnaObj[$subcat_id]->getVar('faqid') . "'>" . $last_qnaObj[$subcat_id]->question($lastfaqsize) . "</a>");
@@ -138,7 +138,7 @@ if (count($faqsObj)>0) {
 		$xoopsTpl->append('faqs', $faq);
 	}
 	
-	If (isset($last_qnaObj) && $last_qnaObj) {
+	if (isset($last_qnaObj) && $last_qnaObj) {
 		$category['last_faqid'] = $last_qnaObj[$categoryObj->getVar('categoryid')]->getVar('faqid');
 		$category['last_question_link'] = "<a href='faq.php?faqid=" . $last_qnaObj[$categoryObj->getVar('categoryid')]->getVar('faqid') . "'>" . $last_qnaObj[$categoryObj->getVar('categoryid')]->question($lastfaqsize) . "</a>";
 	}
@@ -167,7 +167,7 @@ $xoopsTpl->assign('lang_comments', _MD_SF_COMMENTS);
 // The Navigation Bar
 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 $pagenav = new XoopsPageNav($thiscategory_faqcount, $xoopsModuleConfig['indexperpage'], $start, 'start', 'categoryid=' . $categoryObj->getVar('categoryid'));
-If ($xoopsModuleConfig['useimagenavpage'] == 1) {
+if ($xoopsModuleConfig['useimagenavpage'] == 1) {
 	$xoopsTpl->assign('navbar', '<div style="text-align:right;">' . $pagenav->renderImageNav() . '</div>');
 } else {
 	$xoopsTpl->assign('navbar', '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>');

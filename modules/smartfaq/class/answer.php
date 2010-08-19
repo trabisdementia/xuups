@@ -63,7 +63,7 @@ class sfAnswer extends XoopsObject
 	{
 		$answer_handler = new sfAnswerHandler($this->db);
 
-		If ($this->status() == _SF_AN_STATUS_APPROVED) {
+		if ($this->status() == _SF_AN_STATUS_APPROVED) {
 			$criteria = new CriteriaCompo(new criteria('faqid', $this->faqid()));
 			$answer_handler->updateAll('status', _SF_AN_STATUS_REJECTED, $criteria);
 		}
@@ -92,7 +92,7 @@ class sfAnswer extends XoopsObject
 
 	function datesub($dateFormat='none', $format="S")
 	{
-		If ($dateFormat == 'none') {
+		if ($dateFormat == 'none') {
 		    $smartModuleConfig =& sf_getModuleConfig();
 			$dateFormat = $smartModuleConfig['dateformat'];
 		}
@@ -291,7 +291,7 @@ class sfAnswerHandler extends XoopsObjectHandler
 		$answers =& $this->getAllAnswers($faqObj->faqid());
 		$result = true;
 		foreach ($answers as $answer) {
-			If (!$this->delete($answer)) {
+			if (!$this->delete($answer)) {
 				$result = false;
 			}
 		}
@@ -347,7 +347,7 @@ class sfAnswerHandler extends XoopsObjectHandler
 	function &getOfficialAnswer($faqid=0)
 	{
 		$theaAnswers =& $this->getAllAnswers($faqid, _SF_AN_STATUS_APPROVED, 1, 0);
-		If (count($theaAnswers) == 1) {
+		if (count($theaAnswers) == 1) {
 			return $theaAnswers[0];
 		} else {
 			return false;
@@ -365,7 +365,7 @@ class sfAnswerHandler extends XoopsObjectHandler
 	{
 		$hasStatusCriteria = false;
 		$criteriaStatus = new CriteriaCompo();
-		If ( is_array($status)) {
+		if ( is_array($status)) {
 			$hasStatusCriteria = true;
 			foreach ($status as $v) {
 				$criteriaStatus->add(new Criteria('status', $v), 'OR');

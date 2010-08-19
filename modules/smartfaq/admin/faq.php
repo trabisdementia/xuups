@@ -133,7 +133,7 @@ function editfaq($showmenu = false, $faqid = -1, $answerid = -1, $merge=false)
 		// Creating the category of this FAQ
 		$categoryObj =& $faqObj->category();
 
-		If ($showmenu) {
+		if ($showmenu) {
 			sf_adminMenu(2, $breadcrumb_action1 . " > " . $breadcrumb_action2);
 		}
 
@@ -153,7 +153,7 @@ function editfaq($showmenu = false, $faqid = -1, $answerid = -1, $merge=false)
 		$breadcrumb_action1 = _AM_SF_SMARTFAQS;
 		$breadcrumb_action2 = _AM_SF_CREATINGNEW;
 		$button_caption = _AM_SF_CREATE;
-		If ($showmenu) {
+		if ($showmenu) {
 			sf_adminMenu(2, $breadcrumb_action1 . " > " . $breadcrumb_action2);
 		}
 		sf_collapsableBar('bottomtable', 'bottomtableicon');
@@ -235,7 +235,7 @@ function editfaq($showmenu = false, $faqid = -1, $answerid = -1, $merge=false)
 	$group_list = &$member_handler->getGroupList();
 	$groups_checkbox = new XoopsFormCheckBox(_AM_SF_PERMISSIONS_FAQ, 'groups[]', $faqObj->getGroups_read());
 	foreach ($group_list as $group_id => $group_name) {
-		If ($group_id != XOOPS_GROUP_ADMIN) {
+		if ($group_id != XOOPS_GROUP_ADMIN) {
 			$groups_checkbox->addOption($group_id, $group_name);
 		}
 	}
@@ -262,7 +262,7 @@ function editfaq($showmenu = false, $faqid = -1, $answerid = -1, $merge=false)
 	$sform->addElement($options_tray);
 
 	// OFFLINE
-	If ( $faqObj->status() == _SF_STATUS_OFFLINE ) {
+	if ( $faqObj->status() == _SF_STATUS_OFFLINE ) {
 		// Back OnLine
 		$offline_radio = new XoopsFormRadioYN(_AM_SF_OFFLINE_FIELD, 'offline', 1, ' ' . _AM_SF_YES . '', ' ' . _AM_SF_NO . '');
 		$sform->addElement($offline_radio);
@@ -384,7 +384,7 @@ switch ($op) {
 	}
 
 	// Putting the values in the FAQ object
-	if(isset($_POST['groups'])){
+	if (isset($_POST['groups'])){
 		$faqObj->setGroups_read($_POST['groups']);
 	}
 	else{
@@ -399,7 +399,7 @@ switch ($op) {
 
 	// If this SmartFAQ is offline and the user set this option to No
 	$offline = (isset($_POST['offline']))? $_POST['offline'] : 1;
-	If ( ($faqObj->status() == _SF_STATUS_OFFLINE) && ($offline == 0) ) {
+	if ( ($faqObj->status() == _SF_STATUS_OFFLINE) && ($offline == 0) ) {
 		$faqObj->setVar('status', _SF_STATUS_PUBLISHED);
 	}
 	$faqObj->setVar('weight', (isset($_POST['weight']))? intval($_POST['weight']) : $faqObj->weight());
@@ -490,20 +490,20 @@ switch ($op) {
 	$answerObj->setVar('uid', $answerer_uid);
 
 	// Storing the FAQ
-	If ( !$faqObj->store() ) {
+	if ( !$faqObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 3, $error_msg . sf_formatErrors($faqObj->getErrors()));
 		exit;
 	}
 
 	// Storing the answer
 	$answerObj->setVar('faqid', $faqObj->faqid());
-	If ( !$answerObj->store() ) {
+	if ( !$answerObj->store() ) {
 		redirect_header("javascript:history.go(-1)", 3, $error_msg . sf_formatErrors($answerObj->getErrors()));
 		exit;
 	}
 
 	// Send notifications
-	If (!empty($notifToDo)) {
+	if (!empty($notifToDo)) {
 		$faqObj->sendNotifications($notifToDo);
 	}
 
@@ -527,7 +527,7 @@ switch ($op) {
 	$question = (isset($_POST['question']))? $_POST['question'] : '';
 
 	if ($confirm) {
-		If ( !$faq_handler->delete($faqObj)) {
+		if ( !$faq_handler->delete($faqObj)) {
 			redirect_header("faq.php", 2, _AM_SF_FAQ_DELETE_ERROR . sf_formatErrors($faqObj->getErrors()));
 			exit;
 		}

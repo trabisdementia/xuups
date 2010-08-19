@@ -22,7 +22,7 @@ $categoryid = isset($_GET['categoryid'])? intval($_GET['categoryid']) : 0;
 $categoryObj = new sfCategory($categoryid);
 
 // If the selected category was not found, exit
-If ($categoryObj->notLoaded()) {
+if ($categoryObj->notLoaded()) {
 	redirect_header("javascript:history.go(-1)", 1, _MD_SF_NOCATEGORYSELECTED);
 	exit();
 }
@@ -45,7 +45,7 @@ $faq_handler =& sf_gethandler('faq');
 // creating the FAQ objects that belong to the selected category
 $faqsObj = $faq_handler->getFaqs($xoopsModuleConfig['indexperpage'], $start, _SF_STATUS_OPENED, $categoryid);
 
-If ($faqsObj) {
+if ($faqsObj) {
 	$totalQnasOnPage = count($faqsObj);
 } else {
 	$totalQnasOnPage = 0;
@@ -74,7 +74,7 @@ $category['categoryPath'] = $categoryObj->getCategoryPath(false, true);
 $subcatsObj = $category_handler->getCategories(0, 0, $categoryid);
 $total_subcats = count($subcatsObj);
 $catQnasWithSub = 0;
-If ($total_subcats != 0) {
+if ($total_subcats != 0) {
     $faq_handler =& sf_gethandler('faq');
 	// Arrays that will hold the informations passed on to smarty variables
 	foreach ($subcatsObj as $key => $subcat) {
@@ -131,7 +131,7 @@ $xoopsTpl->assign('lang_category', _MD_SF_CATEGORY);
 // The Navigation Bar
 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 $pagenav = new XoopsPageNav($totalQnas[$categoryid], $xoopsModuleConfig['indexperpage'], $start, 'start', 'categoryid=' . $categoryObj->getVar('categoryid'));
-If ($xoopsModuleConfig['useimagenavpage'] == 1) {
+if ($xoopsModuleConfig['useimagenavpage'] == 1) {
 	$category['navbar'] = '<div style="text-align:right;">' . $pagenav->renderImageNav() . '</div>';
 } else {
 	$category['navbar'] = '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>';

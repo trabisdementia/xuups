@@ -25,8 +25,8 @@ $totalCategories = $category_handler->getCategoriesCount(0);
 // Total number of published FAQ in the module
 $totalFaqs = $faq_handler->getFaqsCount(-1, array(_SF_STATUS_PUBLISHED, _SF_STATUS_NEW_ANSWER));
 
-If ($totalFaqs  == 0 ) {
-	If ( ($totalCategories > 0) && ($xoopsModuleConfig['allowrequest'] && ($xoopsModuleConfig['anonpost']) || is_object($xoopsUser))){
+if ($totalFaqs  == 0 ) {
+	if ( ($totalCategories > 0) && ($xoopsModuleConfig['allowrequest'] && ($xoopsModuleConfig['anonpost']) || is_object($xoopsUser))){
 		redirect_header("request.php", 2, _AM_SF_NO_TOP_PERMISSIONS);
 	} else {
 		redirect_header("../../index.php", 2, _AM_SF_NO_TOP_PERMISSIONS);
@@ -43,7 +43,7 @@ include_once("footer.php");
 $categoriesObj = $category_handler->getCategories($xoopsModuleConfig['catperpage'], $catstart);
 // If no categories are found, exit
 $totalCategoriesOnPage = count($categoriesObj);
-If ($totalCategoriesOnPage  == 0 ) {
+if ($totalCategoriesOnPage  == 0 ) {
 	redirect_header("javascript:history.go(-1)", 2, _AM_SF_NO_CAT_EXISTS);
 	exit;
 }
@@ -74,7 +74,7 @@ foreach ($categoriesObj as $cat_id => $category) {
 					$subcat->setVar('last_question_link', "<a href='faq.php?faqid=" . $last_qnaObj[$subcat_id]->getVar('faqid') . "'>" . $last_qnaObj[$subcat_id]->question($lastfaqsize) . "</a>");
 				}
 				$subcat->setVar('faqcount', $totalQnas[$subcat_id]);
-				if($xoopsModuleConfig['displaysubcatonindex']){
+				if ($xoopsModuleConfig['displaysubcatonindex']){
 					$categories[$cat_id]['subcats'][$subcat_id] = $subcat->toArray();
 				}
 			}
@@ -114,7 +114,7 @@ if ($displaylastfaqs) {
 	$faqsObj = $faq_handler->getAllPublished($xoopsModuleConfig['indexperpage'], $start);
 	$totalQnasOnPage = count($faqsObj);
 	$allcategories = $category_handler->getObjects(null, true);
-	If ($faqsObj) {
+	if ($faqsObj) {
 		$userids = array();
 		foreach ($faqsObj as $key => $thisfaq) {
 			$faqids[] = $thisfaq->getVar('faqid');
@@ -182,7 +182,7 @@ $xoopsTpl->assign('lang_comments', _MD_SF_COMMENTS);
 // Category Navigation Bar
 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 $pagenav = new XoopsPageNav($totalCategories, $xoopsModuleConfig['catperpage'], $catstart, 'catstart', '');
-If ($xoopsModuleConfig['useimagenavpage'] == 1) {
+if ($xoopsModuleConfig['useimagenavpage'] == 1) {
 	$xoopsTpl->assign('catnavbar', '<div style="text-align:right;">' . $pagenav->renderImageNav() . '</div>');
 } else {
 	$xoopsTpl->assign('catnavbar', '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>');
@@ -190,7 +190,7 @@ If ($xoopsModuleConfig['useimagenavpage'] == 1) {
 
 // FAQ Navigation Bar
 $pagenav = new XoopsPageNav($totalFaqs, $xoopsModuleConfig['indexperpage'], $start, 'start', '');
-If ($xoopsModuleConfig['useimagenavpage'] == 1) {
+if ($xoopsModuleConfig['useimagenavpage'] == 1) {
 	$xoopsTpl->assign('navbar', '<div style="text-align:right;">' . $pagenav->renderImageNav() . '</div>');
 } else {
 	$xoopsTpl->assign('navbar', '<div style="text-align:right;">' . $pagenav->renderNav() . '</div>');

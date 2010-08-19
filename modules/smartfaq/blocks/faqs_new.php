@@ -16,7 +16,7 @@ function b_faqs_new_show($options)
 	
 	$block = array();
 	
-	If ($options[0] == 0) {
+	if ($options[0] == 0) {
 		$categoryid = -1;
 	} else {
 		$categoryid = $options[0];
@@ -31,7 +31,7 @@ function b_faqs_new_show($options)
 	// creating the FAQ objects that belong to the selected category
 	$faqsObj = $faq_handler->getAllPublished($limit, 0, $categoryid, $sort);
 	$totalfaqs = count($faqsObj);
-	If ($faqsObj) {
+	if ($faqsObj) {
 		for ( $i = 0; $i < $totalfaqs; $i++ ) {
             $newfaqs = array();
             $newfaqs['linktext'] = $faqsObj[$i]->question($maxQuestionLength);

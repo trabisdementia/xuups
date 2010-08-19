@@ -47,7 +47,7 @@ if ($op == 'start')
 		$result = $xoopsDB->query ("select count(*) from ".$xoopsDB->prefix("faqtopics"));
 		list ($totalFAQ) = $xoopsDB->fetchRow ($result);
 		
-		If ($totalFAQ == 0) {
+		if ($totalFAQ == 0) {
 			echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . sprintf(_AM_SF_IMPORT_MODULE_FOUND_NO_FAQ, $importFromModuleName, $totalCat) . "</span>";
 		} else {
 			
@@ -116,7 +116,7 @@ if ($op == 'start')
 if ($op == 'go')
 {
 	$import_category = (isset($_POST['import_category'])? ($_POST['import_category']) : null);
-	If (!$import_category) {
+	if (!$import_category) {
 		redirect_header($scriptname, 2, _AM_SF_NOCATSELECTED);
 		exit;
 	}

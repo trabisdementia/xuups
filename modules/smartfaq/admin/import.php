@@ -62,15 +62,15 @@ switch ($op) {
 	include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 	
 	$module_handler =& xoops_gethandler ('module');
-	If ($module_handler->getByDirname('xoopsfaq')) {
+	if ($module_handler->getByDirname('xoopsfaq')) {
 		$importfile_select_array["xoopsfaq"] = _AM_SF_IMPORT_XOOPSFAQ_110;
 	}
 	
-	If ($module_handler->getByDirname('wffaq')) {
+	if ($module_handler->getByDirname('wffaq')) {
 		$importfile_select_array["wffaq"] = _AM_SF_IMPORT_WFFAQ_105;
 	}
 	
-	If (isset($importfile_select_array) && count($importfile_select_array) > 0 ) {
+	if (isset($importfile_select_array) && count($importfile_select_array) > 0 ) {
 		
 		$sform = new XoopsThemeForm(_AM_SF_IMPORT_SELECTION, "op", xoops_getenv('PHP_SELF'));
 		$sform->setExtra('enctype="multipart/form-data"');

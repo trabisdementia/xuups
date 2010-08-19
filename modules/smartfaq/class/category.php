@@ -107,7 +107,7 @@ class sfCategory extends XoopsObject
 	function name($format="S")
 	{
 		$ret = $this->getVar("name", $format);
-		If (($format=='s') || ($format=='S') || ($format=='show')) {
+		if (($format=='s') || ($format=='S') || ($format=='show')) {
 			$myts =& MyTextSanitizer::getInstance();
 			$ret = $myts->displayTarea($ret);
 		}
@@ -132,7 +132,7 @@ class sfCategory extends XoopsObject
 	    else {
 	        $filename = "category.php";
 	    }
-		If ($withAllLink) {
+		if ($withAllLink) {
 			$ret = "<a href='" . XOOPS_URL . "/modules/smartfaq/".$filename."?categoryid=" . $this->categoryid() . "'>" . $this->name() . "</a>";
 		} else {
 			$ret = $this->name();
@@ -168,7 +168,7 @@ class sfCategory extends XoopsObject
 		$category_handler = new sfCategoryHandler($this->db);
 
 		$ret = $category_handler->insert($this, $force);
-		If ( $sendNotifications && $ret && ($this->isNew()) ) {
+		if ( $sendNotifications && $ret && ($this->isNew()) ) {
 			$this->sendNotifications();
 		}
 		$this->unsetNew();
@@ -401,7 +401,7 @@ class sfCategoryHandler extends XoopsObjectHandler
 		$criteria->setSort($sort);
 		$criteria->setOrder($order);
 
-		If ($parentid != -1 ) {
+		if ($parentid != -1 ) {
 			$criteria->add(new Criteria('parentid', $parentid));
 		}
 		if (!sf_userIsAdmin()) {
@@ -425,7 +425,7 @@ class sfCategoryHandler extends XoopsObjectHandler
 		$criteria->setSort($sort);
 		$criteria->setOrder($order);
 
-		If ($parentid != -1 ) {
+		if ($parentid != -1 ) {
 			$criteria->add(new Criteria('c.parentid', $parentid));
 		}
 		if (!sf_userIsAdmin()) {
@@ -489,11 +489,11 @@ class sfCategoryHandler extends XoopsObjectHandler
 	function getCategoriesCount($parentid=0)
 	{
 
-		If ($parentid == -1)  {
+		if ($parentid == -1)  {
 			return $this->getCount();
 		}
 		$criteria = new CriteriaCompo();
-		If (isset($parentid) && ($parentid != -1)) {
+		if (isset($parentid) && ($parentid != -1)) {
 		    $criteria->add(new criteria('parentid', $parentid));
 		    if (!sf_userIsAdmin()) {
 		        $smartPermHandler =& xoops_getmodulehandler('permission', 'smartfaq');
@@ -508,11 +508,11 @@ class sfCategoryHandler extends XoopsObjectHandler
 	function getCategoriesWithOpenQuestionsCount($parentid=0)
 	{
 
-		If ($parentid == -1)  {
+		if ($parentid == -1)  {
 			return $this->getCount();
 		}
 		$criteria = new CriteriaCompo();
-		If (isset($parentid) && ($parentid != -1)) {
+		if (isset($parentid) && ($parentid != -1)) {
 		    $criteria->add(new criteria('parentid', $parentid));
 		    if (!sf_userIsAdmin()) {
 		        $smartPermHandler =& xoops_getmodulehandler('permission', 'smartfaq');

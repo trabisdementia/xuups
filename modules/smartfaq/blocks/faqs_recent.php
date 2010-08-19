@@ -21,7 +21,7 @@ function b_faqs_recent_show($options)
 	
 	$block = array();
 	
-	If ($options[0] == 0) {
+	if ($options[0] == 0) {
 		$categoryid = -1;
 	} else {
 		$categoryid = $options[0];
@@ -40,7 +40,7 @@ function b_faqs_recent_show($options)
 	// Creating the last FAQs
 	$faqsObj = $faq_handler->getAllPublished($limit, 0, $categoryid, $sort);
 	$allcategories = $category_handler->getObjects(null, true);
-	If ($faqsObj) {
+	if ($faqsObj) {
 		$userids = array();
 		foreach ($faqsObj as $key => $thisfaq) {
 			$faqids[] = $thisfaq->getVar('faqid');

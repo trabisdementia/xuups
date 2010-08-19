@@ -22,7 +22,7 @@ $xoops_system_path = XOOPS_ROOT_PATH."/modules/system";
 
 // language files
 $language = $xoopsConfig['language'] ;
-if(!file_exists("$xoops_system_path/language/$language/admin/blocksadmin.php")) $language = 'english';
+if (!file_exists("$xoops_system_path/language/$language/admin/blocksadmin.php")) $language = 'english';
 
 // to prevent from notice that constants already defined
 $error_reporting_level = error_reporting(0);
@@ -34,11 +34,11 @@ error_reporting( $error_reporting_level ) ;
 
 $group_defs = file( "$xoops_system_path/language/$language/admin/groups.php" ) ;
 foreach( $group_defs as $def ) {
-	if( strstr( $def , '_AM_ACCESSRIGHTS' ) || strstr( $def , '_AM_ACTIVERIGHTS' ) ) eval( $def ) ;
+	if ( strstr( $def , '_AM_ACCESSRIGHTS' ) || strstr( $def , '_AM_ACTIVERIGHTS' ) ) eval( $def ) ;
 }
 
 // check $xoopsModule
-if( ! is_object( $xoopsModule ) ) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;
+if ( ! is_object( $xoopsModule ) ) redirect_header( XOOPS_URL.'/user.php' , 1 , _NOPERM ) ;
 
 // check access right (needs system_admin of BLOCK)
 $sysperm_handler =& xoops_gethandler('groupperm');
@@ -110,7 +110,7 @@ function list_blocks()
 		// bcachetime
 		$cachetime_options = '' ;
 		foreach( $cachetimes as $cachetime => $cachetime_name ) {
-			if( $bcachetime == $cachetime ) {
+			if ( $bcachetime == $cachetime ) {
 				$cachetime_options .= "<option value='$cachetime' selected='selected'>$cachetime_name</option>\n" ;
 			} else {
 				$cachetime_options .= "<option value='$cachetime'>$cachetime_name</option>\n" ;
@@ -134,7 +134,7 @@ function list_blocks()
 		$module_options = '' ;
 		$myts = &MyTextSanitizer::getInstance();
 		foreach( $module_list as $mid => $mname ) {
-			if( in_array( $mid , $selected_mids ) ) {
+			if ( in_array( $mid , $selected_mids ) ) {
 				$module_options .= "<option value='$mid' selected='selected'>" . $myts->displayTarea($mname) . "</option>\n" ;
 			} else {
 				$module_options .= "<option value='$mid'>" . $myts->displayTarea($mname) . "</option>\n" ;
@@ -213,14 +213,14 @@ function list_groups()
     echo "</div>";	
 }
 
-if(!empty($_POST['submit'])) {
+if (!empty($_POST['submit'])) {
 	include( "mygroupperm.php" ) ;
 	include_once( "$xoops_system_path/language/$language/admin.php" ) ;
 	redirect_header( XOOPS_URL."/modules/".$xoopsModule->dirname()."/admin/myblocksadmin.php" , 1 , _AM_DBUPDATED );
 }
 
 xoops_cp_header() ;
-if(file_exists('./mymenu.php')) include('./mymenu.php');
+if (file_exists('./mymenu.php')) include('./mymenu.php');
 sf_adminMenu(5, _AM_SF_BLOCKSANDGROUPS);
 
 list_blocks() ;

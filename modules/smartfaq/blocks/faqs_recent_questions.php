@@ -16,7 +16,7 @@ function b_faqs_recent_questions_show($options)
 	
 	$block = array();
 	
-	If ($options[0] == 0) {
+	if ($options[0] == 0) {
 		$categoryid = -1;
 	} else {
 		$categoryid = $options[0];
@@ -33,7 +33,7 @@ function b_faqs_recent_questions_show($options)
 	$faqsObj = $faq_handler->getFaqs( $limit, 0, _SF_STATUS_OPENED, $categoryid, $sort);
 	$totalfaqs = count($faqsObj);
 	
-	If ($faqsObj) {
+	if ($faqsObj) {
 		for ( $i = 0; $i < $totalfaqs; $i++ ) {
 			$newfaqs = array();
 			
