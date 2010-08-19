@@ -1,2 +1,7 @@
+<b><u>=> Version 1.1 (2010-08-19)</u></b>
+- added plugin for displaying smarty variables.
+- added plugin for displaying constants.
+- image link must be a valid url, relative to root is deprecated.
+
 <b><u>=> Version 1.0 (2010-08-11)</u></b>
 - First public release of the module.

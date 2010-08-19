@@ -68,12 +68,13 @@ class MymenusMymenusPluginItem extends MymenusPluginItem
 
     function eventImageDecoration()
     {
+        /*
         $registry =& MymenusRegistry::getInstance();
         $linkArray = $registry->getEntry('link_array');
         if (!empty($linkArray['image'])) {
             $linkArray['image'] = XOOPS_URL . '/' . $linkArray['image'];  //Do not do this in other decorators
             $registry->setEntry('link_array', $linkArray);
-        }
+        }*/
     }
 
     function eventTitleDecoration()

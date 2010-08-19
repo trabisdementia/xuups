@@ -26,7 +26,6 @@ function admin_showDiv(type,id){
 
 <table width="100%" cellspacing="1" cellpadding="0" class="outer">
     <tr align="center">
-      <th width="5%"><{$smarty.const._AM_MYMENUS_MENU_IMAGE}></th>
       <th><{$smarty.const._AM_MYMENUS_MENU_TITLE}></th>
       <th><{$smarty.const._AM_MYMENUS_MENU_LINK}></th>
       <th><{$smarty.const._AM_MYMENUS_MENU_HOOKS}></th>
@@ -44,7 +43,6 @@ function admin_showDiv(type,id){
     <{/section}>
 
     <tr class="odd" align="center">
-    <td align="left"><{if $menu.image}><img src="<{$xoops_url}>/<{$menu.image}>" /><{/if}></td>
         <td align="left"><{$padding}><{$menu.title}></td>
         <td align="left"><{$padding}><{$menu.link}></td>
         <td align="right">
