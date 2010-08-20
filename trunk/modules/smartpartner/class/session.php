@@ -75,7 +75,7 @@ class SmartpartnerSession {
         static $_sess;
 
         if (!isset($_sess)) {
-            $_sess =& new SmartpartnerSession();
+            $_sess = new SmartpartnerSession();
         }
         return $_sess;
     }
