@@ -155,7 +155,7 @@ switch ($op) {
 
 	// Creating the file object
 	if ($fileid != 0) {
-		$fileObj =& new SmartpartnerFile($fileid);
+		$fileObj = new SmartpartnerFile($fileid);
 	} else {
 		$fileObj = $smartpartner_file_handler->create();
 	}

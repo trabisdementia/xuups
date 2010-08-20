@@ -79,7 +79,7 @@ class smartpartner_PersistableObjectHandler extends XoopsObjectHandler {
      * @return object
      */
     function &create($isNew = true) {
-        $obj =& new $this->className();
+        $obj = new $this->className();
         if ($isNew === true) {
             $obj->setNew();
         }

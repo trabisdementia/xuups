@@ -59,7 +59,7 @@ class SmartpartnerPartner extends SmartObject
 		$this->initVar("dohtml", XOBJ_DTYPE_INT, 1, false);
 
 		if (isset($id)) {
-			$smartpartner_partner_handler =& new SmartpartnerPartnerHandler($this->db);
+			$smartpartner_partner_handler = new SmartpartnerPartnerHandler($this->db);
 			$partner =& $smartpartner_partner_handler->get($id);
 			foreach ($partner->vars as $k => $v) {
 				$this->assignVar($k, $v['value']);
@@ -325,7 +325,7 @@ class SmartpartnerPartner extends SmartObject
 
 	function store($force = true)
 	{
-		$smartpartner_partner_handler =& new SmartpartnerPartnerHandler($this->db);
+		$smartpartner_partner_handler = new SmartpartnerPartnerHandler($this->db);
 		return $smartpartner_partner_handler->insert($this, $force);
 	}
 
