@@ -8,11 +8,13 @@
           <a href="<{$item.categoryurl}>" title="<{$item.item_cat_description}>"><span><{$item.item_cat_name}></span></a>
         </div>
         <div class="publisher-content clearfix">
-          <{if $item.item_image != ''}>
-            <img src="<{$item.item_image}>" alt="<{$item.item_cleantitle}>" align="left" width="120" />
-          <{/if}>
           <h4 class="publisher-title"><a href="<{$item.itemurl}>" title="<{$item.item_cleantitle}>"><{$item.item_title}></a></h4>
-          <p><{$item.item_summary}></p>
+          <p>
+          <{if $item.item_image != ''}>
+            <img src="<{$item.item_image}>" alt="<{$item.item_cleantitle}>" align="left" width="100" />
+          <{/if}>
+          <{$item.item_summary}>
+          </p>
         </div>
 
         <{if $item.subitem}>

@@ -215,7 +215,7 @@ $modversion['blocks'][$i]['name'] = _MI_PUBLISHER_LATEST_NEWS;
 $modversion['blocks'][$i]['description'] = _MI_PUBLISHER_LATEST_NEWS_DSC;
 $modversion['blocks'][$i]['show_func'] = "publisher_latest_news_show";
 $modversion['blocks'][$i]['edit_func'] = "publisher_latest_news_edit";
-$modversion['blocks'][$i]['options'] = "6|2|300|0|0|100|30|published|1|120|120|1|dcdcdc|RIGHT|1|1|1|1|1|1|1|1|1|1|1|1|";
+$modversion['blocks'][$i]['options'] = "6|2|300|0|0|100|30|published|1|120|120|1|dcdcdc|RIGHT|1|1|1|1|1|1|1|1|1|1|1|1|extended|";
 $modversion['blocks'][$i]['template'] = 'publisher_latest_news.html';
 
 $i++;

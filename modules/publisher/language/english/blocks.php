@@ -88,15 +88,26 @@ define("_MB_PUBLISHER_TOPICSDISPLAY", "Topics to Display");
 define("_MB_PUBLISHER_SCROLL", "Enable Scrolling News Ticker");
 define("_MB_PUBLISHER_SCROLLHEIGHT", "Scroll Height");
 define("_MB_PUBLISHER_SCROLLSPEED", "Scroll Speed");
+define("_MB_PUBLISHER_SCROLLDIR", "Scroll Direction");
+define("_MB_PUBLISHER_SCROLL_RIGHT", "Right");
+define("_MB_PUBLISHER_SCROLL_LEFT", "Left");
+define("_MB_PUBLISHER_SCROLL_UP", "Up");
+define("_MB_PUBLISHER_SCROLL_DOWN", "Down");
 define("_MB_PUBLISHER_SELECTEDSTORIES", "Set article IDs (eg:3,8,23,46) note: set 0 to show all");
 define("_MB_PUBLISHER_IMGDISPLAY", "Show Article Image");
 define("_MB_PUBLISHER_GENERALCONFIG", "<strong>General Options</strong>");
 define("_MB_PUBLISHER_PHOTOSCONFIG", "<strong>Images Options</strong>");
 define("_MB_PUBLISHER_LINKSCONFIG", "<strong>Links Options</strong>");
 define("_MB_PUBLISHER_TOPICSCONFIG", "<strong>Topic Options</strong>");
+define("_MB_PUBLISHER_TEMPLATESCONFIG", "<strong>Template Options</strong>");
+
 define("_MB_PUBLISHER_SUBMITNEWS", "Submit article");
 
 define("_MB_PUBLISHER_TEMPLATE", "Template");
 define("_MB_PUBLISHER_TEMPLATE_NORMAL", "Normal");
 define("_MB_PUBLISHER_TEMPLATE_EXTENDED", "Extended");
+define("_MB_PUBLISHER_TEMPLATE_TICKER", "Ticker");
+define("_MB_PUBLISHER_TEMPLATE_SLIDER1", "Fade-in Slider");
+define("_MB_PUBLISHER_TEMPLATE_SLIDER2", "Tabbed Slider");
+
 ?>

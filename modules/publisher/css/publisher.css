@@ -504,131 +504,185 @@ ul.publisher-links li {
 	visibility: hidden;
 }
 
-/**
- * jQuery lightBox plugin
- * This jQuery plugin was inspired and based on Lightbox 2 by Lokesh Dhakar (http://www.huddletogether.com/projects/lightbox2/)
- * and adapted to me for use like a plugin from jQuery.
- * @name jquery-lightbox-0.5.css
- * @author Leandro Vieira Pinho - http://leandrovieira.com
- * @version 0.5
- * @date April 11, 2008
- * @category jQuery plugin
- * @copyright (c) 2008 Leandro Vieira Pinho (leandrovieira.com)
- * @license CC Attribution-No Derivative Works 2.5 Brazil - http://creativecommons.org/licenses/by-nd/2.5/br/deed.en_US
- * @example Visit http://leandrovieira.com/projects/jquery/lightbox/ for more informations about this jQuery plugin
- */
-#jquery-overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 90;
-	width: 100%;
-	height: 500px;
+
+.clear {
+	clear:both
 }
 
-#jquery-lightbox {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 100;
-	text-align: center;
-	line-height: 0;
+/* --------------- Latestnews Slider 1  --------------- */
+
+ul.pub_slideshow1 {
+	list-style: none !important;
+	height:200px;
+	overflow:hidden;
+	position:relative;
+	margin:0;
+	padding:0;
+}	
+
+ul.pub_slideshow1 li {
+	position:absolute;
+	left:0;
+	right:0;
+	list-style: none !important;
 }
 
-#jquery-lightbox a img {
-	border: none;
+ul.pub_slideshow1 li.show {
+	z-index:500;	
 }
 
-#lightbox-container-image-box {
-	position: relative;
-	background-color: #fff;
-	width: 250px;
-	height: 250px;
-	margin: 0 auto;
+ul.pub_slideshow1 img {
+	border:none;	
 }
 
-#lightbox-container-image {
-	padding: 10px;
+#pub_slideshow1-caption {
+	height:70px;
+	position:absolute;
+	bottom:0;
+	left:0;	
+	color:#fff;
+	background:#000;
+	z-index:500;
 }
 
-#lightbox-loading {
-	position: absolute;
-	top: 40%;
-	left: 0%;
-	height: 25%;
-	width: 100%;
-	text-align: center;
-	line-height: 0;
+#pub_slideshow1-caption .pub_slideshow1-caption-container {
+	padding:5px 10px;	
+	z-index:1000;	
 }
 
-#lightbox-nav {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	z-index: 10;
+#pub_slideshow1-caption h3 {
+	margin:0;
+	padding:0;	
+	font-size:16px;
 }
 
-#lightbox-container-image-box>#lightbox-nav {
-	left: 0;
+#pub_slideshow1-caption p {
+	margin:5px 0 0 0;
+	padding:0;
+    font-weight: normal !important;
 }
 
-#lightbox-nav a {
-	outline: none;
+/* --------------- Latestnews Slider 2  --------------- */
+
+.lof-slidecontent{
+	position:relative;
+	overflow:hidden;
+	border:#F4F4F4 solid 1px;
+	width:600px;
+	height:300px;
 }
 
-#lightbox-nav-btnPrev,#lightbox-nav-btnNext {
-	width: 49%;
-	height: 100%;
-	/*zoom: 1;*/
-	display: block;
+.lof-main-outer{
+	position:relative;
+	height:100%;
+	width:408px;
+	z-index:3px;
+	overflow:hidden;
 }
 
-#lightbox-nav-btnPrev {
-	left: 0;
-	float: left;
+
+/* main flash */
+ul.lof-main-wapper{
+	/* margin-right:auto; */
+	overflow:hidden;
+	padding:0px;
+	margin:0;
+	height:300px;
+	width:408px;
+	position:absolute;
+	overflow:hidden;
+	list-style: none !important;
 }
 
-#lightbox-nav-btnNext {
-	right: 0;
-	float: right;
+ul.lof-main-wapper li{
+	overflow:hidden;
+	padding:0px;
+	margin:0px;
+	height:100%;
+	width:408px;
+	float:left;
+	list-style: none !important;
+}
+.lof-opacity  li{
+	position:absolute;
+	top:0;
+	left:0;
+	float:inherit;
+	list-style: none !important;
+}
+ul.lof-main-wapper li img{
+	padding:0px;	
+	width:408px;
 }
 
-#lightbox-container-image-data-box {
-	font: 10px Verdana, Helvetica, sans-serif;
-	background-color: #fff;
-	margin: 0 auto;
-	line-height: 1.4em;
-	overflow: auto;
-	width: 100%;
-	padding: 0 10px 0;
+/* item navigator */
+ul.lof-navigator{
+	top:0;
+	padding:0 !important;
+	margin:0 !important;
+	position:absolute;
+	width:100%;
+}
+ul.lof-navigator li{
+	cursor:hand; 
+	cursor:pointer;
+	list-style:none !important;
+	width:100%;
+	padding:0 !important;
+	margin:0 !important;
+	overflow:hidden;
+}
+.lof-navigator-outer{
+	position:absolute;
+	right:0;
+	top:00px;
+	z-index:100;
+	height:300px;
+	width:210px;
+	overflow:hidden;
+	color:#FFF
+}
+.lof-navigator li.active{
+	background:url(../images/arrow-bg.png) no-repeat scroll left center; 
+	color:#FFF
+}
+.lof-navigator li:hover{
+	
 }
 
-#lightbox-container-image-data {
-	padding: 0 10px;
-	color: #666;
+
+.lof-navigator li h3{
+	color:#FFF;
+	font-size:100%;
+	padding:15px 10px !important;
+	margin:0;
+
+}
+.lof-navigator li div{
+	background:url(../images/transparent_bg.png);
+	color:#FFF;
+	height:100%;
+	position:relative;
+	margin-left:15px;
+	padding-left:15px;
+	border-top:1px solid #E1E1E1;
 }
 
-#lightbox-container-image-data #lightbox-image-details {
-	width: 70%;
-	float: left;
-	text-align: left;
+.lof-navigator li.active div{
+	background:url(../images/grad-bg.gif);
+	color:#FFF;
 }
-
-#lightbox-image-details-caption {
-	font-weight: bold;
+.lof-navigator li img{
+	height:60px;
+	width:60px;
+	margin:15px 15px 10px 0px;
+	float:left;
+	padding:3px;
+	border:#C5C5C5 solid 1px;
 }
-
-#lightbox-image-details-currentNumber {
-	display: block;
-	clear: left;
-	padding-bottom: 1.0em;
+.lof-navigator li.active img{
+	border:##6C8E5C  solid 1px;
 }
-
-#lightbox-secNav-btnClose {
-	width: 66px;
-	float: right;
-	padding-bottom: 0.7em;
+.lof-navigator li.active h3{
+	color:#FFF;
 }
