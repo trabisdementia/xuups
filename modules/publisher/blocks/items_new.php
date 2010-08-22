@@ -75,7 +75,15 @@ function publisher_items_new_show ($options)
                 $item['image'] = $itemsObj[$i]->getCategoryImagePath();
                 $item['image_name'] = $itemsObj[$i]->getCategoryName();
             } elseif ($image == 'avatar') {
+                if ($itemsObj[$i]->uid() == '0') { 
+                $item['image'] = XOOPS_URL . '/uploads/blank.gif';
+                $images = $itemsObj[$i]->getImages();
+                if (is_object($images['main'])) {
+                    $item['image'] = XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name');
+                }
+                } else {
                 $item['image'] = XOOPS_URL . '/uploads/' . $itemsObj[$i]->posterAvatar();
+                }
                 $item['image_name'] = $itemsObj[$i]->posterName();
             }
 
