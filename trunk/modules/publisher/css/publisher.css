@@ -287,6 +287,7 @@ See readme.txt for full credit details.
 	padding: 0px;
 	margin: 0px;
 	float: left;
+    overflow: hidden;
 }
 
 .publisher_unit-rating div a {
@@ -296,6 +297,7 @@ See readme.txt for full credit details.
 	height: 30px;
 	text-decoration: none;
 	text-indent: -9000px;
+    overflow: hidden;
 	z-index: 20;
 	position: absolute;
 	padding: 0px;
@@ -394,6 +396,7 @@ See readme.txt for full credit details.
 	display: block;
 	text-indent: -9000px;
 	z-index: 1;
+    overflow: hidden;
 }
 
 .publisher_voted {
@@ -568,14 +571,14 @@ ul.pub_slideshow1 img {
 	position:relative;
 	overflow:hidden;
 	border:#F4F4F4 solid 1px;
-	width:600px;
+	width:592px;
 	height:300px;
 }
 
 .lof-main-outer{
 	position:relative;
 	height:100%;
-	width:408px;
+	width:400px;
 	z-index:3px;
 	overflow:hidden;
 }
@@ -588,7 +591,7 @@ ul.lof-main-wapper{
 	padding:0px;
 	margin:0;
 	height:300px;
-	width:408px;
+	width:400px;
 	position:absolute;
 	overflow:hidden;
 	list-style: none !important;
@@ -599,7 +602,7 @@ ul.lof-main-wapper li{
 	padding:0px;
 	margin:0px;
 	height:100%;
-	width:408px;
+	width:400px;
 	float:left;
 	list-style: none !important;
 }
@@ -612,7 +615,7 @@ ul.lof-main-wapper li{
 }
 ul.lof-main-wapper li img{
 	padding:0px;	
-	width:408px;
+	width:400px;
 }
 
 /* item navigator */
@@ -669,7 +672,7 @@ ul.lof-navigator li{
 }
 
 .lof-navigator li.active div{
-	background:url(../images/grad-bg.gif);
+	background: #941813 url(../images/grad-bg.png) repeat-x;
 	color:#FFF;
 }
 .lof-navigator li img{
