@@ -61,8 +61,7 @@ function publisher_items_new_show ($options)
             $item = array();
             $item['link']   = $itemsObj[$i]->getItemLink(false, isset($options[4]) ? $options[4] : 65);
             $item['id']     = $itemsObj[$i]->itemid();
-          //$item['poster'] = $itemsObj[$i]->linkedPosterName();
-            $item['poster'] = $itemsObj[$i]->posterName();
+            $item['poster'] = $itemsObj[$i]->posterName(); // for make poster name linked, use linkedPosterName() instead of posterName()
 
             if ($image == 'article') {
                 $item['image'] = XOOPS_URL . '/uploads/blank.gif';
