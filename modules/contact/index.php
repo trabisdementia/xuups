@@ -206,7 +206,7 @@ else
         'usersName', 'usersEmail', 'usersAddress',
         'usersSite', 'usersICQ', 'usersCompanyName',
         'usersCompanyName', 'usersCompanyLocation', 'userSendConfirm',
-        'userDepartment', 'userComments', 'userMoreInfo', 'securityHidden',
+        'userDepartment', 'usersComments', 'userMoreInfo', 'securityHidden',
         'securityType');
     foreach ($fields as $field) {
         if (isset($_POST[$field])) {
@@ -227,7 +227,7 @@ else
     $contactclass->setSendConfirm(isset( $userSendConfirm ) ? $userSendConfirm : '0' );
     $contactclass->setSelectedDepartment(isset( $userDepartment ) ? $userDepartment : $contactclass->getSelectedDepartment());
     $contactclass->setUserComments(isset($usersComments) ? $usersComments: "");
-    $contactclass->setUserMoreInfo( isset($userMoreInfo) ? (array)$userMoreInfo : array() );// set user more info - it's an array, so we have to figure it out first!!!
+    $contactclass->setUserMoreInfo(isset($userMoreInfo) ? (array)$userMoreInfo : array());// set user more info - it's an array, so we have to figure it out first!!!
 
     $do_check = false;
 

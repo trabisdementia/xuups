@@ -26,7 +26,7 @@
 //  ------------------------------------------------------------------------ //
 
 $modversion['name'] = _MI_CONTACT_NAME;
-$modversion['version'] = 1.7;
+$modversion['version'] = 1.8;//24-08-2010
 $modversion['description'] = _MI_CONTACT_DESC;
 $modversion['credits'] = "Original version by Skalpa\nAAINC (XOOPS@IBDeeming! User) for mod on From Email Name\n";
 $modversion['author'] = "Modified by CreepingDeath - XOOPS@IBDeeming!";
