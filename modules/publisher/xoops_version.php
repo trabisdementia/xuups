@@ -133,7 +133,7 @@ $modversion['blocks'][$i]['name'] = _MI_PUBLISHER_ITEMSNEW;
 $modversion['blocks'][$i]['description'] = _MI_PUBLISHER_ITEMSNEW_DSC;
 $modversion['blocks'][$i]['show_func'] = "publisher_items_new_show";
 $modversion['blocks'][$i]['edit_func'] = "publisher_items_new_edit";
-$modversion['blocks'][$i]['options'] = "0|datesub|5|65|none";
+$modversion['blocks'][$i]['options'] = "0|datesub|0|5|65|none";
 $modversion['blocks'][$i]['template'] = "publisher_items_new.html";
 
 $i++;
