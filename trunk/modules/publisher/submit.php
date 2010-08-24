@@ -307,7 +307,7 @@ switch ($op) {
         } else {
             $redirect_msg = _MD_PUBLISHER_ITEMMODIFIED;
         }
-        redirect_header("index.php", 2, $redirect_msg);
+        redirect_header("item.php?itemid=$itemid", 2, $redirect_msg);
         exit();
 
         break;
