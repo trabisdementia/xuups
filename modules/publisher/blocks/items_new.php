@@ -41,9 +41,9 @@ function publisher_items_new_show ($options)
 
     $sort = $options[1];
     $order = publisher_getOrderBy($sort);
-    $limit = $options[2];
+    $limit = $options[3];
     $start = 0;
-    $image = $options[4];
+    $image = $options[5];
 
     // creating the ITEM objects that belong to the selected category
     if ($allcats) {
@@ -59,9 +59,10 @@ function publisher_items_new_show ($options)
         for ( $i = 0; $i < $totalitems; $i++ ) {
 
             $item = array();
-            $item['link']   = $itemsObj[$i]->getItemLink(false, isset($options[3]) ? $options[3] : 65);
+            $item['link']   = $itemsObj[$i]->getItemLink(false, isset($options[4]) ? $options[4] : 65);
             $item['id']     = $itemsObj[$i]->itemid();
-            $item['poster'] = $itemsObj[$i]->linkedPosterName();
+          //$item['poster'] = $itemsObj[$i]->linkedPosterName();
+            $item['poster'] = $itemsObj[$i]->posterName();
 
             if ($image == 'article') {
                 $item['image'] = XOOPS_URL . '/uploads/blank.gif';
@@ -101,6 +102,8 @@ function publisher_items_new_show ($options)
         }
     }
 
+    $block['show_order'] = $options[2];
+
     return $block;
 }
 
@@ -133,32 +136,47 @@ function publisher_items_new_edit($options)
 
     $form .= "</select></td>";
 
-    $form .= "</tr><tr><td>" . _MB_PUBLISHER_DISP . "</td><td><input type='text' name='options[2]' value='" . $options[2] . "' />&nbsp;" . _MB_PUBLISHER_ITEMS . "</td></tr>";
-    $form .= "<tr><td>" . _MB_PUBLISHER_CHARS . "</td><td><input type='text' name='options[3]' value='" . $options[3] . "' />&nbsp;chars</td></tr>";
+
+    $form .= "<tr><td>" . _MB_PUBLISHER_ORDER_SHOW . "</td><td>";
+    $chk   = "";
+    if ($options[2] == 0) {
+        $chk = " checked='checked'";
+    }
+    $form .= "<input type='radio' name='options[2]' value='0'" . $chk . " />" . _NO . "";
+    $chk   = "";
+
+    if ($options[2] == 1) {
+        $chk = " checked='checked'";
+    }
+    $form .= "<input type='radio' name='options[2]' value='1'" . $chk . " />"._YES."</td></tr>";
+
+
+    $form .= "<tr><td>" . _MB_PUBLISHER_DISP . "</td><td><input type='text' name='options[3]' value='" . $options[3] . "' />&nbsp;" . _MB_PUBLISHER_ITEMS . "</td></tr>";
+    $form .= "<tr><td>" . _MB_PUBLISHER_CHARS . "</td><td><input type='text' name='options[4]' value='" . $options[4] . "' />&nbsp;chars</td></tr>";
 
     $form .= "<tr><td>" . _MB_PUBLISHER_IMAGE_TO_DISPLAY . "</td>";
-    $form .= "<td><select name='options[4]'>";
+    $form .= "<td><select name='options[5]'>";
 
     $form .= "<option value='none'";
-    if ($options[4] == "none") {
+    if ($options[5] == "none") {
         $form .= " selected='selected'";
     }
     $form .= ">" . _NONE . "</option>";
 
     $form .= "<option value='article'";
-    if ($options[4] == "article") {
+    if ($options[5] == "article") {
         $form .= " selected='selected'";
     }
     $form .= ">" . _MB_PUBLISHER_IMAGE_ARTICLE . "</option>";
 
     $form .= "<option value='category'";
-    if ($options[4] == "category") {
+    if ($options[5] == "category") {
         $form .= " selected='selected'";
     }
     $form .= ">" . _MB_PUBLISHER_IMAGE_CATEGORY . "</option>";
 
     $form .= "<option value='avatar'";
-    if ($options[4] == "avatar") {
+    if ($options[5] == "avatar") {
         $form .= " selected='selected'";
     }
     $form .= ">" . _MB_PUBLISHER_IMAGE_AVATAR . "</option>";

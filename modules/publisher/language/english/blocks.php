@@ -25,6 +25,7 @@ define("_MB_PUBLISHER_HITS", "Number of hits");
 define("_MB_PUBLISHER_ITEMS", "Articles");
 define("_MB_PUBLISHER_LAST_ITEMS_COUNT", "if yes, how many items to display?");
 define("_MB_PUBLISHER_ORDER", "Display order");
+define("_MB_PUBLISHER_ORDER_SHOW", "Show order in block");
 define("_MB_PUBLISHER_POSTEDBY", "Published by");
 define("_MB_PUBLISHER_READMORE", "Read more...");
 define("_MB_PUBLISHER_READS", "reads");
