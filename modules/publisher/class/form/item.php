@@ -31,13 +31,78 @@ include_once XOOPS_ROOT_PATH . '/class/tree.php';
 include_once PUBLISHER_ROOT_PATH . '/class/formdatetime.php';
 include_once PUBLISHER_ROOT_PATH . '/class/themetabform.php';
 
-class PublisherItemForm extends XoopsThemeTabForm {
+class PublisherItemForm extends XoopsThemeTabForm
+{
 
     var $checkperm = true;
+    var $tabs = array(
+        _CO_PUBLISHER_TAB_MAIN   => 'mainTab',
+        _CO_PUBLISHER_TAB_IMAGES => 'imagesTab',
+        _CO_PUBLISHER_TAB_OTHERS => 'othersTab'
+    );
+
+    var $mainTab = array(
+        _PUBLISHER_SUBTITLE,
+        _PUBLISHER_ITEM_SHORT_URL,
+        _PUBLISHER_ITEM_TAGS,
+        _PUBLISHER_SUMMARY,
+        _PUBLISHER_DOHTML,
+        _PUBLISHER_DOSMILEY,
+        _PUBLISHER_DOXCODE,
+        _PUBLISHER_DOIMAGE,
+        _PUBLISHER_DOLINEBREAK,
+        _PUBLISHER_DATESUB,
+        _PUBLISHER_STATUS,
+        _PUBLISHER_AUTHOR_ALIAS,
+        _PUBLISHER_NOTIFY,
+        _PUBLISHER_AVAILABLE_PAGE_WRAP,
+        _PUBLISHER_UID
+    );
+
+    var $imagesTab= array(
+        _PUBLISHER_IMAGE_ITEM
+    );
+
+    var $othersTab= array(
+        _PUBLISHER_ITEM_UPLOAD_FILE,
+        _PUBLISHER_ITEM_META_KEYWORDS,
+        _PUBLISHER_ITEM_META_DESCRIPTION,
+        _PUBLISHER_WEIGHT,
+        _PUBLISHER_ALLOWCOMMENTS,
+        _PUBLISHER_PERMISSIONS_ITEM,
+        _PUBLISHER_PARTIAL_VIEW
+    );
 
     function setCheckPermissions($checkperm)
     {
         $this->checkperm = (bool) $checkperm;
+    }
+
+    function isGranted($item)
+    {
+        $publisher =& PublisherPublisher::getInstance();
+        $ret = false;
+        if (!$this->checkperm || $publisher->getHandler('permission')->isGranted('form_view', $item)) {
+            $ret = true;
+        }
+        return $ret;
+    }
+
+    function hasTab($tab)
+    {
+        if (!isset($tab) || !isset($this->tabs[$tab])) {
+            return false;
+        }
+
+        $tabRef = $this->tabs[$tab];
+        $items = $this->$tabRef;
+        foreach ($items as $item) {
+            if ($this->isGranted($item)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     function createElements($obj)
@@ -71,26 +136,26 @@ class PublisherItemForm extends XoopsThemeTabForm {
         $this->addElement(new XoopsFormText(_CO_PUBLISHER_TITLE, 'title', 50, 255, $obj->getVar('title', 'e')), true);
 
         // SUBTITLE
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_SUBTITLE)) {
+        if ($this->isGranted(_PUBLISHER_SUBTITLE)) {
             $this->addElement(new XoopsFormText(_CO_PUBLISHER_SUBTITLE, 'subtitle', 50, 255, $obj->getVar('subtitle', 'e')));
         }
 
         // SHORT URL
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_ITEM_SHORT_URL)) {
+        if ($this->isGranted(_PUBLISHER_ITEM_SHORT_URL)) {
             $text_short_url = new XoopsFormText(_CO_PUBLISHER_ITEM_SHORT_URL, 'item_short_url', 50, 255, $obj->short_url('e'));
             $text_short_url->setDescription(_CO_PUBLISHER_ITEM_SHORT_URL_DSC);
             $this->addElement($text_short_url);
         }
 
         // TAGS
-        if (xoops_isActiveModule('tag') && (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_ITEM_TAGS))) {
+        if (xoops_isActiveModule('tag') && $this->isGranted(_PUBLISHER_ITEM_TAGS)) {
             include_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
             $text_tags = new XoopsFormTag('item_tag', 60, 255, $obj->getVar('item_tag', 'e'), 0);
             $this->addElement($text_tags);
         }
 
         // SUMMARY
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_SUMMARY)) {
+        if ($this->isGranted(_PUBLISHER_SUMMARY)) {
             // Description
             $summary_text = new XoopsFormTextArea(_CO_PUBLISHER_SUMMARY, 'summary', $obj->getVar('summary', 'e'), 7, 60);
             /*$editor_configs["name"] = "summary";
@@ -134,35 +199,36 @@ class PublisherItemForm extends XoopsThemeTabForm {
         $this->addElement($body_text);
 
         // VARIOUS OPTIONS
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOHTML)
-        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOSMILEY)
-        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOXCODE)
-        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOIMAGE)
-        || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOLINEBREAK)) {
-            if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOHTML)) {
+        if ($this->isGranted(_PUBLISHER_DOHTML)   ||
+            $this->isGranted(_PUBLISHER_DOSMILEY) ||
+            $this->isGranted(_PUBLISHER_DOXCODE)  ||
+            $this->isGranted(_PUBLISHER_DOIMAGE)  ||
+            $this->isGranted(_PUBLISHER_DOLINEBREAK)
+            ) {
+            if ($this->isGranted(_PUBLISHER_DOHTML)) {
                 $html_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOHTML, 'dohtml', $obj->dohtml(), _YES , _NO);
                 $this->addElement($html_radio);
             }
-            if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOSMILEY)) {
+            if ($this->isGranted(_PUBLISHER_DOSMILEY)) {
                 $smiley_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOSMILEY, 'dosmiley', $obj->dosmiley(), _YES , _NO);
                 $this->addElement($smiley_radio);
             }
-            if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOXCODE)) {
+            if ($this->isGranted(_PUBLISHER_DOXCODE)) {
                 $xcode_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOXCODE, 'doxcode', $obj->doxcode(), _YES , _NO);
                 $this->addElement($xcode_radio);
             }
-            if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOIMAGE)) {
+            if ($this->isGranted(_PUBLISHER_DOIMAGE)) {
                 $image_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOIMAGE, 'doimage', $obj->doimage(), _YES , _NO);
                 $this->addElement($image_radio);
             }
-            if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DOLINEBREAK)) {
+            if ($this->isGranted(_PUBLISHER_DOLINEBREAK)) {
                 $linebreak_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOLINEBREAK, 'dolinebreak', $obj->dobr(), _YES , _NO);
                 $this->addElement($linebreak_radio);
             }
         }
 
         // Available pages to wrap
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_AVAILABLE_PAGE_WRAP)) {
+        if ($this->isGranted(_PUBLISHER_AVAILABLE_PAGE_WRAP)) {
             $wrap_pages = XoopsLists::getHtmlListAsArray(publisher_getUploadDir(true, 'content'));
             $available_wrap_pages_text = array();
             foreach ($wrap_pages as $page) {
@@ -178,7 +244,7 @@ class PublisherItemForm extends XoopsThemeTabForm {
          the method users::getobjects encounters a memory error
          */
         // Trabis : well, maybe is because you are getting 6000 objects into memory , no??? LOL
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_UID)) {
+        if ($this->isGranted(_PUBLISHER_UID)) {
             $uid_select = new XoopsFormSelect(_CO_PUBLISHER_UID, 'uid', $obj->uid(), 1, false);
             $uid_select->setDescription(_CO_PUBLISHER_UID_DSC);
             $sql = "SELECT uid, uname FROM " . $obj->db->prefix('users') . " ORDER BY uname ASC";
@@ -197,7 +263,7 @@ class PublisherItemForm extends XoopsThemeTabForm {
         }*/
 
         // Author ALias
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_AUTHOR_ALIAS)) {
+        if ($this->isGranted(_PUBLISHER_AUTHOR_ALIAS)) {
             $element = new XoopsFormText(_CO_PUBLISHER_AUTHOR_ALIAS, 'author_alias', 50, 255, $obj->getVar('author_alias','e'));
             $element->setDescription(_CO_PUBLISHER_AUTHOR_ALIAS_DSC);
             $this->addElement($element);
@@ -205,11 +271,13 @@ class PublisherItemForm extends XoopsThemeTabForm {
         }
 
         // STATUS
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_STATUS)) {
-            $options = array(_PUBLISHER_STATUS_PUBLISHED => _CO_PUBLISHER_PUBLISHED,
-            _PUBLISHER_STATUS_OFFLINE   => _CO_PUBLISHER_OFFLINE,
-            _PUBLISHER_STATUS_SUBMITTED =>_CO_PUBLISHER_SUBMITTED,
-            _PUBLISHER_STATUS_REJECTED  =>_CO_PUBLISHER_REJECTED);
+        if ($this->isGranted(_PUBLISHER_STATUS)) {
+            $options = array(
+                _PUBLISHER_STATUS_PUBLISHED => _CO_PUBLISHER_PUBLISHED,
+                _PUBLISHER_STATUS_OFFLINE   => _CO_PUBLISHER_OFFLINE,
+                _PUBLISHER_STATUS_SUBMITTED => _CO_PUBLISHER_SUBMITTED,
+                _PUBLISHER_STATUS_REJECTED  => _CO_PUBLISHER_REJECTED
+            );
             $status_select = new XoopsFormSelect(_CO_PUBLISHER_STATUS, 'status', $obj->getVar('status'));
             $status_select->addOptionArray($options);
             $status_select->setDescription(_CO_PUBLISHER_STATUS_DSC);
@@ -217,7 +285,7 @@ class PublisherItemForm extends XoopsThemeTabForm {
         }
 
         // Datesub
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_DATESUB)) {
+        if ($this->isGranted(_PUBLISHER_DATESUB)) {
             $datesub = ($obj->getVar('datesub') == 0) ? time() : $obj->getVar('datesub');
             $datesub_datetime = new PublisherFormDateTime(_CO_PUBLISHER_DATESUB, 'datesub', $size = 15, $datesub);
             $datesub_datetime->setDescription(_CO_PUBLISHER_DATESUB_DSC);
@@ -225,16 +293,17 @@ class PublisherItemForm extends XoopsThemeTabForm {
         }
 
         // NOTIFY ON PUBLISH
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_NOTIFY)) {
+        if ($this->isGranted(_PUBLISHER_NOTIFY)) {
             $notify_radio = new XoopsFormRadioYN(_CO_PUBLISHER_NOTIFY, 'notify', $obj->notifypub(), _YES , _NO);
             $this->addElement($notify_radio);
         }
 
-        $this->startTab(_CO_PUBLISHER_TAB_IMAGES);
-        // IMAGE
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_IMAGE_ITEM)) {
-            //$image_array = & XoopsLists::getImgListAsArray(publisher_getImageDir('item'));
+        if ($this->hasTab(_CO_PUBLISHER_TAB_IMAGES)) {
+            $this->startTab(_CO_PUBLISHER_TAB_IMAGES);
+        }
 
+        // IMAGE
+        if ($this->isGranted(_PUBLISHER_IMAGE_ITEM)) {
             $objimages = $obj->getImages();
             $mainarray = is_object($objimages['main']) ? array($objimages['main']) : array();
             $mergedimages = array_merge($mainarray, $objimages['others']);
@@ -379,17 +448,19 @@ $publisher(document).ready(function(){
             $this->addElement($image_preview);
         }
 
-        $this->startTab(_CO_PUBLISHER_TAB_OTHERS);
+        if ($this->hasTab(_CO_PUBLISHER_TAB_OTHERS)) {
+            $this->startTab(_CO_PUBLISHER_TAB_OTHERS);
+        }
         //$this->startTab(_CO_PUBLISHER_TAB_META);
         // Meta Keywords
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_ITEM_META_KEYWORDS)) {
+        if ($this->isGranted(_PUBLISHER_ITEM_META_KEYWORDS)) {
             $text_meta_keywords = new XoopsFormTextArea(_CO_PUBLISHER_ITEM_META_KEYWORDS, 'item_meta_keywords', $obj->meta_keywords('e'), 7, 60);
             $text_meta_keywords->setDescription(_CO_PUBLISHER_ITEM_META_KEYWORDS_DSC);
             $this->addElement($text_meta_keywords);
         }
 
         // Meta Description
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_ITEM_META_DESCRIPTION)) {
+        if ($this->isGranted(_PUBLISHER_ITEM_META_DESCRIPTION)) {
             $text_meta_description = new XoopsFormTextArea(_CO_PUBLISHER_ITEM_META_DESCRIPTION, 'item_meta_description', $obj->meta_description('e'), 7, 60);
             $text_meta_description->setDescription(_CO_PUBLISHER_ITEM_META_DESCRIPTION_DSC);
             $this->addElement($text_meta_description);
@@ -398,13 +469,13 @@ $publisher(document).ready(function(){
         //$this->startTab(_CO_PUBLISHER_TAB_PERMISSIONS);
 
         // COMMENTS
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_ALLOWCOMMENTS)) {
+        if ($this->isGranted(_PUBLISHER_ALLOWCOMMENTS)) {
             $addcomments_radio = new XoopsFormRadioYN(_CO_PUBLISHER_ALLOWCOMMENTS, 'allowcomments', $obj->cancomment(), _YES , _NO);
             $this->addElement($addcomments_radio);
         }
 
         // PER ITEM PERMISSIONS
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_PERMISSIONS_ITEM)) {
+        if ($this->isGranted(_PUBLISHER_PERMISSIONS_ITEM)) {
             $member_handler = &xoops_gethandler('member');
             $group_list = $member_handler->getGroupList();
             $groups_checkbox = new XoopsFormCheckBox(_CO_PUBLISHER_PERMISSIONS_ITEM, 'permissions_item[]', $obj->getGroups_read());
@@ -418,7 +489,7 @@ $publisher(document).ready(function(){
         }
 
         // partial_view
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_PARTIAL_VIEW)) {
+        if ($this->isGranted(_PUBLISHER_PARTIAL_VIEW)) {
             $p_view_checkbox = new XoopsFormCheckBox(_CO_PUBLISHER_PARTIAL_VIEW, 'partial_view[]', $obj->partial_view());
             $p_view_checkbox->setDescription(_CO_PUBLISHER_PARTIAL_VIEW_DSC);
             foreach ($group_list as $group_id => $group_name) {
@@ -430,7 +501,7 @@ $publisher(document).ready(function(){
         }
 
         // File upload UPLOAD
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_ITEM_UPLOAD_FILE)) {
+        if ($this->isGranted(_PUBLISHER_ITEM_UPLOAD_FILE)) {
             $file_box = new XoopsFormFile(publisher_newFeatureTag() . _CO_PUBLISHER_ITEM_UPLOAD_FILE, "item_upload_file", 0);
             $file_box->setDescription(_CO_PUBLISHER_ITEM_UPLOAD_FILE_DSC . publisher_newFeatureTag());
             $file_box->setExtra("size ='50'");
@@ -439,7 +510,7 @@ $publisher(document).ready(function(){
         }
 
         // WEIGHT
-        if (!$checkperm || $publisher->getHandler('permission')->isGranted('form_view', _PUBLISHER_WEIGHT)) {
+        if ($this->isGranted(_PUBLISHER_WEIGHT)) {
             $this->addElement(new XoopsFormText(_CO_PUBLISHER_WEIGHT, 'weight', 5, 5, $obj->weight()));
         }
 
