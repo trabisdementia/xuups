@@ -292,6 +292,7 @@ switch ($op) {
                 $itemObj->sendNotifications(array(_PUBLISHER_NOT_ITEM_PUBLISHED));
 
                 $redirect_msg = _MD_PUBLISHER_ITEM_RECEIVED_AND_PUBLISHED;
+                redirect_header($itemObj->getItemUrl(), 2, $redirect_msg);
             } else {
                 // Subscribe the user to On Published notification, if requested
                 if ($notify) {
@@ -306,8 +307,9 @@ switch ($op) {
             }
         } else {
             $redirect_msg = _MD_PUBLISHER_ITEMMODIFIED;
+            redirect_header($itemObj->getItemUrl(), 2, $redirect_msg);
         }
-        redirect_header("item.php?itemid=$itemid", 2, $redirect_msg);
+        redirect_header("index.php", 2, $redirect_msg);
         exit();
 
         break;
