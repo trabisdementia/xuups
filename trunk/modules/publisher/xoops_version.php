@@ -357,11 +357,17 @@ $modversion['config'][$i]['description'] = '_MI_PUBLISHER_URL_REWRITE_DSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'none';
-$modversion['config'][$i]['options'] = array(_MI_PUBLISHER_URL_REWRITE_NONE      => 'none',
-_MI_PUBLISHER_URL_REWRITE_PATHINFO  => 'path-info');
+$modversion['config'][$i]['options'] = array(
+    _MI_PUBLISHER_URL_REWRITE_NONE      => 'none',
+    _MI_PUBLISHER_URL_REWRITE_PATHINFO  => 'path-info'
+);
+
 // Is performing module install/update?
 $isModuleAction = (!empty($_POST["fct"]) && "modulesadmin" == $_POST["fct"]) ? true : false;
-if ($isModuleAction && in_array(php_sapi_name(), array("apache", "apache2handler"))) {
+
+if ($isModuleAction &&
+    (in_array(php_sapi_name(), array("apache", "apache2handler")) || isset($_SERVER['FCGI_SERVER_VERSION']))
+) {
     $modversion['config'][$i]['options'][_MI_PUBLISHER_URL_REWRITE_HTACCESS]  = 'htaccess';
 }
 $modversion['config'][$i]['category'] = 'seo';
