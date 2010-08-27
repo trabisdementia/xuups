@@ -45,9 +45,9 @@ if (empty($seoOp) && @$_SERVER['PATH_INFO']) {
 }
 
 $seoMap = array(
-	'category' => 'category.php',
-	'item' => 'item.php',
-	'print' => 'print.php'
+    'category' => 'category.php',
+    'item'     => 'item.php',
+    'print'    => 'print.php'
 );
 
 if (!empty($seoOp) && isset($seoMap[$seoOp])) {
@@ -64,12 +64,14 @@ if (!empty($seoOp) && isset($seoMap[$seoOp])) {
         case 'category':
             $_SERVER['REQUEST_URI'] = $newUrl . '?categoryid=' . $seoArg;
             $_GET['categoryid'] = $seoArg;
+            $_REQUEST['categoryid'] = $seoArg;
             break;
         case 'item':
         case 'print':
         default:
             $_SERVER['REQUEST_URI'] = $newUrl . '?itemid=' . $seoArg;
             $_GET['itemid'] = $seoArg;
+            $_REQUEST['itemid'] = $seoArg;
     }
     include PUBLISHER_ROOT_PATH . '/'. $seoMap[$seoOp];
     exit;
