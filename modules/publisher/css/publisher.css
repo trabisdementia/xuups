@@ -180,9 +180,13 @@
 }
 
 .publisher_spotlight_readmore {
-	font-size: 10px;
-	text-align: right;
-	border-bottom: 1px solid #000000;
+	display:block;
+	width:100px;
+	height:20px;
+	background-color: #aaa;
+   color: #fff;
+   text-align: center;
+   padding-top: 5px;
 }
 
 .publisher_pagenav_top {

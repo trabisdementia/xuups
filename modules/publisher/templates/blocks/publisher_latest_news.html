@@ -15,6 +15,12 @@
 <{/if}>
 
 <{if $block.template == 'extended'}>
+
+<{php}>   
+    global $xoTheme; 
+    $xoTheme->addStylesheet(PUBLISHER_URL . '/css/publisher.css');
+<{/php}> 
+
 <{if $block.latestnews_scroll }>
 <marquee behavior='scroll' align='center'  direction='<{$block.scrolldir}>'  height='<{$block.scrollheight}>' scrollamount='3' scrolldelay='<{$block.scrollspeed}>' onmouseover='this.stop()' onmouseout='this.start()' >
 <{/if}>
