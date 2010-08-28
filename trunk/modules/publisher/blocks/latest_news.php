@@ -179,7 +179,7 @@ function publisher_latest_news_show($options)
 
         $item['more'] = '';
         if ($itemObj->body() != '' || $itemObj->comments() > 0){
-            $item['more'] = '<a href="' . $itemObj->getItemUrl() . '">' . _MB_PUBLISHER_READMORE . '</a>';
+            $item['more'] = '<a class="publisher_spotlight_readmore" href="' . $itemObj->getItemUrl() . '">' . _MB_PUBLISHER_READMORE . '</a>';
         }
 
         $comments = $itemObj->comments();
