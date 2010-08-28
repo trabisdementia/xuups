@@ -146,10 +146,9 @@ function publisher_latest_news_show($options)
          }
          */
         $block['archivelink'] = '';
-        /*if ($options[16] == 1) {
-         $block['archivelink'] = '| <a href="'.XOOPS_URL.'/modules/news/archive.php">'._MB_PUBLISHER_NEWSARCHIVES.'</a> ';
-         } */
-
+        if ($options[16] == 1) {
+            $block['archivelink'] = '| <a href="' . PUBLISHER_URL . '/archive.php">'._MB_PUBLISHER_ARCHIVE.'</a> ';
+        }
 
         //TODO: Should we not show link to Anonymous?
         $block['submitlink'] = '';

@@ -111,4 +111,6 @@ define("_MB_PUBLISHER_TEMPLATE_TICKER", "Ticker");
 define("_MB_PUBLISHER_TEMPLATE_SLIDER1", "Fade-in Slider");
 define("_MB_PUBLISHER_TEMPLATE_SLIDER2", "Tabbed Slider");
 
+define("_MB_PUBLISHER_ARCHIVE", "Archive");
+
 ?>
