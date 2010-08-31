@@ -16,7 +16,7 @@
  * @subpackage      Action
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @author		    Sina Asghari (AKA stranger) <stranger@impresscms.ir>
+ * @author            Sina Asghari (AKA stranger) <stranger@impresscms.ir>
  * @version         $Id: makepdf.php 0 2009-06-11 18:47:04Z trabis $
  */
 

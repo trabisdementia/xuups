@@ -225,23 +225,23 @@ class PublisherMetagen
     {
         // Transformation de la chaine en minuscule
         // Codage de la chaine afin d'éviter les erreurs 500 en cas de caractères imprévus
-        $title   = rawurlencode(strtolower($title));
+        $title = rawurlencode(strtolower($title));
 
         // Transformation des ponctuations
         //                 Tab     Space      !        "        #        %        &        '        (        )        ,        /        :        ;        <        =        >        ?        @        [        \        ]        ^        {        |        }        ~       .
         $pattern = array("/%09/", "/%20/", "/%21/", "/%22/", "/%23/", "/%25/", "/%26/", "/%27/", "/%28/", "/%29/", "/%2C/", "/%2F/", "/%3A/", "/%3B/", "/%3C/", "/%3D/", "/%3E/", "/%3F/", "/%40/", "/%5B/", "/%5C/", "/%5D/", "/%5E/", "/%7B/", "/%7C/", "/%7D/", "/%7E/", "/\./");
-        $rep_pat = array(  "-"  ,   "-"  ,   "-"  ,   "-"  ,   "-"  , "-100" ,   "-"  ,   "-"  ,   "-"  ,   "-"  ,   "-"  ,   "-"  ,  "-"   ,   "-"  ,   "-"  ,   "-"  ,  "-"   ,   "-"  , "-at-" ,   "-"  ,   "-"   ,  "-"  ,   "-"  ,   "-"  ,   "-"  ,   "-"  ,   "-"  ,   "-" );
-        $title   = preg_replace($pattern, $rep_pat, $title);
+        $rep_pat = array("-", "-", "-", "-", "-", "-100", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-at-", "-", "-", "-", "-", "-", "-", "-", "-", "-");
+        $title = preg_replace($pattern, $rep_pat, $title);
 
         // Transformation des caractères accentués
         //                  °        è        é        ê        ë        ç        à        â        ä        î        ï        ù        ü        û        ô        ö
         $pattern = array("/%B0/", "/%E8/", "/%E9/", "/%EA/", "/%EB/", "/%E7/", "/%E0/", "/%E2/", "/%E4/", "/%EE/", "/%EF/", "/%F9/", "/%FC/", "/%FB/", "/%F4/", "/%F6/");
-        $rep_pat = array(  "-"  ,   "e"  ,   "e"  ,   "e"  ,   "e"  ,   "c"  ,   "a"  ,   "a"  ,   "a"  ,   "i"  ,   "i"  ,   "u"  ,   "u"  ,   "u"  ,   "o"  ,   "o"  );
-        $title   = preg_replace($pattern, $rep_pat, $title);
+        $rep_pat = array("-", "e", "e", "e", "e", "c", "a", "a", "a", "i", "i", "u", "u", "u", "o", "o");
+        $title = preg_replace($pattern, $rep_pat, $title);
 
         $tableau = explode("-", $title); // Transforme la chaine de caractères en tableau
         $tableau = array_filter($tableau, array('PublisherMetagen', 'emptyString')); // Supprime les chaines vides du tableau
-        $title   = implode("-", $tableau); // Transforme un tableau en chaine de caractères séparé par un tiret
+        $title = implode("-", $tableau); // Transforme un tableau en chaine de caractères séparé par un tiret
 
         if (sizeof($title) > 0) {
             if ($withExt) {
@@ -290,12 +290,12 @@ class PublisherMetagen
         // and white space. It will also convert some
         // common HTML entities to their text equivalent.
         // Credits : newbb2
-        $search = array (
-            "'<script[^>]*?>.*?</script>'si",  // Strip out javascript<?
-            "'<img.*?/>'si",       // Strip out img tags
-            "'<[\/\!]*?[^<>]*?>'si",          // Strip out HTML tags<?
-            "'([\r\n])[\s]+'",                // Strip out white space
-            "'&(quot|#34);'i",                // Replace HTML entities
+        $search = array(
+            "'<script[^>]*?>.*?</script>'si", // Strip out javascript<?
+            "'<img.*?/>'si", // Strip out img tags
+            "'<[\/\!]*?[^<>]*?>'si", // Strip out HTML tags<?
+            "'([\r\n])[\s]+'", // Strip out white space
+            "'&(quot|#34);'i", // Replace HTML entities
             "'&(amp|#38);'i",
             "'&(lt|#60);'i",
             "'&(gt|#62);'i",
@@ -304,8 +304,9 @@ class PublisherMetagen
             "'&(cent|#162);'i",
             "'&(pound|#163);'i",
             "'&(copy|#169);'i",
-        //"'&#(\d+);'e"
-        );// evaluate as php
+            //"'&#(\d+);'e"
+        );
+        // evaluate as php
 
         $replace = array(
             "",
@@ -317,11 +318,11 @@ class PublisherMetagen
             "<",
             ">",
             " ",
-        chr(161),
-        chr(162),
-        chr(163),
-        chr(169),
-        //"chr(\\1)"
+            chr(161),
+            chr(162),
+            chr(163),
+            chr(169),
+            //"chr(\\1)"
         );
 
         $text = preg_replace($search, $replace, $document);

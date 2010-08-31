@@ -112,4 +112,5 @@ class PublisherFileForm extends XoopsThemeForm
         $this->addElement($files_button_tray);
     }
 }
+
 ?>

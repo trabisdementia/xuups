@@ -61,7 +61,7 @@ function publisher_items_menu_show($options)
     $categoryids = implode(', ', $array_categoryids);
 
     foreach ($block_categoriesObj as $catid => $block_categoryObj) {
-        if($catid != $categoryid){
+        if ($catid != $categoryid) {
             $block['categories'][$catid]['categoryLink'] = $block_categoryObj->getCategoryLink($catlink_class);
         }
     }

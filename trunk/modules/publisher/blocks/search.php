@@ -26,7 +26,7 @@ if (!defined("XOOPS_ROOT_PATH")) {
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-function publisher_search_show ($options)
+function publisher_search_show($options)
 {
     $block = array();
     $publisher =& PublisherPublisher::getInstance();
@@ -52,7 +52,7 @@ function publisher_search_show ($options)
     }
 
     $andor = (in_array(strtoupper($andor), array("OR", "AND", "EXACT"))) ? strtoupper($andor) : "OR";
-    $sortby = (in_array(strtolower($sortby), array("itemid", "datesub", "title", "categoryid"))) ? strtolower($sortby) :  "itemid";
+    $sortby = (in_array(strtolower($sortby), array("itemid", "datesub", "title", "categoryid"))) ? strtolower($sortby) : "itemid";
 
     /* type */
     $type_select = "<select name=\"andor\">";
@@ -60,7 +60,7 @@ function publisher_search_show ($options)
     if ("OR" == $andor) $type_select .= " selected=\"selected\"";
     $type_select .= ">" . _SR_ANY . "</option>";
     $type_select .= "<option value=\"AND\"";
-    if("AND" == $andor) $type_select .= " selected=\"selected\"";
+    if ("AND" == $andor) $type_select .= " selected=\"selected\"";
     $type_select .= ">" . _SR_ALL . "</option>";
     $type_select .= "<option value=\"EXACT\"";
     if ("exact" == $andor) $type_select .= " selected=\"selected\"";

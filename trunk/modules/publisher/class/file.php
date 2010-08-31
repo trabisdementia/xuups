@@ -63,7 +63,8 @@ class PublisherFile extends XoopsObject
         }
     }
 
-    function __call($method, $args) {
+    function __call($method, $args)
+    {
         $arg = isset($args[0]) ? $args[0] : null;
         return $this->getVar($method, $arg);
     }
@@ -76,9 +77,9 @@ class PublisherFile extends XoopsObject
 
         $errors = array();
 
-        if(!isset($allowed_mimetypes)){
+        if (!isset($allowed_mimetypes)) {
             $allowed_mimetypes = $this->publisher->getHandler('mimetype')->checkMimeTypes($post_field);
-            if(!$allowed_mimetypes){
+            if (!$allowed_mimetypes) {
                 $errors[] = _CO_PUBLISHER_MESSAGE_WRONG_MIMETYPE;
                 return false;
             }
@@ -99,9 +100,9 @@ class PublisherFile extends XoopsObject
         global $xoopsUser, $xoopsDB;
         $itemid = $this->getVar('itemid');
 
-        if(!isset($allowed_mimetypes)){
+        if (!isset($allowed_mimetypes)) {
             $allowed_mimetypes = $this->publisher->getHandler('mimetype')->checkMimeTypes($post_field);
-            if(!$allowed_mimetypes){
+            if (!$allowed_mimetypes) {
                 return false;
             }
         }
@@ -110,14 +111,14 @@ class PublisherFile extends XoopsObject
         $maxfilewidth = $this->publisher->getConfig('maximum_image_width');
         $maxfileheight = $this->publisher->getConfig('maximum_image_height');
 
-        if(!is_dir(publisher_getUploadDir())){
+        if (!is_dir(publisher_getUploadDir())) {
             mkdir(publisher_getUploadDir(), 0757);
         }
 
         xoops_load('XoopsMediaUploader');
-        $uploader = new XoopsMediaUploader(publisher_getUploadDir().'/', $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
+        $uploader = new XoopsMediaUploader(publisher_getUploadDir() . '/', $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
         if ($uploader->fetchMedia($post_field)) {
-            $uploader->setTargetFileName($itemid."_". $uploader->getMediaName());
+            $uploader->setTargetFileName($itemid . "_" . $uploader->getMediaName());
             if ($uploader->upload()) {
                 $this->setVar('filename', $uploader->getSavedFileName());
                 if ($this->getVar('name') == '') {
@@ -167,12 +168,12 @@ class PublisherFile extends XoopsObject
 
     function getFileUrl()
     {
-        return publisher_getUploadDir(false) .  $this->filename();
+        return publisher_getUploadDir(false) . $this->filename();
     }
 
     function getFilePath()
     {
-        return 	publisher_getUploadDir() . $this->filename();
+        return publisher_getUploadDir() . $this->filename();
     }
 
     function getFileLink()
@@ -282,12 +283,12 @@ class PublisherFileHandler extends XoopsPersistableObjectHandler
     {
         $hasStatusCriteria = false;
         $criteriaStatus = new CriteriaCompo();
-        if ( is_array($status)) {
+        if (is_array($status)) {
             $hasStatusCriteria = true;
             foreach ($status as $v) {
                 $criteriaStatus->add(new Criteria('status', $v), 'OR');
             }
-        } elseif ( $status != -1) {
+        } elseif ($status != -1) {
             $hasStatusCriteria = true;
             $criteriaStatus->add(new Criteria('status', $status), 'OR');
         }
@@ -313,4 +314,5 @@ class PublisherFileHandler extends XoopsPersistableObjectHandler
     }
 
 }
+
 ?>

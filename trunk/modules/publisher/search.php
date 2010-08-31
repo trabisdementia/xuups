@@ -27,7 +27,7 @@ xoops_loadLanguage('search');
 $config_handler =& xoops_gethandler("config");
 $xoopsConfigSearch =& $config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
 if (empty($xoopsConfigSearch["enable_search"])) {
-    redirect_header(PUBLISHER_URL  . "/index.php", 2, _NOPERM);
+    redirect_header(PUBLISHER_URL . "/index.php", 2, _NOPERM);
     exit();
 }
 
@@ -48,16 +48,16 @@ include XOOPS_ROOT_PATH . '/header.php';
 $module_info_search = $publisher->getModule()->getInfo("search");
 include_once PUBLISHER_ROOT_PATH . "/" . $module_info_search["file"];
 
-$limit    = 10;//$publisher->getConfig('idxcat_perpage');
-$uid      = 0;
-$queries  = array();
-$andor    = PublisherRequest::getString('andor');
-$start    = PublisherRequest::getInt('start');
+$limit = 10; //$publisher->getConfig('idxcat_perpage');
+$uid = 0;
+$queries = array();
+$andor = PublisherRequest::getString('andor');
+$start = PublisherRequest::getInt('start');
 $category = PublisherRequest::getArray('category');
 $username = PublisherRequest::getString('uname');
 $searchin = PublisherRequest::getArray('searchin');
-$sortby   = PublisherRequest::getString('sortby');
-$term     = PublisherRequest::getString('term');
+$sortby = PublisherRequest::getString('sortby');
+$term = PublisherRequest::getString('term');
 
 if (empty($category) || (is_array($category) && in_array("all", $category))) {
     $category = array();
@@ -66,8 +66,8 @@ if (empty($category) || (is_array($category) && in_array("all", $category))) {
     $category = array_map("intval", $category);
 }
 
-$andor  = (in_array(strtoupper($andor), array("OR", "AND", "EXACT"))) ? strtoupper($andor) : "OR";
-$sortby = (in_array(strtolower($sortby), array("itemid", "datesub", "title", "categoryid"))) ? strtolower($sortby) :  "itemid";
+$andor = (in_array(strtoupper($andor), array("OR", "AND", "EXACT"))) ? strtoupper($andor) : "OR";
+$sortby = (in_array(strtolower($sortby), array("itemid", "datesub", "title", "categoryid"))) ? strtolower($sortby) : "itemid";
 
 if (!(empty($_POST["submit"]) && empty($term))) {
 
@@ -133,7 +133,7 @@ if (!(empty($_POST["submit"]) && empty($term))) {
     }
 
     if (count($results) < 1) {
-        $results[] = array("text"=> _SR_NOMATCH);
+        $results[] = array("text" => _SR_NOMATCH);
     }
 
     $xoopsTpl->assign("results", $results);
@@ -143,7 +143,7 @@ if (!(empty($_POST["submit"]) && empty($term))) {
         foreach ($next_search as $para => $val) {
             if (!empty($val)) $items[] = "{$para}={$val}";
         }
-        if (count($items)>0) $paras = implode("&", $items);
+        if (count($items) > 0) $paras = implode("&", $items);
         unset($next_search);
         unset($items);
     }
@@ -151,9 +151,9 @@ if (!(empty($_POST["submit"]) && empty($term))) {
 
     if (count($results)) {
         $next = $start + $limit;
-        $queries = implode(",",$queries);
+        $queries = implode(",", $queries);
         $search_url_next = $search_url . "&start={$next}";
-        $search_next = "<a href=\"".htmlspecialchars($search_url_next)."\">"._SR_NEXT."</a>";
+        $search_next = "<a href=\"" . htmlspecialchars($search_url_next) . "\">" . _SR_NEXT . "</a>";
         $xoopsTpl->assign("search_next", $search_next);
     }
     if ($start > 0) {
@@ -166,7 +166,7 @@ if (!(empty($_POST["submit"]) && empty($term))) {
     unset($results);
     $search_info = _SR_KEYWORDS . ": " . $myts->htmlSpecialChars($term);
     if ($uname_required) {
-        if($search_info) $search_info .= "<br />";
+        if ($search_info) $search_info .= "<br />";
         $search_info .= _CO_PUBLISHER_UID . ": " . $myts->htmlSpecialChars($search_username);
     }
     $xoopsTpl->assign("search_info", $search_info);

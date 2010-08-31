@@ -325,7 +325,7 @@ define("_MI_PUBLISHER_AUTHOR_ITEMS_DSC", "Afficher les articles du même auteur"
 
 /**
  * @translation     AFUX (Association Francophone des Utilisateurs de Xoops) <http://www.afux.org/>
- * @translation		grandoc 2010-02-06
+ * @translation        grandoc 2010-02-06
  * @specification   _LANGCODE: fr
  * @specification   _CHARSET: UTF-8
  *

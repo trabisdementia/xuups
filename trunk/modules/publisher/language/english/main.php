@@ -75,7 +75,7 @@ define("_MD_PUBLISHER_PREVIOUS_ITEM", "Previous article");
 
 define("_MD_PUBLISHER_PRINTERFRIENDLY", "Print this article in a printer friendly format");
 define("_MD_PUBLISHER_READS", "reads");
-define("_MD_PUBLISHER_RSSFEED","RSS Feed");
+define("_MD_PUBLISHER_RSSFEED", "RSS Feed");
 define("_MD_PUBLISHER_SENDSTORY", "Send this article to a friend");
 define("_MD_PUBLISHER_SUB_CLONE", "Dupplicate an article");
 define("_MD_PUBLISHER_SUB_SMNAME", "Submit an article");

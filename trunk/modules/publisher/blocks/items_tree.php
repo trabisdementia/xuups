@@ -45,23 +45,23 @@ function publisher_items_tree_show($options)
     {
         case -1:
             global $xoopsModule;
-            	
-            	
-            if($xoopsModule->dirname() == $publisher->getModule()->getVar('dirname'))
-            {
-                if(isset($_GET['categoryid']))
-                {
+
+
+            if ($xoopsModule->dirname() == $publisher->getModule()->getVar('dirname')) {
+                if (isset($_GET['categoryid'])) {
                     $cat2show = $_GET['categoryid'];
-                }else{
-                    if(isset($_GET['itemid']))
-                    {
+                } else {
+                    if (isset($_GET['itemid'])) {
                         $itemObj = $publisher->getHandler('item')->get($_GET['itemid']);
                         $cat2show = $itemObj->categoryid();
-                    }else{
+                    } else {
                         $cat2show = 0;
-                    }//itemid
-                }//categoryid
-            }//dirname
+                    }
+                    //itemid
+                }
+                //categoryid
+            }
+            //dirname
             break;
         case 0:
             $cat2show = 0;
@@ -84,7 +84,7 @@ function publisher_items_tree_show($options)
 }
 
 function publisher_tree($categoryid, $level = 0, $sort = "weight", $order = "ASC", $maxlevel = -1,
-$showItems = true, $itemsLoad = false, $items = array(), $catsLoad = false, $cats = array())
+                        $showItems = true, $itemsLoad = false, $items = array(), $catsLoad = false, $cats = array())
 {
 
     $publisher =& PublisherPublisher::getInstance();
@@ -105,69 +105,76 @@ $showItems = true, $itemsLoad = false, $items = array(), $catsLoad = false, $cat
 
     $tree = array();
 
-    if($categoryid < 0)
-    $categoryid = 0;
+    if ($categoryid < 0) {
+        $categoryid = 0;
+    }
 
-    if($showItems and !$itemsLoad)
-    {
+    if ($showItems and !$itemsLoad) {
         //$items = $publisher_item_handler-> getAllPublished(0, 0, -1, $sort, $order, '', true, 'categoryid');
         $items = $publisher->getHandler('item')->getAllPublished(0, 0, $categoryid, $sort, $order, '', true, 'categoryid');
         $itemsLoad = true;
-    }//if($showItems and !$itemsLoad)
+    }
+    //if($showItems and !$itemsLoad)
 
-    if(!$catsLoad)
-    {
+    if (!$catsLoad) {
         $categoriesObj = $publisher->getHandler('category')->getCategories(0, 0, $categoryid, $sort, $order);
         //$categoriesObj = $publisher_category_handler->getCategories(0, 0, -1, $sort, $order);
 
         $cats = array();
-        foreach($categoriesObj as $cat)
+        foreach ($categoriesObj as $cat)
         {
             $catArray = $cat->toArray();
             $catArray["categoryUrl"] = $cat->getCategoryUrl();
             $catArray["categoryLink"] = $cat->getCategoryLink();
             $catArray["parentid"] = $cat->parentid();
-            	
+
             $cats[$cat->parentid()][$cat->categoryid()] = $catArray;
-            	
-        }//foreach $categoryObj
+
+        }
+        //foreach $categoryObj
         unset($cat);
         $catsLoad = true;
-    }//catsload
+    }
+    //catsload
 
-    if( (!empty($cats)) and (array_key_exists($categoryid, $cats)))
-    {
+    if ((!empty($cats)) and (array_key_exists($categoryid, $cats))) {
         //for all childs of $categoryid
-        foreach($cats[$categoryid] as $catid=>$cat)
+        foreach ($cats[$categoryid] as $catid => $cat)
         {
             $tree[$catid] = $cat;
-            if( ($level < $maxlevel) or ($maxlevel == -1) )
-            {
+            if (($level < $maxlevel) or ($maxlevel == -1)) {
                 $tree[$catid]["subcats"] = publisher_tree($catid, $level + 1, $sort, $order, $maxlevel, $showItems, $itemsLoad, $items, $catsLoad, $cats);
 
-                if($showItems == 1)
-                {
-                    if(array_key_exists($catid, $items))
-                    {
-                        foreach($items[$catid] as $item)
+                if ($showItems == 1) {
+                    if (array_key_exists($catid, $items)) {
+                        foreach ($items[$catid] as $item)
                         {
                             $tree[$catid]["items"][$item->itemid()]["itemLink"] = $item->getItemLink();
-                        }//foreach catItems
-                    }//key exists
-                }//showItems
-            }//level
-        }//foreach $cats
-    }//key exists
+                        }
+                        //foreach catItems
+                    }
+                    //key exists
+                }
+                //showItems
+            }
+            //level
+        }
+        //foreach $cats
+    }
+    //key exists
 
-    if( (!empty($items[$categoryid])) and (array_key_exists($categoryid, $items)) )
-    {
-        foreach($items[$categoryid] as $item)
+    if ((!empty($items[$categoryid])) and (array_key_exists($categoryid, $items))) {
+        foreach ($items[$categoryid] as $item)
         {
             $tree["items"][$item->itemid()]["itemLink"] = $item->getItemLink();
-        }//foreach catItems
-    }//array_key_exists($categoryid, $items)
+        }
+        //foreach catItems
+    }
+    //array_key_exists($categoryid, $items)
     return $tree;
-}//publisher_tree
+}
+
+//publisher_tree
 
 function publisher_items_tree_edit($options)
 {
@@ -189,7 +196,7 @@ function publisher_items_tree_edit($options)
     $categoriesObj = $publisher->getHandler('category')->getCategories(0, 0, 0);
 
     if (count($categoriesObj) > 0) {
-        foreach ( $categoriesObj as $catID => $categoryObj) {
+        foreach ($categoriesObj as $catID => $categoryObj) {
             $form .= publisher_addCategoryOption($categoryObj, $options[0]);
         }
     }
@@ -218,26 +225,28 @@ function publisher_items_tree_edit($options)
     $form .= "</select>\n";
 
     $form .=
-		"&nbsp;" . 
-		"<select name='options[]'>" .
-			"<option value='ASC'";
+            "&nbsp;" .
+            "<select name='options[]'>" .
+            "<option value='ASC'";
     if ($options[2] == "ASC") {
         $form .= " selected='selected'";
     }
-    $form .= ">". _MB_PUBLISHER_ASC ."</option>" .
-			"<option value='DESC'";
+    $form .= ">" . _MB_PUBLISHER_ASC . "</option>" .
+             "<option value='DESC'";
     if ($options[2] == "DESC") {
         $form .= " selected='selected'";
     }
-    $form .= ">". _MB_PUBLISHER_DESC ."</option>" .
-		"</select>";
+    $form .= ">" . _MB_PUBLISHER_DESC . "</option>" .
+             "</select>";
 
     $form .= "<br />" . _MB_PUBLISHER_LEVELS .
-		"<input name='options[]' value='". $options[3] ."' size='3' maxlenght='3'/>";
+             "<input name='options[]' value='" . $options[3] . "' size='3' maxlenght='3'/>";
 
     $showItemsRadio = new XoopsFormRadioYN(_MB_PUBLISHER_SHOWITEMS, 'options[]', $options[4]);
     $form .= "<br />" . _MB_PUBLISHER_SHOWITEMS . "&nbsp;" . $showItemsRadio->render();
 
     return $form;
-}//edit
+}
+
+//edit
 ?>

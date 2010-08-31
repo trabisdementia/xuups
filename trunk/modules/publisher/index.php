@@ -71,7 +71,7 @@ if ($publisher->getConfig('idxcat_display_last_item') == 1) {
 $lastitemsize = intval($publisher->getConfig('idxcat_last_item_size'));
 
 // Hide sub categories in main page only - hacked by Mowaffak
-if ($publisher->getConfig('idxcat_show_subcats') == 'nomain' ) {
+if ($publisher->getConfig('idxcat_show_subcats') == 'nomain') {
     $publisher->setConfig('idxcat_show_subcats', 'no');
 }
 
@@ -87,7 +87,7 @@ foreach ($categoriesObj as $cat_id => $category) {
                 // Get the items count of this very category
                 $subcat_total_items = isset($totalItems[$key]) ? $totalItems[$key] : 0;
                 // Do we display empty sub-cats ?
-                if (($subcat_total_items > 0) || ($publisher->getConfig('idxcat_show_subcats') == 'all' )) {
+                if (($subcat_total_items > 0) || ($publisher->getConfig('idxcat_show_subcats') == 'all')) {
                     $subcat_id = $subcat->getVar('categoryid');
                     // if we retrieved the last item object for this category
                     if (isset($last_itemObj[$subcat_id])) {
@@ -95,7 +95,7 @@ foreach ($categoriesObj as $cat_id => $category) {
                         $subcat->setVar('last_title_link', $last_itemObj[$subcat_id]->getItemLink(false, $lastitemsize));
                     }
 
-                    $numItems= isset($totalItems[$subcat_id])? $totalItems[$key] : 0;
+                    $numItems = isset($totalItems[$subcat_id]) ? $totalItems[$key] : 0;
                     $subcat->setVar('itemcount', $numItems);
                     // Put this subcat in the smarty variable
                     $categories[$cat_id]['subcats'][$key] = $subcat->toArrayTable();
@@ -160,7 +160,7 @@ if ($publisher->getConfig('index_display_last_items')) {
     //todo: make config for summary size
     if ($itemsCount > 0) {
         foreach ($itemsObj as $itemObj) {
-            $xoopsTpl->append('items', $itemObj->toArray($publisher->getConfig('idxcat_items_display_type'), $publisher->getConfig('item_title_size'), 300, true));  //if no summary truncate body to 300
+            $xoopsTpl->append('items', $itemObj->toArray($publisher->getConfig('idxcat_items_display_type'), $publisher->getConfig('item_title_size'), 300, true)); //if no summary truncate body to 300
         }
         unset($allcategories);
     }

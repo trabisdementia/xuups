@@ -89,10 +89,10 @@ class PublisherCategoryForm extends XoopsThemeForm
             } else {
                 $editor = publisher_getCookieVar('publisher_editor');
                 if (empty($editor) && is_object($xoopsUser)) {
-                    $editor =@ $xoopsUser->getVar('publisher_editor'); // Need set through user profile
+                    $editor = @ $xoopsUser->getVar('publisher_editor'); // Need set through user profile
                 }
             }
-            $editor = (empty($editor) || !in_array($editor, $allowed_editors)) ?  $this->publisher->getConfig('submit_editor') : $editor;
+            $editor = (empty($editor) || !in_array($editor, $allowed_editors)) ? $this->publisher->getConfig('submit_editor') : $editor;
             $form_editor = new XoopsFormSelectEditor($this, 'editor', $editor, $nohtml, $allowed_editors);
             $this->addElement($form_editor);
         } else {
@@ -114,20 +114,20 @@ class PublisherCategoryForm extends XoopsThemeForm
 
         // IMAGE
         $image_array = XoopsLists::getImgListAsArray(publisher_getImageDir('category'));
-        $image_select = new XoopsFormSelect( '', 'image', $this->targetObject->image());
+        $image_select = new XoopsFormSelect('', 'image', $this->targetObject->image());
         //$image_select -> addOption ('-1', '---------------');
         $image_select->addOptionArray($image_array);
-        $image_select->setExtra("onchange='showImgSelected(\"image3\", \"image\", \"" . 'uploads/' . PUBLISHER_DIRNAME. '/images/category/' . "\", \"\", \"" . XOOPS_URL . "\")'");
+        $image_select->setExtra("onchange='showImgSelected(\"image3\", \"image\", \"" . 'uploads/' . PUBLISHER_DIRNAME . '/images/category/' . "\", \"\", \"" . XOOPS_URL . "\")'");
         $image_tray = new XoopsFormElementTray(_AM_PUBLISHER_IMAGE, '&nbsp;');
         $image_tray->addElement($image_select);
-        $image_tray->addElement(new XoopsFormLabel( '', "<br /><br /><img src='" . publisher_getImageDir('category', false) .$this->targetObject->image() . "' name='image3' id='image3' alt='' />"));
+        $image_tray->addElement(new XoopsFormLabel('', "<br /><br /><img src='" . publisher_getImageDir('category', false) . $this->targetObject->image() . "' name='image3' id='image3' alt='' />"));
         $image_tray->setDescription(_AM_PUBLISHER_IMAGE_DSC);
         $this->addElement($image_tray);
 
         // IMAGE UPLOAD
         $max_size = 5000000;
         $file_box = new XoopsFormFile(_AM_PUBLISHER_IMAGE_UPLOAD, "image_file", $max_size);
-        $file_box->setExtra("size ='45'") ;
+        $file_box->setExtra("size ='45'");
         $file_box->setDescription(_AM_PUBLISHER_IMAGE_UPLOAD_DSC);
         $this->addElement($file_box);
 
@@ -150,7 +150,7 @@ class PublisherCategoryForm extends XoopsThemeForm
         $this->addElement(new XoopsFormText(_AM_PUBLISHER_COLPOSIT, 'weight', 4, 4, $this->targetObject->weight()));
 
         // Added by skalpa: custom template support
-        $this->addElement(new XoopsFormText( "Custom template", 'template', 50, 255, $this->targetObject->template('e')), false);
+        $this->addElement(new XoopsFormText("Custom template", 'template', 50, 255, $this->targetObject->template('e')), false);
 
         // READ PERMISSIONS
         $groups_read_checkbox = new XoopsFormCheckBox(_AM_PUBLISHER_PERMISSIONS_CAT_READ, 'groups_read[]', $this->targetObject->getGroups_read());
@@ -161,7 +161,7 @@ class PublisherCategoryForm extends XoopsThemeForm
         }
         $this->addElement($groups_read_checkbox);
         // Apply permissions on all items
-        $apply = isset($_POST['applyall']) ? intval($_POST['applyall']) : 0 ;
+        $apply = isset($_POST['applyall']) ? intval($_POST['applyall']) : 0;
 
         $addapplyall_radio = new XoopsFormRadioYN(_AM_PUBLISHER_PERMISSIONS_APPLY_ON_ITEMS, 'applyall', $apply, ' ' . _AM_PUBLISHER_YES . '', ' ' . _AM_PUBLISHER_NO . '');
         $this->addElement($addapplyall_radio);
@@ -183,12 +183,12 @@ class PublisherCategoryForm extends XoopsThemeForm
 
         $cat_tray = new XoopsFormElementTray(_AM_PUBLISHER_SCATEGORYNAME, '<br /><br />');
         for ($i = 0; $i < $this->subCatsCount; $i++) {
-            if ($i < (isset($_POST['scname']) ? sizeof($_POST['scname']) : 0 )){
-                $subname = isset($_POST['scname']) ? $_POST['scname'][$i] : '' ;
+            if ($i < (isset($_POST['scname']) ? sizeof($_POST['scname']) : 0)) {
+                $subname = isset($_POST['scname']) ? $_POST['scname'][$i] : '';
             } else {
                 $subname = '';
             }
-            $cat_tray->addElement(new XoopsFormText('' , 'scname['.$i.']', 50, 255, $subname), true);
+            $cat_tray->addElement(new XoopsFormText('', 'scname[' . $i . ']', 50, 255, $subname), true);
 
         }
         $t = new XoopsFormText('', 'nb_subcats', 3, 2);
@@ -241,4 +241,5 @@ class PublisherCategoryForm extends XoopsThemeForm
         }
     }
 }
+
 ?>

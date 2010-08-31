@@ -26,7 +26,7 @@ if (!defined("XOOPS_ROOT_PATH")) {
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-function publisher_latest_files_show ($options)
+function publisher_latest_files_show($options)
 {
     $publisher =& PublisherPublisher::getInstance();
     /**

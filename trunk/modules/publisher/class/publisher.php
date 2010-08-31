@@ -71,7 +71,7 @@ class PublisherPublisher
             return null;
         }
 
-        $this->addLog("Getting config '{$name}' : " .$this->config[$name]);
+        $this->addLog("Getting config '{$name}' : " . $this->config[$name]);
         return $this->config[$name];
     }
 
@@ -131,7 +131,7 @@ class PublisherPublisher
     {
         if ($this->debug) {
             //$this->debugArray[] = $log /*. ' -  ' . sprintf( "%.03f", $dif)*/;
-            if  (is_object($GLOBALS['xoopsLogger'])) {
+            if (is_object($GLOBALS['xoopsLogger'])) {
                 $GLOBALS['xoopsLogger']->addExtra($this->module->name(), $log);
             }
         }
@@ -149,4 +149,5 @@ class PublisherPublisher
      }
      } */
 }
+
 ?>

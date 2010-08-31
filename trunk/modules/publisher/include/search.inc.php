@@ -25,17 +25,18 @@ if (!defined("XOOPS_ROOT_PATH")) {
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-function publisher_search($queryarray, $andor, $limit, $offset, $userid, $categories = array(), $sortby = 0, $searchin = "", $extra = "") {
+function publisher_search($queryarray, $andor, $limit, $offset, $userid, $categories = array(), $sortby = 0, $searchin = "", $extra = "")
+{
     global $myts;
     $publisher =& PublisherPublisher::getInstance();
 
     $ret = array();
 
-    if ($queryarray == '' || count($queryarray) == 0){
-        $keywords= '';
+    if ($queryarray == '' || count($queryarray) == 0) {
+        $keywords = '';
         $hightlight_key = '';
     } else {
-        $keywords=implode('+', $queryarray);
+        $keywords = implode('+', $queryarray);
         $hightlight_key = "&amp;keywords=" . $keywords;
     }
 
@@ -47,13 +48,13 @@ function publisher_search($queryarray, $andor, $limit, $offset, $userid, $catego
     foreach ($itemsObjs as $obj) {
         $item['image'] = "images/item_icon.gif";
         $item['link'] = $obj->getItemUrl();
-        $item['link'] .=  (!empty($hightlight_key) && (strpos($item['link'], '.php?') === false)) ? "?" . ltrim($hightlight_key ,'&amp;') : $hightlight_key;
+        $item['link'] .= (!empty($hightlight_key) && (strpos($item['link'], '.php?') === false)) ? "?" . ltrim($hightlight_key, '&amp;') : $hightlight_key;
         if ($withCategoryPath) {
             $item['title'] = $obj->getCategoryPath(false) . " > " . $obj->title();
         } else {
             $item['title'] = $obj->title();
         }
-        $item['time'] = $obj->getVar('datesub');   //must go has unix timestamp
+        $item['time'] = $obj->getVar('datesub'); //must go has unix timestamp
         $item['uid'] = $obj->uid();
 
         /*
@@ -66,10 +67,10 @@ function publisher_search($queryarray, $andor, $limit, $offset, $userid, $catego
         $queryarray = is_array($queryarray) ? $queryarray : array($queryarray);
         foreach ($queryarray as $query) {
             if ($query != '') {
-                $pos             = strpos($text_i, strtolower($query));//xoops_local("strpos", $text_i, strtolower($query));
-                $start           = max(($pos - 100), 0);
-                $length          = strlen($query) + 200;//xoops_local("strlen", $query) + 200;
-                $context         = preg_replace_callback("/(" . preg_quote($query) . ")/si", array($obj, 'highlighter'), xoops_substr($text, $start, $length, " [...]"));
+                $pos = strpos($text_i, strtolower($query)); //xoops_local("strpos", $text_i, strtolower($query));
+                $start = max(($pos - 100), 0);
+                $length = strlen($query) + 200; //xoops_local("strlen", $query) + 200;
+                $context = preg_replace_callback("/(" . preg_quote($query) . ")/si", array($obj, 'highlighter'), xoops_substr($text, $start, $length, " [...]"));
                 $sanitized_text .= "<p>[...] " . $context . "</p>";
             }
         }

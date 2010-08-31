@@ -34,9 +34,9 @@ function publisher_date_to_date_show($options)
     $block = array();
     $fromArray = explode('/', $options[0]);
     //month, day, year
-    $fromStamp = mktime(0,0,0,$fromArray[0], $fromArray[1], $fromArray[2]);
+    $fromStamp = mktime(0, 0, 0, $fromArray[0], $fromArray[1], $fromArray[2]);
     $untilArray = explode('/', $options[1]);
-    $untilStamp = mktime(0,0,0,$untilArray[0], $untilArray[1], $untilArray[2]);
+    $untilStamp = mktime(0, 0, 0, $untilArray[0], $untilArray[1], $untilArray[2]);
 
     $criteria = new CriteriaCompo();
     $criteria->add(new Criteria('datesub', $fromStamp, '>'));
@@ -49,15 +49,15 @@ function publisher_date_to_date_show($options)
     $totalItems = count($itemsObj);
 
     if ($itemsObj) {
-        for ( $i = 0; $i < $totalItems; $i++ ) {
+        for ($i = 0; $i < $totalItems; $i++) {
 
-            $newItems['itemid']       = $itemsObj[$i]->itemid();
-            $newItems['title']        = $itemsObj[$i]->title();
+            $newItems['itemid'] = $itemsObj[$i]->itemid();
+            $newItems['title'] = $itemsObj[$i]->title();
             $newItems['categoryname'] = $itemsObj[$i]->getCategoryName();
-            $newItems['categoryid']   = $itemsObj[$i]->categoryid();
-            $newItems['date']         = $itemsObj[$i]->datesub();
-            $newItems['poster']       = $itemsObj[$i]->linkedPosterName();
-            $newItems['itemlink']     = $itemsObj[$i]->getItemLink(false, isset($options[3]) ? $options[3] : 65);
+            $newItems['categoryid'] = $itemsObj[$i]->categoryid();
+            $newItems['date'] = $itemsObj[$i]->datesub();
+            $newItems['poster'] = $itemsObj[$i]->linkedPosterName();
+            $newItems['itemlink'] = $itemsObj[$i]->getItemLink(false, isset($options[3]) ? $options[3] : 65);
             $newItems['categorylink'] = $itemsObj[$i]->getCategoryLink();
 
             $block['items'][] = $newItems;
@@ -78,8 +78,8 @@ function publisher_date_to_date_show($options)
 function publisher_date_to_date_edit($options)
 {
 
-    $form =  _MB_PUBLISHER_FROM . "<input type='text' name='options[]' value='" . $options[0] . "' />&nbsp;<br />";
-    $form .= _MB_PUBLISHER_UNTIL . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "' /><br/>"._MB_PUBLISHER_DATE_FORMAT;
+    $form = _MB_PUBLISHER_FROM . "<input type='text' name='options[]' value='" . $options[0] . "' />&nbsp;<br />";
+    $form .= _MB_PUBLISHER_UNTIL . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "' /><br/>" . _MB_PUBLISHER_DATE_FORMAT;
 
     return $form;
 }

@@ -36,10 +36,10 @@ function publisher_items_random_item_show($options)
 
     if (!is_object($itemsObj)) return $block;
 
-   	$block['content']       = $itemsObj->getBlockSummary(300, true); //show complete summary  but truncate to 300 if only body available
-   	$block['id']            = $itemsObj->itemid();
-   	$block['url']           = $itemsObj->getItemUrl();
-   	$block['lang_fullitem'] = _MB_PUBLISHER_FULLITEM;
+    $block['content'] = $itemsObj->getBlockSummary(300, true); //show complete summary  but truncate to 300 if only body available
+    $block['id'] = $itemsObj->itemid();
+    $block['url'] = $itemsObj->getItemUrl();
+    $block['lang_fullitem'] = _MB_PUBLISHER_FULLITEM;
 
     return $block;
 }

@@ -105,7 +105,7 @@ $new_back[] .= '<div class="publisher_r8-unit">8</div>';
 $new_back[] .= '<div class="publisher_r9-unit">9</div>';
 $new_back[] .= '<div class="publisher_r10-unit">10</div>';
 $new_back[] .= '</div>';
-$new_back[] .= '<div class="publisher_voted">' . _MD_PUBLISHER_VOTE_RATING .' <strong>' . @number_format($current_rating / $count, 2) . '</strong>/' . $units . ' (' . $count . ' ' . $tense . ')</div>';
+$new_back[] .= '<div class="publisher_voted">' . _MD_PUBLISHER_VOTE_RATING . ' <strong>' . @number_format($current_rating / $count, 2) . '</strong>/' . $units . ' (' . $count . ' ' . $tense . ')</div>';
 $new_back[] .= '<div class="publisher_thanks">' . _MD_PUBLISHER_VOTE_THANKS . '</div>';
 
 $allnewback = join("\n", $new_back);

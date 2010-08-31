@@ -94,7 +94,7 @@ switch ($op) {
         } */
 
 
-        if (isset($importfile_select_array) && count($importfile_select_array) > 0 ) {
+        if (isset($importfile_select_array) && count($importfile_select_array) > 0) {
 
             $sform = new XoopsThemeForm(_AM_PUBLISHER_IMPORT_SELECTION, "op", xoops_getenv('PHP_SELF'));
             $sform->setExtra('enctype="multipart/form-data"');
@@ -102,7 +102,7 @@ switch ($op) {
             // Partners to import
             $importfile_select = new XoopsFormSelect('', 'importfile', $importfile);
             $importfile_select->addOptionArray($importfile_select_array);
-            $importfile_tray = new XoopsFormElementTray(_AM_PUBLISHER_IMPORT_SELECT_FILE , '&nbsp;');
+            $importfile_tray = new XoopsFormElementTray(_AM_PUBLISHER_IMPORT_SELECT_FILE, '&nbsp;');
             $importfile_tray->addElement($importfile_select);
             $importfile_tray->setDescription(_AM_PUBLISHER_IMPORT_SELECT_FILE_DSC);
             $sform->addElement($importfile_tray);

@@ -26,7 +26,7 @@ if (!defined("XOOPS_ROOT_PATH")) {
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-function publisher_items_new_show ($options)
+function publisher_items_new_show($options)
 {
     $publisher =& PublisherPublisher::getInstance();
 
@@ -47,7 +47,7 @@ function publisher_items_new_show ($options)
 
     // creating the ITEM objects that belong to the selected category
     if ($allcats) {
-        $criteria=null;
+        $criteria = null;
     } else {
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('categoryid', '(' . $options[0] . ')', 'IN'));
@@ -56,11 +56,11 @@ function publisher_items_new_show ($options)
 
     $totalitems = count($itemsObj);
     if ($itemsObj) {
-        for ( $i = 0; $i < $totalitems; $i++ ) {
+        for ($i = 0; $i < $totalitems; $i++) {
 
             $item = array();
-            $item['link']   = $itemsObj[$i]->getItemLink(false, isset($options[4]) ? $options[4] : 65);
-            $item['id']     = $itemsObj[$i]->itemid();
+            $item['link'] = $itemsObj[$i]->getItemLink(false, isset($options[4]) ? $options[4] : 65);
+            $item['id'] = $itemsObj[$i]->itemid();
             $item['poster'] = $itemsObj[$i]->posterName(); // for make poster name linked, use linkedPosterName() instead of posterName()
 
             if ($image == 'article') {
@@ -75,14 +75,14 @@ function publisher_items_new_show ($options)
                 $item['image'] = $itemsObj[$i]->getCategoryImagePath();
                 $item['image_name'] = $itemsObj[$i]->getCategoryName();
             } elseif ($image == 'avatar') {
-                if ($itemsObj[$i]->uid() == '0') { 
-                $item['image'] = XOOPS_URL . '/uploads/blank.gif';
-                $images = $itemsObj[$i]->getImages();
-                if (is_object($images['main'])) {
-                    $item['image'] = XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name');
-                }
+                if ($itemsObj[$i]->uid() == '0') {
+                    $item['image'] = XOOPS_URL . '/uploads/blank.gif';
+                    $images = $itemsObj[$i]->getImages();
+                    if (is_object($images['main'])) {
+                        $item['image'] = XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name');
+                    }
                 } else {
-                $item['image'] = XOOPS_URL . '/uploads/' . $itemsObj[$i]->posterAvatar();
+                    $item['image'] = XOOPS_URL . '/uploads/' . $itemsObj[$i]->posterAvatar();
                 }
                 $item['image_name'] = $itemsObj[$i]->posterName();
             }
@@ -108,7 +108,7 @@ function publisher_items_new_show ($options)
 
 function publisher_items_new_edit($options)
 {
-    $form  = "<table border='0'>";
+    $form = "<table border='0'>";
     $form .= '<tr><td style="vertical-align: top; width: 250px;">' . _MB_PUBLISHER_SELECTCAT . '</td>';
     $form .= '<td>' . publisher_createCategorySelect($options[0]) . '</td></tr>';
 
@@ -137,17 +137,17 @@ function publisher_items_new_edit($options)
 
 
     $form .= "<tr><td>" . _MB_PUBLISHER_ORDER_SHOW . "</td><td>";
-    $chk   = "";
+    $chk = "";
     if ($options[2] == 0) {
         $chk = " checked='checked'";
     }
     $form .= "<input type='radio' name='options[2]' value='0'" . $chk . " />" . _NO . "";
-    $chk   = "";
+    $chk = "";
 
     if ($options[2] == 1) {
         $chk = " checked='checked'";
     }
-    $form .= "<input type='radio' name='options[2]' value='1'" . $chk . " />"._YES."</td></tr>";
+    $form .= "<input type='radio' name='options[2]' value='1'" . $chk . " />" . _YES . "</td></tr>";
 
 
     $form .= "<tr><td>" . _MB_PUBLISHER_DISP . "</td><td><input type='text' name='options[3]' value='" . $options[3] . "' />&nbsp;" . _MB_PUBLISHER_ITEMS . "</td></tr>";

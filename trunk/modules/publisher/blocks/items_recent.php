@@ -58,36 +58,37 @@ function publisher_items_recent_show($options)
     $totalItems = count($itemsObj);
 
     if ($itemsObj) {
-        for ( $i = 0; $i < $totalItems; $i++ ) {
+        for ($i = 0; $i < $totalItems; $i++) {
 
-            $newItems['itemid']       = $itemsObj[$i]->itemid();
-            $newItems['title']        = $itemsObj[$i]->title();
+            $newItems['itemid'] = $itemsObj[$i]->itemid();
+            $newItems['title'] = $itemsObj[$i]->title();
             $newItems['categoryname'] = $itemsObj[$i]->getCategoryName();
-            $newItems['categoryid']   = $itemsObj[$i]->categoryid();
-            $newItems['date']         = $itemsObj[$i]->datesub();
-            $newItems['poster']       = $itemsObj[$i]->linkedPosterName();
-            $newItems['itemlink']     = $itemsObj[$i]->getItemLink(false, isset($options[3]) ? $options[3] : 65);
+            $newItems['categoryid'] = $itemsObj[$i]->categoryid();
+            $newItems['date'] = $itemsObj[$i]->datesub();
+            $newItems['poster'] = $itemsObj[$i]->linkedPosterName();
+            $newItems['itemlink'] = $itemsObj[$i]->getItemLink(false, isset($options[3]) ? $options[3] : 65);
             $newItems['categorylink'] = $itemsObj[$i]->getCategoryLink();
 
             $block['items'][] = $newItems;
         }
 
-        $block['lang_title']     = _MB_PUBLISHER_ITEMS;
-        $block['lang_category']  = _MB_PUBLISHER_CATEGORY;
-        $block['lang_poster']    = _MB_PUBLISHER_POSTEDBY;
-        $block['lang_date']      = _MB_PUBLISHER_DATE;
-        $modulename              = $myts->displayTarea($publisher->getModule()->getVar('name'));
+        $block['lang_title'] = _MB_PUBLISHER_ITEMS;
+        $block['lang_category'] = _MB_PUBLISHER_CATEGORY;
+        $block['lang_poster'] = _MB_PUBLISHER_POSTEDBY;
+        $block['lang_date'] = _MB_PUBLISHER_DATE;
+        $modulename = $myts->displayTarea($publisher->getModule()->getVar('name'));
         $block['lang_visitItem'] = _MB_PUBLISHER_VISITITEM . " " . $modulename;
     }
 
     return $block;
 }
 
-function publisher_items_recent_edit($options) {
+function publisher_items_recent_edit($options)
+{
 
-    $form  = "<table border='0'>";
+    $form = "<table border='0'>";
     $form .= '<tr><td style="vertical-align: top; width: 250px;">' . _MB_PUBLISHER_SELECTCAT . '</td>';
-    $form .= '<td>'. publisher_createCategorySelect($options[0]) . '</td></tr>';
+    $form .= '<td>' . publisher_createCategorySelect($options[0]) . '</td></tr>';
 
     $form .= "<tr><td>" . _MB_PUBLISHER_ORDER . "</td>";
     $form .= "<td><select name='options[1]'>";

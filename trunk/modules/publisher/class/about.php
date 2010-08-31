@@ -63,7 +63,7 @@ class PublisherAbout
         $this->_lang_developer_credits = _MI_PUBLISHER_DEVELOPER_CREDITS;
         $this->_lang_module_info = _MI_PUBLISHER_MODULE_INFO;
         $this->_lang_module_status = _MI_PUBLISHER_MODULE_STATUS;
-        $this->_lang_module_release_date =_MI_PUBLISHER_MODULE_RELEASE_DATE ;
+        $this->_lang_module_release_date = _MI_PUBLISHER_MODULE_RELEASE_DATE;
         $this->_lang_module_demo = _MI_PUBLISHER_MODULE_DEMO;
         $this->_lang_module_support = _MI_PUBLISHER_MODULE_SUPPORT;
         $this->_lang_module_bug = _MI_PUBLISHER_MODULE_BUG;
@@ -166,4 +166,5 @@ class PublisherAbout
         xoops_cp_footer();
     }
 }
+
 ?>

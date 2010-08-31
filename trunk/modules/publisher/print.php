@@ -51,8 +51,8 @@ $categoryObj =& $itemObj->category();
 $xoopsTpl = new XoopsTpl();
 $myts =& MyTextSanitizer::getInstance();
 
-$item['title'] =  $itemObj->title();
-$item['body']  =  $itemObj->body();
+$item['title'] = $itemObj->title();
+$item['body'] = $itemObj->body();
 $item['categoryname'] = $myts->displayTarea($categoryObj->name());
 
 $mainImage = $itemObj->getMainImage();
@@ -76,10 +76,10 @@ $xoopsTpl->assign('noTitle', $noTitle);
 $xoopsTpl->assign('smartPopup', $smartPopup);
 $xoopsTpl->assign('current_language', $xoopsConfig['language']);
 
-if($publisher->getConfig('print_footer')== 'item footer' || $publisher->getConfig('print_footer')== 'both'){
+if ($publisher->getConfig('print_footer') == 'item footer' || $publisher->getConfig('print_footer') == 'both') {
     $xoopsTpl->assign('itemfooter', $myts->displayTarea($publisher->getConfig('item_footer'), 1));
 }
-if($publisher->getConfig('print_footer')== 'index footer' || $publisher->getConfig('print_footer')== 'both'){
+if ($publisher->getConfig('print_footer') == 'index footer' || $publisher->getConfig('print_footer') == 'both') {
     $xoopsTpl->assign('indexfooter', $myts->displayTarea($publisher->getConfig('index_footer'), 1));
 }
 

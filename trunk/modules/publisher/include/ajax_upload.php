@@ -40,7 +40,7 @@ if (!is_object($xoopsUser)) {
 
 $filename = basename($_FILES['publisher_upload_file']['name']);
 $image_nicename = isset($_POST['image_nicename']) ? trim($_POST['image_nicename']) : '';
-if ($image_nicename == '' ||  $image_nicename == _CO_PUBLISHER_IMAGE_NICENAME) {
+if ($image_nicename == '' || $image_nicename == _CO_PUBLISHER_IMAGE_NICENAME) {
     $image_nicename = $filename;
 }
 

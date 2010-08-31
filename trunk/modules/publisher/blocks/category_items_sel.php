@@ -53,13 +53,13 @@ function publisher_category_items_sel_show($options)
 
         if (count($items) == 0) continue;
 
-        $item['title']                          = $catObj->name();
-        $item['itemurl']                        = 'none';
+        $item['title'] = $catObj->name();
+        $item['itemurl'] = 'none';
         $block['categories'][$catID]['items'][] = $item;
 
         foreach ($items as $itemObj) {
-            $item['title']                          = $itemObj->title(isset($options[3]) ? $options[3] : 0);
-            $item['itemurl']                        = $itemObj->getItemUrl();
+            $item['title'] = $itemObj->title(isset($options[3]) ? $options[3] : 0);
+            $item['itemurl'] = $itemObj->getItemUrl();
             $block['categories'][$catID]['items'][] = $item;
         }
         $block['categories'][$catID]['name'] = $catObj->name();
@@ -71,11 +71,12 @@ function publisher_category_items_sel_show($options)
     return $block;
 }
 
-function publisher_category_items_sel_edit($options) {
+function publisher_category_items_sel_edit($options)
+{
 
-    $form  = "<table border='0'>";
+    $form = "<table border='0'>";
     $form .= '<tr><td style="vertical-align: top; width: 250px;">' . _MB_PUBLISHER_SELECTCAT . '</td>';
-    $form .= '<td>'. publisher_createCategorySelect($options[0]) . '</td></tr>';
+    $form .= '<td>' . publisher_createCategorySelect($options[0]) . '</td></tr>';
 
     $form .= "<tr><td>" . _MB_PUBLISHER_ORDER . "</td>";
     $form .= "<td><select name='options[1]'>";

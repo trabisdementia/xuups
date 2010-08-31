@@ -35,8 +35,8 @@ if (isset($_POST['additem'])) {
 // Where shall we start ?
 $submittedstartitem = PublisherRequest::getInt('submittedstartitem');
 $publishedstartitem = PublisherRequest::getInt('publishedstartitem');
-$offlinestartitem   = PublisherRequest::getInt('offlinestartitem');
-$rejectedstartitem  = PublisherRequest::getInt('rejectedstartitem');
+$offlinestartitem = PublisherRequest::getInt('offlinestartitem');
+$rejectedstartitem = PublisherRequest::getInt('rejectedstartitem');
 
 switch ($op) {
     case "clone":
@@ -79,7 +79,7 @@ switch ($op) {
         // Putting the values in the ITEM object
         if (isset($_POST['permissions_item'])) {
             $itemObj->setGroups_read($_POST['permissions_item']);
-        } else{
+        } else {
             $itemObj->setGroups_read();
         }
 
@@ -120,7 +120,7 @@ switch ($op) {
         $itemObj->setVar('item_tag', PublisherRequest::getString('item_tag'));
 
         $old_status = $itemObj->status();
-        $new_status = PublisherRequest::getInt('status', _PUBLISHER_STATUS_PUBLISHED);//_PUBLISHER_STATUS_NOTSET;
+        $new_status = PublisherRequest::getInt('status', _PUBLISHER_STATUS_PUBLISHED); //_PUBLISHER_STATUS_NOTSET;
 
         $itemObj->setVar('uid', PublisherRequest::getInt('uid', $uid));
         $itemObj->setVar('datesub', isset($_POST['datesub']) ? strtotime($_POST['datesub']['date']) + $_POST['datesub']['time'] : $datesub);
@@ -450,11 +450,11 @@ function publisher_showFiles($itemObj)
             if ($filesObj[$i]->status() == 0) {
                 $not_visible = "<img src='" . PUBLISHER_URL . "/images/no.gif'/>";
             } else {
-                $not_visible ='';
+                $not_visible = '';
             }
             echo "<tr>";
-            echo "<td class='head' align='center'>" .$filesObj[$i]->getVar('fileid') . "</td>";
-            echo "<td class='odd' align='left'>" .$not_visible. $filesObj[$i]->getFileLink() . "</td>";
+            echo "<td class='head' align='center'>" . $filesObj[$i]->getVar('fileid') . "</td>";
+            echo "<td class='odd' align='left'>" . $not_visible . $filesObj[$i]->getFileLink() . "</td>";
             echo "<td class='even' align='left'>" . $filesObj[$i]->description() . "</td>";
             echo "<td class='even' align='center'>" . $filesObj[$i]->counter() . "";
             echo "<td class='even' align='center'>" . $filesObj[$i]->datesub() . "</td>";
@@ -468,7 +468,7 @@ function publisher_showFiles($itemObj)
     }
 
     echo "<form><div style=\"margin-bottom: 24px;\">";
-    echo "<input type='button' name='button' onclick=\"location='file.php?op=mod&amp;itemid=" . $itemObj->itemid(). "'\" value='" . _AM_PUBLISHER_UPLOAD_FILE_NEW . "'>&nbsp;&nbsp;";
+    echo "<input type='button' name='button' onclick=\"location='file.php?op=mod&amp;itemid=" . $itemObj->itemid() . "'\" value='" . _AM_PUBLISHER_UPLOAD_FILE_NEW . "'>&nbsp;&nbsp;";
     echo "</div></form>";
 
     publisher_closeCollapsableBar('filetable', 'filetableicon');
@@ -552,8 +552,8 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
 
             case "default" :
             default :
-                $breadcrumb_action1 = 	_AM_PUBLISHER_ITEMS;
-                $breadcrumb_action2 = 	_AM_PUBLISHER_EDITING;
+                $breadcrumb_action1 = _AM_PUBLISHER_ITEMS;
+                $breadcrumb_action2 = _AM_PUBLISHER_EDITING;
                 $page_title = _AM_PUBLISHER_PUBLISHEDEDITING;
                 $page_info = _AM_PUBLISHER_PUBLISHEDEDITING_INFO;
                 $button_caption = _AM_PUBLISHER_MODIFY;
@@ -572,7 +572,7 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
 
         if (!$clone) {
             echo "<form><div style=\"margin-bottom: 10px;\">";
-            echo "<input type='button' name='button' onclick=\"location='item.php?op=clone&itemid=" . $itemObj->itemid(). "'\" value='" . _AM_PUBLISHER_CLONE_ITEM . "'>&nbsp;&nbsp;";
+            echo "<input type='button' name='button' onclick=\"location='item.php?op=clone&itemid=" . $itemObj->itemid() . "'\" value='" . _AM_PUBLISHER_CLONE_ITEM . "'>&nbsp;&nbsp;";
             echo "</div></form>";
         }
 
@@ -608,7 +608,7 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
 
     $dir = publisher_getUploadDir(true, 'content');
 
-    if(!preg_match('/777/i', decoct(fileperms($dir)))) {
+    if (!preg_match('/777/i', decoct(fileperms($dir)))) {
         echo "<font color='FF0000'><h4>" . _AM_PUBLISHER_PERMERROR . "</h4></font>";
     }
 
@@ -649,4 +649,5 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
         publisher_showFiles($itemObj);
     }
 }
+
 ?>

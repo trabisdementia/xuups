@@ -28,7 +28,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
 /***
  * Function To Show Publisher Items From Categories In Their Own Columns
- * @param	array $options Block Options
+ * @param    array $options Block Options
  */
 function publisher_items_columns_show($options)
 {
@@ -55,7 +55,7 @@ function publisher_items_columns_show($options)
 
     //if not selected 'all', let's get the selected ones
     if (!in_array(0, $sel_categories)) {
-        foreach ($categories_obj as $key=>$value) {
+        foreach ($categories_obj as $key => $value) {
             if (in_array($key, $sel_categories)) {
                 $sel_categories_obj[$key] = $value;
             }
@@ -85,27 +85,27 @@ function publisher_items_columns_show($options)
             //First Item
             list($itemid, $thisitem) = each($categoryItemsObj);
 
-            $mainitem['item_title']      = $thisitem->title();
+            $mainitem['item_title'] = $thisitem->title();
             $mainitem['item_cleantitle'] = strip_tags($thisitem->title());
-            $mainitem['item_link']       = $thisitem->itemid();
-            $mainitem['itemurl']         = $thisitem->getItemUrl();
-            $mainImage                   = $thisitem->getMainImage();
-            $mainitem['item_image']      = $mainImage['image_path'];
-            $mainitem['item_summary']    = $thisitem->getBlockSummary($opt_cat_truncate);
+            $mainitem['item_link'] = $thisitem->itemid();
+            $mainitem['itemurl'] = $thisitem->getItemUrl();
+            $mainImage = $thisitem->getMainImage();
+            $mainitem['item_image'] = $mainImage['image_path'];
+            $mainitem['item_summary'] = $thisitem->getBlockSummary($opt_cat_truncate);
 
-            $mainitem['item_cat_name']        = $mainitemCatObj->name();
+            $mainitem['item_cat_name'] = $mainitemCatObj->name();
             $mainitem['item_cat_description'] = $mainitemCatObj->description() != '' ? $mainitemCatObj->description() : $mainitemCatObj->name();
-            $mainitem['item_cat_link']        = $mainitemCatObj->getCategoryLink();
-            $mainitem['categoryurl']          = $mainitemCatObj->getCategoryUrl();
+            $mainitem['item_cat_link'] = $mainitemCatObj->getCategoryLink();
+            $mainitem['categoryurl'] = $mainitemCatObj->getCategoryUrl();
 
             //The Rest
             if ($scount > 1) {
                 while (list($itemid, $thisitem) = each($categoryItemsObj)) {
-                    $subitem['title']      = $thisitem->title();
+                    $subitem['title'] = $thisitem->title();
                     $subitem['cleantitle'] = strip_tags($thisitem->title());
-                    $subitem['link']       = $thisitem->getItemLink();
-                    $subitem['itemurl']    = $thisitem->getItemUrl();
-                    $subitem['summary']    = $thisitem->getBlockSummary($opt_cat_truncate);
+                    $subitem['link'] = $thisitem->getItemLink();
+                    $subitem['itemurl'] = $thisitem->getItemUrl();
+                    $subitem['summary'] = $thisitem->getBlockSummary($opt_cat_truncate);
                     $mainitem['subitem'][] = $subitem;
                     unset($subitem);
                 }
@@ -122,7 +122,7 @@ function publisher_items_columns_show($options)
     }
     $block['template'] = $options[4];
     $block['columns'] = $columns;
-    $block['columnwidth'] = intval(100/$opt_num_columns);
+    $block['columnwidth'] = intval(100 / $opt_num_columns);
 
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . PUBLISHER_DIRNAME . '/css/publisher.css');
 
@@ -131,14 +131,14 @@ function publisher_items_columns_show($options)
 
 /***
  * Edit Function For Multi-Column Category Items Display Block
- * @param	array $options Block Options
+ * @param    array $options Block Options
  *
  */
 function publisher_items_columns_edit($options)
 {
     global $xoopsDB;
 
-    $form  = "<table border='0'>";
+    $form = "<table border='0'>";
     $form .= "<tr><td style='vertical-align: top; width: 250px;'>" . _MB_PUBLISHER_NUMBER_COLUMN_VIEW . "</td>";
     $form .= "<td><select size='1' name='options[0]'>";
 
@@ -154,7 +154,7 @@ function publisher_items_columns_edit($options)
     $form .= "</select></td></tr>";
 
     //Select Which Categories To Show
-    $form .= "<tr><td style='vertical-align: top;'>"._MB_PUBLISHER_SELECTCAT."</td><td>";
+    $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_SELECTCAT . "</td><td>";
     $form .= publisher_createCategorySelect($options[1], 0, true, 'options[1]');
     $form .= "</td></tr>";
 
@@ -169,7 +169,7 @@ function publisher_items_columns_edit($options)
 
     //template
     $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_TEMPLATE . "</td>";
-   	$form .= "<td><select size='1' name='options[4]'>";
+    $form .= "<td><select size='1' name='options[4]'>";
 
     $templates = array('normal' => _MB_PUBLISHER_TEMPLATE_NORMAL, 'extended' => _MB_PUBLISHER_TEMPLATE_EXTENDED);
     foreach ($templates as $key => $value) {
@@ -185,4 +185,5 @@ function publisher_items_columns_edit($options)
     $form .= "</table>";
     return $form;
 }
+
 ?>

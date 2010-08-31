@@ -37,12 +37,13 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
  * @version         $Id: baseObjectHandler.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-class PublisherBaseObjectHandler extends XoopsObjectHandler {
+class PublisherBaseObjectHandler extends XoopsObjectHandler
+{
     /**
      * Database connection
      *
-     * @var	object
-     * @access	private
+     * @var    object
+     * @access    private
      */
     var $_db;
 
@@ -57,7 +58,7 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
     /**
      * Constructor
      *
-     * @param	object   $db    reference to a xoopsDB object
+     * @param    object   $db    reference to a xoopsDB object
      */
     function init(&$db)
     {
@@ -84,13 +85,13 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
     function &get($id)
     {
         $id = intval($id);
-        if($id > 0) {
+        if ($id > 0) {
             $sql = $this->_selectQuery(new Criteria($this->_idfield, $id));
-            if(!$result = $this->_db->query($sql)) {
+            if (!$result = $this->_db->query($sql)) {
                 return false;
             }
             $numrows = $this->_db->getRowsNum($result);
-            if($numrows == 1) {
+            if ($numrows == 1) {
                 $obj = new $this->classname($this->_db->fetchArray($result));
                 return $obj;
             }
@@ -108,10 +109,10 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
      */
     function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret    = array();
-        $limit  = $start = 0;
-        $sql    = $this->_selectQuery($criteria);
-        $id     = $this->_idfield;
+        $ret = array();
+        $limit = $start = 0;
+        $sql = $this->_selectQuery($criteria);
+        $id = $this->_idfield;
 
         if (isset($criteria)) {
             $limit = $criteria->getLimit();
@@ -157,7 +158,7 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
         // Create query for DB update
         if ($obj->isNew()) {
             // Determine next auto-gen ID for table
-            $id = $this->_db->genId($this->_db->prefix($this->_dbtable).'_uid_seq');
+            $id = $this->_db->genId($this->_db->prefix($this->_dbtable) . '_uid_seq');
             $sql = $this->_insertQuery($obj);
         } else {
             $sql = $this->_updateQuery($obj);
@@ -191,11 +192,11 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
     function _selectQuery($criteria = null)
     {
         $sql = sprintf('SELECT * FROM %s', $this->_db->prefix($this->_dbtable));
-        if(isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' ' .$criteria->renderWhere();
-            if($criteria->getSort() != '') {
+        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+            $sql .= ' ' . $criteria->renderWhere();
+            if ($criteria->getSort() != '') {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . '
-                    ' .$criteria->getOrder();
+                    ' . $criteria->getOrder();
             }
         }
         return $sql;
@@ -210,9 +211,9 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
      */
     function getCount($criteria = null)
     {
-        $sql = 'SELECT COUNT(*) FROM '.$this->_db->prefix($this->_dbtable);
+        $sql = 'SELECT COUNT(*) FROM ' . $this->_db->prefix($this->_dbtable);
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' '.$criteria->renderWhere();
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result =& $this->_db->query($sql)) {
             return 0;
@@ -253,13 +254,13 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
      *
      * @param object $criteria {@link CriteriaElement}
      * @return bool FALSE if deletion failed
-     * @access	public
+     * @access    public
      */
     function deleteAll($criteria = null)
     {
-        $sql = 'DELETE FROM '.$this->_db->prefix($this->_dbtable);
+        $sql = 'DELETE FROM ' . $this->_db->prefix($this->_dbtable);
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' '.$criteria->renderWhere();
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->_db->query($sql)) {
             return false;
@@ -272,14 +273,14 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
      *
      * @param object $criteria {@link CriteriaElement}
      * @return bool FALSE if update failed
-     * @access	public
+     * @access    public
      */
     function updateAll($fieldname, $fieldvalue, $criteria = null)
     {
-        $set_clause = is_numeric($fieldvalue) ? $fieldname.' = '.$fieldvalue : $fieldname.' = '.$this->_db->quoteString($fieldvalue);
-        $sql = 'UPDATE '.$this->_db->prefix($this->_dbtable).' SET '.$set_clause;
+        $set_clause = is_numeric($fieldvalue) ? $fieldname . ' = ' . $fieldvalue : $fieldname . ' = ' . $this->_db->quoteString($fieldvalue);
+        $sql = 'UPDATE ' . $this->_db->prefix($this->_dbtable) . ' SET ' . $set_clause;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' '.$criteria->renderWhere();
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->_db->query($sql)) {
             return false;
@@ -314,8 +315,8 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
     function &getInstance(&$db)
     {
         static $instance;
-        if(!isset($instance)) {
-            $classname = $this->classname.'Handler';
+        if (!isset($instance)) {
+            $classname = $this->classname . 'Handler';
             $instance = new $classname($db);
         }
         return $instance;
@@ -349,15 +350,15 @@ class PublisherMimetype extends XoopsObject
             $this->setNew();
         }
     }
-}   // end of class
+} // end of class
 
 class PublisherMimetypeHandler extends PublisherBaseObjectHandler
 {
     /**
      * Name of child class
      *
-     * @var	string
-     * @access	private
+     * @var    string
+     * @access    private
      */
     var $classname = 'publishermimetype';
 
@@ -381,9 +382,9 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler
 
     /**
      * retrieve a mimetype object from the database
-     * @param	int	$id	ID of mimetype
-     * @return	object	{@link PublisherMimetype}
-     * @access	public
+     * @param    int    $id    ID of mimetype
+     * @return    object    {@link PublisherMimetype}
+     * @access    public
      */
     function &get($id)
     {
@@ -407,13 +408,13 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler
      *
      * @param object $criteria {@link CriteriaElement} conditions to be met
      * @return array array of {@link PublisherMimetype} objects
-     * @access	public
+     * @access    public
      */
     function &getObjects($criteria = null)
     {
-        $ret    = array();
-        $limit  = $start = 0;
-        $sql    = $this->_selectQuery($criteria);
+        $ret = array();
+        $limit = $start = 0;
+        $sql = $this->_selectQuery($criteria);
         if (isset($criteria)) {
             $limit = $criteria->getLimit();
             $start = $criteria->getStart();
@@ -445,12 +446,12 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler
         global $publisher_isAdmin, $xoopsUser;
 
         $ret = array();
-        if ($xoopsUser && !$publisher_isAdmin){
+        if ($xoopsUser && !$publisher_isAdmin) {
             // For user uploading
-            $crit = new CriteriaCompo(new Criteria('mime_user', 1));   //$sql = sprintf("SELECT * FROM %s WHERE mime_user=1", $xoopsDB->prefix('publisher_mimetypes'));
-        } elseif ($xoopsUser && $publisher_isAdmin){
+            $crit = new CriteriaCompo(new Criteria('mime_user', 1)); //$sql = sprintf("SELECT * FROM %s WHERE mime_user=1", $xoopsDB->prefix('publisher_mimetypes'));
+        } elseif ($xoopsUser && $publisher_isAdmin) {
             // For admin uploading
-            $crit = new CriteriaCompo(new Criteria('mime_admin', 1));  //$sql = sprintf("SELECT * FROM %s WHERE mime_admin=1", $xoopsDB->prefix('publisher_mimetypes'));
+            $crit = new CriteriaCompo(new Criteria('mime_admin', 1)); //$sql = sprintf("SELECT * FROM %s WHERE mime_admin=1", $xoopsDB->prefix('publisher_mimetypes'));
         } else {
             return $ret;
         }
@@ -466,7 +467,7 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler
 
         foreach ($result as $mime) {
             $line = split(" ", $mime->getVar('mime_types'));
-            foreach($line as $row){
+            foreach ($line as $row) {
                 $allowed_mimetypes[] = array('type' => $row, 'ext' => $mime->getVar('mime_ext'));
             }
         }
@@ -483,16 +484,16 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler
     {
         $fname = $_FILES[$post_field]['name'];
         $farray = explode('.', $fname);
-        $fextension = strtolower($farray[count($farray) -1]);
+        $fextension = strtolower($farray[count($farray) - 1]);
 
         $allowed_mimetypes = $this->getArray();
-        if(empty($allowed_mimetypes)){
+        if (empty($allowed_mimetypes)) {
             return false;
         }
 
-        foreach($allowed_mimetypes as $mime){
+        foreach ($allowed_mimetypes as $mime) {
             //echo $mime['type'];
-            if($mime['type'] == $_FILES[$post_field]['type']){
+            if ($mime['type'] == $_FILES[$post_field]['type']) {
                 $allowed_mimetypes = $mime['type'];
                 break;
             } else {
@@ -505,20 +506,21 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler
     /**
      * Create a "select" SQL query
      * @param object $criteria {@link CriteriaElement} to match
-     * @return	string SQL query
-     * @access	private
+     * @return    string SQL query
+     * @access    private
      */
     function _selectQuery($criteria = null, $join = false)
     {
-        if(!$join){
+        if (!$join) {
             $sql = sprintf('SELECT * FROM %s', $this->_db->prefix($this->_dbtable));
         } else {
-            echo "no need for join..."; exit;
+            echo "no need for join...";
+            exit;
         }
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' '.$criteria->renderWhere();
+            $sql .= ' ' . $criteria->renderWhere();
             if ($criteria->getSort() != '') {
-                $sql .= ' ORDER BY '.$criteria->getSort().' '.$criteria->getOrder();
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
         }
         return $sql;
@@ -533,7 +535,7 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler
 
         $sql = sprintf("INSERT INTO %s (mime_id, mime_ext, mime_types, mime_name, mime_admin, mime_user) VALUES
             (%u, %s, %s, %s, %u, %u)", $this->_db->prefix($this->_dbtable), $mime_id, $this->_db->quoteString($mime_ext),
-        $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user);
+                       $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user);
         return $sql;
     }
 
@@ -546,7 +548,7 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler
 
         $sql = sprintf("UPDATE %s SET mime_ext = %s, mime_types = %s, mime_name = %s, mime_admin = %u, mime_user = %u WHERE
             mime_id = %u", $this->_db->prefix($this->_dbtable), $this->_db->quoteString($mime_ext),
-        $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user, $mime_id);
+                       $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user, $mime_id);
         return $sql;
     }
 
@@ -555,6 +557,8 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler
         $sql = sprintf('DELETE FROM %s WHERE mime_id = %u', $this->_db->prefix($this->_dbtable), $obj->getVar('mime_id'));
         return $sql;
     }
-}// end class
+}
+
+// end class
 
 ?>

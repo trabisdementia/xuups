@@ -75,14 +75,14 @@ $false = false;
 /* -- Available operations -- */
 switch ($op) {
     case "uploadfile";
-    publisher_uploadFile(false, true, $false);
-    exit;
-    break;
+        publisher_uploadFile(false, true, $false);
+        exit;
+        break;
 
     case "uploadanother";
-    publisher_uploadFile(true, true, $false);
-    exit;
-    break;
+        publisher_uploadFile(true, true, $false);
+        exit;
+        break;
 
     case "mod":
         $fileid = isset($_GET['fileid']) ? $_GET['fileid'] : 0;
