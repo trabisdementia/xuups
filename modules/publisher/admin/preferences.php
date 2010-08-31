@@ -55,7 +55,7 @@ if ($op == 'showmod') {
     $config_cats = $module->getInfo('configcat');
 
     if (!in_array('others', array_keys($config_cats))) {
-        $config_cats['others'] = array('name'        => _MI_PUBLISHER_CONFCAT_OTHERS,
+        $config_cats['others'] = array('name' => _MI_PUBLISHER_CONFCAT_OTHERS,
                                        'description' => _MI_PUBLISHER_CONFCAT_OTHERS_DSC);
     }
     $cat_others_used = false;
@@ -72,13 +72,13 @@ if ($op == 'showmod') {
 
     xoops_load('XoopsFormLoader');
 
-    foreach($config_cats as $form_cat => $info) {
+    foreach ($config_cats as $form_cat => $info) {
         $$form_cat = new XoopsThemeForm($info['name'], 'pref_form_' . $form_cat, 'preferences.php', 'post', true);
     }
 
     for ($i = 0; $i < $count; $i++) {
 
-        foreach($xv_configs as $xv_config) {
+        foreach ($xv_configs as $xv_config) {
             if ($config[$i]->getVar('conf_name') == $xv_config['name']) break;
         }
         $form_cat = @$xv_config['category'];
@@ -88,7 +88,7 @@ if ($op == 'showmod') {
             $cat_others_used = true;
         }
 
-        $title = (!defined($config[$i]->getVar('conf_desc')) || constant($config[$i]->getVar('conf_desc')) == '') ? constant($config[$i]->getVar('conf_title')) : constant($config[$i]->getVar('conf_title')).'<br /><br /><span style="font-weight:normal;">'.constant($config[$i]->getVar('conf_desc')).'</span>';
+        $title = (!defined($config[$i]->getVar('conf_desc')) || constant($config[$i]->getVar('conf_desc')) == '') ? constant($config[$i]->getVar('conf_title')) : constant($config[$i]->getVar('conf_title')) . '<br /><br /><span style="font-weight:normal;">' . constant($config[$i]->getVar('conf_desc')) . '</span>';
         switch ($config[$i]->getVar('conf_formtype')) {
             case 'textarea':
                 $myts =& MyTextSanitizer::getInstance();
@@ -123,19 +123,19 @@ if ($op == 'showmod') {
                 $ele = new XoopsFormRadioYN($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput(), _YES, _NO);
                 break;
             case 'group':
-                include_once XOOPS_ROOT_PATH.'/class/xoopslists.php';
+                include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
                 $ele = new XoopsFormSelectGroup($title, $config[$i]->getVar('conf_name'), false, $config[$i]->getConfValueForOutput(), 1, false);
                 break;
             case 'group_multi':
-                include_once XOOPS_ROOT_PATH.'/class/xoopslists.php';
+                include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
                 $ele = new XoopsFormSelectGroup($title, $config[$i]->getVar('conf_name'), false, $config[$i]->getConfValueForOutput(), 5, true);
                 break;
             case 'user':
-                include_once XOOPS_ROOT_PATH.'/class/xoopslists.php';
+                include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
                 $ele = new XoopsFormSelectUser($title, $config[$i]->getVar('conf_name'), false, $config[$i]->getConfValueForOutput(), 1, false);
                 break;
             case 'user_multi':
-                include_once XOOPS_ROOT_PATH.'/class/xoopslists.php';
+                include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
                 $ele = new XoopsFormSelectUser($title, $config[$i]->getVar('conf_name'), false, $config[$i]->getConfValueForOutput(), 5, true);
                 break;
             case 'password':
@@ -148,7 +148,7 @@ if ($op == 'showmod') {
                 break;
             case 'hidden':
                 $myts =& MyTextSanitizer::getInstance();
-                $ele = new XoopsFormHidden( $config[$i]->getVar('conf_name'), $myts->htmlspecialchars( $config[$i]->getConfValueForOutput() ) );
+                $ele = new XoopsFormHidden($config[$i]->getVar('conf_name'), $myts->htmlspecialchars($config[$i]->getConfValueForOutput()));
                 break;
             case 'textbox':
             default:
@@ -165,7 +165,7 @@ if ($op == 'showmod') {
 
     publisher_cpHeader();
     publisher_adminMenu(5, _PREFERENCES);
-    foreach($config_cats as $form_cat => $info) {
+    foreach ($config_cats as $form_cat => $info) {
         if ($form_cat == 'others' && !$cat_others_used) continue;
         $$form_cat->addElement(new XoopsFormHidden('op', 'save'));
         $$form_cat->addElement(new XoopsFormButton('', 'button', _GO, 'submit'));

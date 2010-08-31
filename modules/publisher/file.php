@@ -23,13 +23,14 @@
 include_once dirname(__FILE__) . '/header.php';
 
 // if the user is not admin AND we don't allow user submission, exit
-if (!$publisher_isAdmin || (
-$publisher->getConfig('perm_submit') &&
-$publisher->getConfig('perm_submit') == 1 && (
-is_object($xoopsUser) || (
-$publisher->getConfig('perm_anon_submit') && $publisher->getConfig('perm_anon_submit') == 1)
-)
-)
+if (
+        !$publisher_isAdmin || (
+                $publisher->getConfig('perm_submit') &&
+                $publisher->getConfig('perm_submit') == 1 && (
+                        is_object($xoopsUser) || (
+                                $publisher->getConfig('perm_anon_submit') && $publisher->getConfig('perm_anon_submit') == 1)
+                )
+        )
 ) {
     redirect_header("index.php", 1, _NOPERM);
     exit();
@@ -73,7 +74,7 @@ switch ($op) {
         $xoopsTpl->assign('lang_intro_title', sprintf(_MD_PUBLISHER_ADD_FILE_TITLE, $publisher->getModule()->getVar('name')));
 
         $name = $xoopsUser ? (ucwords($xoopsUser->getVar("uname"))) : $GLOBALS['xoopsConfig']['anonymous'];
-        $xoopsTpl->assign('lang_intro_text',  sprintf(_MD_PUBLISHER_GOODDAY, $name) . sprintf(_MD_PUBLISHER_ADD_FILE_INTRO, $itemObj->title()));
+        $xoopsTpl->assign('lang_intro_text', sprintf(_MD_PUBLISHER_GOODDAY, $name) . sprintf(_MD_PUBLISHER_ADD_FILE_INTRO, $itemObj->title()));
 
         xoops_loadLanguage('admin', 'publisher');
         $fileObj =& $publisher->getHandler('file')->create();

@@ -25,10 +25,10 @@ include_once dirname(__FILE__) . '/include/common.php';
 $com_itemid = isset($_GET['com_itemid']) ? intval($_GET['com_itemid']) : 0;
 if ($com_itemid > 0) {
     $itemObj = $publisher->getHandler('item')->get($com_itemid);
-    $com_replytext = _POSTEDBY . '&nbsp;<b>'. $itemObj->linkedPosterName() . '</b>&nbsp;' . _DATE . '&nbsp;<b>' . $itemObj->dateSub() . '</b><br /><br />' . $itemObj->summary();
+    $com_replytext = _POSTEDBY . '&nbsp;<b>' . $itemObj->linkedPosterName() . '</b>&nbsp;' . _DATE . '&nbsp;<b>' . $itemObj->dateSub() . '</b><br /><br />' . $itemObj->summary();
     $bodytext = $itemObj->body();
     if ($bodytext != '') {
-        $com_replytext .= '<br /><br />'.$bodytext.'';
+        $com_replytext .= '<br /><br />' . $bodytext . '';
     }
     $com_replytitle = $itemObj->title();
     include_once XOOPS_ROOT_PATH . '/include/comment_new.php';

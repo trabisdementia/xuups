@@ -83,12 +83,12 @@ $allowed_editors = publisher_getEditors($gperm_handler->getItemIds('editors', $g
 $form_view = $gperm_handler->getItemIds('form_view', $groups, $module_id);
 
 // This code makes sure permissions are not manipulated
-$elements = array (
+$elements = array(
     'summary', 'available_page_wrap', 'item_tags', 'image_item',
-    'item_upload_file', 'uid', 'datesub', 'status','item_short_url',
-    'item_meta_keywords', 'item_meta_description','weight',
+    'item_upload_file', 'uid', 'datesub', 'status', 'item_short_url',
+    'item_meta_keywords', 'item_meta_description', 'weight',
     'allow_comments', 'permissions_item', 'partial_view',
-    'dohtml', 'dosmiley', 'doxcode' , 'doimage', 'dolinebreak',
+    'dohtml', 'dosmiley', 'doxcode', 'doimage', 'dolinebreak',
     'notify', 'subtitle', 'author_alias');
 foreach ($elements as $element) {
     if (isset($_REQUEST[$element]) && !in_array(constant('_PUBLISHER_' . strtoupper($element)), $form_view)) {
@@ -275,7 +275,7 @@ switch ($op) {
         }
 
         // attach file if any
-        if ($item_upload_file && $item_upload_file['name'] != "" ) {
+        if ($item_upload_file && $item_upload_file['name'] != "") {
             $file_upload_result = publisher_uploadFile(false, false, $itemObj);
             if ($file_upload_result !== true) {
                 redirect_header("javascript:history.go(-1)", 3, $file_upload_result);
@@ -285,7 +285,7 @@ switch ($op) {
 
         // if autoapprove_submitted. This does not apply if we are editing an article
         if (!$itemid) {
-            if ($itemObj->getVar('status') == _PUBLISHER_STATUS_PUBLISHED/*$publisher->getConfig('perm_autoapprove'] ==  1*/) {
+            if ($itemObj->getVar('status') == _PUBLISHER_STATUS_PUBLISHED /*$publisher->getConfig('perm_autoapprove'] ==  1*/) {
                 // We do not not subscribe user to notification on publish since we publish it right away
 
                 // Send notifications

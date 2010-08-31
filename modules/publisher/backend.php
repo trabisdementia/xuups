@@ -30,7 +30,7 @@ if (function_exists('mb_http_output')) {
     mb_http_output('pass');
 }
 
-$categoryid = isset($_GET['categoryid']) ? $_GET['categoryid'] : -1 ;
+$categoryid = isset($_GET['categoryid']) ? $_GET['categoryid'] : -1;
 
 if ($categoryid != -1) {
     $categoryObj = $publisher->getHandler('category')->get($categoryid);
@@ -47,7 +47,7 @@ if (!$tpl->is_cached('db:publisher_rss.html')) {
     if (method_exists($myts, 'formatForML')) {
         $xoopsConfig['sitename'] = $myts->formatForML($xoopsConfig['sitename']);
         $xoopsConfig['slogan'] = $myts->formatForML($xoopsConfig['slogan']);
-        $channel_category =  $myts->formatForML($channel_category);
+        $channel_category = $myts->formatForML($channel_category);
     }
     $tpl->assign('channel_charset', _CHARSET);
     $tpl->assign('channel_title', htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES));
@@ -81,11 +81,11 @@ if (!$tpl->is_cached('db:publisher_rss.html')) {
         $count = $sarray;
         foreach ($sarray as $item) {
             $tpl->append('items',
-            array('title' => htmlspecialchars($item->title(), ENT_QUOTES),
-			            'link' => $item->getItemUrl(),
-			            'guid' => $item->getItemUrl(),
-			            'pubdate' => formatTimestamp($item->getVar('datesub'), 'rss'),
-			            'description' => htmlspecialchars($item->getBlockSummary(300, true), ENT_QUOTES)));
+                         array('title' => htmlspecialchars($item->title(), ENT_QUOTES),
+                               'link' => $item->getItemUrl(),
+                               'guid' => $item->getItemUrl(),
+                               'pubdate' => formatTimestamp($item->getVar('datesub'), 'rss'),
+                               'description' => htmlspecialchars($item->getBlockSummary(300, true), ENT_QUOTES)));
         }
     }
 }

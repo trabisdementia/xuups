@@ -48,4 +48,5 @@ class PublisherRatingHandler extends XoopsPersistableObjectHandler
         parent::__construct($db, 'publisher_rating', 'PublisherRating', 'ratingid', 'itemid');
     }
 }
+
 ?>

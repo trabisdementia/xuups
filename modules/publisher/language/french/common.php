@@ -15,7 +15,7 @@ define("_CO_PUBLISHER_ALLOWCOMMENTS", "l'article peut-il être commenté ?");
 define("_CO_PUBLISHER_AUTHOR_ALIAS", "Auteur alias");
 define("_CO_PUBLISHER_AUTHOR_ALIAS_DSC", "Sélectionnez le nom d'alias des soumettants, il sera utilisé au lieu de 'anonyme' et fixera l'id du propriétaire de l'article à 0");
 define("_CO_PUBLISHER_AVAILABLE_PAGE_WRAP", "disponible pour les pages de synthèse");
-define("_CO_PUBLISHER_AVAILABLE_PAGE_WRAP_DSC", "Voici les pages disponibles pour la mise en forme du coeur de l'article. Cliquez sur la(les) page(s) que vous aimeriez mettre en forme. Ne fonctionne qu'avec l'éditeur XOOPS pour le moment. Ajouter manuellement si vous utilisez un autre éditeur." );
+define("_CO_PUBLISHER_AVAILABLE_PAGE_WRAP_DSC", "Voici les pages disponibles pour la mise en forme du coeur de l'article. Cliquez sur la(les) page(s) que vous aimeriez mettre en forme. Ne fonctionne qu'avec l'éditeur XOOPS pour le moment. Ajouter manuellement si vous utilisez un autre éditeur.");
 define("_CO_PUBLISHER_DATESUB", "Date de publication");
 define("_CO_PUBLISHER_DATESUB_DSC", "Choisissez la date de publication");
 define("_CO_PUBLISHER_ITEM_META_DESCRIPTION", "Meta Description");

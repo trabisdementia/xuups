@@ -76,16 +76,16 @@ switch ($op) {
         // Uploading the image, if any
         // Retreive the filename to be uploaded
         if (isset($_FILES['image_file']['name']) && $_FILES['image_file']['name'] != "") {
-            $filename = $_POST["xoops_upload_file"][0] ;
-            if (!empty( $filename ) || $filename != "") {
+            $filename = $_POST["xoops_upload_file"][0];
+            if (!empty($filename) || $filename != "") {
                 // TODO : implement publisher mimetype management
                 $max_size = $publisher->getConfig('maximum_filesize');
                 $max_imgwidth = $publisher->getConfig('maximum_image_width');
                 $max_imgheight = $publisher->getConfig('maximum_image_height');
                 $allowed_mimetypes = publisher_getAllowedImagesTypes();
 
-                if ($_FILES[$filename]['tmp_name'] == "" || !is_readable( $_FILES[$filename]['tmp_name'])) {
-                    redirect_header('javascript:history.go(-1)' , 2, _AM_PUBLISHER_FILEUPLOAD_ERROR) ;
+                if ($_FILES[$filename]['tmp_name'] == "" || !is_readable($_FILES[$filename]['tmp_name'])) {
+                    redirect_header('javascript:history.go(-1)', 2, _AM_PUBLISHER_FILEUPLOAD_ERROR);
                     exit();
                 }
 
@@ -94,7 +94,7 @@ switch ($op) {
                 if ($uploader->fetchMedia($filename) && $uploader->upload()) {
                     $categoryObj->setVar('image', $uploader->getSavedFileName());
                 } else {
-                    redirect_header('javascript:history.go(-1)' , 2, _AM_PUBLISHER_FILEUPLOAD_ERROR . $uploader->getErrors());
+                    redirect_header('javascript:history.go(-1)', 2, _AM_PUBLISHER_FILEUPLOAD_ERROR . $uploader->getErrors());
                     exit();
                 }
             }
@@ -116,7 +116,7 @@ switch ($op) {
         }
         $grpread = isset($_POST['groups_read']) ? $_POST['groups_read'] : array();
 
-        if (isset($_POST['groups_submit'])){
+        if (isset($_POST['groups_submit'])) {
             $categoryObj->setGroups_submit($_POST['groups_submit']);
         } else {
             $categoryObj->setGroups_submit();
@@ -170,7 +170,7 @@ switch ($op) {
         $parentCat = $categoryObj->categoryid();
         $sizeof = sizeof($_POST['scname']);
         for ($i = 0; $i < $sizeof; $i++) {
-            if ($_POST['scname'][$i]!= '') {
+            if ($_POST['scname'][$i] != '') {
                 $categoryObj = $publisher->getHandler('category')->create();
                 $categoryObj->setVar('name', $_POST['scname'][$i]);
                 $categoryObj->setVar('parentid', $parentCat);
@@ -196,7 +196,7 @@ switch ($op) {
         exit();
         break;
 
-        //Added by fx2024
+    //Added by fx2024
 
     case "addsubcats":
         $categoryid = 0;
@@ -216,7 +216,7 @@ switch ($op) {
         exit();
 
         break;
-        //end of fx2024 code
+    //end of fx2024 code
 
     case "cancel":
         redirect_header("category.php", 1, sprintf(_AM_PUBLISHER_BACK2IDX, ''));
@@ -275,10 +275,10 @@ function publisher_displayCategory($categoryObj, $level = 0)
     $description = $categoryObj->description();
     if (!XOOPS_USE_MULTIBYTES) {
         if (strlen($description) >= 100) {
-            $description = substr($description, 0, (100 -1)) . "...";
+            $description = substr($description, 0, (100 - 1)) . "...";
         }
     }
-    $modify = "<a href='category.php?op=mod&amp;categoryid=" . $categoryObj->categoryid() ."&amp;parentid=".$categoryObj->parentid(). "'><img src='" . PUBLISHER_URL . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITCOL . "' alt='" . _AM_PUBLISHER_EDITCOL . "' /></a>";
+    $modify = "<a href='category.php?op=mod&amp;categoryid=" . $categoryObj->categoryid() . "&amp;parentid=" . $categoryObj->parentid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITCOL . "' alt='" . _AM_PUBLISHER_EDITCOL . "' /></a>";
     $delete = "<a href='category.php?op=del&amp;categoryid=" . $categoryObj->categoryid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETECOL . "' alt='" . _AM_PUBLISHER_DELETECOL . "' /></a>";
 
     $spaces = '';
@@ -365,7 +365,7 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
                 $delete = "<a href='category.php?op=del&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETE . "' alt='" . _AM_PUBLISHER_DELETE . "' /></a>";
                 echo "<tr>";
                 echo "<td class='head' align='left'>" . $subcat->categoryid() . "</td>";
-                echo "<td class='even' align='left'><a href='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/category.php?categoryid=" . $subcat->categoryid() . "&amp;parentid=" . $subcat->parentid() . "'>" .$subcat->name() . "</a></td>";
+                echo "<td class='even' align='left'><a href='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/category.php?categoryid=" . $subcat->categoryid() . "&amp;parentid=" . $subcat->parentid() . "'>" . $subcat->name() . "</a></td>";
                 echo "<td class='even' align='left'>" . $subcat->description() . "</td>";
                 echo "<td class='even' align='right'> {$modify} {$delete} </td>";
                 echo "</tr>";
@@ -399,7 +399,7 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
             for ($i = 0; $i < $totalitemsOnPage; $i++) {
                 $categoryObj =& $allcats[$itemsObj[$i]->categoryid()];
                 $modify = "<a href='item.php?op=mod&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
-                $delete = "<a href='item.php?op=del&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" .  _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
+                $delete = "<a href='item.php?op=del&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
                 echo "<tr>";
                 echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
                 echo "<td class='even' align='left'>" . $categoryObj->name() . "</td>";

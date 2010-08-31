@@ -46,15 +46,15 @@ function publisher_items_spot_show($options)
 
     $block = array();
     if ($opt_display_last == 1) {
-        $itemsObj = $publisher->getHandler('item')->getAllPublished($opt_items_count, 0, $opt_categoryid, $sort='datesub', $order='DESC', 'summary');
+        $itemsObj = $publisher->getHandler('item')->getAllPublished($opt_items_count, 0, $opt_categoryid, $sort = 'datesub', $order = 'DESC', 'summary');
         $i = 1;
         $itemsCount = count($itemsObj);
 
         if ($itemsObj) {
-            if($opt_categoryid != -1 && $opt_catimage){
+            if ($opt_categoryid != -1 && $opt_catimage) {
                 $cat = $publisher->getHandler('category')->get($opt_categoryid);
-                $category['name']             = $cat->name();
-                $category['categoryurl']      = $cat->getCategoryUrl();
+                $category['name'] = $cat->name();
+                $category['categoryurl'] = $cat->getCategoryUrl();
                 if ($cat->image() != 'blank.png') {
                     $category['image_path'] = publisher_getImageDir('category', false) . $cat->image();
                 } else {
@@ -122,21 +122,21 @@ function publisher_items_spot_edit($options)
 {
     $publisher =& PublisherPublisher::getInstance();
 
-    $form  = "<table border='0'>";
+    $form = "<table border='0'>";
 
     // Auto select last items
     $form .= "<tr><td>" . _MB_PUBLISHER_AUTO_LAST_ITEMS . "</td><td>";
-    $chk   = "";
+    $chk = "";
     if ($options[0] == 0) {
         $chk = " checked='checked'";
     }
     $form .= "<input type='radio' name='options[0]' value='0'" . $chk . " />" . _NO . "";
-    $chk   = "";
+    $chk = "";
 
     if ($options[0] == 1) {
         $chk = " checked='checked'";
     }
-    $form .= "<input type='radio' name='options[0]' value='1'" . $chk . " />"._YES."</td></tr>";
+    $form .= "<input type='radio' name='options[0]' value='1'" . $chk . " />" . _YES . "</td></tr>";
 
     // Number of last items...
     $form .= "<tr><td>" . _MB_PUBLISHER_LAST_ITEMS_COUNT . "</td><td>";
@@ -164,17 +164,17 @@ function publisher_items_spot_edit($options)
     $form .= "<select size='10' name='options[3][]' multiple='multiple'>";
 
     if ($itemsObj) {
-        foreach($itemsObj as $id => $title) {
+        foreach ($itemsObj as $id => $title) {
             $sel = "";
             if ($sel_items == '0') {
                 $sel = " selected='selected' ";
                 $sel_items = '';
             } else {
-                if ( !empty($sel_items) && ( in_array($id, $sel_items) )) {
+                if (!empty($sel_items) && (in_array($id, $sel_items))) {
                     $sel = " selected='selected' ";
                 }
             }
-            $form .= "<option value='" . $id . "' ".$sel.">". $title ."</option>";
+            $form .= "<option value='" . $id . "' " . $sel . ">" . $title . "</option>";
         }
     }
 
@@ -182,12 +182,12 @@ function publisher_items_spot_edit($options)
 
     // Display Who and When
     $form .= "<tr><td>" . _MB_PUBLISHER_DISPLAY_WHO_AND_WHEN . "</td><td>";
-    $chk   = "";
+    $chk = "";
     if ($options[4] == 0) {
         $chk = " checked='checked'";
     }
     $form .= "<input type='radio' name='options[4]' value='0'" . $chk . " />" . _NO . "";
-    $chk   = "";
+    $chk = "";
     if ($options[4] == 1) {
         $chk = " checked='checked'";
     }
@@ -195,12 +195,12 @@ function publisher_items_spot_edit($options)
 
     // Display Comment(s)
     $form .= "<tr><td>" . _MB_PUBLISHER_DISPLAY_COMMENTS . "</td><td>";
-    $chk   = "";
+    $chk = "";
     if ($options[5] == 0) {
         $chk = " checked='checked'";
     }
     $form .= "<input type='radio' name='options[5]' value='0'" . $chk . " />" . _NO . "";
-    $chk   = "";
+    $chk = "";
     if ($options[5] == 1) {
         $chk = " checked='checked'";
     }
@@ -231,12 +231,12 @@ function publisher_items_spot_edit($options)
 
     // Display Category image
     $form .= "<tr><td>" . _MB_PUBLISHER_DISPLAY_CATIMAGE . "</td><td>";
-    $chk   = "";
+    $chk = "";
     if ($options[8] == 0) {
         $chk = " checked='checked'";
     }
     $form .= "<input type='radio' name='options[8]' value='0'" . $chk . " />" . _NO . "";
-    $chk   = "";
+    $chk = "";
     if ($options[8] == 1) {
         $chk = " checked='checked'";
     }
@@ -245,4 +245,5 @@ function publisher_items_spot_edit($options)
     $form .= "</table>";
     return $form;
 }
+
 ?>

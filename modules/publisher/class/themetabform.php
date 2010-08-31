@@ -142,20 +142,20 @@ class XoopsThemeTabForm extends XoopsForm
         if (count($this->getRequired()) > 0) {
             $this->_elements[] = "<tr class='foot'><td colspan='2'>* = " . _REQUIRED . "</td></tr>";
         }
-        foreach ( $this->getElements() as $ele ) {
+        foreach ($this->getElements() as $ele) {
             ++$i;
 
-            if (is_string( $ele ) && $ele == 'addTab') {
+            if (is_string($ele) && $ele == 'addTab') {
                 ++$tab;
                 continue;
             }
 
-            if (is_string( $ele ) && $ele == 'endTabs') {
+            if (is_string($ele) && $ele == 'endTabs') {
                 $tab = -1;
                 continue;
             }
 
-            if (is_string( $ele )) {
+            if (is_string($ele)) {
                 $elements[$i]['body'] = $ele;
                 $elements[$i]['tab'] = $tab;
                 continue;
@@ -163,27 +163,27 @@ class XoopsThemeTabForm extends XoopsForm
             $ele_name = $ele->getName();
             $ele_description = $ele->getDescription();
             $n = $ele_name ? $ele_name : $i;
-            $elements[$n]['name']       = $ele_name;
-            $elements[$n]['caption']    = $ele->getCaption();
-            $elements[$n]['body']       = $ele->render();
-            $elements[$n]['hidden']     = $ele->isHidden() ? true : false;
-            $elements[$n]['required']   = $ele->isRequired();
+            $elements[$n]['name'] = $ele_name;
+            $elements[$n]['caption'] = $ele->getCaption();
+            $elements[$n]['body'] = $ele->render();
+            $elements[$n]['hidden'] = $ele->isHidden() ? true : false;
+            $elements[$n]['required'] = $ele->isRequired();
 
             if ($ele_description != '') {
-                $elements[$n]['description']  = $ele_description;
+                $elements[$n]['description'] = $ele_description;
             }
             $elements[$n]['tab'] = $tab;
         }
         $js = $this->renderValidationJS();
         $tpl->assign($this->getName(), array('title' => $this->getTitle(),
-            'id' => 'tab_' . preg_replace('/[^a-z0-9]+/i', '', $this->getTitle()),
-            'name' => $this->getName(),
-            'action' => $this->getAction(),
-            'method' => $this->getMethod(),
-            'extra' => 'onsubmit="return xoopsFormValidate_'.$this->getName().'();"'.$this->getExtra(),
-            'javascript' => $js,
-            'tabs' => $this->_tabs,
-            'elements' => $elements));
+                                             'id' => 'tab_' . preg_replace('/[^a-z0-9]+/i', '', $this->getTitle()),
+                                             'name' => $this->getName(),
+                                             'action' => $this->getAction(),
+                                             'method' => $this->getMethod(),
+                                             'extra' => 'onsubmit="return xoopsFormValidate_' . $this->getName() . '();"' . $this->getExtra(),
+                                             'javascript' => $js,
+                                             'tabs' => $this->_tabs,
+                                             'elements' => $elements));
     }
 
 

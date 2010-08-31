@@ -181,7 +181,7 @@ if (xoops_isActiveModule('tag')) {
 /**
  * Generating meta information for this page
  */
-$publisher_metagen = new PublisherMetagen($itemObj->getVar('title'), $itemObj->getVar('meta_keywords','n'), $itemObj->getVar('meta_description', 'n'), $itemObj->getCategoryPath());
+$publisher_metagen = new PublisherMetagen($itemObj->getVar('title'), $itemObj->getVar('meta_keywords', 'n'), $itemObj->getVar('meta_description', 'n'), $itemObj->getCategoryPath());
 $publisher_metagen->createMetaTags();
 
 // Include the comments if the selected ITEM supports comments
@@ -191,7 +191,7 @@ if ((($itemObj->cancomment() == 1) || !$publisher->getConfig('perm_com_art_level
     $xoopsTpl->assign(array(
         'editcomment_link' => PUBLISHER_URL . '/comment_edit.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra,
         'deletecomment_link' => PUBLISHER_URL . '/comment_delete.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra,
-        'replycomment_link' => PUBLISHER_URL . '/comment_reply.php?com_itemid='  .$com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra));
+        'replycomment_link' => PUBLISHER_URL . '/comment_reply.php?com_itemid=' . $com_itemid . '&amp;com_order=' . $com_order . '&amp;com_mode=' . $com_mode . $link_extra));
     $xoopsTpl->_tpl_vars['commentsnav'] = str_replace("self.location.href='", "self.location.href='" . PUBLISHER_URL . '/', $xoopsTpl->_tpl_vars['commentsnav']);
 }
 

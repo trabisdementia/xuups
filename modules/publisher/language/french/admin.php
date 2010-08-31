@@ -52,7 +52,7 @@ define("_AM_PUBLISHER_CATEGORY_META_KEYWORDS_DSC", "Afin d'aider les moteurs de 
 define("_AM_PUBLISHER_CATEGORY_SAVE_ERROR", "Une erreur est survenue lors de la sauvegarde de cette catégorie. Voici la liste des erreurs:");
 define("_AM_PUBLISHER_CATEGORY_SHORT_URL", "URL courte");
 define("_AM_PUBLISHER_CATEGORY_SHORT_URL_DSC", "Si vous utilisez les fonctionnalités SEO du module, vous pouvez spécifier une URL courte pour cette catégorie. Ceci est optionnel.");
-define("_AM_PUBLISHER_CATID","ID");
+define("_AM_PUBLISHER_CATID", "ID");
 define("_AM_PUBLISHER_CLEAR", "Vider");
 define("_AM_PUBLISHER_CLONE_ITEM", "Dupliquer cet article");
 define("_AM_PUBLISHER_CLONE_NEW", "Dupliquer un article");
@@ -120,7 +120,7 @@ define("_AM_PUBLISHER_FILE_STATUS", "Fichier visible ?");
 define("_AM_PUBLISHER_FILE_STATUS_DSC", "Si vous sélectionnez 'Non', le fichier ne sera pas visible du côté utilisateur.");
 define("_AM_PUBLISHER_FILE_TO_UPLOAD", "Fichier à charger:");
 define("_AM_PUBLISHER_FILE_UPLOAD_ANOTHER", "Charger un autre fichier");
-define("_AM_PUBLISHER_FILEISDELETED", "Le fichier a été effacé de la base de données") ;
+define("_AM_PUBLISHER_FILEISDELETED", "Le fichier a été effacé de la base de données");
 define("_AM_PUBLISHER_FILENAME", "Nom du fichier");
 define("_AM_PUBLISHER_FILES_LINKED", "Fichiers en lien avec cet article");
 define("_AM_PUBLISHER_FILEUPLOAD_ERROR", "Une erreur est survenue lors du chargement du fichier.");

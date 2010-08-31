@@ -38,9 +38,9 @@ if ($op == 'start') {
 
     publisher_cpHeader();
     publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
-    publisher_openCollapsableBar('newsimport', 'newsimporticon',  sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_INFO);
+    publisher_openCollapsableBar('newsimport', 'newsimporticon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_INFO);
 
-    $result = $xoopsDB->query ("SELECT COUNT(*) FROM " . $xoopsDB->prefix("topics"));
+    $result = $xoopsDB->query("SELECT COUNT(*) FROM " . $xoopsDB->prefix("topics"));
     list ($totalCat) = $xoopsDB->fetchRow($result);
 
     if ($totalCat == 0) {
@@ -48,7 +48,7 @@ if ($op == 'start') {
     } else {
         include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 
-        $result = $xoopsDB->query ("SELECT COUNT(*) FROM " . $xoopsDB->prefix("stories"));
+        $result = $xoopsDB->query("SELECT COUNT(*) FROM " . $xoopsDB->prefix("stories"));
         list ($totalArticles) = $xoopsDB->fetchRow($result);
 
         if ($totalArticles == 0) {
@@ -56,35 +56,35 @@ if ($op == 'start') {
         } else {
             echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . sprintf(_AM_PUBLISHER_IMPORT_MODULE_FOUND, $importFromModuleName, $totalArticles, $totalCat) . "</span>";
 
-            $form = new XoopsThemeForm(_AM_PUBLISHER_IMPORT_SETTINGS, 'import_form',  PUBLISHER_ADMIN_URL . "/import/$scriptname");
+            $form = new XoopsThemeForm(_AM_PUBLISHER_IMPORT_SETTINGS, 'import_form', PUBLISHER_ADMIN_URL . "/import/$scriptname");
 
             // Categories to be imported
-            $sql = "SELECT cat.topic_id, cat.topic_pid, cat.topic_title, COUNT(art.storyid) FROM ".$xoopsDB->prefix("topics") . " AS cat INNER JOIN ".$xoopsDB->prefix("stories") . " AS art ON cat.topic_id=art.topicid GROUP BY art.topicid";
+            $sql = "SELECT cat.topic_id, cat.topic_pid, cat.topic_title, COUNT(art.storyid) FROM " . $xoopsDB->prefix("topics") . " AS cat INNER JOIN " . $xoopsDB->prefix("stories") . " AS art ON cat.topic_id=art.topicid GROUP BY art.topicid";
 
             $result = $xoopsDB->query($sql);
-            $cat_cbox_options= array();
+            $cat_cbox_options = array();
 
-            while (list ($cid, $pid, $cat_title, $art_count) = $xoopsDB->fetchRow ($result)) {
+            while (list ($cid, $pid, $cat_title, $art_count) = $xoopsDB->fetchRow($result)) {
                 $cat_title = $myts->displayTarea($cat_title);
                 $cat_cbox_options[$cid] = "$cat_title ($art_count)";
             }
 
             $cat_label = new XoopsFormLabel(_AM_PUBLISHER_IMPORT_CATEGORIES, implode("<br />", $cat_cbox_options));
             $cat_label->setDescription(_AM_PUBLISHER_IMPORT_CATEGORIES_DSC);
-            $form->addElement ($cat_label);
+            $form->addElement($cat_label);
 
             // Publisher parent category
             $mytree = new XoopsTree($xoopsDB->prefix("publisher_categories"), "categoryid", "parentid");
             ob_start();
-            $mytree->makeMySelBox("name", "weight", $preset_id=0, $none=1, $sel_name="parent_category");
+            $mytree->makeMySelBox("name", "weight", $preset_id = 0, $none = 1, $sel_name = "parent_category");
 
             $parent_cat_sel = new XoopsFormLabel(_AM_PUBLISHER_IMPORT_PARENT_CATEGORY, ob_get_contents());
             $parent_cat_sel->setDescription(_AM_PUBLISHER_IMPORT_PARENT_CATEGORY_DSC);
             $form->addElement($parent_cat_sel);
             ob_end_clean();
 
-            $form->addElement (new XoopsFormHidden('op', 'go'));
-            $form->addElement (new XoopsFormButton ('', 'import', _AM_PUBLISHER_IMPORT, 'submit'));
+            $form->addElement(new XoopsFormHidden('op', 'go'));
+            $form->addElement(new XoopsFormButton ('', 'import', _AM_PUBLISHER_IMPORT, 'submit'));
 
             $form->addElement(new XoopsFormHidden('from_module_version', $_POST['news_version']));
 
@@ -99,7 +99,7 @@ if ($op == 'start') {
 if ($op == 'go') {
     publisher_cpHeader();
     publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
-    publisher_openCollapsableBar('newsimportgo', 'newsimportgoicon',  sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
+    publisher_openCollapsableBar('newsimportgo', 'newsimportgoicon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
 
     $module_handler =& xoops_gethandler('module');
     $moduleObj = $module_handler->getByDirname('news');
@@ -150,7 +150,7 @@ if ($op == 'go') {
 
         echo sprintf(_AM_PUBLISHER_IMPORT_CATEGORY_SUCCESS, $categoryObj->name()) . "<br\>";
 
-        $sql = "SELECT * FROM " . $xoopsDB->prefix('stories') .  " WHERE topicid=" . $arrCat['topic_id'];
+        $sql = "SELECT * FROM " . $xoopsDB->prefix('stories') . " WHERE topicid=" . $arrCat['topic_id'];
         $resultArticles = $xoopsDB->query($sql);
         while ($arrArticle = $xoopsDB->fetchArray($resultArticles)) {
             // insert article
@@ -268,9 +268,9 @@ if ($op == 'go') {
         $comment->setVar('com_modid', $publisher_module_id);
         $comment->setNew();
         if (!$comment_handler->insert($comment)) {
-            echo "&nbsp;&nbsp;"  . sprintf(_AM_PUBLISHER_IMPORTED_COMMENT_ERROR, $comment->getVar('com_title')) . "<br />";
+            echo "&nbsp;&nbsp;" . sprintf(_AM_PUBLISHER_IMPORTED_COMMENT_ERROR, $comment->getVar('com_title')) . "<br />";
         } else {
-            echo "&nbsp;&nbsp;"  . sprintf(_AM_PUBLISHER_IMPORTED_COMMENT, $comment->getVar('com_title')) . "<br />";
+            echo "&nbsp;&nbsp;" . sprintf(_AM_PUBLISHER_IMPORTED_COMMENT, $comment->getVar('com_title')) . "<br />";
         }
 
     }

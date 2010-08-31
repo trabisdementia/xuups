@@ -16,7 +16,7 @@
  * @subpackage      Include
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @author		    Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
+ * @author            Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @version         $Id: media.textsanitizer.php 0 2009-06-11 18:47:04Z trabis $
  */
 
@@ -40,30 +40,30 @@ class MyTextSanitizerExtension
     function wmp(&$patterns, &$replacements)
     {
         $patterns[] = "/\[wmp=(['\"]?)([^\"']*),([^\"']*)\\1]([^\"]*)\[\/wmp\]/sU";
-        $rp  ="<object classid=\"clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6\" id=\"WindowsMediaPlayer\" width=\"\\2\" height=\"\\3\">\n";
-        $rp .="<param name=\"URL\" value=\"\\4\">\n";
-        $rp .="<param name=\"AutoStart\" value=\"0\">\n";
-        $rp .="<embed autostart=\"0\" src=\"\\4\" type=\"video/x-ms-wmv\" width=\"\\2\" height=\"\\3\" controls=\"ImageWindow\" console=\"cons\"> </embed>";
-        $rp .="</object>\n";
+        $rp = "<object classid=\"clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6\" id=\"WindowsMediaPlayer\" width=\"\\2\" height=\"\\3\">\n";
+        $rp .= "<param name=\"URL\" value=\"\\4\">\n";
+        $rp .= "<param name=\"AutoStart\" value=\"0\">\n";
+        $rp .= "<embed autostart=\"0\" src=\"\\4\" type=\"video/x-ms-wmv\" width=\"\\2\" height=\"\\3\" controls=\"ImageWindow\" console=\"cons\"> </embed>";
+        $rp .= "</object>\n";
         $replacements[] = $rp;
     }
 
-    function _displayFlash($url, $width=false, $height=false)
+    function _displayFlash($url, $width = false, $height = false)
     {
-        if(!$width || !$height) {
-            if( !$dimension = @getimagesize($url) ) {
+        if (!$width || !$height) {
+            if (!$dimension = @getimagesize($url)) {
                 return "<a href='{$url}' target='_blank'>{$url}</a>";
             }
-            if(!empty($width)) {
-                $height = $dimension[1] * $width /  $dimension[0];
-            }elseif(!empty($height)) {
-                $width = $dimension[0] * $height /  $dimension[1];
-            }else{
+            if (!empty($width)) {
+                $height = $dimension[1] * $width / $dimension[0];
+            } elseif (!empty($height)) {
+                $width = $dimension[0] * $height / $dimension[1];
+            } else {
                 list($width, $height) = array($dimension[0], $dimension[1]);
             }
         }
 
-        $rp  = "<object width='{$width}' height='{$height}' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0'>";
+        $rp = "<object width='{$width}' height='{$height}' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0'>";
         $rp .= "<param name='movie' value='{$url}'>";
         $rp .= "<param name='QUALITY' value='high'>";
         $rp .= "<PARAM NAME='bgcolor' VALUE='#FFFFFF'>";
@@ -153,4 +153,5 @@ class MyTextSanitizerExtension
         $replacements[] = $rp;
     }
 }
+
 ?>

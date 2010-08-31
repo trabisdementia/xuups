@@ -69,10 +69,10 @@ $totalrejected = $publisher->getHandler('item')->getItemsCount(-1, array(_PUBLIS
 
 // Check Path Configuration
 if ((publisher_getPathStatus('root', true) < 0) ||
-(publisher_getPathStatus('images', true) < 0) ||
-(publisher_getPathStatus('images/category', true) < 0) ||
-(publisher_getPathStatus('images/item', true) < 0) ||
-(publisher_getPathStatus('content', true) < 0)) {
+        (publisher_getPathStatus('images', true) < 0) ||
+        (publisher_getPathStatus('images/category', true) < 0) ||
+        (publisher_getPathStatus('images/item', true) < 0) ||
+        (publisher_getPathStatus('content', true) < 0)) {
 
     createDir();
 }
@@ -111,8 +111,8 @@ $sorttxtcreated = "";
 $sorttxtweight = "";
 $sorttxtitemid = "";
 
-$ordertxtasc='';
-$ordertxtdesc='';
+$ordertxtasc = '';
+$ordertxtdesc = '';
 
 switch ($sortsel) {
     case 'title':
@@ -225,7 +225,7 @@ buildTable();
 
 if ($numrows > 0) {
 
-    for ( $i = 0; $i < $totalItemsOnPage; $i++ ) {
+    for ($i = 0; $i < $totalItemsOnPage; $i++) {
         // Creating the category object to which this item is linked
         $categoryObj =& $itemsObj[$i]->category();
         $approve = '';
@@ -243,7 +243,7 @@ if ($numrows > 0) {
             case _PUBLISHER_STATUS_PUBLISHED :
                 $statustxt = _CO_PUBLISHER_PUBLISHED;
                 $approve = "";
-                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" .  _AM_PUBLISHER_CLONE_ITEM  . "' /></a>&nbsp;";
+                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" . _AM_PUBLISHER_CLONE_ITEM . "' /></a>&nbsp;";
                 $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_ITEM_EDIT . "' alt='" . _AM_PUBLISHER_ITEM_EDIT . "' /></a>&nbsp;";
                 $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
                 break;
@@ -251,7 +251,7 @@ if ($numrows > 0) {
             case _PUBLISHER_STATUS_OFFLINE :
                 $statustxt = _CO_PUBLISHER_OFFLINE;
                 $approve = "";
-                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" .  _AM_PUBLISHER_CLONE_ITEM  . "' /></a>&nbsp;";
+                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" . _AM_PUBLISHER_CLONE_ITEM . "' /></a>&nbsp;";
                 $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_ITEM_EDIT . "' alt='" . _AM_PUBLISHER_ITEM_EDIT . "' /></a>&nbsp;";
                 $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
                 break;
@@ -280,7 +280,7 @@ if ($numrows > 0) {
         echo "<td class='even' align='left'>" . $itemsObj[$i]->getItemLink() . "</td>";
         echo "<td class='even' align='center'>" . $itemsObj[$i]->datesub() . "</td>";
         echo "<td class='even' align='center'>" . $statustxt . "</td>";
-        echo "<td class='even' align='center'> ". $approve .$clone. $modify . $delete . "</td>";
+        echo "<td class='even' align='center'> " . $approve . $clone . $modify . $delete . "</td>";
         echo "</tr>";
     }
 } else {
@@ -327,7 +327,7 @@ function createDir()
             $dest = $thePath . "blank.png";
             publisher_copyr($source, $dest);
         }
-        $msg = $res ?_AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
+        $msg = $res ? _AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
     }
 
     if (publisher_getPathStatus('images/category', true) < 0) {
@@ -339,7 +339,7 @@ function createDir()
             $dest = $thePath . 'blank.png';
             publisher_copyr($source, $dest);
         }
-        $msg = $res ?_AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
+        $msg = $res ? _AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
     }
 
     if (publisher_getPathStatus('images/item', true) < 0) {
@@ -351,7 +351,7 @@ function createDir()
             $dest = $thePath . 'blank.png';
             publisher_copyr($source, $dest);
         }
-        $msg = $res ?_AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
+        $msg = $res ? _AM_PUBLISHER_DIRCREATED : _AM_PUBLISHER_DIRNOTCREATED;
     }
 
     if (publisher_getPathStatus('content', true) < 0) {
@@ -373,4 +373,5 @@ function buildTable()
     echo "<td width='90px' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
     echo "</tr>";
 }
+
 ?>

@@ -34,7 +34,7 @@ if (!is_object($thisuser)) {
     exit();
 }
 
-if(!$publisher->getConfig('perm_author_items')) {
+if (!$publisher->getConfig('perm_author_items')) {
     redirect_header('index.php', 2, _CO_PUBLISHER_ERROR);
     exit();
 }
@@ -70,24 +70,24 @@ if ($count > 0) {
                 'count_items' => 0,
                 'count_hits' => 0,
                 'title' => $item->getCategoryName(),
-                'link'  => $item->getCategoryLink()
+                'link' => $item->getCategoryLink()
             );
         }
 
         $categories[$catid]['count_items']++;
         $categories[$catid]['count_hits'] += $item->counter();
         $categories[$catid]['items'][] = array(
-            'title'     => $item->title(),
-            'hits'      => $item->counter(),
-            'link'      => $item->getItemLink(),
+            'title' => $item->title(),
+            'hits' => $item->counter(),
+            'link' => $item->getItemLink(),
             'published' => $item->datesub(),
-            'rating'    => $item->rating());
+            'rating' => $item->rating());
     }
 }
 
 $xoopsTpl->assign('categories', $categories);
 
-$title = _MD_PUBLISHER_ITEMS_SAME_AUTHOR . ' - ' .$author_name;
+$title = _MD_PUBLISHER_ITEMS_SAME_AUTHOR . ' - ' . $author_name;
 
 /**
  * Generating meta information for this page

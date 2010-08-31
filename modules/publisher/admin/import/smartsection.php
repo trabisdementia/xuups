@@ -38,10 +38,10 @@ if ($op == 'start') {
 
     publisher_cpHeader();
     publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
-    publisher_openCollapsableBar('newsimport', 'newsimporticon',  sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_INFO);
+    publisher_openCollapsableBar('newsimport', 'newsimporticon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_INFO);
 
     $result = $xoopsDB->query("SELECT COUNT(*) FROM " . $xoopsDB->prefix("smartsection_categories"));
-    list ($totalCat) = $xoopsDB->fetchRow ($result);
+    list ($totalCat) = $xoopsDB->fetchRow($result);
 
     if ($totalCat == 0) {
         echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . _AM_PUBLISHER_IMPORT_NO_CATEGORY . "</span>";
@@ -56,15 +56,15 @@ if ($op == 'start') {
         } else {
             echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . sprintf(_AM_PUBLISHER_IMPORT_MODULE_FOUND, $importFromModuleName, $totalArticles, $totalCat) . "</span>";
 
-            $form = new XoopsThemeForm(_AM_PUBLISHER_IMPORT_SETTINGS, 'import_form',  PUBLISHER_ADMIN_URL . "/import/{$scriptname}");
+            $form = new XoopsThemeForm(_AM_PUBLISHER_IMPORT_SETTINGS, 'import_form', PUBLISHER_ADMIN_URL . "/import/{$scriptname}");
 
             // Categories to be imported
-            $sql = "SELECT cat.categoryid, cat.parentid, cat.name, COUNT(art.itemid) FROM " . $xoopsDB->prefix('smartsection_categories') . " AS cat INNER JOIN ".$xoopsDB->prefix('smartsection_items') . " AS art ON cat.categoryid=art.categoryid GROUP BY art.categoryid";
+            $sql = "SELECT cat.categoryid, cat.parentid, cat.name, COUNT(art.itemid) FROM " . $xoopsDB->prefix('smartsection_categories') . " AS cat INNER JOIN " . $xoopsDB->prefix('smartsection_items') . " AS art ON cat.categoryid=art.categoryid GROUP BY art.categoryid";
 
             $result = $xoopsDB->query($sql);
-            $cat_cbox_options= array();
+            $cat_cbox_options = array();
 
-            while (list ($cid, $pid, $cat_title, $art_count) = $xoopsDB->fetchRow ($result)) {
+            while (list ($cid, $pid, $cat_title, $art_count) = $xoopsDB->fetchRow($result)) {
                 $cat_title = $myts->displayTarea($cat_title);
                 $cat_cbox_options[$cid] = "$cat_title ($art_count)";
             }
@@ -83,8 +83,8 @@ if ($op == 'start') {
             $form->addElement($parent_cat_sel);
             ob_end_clean();
 
-            $form->addElement (new XoopsFormHidden('op', 'go'));
-            $form->addElement (new XoopsFormButton ('', 'import', _AM_PUBLISHER_IMPORT, 'submit'));
+            $form->addElement(new XoopsFormHidden('op', 'go'));
+            $form->addElement(new XoopsFormButton ('', 'import', _AM_PUBLISHER_IMPORT, 'submit'));
 
             $form->addElement(new XoopsFormHidden('from_module_version', $_POST['news_version']));
 
@@ -99,7 +99,7 @@ if ($op == 'start') {
 if ($op == 'go') {
     publisher_cpHeader();
     publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
-    publisher_openCollapsableBar('newsimportgo', 'newsimportgoicon',  sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
+    publisher_openCollapsableBar('newsimportgo', 'newsimportgoicon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
 
     $module_handler =& xoops_gethandler('module');
     $moduleObj = $module_handler->getByDirname('smartsection');
@@ -192,7 +192,7 @@ if ($op == 'go') {
                             $fileObj->setVar('fileid', 0);
 
                             if ($fileObj->store($allowed_mimetypes, true, false)) {
-                                echo "&nbsp;&nbsp;&nbsp;&nbsp;"  . sprintf(_AM_PUBLISHER_IMPORTED_ARTICLE_FILE, $arrFile['filename']) . "<br />";
+                                echo "&nbsp;&nbsp;&nbsp;&nbsp;" . sprintf(_AM_PUBLISHER_IMPORTED_ARTICLE_FILE, $arrFile['filename']) . "<br />";
                             }
                         }
                     }
@@ -220,7 +220,7 @@ if ($op == 'go') {
     }
 
     // Looping through cat to change the parentid to the new parentid
-    foreach($newCatArray as $oldid => $newCat) {
+    foreach ($newCatArray as $oldid => $newCat) {
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('categoryid', $newCat['newid']));
         $oldpid = $newCat['oldpid'];

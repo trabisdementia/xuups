@@ -105,6 +105,7 @@ class XoopsMediaUploader
      * No admin check for uploads
      */
     var $noadmin_sizecheck;
+
     /**
      * Constructor
      *
@@ -183,9 +184,8 @@ class XoopsMediaUploader
             return false;
         }
 
-        if (!$this->checkMaxFileSize())
-        {
-            $this->setErrors(sprintf('File Size: %u. Maximum Size Allowed: %u' , $this->mediaSize, $this->maxFileSize));
+        if (!$this->checkMaxFileSize()) {
+            $this->setErrors(sprintf('File Size: %u. Maximum Size Allowed: %u', $this->mediaSize, $this->maxFileSize));
         }
 
         if (is_array($this->dimension)) {
@@ -337,7 +337,7 @@ class XoopsMediaUploader
         }
 
         if (!$this->checkMaxFileSize()) {
-            $this->setErrors(sprintf('File Size: %u. Maximum Size Allowed: %u' , $this->mediaSize, $this->maxFileSize));
+            $this->setErrors(sprintf('File Size: %u. Maximum Size Allowed: %u', $this->mediaSize, $this->maxFileSize));
         }
 
         if (is_array($this->dimension)) {
@@ -368,7 +368,8 @@ class XoopsMediaUploader
      *
      * @return bool
      */
-    function _copyFile($chmod) {
+    function _copyFile($chmod)
+    {
         $matched = array();
         if (!preg_match("/\.([a-zA-Z0-9]+)$/", $this->mediaName, $matched)) {
             return false;
@@ -398,7 +399,8 @@ class XoopsMediaUploader
      *
      * @return bool
      */
-    function checkMaxFileSize() {
+    function checkMaxFileSize()
+    {
         if ($this->noadmin_sizecheck) {
             return true;
         }
@@ -447,7 +449,8 @@ class XoopsMediaUploader
      *
      * @return bool
      */
-    function checkMimeType() {
+    function checkMimeType()
+    {
         if (count($this->allowedMimeTypes) > 0 && !in_array($this->mediaType, $this->allowedMimeTypes)) {
             return false;
         } else {

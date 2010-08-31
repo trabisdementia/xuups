@@ -24,7 +24,7 @@ if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
 
-$seoOp  = @$_GET['seoOp'];
+$seoOp = @$_GET['seoOp'];
 $seoArg = @$_GET['seoArg'];
 
 if (empty($seoOp) && @$_SERVER['PATH_INFO']) {
@@ -46,8 +46,8 @@ if (empty($seoOp) && @$_SERVER['PATH_INFO']) {
 
 $seoMap = array(
     'category' => 'category.php',
-    'item'     => 'item.php',
-    'print'    => 'print.php'
+    'item' => 'item.php',
+    'print' => 'print.php'
 );
 
 if (!empty($seoOp) && isset($seoMap[$seoOp])) {
@@ -73,7 +73,7 @@ if (!empty($seoOp) && isset($seoMap[$seoOp])) {
             $_GET['itemid'] = $seoArg;
             $_REQUEST['itemid'] = $seoArg;
     }
-    include PUBLISHER_ROOT_PATH . '/'. $seoMap[$seoOp];
+    include PUBLISHER_ROOT_PATH . '/' . $seoMap[$seoOp];
     exit;
 }
 

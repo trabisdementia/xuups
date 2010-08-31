@@ -29,8 +29,8 @@
 /**
  * Set the available masks for cleaning variables
  */
-define('PUBLISHER_REQUEST_NOTRIM'   , 1);
-define('PUBLISHER_REQUEST_ALLOWRAW' , 2);
+define('PUBLISHER_REQUEST_NOTRIM', 1);
+define('PUBLISHER_REQUEST_ALLOWRAW', 2);
 define('PUBLISHER_REQUEST_ALLOWHTML', 4);
 
 /**
@@ -84,12 +84,12 @@ class PublisherRequest
     function getVar($name, $default = null, $hash = 'default', $type = 'none', $mask = 0)
     {
         // Ensure hash and type are uppercase
-        $hash = strtoupper( $hash );
+        $hash = strtoupper($hash);
         if ($hash === 'METHOD') {
-            $hash = strtoupper( $_SERVER['REQUEST_METHOD'] );
+            $hash = strtoupper($_SERVER['REQUEST_METHOD']);
         }
-        $type   = strtoupper( $type );
-        $sig    = $hash.$type.$mask;
+        $type = strtoupper($type);
+        $sig = $hash . $type . $mask;
 
         // Get the input hash
         switch ($hash) {
@@ -123,7 +123,7 @@ class PublisherRequest
 
             // Handle magic quotes compatability
             if (get_magic_quotes_gpc() && ($var != $default) && ($hash != 'FILES')) {
-                $var = PublisherRequest::_stripSlashesRecursive( $var );
+                $var = PublisherRequest::_stripSlashesRecursive($var);
             }
         } else if ($default !== null) {
             // Clean the default value
@@ -161,10 +161,10 @@ class PublisherRequest
      * See getVar() for more in-depth documentation on the parameters.
      *
      * @static
-     * @param	string	$name		Variable name
-     * @param	string	$default	Default value if the variable does not exist
-     * @param	string	$hash		Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
-     * @return	float	Requested variable
+     * @param    string    $name        Variable name
+     * @param    string    $default    Default value if the variable does not exist
+     * @param    string    $hash        Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
+     * @return    float    Requested variable
      */
     function getFloat($name, $default = 0.0, $hash = 'default')
     {
@@ -179,10 +179,10 @@ class PublisherRequest
      * See getVar() for more in-depth documentation on the parameters.
      *
      * @static
-     * @param	string	$name		Variable name
-     * @param	string	$default	Default value if the variable does not exist
-     * @param	string	$hash		Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
-     * @return	bool		Requested variable
+     * @param    string    $name        Variable name
+     * @param    string    $default    Default value if the variable does not exist
+     * @param    string    $hash        Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
+     * @return    bool        Requested variable
      */
     function getBool($name, $default = false, $hash = 'default')
     {
@@ -197,10 +197,10 @@ class PublisherRequest
      * See getVar() for more in-depth documentation on the parameters.
      *
      * @static
-     * @param	string	$name		Variable name
-     * @param	string	$default	Default value if the variable does not exist
-     * @param	string	$hash		Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
-     * @return	string	Requested variable
+     * @param    string    $name        Variable name
+     * @param    string    $default    Default value if the variable does not exist
+     * @param    string    $hash        Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
+     * @return    string    Requested variable
      */
     function getWord($name, $default = '', $hash = 'default')
     {
@@ -215,10 +215,10 @@ class PublisherRequest
      * See getVar() for more in-depth documentation on the parameters.
      *
      * @static
-     * @param	string	$name		Variable name
-     * @param	string	$default	Default value if the variable does not exist
-     * @param	string	$hash		Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
-     * @return	string	Requested variable
+     * @param    string    $name        Variable name
+     * @param    string    $default    Default value if the variable does not exist
+     * @param    string    $hash        Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
+     * @return    string    Requested variable
      */
     function getCmd($name, $default = '', $hash = 'default')
     {
@@ -233,11 +233,11 @@ class PublisherRequest
      * See getVar() for more in-depth documentation on the parameters.
      *
      * @static
-     * @param	string	$name		Variable name
-     * @param	string	$default	Default value if the variable does not exist
-     * @param	string	$hash		Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
-     * @param	int		$mask		Filter mask for the variable
-     * @return	string	Requested variable
+     * @param    string    $name        Variable name
+     * @param    string    $default    Default value if the variable does not exist
+     * @param    string    $hash        Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
+     * @param    int        $mask        Filter mask for the variable
+     * @return    string    Requested variable
      */
     function getString($name, $default = '', $hash = 'default', $mask = 0)
     {
@@ -258,12 +258,12 @@ class PublisherRequest
     /**
      * Set a variabe in on of the request variables
      *
-     * @access	public
-     * @param	string	$name		Name
-     * @param	string	$value		Value
-     * @param	string	$hash		Hash
-     * @param	boolean	$overwrite	Boolean
-     * @return	string	Previous value
+     * @access    public
+     * @param    string    $name        Name
+     * @param    string    $value        Value
+     * @param    string    $hash        Hash
+     * @param    boolean    $overwrite    Boolean
+     * @return    string    Previous value
      */
     function setVar($name, $value = null, $hash = 'method', $overwrite = true)
     {
@@ -316,26 +316,26 @@ class PublisherRequest
      *
      * You can force the source by setting the $hash parameter:
      *
-     *   post		$_POST
-     *   get		$_GET
-     *   files		$_FILES
-     *   cookie		$_COOKIE
-     *   env		$_ENV
-     *   server		$_SERVER
-     *   method		via current $_SERVER['REQUEST_METHOD']
-     *   default	$_REQUEST
+     *   post        $_POST
+     *   get        $_GET
+     *   files        $_FILES
+     *   cookie        $_COOKIE
+     *   env        $_ENV
+     *   server        $_SERVER
+     *   method        via current $_SERVER['REQUEST_METHOD']
+     *   default    $_REQUEST
      *
      * @static
-     * @param	string	$hash	to get (POST, GET, FILES, METHOD)
-     * @param	int		$mask	Filter mask for the variable
-     * @return	mixed	Request hash
+     * @param    string    $hash    to get (POST, GET, FILES, METHOD)
+     * @param    int        $mask    Filter mask for the variable
+     * @return    mixed    Request hash
      */
     function get($hash = 'default', $mask = 0)
     {
         $hash = strtoupper($hash);
 
         if ($hash === 'METHOD') {
-            $hash = strtoupper( $_SERVER['REQUEST_METHOD'] );
+            $hash = strtoupper($_SERVER['REQUEST_METHOD']);
         }
 
         switch ($hash) {
@@ -372,7 +372,7 @@ class PublisherRequest
 
         // Handle magic quotes compatability
         if (get_magic_quotes_gpc() && ($hash != 'FILES')) {
-            $result = PublisherRequest::_stripSlashesRecursive( $result );
+            $result = PublisherRequest::_stripSlashesRecursive($result);
         }
 
         return $result;
@@ -381,11 +381,11 @@ class PublisherRequest
     /**
      * Sets a request variable
      *
-     * @param	array	An associative array of key-value pairs
-     * @param	string	The request variable to set (POST, GET, FILES, METHOD)
-     * @param	boolean	If true and an existing key is found, the value is overwritten, otherwise it is ingored
+     * @param    array    An associative array of key-value pairs
+     * @param    string    The request variable to set (POST, GET, FILES, METHOD)
+     * @param    boolean    If true and an existing key is found, the value is overwritten, otherwise it is ingored
      */
-    function set( $array, $hash = 'default', $overwrite = true )
+    function set($array, $hash = 'default', $overwrite = true)
     {
         foreach ($array as $key => $value) {
             PublisherRequest::setVar($key, $value, $hash, $overwrite);
@@ -397,7 +397,7 @@ class PublisherRequest
      * Cleans the request from script injection.
      *
      * @static
-     * @return	void
+     * @return    void
      */
     function clean()
     {
@@ -412,13 +412,13 @@ class PublisherRequest
             PublisherRequest::_cleanArray($_SESSION);
         }
 
-        $REQUEST    = $_REQUEST;
-        $GET        = $_GET;
-        $POST       = $_POST;
-        $COOKIE     = $_COOKIE;
-        $FILES      = $_FILES;
-        $ENV        = $_ENV;
-        $SERVER     = $_SERVER;
+        $REQUEST = $_REQUEST;
+        $GET = $_GET;
+        $POST = $_POST;
+        $COOKIE = $_COOKIE;
+        $FILES = $_FILES;
+        $ENV = $_ENV;
+        $SERVER = $_SERVER;
 
         if (isset ($_SESSION)) {
             $SESSION = $_SESSION;
@@ -429,13 +429,13 @@ class PublisherRequest
                 unset($GLOBALS[$key]);
             }
         }
-        $_REQUEST   = $REQUEST;
-        $_GET       = $GET;
-        $_POST      = $POST;
-        $_COOKIE    = $COOKIE;
-        $_FILES     = $FILES;
-        $_ENV       = $ENV;
-        $_SERVER    = $SERVER;
+        $_REQUEST = $REQUEST;
+        $_GET = $GET;
+        $_POST = $POST;
+        $_COOKIE = $COOKIE;
+        $_FILES = $FILES;
+        $_ENV = $ENV;
+        $_SERVER = $SERVER;
 
         if (isset($SESSION)) {
             $_SESSION = $SESSION;
@@ -445,23 +445,23 @@ class PublisherRequest
     /**
      * Adds an array to the GLOBALS array and checks that the GLOBALS variable is not being attacked
      *
-     * @access	protected
-     * @param	array	$array	Array to clean
-     * @param	boolean	True if the array is to be added to the GLOBALS
+     * @access    protected
+     * @param    array    $array    Array to clean
+     * @param    boolean    True if the array is to be added to the GLOBALS
      */
-    function _cleanArray( &$array, $globalise=false )
+    function _cleanArray(&$array, $globalise = false)
     {
         static $banned = array('_files', '_env', '_get', '_post', '_cookie', '_server', '_session', 'globals');
 
         foreach ($array as $key => $value)
         {
             // PHP GLOBALS injection bug
-            $failed = in_array( strtolower( $key ), $banned );
+            $failed = in_array(strtolower($key), $banned);
 
             // PHP Zend_Hash_Del_Key_Or_Index bug
-            $failed |= is_numeric( $key );
+            $failed |= is_numeric($key);
             if ($failed) {
-                exit('Illegal variable <b>' . implode('</b> or <b>', $banned ) . '</b> passed to script.');
+                exit('Illegal variable <b>' . implode('</b> or <b>', $banned) . '</b> passed to script.');
             }
             if ($globalise) {
                 $GLOBALS[$key] = $value;
@@ -481,11 +481,11 @@ class PublisherRequest
      * other than the 1 bit is set, a strict filter is applied.
      * @param string The variable type {@see JFilterInput::clean()}.
      */
-    function _cleanVar($var, $mask = 0, $type=null)
+    function _cleanVar($var, $mask = 0, $type = null)
     {
         // Static input filters for specific settings
-        static $noHtmlFilter	= null;
-        static $safeHtmlFilter	= null;
+        static $noHtmlFilter = null;
+        static $safeHtmlFilter = null;
 
         // If the no trim flag is not set, trim the variable
         if (!($mask & 1) && is_string($var)) {
@@ -505,7 +505,7 @@ class PublisherRequest
         } else {
             // Since no allow flags were set, we will apply the most strict filter to the variable
             if (is_null($noHtmlFilter)) {
-                $noHtmlFilter =& PublisherFilterInput::getInstance(/* $tags, $attr, $tag_method, $attr_method, $xss_auto */);
+                $noHtmlFilter =& PublisherFilterInput::getInstance( /* $tags, $attr, $tag_method, $attr_method, $xss_auto */);
             }
             $var = $noHtmlFilter->clean($var, $type);
         }
@@ -515,13 +515,13 @@ class PublisherRequest
     /**
      * Strips slashes recursively on an array
      *
-     * @access	protected
-     * @param	array	$array		Array of (nested arrays of) strings
-     * @return	array	The input array with stripshlashes applied to it
+     * @access    protected
+     * @param    array    $array        Array of (nested arrays of) strings
+     * @return    array    The input array with stripshlashes applied to it
      */
-    function _stripSlashesRecursive( $value )
+    function _stripSlashesRecursive($value)
     {
-        $value = is_array( $value ) ? array_map( array( 'PublisherRequest', '_stripSlashesRecursive' ), $value ) : stripslashes( $value );
+        $value = is_array($value) ? array_map(array('PublisherRequest', '_stripSlashesRecursive'), $value) : stripslashes($value);
         return $value;
     }
 }
@@ -543,8 +543,8 @@ class PublisherFilterInput
     var $attrMethod; // default = 0
 
     var $xssAuto; // default = 1
-    var $tagBlacklist = array ('applet', 'body', 'bgsound', 'base', 'basefont', 'embed', 'frame', 'frameset', 'head', 'html', 'id', 'iframe', 'ilayer', 'layer', 'link', 'meta', 'name', 'object', 'script', 'style', 'title', 'xml');
-    var $attrBlacklist = array ('action', 'background', 'codebase', 'dynsrc', 'lowsrc'); // also will strip ALL event handlers
+    var $tagBlacklist = array('applet', 'body', 'bgsound', 'base', 'basefont', 'embed', 'frame', 'frameset', 'head', 'html', 'id', 'iframe', 'ilayer', 'layer', 'link', 'meta', 'name', 'object', 'script', 'style', 'title', 'xml');
+    var $attrBlacklist = array('action', 'background', 'codebase', 'dynsrc', 'lowsrc'); // also will strip ALL event handlers
 
     /**
      * Constructor for inputFilter class. Only first parameter is required.
@@ -563,11 +563,11 @@ class PublisherFilterInput
         $attrArray = array_map('strtolower', (array) $attrArray);
 
         // Assign member variables
-        $this->tagsArray    = $tagsArray;
-        $this->attrArray    = $attrArray;
-        $this->tagsMethod   = $tagsMethod;
-        $this->attrMethod   = $attrMethod;
-        $this->xssAuto      = $xssAuto;
+        $this->tagsArray = $tagsArray;
+        $this->attrArray = $attrArray;
+        $this->tagsMethod = $tagsMethod;
+        $this->attrMethod = $attrMethod;
+        $this->xssAuto = $xssAuto;
     }
 
     /**
@@ -589,7 +589,7 @@ class PublisherFilterInput
     {
         static $instances;
 
-        $sig = md5(serialize(array($tagsArray,$attrArray,$tagsMethod,$attrMethod,$xssAuto)));
+        $sig = md5(serialize(array($tagsArray, $attrArray, $tagsMethod, $attrMethod, $xssAuto)));
 
         if (!isset ($instances)) {
             $instances = array();
@@ -612,7 +612,7 @@ class PublisherFilterInput
      * @return  mixed   'Cleaned' version of input parameter
      * @static
      */
-    function clean($source, $type='string')
+    function clean($source, $type = 'string')
     {
         // Handle the type constraint
         switch (strtoupper($type)) {
@@ -735,7 +735,7 @@ class PublisherFilterInput
         // Iteration provides nested tag protection
         while ($source != $this->_cleanTags($source)) {
             $source = $this->_cleanTags($source);
-            $loopCounter ++;
+            $loopCounter++;
         }
         return $source;
     }
@@ -753,25 +753,25 @@ class PublisherFilterInput
          * In the beginning we don't really have a tag, so everything is
          * postTag
          */
-        $preTag     = null;
-        $postTag    = $source;
+        $preTag = null;
+        $postTag = $source;
         $currentSpace = false;
-        $attr = '';  // moffats: setting to null due to issues in migration system - undefined variable errors
+        $attr = ''; // moffats: setting to null due to issues in migration system - undefined variable errors
 
         // Is there a tag? If so it will certainly start with a '<'
-        $tagOpen_start  = strpos($source, '<');
+        $tagOpen_start = strpos($source, '<');
 
         while ($tagOpen_start !== false) {
             // Get some information about the tag we are processing
-            $preTag         .= substr($postTag, 0, $tagOpen_start);
-            $postTag        = substr($postTag, $tagOpen_start);
-            $fromTagOpen    = substr($postTag, 1);
-            $tagOpen_end    = strpos($fromTagOpen, '>');
+            $preTag .= substr($postTag, 0, $tagOpen_start);
+            $postTag = substr($postTag, $tagOpen_start);
+            $fromTagOpen = substr($postTag, 1);
+            $tagOpen_end = strpos($fromTagOpen, '>');
 
             // Let's catch any non-terminated tags and skip over them
             if ($tagOpen_end === false) {
-                $postTag        = substr($postTag, $tagOpen_start +1);
-                $tagOpen_start  = strpos($postTag, '<');
+                $postTag = substr($postTag, $tagOpen_start + 1);
+                $tagOpen_start = strpos($postTag, '<');
                 continue;
             }
 
@@ -779,29 +779,29 @@ class PublisherFilterInput
             $tagOpen_nested = strpos($fromTagOpen, '<');
             $tagOpen_nested_end = strpos(substr($postTag, $tagOpen_end), '>');
             if (($tagOpen_nested !== false) && ($tagOpen_nested < $tagOpen_end)) {
-                $preTag         .= substr($postTag, 0, ($tagOpen_nested +1));
-                $postTag        = substr($postTag, ($tagOpen_nested +1));
-                $tagOpen_start  = strpos($postTag, '<');
+                $preTag .= substr($postTag, 0, ($tagOpen_nested + 1));
+                $postTag = substr($postTag, ($tagOpen_nested + 1));
+                $tagOpen_start = strpos($postTag, '<');
                 continue;
             }
 
             // Lets get some information about our tag and setup attribute pairs
-            $tagOpen_nested = (strpos($fromTagOpen, '<') + $tagOpen_start +1);
-            $currentTag     = substr($fromTagOpen, 0, $tagOpen_end);
-            $tagLength      = strlen($currentTag);
-            $tagLeft        = $currentTag;
-            $attrSet        = array ();
-            $currentSpace   = strpos($tagLeft, ' ');
+            $tagOpen_nested = (strpos($fromTagOpen, '<') + $tagOpen_start + 1);
+            $currentTag = substr($fromTagOpen, 0, $tagOpen_end);
+            $tagLength = strlen($currentTag);
+            $tagLeft = $currentTag;
+            $attrSet = array();
+            $currentSpace = strpos($tagLeft, ' ');
 
             // Are we an open tag or a close tag?
             if (substr($currentTag, 0, 1) == '/') {
                 // Close Tag
-                $isCloseTag     = true;
+                $isCloseTag = true;
                 list ($tagName) = explode(' ', $currentTag);
-                $tagName        = substr($tagName, 1);
+                $tagName = substr($tagName, 1);
             } else {
                 // Open Tag
-                $isCloseTag     = false;
+                $isCloseTag = false;
                 list ($tagName) = explode(' ', $currentTag);
             }
 
@@ -811,8 +811,8 @@ class PublisherFilterInput
              * OR remove if xssauto is on and tag is blacklisted
              */
             if ((!preg_match("/^[a-z][a-z0-9]*$/i", $tagName)) || (!$tagName) || ((in_array(strtolower($tagName), $this->tagBlacklist)) && ($this->xssAuto))) {
-                $postTag        = substr($postTag, ($tagLength +2));
-                $tagOpen_start  = strpos($postTag, '<');
+                $postTag = substr($postTag, ($tagLength + 2));
+                $tagOpen_start = strpos($postTag, '<');
                 // Strip tag
                 continue;
             }
@@ -822,11 +822,11 @@ class PublisherFilterInput
              * case attributes have spaces in the values.
              */
             while ($currentSpace !== false) {
-                $attr           = '';
-                $fromSpace      = substr($tagLeft, ($currentSpace +1));
-                $nextSpace      = strpos($fromSpace, ' ');
-                $openQuotes     = strpos($fromSpace, '"');
-                $closeQuotes    = strpos(substr($fromSpace, ($openQuotes +1)), '"') + $openQuotes +1;
+                $attr = '';
+                $fromSpace = substr($tagLeft, ($currentSpace + 1));
+                $nextSpace = strpos($fromSpace, ' ');
+                $openQuotes = strpos($fromSpace, '"');
+                $closeQuotes = strpos(substr($fromSpace, ($openQuotes + 1)), '"') + $openQuotes + 1;
 
                 // Do we have an attribute to process? [check for equal sign]
                 if (strpos($fromSpace, '=') !== false) {
@@ -835,8 +835,8 @@ class PublisherFilterInput
                      * grab the substring from the closing quote, otherwise grab
                      * till the next space
                      */
-                    if (($openQuotes !== false) && (strpos(substr($fromSpace, ($openQuotes +1)), '"') !== false)) {
-                        $attr = substr($fromSpace, 0, ($closeQuotes +1));
+                    if (($openQuotes !== false) && (strpos(substr($fromSpace, ($openQuotes + 1)), '"') !== false)) {
+                        $attr = substr($fromSpace, 0, ($closeQuotes + 1));
                     } else {
                         $attr = substr($fromSpace, 0, $nextSpace);
                     }
@@ -859,8 +859,8 @@ class PublisherFilterInput
                 $attrSet[] = $attr;
 
                 // Move search point and continue iteration
-                $tagLeft        = substr($fromSpace, strlen($attr));
-                $currentSpace   = strpos($tagLeft, ' ');
+                $tagLeft = substr($fromSpace, strlen($attr));
+                $currentSpace = strpos($tagLeft, ' ');
             }
 
             // Is our tag in the user input array?
@@ -873,27 +873,27 @@ class PublisherFilterInput
                 if (!$isCloseTag) {
                     // Open or Single tag
                     $attrSet = $this->_cleanAttributes($attrSet);
-                    $preTag .= '<'.$tagName;
-                    for ($i = 0; $i < count($attrSet); $i ++)
+                    $preTag .= '<' . $tagName;
+                    for ($i = 0; $i < count($attrSet); $i++)
                     {
-                        $preTag .= ' '.$attrSet[$i];
+                        $preTag .= ' ' . $attrSet[$i];
                     }
 
                     // Reformat single tags to XHTML
-                    if (strpos($fromTagOpen, '</'.$tagName)) {
+                    if (strpos($fromTagOpen, '</' . $tagName)) {
                         $preTag .= '>';
                     } else {
                         $preTag .= ' />';
                     }
                 } else {
                     // Closing Tag
-                    $preTag .= '</'.$tagName.'>';
+                    $preTag .= '</' . $tagName . '>';
                 }
             }
 
             // Find next tag's start and continue iteration
-            $postTag        = substr($postTag, ($tagLength +2));
-            $tagOpen_start  = strpos($postTag, '<');
+            $postTag = substr($postTag, ($tagLength + 2));
+            $tagOpen_start = strpos($postTag, '<');
         }
 
         // Append any code after the end of tags and return
@@ -916,7 +916,7 @@ class PublisherFilterInput
         $newSet = array();
 
         // Iterate through attribute pairs
-        for ($i = 0; $i < count($attrSet); $i ++) {
+        for ($i = 0; $i < count($attrSet); $i++) {
             // Skip blank spaces
             if (!$attrSet[$i]) {
                 continue;
@@ -963,15 +963,15 @@ class PublisherFilterInput
 
                 // Does the attribute have a value?
                 if ($attrSubSet[1]) {
-                    $newSet[] = $attrSubSet[0].'="'.$attrSubSet[1].'"';
+                    $newSet[] = $attrSubSet[0] . '="' . $attrSubSet[1] . '"';
                 } elseif ($attrSubSet[1] == "0") {
                     /*
                      * Special Case
                      * Is the value 0?
                      */
-                    $newSet[] = $attrSubSet[0].'="0"';
+                    $newSet[] = $attrSubSet[0] . '="0"';
                 } else {
-                    $newSet[] = $attrSubSet[0].'="'.$attrSubSet[0].'"';
+                    $newSet[] = $attrSubSet[0] . '="' . $attrSubSet[0] . '"';
                 }
             }
         }

@@ -38,9 +38,9 @@ if ($op == 'start') {
 
     publisher_cpHeader();
     publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
-    publisher_openCollapsableBar('xfsectionimport', 'xfsectionimporticon',  sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_INFO);
+    publisher_openCollapsableBar('xfsectionimport', 'xfsectionimporticon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_INFO);
 
-    $result = $xoopsDB->query("SELECT COUNT(*) FROM ".$xoopsDB->prefix("xfs_category"));
+    $result = $xoopsDB->query("SELECT COUNT(*) FROM " . $xoopsDB->prefix("xfs_category"));
     list ($totalCat) = $xoopsDB->fetchRow($result);
 
     if ($totalCat == 0) {
@@ -56,25 +56,25 @@ if ($op == 'start') {
         } else {
             echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . sprintf(_AM_PUBLISHER_IMPORT_MODULE_FOUND, $importFromModuleName, $totalArticles, $totalCat) . "</span>";
 
-            $form = new XoopsThemeForm(_AM_PUBLISHER_IMPORT_SETTINGS, 'import_form',  PUBLISHER_ADMIN_URL . "/import/$scriptname");
+            $form = new XoopsThemeForm(_AM_PUBLISHER_IMPORT_SETTINGS, 'import_form', PUBLISHER_ADMIN_URL . "/import/$scriptname");
 
             // Categories to be imported
-            $sql = "SELECT cat.id, cat.pid, cat.title, COUNT(art.articleid) FROM ".$xoopsDB->prefix("xfs_category") . " AS cat INNER JOIN ".$xoopsDB->prefix("xfs_article") . " AS art ON cat.id=art.categoryid GROUP BY art.categoryid";
-            $result = $xoopsDB->query ($sql);
+            $sql = "SELECT cat.id, cat.pid, cat.title, COUNT(art.articleid) FROM " . $xoopsDB->prefix("xfs_category") . " AS cat INNER JOIN " . $xoopsDB->prefix("xfs_article") . " AS art ON cat.id=art.categoryid GROUP BY art.categoryid";
+            $result = $xoopsDB->query($sql);
             $cat_cbox_values = array();
-            $cat_cbox_options= array();
-            while (list ($cid, $pid, $cat_title, $art_count) = $xoopsDB->fetchRow ($result)) {
+            $cat_cbox_options = array();
+            while (list ($cid, $pid, $cat_title, $art_count) = $xoopsDB->fetchRow($result)) {
                 $cat_title = $myts->displayTarea($cat_title);
                 $cat_cbox_options[$cid] = "$cat_title ($art_count)";
             }
             $cat_label = new XoopsFormLabel(_AM_PUBLISHER_IMPORT_CATEGORIES, implode("<br />", $cat_cbox_options));
             $cat_label->setDescription(_AM_PUBLISHER_IMPORT_CATEGORIES_DSC);
-            $form->addElement ($cat_label);
+            $form->addElement($cat_label);
 
             // SmartFAQ parent category
             $mytree = new XoopsTree($xoopsDB->prefix("publisher_categories"), "categoryid", "parentid");
             ob_start();
-            $mytree->makeMySelBox("name", "weight", $preset_id=0, $none=1, $sel_name="parent_category");
+            $mytree->makeMySelBox("name", "weight", $preset_id = 0, $none = 1, $sel_name = "parent_category");
 
             $parent_cat_sel = new XoopsFormLabel(_AM_PUBLISHER_IMPORT_PARENT_CATEGORY, ob_get_contents());
             $parent_cat_sel->setDescription(_AM_PUBLISHER_IMPORT_PARENT_CATEGORY_DSC);
@@ -97,7 +97,7 @@ if ($op == 'start') {
 if ($op == 'go') {
     publisher_cpHeader();
     publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
-    publisher_openCollapsableBar('xfsectionimportgo', 'xfsectionimportgoicon',  sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
+    publisher_openCollapsableBar('xfsectionimportgo', 'xfsectionimportgoicon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
 
     $cnt_imported_cat = 0;
     $cnt_imported_articles = 0;
@@ -121,8 +121,8 @@ if ($op == 'go') {
         $categoryObj->setVar('parentid', $arrCat['pid']);
 
         $categoryObj->setVar('weight', $arrCat['orders']);
-        $categoryObj->setGroups_read(explode (" ", trim($arrCat['groupid'])));
-        $categoryObj->setGroups_submit(explode (" ", trim($arrCat['editaccess'])));
+        $categoryObj->setGroups_read(explode(" ", trim($arrCat['groupid'])));
+        $categoryObj->setGroups_submit(explode(" ", trim($arrCat['editaccess'])));
         $categoryObj->setVar('name', $arrCat['title']);
         $categoryObj->setVar('description', $arrCat['description']);
 
@@ -154,16 +154,16 @@ if ($op == 'go') {
             $itemObj =& $publisher->getHandler('item')->create();
 
             $itemObj->setVar('categoryid', $categoryObj->categoryid());
-            $itemObj->setVar('title',     $arrArticle['title']);
-            $itemObj->setVar('uid',       $arrArticle['uid']);
-            $itemObj->setVar('summary',   $arrArticle['summary']);
-            $itemObj->setVar('body',      $arrArticle['maintext']);
-            $itemObj->setVar('counter',   $arrArticle['counter']);
-            $itemObj->setVar('datesub',   $arrArticle['created']);
-            $itemObj->setVar('weight',    $arrArticle['weight']);
-            $itemObj->setVar('dohtml',   !$arrArticle['nohtml']);
+            $itemObj->setVar('title', $arrArticle['title']);
+            $itemObj->setVar('uid', $arrArticle['uid']);
+            $itemObj->setVar('summary', $arrArticle['summary']);
+            $itemObj->setVar('body', $arrArticle['maintext']);
+            $itemObj->setVar('counter', $arrArticle['counter']);
+            $itemObj->setVar('datesub', $arrArticle['created']);
+            $itemObj->setVar('weight', $arrArticle['weight']);
+            $itemObj->setVar('dohtml', !$arrArticle['nohtml']);
             $itemObj->setVar('dosmiley', !$arrArticle['nosmiley']);
-            $itemObj->setVar('dobr',     !$arrArticle['nobr']);
+            $itemObj->setVar('dobr', !$arrArticle['nobr']);
             $itemObj->setGroups_read(explode(" ", trim($arrArticle['groupid'])));
 
             // status
@@ -175,7 +175,7 @@ if ($op == 'go') {
 
             // HTML Wrap
             if ($arrArticle['htmlpage']) {
-                $pagewrap_filename = XOOPS_ROOT_PATH . "/modules/xfsection/html/" .$arrArticle['htmlpage'];
+                $pagewrap_filename = XOOPS_ROOT_PATH . "/modules/xfsection/html/" . $arrArticle['htmlpage'];
                 if (file_exists($pagewrap_filename)) {
                     if (copy($pagewrap_filename, PUBLISHER_UPLOADS_PATH . "/content/" . $arrArticle['htmlpage'])) {
                         $itemObj->setVar('body', "[pagewrap=" . $arrArticle['htmlpage'] . "]");
@@ -190,10 +190,10 @@ if ($op == 'go') {
             } else {
                 // Linkes files
 
-                $sql = "SELECT * FROM ".$xoopsDB->prefix("xfs_files")." WHERE articleid=" . $arrArticle['articleid'];
-                $resultFiles = $xoopsDB->query ($sql);
+                $sql = "SELECT * FROM " . $xoopsDB->prefix("xfs_files") . " WHERE articleid=" . $arrArticle['articleid'];
+                $resultFiles = $xoopsDB->query($sql);
                 $allowed_mimetypes = '';
-                while ($arrFile = $xoopsDB->fetchArray ($resultFiles)) {
+                while ($arrFile = $xoopsDB->fetchArray($resultFiles)) {
 
                     $filename = XOOPS_ROOT_PATH . "/modules/xfsection/cache/uploaded/" . $arrFile['filerealname'];
                     if (file_exists($filename)) {
@@ -242,7 +242,7 @@ if ($op == 'go') {
     // Looping through the comments to link them to the new articles and module
     echo _AM_PUBLISHER_IMPORT_COMMENTS . "<br />";
 
-    $module_handler =& xoops_gethandler ('module');
+    $module_handler =& xoops_gethandler('module');
     $moduleObj = $module_handler->getByDirname('xfsection');
     $news_module_id = $moduleObj->getVar('mid');
 
@@ -257,9 +257,9 @@ if ($op == 'go') {
         $comment->setVar('com_modid', $publisher_module_id);
         $comment->setNew();
         if (!$comment_handler->insert($comment)) {
-            echo "&nbsp;&nbsp;"  . sprintf(_AM_PUBLISHER_IMPORTED_COMMENT_ERROR, $comment->getVar('com_title')) . "<br />";
+            echo "&nbsp;&nbsp;" . sprintf(_AM_PUBLISHER_IMPORTED_COMMENT_ERROR, $comment->getVar('com_title')) . "<br />";
         } else {
-            echo "&nbsp;&nbsp;"  . sprintf(_AM_PUBLISHER_IMPORTED_COMMENT, $comment->getVar('com_title')) . "<br />";
+            echo "&nbsp;&nbsp;" . sprintf(_AM_PUBLISHER_IMPORTED_COMMENT, $comment->getVar('com_title')) . "<br />";
         }
 
     }

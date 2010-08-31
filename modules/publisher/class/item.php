@@ -95,7 +95,8 @@ class PublisherItem extends XoopsObject
         }
     }
 
-    function __call($method, $args) {
+    function __call($method, $args)
+    {
         $arg = isset($args[0]) ? $args[0] : null;
         return $this->getVar($method, $arg);
     }
@@ -153,7 +154,7 @@ class PublisherItem extends XoopsObject
         if ($maxLength != 0) {
             if (!XOOPS_USE_MULTIBYTES) {
                 if (strlen($ret) >= $maxLength) {
-                    $ret = publisher_substr($ret , 0, $maxLength);
+                    $ret = publisher_substr($ret, 0, $maxLength);
                 }
             }
         }
@@ -168,7 +169,7 @@ class PublisherItem extends XoopsObject
         if ($maxLength != 0) {
             if (!XOOPS_USE_MULTIBYTES) {
                 if (strlen($ret) >= $maxLength) {
-                    $ret = publisher_substr($ret , 0, $maxLength);
+                    $ret = publisher_substr($ret, 0, $maxLength);
                 }
             }
         }
@@ -217,7 +218,7 @@ class PublisherItem extends XoopsObject
     function wrappage($file_name)
     {
         $page = publisher_getUploadDir(true, 'content') . $file_name;
-        if (file_exists($page)){
+        if (file_exists($page)) {
             // this page uses smarty template
             ob_start();
             include($page);
@@ -259,10 +260,10 @@ class PublisherItem extends XoopsObject
                     $wrap_page_name = substr($ret, $wrap_pos + $wrap_code_length, $end_wrap_pos - $wrap_code_length - $wrap_pos);
                     $wrap_pages[] = $wrap_page_name;
                 }
-                $wrap_pos = strpos($ret, '[pagewrap=', $end_wrap_pos -1);
+                $wrap_pos = strpos($ret, '[pagewrap=', $end_wrap_pos - 1);
             }
 
-            foreach($wrap_pages as $page) {
+            foreach ($wrap_pages as $page) {
                 $wrap_page_content = $this->wrappage($page);
                 $ret = str_replace("[pagewrap={$page}]", $wrap_page_content, $ret);
             }
@@ -326,7 +327,7 @@ class PublisherItem extends XoopsObject
 
         $ret = $this->author_alias();
         if ($ret == '') {
-            $ret =  XoopsUserUtility::getUnameFromId($this->uid(), $this->publisher->getConfig('format_realname'), true);
+            $ret = XoopsUserUtility::getUnameFromId($this->uid(), $this->publisher->getConfig('format_realname'), true);
         }
         return $ret;
     }
@@ -378,7 +379,7 @@ class PublisherItem extends XoopsObject
 
     function getCategoryPath($withAllLink = true)
     {
-        return  $this->category()->getCategoryPath($withAllLink);
+        return $this->category()->getCategoryPath($withAllLink);
     }
 
     function getCategoryImagePath()
@@ -471,7 +472,7 @@ class PublisherItem extends XoopsObject
         return $adminLinks;
     }
 
-    function sendNotifications($notifications=array())
+    function sendNotifications($notifications = array())
     {
         $module_id = $this->publisher->getModule()->getVar('mid');
 
@@ -479,13 +480,13 @@ class PublisherItem extends XoopsObject
         $categoryObj = $this->category();
 
         $tags = array();
-        $tags['MODULE_NAME']   = $this->publisher->getModule()->getVar('name');
-        $tags['ITEM_NAME']     = $this->title();
-        $tags['ITEM_NAME']     = $this->subtitle();
+        $tags['MODULE_NAME'] = $this->publisher->getModule()->getVar('name');
+        $tags['ITEM_NAME'] = $this->title();
+        $tags['ITEM_NAME'] = $this->subtitle();
         $tags['CATEGORY_NAME'] = $this->getCategoryName();
-        $tags['CATEGORY_URL']  = PUBLISHER_URL . '/category.php?categoryid=' . $this->categoryid();
-        $tags['ITEM_BODY']     = $this->body();
-        $tags['DATESUB']       = $this->datesub();
+        $tags['CATEGORY_URL'] = PUBLISHER_URL . '/category.php?categoryid=' . $this->categoryid();
+        $tags['ITEM_BODY'] = $this->body();
+        $tags['DATESUB'] = $this->datesub();
         foreach ($notifications as $notification) {
             switch ($notification) {
                 case _PUBLISHER_NOT_ITEM_PUBLISHED :
@@ -499,7 +500,7 @@ class PublisherItem extends XoopsObject
                 case _PUBLISHER_NOT_ITEM_SUBMITTED :
                     $tags['WAITINGFILES_URL'] = PUBLISHER_URL . '/admin/item.php?itemid=' . $this->itemid();
                     $notification_handler->triggerEvent('global_item', 0, 'submitted', $tags, array(), $this->publisher->getModule()->getVar('mid'));
-                    $notification_handler->triggerEvent('category_item',  $this->categoryid(), 'submitted', $tags, array(), $this->publisher->getModule()->getVar('mid'));
+                    $notification_handler->triggerEvent('category_item', $this->categoryid(), 'submitted', $tags, array(), $this->publisher->getModule()->getVar('mid'));
                     break;
 
                 case _PUBLISHER_NOT_ITEM_REJECTED :
@@ -550,7 +551,7 @@ class PublisherItem extends XoopsObject
 
     function partial_view()
     {
-        return  explode(';', $this->getVar('partial_view'));
+        return explode(';', $this->getVar('partial_view'));
     }
 
     function setPartial_view($groups_array)
@@ -569,17 +570,17 @@ class PublisherItem extends XoopsObject
         if (!$this->partial_view()) {
             //if no groups are setted to see p_view, get out of here
             return false;
-        } elseif(is_object($xoopsUser)) {
+        } elseif (is_object($xoopsUser)) {
             //get groups of current user
-            $u_groups = $xoopsUser->getGroups()	;
+            $u_groups = $xoopsUser->getGroups();
         } else {
             //anonymous if it is not a user
-            $u_groups = array( 0 => 3);
+            $u_groups = array(0 => 3);
         }
         //get groups setted for p_view
         $pv_groups = $this->partial_view();
         //get groups to wich belong user that are not setted for p_view
-        $gr_with_no_pview = array_diff ( $u_groups, $pv_groups);
+        $gr_with_no_pview = array_diff($u_groups, $pv_groups);
 
         if (!empty($gr_with_no_pview)) {
             //determine if these groups can view the full article
@@ -655,12 +656,12 @@ class PublisherItem extends XoopsObject
             $ret[$itemid]['main'] = '';
             $ret[$itemid]['others'] = array();
             $images_ids = array();
-            $image =  $this->getVar('image');
+            $image = $this->getVar('image');
             $images = $this->getVar('images');
             if ($images != '') {
                 $images_ids = explode('|', $images);
             }
-            if ($image > 0 ) {
+            if ($image > 0) {
                 $image_ids = array_merge($images_ids, array($image));
             }
             $imageObjs = array();
@@ -673,7 +674,7 @@ class PublisherItem extends XoopsObject
             foreach ($imageObjs as $id => $imageObj) {
                 if ($id == $image) {
                     $ret[$itemid]['main'] = $imageObj;
-                }  else {
+                } else {
                     $ret[$itemid]['others'][] = $imageObj;
                 }
                 unset($imageObj);
@@ -691,12 +692,12 @@ class PublisherItem extends XoopsObject
             $display = 'all';
         }
 
-        $item['itemid']    = $this->itemid();
-        $item['uid']       = $this->uid();
+        $item['itemid'] = $this->itemid();
+        $item['uid'] = $this->uid();
         $item['titlelink'] = $this->getItemLink(false, $max_char_title);
-        $item['subtitle']  = $this->subtitle();
-        $item['datesub']   = $this->datesub();
-        $item['counter']   = $this->counter();
+        $item['subtitle'] = $this->subtitle();
+        $item['datesub'] = $this->datesub();
+        $item['counter'] = $this->counter();
 
         switch ($display) {
             case 'summary':
@@ -764,7 +765,7 @@ class PublisherItem extends XoopsObject
 
     function toArrayAll($item, $item_page_id)
     {
-        if($this->showPartial_view()){
+        if ($this->showPartial_view()) {
             $body = $this->publisher->getConfig('idxcat_partial_view_text');
         } else {
             $body = $this->body();
@@ -807,9 +808,9 @@ class PublisherItem extends XoopsObject
 
     function highlight($content, $keywords)
     {
-        $keywords = explode (' ', $keywords);
+        $keywords = explode(' ', $keywords);
         foreach ($keywords as $keyword) {
-            $content = preg_replace_callback("/(" . preg_quote($keyword) . ")/si", array($this , 'highlighter'), $content);
+            $content = preg_replace_callback("/(" . preg_quote($keyword) . ")/si", array($this, 'highlighter'), $content);
         }
         return $content;
     }
@@ -852,8 +853,8 @@ class PublisherItem extends XoopsObject
         }
 
         // presume OS Browser
-        $agent   = $_SERVER["HTTP_USER_AGENT"];
-        $os      = '';
+        $agent = $_SERVER["HTTP_USER_AGENT"];
+        $os = '';
         $browser = '';
         if (preg_match("/Win/i", $agent)) {
             $os = 'win';
@@ -878,7 +879,7 @@ class PublisherItem extends XoopsObject
     function getForm($title = 'default', $checkperm = true)
     {
         include_once XOOPS_ROOT_PATH . '/modules/publisher/class/form/item.php';
-        $form = new PublisherItemForm($title , 'form', xoops_getenv('PHP_SELF'));
+        $form = new PublisherItemForm($title, 'form', xoops_getenv('PHP_SELF'));
         $form->setCheckPermissions($checkperm);
         $form->createElements($this);
         return $form;
@@ -931,7 +932,6 @@ class PublisherItem extends XoopsObject
  * @author marcan <marcan@notrevie.ca>
  * @package Publisher
  */
-
 class PublisherItemHandler extends XoopsPersistableObjectHandler
 {
     /**
@@ -939,11 +939,6 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
      * @access public
      */
     var $publisher = null;
-
-    function MyprojectsItemHandler(&$db)
-    {
-        $this->__construct($db);
-    }
 
     function __construct(&$db)
     {
@@ -1043,7 +1038,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
             $tag_handler->updateByItem('', $item->getVar('itemid'), PUBLISHER_DIRNAME, 0);
         }
         // Removing item permissions
-        xoops_groupperm_deletebymoditem ($module_id, "item_read", $item->itemid());
+        xoops_groupperm_deletebymoditem($module_id, "item_read", $item->itemid());
         return true;
     }
 
@@ -1058,13 +1053,13 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
     {
         $ret = array();
         $limit = $start = 0;
-        $sql = 'SELECT * FROM '.$this->db->prefix('publisher_items');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('publisher_items');
 
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $whereClause = $criteria->renderWhere();
 
             if ($whereClause != 'WHERE ()') {
-                $sql .= ' '.$criteria->renderWhere();
+                $sql .= ' ' . $criteria->renderWhere();
                 if (!empty($notNullFields)) {
                     $sql .= $this->NotNullFieldClause($notNullFields, true);
                 }
@@ -1072,7 +1067,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
                 $sql .= " WHERE " . $this->NotNullFieldClause($notNullFields);
             }
             if ($criteria->getSort() != '') {
-                $sql .= ' ORDER BY '.$criteria->getSort().' '.$criteria->getOrder();
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
             $limit = $criteria->getLimit();
             $start = $criteria->getStart();
@@ -1127,13 +1122,13 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
      * @param object $criteria {@link CriteriaElement} to match
      * @return int count of items
      */
-    function getCount($criteria = null, $notNullFields='')
+    function getCount($criteria = null, $notNullFields = '')
     {
-        $sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('publisher_items');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('publisher_items');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $whereClause = $criteria->renderWhere();
             if ($whereClause != 'WHERE ()') {
-                $sql .= ' '.$criteria->renderWhere();
+                $sql .= ' ' . $criteria->renderWhere();
                 if (!empty($notNullFields)) {
                     $sql .= $this->NotNullFieldClause($notNullFields, true);
                 }
@@ -1256,7 +1251,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
     }
 
     // Rejected articles
-    function getAllRejected($limit = 0, $start = 0, $categoryid  = -1, $sort = 'datesub', $order = 'DESC', $notNullFields = '', $asobject = true, $id_key = 'none')
+    function getAllRejected($limit = 0, $start = 0, $categoryid = -1, $sort = 'datesub', $order = 'DESC', $notNullFields = '', $asobject = true, $id_key = 'none')
     {
         return $this->getItems($limit, $start, array(_PUBLISHER_STATUS_REJECTED), $categoryid, $sort, $order, $notNullFields, $asobject, null, $id_key);
     }
@@ -1277,7 +1272,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
 
             // Item for which user has access
             $itemsGranted = $this->publisher->getHandler('permission')->getGrantedItems('item_read');
-            $grantedItem = new Criteria('itemid', "(".implode(',', $itemsGranted).")", 'IN');
+            $grantedItem = new Criteria('itemid', "(" . implode(',', $itemsGranted) . ")", 'IN');
             $criteriaPermissions->add($grantedItem, 'AND');
         }
 
@@ -1322,7 +1317,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
         return $ret;
     }
 
-    function getRandomItem($field='', $status='', $categoryId=-1)
+    function getRandomItem($field = '', $status = '', $categoryId = -1)
     {
         $ret = false;
 
@@ -1333,7 +1328,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
 
         if ($totalItems > 0) {
             $totalItems = $totalItems - 1;
-            mt_srand((double)microtime() * 1000000);
+            mt_srand((double) microtime() * 1000000);
             $entrynumber = mt_rand(0, $totalItems);
             $item =& $this->getItems(1, $entrynumber, $status, $categoryId, $sort = 'datesub', $order = 'DESC', $notNullFields);
             if ($item) {
@@ -1513,7 +1508,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
         }
 
         $cat = array();
-        $sql = "SELECT categoryid, MAX(datesub) as date FROM ".$this->db->prefix('publisher_items')." WHERE status IN (". implode(',', $status).") {$itemclause} GROUP BY categoryid";
+        $sql = "SELECT categoryid, MAX(datesub) as date FROM " . $this->db->prefix('publisher_items') . " WHERE status IN (" . implode(',', $status) . ") {$itemclause} GROUP BY categoryid";
         $result = $this->db->query($sql);
         while ($row = $this->db->fetchArray($result)) {
             $cat[$row['categoryid']] = $row['date'];
@@ -1523,7 +1518,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
         $sql = "SELECT categoryid, itemid, title, short_url, uid, datesub FROM " . $this->db->prefix('publisher_items');
         $criteriaBig = new CriteriaCompo();
         foreach ($cat as $id => $date) {
-            $criteria =  new CriteriaCompo(new Criteria('categoryid', $id));
+            $criteria = new CriteriaCompo(new Criteria('categoryid', $id));
             $criteria->add(new Criteria('datesub', $date));
             $criteriaBig->add($criteria, 'OR');
             unset($criteria);
@@ -1547,13 +1542,13 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
         $newspaces = $spaces . '--';
 
         $thecount = 0;
-        foreach($catsCount[$parentid] as $subCatId => $count) {
+        foreach ($catsCount[$parentid] as $subCatId => $count) {
             $thecount = $thecount + $count;
 
-            $resultCatCounts[$subCatId]	= $count;
+            $resultCatCounts[$subCatId] = $count;
             if (isset($catsCount[$subCatId])) {
-                $thecount = $thecount + $this->countArticlesByCat($subCatId, $catsCount,  $newspaces );
-                $resultCatCounts[$subCatId]	= $thecount;
+                $thecount = $thecount + $this->countArticlesByCat($subCatId, $catsCount, $newspaces);
+                $resultCatCounts[$subCatId] = $thecount;
             }
         }
         return $thecount;
@@ -1565,15 +1560,15 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
         global $publisher_isAdmin, $resultCatCounts;
         $ret = array();
         $catsCount = array();
-        $sql = 'SELECT c.parentid, i.categoryid, COUNT(*) AS count FROM '.$this->db->prefix('publisher_items') . ' AS i INNER JOIN '.$this->db->prefix('publisher_categories') . ' AS c ON i.categoryid=c.categoryid';
+        $sql = 'SELECT c.parentid, i.categoryid, COUNT(*) AS count FROM ' . $this->db->prefix('publisher_items') . ' AS i INNER JOIN ' . $this->db->prefix('publisher_categories') . ' AS c ON i.categoryid=c.categoryid';
         if (intval($cat_id) > 0) {
-            $sql .= ' WHERE i.categoryid = '.intval($cat_id);
-            $sql .= ' AND i.status IN ('.implode(',', $status).')';
+            $sql .= ' WHERE i.categoryid = ' . intval($cat_id);
+            $sql .= ' AND i.status IN (' . implode(',', $status) . ')';
         } else {
-            $sql .= ' WHERE i.status IN ('.implode(',', $status).')';
+            $sql .= ' WHERE i.status IN (' . implode(',', $status) . ')';
             if (!$publisher_isAdmin) {
                 $items = $this->publisher->getHandler('permission')->getGrantedItems('item_read');
-                $sql .= ' AND i.itemid IN ('.implode(',', $items).')';
+                $sql .= ' AND i.itemid IN (' . implode(',', $items) . ')';
             }
         }
         $sql .= ' GROUP BY i.categoryid ORDER BY c.parentid ASC, i.categoryid ASC';
@@ -1598,13 +1593,14 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
 
         $resultCatCounts = array();
         foreach ($catsCount[0] as $subCatId => $count) {
-            $resultCatCounts[$subCatId]	= $count;
+            $resultCatCounts[$subCatId] = $count;
             if (isset($catsCount[$subCatId])) {
-                $resultCatCounts[$subCatId]	= $resultCatCounts[$subCatId] + $this->countArticlesByCat($subCatId, $catsCount);
+                $resultCatCounts[$subCatId] = $resultCatCounts[$subCatId] + $this->countArticlesByCat($subCatId, $catsCount);
             }
         }
 
         return $resultCatCounts;
     }
 }
+
 ?>

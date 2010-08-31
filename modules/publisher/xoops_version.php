@@ -34,7 +34,7 @@ $modversion['dirname'] = basename(dirname(__FILE__));
 $modversion['iconsmall'] = "images/icon_small.gif";
 $modversion['iconbig'] = "images/icon_big.gif";
 
-include_once XOOPS_ROOT_PATH . "/modules/" . $modversion['dirname'] ."/include/constants.php";
+include_once XOOPS_ROOT_PATH . "/modules/" . $modversion['dirname'] . "/include/constants.php";
 
 $logo_filename = $modversion['dirname'] . "_logo.png";
 
@@ -108,7 +108,7 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
     }
     // Add the Submit new item button
     $allowsubmit = (isset($xoopsModuleConfig['perm_submit']) && $xoopsModuleConfig['perm_submit'] == 1) ? true : false;
-    $anonpost    = (isset($xoopsModuleConfig['permissions_anon_post']) && $xoopsModuleConfig['permissions_anon_post'] == 1) ? true : false;
+    $anonpost = (isset($xoopsModuleConfig['permissions_anon_post']) && $xoopsModuleConfig['permissions_anon_post'] == 1) ? true : false;
     if ($isAdmin || ($allowsubmit && (is_object($xoopsUser) || $anonpost))) {
         $modversion['sub'][1]['name'] = _MI_PUBLISHER_SUB_SMNAME1;
         $modversion['sub'][1]['url'] = "submit.php?op=add";
@@ -184,7 +184,7 @@ $modversion['blocks'][$i]['name'] = _MI_PUBLISHER_DATE_TO_DATE;
 $modversion['blocks'][$i]['description'] = _MI_PUBLISHER_DATE_TO_DATE_DSC;
 $modversion['blocks'][$i]['show_func'] = "publisher_date_to_date_show";
 $modversion['blocks'][$i]['edit_func'] = "publisher_date_to_date_edit";
-$modversion['blocks'][$i]['options'] = formatTimeStamp(time(), 'm/j/Y')."|".formatTimeStamp(time(), 'm/j/Y');
+$modversion['blocks'][$i]['options'] = formatTimeStamp(time(), 'm/j/Y') . "|" . formatTimeStamp(time(), 'm/j/Y');
 $modversion['blocks'][$i]['template'] = "publisher_date_to_date.html";
 
 /* We need to comment this out has it require a smarty plugin not present in the core...
@@ -358,8 +358,8 @@ $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'none';
 $modversion['config'][$i]['options'] = array(
-    _MI_PUBLISHER_URL_REWRITE_NONE      => 'none',
-    _MI_PUBLISHER_URL_REWRITE_PATHINFO  => 'path-info'
+    _MI_PUBLISHER_URL_REWRITE_NONE => 'none',
+    _MI_PUBLISHER_URL_REWRITE_PATHINFO => 'path-info'
 );
 
 // Is performing module install/update?
@@ -368,7 +368,7 @@ $isModuleAction = (!empty($_POST["fct"]) && "modulesadmin" == $_POST["fct"]) ? t
 if ($isModuleAction &&
     (in_array(php_sapi_name(), array("apache", "apache2handler")) || isset($_SERVER['FCGI_SERVER_VERSION']))
 ) {
-    $modversion['config'][$i]['options'][_MI_PUBLISHER_URL_REWRITE_HTACCESS]  = 'htaccess';
+    $modversion['config'][$i]['options'][_MI_PUBLISHER_URL_REWRITE_HTACCESS] = 'htaccess';
 }
 $modversion['config'][$i]['category'] = 'seo';
 
@@ -510,8 +510,8 @@ $modversion['config'][$i]['description'] = '_MI_PUBLISHER_OTHERITEMSDSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['options'] = array(_MI_PUBLISHER_OTHER_ITEMS_TYPE_NONE => 'none',
-_MI_PUBLISHER_OTHER_ITEMS_TYPE_PREVIOUS_NEXT => 'previous_next',
-_MI_PUBLISHER_OTHER_ITEMS_TYPE_ALL => 'all');
+                                             _MI_PUBLISHER_OTHER_ITEMS_TYPE_PREVIOUS_NEXT => 'previous_next',
+                                             _MI_PUBLISHER_OTHER_ITEMS_TYPE_ALL => 'all');
 $modversion['config'][$i]['default'] = 'previous_next';
 $modversion['config'][$i]['category'] = 'item';
 
@@ -523,10 +523,10 @@ $modversion['config'][$i]['description'] = '_MI_PUBLISHER_SHOW_SUBCATS_DSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'all';
-$modversion['config'][$i]['options'] = array(_MI_PUBLISHER_SHOW_SUBCATS_NO        => 'no',
-_MI_PUBLISHER_SHOW_SUBCATS_NOTEMPTY  => 'nonempty',
-_MI_PUBLISHER_SHOW_SUBCATS_ALL       => 'all',
-_MI_PUBLISHER_SHOW_SUBCATS_NOMAIN    => 'nomain');
+$modversion['config'][$i]['options'] = array(_MI_PUBLISHER_SHOW_SUBCATS_NO => 'no',
+                                             _MI_PUBLISHER_SHOW_SUBCATS_NOTEMPTY => 'nonempty',
+                                             _MI_PUBLISHER_SHOW_SUBCATS_ALL => 'all',
+                                             _MI_PUBLISHER_SHOW_SUBCATS_NOMAIN => 'nomain');
 $modversion['config'][$i]['category'] = 'indexcat';
 
 $i++;
@@ -553,10 +553,10 @@ $modversion['config'][$i]['title'] = '_MI_PUBLISHER_DISTYPE';
 $modversion['config'][$i]['description'] = '_MI_PUBLISHER_DISTYPEDSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
-$modversion['config'][$i]['options'] = array(_MI_PUBLISHER_DISPLAYTYPE_SUMMARY   => 'summary',
-_MI_PUBLISHER_DISPLAYTYPE_FULL      => 'full',
-_MI_PUBLISHER_DISPLAYTYPE_LIST      => 'list',
-_MI_PUBLISHER_DISPLAYTYPE_WFSECTION => 'wfsection');
+$modversion['config'][$i]['options'] = array(_MI_PUBLISHER_DISPLAYTYPE_SUMMARY => 'summary',
+                                             _MI_PUBLISHER_DISPLAYTYPE_FULL => 'full',
+                                             _MI_PUBLISHER_DISPLAYTYPE_LIST => 'list',
+                                             _MI_PUBLISHER_DISPLAYTYPE_WFSECTION => 'wfsection');
 $modversion['config'][$i]['default'] = 'summary';
 $modversion['config'][$i]['category'] = 'indexcat';
 
@@ -679,10 +679,10 @@ $modversion['config'][$i]['description'] = '_MI_PUBLISHER_FOOTERPRINTDSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'item footer';
-$modversion['config'][$i]['options'] = array(_MI_PUBLISHER_ITEMFOOTER_SEL  => 'item footer',
-_MI_PUBLISHER_INDEXFOOTER_SEL => 'index footer',
-_MI_PUBLISHER_BOTH_FOOTERS    => 'both',
-_MI_PUBLISHER_NO_FOOTERS      => 'none');
+$modversion['config'][$i]['options'] = array(_MI_PUBLISHER_ITEMFOOTER_SEL => 'item footer',
+                                             _MI_PUBLISHER_INDEXFOOTER_SEL => 'index footer',
+                                             _MI_PUBLISHER_BOTH_FOOTERS => 'both',
+                                             _MI_PUBLISHER_NO_FOOTERS => 'none');
 $modversion['config'][$i]['category'] = 'print';
 
 
@@ -702,9 +702,9 @@ $modversion['config'][$i]['title'] = '_MI_PUBLISHER_ORDERBY';
 $modversion['config'][$i]['description'] = '_MI_PUBLISHER_ORDERBYDSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
-$modversion['config'][$i]['options'] = array(_MI_PUBLISHER_ORDERBY_TITLE  => 'title',
-_MI_PUBLISHER_ORDERBY_DATE   => 'date',
-_MI_PUBLISHER_ORDERBY_WEIGHT => 'weight');
+$modversion['config'][$i]['options'] = array(_MI_PUBLISHER_ORDERBY_TITLE => 'title',
+                                             _MI_PUBLISHER_ORDERBY_DATE => 'date',
+                                             _MI_PUBLISHER_ORDERBY_WEIGHT => 'weight');
 $modversion['config'][$i]['default'] = 'date';
 $modversion['config'][$i]['category'] = 'format';
 
@@ -782,7 +782,7 @@ $modversion['config'][$i]['description'] = '_MI_PUBLISHER_EDITOR_DSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['options'] = array_flip($editor_handler->getList());
-$modversion['config'][$i]['default'] ='dhtmltextarea';
+$modversion['config'][$i]['default'] = 'dhtmltextarea';
 $modversion['config'][$i]['category'] = 'submit';
 
 $i++;
@@ -828,9 +828,9 @@ $modversion['config'][$i]['description'] = '_MI_PUBLISHER_FORM_STATUS_DSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['options'] = array(_MI_PUBLISHER_PUBLISHED => _PUBLISHER_STATUS_PUBLISHED,
-_MI_PUBLISHER_OFFLINE   => _PUBLISHER_STATUS_OFFLINE,
-_MI_PUBLISHER_SUBMITTED => _PUBLISHER_STATUS_SUBMITTED,
-_MI_PUBLISHER_REJECTED  => _PUBLISHER_STATUS_REJECTED);
+                                             _MI_PUBLISHER_OFFLINE => _PUBLISHER_STATUS_OFFLINE,
+                                             _MI_PUBLISHER_SUBMITTED => _PUBLISHER_STATUS_SUBMITTED,
+                                             _MI_PUBLISHER_REJECTED => _PUBLISHER_STATUS_REJECTED);
 $modversion['config'][$i]['default'] = _PUBLISHER_STATUS_SUBMITTED;
 $modversion['config'][$i]['category'] = 'submit';
 
