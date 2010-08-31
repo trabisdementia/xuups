@@ -42,6 +42,9 @@ if (isset($smartobject_config['enable_currencyman']) && $smartobject_config['ena
 
 global $xoopsModule;
 if (isset($xoopsModule) && $xoopsModule->getVar('dirname') == 'smartobject') {
+    include_once dirname(dirname(__FILE__)) . '/include/common.php';
+    xoops_loadLanguage('admin', 'smartobject');
+
     $i = -1;
 
     $i++;
