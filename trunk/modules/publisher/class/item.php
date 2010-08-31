@@ -940,12 +940,20 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
      */
     var $publisher = null;
 
+    /**
+     * @param  $db
+     * @return void
+     */
     function __construct(&$db)
     {
         parent::__construct($db, "publisher_items", 'PublisherItem', "itemid", "title");
         $this->publisher =& PublisherPublisher::getInstance();
     }
 
+    /**
+     * @param bool $isNew
+     * @return object
+     */
     function &create($isNew = true)
     {
         $obj = parent::create($isNew);
@@ -1120,6 +1128,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
      * count items matching a condition
      *
      * @param object $criteria {@link CriteriaElement} to match
+     * @param n
      * @return int count of items
      */
     function getCount($criteria = null, $notNullFields = '')
@@ -1147,14 +1156,18 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
         return $count;
     }
 
+    /**
+     * @param int $categoryid
+     * @param string $status
+     * @param array $notNullFields
+     * @return int
+     */
     function getItemsCount($categoryid = -1, $status = '', $notNullFields = '')
     {
         global $xoopsUser, $publisher_isAdmin;
 
         $gperm_handler =& xoops_gethandler('groupperm');
         $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-
-        $ret = array();
 
         if (!$publisher_isAdmin) {
             $criteriaPermissions = new CriteriaCompo();
@@ -1196,11 +1209,8 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
             $criteria->add($criteriaStatus);
         }
 
-        if (!empty($otherCriteria)) {
-            $criteria->add($otherCriteria);
-        }
-
         return $this->getCount($criteria, $notNullFields);
+
     }
 
     function getAllPublished($limit = 0, $start = 0, $categoryid = -1, $sort = 'datesub', $order = 'DESC', $notNullFields = '', $asobject = true, $id_key = 'none')
@@ -1347,6 +1357,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
      */
     function deleteAll($criteria = null)
     {
+        //todo resource consuming, use get list instead?
         $items = $this->getObjects($criteria);
         foreach ($items as $item) {
             $this->delete($item);
@@ -1364,6 +1375,11 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
         }
     }
 
+    /**
+     * @param array $notNullFields
+     * @param bool $withAnd
+     * @return string
+     */
     function NotNullFieldClause($notNullFields = '', $withAnd = false)
     {
         $ret = '';
