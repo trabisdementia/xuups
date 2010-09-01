@@ -1469,7 +1469,7 @@ class sfFaqHandler extends XoopsObjectHandler
             }
             $grantedCategories= new Criteria('faq.categoryid', "(".implode(',', $categoriesGranted).")", 'IN');
             $grantedFaq= new CriteriaCompo();
-            $grantedFaq->add(new Criteria('faqid', "(".implode(',', $faqsGranted).")", 'IN'), 'OR');
+            $grantedFaq->add(new Criteria('faq.faqid', "(".implode(',', $faqsGranted).")", 'IN'), 'OR');
             // If user is anonymous, check if the FAQ allow partialview
             if (!is_object($xoopsUser))
             {
@@ -1545,7 +1545,7 @@ class sfFaqHandler extends XoopsObjectHandler
         $result= $this->db->query($sql, $limit, $start);
         if (!$result)
         {
-            echo "- query did not work in smartfaq -";
+            trigger_error("Query did not work in smartfaq", E_USER_WARNING);
             return $ret;
         }
 
