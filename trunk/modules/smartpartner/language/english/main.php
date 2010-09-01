@@ -1,13 +1,13 @@
 <?php
 
 /**
-* $Id: main.php,v 1.2 2007/09/18 14:01:04 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: main.php,v 1.2 2007/09/18 14:01:04 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 if (!defined("XOOPS_ROOT_PATH")) {
- 	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 /**
@@ -20,9 +20,9 @@ if (!defined("XOOPS_ROOT_PATH")) {
 // including the common language file
 $fileName = XOOPS_ROOT_PATH . '/modules/smartpartner/language/' . $GLOBALS['xoopsConfig']['language'] . '/common.php';
 if (file_exists($fileName)) {
-	include_once $fileName;
+    include_once $fileName;
 } else {
-	include_once XOOPS_ROOT_PATH . '/modules/smartpartner/language/english/common.php';
+    include_once XOOPS_ROOT_PATH . '/modules/smartpartner/language/english/common.php';
 }
 
 define("_MD_SPARTNER_ADMIN_PAGE", ":: Admin Section ::");

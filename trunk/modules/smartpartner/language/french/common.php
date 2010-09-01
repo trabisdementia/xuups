@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: common.php,v 1.1 2007/06/05 18:32:42 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: common.php,v 1.1 2007/06/05 18:32:42 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 define("_CO_SPARTNER_ACTIVE", "Activ&eacute;");
 define("_CO_SPARTNER_ADRESS", "Adresse");

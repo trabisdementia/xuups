@@ -1,20 +1,20 @@
 <?php
 
 /**
-* $Id: notification.inc.php,v 1.1 2007/06/05 18:32:32 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: notification.inc.php,v 1.1 2007/06/05 18:32:32 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 function smartpartner_notify_iteminfo($category, $item_id)
 {
-	// This must contain the name of the folder in which reside SmartPartner
-	if( !defined("SMARTPARTNER_DIRNAME") ){
-		define("SMARTPARTNER_DIRNAME", 'smartpartner');
-	}    
-	
-	global $xoopsModule, $xoopsModuleConfig, $xoopsConfig;
+    // This must contain the name of the folder in which reside SmartPartner
+    if (!defined("SMARTPARTNER_DIRNAME")) {
+        define("SMARTPARTNER_DIRNAME", 'smartpartner');
+    }
+
+    global $xoopsModule, $xoopsModuleConfig, $xoopsConfig;
 
     if (empty($xoopsModule) || $xoopsModule->getVar('dirname') != SMARTPARTNER_DIRNAME) {
         $module_handler = &xoops_gethandler('module');
@@ -24,13 +24,13 @@ function smartpartner_notify_iteminfo($category, $item_id)
     } else {
         $module = &$xoopsModule;
         $config = &$xoopsModuleConfig;
-    } 
+    }
 
     if ($category == 'global') {
         $item['name'] = '';
         $item['url'] = '';
         return $item;
-    } 
+    }
 
     global $xoopsDB;
 
@@ -42,7 +42,7 @@ function smartpartner_notify_iteminfo($category, $item_id)
         $item['name'] = $result_array['title'];
         $item['url'] = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/partner.php?id=' . $item_id;
         return $item;
-    } 
-} 
+    }
+}
 
 ?>

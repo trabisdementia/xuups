@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: displaysubcats.php,v 1.1 2007/06/05 18:32:32 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: displaysubcats.php,v 1.1 2007/06/05 18:32:32 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 global $xoopsUser, $xoopsUser, $xoopsConfig, $xoopsDB, $xoopsModuleConfig, $xoopsModule;
 
@@ -22,7 +22,7 @@ $categoriesObj = $smartpartner_category_handler->get($sel_cat);
 $totalsubs = $smartpartner_category_handler->getCategoriesCount($sel_cat);
 
 // creating the categories objects that are published
-$subcatsObj = $smartpartner_category_handler->getCategories(0,0,$categoriesObj->categoryid());
+$subcatsObj = $smartpartner_category_handler->getCategories(0, 0, $categoriesObj->categoryid());
 
 $totalSCOnPage = count($subcatsObj);
 echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
@@ -34,20 +34,20 @@ echo "<td width='60' class='bg3' align='right'><b>" . _AM_SPARTNER_ACTION . "</b
 echo "</tr>";
 
 if ($totalsubs > 0) {
-	foreach ($subcatsObj as $subcat) {
-		$modify = "<a href='category.php?op=mod&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/edit.gif' title='" . _AM_SPARTNER_MODIFY . "' alt='" . _AM_SPARTNER_MODIFY . "' /></a>";
-		$delete = "<a href='category.php?op=del&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/delete.gif' title='" . _AM_SPARTNER_DELETE . "' alt='" . _AM_SPARTNER_DELETE . "'/></a>";
-		echo "<tr>";
-		echo "<td class='head' align='left'>" . $subcat->categoryid() . "</td>";
-		echo "<td class='even' align='left'><a href='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/category.php?categoryid=" . $subcat->categoryid() . "&parentid=".$subcat->parentid()."'>" .$subcat->name() . "</a></td>";
-		echo "<td class='even' align='left'>" . $subcat->description() . "</td>";
-		echo "<td class='even' align='right'> $modify $delete </td>";
-		echo "</tr>";
-	}
+    foreach ($subcatsObj as $subcat) {
+        $modify = "<a href='category.php?op=mod&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/edit.gif' title='" . _AM_SPARTNER_MODIFY . "' alt='" . _AM_SPARTNER_MODIFY . "' /></a>";
+        $delete = "<a href='category.php?op=del&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/delete.gif' title='" . _AM_SPARTNER_DELETE . "' alt='" . _AM_SPARTNER_DELETE . "'/></a>";
+        echo "<tr>";
+        echo "<td class='head' align='left'>" . $subcat->categoryid() . "</td>";
+        echo "<td class='even' align='left'><a href='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/category.php?categoryid=" . $subcat->categoryid() . "&parentid=" . $subcat->parentid() . "'>" . $subcat->name() . "</a></td>";
+        echo "<td class='even' align='left'>" . $subcat->description() . "</td>";
+        echo "<td class='even' align='right'> $modify $delete </td>";
+        echo "</tr>";
+    }
 } else {
-	echo "<tr>";
-	echo "<td class='head' align='center' colspan= '7'>" . _AM_SPARTNER_NOSUBCAT . "</td>";
-	echo "</tr>";
+    echo "<tr>";
+    echo "<td class='head' align='center' colspan= '7'>" . _AM_SPARTNER_NOSUBCAT . "</td>";
+    echo "</tr>";
 }
 echo "</table>\n";
 echo "<br />\n";

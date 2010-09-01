@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: menu.php,v 1.2 2007/09/18 14:00:51 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: menu.php,v 1.2 2007/09/18 14:00:51 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 
 $adminmenu[0]['title'] = _MI_SPARTNER_ADMENU1;
@@ -21,20 +21,20 @@ $adminmenu[3]['title'] = _MI_SPARTNER_ADMENU3;
 $adminmenu[3]['link'] = "admin/offer.php";
 
 if (isset($xoopsModule)) {
-	$headermenu[0]['title'] = _PREFERENCES;
-	$headermenu[0]['link'] = '../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule->getVar('mid');
+    $headermenu[0]['title'] = _PREFERENCES;
+    $headermenu[0]['link'] = '../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule->getVar('mid');
 
-	$headermenu[1]['title'] = _AM_SPARTNER_GOMOD;
-	$headermenu[1]['link'] = SMARTPARTNER_URL;
+    $headermenu[1]['title'] = _AM_SPARTNER_GOMOD;
+    $headermenu[1]['link'] = SMARTPARTNER_URL;
 
-	$headermenu[2]['title'] = _AM_SPARTNER_UPDATE_MODULE;
-	$headermenu[2]['link'] = XOOPS_URL . "/modules/system/admin.php?fct=modulesadmin&op=update&module=" . $xoopsModule->getVar('dirname');
+    $headermenu[2]['title'] = _AM_SPARTNER_UPDATE_MODULE;
+    $headermenu[2]['link'] = XOOPS_URL . "/modules/system/admin.php?fct=modulesadmin&op=update&module=" . $xoopsModule->getVar('dirname');
 
-	$headermenu[3]['title'] = _AM_SPARTNER_IMPORT;
-	$headermenu[3]['link'] = SMARTPARTNER_URL . "admin/import.php";
+    $headermenu[3]['title'] = _AM_SPARTNER_IMPORT;
+    $headermenu[3]['link'] = SMARTPARTNER_URL . "admin/import.php";
 
-	$headermenu[4]['title'] = _AM_SPARTNER_ABOUT;
-	$headermenu[4]['link'] = SMARTPARTNER_URL . "admin/about.php";
+    $headermenu[4]['title'] = _AM_SPARTNER_ABOUT;
+    $headermenu[4]['link'] = SMARTPARTNER_URL . "admin/about.php";
 }
 
 ?>

@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: modinfo.php,v 1.4 2007/09/19 17:53:35 felix Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: modinfo.php,v 1.4 2007/09/19 17:53:35 felix Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 define('_MI_SPARTNER_ADMENU1', 'Index');
 define('_MI_SPARTNER_ADMENU2', 'Partners');
@@ -141,7 +141,6 @@ define("_MI_SPARTNER_GLOBAL_OFFER_NEW_NOTIFY", "New offer");
 define("_MI_SPARTNER_GLOBAL_OFFER_NEW_NOTIFY_CAP", "Notify me when any new offer is published.");
 define("_MI_SPARTNER_GLOBAL_OFFER_NEW_NOTIFY_DSC", "");
 define("_MI_SPARTNER_GLOBAL_OFFER_NEW_NOTIFY_SBJ", "[{X_SITENAME}] {X_MODULE} auto-notify : New offer published");
-
 
 
 // About.php constants

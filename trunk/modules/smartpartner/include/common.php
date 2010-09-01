@@ -1,26 +1,26 @@
 <?php
 
 /**
-* $Id: common.php,v 1.2 2007/09/18 14:00:57 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: common.php,v 1.2 2007/09/18 14:00:57 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 if (!defined("XOOPS_ROOT_PATH")) {
- 	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 
 // This must contain the name of the folder in which reside SmartPartner
-if( !defined("SMARTPARTNER_DIRNAME") ){
-	define("SMARTPARTNER_DIRNAME", 'smartpartner');
+if (!defined("SMARTPARTNER_DIRNAME")) {
+    define("SMARTPARTNER_DIRNAME", 'smartpartner');
 }
 
-if( !defined("SMARTPARTNER_URL") ){
-	define("SMARTPARTNER_URL", XOOPS_URL.'/modules/'.SMARTPARTNER_DIRNAME.'/');
+if (!defined("SMARTPARTNER_URL")) {
+    define("SMARTPARTNER_URL", XOOPS_URL . '/modules/' . SMARTPARTNER_DIRNAME . '/');
 }
-if( !defined("SMARTPARTNER_ROOT_PATH") ){
-	define("SMARTPARTNER_ROOT_PATH", XOOPS_ROOT_PATH.'/modules/'.SMARTPARTNER_DIRNAME.'/');
+if (!defined("SMARTPARTNER_ROOT_PATH")) {
+    define("SMARTPARTNER_ROOT_PATH", XOOPS_ROOT_PATH . '/modules/' . SMARTPARTNER_DIRNAME . '/');
 }
 
 include_once(SMARTPARTNER_ROOT_PATH . "include/functions.php");
@@ -30,7 +30,7 @@ include_once(SMARTPARTNER_ROOT_PATH . "class/keyhighlighter.class.php");
 include_once(SMARTPARTNER_ROOT_PATH . "class/session.php");
 
 /** Include SmartObject framework **/
-include_once XOOPS_ROOT_PATH.'/modules/smartobject/class/smartloader.php';
+include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartloader.php';
 include_once(SMARTOBJECT_ROOT_PATH . "class/smartobjectcategory.php");
 
 // Creating the SmartModule object
@@ -64,8 +64,8 @@ $smartpartner_file_handler =& smartpartner_gethandler('file');
 define('_SPARTNER_STATUS_OFFLINE', 0);
 define('_SPARTNER_STATUS_ONLINE', 1);
 $statusArray = array(
-	_SPARTNER_STATUS_OFFLINE => _CO_SPARTNER_STATUS_OFFLINE,
-	_SPARTNER_STATUS_ONLINE => _CO_SPARTNER_STATUS_ONLINE
-	);
+    _SPARTNER_STATUS_OFFLINE => _CO_SPARTNER_STATUS_OFFLINE,
+    _SPARTNER_STATUS_ONLINE => _CO_SPARTNER_STATUS_ONLINE
+);
 include_once(SMARTPARTNER_ROOT_PATH . "class/smarttree.php");
 ?>

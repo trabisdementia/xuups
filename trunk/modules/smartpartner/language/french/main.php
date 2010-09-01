@@ -1,28 +1,28 @@
 <?php
 
 /**
-* $Id: main.php,v 1.1 2007/06/05 18:32:42 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
-if (!defined("XOOPS_ROOT_PATH")) { 
- 	die("XOOPS root path not defined");
+ * $Id: main.php,v 1.1 2007/06/05 18:32:42 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
+if (!defined("XOOPS_ROOT_PATH")) {
+    die("XOOPS root path not defined");
 }
 
 /**
  * This does not belong here. However, since some admin.php constants are refereing to constants
  * defined in common.php, and since admin.php is automatically include when including mainfile.php
  * we need to include the common language file here.
- * 
+ *
  * For next release : remove all reference to common constants in other language files.
  */
 // including the common language file
 $fileName = XOOPS_ROOT_PATH . '/modules/smartpartner/language/' . $GLOBALS['xoopsConfig']['language'] . '/common.php';
 if (file_exists($fileName)) {
-	include_once $fileName;
+    include_once $fileName;
 } else {
-	include_once XOOPS_ROOT_PATH . '/modules/smartpartner/language/english/common.php';
+    include_once XOOPS_ROOT_PATH . '/modules/smartpartner/language/english/common.php';
 }
 
 define("_MD_SPARTNER_ADMIN_PAGE", ":: Section d'Administration ::");

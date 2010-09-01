@@ -30,30 +30,38 @@
 if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
-include_once XOOPS_ROOT_PATH."/modules/smartobject/class/smartobject.php";
-include_once XOOPS_ROOT_PATH."/modules/smartobject/class/smartobjecthandler.php";
-class SmartpartnerPartner_cat_link extends SmartObject {
+include_once XOOPS_ROOT_PATH . "/modules/smartobject/class/smartobject.php";
+include_once XOOPS_ROOT_PATH . "/modules/smartobject/class/smartobjecthandler.php";
+class SmartpartnerPartner_cat_link extends SmartObject
+{
 
-    function SmartpartnerPartner_cat_link() {
+    function SmartpartnerPartner_cat_link()
+    {
         $this->initVar('partner_cat_linkid', XOBJ_DTYPE_INT, '', true);
-        $this->initVar('partnerid', XOBJ_DTYPE_INT, '',  true);
+        $this->initVar('partnerid', XOBJ_DTYPE_INT, '', true);
         $this->initVar('categoryid', XOBJ_DTYPE_INT, '', true);
-        }
+    }
 }
-class SmartpartnerPartner_cat_linkHandler extends SmartPersistableObjectHandler {
-    function SmartpartnerPartner_cat_linkHandler($db) {
+
+class SmartpartnerPartner_cat_linkHandler extends SmartPersistableObjectHandler
+{
+    function SmartpartnerPartner_cat_linkHandler($db)
+    {
 
         $this->SmartPersistableObjectHandler($db, 'partner_cat_link', array('partnerid', 'categoryid'), '', false, 'smartpartner');
     }
-	function getParentIds($partnerid){
-		$criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('partnerid', $partnerid));
-		$links = $this->getObjects($criteria);
-		$parent_array = array();
-		foreach($links as $link){
-			$parent_array[] = $link->getVar('categoryid');
-		}
-		return implode('|',$parent_array);
-	}
+
+    function getParentIds($partnerid)
+    {
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('partnerid', $partnerid));
+        $links = $this->getObjects($criteria);
+        $parent_array = array();
+        foreach ($links as $link) {
+            $parent_array[] = $link->getVar('categoryid');
+        }
+        return implode('|', $parent_array);
+    }
 }
+
 ?>
