@@ -6,7 +6,8 @@
  */
 
 
-class SmartpartnerSession {
+class SmartpartnerSession
+{
 
     /**
      * Session constructor<br />
@@ -80,4 +81,5 @@ class SmartpartnerSession {
         return $_sess;
     }
 }
+
 ?>

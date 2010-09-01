@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: blocks.php,v 1.1 2007/06/05 18:32:42 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: blocks.php,v 1.1 2007/06/05 18:32:42 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 define('_MB_SPARTNER_PARTNERS_PSPACE', 'Mettre des Espaces entre les Partenaires?');
 define('_MB_SPARTNER_BRAND', 'D&eacute;filement al&eacute;atoire des Partenaires dans les blocs?');

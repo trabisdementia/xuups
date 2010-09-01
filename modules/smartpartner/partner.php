@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: partner.php,v 1.2 2007/09/18 14:00:55 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: partner.php,v 1.2 2007/09/18 14:00:55 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 include_once("header.php");
 $xoopsOption['template_main'] = 'smartpartner_partner.html';
@@ -17,8 +17,8 @@ global $xoopsUser, $xoopsConfig, $xoopsModuleConfig, $xoopsModule;
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 If ($id == 0) {
-	redirect_header("javascript:history.go(-1)", 2, _MD_SPARTNER_NOPARTNERSELECTED);
-	exit();
+    redirect_header("javascript:history.go(-1)", 2, _MD_SPARTNER_NOPARTNERSELECTED);
+    exit();
 }
 
 // Creating the Partner object for the selected FAQ
@@ -26,8 +26,8 @@ $partnerObj = new SmartpartnerPartner($id);
 
 // If the selected partner was not found, exit
 If ($partnerObj->notLoaded()) {
-	redirect_header("javascript:history.go(-1)", 2, _MD_SPARTNER_NOPARTNERSELECTED);
-	exit();
+    redirect_header("javascript:history.go(-1)", 2, _MD_SPARTNER_NOPARTNERSELECTED);
+    exit();
 }
 include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectpermission.php';
 $smartpermissions_handler = new SmartobjectPermissionHandler($smartpartner_partner_handler);
@@ -35,9 +35,9 @@ $grantedItems = $smartpermissions_handler->getGrantedItems('full_view');
 $grantedItems = array_merge($grantedItems, $smartpermissions_handler->getGrantedItems('partial_view'));
 
 // Chech the status
-If ($partnerObj->status() != _SPARTNER_STATUS_ACTIVE || (!in_array($id, $grantedItems)) ){
-	redirect_header("javascript:history.go(-1)", 2, _NOPERM);
-	exit();
+If ($partnerObj->status() != _SPARTNER_STATUS_ACTIVE || (!in_array($id, $grantedItems))) {
+    redirect_header("javascript:history.go(-1)", 2, _NOPERM);
+    exit();
 }
 
 // Updating the counter
@@ -51,28 +51,28 @@ $filesObj = $partnerObj->getFiles();
 $files = array();
 $embeded_files = array();
 
-foreach($filesObj as $fileObj)
+foreach ($filesObj as $fileObj)
 {
-	if ($fileObj->mimetype() == 'application/x-shockwave-flash') {
-		$file['content'] = $fileObj->displayFlash();
+    if ($fileObj->mimetype() == 'application/x-shockwave-flash') {
+        $file['content'] = $fileObj->displayFlash();
 
-		if (strpos($partner['maintext'], '[flash-' . $fileObj->getVar('fileid') . ']')) {
-			$partner['maintext'] = str_replace('[flash-' . $fileObj->getVar('fileid') . ']', $file['content'], $partner['maintext']);
-		} else {
-			$embeded_files[] = $file;
-		}
-		unset($file);
-	} else {
-		$file['fileid'] = $fileObj->fileid();
-		$file['name'] = $fileObj->name();
-		$file['description'] = $fileObj->description();
-		$file['name'] = $fileObj->name();
-		$file['type'] = $fileObj->mimetype();
-		$file['datesub'] = $fileObj->datesub();
-		$file['hits'] = $fileObj->counter();
-		$files[] = $file;
-		unset($file);
-	}
+        if (strpos($partner['maintext'], '[flash-' . $fileObj->getVar('fileid') . ']')) {
+            $partner['maintext'] = str_replace('[flash-' . $fileObj->getVar('fileid') . ']', $file['content'], $partner['maintext']);
+        } else {
+            $embeded_files[] = $file;
+        }
+        unset($file);
+    } else {
+        $file['fileid'] = $fileObj->fileid();
+        $file['name'] = $fileObj->name();
+        $file['description'] = $fileObj->description();
+        $file['name'] = $fileObj->name();
+        $file['type'] = $fileObj->mimetype();
+        $file['datesub'] = $fileObj->datesub();
+        $file['hits'] = $fileObj->counter();
+        $files[] = $file;
+        unset($file);
+    }
 
 }
 $partner['files'] = $files;
@@ -84,23 +84,23 @@ $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('partnerid', $id));
 $criteria->add(new Criteria('date_pub', time(), '<'));
 $criteria->add(new Criteria('date_end', time(), '>'));
-$criteria->add(new Criteria('status',_SPARTNER_STATUS_ONLINE));
+$criteria->add(new Criteria('status', _SPARTNER_STATUS_ONLINE));
 
 $offersObj =& $smartpartner_offer_handler->getObjects($criteria);
 $offers = array();
-foreach($offersObj as $offerObj){
-	$offers[] = $offerObj->toArray();
+foreach ($offersObj as $offerObj) {
+    $offers[] = $offerObj->toArray();
 }
 $xoopsTpl->assign('offers', $offers);
 $categoryPath = '';
-if(isset($_GET['cid'])){
-	$categoryObj = $smartpartner_category_handler->get($_GET['cid']);
-}else{
-	$categoryObj = $smartpartner_category_handler->get($partnerObj->categoryid());
+if (isset($_GET['cid'])) {
+    $categoryObj = $smartpartner_category_handler->get($_GET['cid']);
+} else {
+    $categoryObj = $smartpartner_category_handler->get($partnerObj->categoryid());
 }
 
 if (!$categoryObj->isNew()) {
-	$categoryPath = $categoryObj->getCategoryPath() . " > ";
+    $categoryPath = $categoryObj->getCategoryPath() . " > ";
 }
 $categoryPath .= $partnerObj->title();
 $xoopsTpl->assign('categoryPath', $categoryPath);
@@ -126,13 +126,13 @@ $xoopsTpl->assign('partview_msg', $myts->xoopsCodeDecode($myts->displayTarea($xo
 
 $show_stats_block = false;
 if ($xoopsUser) {
-	foreach($xoopsModuleConfig['stats_group'] as $group) {
-		if (in_array($group, $xoopsUser->getGroups()))	{
-			$show_stats_block = true;
-		}
-	}
+    foreach ($xoopsModuleConfig['stats_group'] as $group) {
+        if (in_array($group, $xoopsUser->getGroups())) {
+            $show_stats_block = true;
+        }
+    }
 } else {
-	$show_stats_block = in_array(XOOPS_GROUP_ANONYMOUS, $xoopsModuleConfig['stats_group']);
+    $show_stats_block = in_array(XOOPS_GROUP_ANONYMOUS, $xoopsModuleConfig['stats_group']);
 }
 
 $xoopsTpl->assign('show_stats_block', $show_stats_block);

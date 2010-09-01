@@ -1,13 +1,13 @@
 <?php
 
 /**
-* $Id: admin.php,v 1.4 2007/09/19 17:53:35 felix Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: admin.php,v 1.4 2007/09/19 17:53:35 felix Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 if (!defined("XOOPS_ROOT_PATH")) {
- 	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 /**
@@ -20,9 +20,9 @@ if (!defined("XOOPS_ROOT_PATH")) {
 // including the common language file
 $fileName = XOOPS_ROOT_PATH . '/modules/smartpartner/language/' . $GLOBALS['xoopsConfig']['language'] . '/common.php';
 if (file_exists($fileName)) {
-	include_once $fileName;
+    include_once $fileName;
 } else {
-	include_once XOOPS_ROOT_PATH . '/modules/smartpartner/language/english/common.php';
+    include_once XOOPS_ROOT_PATH . '/modules/smartpartner/language/english/common.php';
 }
 
 define("_AM_SPARTNER_ABOUT", "About");
@@ -74,22 +74,22 @@ define("_AM_SPARTNER_DB_UPDATE_OK", "Successfully updated to version %s");
 define("_AM_SPARTNER_DB_UPDATE_TO", "Updating to version %s");
 define("_AM_SPARTNER_DELETE", "Delete");
 define("_AM_SPARTNER_DELETEPARTNER", _CO_SPARTNER_DELETEPARTNER);
-define("_AM_SPARTNER_DELETEFILE","Delete file");
+define("_AM_SPARTNER_DELETEFILE", "Delete file");
 define("_AM_SPARTNER_DELETETHISP", "Do you really want to delete this partner?");
-define("_AM_SPARTNER_DELETETHISFILE","Are you sure you want to delete this file?");
+define("_AM_SPARTNER_DELETETHISFILE", "Are you sure you want to delete this file?");
 define("_AM_SPARTNER_DESC", "Descending");
 define("_AM_SPARTNER_DESCRIPTION", _CO_SPARTNER_DESCRIPTION);
 define("_AM_SPARTNER_DESCRIPTION_DSC", _CO_SPARTNER_DESCRIPTION_DSC);
 define("_AM_SPARTNER_DIRCREATED", "Folder successfully created ");
 define("_AM_SPARTNER_DIRNOTCREATED", "The folder could not be created ");
-define("_AM_SPARTNER_EDITFILE","Edit file");
+define("_AM_SPARTNER_EDITFILE", "Edit file");
 define("_AM_SPARTNER_EDITING", "Editing");
 define("_AM_SPARTNER_EDITPARTNER", _CO_SPARTNER_EDITPARTNER);
 define("_AM_SPARTNER_FILE", "Files");
 define("_AM_SPARTNER_FILE_ADD", "Adding a file");
 define("_AM_SPARTNER_FILE_ADDING", "Adding a new file");
 define("_AM_SPARTNER_FILE_ADDING_DSC", "Please fill the following form in order to add a new file to this partner.");
-define("_AM_SPARTNER_FILE_DELETE_ERROR","An error occured while deleting the file.");
+define("_AM_SPARTNER_FILE_DELETE_ERROR", "An error occured while deleting the file.");
 define("_AM_SPARTNER_FILE_DESCRIPTION", "Description");
 define("_AM_SPARTNER_FILE_DESCRIPTION_DSC", "Description of the file to be uploaded.");
 define("_AM_SPARTNER_FILE_EDITING", "Editing a file");
@@ -103,7 +103,7 @@ define("_AM_SPARTNER_FILE_STATUS", "File visible ?");
 define("_AM_SPARTNER_FILE_STATUS_DSC", "if you select no, the file will not be visible from the user side.");
 define("_AM_SPARTNER_FILE_TO_UPLOAD", "File to upload :");
 define("_AM_SPARTNER_FILE_UPLOAD_ANOTHER", "Upload again");
-define("_AM_SPARTNER_FILEISDELETED","The file has been succesfully deleted") ;
+define("_AM_SPARTNER_FILEISDELETED", "The file has been succesfully deleted");
 define("_AM_SPARTNER_FILENAME", "File name");
 define("_AM_SPARTNER_FILES_LINKED", "Files linked to this partner");
 
@@ -183,7 +183,7 @@ define("_AM_SPARTNER_REJECTED_EDITING", "Editing a rejected partner");
 define("_AM_SPARTNER_REJECTED_EDITING_INFO", "You can edit this rejected partner. Modifications will be saved for this partner. However, if you would like to display this partner in the user side, you will need to set the <b>Status</b> field to 'Active'.");
 define("_AM_SPARTNER_SELECT_SORT", "Select sort order :");
 define("_AM_SPARTNER_SELECT_STATUS", "Select a status");
-define('_AM_SB_SETMPERM','Set the permission');
+define('_AM_SB_SETMPERM', 'Set the permission');
 define("_AM_SPARTNER_NOFILE", "This partner does not have any attached files.");
 define("_AM_SPARTNER_PATH_FILES", "Attached files");
 define("_AM_SPARTNER_SHOWING", "Showing");
@@ -241,7 +241,7 @@ define("_AM_SPARTNER_CATEGORY_EDIT_INFO", "You can edit this category. Modificat
 define("_AM_SPARTNER_CATEGORY_REQ", "Category*");
 define("_AM_SPARTNER_CATEGORY_SAVE_ERROR", "An error occured while saving the category. Here is a list of error(s) :");
 define("_AM_SPARTNER_CATHEADER", "Categories Management");
-define("_AM_SPARTNER_CATID","ID");
+define("_AM_SPARTNER_CATID", "ID");
 define("_AM_SPARTNER_CATEGORY_DSC", "Category description");
 define("_AM_SPARTNER_CATEGORY_DELETED", "Category %s has been deleted");
 define("_AM_SPARTNER_CATEGORY_MODIFIED", "The category was successfully modified.");
@@ -253,12 +253,12 @@ define("_AM_SPARTNER_CATEGORY_IMAGE_UPLOAD_DSC", "Select an image on your comput
 define("_AM_SPARTNER_CATEGORY_CREATING", "Creating new");
 define("_AM_SPARTNER_CATEGORY_PARENT", "Parent category");
 define("_AM_SPARTNER_CATEGORY_PARENT_DSC", "Select a parent to make this a sub-category.");
-define("_AM_SPARTNER_CATEGORY_SUBCATS_CREATE","Create subcategories");
-define("_AM_SPARTNER_CATEGORY_SUBCATS_CREATE_DSC","Fill the text box with the names of sub categories to create.<br>Leave blank to not create subcategory. To create more, enter the how much more to create then press 'Add'");
-define("_AM_SPARTNER_ADD_OPT","Add %s  more sub categories");
-define("_AM_SPARTNER_ADD_OPT_SUBMIT","Add");
+define("_AM_SPARTNER_CATEGORY_SUBCATS_CREATE", "Create subcategories");
+define("_AM_SPARTNER_CATEGORY_SUBCATS_CREATE_DSC", "Fill the text box with the names of sub categories to create.<br>Leave blank to not create subcategory. To create more, enter the how much more to create then press 'Add'");
+define("_AM_SPARTNER_ADD_OPT", "Add %s  more sub categories");
+define("_AM_SPARTNER_ADD_OPT_SUBMIT", "Add");
 define("_AM_SPARTNER_CATEGORY_CREATED", "New category was created and saved!");
-define("_AM_SPARTNER_CATEGORY_SUBCAT_SAVE_ERROR","An error occured while saving the category. Here is a list of error(s):");
+define("_AM_SPARTNER_CATEGORY_SUBCAT_SAVE_ERROR", "An error occured while saving the category. Here is a list of error(s):");
 define("_AM_SPARTNER_CATEGORY_DELETE_CONFIRM", "Please note that by deleting a category, all the sub-categories and the partners of this category will be deleted as well, along with any comments that may have been posted related to ces articles. Are you sure you wish to delete this category ?");
 define("_AM_SPARTNER_CATEGORY_DELETE_ERROR", "An error occured while deleting this category.");
 define("_AM_SPARTNER_CATEGORY_NONE", "There is no category in the module.");

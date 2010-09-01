@@ -1,28 +1,28 @@
 <?php
 
 /**
-* $Id: admin.php,v 1.1 2007/06/05 18:32:42 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
-if (!defined("XOOPS_ROOT_PATH")) { 
- 	die("XOOPS root path not defined");
+ * $Id: admin.php,v 1.1 2007/06/05 18:32:42 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
+if (!defined("XOOPS_ROOT_PATH")) {
+    die("XOOPS root path not defined");
 }
 
 /**
  * This does not belong here. However, since some admin.php constants are refereing to constants
  * defined in common.php, and since admin.php is automatically include when including mainfile.php
  * we need to include the common language file here.
- * 
+ *
  * For next release : remove all reference to common constants in other language files.
  */
 // including the common language file
 $fileName = XOOPS_ROOT_PATH . '/modules/smartpartner/language/' . $GLOBALS['xoopsConfig']['language'] . '/common.php';
 if (file_exists($fileName)) {
-	include_once $fileName;
+    include_once $fileName;
 } else {
-	include_once XOOPS_ROOT_PATH . '/modules/smartpartner/language/english/common.php';
+    include_once XOOPS_ROOT_PATH . '/modules/smartpartner/language/english/common.php';
 }
 
 define("_AM_SPARTNER_ABOUT", "A propos");
@@ -158,7 +158,7 @@ define("_AM_SPARTNER_REJECTED_EDITING", "Edit&eacute; un partenaire rejet&eacute
 define("_AM_SPARTNER_REJECTED_EDITING_INFO", "Vous pouvez editer ce partenaire rejet&eacute;. Les modifications seront sauvegard&eacute;e pour ce partenaire. Cependant, si vous afficher ce partenaire du cot&eacute; utilisateur, il est necessaire de fixer le <b>Status</b> du champ agrave 'Actif'");
 define("_AM_SPARTNER_SELECT_SORT", "Ordre de tri:");
 define("_AM_SPARTNER_SELECT_STATUS", "Statut");
-define('_AM_SB_SETMPERM','Param&eacute;trer les permissions');
+define('_AM_SB_SETMPERM', 'Param&eacute;trer les permissions');
 define("_AM_SPARTNER_SHOWING", "&eacute;tat s&eacute;lectionn&eacute;: ");
 define("_AM_SPARTNER_SMARTPARTNER_IMPORT_SETTINGS", "Param&egrave;tres d'import de SmartPartner");
 define("_AM_SPARTNER_SMARTPARTNER_IMPORT_SETTINGS_VALUE", "Il n'y a pas de param&egrave;tres d'import. Veuillez appuyer sur le bouton d'import pour commencer celui ci.");
@@ -213,7 +213,7 @@ define("_AM_SPARTNER_CATEGORY_EDIT_INFO", "Vous pouvez modifier cette catégorie.
 define("_AM_SPARTNER_CATEGORY_REQ", "Catégorie*");
 define("_AM_SPARTNER_CATEGORY_SAVE_ERROR", "Une erreur est survenue lors de la sauvegarde de la catégorie. Voici la liste des erreur(s) :");
 define("_AM_SPARTNER_CATHEADER", "Gestion des catégories");
-define("_AM_SPARTNER_CATID","ID");
+define("_AM_SPARTNER_CATID", "ID");
 define("_AM_SPARTNER_CATEGORY_DSC", "Description de la catégorie");
 define("_AM_SPARTNER_CATEGORY_DELETED", "La catégorie %s a été effacée");
 define("_AM_SPARTNER_CATEGORY_MODIFIED", "La catégorie a été modifiée avec succès.");
@@ -225,12 +225,12 @@ define("_AM_SPARTNER_CATEGORY_IMAGE_UPLOAD_DSC", "Choisissez une image dans votr
 define("_AM_SPARTNER_CATEGORY_CREATING", "Création");
 define("_AM_SPARTNER_CATEGORY_PARENT", "Catégorie parente");
 define("_AM_SPARTNER_CATEGORY_PARENT_DSC", "Choisissez un parent pour faire de cette catégorie une sous-catégorie.");
-define("_AM_SPARTNER_CATEGORY_SUBCATS_CREATE","Créer sous-catégories");
-define("_AM_SPARTNER_CATEGORY_SUBCATS_CREATE_DSC","Fill the text box with the names of sub catégories to create.<br>Leave blank to not create subcatégorie. To create more, enter the how much more to create then press 'Add'");
-define("_AM_SPARTNER_ADD_OPT","Add %s  more sub catégories");
-define("_AM_SPARTNER_ADD_OPT_SUBMIT","Add");
+define("_AM_SPARTNER_CATEGORY_SUBCATS_CREATE", "Créer sous-catégories");
+define("_AM_SPARTNER_CATEGORY_SUBCATS_CREATE_DSC", "Fill the text box with the names of sub catégories to create.<br>Leave blank to not create subcatégorie. To create more, enter the how much more to create then press 'Add'");
+define("_AM_SPARTNER_ADD_OPT", "Add %s  more sub catégories");
+define("_AM_SPARTNER_ADD_OPT_SUBMIT", "Add");
 define("_AM_SPARTNER_CATEGORY_CREATED", "Nouvelle catégorie créée et sauvegardée!");
-define("_AM_SPARTNER_CATEGORY_SUBCAT_SAVE_ERROR","Une erreur est survenue lors de la sauvegarde de la catégorie. Voici la liste des erreur(s) :");
+define("_AM_SPARTNER_CATEGORY_SUBCAT_SAVE_ERROR", "Une erreur est survenue lors de la sauvegarde de la catégorie. Voici la liste des erreur(s) :");
 define("_AM_SPARTNER_CATEGORY_DELETE_CONFIRM", "Notez qu'en supprimant une cat&eacute;gorie, tous les partenaires la concernant seront supprim&eacute;s &eacute;galement, ainsi que les commentaires y &eacute;tant joints. voulez-vous quand m&ecirc;me poursuivre?");
 define("_AM_SPARTNER_CATEGORY_DELETE_ERROR", "Une erreur est survenue lors de la suppression de la catégorie.");
 define("_AM_SPARTNER_CATEGORY_NONE", "Il n'y a pas de catégorie créée dans le module.");

@@ -16,76 +16,73 @@ Usage:
 //	Define your mapping here
 // ##########################################################
 $patterns = array(
-  // first one must be module directory name
-  'smartpartner'  => 'smartclient', 
-  'partner'  => 'client',  
-  'SMARTPARTNER'  => 'SMARTCLIENT',
-  'SmartPartner'  => 'SmartClient',
-  'Smart Partner' => 'Smart Client',
-  'SPARTNER'      => 'SCLIENT',
-  'Smartpartner'  => 'Smartclient', 
-  'Partner'  => 'Client',
-  'Partenaire'  => 'Client',
-  'partenaire'  => 'client'
+    // first one must be module directory name
+    'smartpartner' => 'smartclient',
+    'partner' => 'client',
+    'SMARTPARTNER' => 'SMARTCLIENT',
+    'SmartPartner' => 'SmartClient',
+    'Smart Partner' => 'Smart Client',
+    'SPARTNER' => 'SCLIENT',
+    'Smartpartner' => 'Smartclient',
+    'Partner' => 'Client',
+    'Partenaire' => 'Client',
+    'partenaire' => 'client'
 );
 
 $patKeys = array_keys($patterns);
 $patValues = array_values($patterns);
 
 // work around for PHP < 5.0.x
-if(!function_exists('file_put_contents')) {
-  function file_put_contents($filename, $data, $file_append = false) {
-    $fp = fopen($filename, (!$file_append ? 'w+' : 'a+'));
-    if(!$fp) {
-      trigger_error('file_put_contents cannot write in file.', E_USER_ERROR);
-      return;
+if (!function_exists('file_put_contents')) {
+    function file_put_contents($filename, $data, $file_append = false)
+    {
+        $fp = fopen($filename, (!$file_append ? 'w+' : 'a+'));
+        if (!$fp) {
+            trigger_error('file_put_contents cannot write in file.', E_USER_ERROR);
+            return;
+        }
+        fputs($fp, $data);
+        fclose($fp);
     }
-    fputs($fp, $data);
-    fclose($fp);
-  }
 }
 
 // recursive clonning script
-function cloneFileFolder($path) 
+function cloneFileFolder($path)
 {
-  global $patKeys;
-  global $patValues;
-  
-  $newPath = str_replace($patKeys[0], $patValues[0], $path);
-  $newPath = str_replace($patKeys[1], $patValues[1], $path);
+    global $patKeys;
+    global $patValues;
 
-  if (is_dir($path)) 
-  {
-    // create new dir
-    mkdir($newPath);
-    
-    // check all files in dir, and process it
-    if ($handle = opendir($path))
-    {
-      while ($file = readdir($handle)) 
-      {
-        if ($file != '.' && $file != '..') 
-        {
-          cloneFileFolder("$path/$file");
+    $newPath = str_replace($patKeys[0], $patValues[0], $path);
+    $newPath = str_replace($patKeys[1], $patValues[1], $path);
+
+    if (is_dir($path)) {
+        // create new dir
+        mkdir($newPath);
+
+        // check all files in dir, and process it
+        if ($handle = opendir($path)) {
+            while ($file = readdir($handle))
+            {
+                if ($file != '.' && $file != '..') {
+                    cloneFileFolder("$path/$file");
+                }
+            }
+            closedir($handle);
         }
-      }
-      closedir($handle);  
     }
-  } 
-  else 
-  {
-    if(preg_match('/(.jpg|.gif|.png|.zip)$/i', $path)) 
+    else
     {
-      copy($path, $newPath);
-    } 
-    else 
-    {
-      // file, read it
-      $content = file_get_contents($path);
-      $content = str_replace($patKeys, $patValues, $content);
-      file_put_contents($newPath, $content);
+        if (preg_match('/(.jpg|.gif|.png|.zip)$/i', $path)) {
+            copy($path, $newPath);
+        }
+        else
+        {
+            // file, read it
+            $content = file_get_contents($path);
+            $content = str_replace($patKeys, $patValues, $content);
+            file_put_contents($newPath, $content);
+        }
     }
-  }
 }
 
 cloneFileFolder('modules/smartpartner');

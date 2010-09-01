@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: index.php,v 1.2 2007/09/19 20:09:35 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: index.php,v 1.2 2007/09/19 20:09:35 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 include_once("admin_header.php");
 $myts = &MyTextSanitizer::getInstance();
@@ -13,33 +13,33 @@ $myts = &MyTextSanitizer::getInstance();
 $op = isset($_GET['op']) ? $_GET['op'] : '';
 
 switch ($op) {
-	case "createdir":
-	$path = isset($_GET['path']) ? $_GET['path'] : false;
-	if ($path) {
-		if ($path == 'root') {
-			$path = '';
-		}
-		$thePath = smartpartner_getUploadDir(true, $path);
+    case "createdir":
+        $path = isset($_GET['path']) ? $_GET['path'] : false;
+        if ($path) {
+            if ($path == 'root') {
+                $path = '';
+            }
+            $thePath = smartpartner_getUploadDir(true, $path);
 
-		$res = smartpartner_admin_mkdir($thePath);
-		if ($res) {
-			$source = SMARTPARTNER_ROOT_PATH . "images/blank.png";
-			$dest = $thePath . "blank.png";
+            $res = smartpartner_admin_mkdir($thePath);
+            if ($res) {
+                $source = SMARTPARTNER_ROOT_PATH . "images/blank.png";
+                $dest = $thePath . "blank.png";
 
-			smartpartner_copyr($source, $dest);
-		}
-		$msg = ($res)?_AM_SPARTNER_DIRCREATED:_AM_SPARTNER_DIRNOTCREATED;
+                smartpartner_copyr($source, $dest);
+            }
+            $msg = ($res) ? _AM_SPARTNER_DIRCREATED : _AM_SPARTNER_DIRNOTCREATED;
 
-	} else {
-		$msg = _AM_SPARTNER_DIRNOTCREATED;
-	}
+        } else {
+            $msg = _AM_SPARTNER_DIRNOTCREATED;
+        }
 
-	redirect_header('index.php', 2, $msg . ': ' . $thePath);
-	exit();
-	break;
+        redirect_header('index.php', 2, $msg . ': ' . $thePath);
+        exit();
+        break;
 }
 $pick = isset($_GET['pick']) ? intval($_GET['pick']) : 0;
-$pick = isset($_POST['pick']) ? intval($_POST['pick']) :$pick;
+$pick = isset($_POST['pick']) ? intval($_POST['pick']) : $pick;
 
 $statussel = isset($_GET['statussel']) ? intval($_GET['statussel']) : 0;
 $statussel = isset($_POST['statussel']) ? intval($_POST['statussel']) : $statussel;
@@ -55,45 +55,46 @@ $module_id = $xoopsModule->getVar('mid');
 
 function pathConfiguration()
 {
-	global $xoopsModule;
-	// Upload and Images Folders
-	smartpartner_collapsableBar('configtable', 'configtableicon', _AM_SPARTNER_PATHCONFIGURATION);
-	echo "<br />";
-	echo "<table width='100%' class='outer' cellspacing='1' cellpadding='3' border='0' ><tr>";
-	echo "<td class='bg3'><b>" . _AM_SPARTNER_PATH_ITEM . "</b></td>";
-	echo "<td class='bg3'><b>" . _AM_SPARTNER_PATH . "</b></td>";
-	echo "<td class='bg3' align='center'><b>" . _AM_SPARTNER_STATUS . "</b></td></tr>";
+    global $xoopsModule;
+    // Upload and Images Folders
+    smartpartner_collapsableBar('configtable', 'configtableicon', _AM_SPARTNER_PATHCONFIGURATION);
+    echo "<br />";
+    echo "<table width='100%' class='outer' cellspacing='1' cellpadding='3' border='0' ><tr>";
+    echo "<td class='bg3'><b>" . _AM_SPARTNER_PATH_ITEM . "</b></td>";
+    echo "<td class='bg3'><b>" . _AM_SPARTNER_PATH . "</b></td>";
+    echo "<td class='bg3' align='center'><b>" . _AM_SPARTNER_STATUS . "</b></td></tr>";
 
-	echo "<tr><td class='odd'>" . _AM_SPARTNER_PATH_IMAGES . "</td>";
-	$image_path = smartpartner_getImageDir();
-	echo "<td class='odd'>" . $image_path . "</td>";
-	echo "<td class='even' style='text-align: center;'>" . smartpartner_admin_getPathStatus('images') . "</td></tr>";
+    echo "<tr><td class='odd'>" . _AM_SPARTNER_PATH_IMAGES . "</td>";
+    $image_path = smartpartner_getImageDir();
+    echo "<td class='odd'>" . $image_path . "</td>";
+    echo "<td class='even' style='text-align: center;'>" . smartpartner_admin_getPathStatus('images') . "</td></tr>";
 
-	echo "<tr><td class='odd'>" . _AM_SPARTNER_PATH_CATEGORY_IMAGES . "</td>";
-	$image_path = smartpartner_getImageDir('category');
-	echo "<td class='odd'>" . $image_path . "</td>";
-	echo "<td class='even' style='text-align: center;'>" . smartpartner_admin_getPathStatus('images/category') . "</td></tr>";
+    echo "<tr><td class='odd'>" . _AM_SPARTNER_PATH_CATEGORY_IMAGES . "</td>";
+    $image_path = smartpartner_getImageDir('category');
+    echo "<td class='odd'>" . $image_path . "</td>";
+    echo "<td class='even' style='text-align: center;'>" . smartpartner_admin_getPathStatus('images/category') . "</td></tr>";
 
 
-	echo "</table>";
-	echo "<br />";
+    echo "</table>";
+    echo "<br />";
 
-	smartpartner_close_collapsable('configtable', 'configtableicon');
+    smartpartner_close_collapsable('configtable', 'configtableicon');
 }
 
 
 function buildTable()
 {
-	global $xoopsConfig, $xoopsModuleConfig, $xoopsModule;
-	echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'>";
-	echo "<tr>";
-	echo "<td class='bg3' width='200px' align='left'><b>" . _AM_SPARTNER_NAME . "</b></td>";
-	echo "<td width='' class='bg3' align='left'><b>" . _AM_SPARTNER_INTRO . "</b></td>";
-	echo "<td width='90' class='bg3' align='center'><b>" . _AM_SPARTNER_HITS . "</b></td>";
-	echo "<td width='90' class='bg3' align='center'><b>" . _AM_SPARTNER_STATUS . "</b></td>";
-	echo "<td width='90' class='bg3' align='center'><b>" . _AM_SPARTNER_ACTION . "</b></td>";
-	echo "</tr>";
+    global $xoopsConfig, $xoopsModuleConfig, $xoopsModule;
+    echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'>";
+    echo "<tr>";
+    echo "<td class='bg3' width='200px' align='left'><b>" . _AM_SPARTNER_NAME . "</b></td>";
+    echo "<td width='' class='bg3' align='left'><b>" . _AM_SPARTNER_INTRO . "</b></td>";
+    echo "<td width='90' class='bg3' align='center'><b>" . _AM_SPARTNER_HITS . "</b></td>";
+    echo "<td width='90' class='bg3' align='center'><b>" . _AM_SPARTNER_STATUS . "</b></td>";
+    echo "<td width='90' class='bg3' align='center'><b>" . _AM_SPARTNER_ACTION . "</b></td>";
+    echo "</tr>";
 }
+
 // Code for the page
 include_once XOOPS_ROOT_PATH . "/class/xoopslists.php";
 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
@@ -125,7 +126,7 @@ $totalrejected = $smartpartner_partner_handler->getPartnerCount(_SPARTNER_STATUS
 
 // Check Path Configuration
 if ((smartpartner_admin_getPathStatus('images', true) < 0) || (smartpartner_admin_getPathStatus('images/category', true) < 0)) {
-	pathConfiguration();
+    pathConfiguration();
 }
 
 // -- //
@@ -157,72 +158,72 @@ $selectedtxt2 = '';
 $selectedtxt3 = '';
 $selectedtxt4 = '';
 
-$sorttxtid='';
-$sorttxttitle='';
-$sorttxtweight='';
+$sorttxtid = '';
+$sorttxttitle = '';
+$sorttxtweight = '';
 
-$ordertxtasc='';
-$ordertxtdesc='';
+$ordertxtasc = '';
+$ordertxtdesc = '';
 
 switch ($sortsel) {
-	case 'title':
-	$sorttxttitle = "selected='selected'";
-	break;
+    case 'title':
+        $sorttxttitle = "selected='selected'";
+        break;
 
-	case 'weight':
-	$sorttxtweight = "selected='selected'";
-	break;
+    case 'weight':
+        $sorttxtweight = "selected='selected'";
+        break;
 
-	default :
-	$sorttxtid = "selected='selected'";
-	break;
+    default :
+        $sorttxtid = "selected='selected'";
+        break;
 }
 
 switch ($ordersel) {
-	case 'ASC':
-	$ordertxtasc = "selected='selected'";
-	break;
+    case 'ASC':
+        $ordertxtasc = "selected='selected'";
+        break;
 
-	default :
-	$ordertxtdesc = "selected='selected'";
-	break;
+    default :
+        $ordertxtdesc = "selected='selected'";
+        break;
 }
 
 switch ($statussel) {
-	case _SPARTNER_STATUS_ALL :
-	$selectedtxt0 = "selected='selected'";
-	$caption = _AM_SPARTNER_ALL;
-	$cond = "";
-	$status_explaination = _AM_SPARTNER_ALL_EXP;
-	break;
+    case _SPARTNER_STATUS_ALL :
+        $selectedtxt0 = "selected='selected'";
+        $caption = _AM_SPARTNER_ALL;
+        $cond = "";
+        $status_explaination = _AM_SPARTNER_ALL_EXP;
+        break;
 
-	case _SPARTNER_STATUS_SUBMITTED :
-	$selectedtxt1 = "selected='selected'";
-	$caption = _AM_SPARTNER_SUBMITTED;
-	$cond = " WHERE status = " . _SPARTNER_STATUS_SUBMITTED . " ";
-	$status_explaination = _AM_SPARTNER_SUBMITTED_EXP;
-	break;
+    case _SPARTNER_STATUS_SUBMITTED :
+        $selectedtxt1 = "selected='selected'";
+        $caption = _AM_SPARTNER_SUBMITTED;
+        $cond = " WHERE status = " . _SPARTNER_STATUS_SUBMITTED . " ";
+        $status_explaination = _AM_SPARTNER_SUBMITTED_EXP;
+        break;
 
-	case _SPARTNER_STATUS_ACTIVE :
-	$selectedtxt2 = "selected='selected'";
-	$caption = _AM_SPARTNER_ACTIVE;
-	$cond = " WHERE status = " . _SPARTNER_STATUS_ACTIVE . " ";
-	$status_explaination = _AM_SPARTNER_ACTIVE_EXP;
-	break;
+    case _SPARTNER_STATUS_ACTIVE :
+        $selectedtxt2 = "selected='selected'";
+        $caption = _AM_SPARTNER_ACTIVE;
+        $cond = " WHERE status = " . _SPARTNER_STATUS_ACTIVE . " ";
+        $status_explaination = _AM_SPARTNER_ACTIVE_EXP;
+        break;
 
-	case _SPARTNER_STATUS_REJECTED :
-	$selectedtxt3 = "selected='selected'";
-	$caption = _AM_SPARTNER_REJECTED;
-	$cond = " WHERE status = " . _SPARTNER_STATUS_REJECTED . " ";
-	$status_explaination = _AM_SPARTNER_REJECTED_EXP;
-	break;
+    case _SPARTNER_STATUS_REJECTED :
+        $selectedtxt3 = "selected='selected'";
+        $caption = _AM_SPARTNER_REJECTED;
+        $cond = " WHERE status = " . _SPARTNER_STATUS_REJECTED . " ";
+        $status_explaination = _AM_SPARTNER_REJECTED_EXP;
+        break;
 
-	case _SPARTNER_STATUS_INACTIVE :
-	$selectedtxt4 = "selected='selected'";
-	$caption = _AM_SPARTNER_INACTIVE;
-	$cond = " WHERE status = " . _SPARTNER_STATUS_INACTIVE . " ";
-	$status_explaination = _AM_SPARTNER_INACTIVE_EXP;
-	break;
+    case _SPARTNER_STATUS_INACTIVE :
+        $selectedtxt4 = "selected='selected'";
+        $caption = _AM_SPARTNER_INACTIVE;
+        $cond = " WHERE status = " . _SPARTNER_STATUS_INACTIVE . " ";
+        $status_explaination = _AM_SPARTNER_INACTIVE_EXP;
+        break;
 }
 
 /* -- Code to show selected terms -- */
@@ -268,60 +269,60 @@ buildTable();
 
 if ($numrows > 0) {
 
-	for ( $i = 0; $i < $totalPartnersOnPage; $i++ ) {
+    for ($i = 0; $i < $totalPartnersOnPage; $i++) {
 
-		$approve = '';
-		switch ($partnersObj[$i]->status()) {
+        $approve = '';
+        switch ($partnersObj[$i]->status()) {
 
-			case _SPARTNER_STATUS_SUBMITTED :
-			$statustxt = _AM_SPARTNER_SUBMITTED;
-			$approve = "<a href='partner.php?op=mod&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/approve.gif' title='" . _AM_SPARTNER_PARTNER_APPROVE . "' alt='" . _AM_SPARTNER_PARTNER_APPROVE . "' /></a>&nbsp;";
-			$delete = "<a href='partner.php?op=del&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/delete.gif' title='" . _AM_SPARTNER_PARTNER_DELETE . "' alt='" . _AM_SPARTNER_PARTNER_DELETE . "' /></a>&nbsp;";
-			$modify = "";
-			break;
+            case _SPARTNER_STATUS_SUBMITTED :
+                $statustxt = _AM_SPARTNER_SUBMITTED;
+                $approve = "<a href='partner.php?op=mod&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/approve.gif' title='" . _AM_SPARTNER_PARTNER_APPROVE . "' alt='" . _AM_SPARTNER_PARTNER_APPROVE . "' /></a>&nbsp;";
+                $delete = "<a href='partner.php?op=del&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/delete.gif' title='" . _AM_SPARTNER_PARTNER_DELETE . "' alt='" . _AM_SPARTNER_PARTNER_DELETE . "' /></a>&nbsp;";
+                $modify = "";
+                break;
 
-			case _SPARTNER_STATUS_ACTIVE :
-			$statustxt = _AM_SPARTNER_ACTIVE;
-			$approve = "";
-			$modify = "<a href='partner.php?op=mod&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/edit.gif' title='" . _AM_SPARTNER_PARTNER_EDIT . "' alt='" . _AM_SPARTNER_PARTNER_EDIT . "' /></a>&nbsp;";
-			$delete = "<a href='partner.php?op=del&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/delete.gif' title='" . _AM_SPARTNER_PARTNER_DELETE . "' alt='" . _AM_SPARTNER_PARTNER_DELETE . "' /></a>&nbsp;";
-			break;
+            case _SPARTNER_STATUS_ACTIVE :
+                $statustxt = _AM_SPARTNER_ACTIVE;
+                $approve = "";
+                $modify = "<a href='partner.php?op=mod&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/edit.gif' title='" . _AM_SPARTNER_PARTNER_EDIT . "' alt='" . _AM_SPARTNER_PARTNER_EDIT . "' /></a>&nbsp;";
+                $delete = "<a href='partner.php?op=del&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/delete.gif' title='" . _AM_SPARTNER_PARTNER_DELETE . "' alt='" . _AM_SPARTNER_PARTNER_DELETE . "' /></a>&nbsp;";
+                break;
 
-			case _SPARTNER_STATUS_INACTIVE :
-			$statustxt = _AM_SPARTNER_INACTIVE;
-			$approve = "";
-			$modify = "<a href='partner.php?op=mod&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/edit.gif' title='" . _AM_SPARTNER_PARTNER_EDIT . "' alt='" . _AM_SPARTNER_PARTNER_EDIT . "' /></a>&nbsp;";
-			$delete = "<a href='partner.php?op=del&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/delete.gif' title='" . _AM_SPARTNER_PARTNER_DELETE . "' alt='" . _AM_SPARTNER_PARTNER_DELETE . "' /></a>&nbsp;";
-			break;
+            case _SPARTNER_STATUS_INACTIVE :
+                $statustxt = _AM_SPARTNER_INACTIVE;
+                $approve = "";
+                $modify = "<a href='partner.php?op=mod&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/edit.gif' title='" . _AM_SPARTNER_PARTNER_EDIT . "' alt='" . _AM_SPARTNER_PARTNER_EDIT . "' /></a>&nbsp;";
+                $delete = "<a href='partner.php?op=del&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/delete.gif' title='" . _AM_SPARTNER_PARTNER_DELETE . "' alt='" . _AM_SPARTNER_PARTNER_DELETE . "' /></a>&nbsp;";
+                break;
 
-			case _SPARTNER_STATUS_REJECTED :
-			$statustxt = _AM_SPARTNER_REJECTED;
-			$approve = "";
-			$modify = "<a href='partner.php?op=mod&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/edit.gif' title='" . _AM_SPARTNER_PARTNER_EDIT . "' alt='" . _AM_SPARTNER_PARTNER_EDIT . "' /></a>&nbsp;";
-			$delete = "<a href='partner.php?op=del&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/delete.gif' title='" . _AM_SPARTNER_PARTNER_DELETE . "' alt='" . _AM_SPARTNER_PARTNER_DELETE . "' /></a>&nbsp;";
-			break;
+            case _SPARTNER_STATUS_REJECTED :
+                $statustxt = _AM_SPARTNER_REJECTED;
+                $approve = "";
+                $modify = "<a href='partner.php?op=mod&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/edit.gif' title='" . _AM_SPARTNER_PARTNER_EDIT . "' alt='" . _AM_SPARTNER_PARTNER_EDIT . "' /></a>&nbsp;";
+                $delete = "<a href='partner.php?op=del&id=" . $partnersObj[$i]->id() . "'><img src='" . XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/images/icon/delete.gif' title='" . _AM_SPARTNER_PARTNER_DELETE . "' alt='" . _AM_SPARTNER_PARTNER_DELETE . "' /></a>&nbsp;";
+                break;
 
-			case "default" :
-			default :
-			$statustxt = "";
-			$approve = "";
-			$modify = "";
-			break;
-		}
+            case "default" :
+            default :
+                $statustxt = "";
+                $approve = "";
+                $modify = "";
+                break;
+        }
 
-		echo "<tr>";
-		echo "<td class='head' align='left'><a href='" . SMARTPARTNER_URL . "partner.php?id=" . $partnersObj[$i]->id() . "'><img src='" . SMARTPARTNER_URL . "images/links/partner.gif' alt=''/>&nbsp;" . $partnersObj[$i]->title() . "</a></td>";
-		echo "<td class='even' align='left'>" . $partnersObj[$i]->summary(100) . "</td>";
-		echo "<td class='even' align='center'>" . $partnersObj[$i]->hits() . "</td>";
-		echo "<td class='even' align='center'>" . $statustxt . "</td>";
-		echo "<td class='even' align='center'> ". $approve . $modify . $delete . "</td>";
-		echo "</tr>";
-	}
+        echo "<tr>";
+        echo "<td class='head' align='left'><a href='" . SMARTPARTNER_URL . "partner.php?id=" . $partnersObj[$i]->id() . "'><img src='" . SMARTPARTNER_URL . "images/links/partner.gif' alt=''/>&nbsp;" . $partnersObj[$i]->title() . "</a></td>";
+        echo "<td class='even' align='left'>" . $partnersObj[$i]->summary(100) . "</td>";
+        echo "<td class='even' align='center'>" . $partnersObj[$i]->hits() . "</td>";
+        echo "<td class='even' align='center'>" . $statustxt . "</td>";
+        echo "<td class='even' align='center'> " . $approve . $modify . $delete . "</td>";
+        echo "</tr>";
+    }
 } else {
-	// that is, $numrows = 0, there's no entries yet
-	echo "<tr>";
-	echo "<td class='head' align='center' colspan= '7'>" . _AM_SPARTNER_NOPARTNERS . "</td>";
-	echo "</tr>";
+    // that is, $numrows = 0, there's no entries yet
+    echo "<tr>";
+    echo "<td class='head' align='center' colspan= '7'>" . _AM_SPARTNER_NOPARTNERS . "</td>";
+    echo "</tr>";
 }
 echo "</table>\n";
 echo "<span style=\"color: #567; margin: 3px 0 18px 0; font-size: small; display: block; \">$status_explaination</span>";
@@ -329,16 +330,16 @@ echo "<span style=\"color: #567; margin: 3px 0 18px 0; font-size: small; display
 $pagenav = new XoopsPageNav($numrows, $xoopsModuleConfig['perpage_admin'], $startentry, 'startentry', "statussel=$statussel&amp;sortsel=$sortsel&amp;ordersel=$ordersel");
 
 if ($xoopsModuleConfig['useimagenavpage'] == 1) {
-	echo '<div style="text-align:right; background-color: white; margin: 10px 0;">' . $pagenav->renderImageNav() . '</div>';
+    echo '<div style="text-align:right; background-color: white; margin: 10px 0;">' . $pagenav->renderImageNav() . '</div>';
 } else {
-	echo '<div style="text-align:right; background-color: white; margin: 10px 0;">' . $pagenav->renderNav() . '</div>';
+    echo '<div style="text-align:right; background-color: white; margin: 10px 0;">' . $pagenav->renderNav() . '</div>';
 }
 // ENDs code to show active entries
 smartpartner_close_collapsable('allitems', 'allitemsicon');
 // Close the collapsable div
 // Check Path Configuration
 if ((smartpartner_admin_getPathStatus('images', true) > 0) && (smartpartner_admin_getPathStatus('images/category', true) > 0)) {
-	pathConfiguration();
+    pathConfiguration();
 }
 echo "</div>";
 echo "</div>";

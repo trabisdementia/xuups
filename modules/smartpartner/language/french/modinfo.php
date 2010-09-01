@@ -1,11 +1,11 @@
 <?php
 
 /**
-* $Id: modinfo.php,v 1.1 2007/06/05 18:32:42 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: modinfo.php,v 1.1 2007/06/05 18:32:42 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 
 define('_MI_SPARTNER_ADMENU1', 'Index');
 define('_MI_SPARTNER_ADMENU2', 'Partenaires');
@@ -73,7 +73,7 @@ define('_MI_SPARTNER_PERPAGE_ADMIN_DSC', "Nombre maximum de partenaires pouvant 
 
 define('_MI_SPARTNER_WELCOMEMSG', 'Message de Bienvenue:');
 define('_MI_SPARTNER_WELCOMEMSG_DSC', 'Message de bienvenue &agrave; montrer dans la page index du module.');
-define('_MI_SPARTNER_WELCOMEMSG_DEF', "Ici sont regroup&eacute;s les partenaires du site. Cliquez sur leur logo pour acc&eacute;der &agrave; leur site web."); 
+define('_MI_SPARTNER_WELCOMEMSG_DEF', "Ici sont regroup&eacute;s les partenaires du site. Cliquez sur leur logo pour acc&eacute;der &agrave; leur site web.");
 
 define('_MI_SPARTNER_USEIMAGENAVPAGE', "Utiliser l'image de la page de Navigation:");
 define('_MI_SPARTNER_USEIMAGENAVPAGEDSC', 'Si vous param&egrave;trez cette option &agrave; "Oui", La page de Navigation sera montr&eacute;e avec une image, sinon, La page de navigation originale sera utilis&eacute;e.');
@@ -115,9 +115,9 @@ define('_MI_SPARTNER_GLOBAL_PARTNER_SUBMITTED_NOTIFY_DSC', "Recevoir une notific
 define('_MI_SPARTNER_GLOBAL_PARTNER_SUBMITTED_NOTIFY_SBJ', "[{X_SITENAME}] {X_MODULE} auto-notify : Nouveau partenaire soumis");
 
 define('_MI_SPARTNER_PARTNER_APPROVED_NOTIFY', "Partenaire approuv&eacute;");
-define('_MI_SPARTNER_PARTNER_APPROVED_NOTIFY_CAP', "Notifiez moi quand un partenaire est approuv&eacute;.");   
-define('_MI_SPARTNER_PARTNER_APPROVED_NOTIFY_DSC', "Recevoir une notification quand un partenaire est approuv&eacute;.");      
-define('_MI_SPARTNER_PARTNER_APPROVED_NOTIFY_SBJ', "[{X_SITENAME}] {X_MODULE} auto-notify : Partenaire approuv&eacute;"); 
+define('_MI_SPARTNER_PARTNER_APPROVED_NOTIFY_CAP', "Notifiez moi quand un partenaire est approuv&eacute;.");
+define('_MI_SPARTNER_PARTNER_APPROVED_NOTIFY_DSC', "Recevoir une notification quand un partenaire est approuv&eacute;.");
+define('_MI_SPARTNER_PARTNER_APPROVED_NOTIFY_SBJ', "[{X_SITENAME}] {X_MODULE} auto-notify : Partenaire approuv&eacute;");
 
 
 // About.php constants

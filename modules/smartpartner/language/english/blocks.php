@@ -1,17 +1,17 @@
 <?php
 
 /**
-* $Id: blocks.php,v 1.2 2007/09/18 14:01:04 marcan Exp $
-* Module: SmartPartner
-* Author: The SmartFactory <www.smartfactory.ca>
-* Licence: GNU
-*/
+ * $Id: blocks.php,v 1.2 2007/09/18 14:01:04 marcan Exp $
+ * Module: SmartPartner
+ * Author: The SmartFactory <www.smartfactory.ca>
+ * Licence: GNU
+ */
 // including the common language file
 $fileName = XOOPS_ROOT_PATH . '/modules/smartpartner/language/' . $GLOBALS['xoopsConfig']['language'] . '/common.php';
 if (file_exists($fileName)) {
-	include_once $fileName;
+    include_once $fileName;
 } else {
-	include_once XOOPS_ROOT_PATH . '/modules/smartpartner/language/english/common.php';
+    include_once XOOPS_ROOT_PATH . '/modules/smartpartner/language/english/common.php';
 }
 define('_MB_SPARTNER_PARTNERS_PSPACE', 'Put spaces between partners?');
 define('_MB_SPARTNER_BRAND', 'Randomize partners in blocks?');
