@@ -200,10 +200,10 @@ class PublisherItemForm extends XoopsThemeTabForm
 
         // VARIOUS OPTIONS
         if ($this->isGranted(_PUBLISHER_DOHTML) ||
-                $this->isGranted(_PUBLISHER_DOSMILEY) ||
-                $this->isGranted(_PUBLISHER_DOXCODE) ||
-                $this->isGranted(_PUBLISHER_DOIMAGE) ||
-                $this->isGranted(_PUBLISHER_DOLINEBREAK)
+            $this->isGranted(_PUBLISHER_DOSMILEY) ||
+            $this->isGranted(_PUBLISHER_DOXCODE) ||
+            $this->isGranted(_PUBLISHER_DOIMAGE) ||
+            $this->isGranted(_PUBLISHER_DOLINEBREAK)
         ) {
             if ($this->isGranted(_PUBLISHER_DOHTML)) {
                 $html_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOHTML, 'dohtml', $obj->dohtml(), _YES, _NO);

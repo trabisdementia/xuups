@@ -69,10 +69,10 @@ $totalrejected = $publisher->getHandler('item')->getItemsCount(-1, array(_PUBLIS
 
 // Check Path Configuration
 if ((publisher_getPathStatus('root', true) < 0) ||
-        (publisher_getPathStatus('images', true) < 0) ||
-        (publisher_getPathStatus('images/category', true) < 0) ||
-        (publisher_getPathStatus('images/item', true) < 0) ||
-        (publisher_getPathStatus('content', true) < 0)) {
+    (publisher_getPathStatus('images', true) < 0) ||
+    (publisher_getPathStatus('images/category', true) < 0) ||
+    (publisher_getPathStatus('images/item', true) < 0) ||
+    (publisher_getPathStatus('content', true) < 0)) {
 
     createDir();
 }
