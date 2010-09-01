@@ -1,51 +1,56 @@
 <?php
-//Include XOOPS Global Includes
 error_reporting(E_ALL); //Enable Error Reporting
-$xoopsOption['nocommon'] = 1;
-
-require '../../mainfile.php';
-require_once XOOPS_ROOT_PATH.'/kernel/object.php';
-require_once XOOPS_ROOT_PATH.'/class/criteria.php';
-require_once XOOPS_ROOT_PATH.'/include/functions.php';
-include_once XOOPS_ROOT_PATH.'/class/logger.php';
-include_once XOOPS_ROOT_PATH.'/class/module.textsanitizer.php';
-include_once XOOPS_ROOT_PATH.'/class/xoopsuser.php';
-
-define("XOOPS_CACHE_PATH", XOOPS_ROOT_PATH."/cache");
-define("XOOPS_UPLOAD_PATH", XOOPS_ROOT_PATH."/uploads");
-define("XOOPS_THEME_PATH", XOOPS_ROOT_PATH."/themes");
-define("XOOPS_COMPILE_PATH", XOOPS_ROOT_PATH."/templates_c");
-define("XOOPS_THEME_URL", XOOPS_URL."/themes");
-define("XOOPS_UPLOAD_URL", XOOPS_URL."/uploads");
-
-if (!defined('XHELP_CONSTANTS_INCLUDED')) {
-    include_once(XOOPS_ROOT_PATH.'/modules/xhelp/include/constants.php');
+if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+    set_magic_quotes_runtime(0);
 }
 
-require_once(XHELP_BASE_PATH.'/functions.php');
+if (function_exists('mb_http_output')) {
+    mb_http_output('pass');
+}
+$xoopsOption['nocommon'] = 1;
+require '../../mainfile.php';
 
-//Initialize XOOPS Logger
-$xoopsLogger =& XoopsLogger::instance();
+defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+defined('NWLINE')or define('NWLINE', "\n");
+
+//Include XOOPS Global Includes
+include XOOPS_ROOT_PATH . '/include/functions.php';
+include_once XOOPS_ROOT_PATH . '/class/xoopsload.php';
+include_once XOOPS_ROOT_PATH . '/class/preload.php';
+include_once XOOPS_ROOT_PATH . '/class/logger/xoopslogger.php';
+include_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
+include_once XOOPS_ROOT_PATH . '/class/database/databasefactory.php';
+require_once XOOPS_ROOT_PATH . '/kernel/object.php';
+require_once XOOPS_ROOT_PATH . '/class/criteria.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopskernel.php';
+
+$xoops = new xos_kernel_Xoops2();
+$xoops->pathTranslation();
+
+$xoopsLogger =& XoopsLogger::getInstance();
 $xoopsLogger->startTime();
 
-//Initialize DB Connection
-include_once XOOPS_ROOT_PATH.'/class/database/databasefactory.php';
+define('XOOPS_DB_PROXY', 1);
 $xoopsDB =& XoopsDatabaseFactory::getDatabaseConnection();
+
+//End of Xoops globals include
+
+if (!defined('XHELP_CONSTANTS_INCLUDED')) {
+    include_once(XOOPS_ROOT_PATH . '/modules/xhelp/include/constants.php');
+}
+
+require_once(XHELP_BASE_PATH . '/functions.php');
+
 $module_handler =& xoops_gethandler('module');
 $module =& $module_handler;
 $config_handler =& xoops_gethandler('config');
 $xoopsConfig =& $config_handler->getConfigsByCat(XOOPS_CONF);
 
-//Include XOOPS Language Files
-if ( file_exists(XOOPS_ROOT_PATH."/language/".$xoopsConfig['language']."/global.php") ) {
-    include_once XOOPS_ROOT_PATH."/language/".$xoopsConfig['language']."/global.php";
-} else {
-    include_once XOOPS_ROOT_PATH."/language/english/global.php";
-}
+xoops_loadLanguage('global');
 
 $xoopsConfigUser = array();
 $myConfigs =& $config_handler->getConfigs();
-foreach($myConfigs as $myConf){
+foreach ($myConfigs as $myConf) {
     $xoopsConfigUser[$myConf->getVar('conf_name')] = $myConf->getVar('conf_value');
 }
 
