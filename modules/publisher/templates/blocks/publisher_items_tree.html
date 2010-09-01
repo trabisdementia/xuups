@@ -1,29 +1,21 @@
 <div class="publisher_tree">
 
-	<{defun name="testrecursion" list=$block.arrayTree}>
-		<ul>
-			<{foreach from=$list item=category key=k}>
-				<{if $k == "items"}>
-					<{foreach from=$category item=item key=itemkey}>
-						<li class="publisher_tree_category"><{$item.itemLink}></li>
-					<{/foreach}>
-				<{else}>
-					<li class="publisher_tree_item">						
-						<a href="<{$category.categoryUrl}>" title="<{$category.name}>"><{$category.name}></a>
-						<{if $category.subcats}>
-							<{fun name="testrecursion" list=$category.subcats}>
-						<{/if}><{*subcats*}>
-						<{if $category.items}>
-							<ul>
-								<{foreach from=$category.items item=item}>
-									<li><{$item.itemLink}></li>
-								<{/foreach}>
-							</ul>
-						<{/if}><{*items*}>
-					</li>
-				<{/if}><{*$k == "items"*}>
-			<{/foreach}>
-		</ul>
-	<{/defun}>
+    <{defun name="testrecursion" list=$block.arrayTree}>
+    <ul>
+        <{foreach from=$list item=category key=k}> <{if $k == "items"}> <{foreach from=$category item=item key=itemkey}>
+        <li class="publisher_tree_category"><{$item.itemLink}></li>
+        <{/foreach}> <{else}>
+        <li class="publisher_tree_item">
+            <a href="<{$category.categoryUrl}>" title="<{$category.name}>"><{$category.name}></a> <{if $category.subcats}> <{fun name="testrecursion" list=$category.subcats}> <{/if}><{*subcats*}> <{if $category.items}>
+            <ul>
+                <{foreach from=$category.items item=item}>
+                <li><{$item.itemLink}></li>
+                <{/foreach}>
+            </ul>
+            <{/if}><{*items*}>
+        </li>
+        <{/if}><{*$k == "items"*}> <{/foreach}>
+    </ul>
+    <{/defun}>
 
 </div><!--publisher_tree-->
