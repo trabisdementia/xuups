@@ -1,26 +1,28 @@
 <?php
 // $Id: timeSpentByDept.php,v 1.9 2006/02/06 19:58:23 eric_juden Exp $
 
-include_once(XHELP_JPGRAPH_PATH .'/jpgraph.php');
-include_once(XHELP_CLASS_PATH .'/report.php');
+include_once(XHELP_JPGRAPH_PATH . '/jpgraph.php');
+include_once(XHELP_CLASS_PATH . '/report.php');
 xhelpIncludeReportLangFile('timeSpentByDept');
 
 global $xoopsDB, $paramVals;
 
-$startDate = date('m/d/y h:i:s A', mktime(0, 0, 0, date("m")-1, date("d"), date("Y")));
-$endDate = date('m/d/y') ." 12:00:00 AM";
+$startDate = date('m/d/y h:i:s A', mktime(0, 0, 0, date("m") - 1, date("d"), date("Y")));
+$endDate = date('m/d/y') . " 12:00:00 AM";
 
 // Cannot fill date values in class...have to fill these values later
 $paramVals = array('startDate' => ((isset($_REQUEST['startDate']) && $_REQUEST['startDate'] != '') ? $_REQUEST['startDate'] : $startDate),
                    'endDate' => ((isset($_REQUEST['endDate']) && $_REQUEST['endDate'] != '') ? $_REQUEST['endDate'] : $endDate));
 
-class xhelpTimeSpentByDeptReport extends xhelpReport {
+class xhelpTimeSpentByDeptReport extends xhelpReport
+{
     function xhelpTimeSpentByDeptReport()
     {
         $this->initVar('results', XOBJ_DTYPE_ARRAY, null, false);
         $this->initVar('hasResults', XOBJ_DTYPE_INT, 0, false);
         $this->initVar('hasGraph', XOBJ_DTYPE_INT, 1, false);
     }
+
     var $name = 'timeSpentByDept';
 
     var $meta = array(
@@ -30,23 +32,23 @@ class xhelpTimeSpentByDeptReport extends xhelpReport {
         'description' => _XHELP_TSBD_DESC,
         'version' => '1.0',
         'dbFields' => array(
-            'department' => _XHELP_TSBD_DB1, 
+            'department' => _XHELP_TSBD_DB1,
             'TotalTime' => _XHELP_TSBD_DB2)
     );
 
     var $parameters = array(
-    _XHELP_TSBD_PARAM1 => array(
+        _XHELP_TSBD_PARAM1 => array(
             'controltype' => XHELP_CONTROL_DATETIME,
             'fieldname' => 'startDate',
-            'value' => '',      // last month
+            'value' => '', // last month
             'values' => '',
             'fieldlength' => 25,
             'dbfield' => 'r.updateTime',
             'dbaction' => '>'),
-    _XHELP_TSBD_PARAM2 => array (
+        _XHELP_TSBD_PARAM2 => array(
             'controltype' => XHELP_CONTROL_DATETIME,
             'fieldname' => 'endDate',
-            'value' => '',      // today
+            'value' => '', // today
             'values' => '',
             'fieldlength' => 25,
             'dbfield' => 'r.updateTime',
@@ -116,23 +118,23 @@ class xhelpTimeSpentByDeptReport extends xhelpReport {
 
     function generateGraph()
     {
-        if($this->getVar('hasGraph') == 0){
+        if ($this->getVar('hasGraph') == 0) {
             return false;
         }
 
-        if($this->getVar('hasResults') == 0){
+        if ($this->getVar('hasResults') == 0) {
             $this->_setResults();
         }
         $aResults = $this->getVar('results');
 
         $i = 0;
         $data = array();
-        foreach($aResults as $result){
-            $data[0][] = $result['department'];     // Used for identifier on chart
-            $data[1][] = $result['TotalTime'];      // used for data on chart
+        foreach ($aResults as $result) {
+            $data[0][] = $result['department']; // Used for identifier on chart
+            $data[1][] = $result['TotalTime']; // used for data on chart
         }
 
-        $this->generatePie3D($data, 0, 1, XHELP_IMAGE_PATH .'/graph_bg.jpg');
+        $this->generatePie3D($data, 0, 1, XHELP_IMAGE_PATH . '/graph_bg.jpg');
     }
 
     function _setResults()
@@ -140,7 +142,7 @@ class xhelpTimeSpentByDeptReport extends xhelpReport {
         global $xoopsDB;
 
         $sSQL = sprintf("SELECT d.department, SUM(r.timeSpent) AS TotalTime FROM %s d, %s t, %s r WHERE (d.id = t.department) AND (t.id = r.ticketid) %s GROUP BY d.department",
-        $xoopsDB->prefix('xhelp_departments'), $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('xhelp_responses'), $this->extraWhere);
+                        $xoopsDB->prefix('xhelp_departments'), $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('xhelp_responses'), $this->extraWhere);
 
         $result = $xoopsDB->query($sSQL);
         $aResults = $this->_arrayFromData($result);

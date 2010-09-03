@@ -246,24 +246,24 @@ define("_AM_XHELP_MINDEX_ACTION", "Action");
 define("_AM_XHELP_MINDEX_PAGE", "<b>Page :<b> ");
 
 //image admin icon
-define("_AM_XHELP_ICO_EDIT","Editer cet &eacute;l&eacute;ment");
-define("_AM_XHELP_ICO_DELETE","Supprimer cet &eacute;l&eacute;ment");
-define("_AM_XHELP_ICO_ONLINE","En ligne");
-define("_AM_XHELP_ICO_OFFLINE","Hors ligne");
-define("_AM_XHELP_ICO_APPROVED","Approuv&eacute;");
-define("_AM_XHELP_ICO_NOTAPPROVED","Non Approuv&eacute;");
+define("_AM_XHELP_ICO_EDIT", "Editer cet &eacute;l&eacute;ment");
+define("_AM_XHELP_ICO_DELETE", "Supprimer cet &eacute;l&eacute;ment");
+define("_AM_XHELP_ICO_ONLINE", "En ligne");
+define("_AM_XHELP_ICO_OFFLINE", "Hors ligne");
+define("_AM_XHELP_ICO_APPROVED", "Approuv&eacute;");
+define("_AM_XHELP_ICO_NOTAPPROVED", "Non Approuv&eacute;");
 
-define("_AM_XHELP_ICO_LINK","Lien relatif");
-define("_AM_XHELP_ICO_URL","Ajouter une URL");
-define("_AM_XHELP_ICO_ADD","Ajouter");
-define("_AM_XHELP_ICO_APPROVE","Approuver");
-define("_AM_XHELP_ICO_STATS","Stats");
+define("_AM_XHELP_ICO_LINK", "Lien relatif");
+define("_AM_XHELP_ICO_URL", "Ajouter une URL");
+define("_AM_XHELP_ICO_ADD", "Ajouter");
+define("_AM_XHELP_ICO_APPROVE", "Approuver");
+define("_AM_XHELP_ICO_STATS", "Stats");
 
-define("_AM_XHELP_ICO_IGNORE","Ignorer");
-define("_AM_XHELP_ICO_ACK","Rapport de rompus accept&eacute;");
-define("_AM_XHELP_ICO_REPORT","Accepter le rapport des rompus?");
-define("_AM_XHELP_ICO_CONFIRM","Rapport de rompu confirm&eacute;");
-define("_AM_XHELP_ICO_CONBROKEN","Confirmer le rapport de rompus?");
+define("_AM_XHELP_ICO_IGNORE", "Ignorer");
+define("_AM_XHELP_ICO_ACK", "Rapport de rompus accept&eacute;");
+define("_AM_XHELP_ICO_REPORT", "Accepter le rapport des rompus?");
+define("_AM_XHELP_ICO_CONFIRM", "Rapport de rompu confirm&eacute;");
+define("_AM_XHELP_ICO_CONBROKEN", "Confirmer le rapport de rompus?");
 
 define("_AM_XHELP_UPLOADFILE", "Fichier transmis correctement");
 define('_AM_XHELP_TEXT_TICKET_INFO', 'Information Ticket');

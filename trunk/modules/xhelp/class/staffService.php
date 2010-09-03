@@ -17,15 +17,15 @@ class xhelpStaffService extends xhelpService
     /**
      * Instance of the xoopsStaffHandler
      *
-     * @var	object
-     * @access	private
+     * @var    object
+     * @access    private
      */
     var $_hStaff;
 
     /**
      * Class Constructor
      *
-     * @access	public
+     * @access    public
      */
     function xhelpStaffService()
     {
@@ -46,7 +46,7 @@ class xhelpStaffService extends xhelpService
 
 
         //if first response for ticket, update staff responsetime
-        $hResponse   =& xhelpGetHandler('responses');
+        $hResponse =& xhelpGetHandler('responses');
         $hMembership =& xhelpGetHandler('membership');
         if ($hResponse->getStaffResponseCount($ticket->getVar('id')) == 1) {
             if ($hMembership->isStaffMember($response->getVar('uid'), $ticket->getVar('department'))) {
@@ -70,8 +70,8 @@ class xhelpStaffService extends xhelpService
     {
         global $xoopsUser;
 
-        $update    = time();
-        $uid       = $xoopsUser->getVar('uid');
+        $update = time();
+        $uid = $xoopsUser->getVar('uid');
         $hResponse =& xhelpGetHandler('responses');
         foreach ($tickets as $ticket) {
             //if first response for ticket, update staff responsetime
@@ -130,7 +130,7 @@ class xhelpStaffService extends xhelpService
      */
     function reopen_ticket($ticket)
     {
-         
+
         $hMembership =& xhelpGetHandler('membership');
         if ($hMembership->isStaffMember($ticket->getVar('closedBy'), $ticket->getVar('department'))) {
             $this->_hStaff->increaseCallsClosed($ticket->getVar('closedBy'), -1);
@@ -172,7 +172,7 @@ class xhelpStaffService extends xhelpService
         }
 
         $value[] = $ticket->getVar('id');
-         
+
         $value = array_merge($value, $oldvalue);
         $value = $this->_array_unique($value);
         $value = array_slice($value, 0, 5);
@@ -196,7 +196,7 @@ class xhelpStaffService extends xhelpService
     /**
      * Only have 1 instance of class used
      * @return object {@link xhelp_staffService}
-     * @access	public
+     * @access    public
      */
     function &singleton()
     {
@@ -204,11 +204,11 @@ class xhelpStaffService extends xhelpService
         static $instance;
 
         // If the instance is not there, create one
-        if(!isset($instance)) {
+        if (!isset($instance)) {
             $c = __CLASS__;
             $instance = new $c;
         }
-        return($instance);
+        return ($instance);
     }
 
     function _array_unique($array)
@@ -216,7 +216,7 @@ class xhelpStaffService extends xhelpService
         $out = array();
 
         //    loop through the inbound
-        foreach ($array as $key=>$value) {
+        foreach ($array as $key => $value) {
             //    if the item isn't in the array
             if (!in_array($value, $out)) { //    add it to the array
                 $out[$key] = $value;
@@ -238,4 +238,5 @@ class xhelpStaffService extends xhelpService
         $this->_attachEvent('view_ticket', $this);
     }
 }
+
 ?>

@@ -1,20 +1,21 @@
 <?php
 // $Id: ticketsByDept.php,v 1.8 2006/02/06 19:58:23 eric_juden Exp $
 
-include_once(XHELP_JPGRAPH_PATH .'/jpgraph.php');
-include_once(XHELP_CLASS_PATH .'/report.php');
+include_once(XHELP_JPGRAPH_PATH . '/jpgraph.php');
+include_once(XHELP_CLASS_PATH . '/report.php');
 xhelpIncludeReportLangFile('ticketsByDept');
 
 global $xoopsDB, $paramVals;
 
-$startDate = date('m/d/y h:i:s A', mktime(0, 0, 0, date("m")-1, date("d"), date("Y")));
-$endDate = date('m/d/y') ." 12:00:00 AM";
+$startDate = date('m/d/y h:i:s A', mktime(0, 0, 0, date("m") - 1, date("d"), date("Y")));
+$endDate = date('m/d/y') . " 12:00:00 AM";
 
 // Cannot fill date values in class...have to fill these values later
 $paramVals = array('startDate' => ((isset($_REQUEST['startDate']) && $_REQUEST['startDate'] != '') ? $_REQUEST['startDate'] : $startDate),
                    'endDate' => ((isset($_REQUEST['endDate']) && $_REQUEST['endDate'] != '') ? $_REQUEST['endDate'] : $endDate));
 
-class xhelpTicketsByDeptReport extends xhelpReport {
+class xhelpTicketsByDeptReport extends xhelpReport
+{
     function xhelpTicketsByDeptReport()
     {
         $this->initVar('results', XOBJ_DTYPE_ARRAY, null, false);
@@ -31,22 +32,22 @@ class xhelpTicketsByDeptReport extends xhelpReport {
         'description' => _XHELP_TBD_DESC,
         'version' => '1.0',
         'dbFields' => array(
-            'department' => _XHELP_TBD_DB1, 
+            'department' => _XHELP_TBD_DB1,
             'TicketCount' => _XHELP_TBD_DB2));
 
     var $parameters = array(
-    _XHELP_TBD_PARAM1 => array(
+        _XHELP_TBD_PARAM1 => array(
             'controltype' => XHELP_CONTROL_DATETIME,
             'fieldname' => 'startDate',
-            'value' => '',      // last month
+            'value' => '', // last month
             'values' => '',
             'fieldlength' => 25,
             'dbfield' => 't.posted',
             'dbaction' => '>'),
-    _XHELP_TBD_PARAM2 => array (
+        _XHELP_TBD_PARAM2 => array(
             'controltype' => XHELP_CONTROL_DATETIME,
             'fieldname' => 'endDate',
-            'value' => '',      // today
+            'value' => '', // today
             'values' => '',
             'fieldlength' => 25,
             'dbfield' => 't.posted',
@@ -116,25 +117,25 @@ class xhelpTicketsByDeptReport extends xhelpReport {
 
     function generateGraph()
     {
-        if($this->getVar('hasResults') == 0){
+        if ($this->getVar('hasResults') == 0) {
             $this->_setResults();
         }
         $aResults = $this->getVar('results');
 
         $i = 0;
         $data = array();
-        foreach($aResults as $result){
+        foreach ($aResults as $result) {
             $data[0][] = $result['department'];
             $data[1][] = $result['TicketCount'];
         }
-        $this->generatePie3D($data, 0, 1, XHELP_IMAGE_PATH .'/graph_bg.jpg');
+        $this->generatePie3D($data, 0, 1, XHELP_IMAGE_PATH . '/graph_bg.jpg');
     }
 
     function _setResults()
     {
         global $xoopsDB;
         $sSQL = sprintf("SELECT DISTINCT d.department, COUNT(*) AS TicketCount FROM %s t, %s d WHERE t.department = d.id AND (d.id = t.department) %s GROUP BY d.department",
-        $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('xhelp_departments'), $this->extraWhere);
+                        $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('xhelp_departments'), $this->extraWhere);
 
         $result = $xoopsDB->query($sSQL);
         $aResults = $this->_arrayFromData($result);
@@ -144,4 +145,5 @@ class xhelpTicketsByDeptReport extends xhelpReport {
         return true;
     }
 }
+
 ?>

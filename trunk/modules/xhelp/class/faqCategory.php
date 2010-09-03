@@ -1,7 +1,8 @@
 <?php
 // $Id: faqCategory.php,v 1.3 2005/11/23 17:20:27 eric_juden Exp $
 
-class xhelpFaqCategory extends XoopsObject {
+class xhelpFaqCategory extends XoopsObject
+{
     function xhelpFaqCategory()
     {
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
@@ -15,10 +16,12 @@ class xhelpFaqCategory extends XoopsObject {
     }
 }
 
-Class xhelpFaqCategoryHandler extends XoopsObjectHandler {
+Class xhelpFaqCategoryHandler extends XoopsObjectHandler
+{
     function &create()
     {
         return new xhelpFaqCategory();
     }
 }
+
 ?>

@@ -1,7 +1,7 @@
 <?php
 //$Id: firnService.php,v 1.1 2005/12/02 23:16:56 ackbarr Exp $
 
-require_once(XHELP_CLASS_PATH.'/xhelpService.php');
+require_once(XHELP_CLASS_PATH . '/xhelpService.php');
 
 /**
  * xhelpFirnService class
@@ -49,7 +49,7 @@ class xhelpFirnService extends xhelpService
     /**
      * Only have 1 instance of class used
      * @return object {@link xhelp_eventService}
-     * @access	public
+     * @access    public
      */
     function &singleton()
     {
@@ -57,12 +57,13 @@ class xhelpFirnService extends xhelpService
         static $instance;
 
         // If the instance is not there, create one
-        if(!isset($instance)) {
+        if (!isset($instance)) {
             $c = __CLASS__;
             $instance = new $c;
         }
-        return($instance);
+        return ($instance);
     }
 
 }
+
 ?>

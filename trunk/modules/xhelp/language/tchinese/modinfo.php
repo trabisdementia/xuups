@@ -2,7 +2,7 @@
 //$Id：modinfo.php,v 1.68 2005/11/01 16:58:36 eric_juden Exp $
 define('_MI_XHELP_NAME', '服務台');
 define('_MI_XHELP_DESC', '用來接收客戶的需求與問題，進一步提出協助與回應。');
-define('_MI_XHELP_CHARSET','UTF-8');
+define('_MI_XHELP_CHARSET', 'UTF-8');
 
 
 //Template variables
@@ -65,7 +65,7 @@ define('_MI_XHELP_NUM_TICKET_UPLOADS', '檔案數');
 define('_MI_XHELP_NUM_TICKET_UPLOADS_DSC', '一次能提供最多檔案數(不包括自訂欄位)。');
 define('_MI_XHELP_ANNOUNCEMENTS', '發佈新聞主題');
 //define('_MI_XHELP_ANNOUNCEMENTS_DSC', 'This is the news topic that pulls announcements for xhelp. Update the xHelp module to see newly added news categories');
-define('_MI_XHELP_ANNOUNCEMENTS_DSC', "This is the news topic that pulls announcements for xhelp. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the news categories.");
+define('_MI_XHELP_ANNOUNCEMENTS_DSC', "This is the news topic that pulls announcements for xhelp. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the news categories.");
 define('_MI_XHELP_ANNOUNCEMENTS_NONE', '***停用訊息發佈***');
 define('_MI_XHELP_ALLOW_REOPEN', '重開傳票');
 define('_MI_XHELP_ALLOW_REOPEN_DSC', '是否允許會員重新開啟關閉的傳票？');
@@ -76,7 +76,7 @@ define('_MI_XHELP_STAFF_ACTIONS_DSC', '您喜歡工作團隊操作如何顯示? 
 define('_MI_XHELP_ACTION1', 'Inline-Style');
 define('_MI_XHELP_ACTION2', 'Block-Style');
 define('_MI_XHELP_DEFAULT_DEPT', '預設部門');
-define('_MI_XHELP_DEFAULT_DEPT_DSC', "這是增加傳票時候的預設部門. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>點選這裡</a> 來更新部門。");
+define('_MI_XHELP_DEFAULT_DEPT_DSC', "這是增加傳票時候的預設部門. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>點選這裡</a> 來更新部門。");
 define('_MI_XHELP_OVERDUE_TIME', '時間');
 define('_MI_XHELP_OVERDUE_TIME_DSC', '這決定傳票多長時間過期 (小時)。');
 define('_MI_XHELP_ALLOW_ANON', '允許匿名提供');
@@ -109,11 +109,11 @@ define('_MI_XHELP_TEXT_NOTIFICATIONS', '管理通知');
 
 
 //NOTIFICATION vars
-define('_MI_XHELP_DEPT_NOTIFY','部門');
-define('_MI_XHELP_DEPT_NOTIFYDSC','套用到每個部門的通知參數');
+define('_MI_XHELP_DEPT_NOTIFY', '部門');
+define('_MI_XHELP_DEPT_NOTIFYDSC', '套用到每個部門的通知參數');
 
-define('_MI_XHELP_TICKET_NOTIFY','傳票');
-define('_MI_XHELP_TICKET_NOTIFYDSC','套用到目前傳票的通知參數');
+define('_MI_XHELP_TICKET_NOTIFY', '傳票');
+define('_MI_XHELP_TICKET_NOTIFYDSC', '套用到目前傳票的通知參數');
 
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFY', '工作團隊：新傳票');
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFYCAP', '當有傳票被建立，通知我');
@@ -202,7 +202,6 @@ define('_MI_XHELP_TICKET_CHANGEDPRIORITY_NOTIFYSBJ', '{X_MODULE} 傳票優先權
 define('_MI_XHELP_TICKET_CHANGEDPRIORITY_NOTIFYTPL', 'ticket_changedpriority_notify.tpl');
 
 
-
 define('_MI_XHELP_TICKET_NEWOWNER_NOTIFY', '會員：新擁有者');
 define('_MI_XHELP_TICKET_NEWOWNER_NOTIFYCAP', '當傳票擁有者被更改，通知我');
 define('_MI_XHELP_TICKET_NEWOWNER_NOTIFYDSC', '接受傳票擁有者被更改的通知');
@@ -226,7 +225,6 @@ define('_MI_XHELP_TICKET_CLOSETICKET_NOTIFYCAP', '當傳票關閉被確認，通
 define('_MI_XHELP_TICKET_CLOSETICKET_NOTIFYDSC', '接受傳票別關閉的通知');
 define('_MI_XHELP_TICKET_CLOSETICKET_NOTIFYSBJ', '{X_MODULE} 傳票被關閉 - id {TICKET_ID}');
 define('_MI_XHELP_TICKET_CLOSETICKET_NOTIFYTPL', 'ticket_closeticket_notify.tpl');
-
 
 
 define('_MI_XHELP_TICKET_NEWUSER_NOTIFY', '會員：創建新會員');

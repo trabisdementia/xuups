@@ -5,7 +5,7 @@
 //                    Copyright (c) 2000 XOOPS.org                           //
 //                       <http://www.xoops.org/>                             //
 //  ------------------------------------------------------------------------ //
-require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
 
 /**
  * xhelpTicketEmails class
@@ -14,7 +14,8 @@ require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
  * @access public
  * @package xhelp
  */
-class xhelpTicketEmails extends XoopsObject {
+class xhelpTicketEmails extends XoopsObject
+{
     function xhelpTicketEmails($id = null)
     {
         $this->initVar('ticketid', XOBJ_DTYPE_INT, null, false);
@@ -30,7 +31,7 @@ class xhelpTicketEmails extends XoopsObject {
             $this->setNew();
         }
     }
-}   //end of class
+} //end of class
 
 /**
  * xhelpTicketEmailsHandler class
@@ -42,12 +43,13 @@ class xhelpTicketEmails extends XoopsObject {
  * @package xhelp
  */
 
-class xhelpTicketEmailsHandler extends xhelpBaseObjectHandler {
+class xhelpTicketEmailsHandler extends xhelpBaseObjectHandler
+{
     /**
      * Name of child class
      *
-     * @var	string
-     * @access	private
+     * @var    string
+     * @access    private
      */
     var $classname = 'xhelpticketemails';
 
@@ -62,7 +64,7 @@ class xhelpTicketEmailsHandler extends xhelpBaseObjectHandler {
     /**
      * Constructor
      *
-     * @param	object   $db    reference to a xoopsDB object
+     * @param    object   $db    reference to a xoopsDB object
      */
     function xhelpTicketEmailsHandler(&$db)
     {
@@ -77,7 +79,7 @@ class xhelpTicketEmailsHandler extends xhelpBaseObjectHandler {
         }
 
         $sql = sprintf("INSERT INTO %s (ticketid, uid, email, suppress) VALUES (%u, %u, %s, %u)",
-        $this->_db->prefix($this->_dbtable), $ticketid, $uid, $this->_db->quoteString($email), $suppress);
+                       $this->_db->prefix($this->_dbtable), $ticketid, $uid, $this->_db->quoteString($email), $suppress);
 
         return $sql;
 
@@ -97,7 +99,7 @@ class xhelpTicketEmailsHandler extends xhelpBaseObjectHandler {
         }
 
         $sql = sprintf("UPDATE %s SET suppress = %u WHERE ticketid = %u AND uid = %u AND email = %s", $this->_db->prefix($this->_dbtable),
-        $suppress, $ticketid, $uid, $this->_db->quotestring($email));
+                       $suppress, $ticketid, $uid, $this->_db->quotestring($email));
         return $sql;
     }
 
@@ -107,13 +109,13 @@ class xhelpTicketEmailsHandler extends xhelpBaseObjectHandler {
      * @param object $criteria {@link CriteriaElement} conditions to be met
      * @param bool $id_as_key Should the department ID be used as array key
      * @return array array of {@link xhelpDepartment} objects
-     * @access	public
+     * @access    public
      */
     function &getObjects($criteria = null)
     {
-        $ret    = array();
-        $limit  = $start = 0;
-        $sql    = $this->_selectQuery($criteria);
+        $ret = array();
+        $limit = $start = 0;
+        $sql = $this->_selectQuery($criteria);
         if (isset($criteria)) {
             $limit = $criteria->getLimit();
             $start = $criteria->getStart();
@@ -140,13 +142,13 @@ class xhelpTicketEmailsHandler extends xhelpBaseObjectHandler {
      * @param object $criteria {@link CriteriaElement} conditions to be met
      * @param bool $id_as_key Should the department ID be used as array key
      * @return array array of {@link xhelpDepartment} objects
-     * @access	public
+     * @access    public
      */
     function &getObjectsSortedByTicket($criteria = null)
     {
-        $ret    = array();
-        $limit  = $start = 0;
-        $sql    = $this->_selectQuery($criteria);
+        $ret = array();
+        $limit = $start = 0;
+        $sql = $this->_selectQuery($criteria);
         if (isset($criteria)) {
             $limit = $criteria->getLimit();
             $start = $criteria->getStart();
@@ -167,4 +169,5 @@ class xhelpTicketEmailsHandler extends xhelpBaseObjectHandler {
         return $ret;
     }
 }
+
 ?>

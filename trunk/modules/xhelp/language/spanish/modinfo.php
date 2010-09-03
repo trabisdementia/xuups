@@ -45,9 +45,6 @@ define('_MI_XHELP_BNAME5', 'Acciones Principales de Incidencias');
 define('_MI_XHELP_BNAME5_DESC', 'Muestra las acciones principales del sistema');
 
 
-
-
-
 // Submenu
 define('_MI_XHELP_SMNAME1', 'Resumen');
 define('_MI_XHELP_SMNAME2', 'Crear Incidencia');
@@ -71,7 +68,7 @@ define('_MI_XHELP_UPLOAD_HEIGHT', 'Altura');
 define('_MI_XHELP_UPLOAD_HEIGHT_DSC', 'Altura máxima de imágen (en pixeles)');
 define('_MI_XHELP_ANNOUNCEMENTS', 'Anunciar nuevas incidencias');
 //define('_MI_XHELP_ANNOUNCEMENTS_DSC', 'Permite añadir noticias al xhelp. Actualiza el módulo para ver las categorías añadidas');
-define('_MI_XHELP_ANNOUNCEMENTS_DSC', "Actualizar el módulo. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Pincha aqui</a> para recibir nuevas categorías.");
+define('_MI_XHELP_ANNOUNCEMENTS_DSC', "Actualizar el módulo. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Pincha aqui</a> para recibir nuevas categorías.");
 define('_MI_XHELP_ANNOUNCEMENTS_NONE', '***Anuncios desactivados***');
 define('_MI_XHELP_ALLOW_REOPEN', 'Permitir Re-abrir incidencias');
 define('_MI_XHELP_ALLOW_REOPEN_DSC', 'Permitir Re-abrir las incidencias a los usuarios después de haber sido cerradas?');
@@ -82,7 +79,7 @@ define('_MI_XHELP_STAFF_ACTIONS_DSC', 'Cómo quieres que sea la vista de accione
 define('_MI_XHELP_ACTION1', 'En línea');
 define('_MI_XHELP_ACTION2', 'En bloques');
 define('_MI_XHELP_DEFAULT_DEPT', 'Departamento por defecto');
-define('_MI_XHELP_DEFAULT_DEPT_DSC', "Será el departamento por defecto cuando creas la incidencia. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Pulsa aqui</a> para actualizar la lista.");
+define('_MI_XHELP_DEFAULT_DEPT_DSC', "Será el departamento por defecto cuando creas la incidencia. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Pulsa aqui</a> para actualizar la lista.");
 define('_MI_XHELP_OVERDUE_TIME', 'Tiempo de Incidencia');
 define('_MI_XHELP_OVERDUE_TIME_DSC', 'Determina el tiempo (en horas) que tiene el técnico para resolver la incidencia.');
 define('_MI_XHELP_ALLOW_ANON', 'Permitir a usuarios anónimos');
@@ -115,11 +112,11 @@ define('_MI_XHELP_TEXT_NOTIFICATIONS', 'Administrar Notificaciones');
 define('_MI_XHELP_TEXT_MANAGE_FAQ', 'Administrar FAQ');
 
 //NOTIFICATION vars
-define('_MI_XHELP_DEPT_NOTIFY','Departamento');
-define('_MI_XHELP_DEPT_NOTIFYDSC','Las opciones de notificación que se aplican a un cierto departamento');
+define('_MI_XHELP_DEPT_NOTIFY', 'Departamento');
+define('_MI_XHELP_DEPT_NOTIFYDSC', 'Las opciones de notificación que se aplican a un cierto departamento');
 
-define('_MI_XHELP_TICKET_NOTIFY','Incidencia');
-define('_MI_XHELP_TICKET_NOTIFYDSC','Las opciones de notificación que se aplican a una incidencia');
+define('_MI_XHELP_TICKET_NOTIFY', 'Incidencia');
+define('_MI_XHELP_TICKET_NOTIFYDSC', 'Las opciones de notificación que se aplican a una incidencia');
 
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFY', 'Técnico: Nueva Incidencia');
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFYCAP', 'Notificarme cuando una incidencia sea creada');

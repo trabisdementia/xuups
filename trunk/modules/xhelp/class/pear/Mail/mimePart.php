@@ -91,7 +91,8 @@
  * @package Mail
  */
 
-class Mail_mimePart {
+class Mail_mimePart
+{
 
     /**
      * The encoding type of this part
@@ -197,9 +198,9 @@ class Mail_mimePart {
         }
 
         // Assign stuff to member variables
-        $this->_encoded  = array();
-        $this->_headers  = $headers;
-        $this->_body     = $body;
+        $this->_encoded = array();
+        $this->_headers = $headers;
+        $this->_body = $body;
     }
 
     /**
@@ -218,7 +219,7 @@ class Mail_mimePart {
         $encoded =& $this->_encoded;
 
         if (!empty($this->_subparts)) {
-            srand((double)microtime()*1000000);
+            srand((double) microtime() * 1000000);
             $boundary = '=_' . md5(uniqid(rand()) . microtime());
             $this->_headers['Content-Type'] .= ';' . MAIL_MIMEPART_CRLF . "\t" . 'boundary="' . $boundary . '"';
 
@@ -233,8 +234,8 @@ class Mail_mimePart {
             }
 
             $encoded['body'] = '--' . $boundary . MAIL_MIMEPART_CRLF .
-            implode('--' . $boundary . MAIL_MIMEPART_CRLF, $subparts) .
-                               '--' . $boundary.'--' . MAIL_MIMEPART_CRLF;
+                               implode('--' . $boundary . MAIL_MIMEPART_CRLF, $subparts) .
+                               '--' . $boundary . '--' . MAIL_MIMEPART_CRLF;
 
         } else {
             $encoded['body'] = $this->_getEncodedData($this->_body, $this->_encoding) . MAIL_MIMEPART_CRLF;
@@ -309,34 +310,34 @@ class Mail_mimePart {
      *
      * @access private
      */
-    function _quotedPrintableEncode($input , $line_max = 76)
+    function _quotedPrintableEncode($input, $line_max = 76)
     {
-        $lines  = preg_split("/\r?\n/", $input);
-        $eol    = MAIL_MIMEPART_CRLF;
+        $lines = preg_split("/\r?\n/", $input);
+        $eol = MAIL_MIMEPART_CRLF;
         $escape = '=';
         $output = '';
 
-        while(list(, $line) = each($lines)){
+        while (list(, $line) = each($lines)) {
 
-            $linlen     = strlen($line);
+            $linlen = strlen($line);
             $newline = '';
 
             for ($i = 0; $i < $linlen; $i++) {
                 $char = substr($line, $i, 1);
-                $dec  = ord($char);
+                $dec = ord($char);
 
-                if (($dec == 32) AND ($i == ($linlen - 1))){    // convert space at eol only
+                if (($dec == 32) AND ($i == ($linlen - 1))) { // convert space at eol only
                     $char = '=20';
 
-                } elseif($dec == 9) {
+                } elseif ($dec == 9) {
                     ; // Do nothing if a tab.
-                } elseif(($dec == 61) OR ($dec < 32 ) OR ($dec > 126)) {
+                } elseif (($dec == 61) OR ($dec < 32) OR ($dec > 126)) {
                     $char = $escape . strtoupper(sprintf('%02s', dechex($dec)));
                 }
 
-                if ((strlen($newline) + strlen($char)) >= $line_max) {        // MAIL_MIMEPART_CRLF is not counted
-                    $output  .= $newline . $escape . $eol;                    // soft line break; " =\r\n" is okay
-                    $newline  = '';
+                if ((strlen($newline) + strlen($char)) >= $line_max) { // MAIL_MIMEPART_CRLF is not counted
+                    $output .= $newline . $escape . $eol; // soft line break; " =\r\n" is okay
+                    $newline = '';
                 }
                 $newline .= $char;
             } // end of for

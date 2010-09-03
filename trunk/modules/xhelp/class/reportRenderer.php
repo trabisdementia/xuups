@@ -5,8 +5,10 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-class xhelpReportRenderer {
+class xhelpReportRenderer
+{
     var $report;
+
     function xhelpReportRenderer($report)
     {
         $this->report = $report;

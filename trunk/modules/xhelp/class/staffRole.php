@@ -9,7 +9,7 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
 
 /**
  * xhelpStaffRole class
@@ -21,7 +21,8 @@ require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
  * @package xhelp
  */
 
-class xhelpStaffRole extends XoopsObject {
+class xhelpStaffRole extends XoopsObject
+{
     function xhelpStaffRole($id = null)
     {
         $this->initVar('uid', XOBJ_DTYPE_INT, null, false);
@@ -36,24 +37,25 @@ class xhelpStaffRole extends XoopsObject {
             $this->setNew();
         }
     }
-}   // end of class
+} // end of class
 
-class xhelpStaffRoleHandler extends xhelpBaseObjectHandler{
+class xhelpStaffRoleHandler extends xhelpBaseObjectHandler
+{
     var $_idfield = 'roleid';
 
     /**
      * Name of child class
      *
-     * @var	string
-     * @access	private
+     * @var    string
+     * @access    private
      */
     var $classname = 'xhelpstaffrole';
 
     /**
      * DB Table Name
      *
-     * @var 		string
-     * @access 	private
+     * @var         string
+     * @access     private
      */
     var $_dbtable = 'xhelp_staffroles';
 
@@ -73,12 +75,12 @@ class xhelpStaffRoleHandler extends xhelpBaseObjectHandler{
         $crit->add(new Criteria('roleid', $roleid));
         $crit->add(new Criteria('deptid', $deptid));
 
-        if(!$role =& $this->getObjects($crit)){
+        if (!$role =& $this->getObjects($crit)) {
             return false;
         }
         return $role;
     }
-     
+
     function &getObjectsByStaff($uid, $id_as_key = false)
     {
         $uid = intval($uid);
@@ -86,7 +88,7 @@ class xhelpStaffRoleHandler extends xhelpBaseObjectHandler{
 
         $arr = $this->getObjects($crit, $id_as_key);
 
-        if(count($arr) == 0){
+        if (count($arr) == 0) {
             $arr = false;
         }
         return $arr;
@@ -97,7 +99,7 @@ class xhelpStaffRoleHandler extends xhelpBaseObjectHandler{
         $crit = new CriteriaCompo('uid', $uid);
         $crit->add(new Criteria('roleid', $roleid));
 
-        if(!$role =& $this->getObjects($crit)){
+        if (!$role =& $this->getObjects($crit)) {
             return false;
         }
         return true;
@@ -111,7 +113,7 @@ class xhelpStaffRoleHandler extends xhelpBaseObjectHandler{
         }
 
         $sql = sprintf("INSERT INTO %s (uid, roleid, deptid) VALUES (%u, %u, %u)",
-        $this->_db->prefix($this->_dbtable), $uid, $roleid, $deptid);
+                       $this->_db->prefix($this->_dbtable), $uid, $roleid, $deptid);
 
         return $sql;
 
@@ -124,5 +126,5 @@ class xhelpStaffRoleHandler extends xhelpBaseObjectHandler{
     }
 
 
-}   // end of handler class
+} // end of handler class
 ?>

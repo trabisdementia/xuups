@@ -8,7 +8,7 @@
 if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
-require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
 
 /**
  * xhelpSavedSearch class
@@ -17,7 +17,8 @@ require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
  * @access public
  * @package xhelp
  */
-class xhelpSavedSearch extends XoopsObject {
+class xhelpSavedSearch extends XoopsObject
+{
     function xhelpSavedSearch($id = null)
     {
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
@@ -35,7 +36,7 @@ class xhelpSavedSearch extends XoopsObject {
             $this->setNew();
         }
     }
-}   //end of class
+} //end of class
 
 /**
  * xhelpSavedSearchHandler class
@@ -47,12 +48,13 @@ class xhelpSavedSearch extends XoopsObject {
  * @package xhelp
  */
 
-class xhelpSavedSearchHandler extends xhelpBaseObjectHandler {
+class xhelpSavedSearchHandler extends xhelpBaseObjectHandler
+{
     /**
      * Name of child class
      *
-     * @var	string
-     * @access	private
+     * @var    string
+     * @access    private
      */
     var $classname = 'xhelpsavedsearch';
 
@@ -67,7 +69,7 @@ class xhelpSavedSearchHandler extends xhelpBaseObjectHandler {
     /**
      * Constructor
      *
-     * @param	object   $db    reference to a xoopsDB object
+     * @param    object   $db    reference to a xoopsDB object
      */
     function xhelpSavedSearchHandler(&$db)
     {
@@ -82,8 +84,8 @@ class xhelpSavedSearchHandler extends xhelpBaseObjectHandler {
         }
 
         $sql = sprintf("INSERT INTO %s (id, uid, name, search, pagenav_vars, hasCustFields) VALUES (%u, %d, %s, %s, %s, %u)",
-        $this->_db->prefix($this->_dbtable), $id, $uid, $this->_db->quoteString($name),
-        $this->_db->quoteString($search), $this->_db->quoteString($pagenav_vars), $hasCustFields);
+                       $this->_db->prefix($this->_dbtable), $id, $uid, $this->_db->quoteString($name),
+                       $this->_db->quoteString($search), $this->_db->quoteString($pagenav_vars), $hasCustFields);
 
         return $sql;
 
@@ -97,9 +99,9 @@ class xhelpSavedSearchHandler extends xhelpBaseObjectHandler {
         }
 
         $sql = sprintf("UPDATE %s SET uid = %d, name = %s, search = %s, pagenav_vars = %s, hasCustFields = %u WHERE id = %u",
-        $this->_db->prefix($this->_dbtable), $uid, $this->_db->quoteString($name),
-        $this->_db->quoteString($search), $this->_db->quoteString($pagenav_vars), $hasCustFields,
-        $id);
+                       $this->_db->prefix($this->_dbtable), $uid, $this->_db->quoteString($name),
+                       $this->_db->quoteString($search), $this->_db->quoteString($pagenav_vars), $hasCustFields,
+                       $id);
 
         return $sql;
     }
@@ -113,7 +115,7 @@ class xhelpSavedSearchHandler extends xhelpBaseObjectHandler {
     function getByUid($uid, $has_global = false)
     {
         $uid = intval($uid);
-        if($has_global){
+        if ($has_global) {
             $crit = new CriteriaCompo(new Criteria('uid', $uid), 'OR');
             $crit->add(new Criteria('uid', XHELP_GLOBAL_UID), 'OR');
         } else {
@@ -136,13 +138,13 @@ class xhelpSavedSearchHandler extends xhelpBaseObjectHandler {
      *
      * @param object $criteria {@link CriteriaElement}
      * @return bool FALSE if deletion failed
-     * @access	public
+     * @access    public
      */
     function deleteAll($criteria = null)
     {
-        $sql = 'DELETE FROM '.$this->_db->prefix($this->_dbtable);
+        $sql = 'DELETE FROM ' . $this->_db->prefix($this->_dbtable);
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' '.$criteria->renderWhere();
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->_db->query($sql)) {
             return false;
@@ -151,4 +153,5 @@ class xhelpSavedSearchHandler extends xhelpBaseObjectHandler {
         return true;
     }
 }
+
 ?>
