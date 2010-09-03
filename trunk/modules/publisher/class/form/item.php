@@ -31,8 +31,7 @@ include_once XOOPS_ROOT_PATH . '/class/tree.php';
 include_once PUBLISHER_ROOT_PATH . '/class/formdatetime.php';
 include_once PUBLISHER_ROOT_PATH . '/class/themetabform.php';
 
-class PublisherItemForm extends XoopsThemeTabForm
-{
+class PublisherItemForm extends XoopsThemeTabForm {
 
     var $checkperm = true;
     var $tabs = array(
@@ -44,7 +43,7 @@ class PublisherItemForm extends XoopsThemeTabForm
     var $mainTab = array(
         _PUBLISHER_SUBTITLE,
         _PUBLISHER_ITEM_SHORT_URL,
-        _PUBLISHER_ITEM_TAGS,
+        _PUBLISHER_ITEM_TAG,
         _PUBLISHER_SUMMARY,
         _PUBLISHER_DOHTML,
         _PUBLISHER_DOSMILEY,
@@ -73,13 +72,11 @@ class PublisherItemForm extends XoopsThemeTabForm
         _PUBLISHER_PARTIAL_VIEW
     );
 
-    function setCheckPermissions($checkperm)
-    {
+    function setCheckPermissions($checkperm) {
         $this->checkperm = (bool) $checkperm;
     }
 
-    function isGranted($item)
-    {
+    function isGranted($item) {
         $publisher =& PublisherPublisher::getInstance();
         $ret = false;
         if (!$this->checkperm || $publisher->getHandler('permission')->isGranted('form_view', $item)) {
@@ -88,8 +85,7 @@ class PublisherItemForm extends XoopsThemeTabForm
         return $ret;
     }
 
-    function hasTab($tab)
-    {
+    function hasTab($tab) {
         if (!isset($tab) || !isset($this->tabs[$tab])) {
             return false;
         }
@@ -105,8 +101,7 @@ class PublisherItemForm extends XoopsThemeTabForm
         return false;
     }
 
-    function createElements($obj)
-    {
+    function createElements($obj) {
 
         global $xoopsConfig, $xoopsUser;
 
@@ -148,7 +143,7 @@ class PublisherItemForm extends XoopsThemeTabForm
         }
 
         // TAGS
-        if (xoops_isActiveModule('tag') && $this->isGranted(_PUBLISHER_ITEM_TAGS)) {
+        if (xoops_isActiveModule('tag') && $this->isGranted(_PUBLISHER_ITEM_TAG)) {
             include_once XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
             $text_tags = new XoopsFormTag('item_tag', 60, 255, $obj->getVar('item_tag', 'e'), 0);
             $this->addElement($text_tags);
@@ -200,10 +195,10 @@ class PublisherItemForm extends XoopsThemeTabForm
 
         // VARIOUS OPTIONS
         if ($this->isGranted(_PUBLISHER_DOHTML) ||
-            $this->isGranted(_PUBLISHER_DOSMILEY) ||
-            $this->isGranted(_PUBLISHER_DOXCODE) ||
-            $this->isGranted(_PUBLISHER_DOIMAGE) ||
-            $this->isGranted(_PUBLISHER_DOLINEBREAK)
+                $this->isGranted(_PUBLISHER_DOSMILEY) ||
+                $this->isGranted(_PUBLISHER_DOXCODE) ||
+                $this->isGranted(_PUBLISHER_DOIMAGE) ||
+                $this->isGranted(_PUBLISHER_DOLINEBREAK)
         ) {
             if ($this->isGranted(_PUBLISHER_DOHTML)) {
                 $html_radio = new XoopsFormRadioYN(_CO_PUBLISHER_DOHTML, 'dohtml', $obj->dohtml(), _YES, _NO);
@@ -493,6 +488,8 @@ $publisher(document).ready(function(){
         if ($this->isGranted(_PUBLISHER_PARTIAL_VIEW)) {
             $p_view_checkbox = new XoopsFormCheckBox(_CO_PUBLISHER_PARTIAL_VIEW, 'partial_view[]', $obj->partial_view());
             $p_view_checkbox->setDescription(_CO_PUBLISHER_PARTIAL_VIEW_DSC);
+            $member_handler = &xoops_gethandler('member');
+            $group_list = $member_handler->getGroupList();
             foreach ($group_list as $group_id => $group_name) {
                 if ($group_id != XOOPS_GROUP_ADMIN) {
                     $p_view_checkbox->addOption($group_id, $group_name);

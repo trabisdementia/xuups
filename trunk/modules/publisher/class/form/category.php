@@ -27,8 +27,7 @@ include_once dirname(dirname(dirname(__FILE__))) . '/include/common.php';
 xoops_load('XoopsFormLoader');
 include_once XOOPS_ROOT_PATH . '/class/tree.php';
 
-class PublisherCategoryForm extends XoopsThemeForm
-{
+class PublisherCategoryForm extends XoopsThemeForm {
     /**
      * @var PublisherPublisher
      * @access public
@@ -41,8 +40,7 @@ class PublisherCategoryForm extends XoopsThemeForm
 
     var $userGroups = array();
 
-    function __construct(&$target, $subCatsCount = 4)
-    {
+    function __construct(&$target, $subCatsCount = 4) {
         $this->publisher =& PublisherPublisher::getInstance();
 
         $this->targetObject =& $target;
@@ -58,8 +56,7 @@ class PublisherCategoryForm extends XoopsThemeForm
         $this->createButtons();
     }
 
-    function createElements()
-    {
+    function createElements() {
         global $xoopsDB, $xoopsUser;
 
         // Category
@@ -211,8 +208,7 @@ class PublisherCategoryForm extends XoopsThemeForm
         $this->addElement(new XoopsFormHidden('nb_sub_yet', $this->subCatsCount));
     }
 
-    function createButtons()
-    {
+    function createButtons() {
         // Action buttons tray
         $button_tray = new XoopsFormElementTray('', '');
 

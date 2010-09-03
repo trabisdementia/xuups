@@ -26,8 +26,7 @@ include_once XOOPS_ROOT_PATH . '/kernel/groupperm.php';
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-class PublisherGroupPermHandler extends XoopsGroupPermHandler
-{
+class PublisherGroupPermHandler extends XoopsGroupPermHandler {
 
     /**
      * Check permission
@@ -39,8 +38,7 @@ class PublisherGroupPermHandler extends XoopsGroupPermHandler
      *
      * @return    bool    TRUE if permission is enabled
      */
-    function checkRight($gperm_name, $gperm_itemid, $gperm_groupid, $gperm_modid = 1)
-    {
+    function checkRight($gperm_name, $gperm_itemid, $gperm_groupid, $gperm_modid = 1) {
         $criteria = new CriteriaCompo(new Criteria('gperm_modid', $gperm_modid));
         $criteria->add(new Criteria('gperm_name', $gperm_name));
         $gperm_itemid = intval($gperm_itemid);

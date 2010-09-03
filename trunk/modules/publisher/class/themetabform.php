@@ -35,12 +35,10 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
  * @access public
  */
 
-class XoopsThemeTabForm extends XoopsForm
-{
+class XoopsThemeTabForm extends XoopsForm {
     var $_tabs;
 
-    function XoopsThemeTabForm($title, $name, $action, $method = "post", $addtoken = false)
-    {
+    function XoopsThemeTabForm($title, $name, $action, $method = "post", $addtoken = false) {
         global $xoTheme;
         $xoTheme->addScript(PUBLISHER_URL . '/js/ui.core.js');
         $xoTheme->addScript(PUBLISHER_URL . '/js/ui.tabs.js');
@@ -134,8 +132,7 @@ class XoopsThemeTabForm extends XoopsForm
      return $ret;
      }
      */
-    function assign(&$tpl)
-    {
+    function assign(&$tpl) {
         $i = -1;
         $tab = -1;
         $elements = array();
@@ -176,14 +173,14 @@ class XoopsThemeTabForm extends XoopsForm
         }
         $js = $this->renderValidationJS();
         $tpl->assign($this->getName(), array('title' => $this->getTitle(),
-                                             'id' => 'tab_' . preg_replace('/[^a-z0-9]+/i', '', $this->getTitle()),
-                                             'name' => $this->getName(),
-                                             'action' => $this->getAction(),
-                                             'method' => $this->getMethod(),
-                                             'extra' => 'onsubmit="return xoopsFormValidate_' . $this->getName() . '();"' . $this->getExtra(),
-                                             'javascript' => $js,
-                                             'tabs' => $this->_tabs,
-                                             'elements' => $elements));
+            'id' => 'tab_' . preg_replace('/[^a-z0-9]+/i', '', $this->getTitle()),
+            'name' => $this->getName(),
+            'action' => $this->getAction(),
+            'method' => $this->getMethod(),
+            'extra' => 'onsubmit="return xoopsFormValidate_' . $this->getName() . '();"' . $this->getExtra(),
+            'javascript' => $js,
+            'tabs' => $this->_tabs,
+            'elements' => $elements));
     }
 
 
@@ -194,8 +191,7 @@ class XoopsThemeTabForm extends XoopsForm
      * @param mixed $paneid
      * @return
      */
-    function startTab($tabText)
-    {
+    function startTab($tabText) {
         $this->addElement($this->_startTab($tabText));
     }
 
@@ -204,8 +200,7 @@ class XoopsThemeTabForm extends XoopsForm
      *
      * @return
      */
-    function endTabs()
-    {
+    function endTabs() {
         $this->addElement($this->_endTabs());
     }
 
@@ -216,8 +211,7 @@ class XoopsThemeTabForm extends XoopsForm
      * @param tabText $ - This is what is displayed on the tab
      * @param paneid $ - This is the parent pane to build this tab on
      */
-    function _startTab($tabText)
-    {
+    function _startTab($tabText) {
         $this->_tabs[] = $tabText;
 
         $ret = 'addTab';
@@ -227,8 +221,7 @@ class XoopsThemeTabForm extends XoopsForm
     /**
      * Ends a tab page
      */
-    function _endTabs()
-    {
+    function _endTabs() {
         $ret = 'endTabs';
         return $ret;
     }

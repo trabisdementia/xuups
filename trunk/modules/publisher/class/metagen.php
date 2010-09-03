@@ -23,8 +23,7 @@ defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-class PublisherMetagen
-{
+class PublisherMetagen {
     /**
      * @var PublisherPublisher
      * @access public
@@ -40,8 +39,7 @@ class PublisherMetagen
     var $_description;
     var $_minChar = 4;
 
-    function PublisherMetagen($title, $keywords = '', $description = '', $categoryPath = false)
-    {
+    function PublisherMetagen($title, $keywords = '', $description = '', $categoryPath = false) {
         $this->publisher =& PublisherPublisher::getInstance();
         $this->_myts =& MyTextSanitizer::getInstance();
 
@@ -54,8 +52,7 @@ class PublisherMetagen
         $this->setKeywords($keywords);
     }
 
-    function setTitle($title)
-    {
+    function setTitle($title) {
         $this->_title = $this->html2text($title);
         $this->_original_title = $this->_title;
 
@@ -94,30 +91,25 @@ class PublisherMetagen
         $this->_title = $ret;
     }
 
-    function setKeywords($keywords)
-    {
+    function setKeywords($keywords) {
         $this->_keywords = $keywords;
     }
 
-    function setCategoryPath($categoryPath)
-    {
+    function setCategoryPath($categoryPath) {
         $categoryPath = $this->html2text($categoryPath);
         $this->_categoryPath = $categoryPath;
     }
 
-    function setDescription($description)
-    {
+    function setDescription($description) {
         $description = $this->html2text($description);
         $description = $this->purifyText($description);
         $this->_description = $description;
     }
 
-    function createTitleTag()
-    {
+    function createTitleTag() {
     }
 
-    function createMetaDescription($maxWords = 30)
-    {
+    function createMetaDescription($maxWords = 30) {
         $description = $this->purifyText($this->_description);
         $description = $this->html2text($description);
 
@@ -138,8 +130,7 @@ class PublisherMetagen
         return $ret;
     }
 
-    function findMetaKeywords($text, $minChar)
-    {
+    function findMetaKeywords($text, $minChar) {
         $keywords = array();
 
         $text = $this->purifyText($text);
@@ -159,8 +150,7 @@ class PublisherMetagen
         return $keywords;
     }
 
-    function createMetaKeywords()
-    {
+    function createMetaKeywords() {
         $keywords = $this->findMetaKeywords($this->_original_title . " " . $this->_description, $this->_minChar);
         $moduleKeywords = $this->publisher->getConfig('seo_meta_keywords');
         if ($moduleKeywords != '') {
@@ -173,20 +163,17 @@ class PublisherMetagen
         return $ret;
     }
 
-    function autoBuildMeta_keywords()
-    {
+    function autoBuildMeta_keywords() {
     }
 
-    function buildAutoMetaTags()
-    {
+    function buildAutoMetaTags() {
         $this->_keywords = $this->createMetaKeywords();
         $this->_description = $this->createMetaDescription();
         $this->_title = $this->createTitleTag();
 
     }
 
-    function createMetaTags()
-    {
+    function createMetaTags() {
         global $xoopsTpl, $xoTheme;
         if ($this->_keywords != '') {
             $xoTheme->addMeta('meta', 'keywords', $this->_keywords);
@@ -207,8 +194,7 @@ class PublisherMetagen
      * @var string $string Chaine de caractère
      * @return boolean
      */
-    function emptyString($var)
-    {
+    function emptyString($var) {
         return (strlen($var) > 0);
     }
 
@@ -221,8 +207,7 @@ class PublisherMetagen
      * @var string $withExt do we add an html extension or not
      * @return string sort_url for the article
      */
-    function generateSeoTitle($title = '', $withExt = true)
-    {
+    function generateSeoTitle($title = '', $withExt = true) {
         // Transformation de la chaine en minuscule
         // Codage de la chaine afin d'éviter les erreurs 500 en cas de caractères imprévus
         $title = rawurlencode(strtolower($title));
@@ -253,8 +238,7 @@ class PublisherMetagen
         return '';
     }
 
-    function purifyText($text, $keyword = false)
-    {
+    function purifyText($text, $keyword = false) {
         $text = str_replace('&nbsp;', ' ', $text);
         $text = str_replace('<br />', ' ', $text);
         $text = strip_tags($text);
@@ -282,8 +266,7 @@ class PublisherMetagen
     }
 
 
-    function html2text($document)
-    {
+    function html2text($document) {
         // PHP Manual:: function preg_replace
         // $document should contain an HTML document.
         // This will remove HTML tags, javascript sections

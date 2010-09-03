@@ -159,8 +159,8 @@ switch ($op) {
             exit;
         }
         // TODO : put this function in the category class
-        publisher_saveCategory_Permissions($categoryObj->getGroups_read(), $categoryObj->categoryid(), 'category_read');
-        publisher_saveCategory_Permissions($categoryObj->getGroups_submit(), $categoryObj->categoryid(), 'item_submit');
+        publisher_saveCategoryPermissions($categoryObj->getGroups_read(), $categoryObj->categoryid(), 'category_read');
+        publisher_saveCategoryPermissions($categoryObj->getGroups_submit(), $categoryObj->categoryid(), 'item_submit');
         //publisher_saveCategory_Permissions($groups_admin, $categoriesObj->categoryid(), 'category_admin');
         if ($applyall) {
             // TODO : put this function in the category class
@@ -182,8 +182,8 @@ switch ($op) {
                     exit;
                 }
                 // TODO : put this function in the category class
-                publisher_saveCategory_Permissions($categoryObj->getGroups_read(), $categoryObj->categoryid(), 'category_read');
-                publisher_saveCategory_Permissions($categoryObj->getGroups_submit(), $categoryObj->categoryid(), 'item_submit');
+                publisher_saveCategoryPermissions($categoryObj->getGroups_read(), $categoryObj->categoryid(), 'category_read');
+                publisher_saveCategoryPermissions($categoryObj->getGroups_submit(), $categoryObj->categoryid(), 'item_submit');
                 //publisher_saveCategory_Permissions($groups_admin, $categoriesObj->categoryid(), 'category_admin');
                 if ($applyall) {
                     // TODO : put this function in the category class

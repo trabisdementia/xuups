@@ -307,7 +307,7 @@ define("_AM_PUBLISHER_CONFIGURE_READ_PERMISSIONS", "Configurer les permissions d
 define("_AM_PUBLISHER_CONFIGURE_READ_PERMISSIONS_EXP", "Cet outil vous permettra de configurer les permissions de lecture de TOUTES Les catégories et de TOUS les articles de façon uniforme. Toutes les permissions seront tout d'abord supprimées pour être remplacées par les options que vous aurez choisies.<br /><br /><strong>Veuillez utiliser cet outil avec soin!</strong>");
 define("_AM_PUBLISHER_FULLACCESS", "Permissions de lecture des catégories et des articles");
 define("_AM_PUBLISHER_PERMISSIONS_UPDATED", "Permissions mises à jour.");
-define("_AM_PUBLISHER_ITEM_TAGS", "Tags");
+define("_AM_PUBLISHER_ITEM_TAG", "Tags");
 
 
 define("_AM_PUBLISHER_PERMISSIONS_FORM", "Options disponibles dans les formulaires de soumission");

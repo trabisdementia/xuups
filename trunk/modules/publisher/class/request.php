@@ -40,16 +40,14 @@ define('PUBLISHER_REQUEST_ALLOWHTML', 4);
  * request variables.  This includes $_POST, $_GET, and naturally $_REQUEST.  Variables
  * can be passed through an input filter to avoid injection or returned raw.
  */
-class PublisherRequest
-{
+class PublisherRequest {
 
     /**
      * Gets the request method
      *
      * @return string
      */
-    function getMethod()
-    {
+    static function getMethod() {
         $method = strtoupper($_SERVER['REQUEST_METHOD']);
         return $method;
     }
@@ -81,8 +79,7 @@ class PublisherRequest
      * @param   int     $mask       Filter mask for the variable
      * @return  mixed   Requested variable
      */
-    function getVar($name, $default = null, $hash = 'default', $type = 'none', $mask = 0)
-    {
+    static function getVar($name, $default = null, $hash = 'default', $type = 'none', $mask = 0) {
         // Ensure hash and type are uppercase
         $hash = strtoupper($hash);
         if ($hash === 'METHOD') {
@@ -148,8 +145,7 @@ class PublisherRequest
      * @param   string  $hash       Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
      * @return  integer Requested variable
      */
-    function getInt($name, $default = 0, $hash = 'default')
-    {
+    static function getInt($name, $default = 0, $hash = 'default') {
         return PublisherRequest::getVar($name, $default, $hash, 'int');
     }
 
@@ -166,8 +162,7 @@ class PublisherRequest
      * @param    string    $hash        Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
      * @return    float    Requested variable
      */
-    function getFloat($name, $default = 0.0, $hash = 'default')
-    {
+    static function getFloat($name, $default = 0.0, $hash = 'default') {
         return PublisherRequest::getVar($name, $default, $hash, 'float');
     }
 
@@ -184,8 +179,7 @@ class PublisherRequest
      * @param    string    $hash        Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
      * @return    bool        Requested variable
      */
-    function getBool($name, $default = false, $hash = 'default')
-    {
+    static function getBool($name, $default = false, $hash = 'default') {
         return PublisherRequest::getVar($name, $default, $hash, 'bool');
     }
 
@@ -202,8 +196,7 @@ class PublisherRequest
      * @param    string    $hash        Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
      * @return    string    Requested variable
      */
-    function getWord($name, $default = '', $hash = 'default')
-    {
+    static function getWord($name, $default = '', $hash = 'default') {
         return PublisherRequest::getVar($name, $default, $hash, 'word');
     }
 
@@ -220,8 +213,7 @@ class PublisherRequest
      * @param    string    $hash        Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
      * @return    string    Requested variable
      */
-    function getCmd($name, $default = '', $hash = 'default')
-    {
+    static function getCmd($name, $default = '', $hash = 'default') {
         return PublisherRequest::getVar($name, $default, $hash, 'cmd');
     }
 
@@ -239,19 +231,16 @@ class PublisherRequest
      * @param    int        $mask        Filter mask for the variable
      * @return    string    Requested variable
      */
-    function getString($name, $default = '', $hash = 'default', $mask = 0)
-    {
+    static function getString($name, $default = '', $hash = 'default', $mask = 0) {
         // Cast to string, in case JREQUEST_ALLOWRAW was specified for mask
         return (string) PublisherRequest::getVar($name, $default, $hash, 'string', $mask);
     }
 
-    function getArray($name, $default = array(), $hash = 'default')
-    {
+    static function getArray($name, $default = array(), $hash = 'default') {
         return PublisherRequest::getVar($name, $default, $hash, 'array');
     }
 
-    function getText($name, $default = '', $hash = 'default')
-    {
+    static function getText($name, $default = '', $hash = 'default') {
         return (string) PublisherRequest::getVar($name, $default, $hash, 'string', PUBLISHER_REQUEST_ALLOWRAW);
     }
 
@@ -265,8 +254,7 @@ class PublisherRequest
      * @param    boolean    $overwrite    Boolean
      * @return    string    Previous value
      */
-    function setVar($name, $value = null, $hash = 'method', $overwrite = true)
-    {
+    static function setVar($name, $value = null, $hash = 'method', $overwrite = true) {
         //If overwrite is true, makes sure the variable hasn't been set yet
         if (!$overwrite && array_key_exists($name, $_REQUEST)) {
             return $_REQUEST[$name];
@@ -330,8 +318,7 @@ class PublisherRequest
      * @param    int        $mask    Filter mask for the variable
      * @return    mixed    Request hash
      */
-    function get($hash = 'default', $mask = 0)
-    {
+    static function get($hash = 'default', $mask = 0) {
         $hash = strtoupper($hash);
 
         if ($hash === 'METHOD') {
@@ -385,8 +372,7 @@ class PublisherRequest
      * @param    string    The request variable to set (POST, GET, FILES, METHOD)
      * @param    boolean    If true and an existing key is found, the value is overwritten, otherwise it is ingored
      */
-    function set($array, $hash = 'default', $overwrite = true)
-    {
+    static function set($array, $hash = 'default', $overwrite = true) {
         foreach ($array as $key => $value) {
             PublisherRequest::setVar($key, $value, $hash, $overwrite);
         }
@@ -399,8 +385,7 @@ class PublisherRequest
      * @static
      * @return    void
      */
-    function clean()
-    {
+    static function clean() {
         PublisherRequest::_cleanArray($_FILES);
         PublisherRequest::_cleanArray($_ENV);
         PublisherRequest::_cleanArray($_GET);
@@ -449,8 +434,7 @@ class PublisherRequest
      * @param    array    $array    Array to clean
      * @param    boolean    True if the array is to be added to the GLOBALS
      */
-    function _cleanArray(&$array, $globalise = false)
-    {
+    static function _cleanArray(&$array, $globalise = false) {
         static $banned = array('_files', '_env', '_get', '_post', '_cookie', '_server', '_session', 'globals');
 
         foreach ($array as $key => $value)
@@ -481,8 +465,7 @@ class PublisherRequest
      * other than the 1 bit is set, a strict filter is applied.
      * @param string The variable type {@see JFilterInput::clean()}.
      */
-    function _cleanVar($var, $mask = 0, $type = null)
-    {
+    static function _cleanVar($var, $mask = 0, $type = null) {
         // Static input filters for specific settings
         static $noHtmlFilter = null;
         static $safeHtmlFilter = null;
@@ -519,8 +502,7 @@ class PublisherRequest
      * @param    array    $array        Array of (nested arrays of) strings
      * @return    array    The input array with stripshlashes applied to it
      */
-    function _stripSlashesRecursive($value)
-    {
+    function _stripSlashesRecursive($value) {
         $value = is_array($value) ? array_map(array('PublisherRequest', '_stripSlashesRecursive'), $value) : stripslashes($value);
         return $value;
     }
@@ -534,8 +516,7 @@ class PublisherRequest
  *
  * @author      Louis Landry <louis.landry@joomla.org>
  */
-class PublisherFilterInput
-{
+class PublisherFilterInput {
     var $tagsArray; // default = empty array
     var $attrArray; // default = empty array
 
@@ -556,8 +537,7 @@ class PublisherFilterInput
      * @param   int     $attrMethod WhiteList method = 0, BlackList method = 1
      * @param   int     $xssAuto    Only auto clean essentials = 0, Allow clean blacklisted tags/attr = 1
      */
-    function __construct($tagsArray = array(), $attrArray = array(), $tagsMethod = 0, $attrMethod = 0, $xssAuto = 1)
-    {
+    function __construct($tagsArray = array(), $attrArray = array(), $tagsMethod = 0, $attrMethod = 0, $xssAuto = 1) {
         // Make sure user defined arrays are in lowercase
         $tagsArray = array_map('strtolower', (array) $tagsArray);
         $attrArray = array_map('strtolower', (array) $attrArray);
@@ -585,8 +565,7 @@ class PublisherFilterInput
      * @return  object  The PublisherFilterInput object.
      * @since   1.5
      */
-    function & getInstance($tagsArray = array(), $attrArray = array(), $tagsMethod = 0, $attrMethod = 0, $xssAuto = 1)
-    {
+    function & getInstance($tagsArray = array(), $attrArray = array(), $tagsMethod = 0, $attrMethod = 0, $xssAuto = 1) {
         static $instances;
 
         $sig = md5(serialize(array($tagsArray, $attrArray, $tagsMethod, $attrMethod, $xssAuto)));
@@ -612,8 +591,7 @@ class PublisherFilterInput
      * @return  mixed   'Cleaned' version of input parameter
      * @static
      */
-    function clean($source, $type = 'string')
-    {
+    function clean($source, $type = 'string') {
         // Handle the type constraint
         switch (strtoupper($type)) {
             case 'INT' :
@@ -714,8 +692,7 @@ class PublisherFilterInput
      * @param   array   $attrSubSet A 2 element array for attributes name,value
      * @return  boolean True if bad code is detected
      */
-    function checkAttribute($attrSubSet)
-    {
+    function checkAttribute($attrSubSet) {
         $attrSubSet[0] = strtolower($attrSubSet[0]);
         $attrSubSet[1] = strtolower($attrSubSet[1]);
         return (((strpos($attrSubSet[1], 'expression') !== false) && ($attrSubSet[0]) == 'style') || (strpos($attrSubSet[1], 'javascript:') !== false) || (strpos($attrSubSet[1], 'behaviour:') !== false) || (strpos($attrSubSet[1], 'vbscript:') !== false) || (strpos($attrSubSet[1], 'mocha:') !== false) || (strpos($attrSubSet[1], 'livescript:') !== false));
@@ -728,8 +705,7 @@ class PublisherFilterInput
      * @param   string  $source Input string to be 'cleaned'
      * @return  string  'Cleaned' version of input parameter
      */
-    function _remove($source)
-    {
+    function _remove($source) {
         $loopCounter = 0;
 
         // Iteration provides nested tag protection
@@ -747,8 +723,7 @@ class PublisherFilterInput
      * @param   string  $source Input string to be 'cleaned'
      * @return  string  'Cleaned' version of input parameter
      */
-    function _cleanTags($source)
-    {
+    function _cleanTags($source) {
         /*
          * In the beginning we don't really have a tag, so everything is
          * postTag
@@ -910,8 +885,7 @@ class PublisherFilterInput
      * @param   array   $attrSet    Array of attribute pairs to filter
      * @return  array   Filtered array of attribute pairs
      */
-    function _cleanAttributes($attrSet)
-    {
+    function _cleanAttributes($attrSet) {
         // Initialize variables
         $newSet = array();
 
@@ -985,8 +959,7 @@ class PublisherFilterInput
      * @param   string  $source
      * @return  string  Plaintext string
      */
-    function _decode($source)
-    {
+    function _decode($source) {
         // entity decode
         $trans_tbl = get_html_translation_table(HTML_ENTITIES);
         foreach ($trans_tbl as $k => $v) {

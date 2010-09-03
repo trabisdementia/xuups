@@ -49,8 +49,6 @@ if ($itemid != 0) {
         exit();
     }
     $categoryObj = $itemObj->category();
-    $datesub = $itemObj->getVar('datesub');
-    $uid = $itemObj->getVar('uid');
 } else {
     // we are submitting a new article
     // if the user is not admin AND we don't allow user submission, exit
@@ -60,12 +58,13 @@ if ($itemid != 0) {
     }
     $itemObj = $publisher->getHandler('item')->create();
     $categoryObj = $publisher->getHandler('category')->create();
-    $datesub = time();
+
 }
 
 if (isset($_GET['op']) && $_GET['op'] == 'clone') {
     $formtitle = _MD_PUBLISHER_SUB_CLONE;
     $itemObj->setNew();
+    $itemObj->setVar('itemid', 0);
 } else {
     $formtitle = _MD_PUBLISHER_SUB_SMNAME;
 }
@@ -84,10 +83,10 @@ $form_view = $gperm_handler->getItemIds('form_view', $groups, $module_id);
 
 // This code makes sure permissions are not manipulated
 $elements = array(
-    'summary', 'available_page_wrap', 'item_tags', 'image_item',
+    'summary', 'available_page_wrap', 'item_tag', 'image_item',
     'item_upload_file', 'uid', 'datesub', 'status', 'item_short_url',
     'item_meta_keywords', 'item_meta_description', 'weight',
-    'allow_comments', 'permissions_item', 'partial_view',
+    'allowcomments', 'permissions_item', 'partial_view',
     'dohtml', 'dosmiley', 'doxcode', 'doimage', 'dolinebreak',
     'notify', 'subtitle', 'author_alias');
 foreach ($elements as $element) {
@@ -96,93 +95,14 @@ foreach ($elements as $element) {
         exit();
     }
 }
-//Now if the values are not in $_POST we can use the default config values
 
-//Required fields
-$categoryid = PublisherRequest::getInt('categoryid');
-$title = PublisherRequest::getString('title');
-$body = PublisherRequest::getText('body');
-
-//Not required fields
-$summary = PublisherRequest::getText('summary');
-
-/*
- $allow_display_summary = in_array(_PUBLISHER_DISPLAY_SUMMARY, $form_view);
- $display_summary = (isset($_POST['display_summmary'])&& $allow_display_summary) ? intval($_POST['display_summary']) : 1;
- */
-
-$subtitle = PublisherRequest::getString('subtitle');
-
-//$allow_available_page_wrap = in_array(_PUBLISHER_AVAILABLE_PAGE_WRAP, $form_view);
-
-$item_tag = PublisherRequest::getString('item_tag');
-$image_item = PublisherRequest::getArray('image_item');
-$image_featured = PublisherRequest::getString('image_featured');
 $item_upload_file = isset($_FILES['item_upload_file']) ? $_FILES['item_upload_file'] : '';
-$uid = PublisherRequest::getInt('uid', $uid);
-$author_alias = PublisherRequest::getString('author_alias');
-if ($author_alias != '') $uid = 0;
-
-$datesub = isset($_POST['datesub']) ? strtotime($_POST['datesub']['date']) + $_POST['datesub']['time'] : $datesub;
-$status = PublisherRequest::getInt('status', $publisher->getConfig('submit_status'));
-$item_short_url = PublisherRequest::getString('item_short_url');
-$item_meta_keywords = PublisherRequest::getString('item_meta_keywords');
-$item_meta_description = PublisherRequest::getString('item_meta_description');
-$weight = PublisherRequest::getInt('weight');
-$allowcomments = PublisherRequest::getInt('allowcomments', $publisher->getConfig('submit_allowcomments'));
-$permissions_item = PublisherRequest::getArray('permissions_item', array('0'));
-$partial_view = PublisherRequest::getInt('partial_view', false);
-$dohtml = PublisherRequest::getInt('dohtml', $publisher->getConfig('submit_dohtml'));
-$dosmiley = PublisherRequest::getInt('dosmiley', $publisher->getConfig('submit_dosmiley'));
-$doxcode = PublisherRequest::getInt('doxcode', $publisher->getConfig('submit_doxcode'));
-$doimage = PublisherRequest::getInt('doimage', $publisher->getConfig('submit_doimage'));
-$dolinebreak = PublisherRequest::getInt('dolinebreak', $publisher->getConfig('submit_dobr'));
-$notify = PublisherRequest::getInt('notify');
 
 //stripcslashes
 switch ($op) {
     case 'preview':
         // Putting the values about the ITEM in the ITEM object
-        $itemObj->setVar('categoryid', $categoryid);
-        $itemObj->setVar('title', $title);
-        $itemObj->setVar('body', $body);
-        $itemObj->setVar('summary', $summary);
-        //$itemObj->setVar('display_summary', $display_summary);
-        //$allow_available_page_wrap = $gperm_handler->checkRight('form_view', _PUBLISHER_AVAILABLE_PAGE_WRAP, $groups, $module_id);
-        $itemObj->setVar('item_tag', $item_tag);
-        $itemObj->setVar('subtitle', $subtitle);
-        $itemObj->setVar('author_alias', $author_alias);
-        $itemObj->setVar('uid', $uid);
-        $itemObj->setVar('datesub', $datesub);
-        $itemObj->setVar('status', $status);
-        $itemObj->setVar('short_url', $item_short_url);
-        $itemObj->setVar('meta_keywords', $item_meta_keywords);
-        $itemObj->setVar('meta_description', $item_meta_description);
-        $itemObj->setVar('weight', $weight);
-        $itemObj->setVar('cancomment', $allowcomments);
-        $itemObj->setGroups_read($permissions_item);
-        $itemObj->setPartial_view($partial_view);
-        $itemObj->setVar('dohtml', $dohtml);
-        $itemObj->setVar('dosmiley', $dosmiley);
-        $itemObj->setVar('doxcode', $doxcode);
-        $itemObj->setVar('doimage', $doimage);
-        $itemObj->setVar('dobr', $dolinebreak);
-        $itemObj->setVar('notifypub', $notify);
-
-        $image_handler =& xoops_gethandler('image');
-        $imageObjs = $image_handler->getObjects(null, true);
-        $image_item_ids = array();
-        foreach ($imageObjs as $id => $imageObj) {
-            $image_name = $imageObj->getVar('image_name');
-            if ($image_name == $image_featured) {
-                $itemObj->setVar('image', $id);
-            }
-            if (in_array($image_name, $image_item)) {
-                $image_item_ids[] = $id;
-            }
-        }
-        $itemObj->setVar('images', implode('|', $image_item_ids));
-        unset($imageObjs);
+        $itemObj->setVarsFromRequest();
 
         $xoopsOption['template_main'] = 'publisher_submit.html';
         include_once XOOPS_ROOT_PATH . '/header.php';
@@ -221,52 +141,7 @@ switch ($op) {
 
     case 'post':
         // Putting the values about the ITEM in the ITEM object
-        $itemObj->setVar('categoryid', $categoryid);
-        $itemObj->setVar('title', $title);
-        $itemObj->setVar('body', $body);
-        $itemObj->setVar('summary', $summary);
-        //$itemObj->setVar('display_summary', $display_summary);
-        //$allow_available_page_wrap = $gperm_handler->checkRight('form_view', _PUBLISHER_AVAILABLE_PAGE_WRAP, $groups, $module_id);
-        $itemObj->setVar('item_tag', $item_tag);
-
-        //Todo: get a better image class for xoops!
-        //Image hack
-        $image_item_ids = array();
-        global $xoopsDB;
-        $sql = 'SELECT image_id, image_name FROM ' . $xoopsDB->prefix('image');
-        $result = $xoopsDB->query($sql, 0, 0);
-        while ($myrow = $xoopsDB->fetchArray($result)) {
-            $image_name = $myrow['image_name'];
-            $id = $myrow['image_id'];
-            if ($image_name == $image_featured) {
-                $itemObj->setVar('image', $id);
-            }
-            if (in_array($image_name, $image_item)) {
-                $image_item_ids[] = $id;
-            }
-
-        }
-
-        $itemObj->setVar('images', implode('|', $image_item_ids));
-
-        $itemObj->setVar('subtitle', $subtitle);
-        $itemObj->setVar('author_alias', $author_alias);
-        $itemObj->setVar('uid', $uid);
-        $itemObj->setVar('datesub', $datesub);
-        $itemObj->setVar('status', $status);
-        $itemObj->setVar('short_url', $item_short_url);
-        $itemObj->setVar('meta_keywords', $item_meta_keywords);
-        $itemObj->setVar('meta_description', $item_meta_description);
-        $itemObj->setVar('weight', $weight);
-        $itemObj->setVar('cancomment', $allowcomments);
-        $itemObj->setGroups_read($permissions_item);
-        $itemObj->setPartial_view($partial_view);
-        $itemObj->setVar('dohtml', $dohtml);
-        $itemObj->setVar('dosmiley', $dosmiley);
-        $itemObj->setVar('doxcode', $doxcode);
-        $itemObj->setVar('doimage', $doimage);
-        $itemObj->setVar('dobr', $dolinebreak);
-        $itemObj->setVar('notifypub', $notify);
+        $itemObj->setVarsFromRequest();
 
         // Storing the item object in the database
         if (!$itemObj->store()) {
@@ -295,7 +170,7 @@ switch ($op) {
                 redirect_header($itemObj->getItemUrl(), 2, $redirect_msg);
             } else {
                 // Subscribe the user to On Published notification, if requested
-                if ($notify) {
+                if ($itemObj->getVar('notifypub')) {
                     include_once XOOPS_ROOT_PATH . '/include/notification_constants.php';
                     $notification_handler =& xoops_gethandler('notification');
                     $notification_handler->subscribe('item', $itemObj->itemid(), 'approved', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE);
@@ -320,20 +195,7 @@ switch ($op) {
         include_once XOOPS_ROOT_PATH . '/header.php';
         include_once PUBLISHER_ROOT_PATH . '/footer.php';
 
-        //new item, is not allways a new item???
-        if ($itemid == 0) {
-            $itemObj->setVar('uid', $uid);
-
-            //default values set in preferences
-            $itemObj->setVar('status', $publisher->getConfig('submit_status'));
-            $itemObj->setVar('cancomment', $publisher->getConfig('submit_allowcomments'));
-            $itemObj->setVar('dohtml', $publisher->getConfig('submit_dohtml'));
-            $itemObj->setVar('dosmiley', $publisher->getConfig('submit_dosmiley'));
-            $itemObj->setVar('doxcode', $publisher->getConfig('submit_doxcode'));
-            $itemObj->setVar('doimage', $publisher->getConfig('submit_doimage'));
-            $itemObj->setVar('dobr', $publisher->getConfig('submit_dobr'));
-            $itemObj->setVar('notifypub', $notify);
-        }
+        $itemObj->setVarsFromRequest();
 
         $xoopsTpl->assign('module_home', publisher_moduleHome());
         if (isset($_GET['op']) && $_GET['op'] == 'clone') {
