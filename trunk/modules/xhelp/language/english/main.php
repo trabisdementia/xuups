@@ -291,6 +291,12 @@ define('_XHELP_TEXT_SAVED_SEARCHES', 'Previously Saved Searches');
 define('_XHELP_TEXT_SWITCH_TO', 'Switch To ');
 define('_XHELP_TEXT_ADDITIONAL_INFO', 'Additional Information');
 
+//added 03-09-2010
+define('_XHELP_TEXT_USE', 'Use');
+define('_XHELP_TEXT_DATE', 'Date Range:');
+define('_XHELP_TEXT_DATE_MIN', 'From:');
+define('_XHELP_TEXT_DATE_MAX', 'To:');
+
 define('_XHELP_ROLE_NAME1', 'Ticket Manager');
 define('_XHELP_ROLE_NAME2', 'Support');
 define('_XHELP_ROLE_NAME3', 'Browser');

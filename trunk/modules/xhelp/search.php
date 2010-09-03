@@ -242,6 +242,64 @@ if($xoopsUser){
             $xoopsTpl->assign('xhelp_baseURL', XHELP_BASE_URL);
             $viewResults = false;
 
+            // Start of hack by trabis/tdm
+            $recieve_datemin = 0;
+            $recieve_datemax = 0;
+            if (isset($_REQUEST['datemin_use'])){
+                $datemin_use = intval($_REQUEST['datemin_use']);
+            }else{
+                $datemin_use = 0;
+            }
+            if (isset($_REQUEST['datemax_use'])){
+                $datemax_use = intval($_REQUEST['datemax_use']);
+            }else{
+                $datemax_use = 0;
+            }
+            $date_criteria = new CriteriaCompo();
+            if (isset($_REQUEST['recieve_datemin'])){
+                if ($_REQUEST['recieve_datemin'] != ''){
+                    if ($datemin_use == 1){
+                        $recieve_datemin = $_REQUEST['recieve_datemin'];
+                        $date_criteria->add(new Criteria('t.posted', strtotime($recieve_datemin), ">="));
+                    }
+                }
+            }
+            if (isset($_REQUEST['recieve_datemax'])){
+                if ($_REQUEST['recieve_datemax'] != ''){
+                    if ($datemax_use == 1){
+                        $recieve_datemax = $_REQUEST['recieve_datemax'];
+                        $date_criteria->add(new Criteria('t.posted', strtotime($recieve_datemax), "<="));
+                    }
+                }
+            }
+
+            //recherche recieve_date
+            xoops_load('XoopsFormLoader');
+            $aff_date = new XoopsFormElementTray('','');
+            $date_min = new XoopsFormTextDateSelect(_XHELP_TEXT_DATE_MIN, 'recieve_datemin', 10, strtotime($recieve_datemin));
+            if ($recieve_datemin == 0){
+                $datemin_use = 0;
+            }
+            $date_min_use = new XoopsFormCheckBox('', 'datemin_use', $datemin_use);
+            $date_min_use ->addOption(1, _XHELP_TEXT_USE);
+
+            $date_max = new XoopsFormTextDateSelect(_XHELP_TEXT_DATE_MAX, 'recieve_datemax', 10, strtotime($recieve_datemax));
+            if ($recieve_datemax == 0){
+                $datemax_use = 0;
+            }
+            $date_max_use = new XoopsFormCheckBox('', 'datemax_use', $datemax_use);
+            $date_max_use ->addOption(1, _XHELP_TEXT_USE);
+
+
+            $aff_date->addElement($date_min);
+            $aff_date->addElement($date_min_use);
+            $aff_date->addElement($date_max);
+            $aff_date->addElement($date_max_use);
+            $dateform = $aff_date->render();
+
+            $xoopsTpl->assign('dateform', $dateform);
+            // End of hack
+
             // If search submitted, or moving to another page of search results, or submitted a saved search
             if(isset($_POST['search']) || isset($_GET['start']) || isset($_REQUEST['savedSearch'])){
                 if(isset($_REQUEST['savedSearch']) && $_REQUEST['savedSearch'] != 0){     // If this is a saved search
@@ -275,7 +333,9 @@ if($xoopsUser){
                 } elseif(isset($_POST['search']) || isset($_GET['start'])){ // If this is a new search or next page in search results
                     $crit = new CriteriaCompo(new Criteria('uid', $xoopsUser->getVar('uid'), "=" , "j"));
                     $vars = array('ticketid', 'department', 'description', 'subject', 'priority', 'status', 'state', 'submittedBy', 'ownership', 'closedBy');
-
+                    //hack
+                    $crit->add($date_criteria);
+                    //end of hack
                     if($custFields =& $_xhelpSession->get("xhelp_custFields")){     // Custom fields
                         $hasCustFields = false;
                         foreach($custFields as $field){
@@ -296,12 +356,12 @@ if($xoopsUser){
                             $$var = $_GET[$var];
                         }
                     }
-                     
+
                     if(isset($ticketid) && $ticketid=intval($ticketid)){
                         $crit->add(new Criteria("id", $ticketid, "=", "t"));
                         $pagenav_vars .= "&amp;ticketid=$ticketid";
                     }
-                     
+
                     if(isset($department)){
                         if(!in_array("-1",$department)){
                             $department = array_filter($department);
@@ -373,7 +433,7 @@ if($xoopsUser){
                     $crit->setLimit($limit);
                     $crit->setSort($sort);
                     $crit->setOrder($order);
-                     
+
                     if(isset($_POST['save']) && $_POST['save'] == 1){
                         if(isset($_POST['searchid']) && $_POST['searchid'] != 0){
                             $exSearch =& $hSavedSearch->get(intval($_POST['searchid']));
@@ -382,7 +442,7 @@ if($xoopsUser){
                             $exSearch->setVar('search', serialize($crit));
                             $exSearch->setVar('pagenav_vars', $pagenav_vars);
                             $exSearch->setVar('hasCustFields', (($hasCustFields) ? 1 : 0));
-                             
+
                             if($hSavedSearch->insert($exSearch)){  // If saved, store savedSearches in a session var
                                 $_xhelpSession->del('xhelp_savedSearches');
                             }
@@ -398,7 +458,7 @@ if($xoopsUser){
                                 $newSearch->setVar('search', serialize($crit));
                                 $newSearch->setVar('pagenav_vars', $pagenav_vars);
                                 $newSearch->setVar('hasCustFields', (($hasCustFields) ? 1 : 0));
-                                 
+
                                 if($hSavedSearch->insert($newSearch)){  // If saved, store savedSearches in a session var
                                     $_xhelpSession->del('xhelp_savedSearches');
                                 }
@@ -411,7 +471,7 @@ if($xoopsUser){
                     }
                 }
                 $viewResults = true;
-                 
+
                 $tickets =& $hTickets->getObjectsByStaff($crit, false, $hasCustFields);
 
                 $total = $hTickets->getCountByStaff($crit, $hasCustFields);
@@ -494,7 +554,7 @@ if($xoopsUser){
             $xoopsTpl->assign('xhelp_text_allTickets', _XHELP_TEXT_SEARCH_RESULTS);
             $xoopsTpl->assign('xhelp_priorities', array(5, 4, 3, 2, 1));
             $xoopsTpl->assign('xhelp_priorities_desc', array('5' => _XHELP_PRIORITY5, '4' => _XHELP_PRIORITY4,'3' => _XHELP_PRIORITY3,
-                              '2' => _XHELP_PRIORITY2, '1' => _XHELP_PRIORITY1));    
+                              '2' => _XHELP_PRIORITY2, '1' => _XHELP_PRIORITY1));
             $staff =& xhelpGetStaff($displayName);
             $xoopsTpl->assign('xhelp_staff', $staff);
             $hMember =& xhelpGetHandler('membership');
