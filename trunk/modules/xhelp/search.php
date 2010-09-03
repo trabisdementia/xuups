@@ -246,7 +246,7 @@ if($xoopsUser){
             $recieve_datemin = 0;
             $recieve_datemax = 0;
             $datemin_use = 0;
-            $datemax = 0;
+            $datemax_use = 0;
 
             if (isset($_REQUEST['datemin_use'])) {
                 $datemin_use = 1;
