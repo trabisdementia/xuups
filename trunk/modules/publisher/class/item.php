@@ -328,7 +328,7 @@ class PublisherItem extends XoopsObject {
             $user_handler = xoops_gethandler('user');
             $member_handler = xoops_gethandler('member');
             $poster = $user_handler->get($this->uid());
-            if (is_object($poster)) {
+            if (is_object($poster) && !$poster->isNew()) {
                 $poster->setVar('posts', $poster->getVar('posts') + 1);
                 if (!$member_handler->insertUser($poster, true)) {
                     $this->setErrors('Article created but could not increment user posts.');
