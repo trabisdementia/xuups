@@ -41,6 +41,10 @@ if (!$itemObj) {
 
 $xoopsOption['template_main'] = 'publisher_item.html';
 include_once XOOPS_ROOT_PATH . '/header.php';
+$xoTheme->addStylesheet(PUBLISHER_URL . '/css/jquery.popeye.style.css');
+$xoTheme->addScript(XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js');
+$xoTheme->addScript(PUBLISHER_URL . '/js/jquery.popeye-2.0.4.js');
+$xoTheme->addScript(PUBLISHER_URL . '/js/publisher.js');
 include_once PUBLISHER_ROOT_PATH . '/footer.php';
 
 // Creating the category object that holds the selected item

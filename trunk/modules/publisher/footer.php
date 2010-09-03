@@ -23,11 +23,10 @@
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 $xoTheme->addStylesheet(PUBLISHER_URL . '/css/publisher.css');
-$xoTheme->addStylesheet(PUBLISHER_URL . '/css/jquery.popeye.style.css');
-
-$xoTheme->addScript(XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js');
-$xoTheme->addScript(PUBLISHER_URL . '/js/jquery.popeye-2.0.4.js');
-$xoTheme->addScript(PUBLISHER_URL . '/js/publisher.js');
+//$xoTheme->addStylesheet(PUBLISHER_URL . '/css/jquery.popeye.style.css');
+//$xoTheme->addScript(XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js');
+//$xoTheme->addScript(PUBLISHER_URL . '/js/jquery.popeye-2.0.4.js');
+//$xoTheme->addScript(PUBLISHER_URL . '/js/publisher.js');
 
 $xoopsTpl->assign("xoops_module_header", '<link rel="alternate" type="application/rss+xml" title="'
                                          . $publisher->getModule()->name() . '" href="' . PUBLISHER_URL . '/backend.php" />'

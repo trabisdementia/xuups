@@ -34,8 +34,6 @@ if (!$categoriesArray) {
 // Find if the user is admin of the module
 $isAdmin = publisher_userIsAdmin();
 
-$uid = is_object($xoopsUser) ? $xoopsUser->uid() : 0;
-
 $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $gperm_handler =& xoops_getmodulehandler('groupperm');
 $module_id = $publisher->getModule()->getVar('mid');
@@ -58,7 +56,6 @@ if ($itemid != 0) {
     }
     $itemObj = $publisher->getHandler('item')->create();
     $categoryObj = $publisher->getHandler('category')->create();
-
 }
 
 if (isset($_GET['op']) && $_GET['op'] == 'clone') {
@@ -106,9 +103,9 @@ switch ($op) {
 
         $xoopsOption['template_main'] = 'publisher_submit.html';
         include_once XOOPS_ROOT_PATH . '/header.php';
+        $xoTheme->addScript(XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js');
+        $xoTheme->addScript(PUBLISHER_URL . '/js/publisher.js');
         include_once PUBLISHER_ROOT_PATH . '/footer.php';
-
-        $name = $xoopsUser ? ucwords($xoopsUser->getVar("uname")) : $GLOBALS['xoopsConfig']['anonymous'];
 
         $categoryObj = $publisher->getHandler('category')->get($_POST['categoryid']);
 
@@ -193,6 +190,8 @@ switch ($op) {
     default:
         $xoopsOption['template_main'] = 'publisher_submit.html';
         include_once XOOPS_ROOT_PATH . '/header.php';
+        $xoTheme->addScript(XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js');
+        $xoTheme->addScript(PUBLISHER_URL . '/js/publisher.js');
         include_once PUBLISHER_ROOT_PATH . '/footer.php';
 
         $itemObj->setVarsFromRequest();
@@ -214,7 +213,6 @@ switch ($op) {
         $sform->assign($xoopsTpl);
 
         include_once XOOPS_ROOT_PATH . '/footer.php';
-
         break;
 }
 
