@@ -266,7 +266,7 @@ if($xoopsUser){
             }
             if (isset($_REQUEST['recieve_datemax'])){
                 if ($_REQUEST['recieve_datemax'] != ''){
-                    if ($datemax_use == 1){
+                    if ($datemain_use == 1){
                         $recieve_datemax = $_REQUEST['recieve_datemax'];
                         $date_criteria->add(new Criteria('t.posted', strtotime($recieve_datemax), "<="));
                     }
@@ -278,14 +278,14 @@ if($xoopsUser){
             $aff_date = new XoopsFormElementTray('','');
             $date_min = new XoopsFormTextDateSelect(_XHELP_TEXT_DATE_MIN, 'recieve_datemin', 10, strtotime($recieve_datemin));
             if ($recieve_datemin == 0){
-                $datemin_use = 0;
+                $datemin_use = 1;
             }
             $date_min_use = new XoopsFormCheckBox('', 'datemin_use', $datemin_use);
             $date_min_use ->addOption(1, _XHELP_TEXT_USE);
 
             $date_max = new XoopsFormTextDateSelect(_XHELP_TEXT_DATE_MAX, 'recieve_datemax', 10, strtotime($recieve_datemax));
             if ($recieve_datemax == 0){
-                $datemax_use = 0;
+                $datemax_use = 1;
             }
             $date_max_use = new XoopsFormCheckBox('', 'datemax_use', $datemax_use);
             $date_max_use ->addOption(1, _XHELP_TEXT_USE);
