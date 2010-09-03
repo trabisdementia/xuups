@@ -302,7 +302,6 @@ define('_XHELP_ROLE_VAL2', 241);
 define('_XHELP_ROLE_VAL3', 0);
 
 
-
 // Ticket.php - Actions
 define('_XHELP_TEXT_SELECTED', 'Ausgewählte:');
 define('_XHELP_TEXT_ADD_RESPONSE', 'Stellungnahme hinzufügen');
@@ -320,9 +319,9 @@ define('_XHELP_TEXT_AUTO_REFRESH1', 'Aktualisierung alle 1 Minuten');
 define('_XHELP_TEXT_AUTO_REFRESH2', 'Aktualisierung alle 5 Minuten');
 define('_XHELP_TEXT_AUTO_REFRESH3', 'Aktualisierung alle 10 Minuten');
 define('_XHELP_TEXT_AUTO_REFRESH4', 'Aktualisierung alle 30 Minuten');
-define('_XHELP_AUTO_REFRESH0', 0);          // Change these to
-define('_XHELP_AUTO_REFRESH1', 60);         // adjust the values
-define('_XHELP_AUTO_REFRESH2', 300);        // in the select box
+define('_XHELP_AUTO_REFRESH0', 0); // Change these to
+define('_XHELP_AUTO_REFRESH1', 60); // adjust the values
+define('_XHELP_AUTO_REFRESH2', 300); // in the select box
 define('_XHELP_AUTO_REFRESH3', 600);
 define('_XHELP_AUTO_REFRESH4', 1800);
 
@@ -431,10 +430,10 @@ define('_XHELP_TIME_DAY', 'Tag');
 define('_XHELP_TIME_WEEK', 'Woche');
 define('_XHELP_TIME_YEAR', 'Jahr');
 
-define('_XHELP_MAILEVENT_CLASS0', 0);     // Connection message
-define('_XHELP_MAILEVENT_CLASS1', 1);     // Parse message
-define('_XHELP_MAILEVENT_CLASS2', 2);     // Storage message
-define('_XHELP_MAILEVENT_CLASS3', 3);     // General message
+define('_XHELP_MAILEVENT_CLASS0', 0); // Connection message
+define('_XHELP_MAILEVENT_CLASS1', 1); // Parse message
+define('_XHELP_MAILEVENT_CLASS2', 2); // Storage message
+define('_XHELP_MAILEVENT_CLASS3', 3); // General message
 
 define('_XHELP_MAILEVENT_DESC0', 'Konnte nicht zum Server verbinden');
 define('_XHELP_MAILEVENT_DESC1', 'Konnte Nachricht nicht analysieren.');

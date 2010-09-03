@@ -5,7 +5,8 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-class xhelpReportRendererFactory {
+class xhelpReportRendererFactory
+{
     function xhelpReportRendererFactory()
     {
         // Constructor
@@ -14,19 +15,19 @@ class xhelpReportRendererFactory {
     function &getRenderer($type, &$report)
     {
         $ret = false;
-        if($type == ''){
+        if ($type == '') {
             return $ret;
         }
 
         // Check rendererValid function
         $isValid = xhelpReportRendererFactory::_rendererValid($type);
 
-        if($isValid){
+        if ($isValid) {
             // Step 2 - include script with faq adapter class
-            require_once(XHELP_RPT_RENDERER_PATH .'/'.$type.'ReportRenderer.php');
+            require_once(XHELP_RPT_RENDERER_PATH . '/' . $type . 'ReportRenderer.php');
 
             // Step 3 - create instance of adapter class
-            $classname = 'xhelp'.$type.'ReportRenderer';
+            $classname = 'xhelp' . $type . 'ReportRenderer';
 
             // Step 4 - return adapter class
             $ret = new $classname($report);
@@ -40,7 +41,7 @@ class xhelpReportRendererFactory {
     function _rendererValid($type)
     {
         // Make sure this is a valid file
-        if (is_file(XHELP_RPT_RENDERER_PATH . '/'. $type. 'ReportRenderer.php')) {
+        if (is_file(XHELP_RPT_RENDERER_PATH . '/' . $type . 'ReportRenderer.php')) {
             return true;
         } else {
             return false;

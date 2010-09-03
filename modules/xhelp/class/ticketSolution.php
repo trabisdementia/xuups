@@ -8,8 +8,8 @@
 if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
-require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
-require_once(XHELP_CLASS_PATH.'/xhelpNaiveBayesian.php');
+require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH . '/xhelpNaiveBayesian.php');
 
 /**
  * xhelpTicketSolution class
@@ -21,7 +21,8 @@ require_once(XHELP_CLASS_PATH.'/xhelpNaiveBayesian.php');
  * @package xhelp
  */
 
-class xhelpTicketSolution extends XoopsObject {
+class xhelpTicketSolution extends XoopsObject
+{
     function xhelpTicketSolution($id = null)
     {
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
@@ -41,33 +42,34 @@ class xhelpTicketSolution extends XoopsObject {
         }
     }
 
-    function posted($format="l")
+    function posted($format = "l")
     {
         return formatTimestamp($this->getVar('posted'), $format);
     }
-}   // end of class
+} // end of class
 
-class xhelpTicketSolutionHandler extends xhelpBaseObjectHandler{
+class xhelpTicketSolutionHandler extends xhelpBaseObjectHandler
+{
     /**
      * Name of child class
      *
-     * @var	string
-     * @access	private
+     * @var    string
+     * @access    private
      */
     var $classname = 'xhelpticketsolution';
 
     /**
      * DB Table Name
      *
-     * @var 		string
-     * @access 	private
+     * @var         string
+     * @access     private
      */
     var $_dbtable = 'xhelp_ticket_solutions';
 
     /**
      * Constructor
      *
-     * @param	object   $db    reference to a xoopsDB object
+     * @param    object   $db    reference to a xoopsDB object
      */
     function xhelpTicketSolutionHandler(&$db)
     {
@@ -82,8 +84,8 @@ class xhelpTicketSolutionHandler extends xhelpBaseObjectHandler{
         }
 
         $sql = sprintf("INSERT INTO %s (id, ticketid, url, title, description, uid, posted) VALUES (%u, %u, %s, %s, %s, %u, %u)",
-        $this->_db->prefix($this->_dbtable), $id, $ticketid, $this->_db->quoteString($url),
-        $this->_db->quoteString($title), $this->_db->quoteString($description), $uid, time());
+                       $this->_db->prefix($this->_dbtable), $id, $ticketid, $this->_db->quoteString($url),
+                       $this->_db->quoteString($title), $this->_db->quoteString($description), $uid, time());
 
         return $sql;
 
@@ -97,8 +99,8 @@ class xhelpTicketSolutionHandler extends xhelpBaseObjectHandler{
         }
 
         $sql = sprintf("UPDATE %s SET ticketid = %u, url = %s, title = %s, description = %s, uid = %u, posted = %u WHERE id = %u",
-        $this->_db->prefix($this->_dbtable), $ticketid, $this->_db->quoteString($url),
-        $this->_db->quoteString($title), $this->_db->quoteString($description), $uid, $posted, $id);
+                       $this->_db->prefix($this->_dbtable), $ticketid, $this->_db->quoteString($url),
+                       $this->_db->quoteString($title), $this->_db->quoteString($description), $uid, $posted, $id);
 
         return $sql;
     }
@@ -126,13 +128,13 @@ class xhelpTicketSolutionHandler extends xhelpBaseObjectHandler{
         $cats = $bayes->categorize($document);
 
         //2. Get solutions to those tickets
-        $crit = new Criteria('ticketid', "(". implode(array_keys($cats), ',') .")", 'IN');
+        $crit = new Criteria('ticketid', "(" . implode(array_keys($cats), ',') . ")", 'IN');
         $solutions =& $this->getObjects($crit);
 
         //3. Sort solutions based on likeness probability
         foreach ($solutions as $solution) {
-            $ret[] = array( 'probability'=> $cats[$solution->getVar('ticketid')],
-                            'solution' => $solution);
+            $ret[] = array('probability' => $cats[$solution->getVar('ticketid')],
+                           'solution' => $solution);
         }
         unset($solutions);
         return $this->multi_sort($ret, 'probability');
@@ -146,32 +148,34 @@ class xhelpTicketSolutionHandler extends xhelpBaseObjectHandler{
             $bayes = new xhelpNaiveBayesian(new xhelpNaiveBayesianStorage);
             $documentid = (string) $ticket->getVar('id');
             $categoryid = (string) $ticket->getVar('id');
-            $document   = $ticket->getVar('subject') . "\r\n" . $ticket->getVar('description');
+            $document = $ticket->getVar('subject') . "\r\n" . $ticket->getVar('description');
             $bayes->train($documentid, $categoryid, $document);
 
             return true;
         }
         return false;
     }
-     
+
 
     function &multi_sort($array, $akey)
     {
         function _compare($a, $b)
         {
             global $key;
-            if ($a[$key]>$b[$key]) {
+            if ($a[$key] > $b[$key]) {
                 $varcmp = "1";
-            } elseif ($a[$key]<$b[$key]) {
+            } elseif ($a[$key] < $b[$key]) {
                 $varcmp = "-1";
-            } elseif ($a[$key]==$b[$key]) {
+            } elseif ($a[$key] == $b[$key]) {
                 $varcmp = "0";
             }
 
             return $varcmp;
         }
+
         usort($array, "_compare");
         return $array;
     }
 }
+
 ?>

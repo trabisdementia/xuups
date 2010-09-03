@@ -9,7 +9,7 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
 
 /**
  * xhelpResponses class
@@ -18,7 +18,8 @@ require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
  * @access public
  * @package xhelp
  */
-class xhelpResponses extends XoopsObject {
+class xhelpResponses extends XoopsObject
+{
     function xhelpResponses($id = null)
     {
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
@@ -45,7 +46,7 @@ class xhelpResponses extends XoopsObject {
      * @return string Formatted posted date
      * @access public
      */
-    function posted($format="l")
+    function posted($format = "l")
     {
         return formatTimestamp($this->getVar('updateTime'), $format);
     }
@@ -53,15 +54,15 @@ class xhelpResponses extends XoopsObject {
     function storeUpload($post_field, $response = null, $allowed_mimetypes = null)
     {
         //global $xoopsModuleConfig, $xoopsUser, $xoopsDB, $xoopsModule;
-        include_once (XHELP_CLASS_PATH.'/uploader.php');
+        include_once (XHELP_CLASS_PATH . '/uploader.php');
         $config =& xhelpGetModuleConfig();
 
         $ticketid = $this->getVar('id');
 
-        if(!isset($allowed_mimetypes)){
+        if (!isset($allowed_mimetypes)) {
             $hMime =& xhelpGetHandler('mimetype');
             $allowed_mimetypes = $hMime->checkMimeTypes();
-            if(!$allowed_mimetypes){
+            if (!$allowed_mimetypes) {
                 return false;
             }
         }
@@ -69,16 +70,16 @@ class xhelpResponses extends XoopsObject {
         $maxfilesize = $config['xhelp_uploadSize'];
         $maxfilewidth = $config['xhelp_uploadWidth'];
         $maxfileheight = $config['xhelp_uploadHeight'];
-        if(!is_dir(XHELP_UPLOAD_PATH)){
+        if (!is_dir(XHELP_UPLOAD_PATH)) {
             mkdir(XHELP_UPLOAD_PATH, 0757);
         }
 
-        $uploader = new XoopsMediaUploader(XHELP_UPLOAD_PATH.'/', $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
+        $uploader = new XoopsMediaUploader(XHELP_UPLOAD_PATH . '/', $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
         if ($uploader->fetchMedia($post_field)) {
             if (!isset($response)) {
-                $uploader->setTargetFileName($ticketid."_". $uploader->getMediaName());
+                $uploader->setTargetFileName($ticketid . "_" . $uploader->getMediaName());
             } else {
-                $uploader->setTargetFileName($ticketid."_".$response."_".$uploader->getMediaName());
+                $uploader->setTargetFileName($ticketid . "_" . $response . "_" . $uploader->getMediaName());
             }
             if ($uploader->upload()) {
                 $hFile =& xhelpGetHandler('file');
@@ -88,12 +89,12 @@ class xhelpResponses extends XoopsObject {
                 $file->setVar('mimetype', $allowed_mimetypes);
                 $file->setVar('responseid', (isset($response) ? intval($response) : 0));
 
-                if($hFile->insert($file)){
+                if ($hFile->insert($file)) {
                     return $file;
                 } else {
                     return $uploader->getErrors();
                 }
-                 
+
             } else {
                 return $uploader->getErrors();
             }
@@ -103,22 +104,22 @@ class xhelpResponses extends XoopsObject {
     function checkUpload($post_field, &$allowed_mimetypes, &$errors)
     {
         //global $xoopsModuleConfig;
-        include_once (XHELP_CLASS_PATH.'/uploader.php');
+        include_once (XHELP_CLASS_PATH . '/uploader.php');
         $config =& xhelpGetModuleConfig();
         $maxfilesize = $config['xhelp_uploadSize'];
         $maxfilewidth = $config['xhelp_uploadWidth'];
         $maxfileheight = $config['xhelp_uploadHeight'];
         $errors = array();
 
-        if(!isset($allowed_mimetypes)){
+        if (!isset($allowed_mimetypes)) {
             $hMime =& xhelpGetHandler('mimetype');
             $allowed_mimetypes = $hMime->checkMimeTypes($post_field);
-            if(!$allowed_mimetypes){
+            if (!$allowed_mimetypes) {
                 $errors[] = _XHELP_MESSAGE_WRONG_MIMETYPE;
                 return false;
             }
         }
-        $uploader = new XoopsMediaUploader(XHELP_UPLOAD_PATH.'/', $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
+        $uploader = new XoopsMediaUploader(XHELP_UPLOAD_PATH . '/', $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
 
         if ($uploader->fetchMedia($post_field)) {
             return true;
@@ -150,12 +151,13 @@ class xhelpResponses extends XoopsObject {
  * @package xhelp
  */
 
-class xhelpResponsesHandler extends xhelpBaseObjectHandler {
+class xhelpResponsesHandler extends xhelpBaseObjectHandler
+{
     /**
      * Name of child class
      *
-     * @var	string
-     * @access	private
+     * @var    string
+     * @access    private
      */
     var $classname = 'xhelpresponses';
 
@@ -170,7 +172,7 @@ class xhelpResponsesHandler extends xhelpBaseObjectHandler {
     /**
      * Constructor
      *
-     * @param	object   $db    reference to a xoopsDB object
+     * @param    object   $db    reference to a xoopsDB object
      */
     function xhelpResponsesHandler(&$db)
     {
@@ -186,7 +188,7 @@ class xhelpResponsesHandler extends xhelpBaseObjectHandler {
 
         $sql = sprintf("INSERT INTO %s (id, uid, ticketid, message, timeSpent, updateTime, userIP, private)
             VALUES (%u, %u, %u, %s, %u, %u, %s, %u)", $this->_db->prefix($this->_dbtable), $id, $uid, $ticketid,
-        $this->_db->quoteString($message), $timeSpent, time(), $this->_db->quoteString($userIP), $private);
+                       $this->_db->quoteString($message), $timeSpent, time(), $this->_db->quoteString($userIP), $private);
 
         return $sql;
 
@@ -201,8 +203,8 @@ class xhelpResponsesHandler extends xhelpBaseObjectHandler {
 
         $sql = sprintf("UPDATE %s SET uid = %u, ticketid = %u, message = %s, timeSpent = %u,
             updateTime = %u, userIP = %s, private = %u WHERE id = %u", $this->_db->prefix($this->_dbtable), $uid, $ticketid,
-        $this->_db->quoteString($message), $timeSpent, time(),
-        $this->_db->quoteString($userIP), $private, $id);
+                       $this->_db->quoteString($message), $timeSpent, time(),
+                       $this->_db->quoteString($userIP), $private, $id);
 
         return $sql;
     }
@@ -219,7 +221,7 @@ class xhelpResponsesHandler extends xhelpBaseObjectHandler {
      * @param object $obj reference to the {@link xhelpResponse} obj to delete
      * @param bool $force
      * @return bool FALSE if failed.
-     * @access	public
+     * @access    public
      */
     function delete(&$obj, $force = false)
     {
@@ -228,10 +230,10 @@ class xhelpResponsesHandler extends xhelpBaseObjectHandler {
         $hFiles =& xhelpGetHandler('file');
         $crit = new CriteriaCompo(new Criteria('ticketid', $obj->getVar('ticketid')));
         $crit->add(new Criteria('responseid', $obj->getVar('responseid')));
-        if(!$hFiles->deleteAll($crit)){
+        if (!$hFiles->deleteAll($crit)) {
             return false;
         }
-         
+
         $ret = parent::delete($obj, $force);
         return $ret;
     }
@@ -242,15 +244,15 @@ class xhelpResponsesHandler extends xhelpBaseObjectHandler {
      *
      * @param int $ticketid ticket to get count
      * @return int Number of staff responses
-     * @access	public
+     * @access    public
      */
     function getStaffResponseCount($ticketid)
     {
         $sql = sprintf('SELECT COUNT(*) FROM %s r INNER JOIN %s s ON r.uid = s.uid WHERE r.ticketid = %u',
-        $this->_db->prefix($this->_dbtable), $this->_db->prefix('xhelp_staff'), $ticketid);
-         
+                       $this->_db->prefix($this->_dbtable), $this->_db->prefix('xhelp_staff'), $ticketid);
+
         $ret = $this->_db->query($sql);
-         
+
         list($count) = $this->_db->fetchRow($ret);
         return $count;
     }
@@ -264,14 +266,14 @@ class xhelpResponsesHandler extends xhelpBaseObjectHandler {
      */
     function getResponseCounts($tickets)
     {
-        if(is_array($tickets)){
+        if (is_array($tickets)) {
             //$crit = new Criteria('ticketid', "(". implode(array_keys($tickets), ',') .")", 'IN');
             $sql = sprintf("SELECT COUNT(*) as numresponses, ticketid FROM %s WHERE ticketid in (%s) GROUP BY ticketid", $this->_db->prefix($this->_dbtable), implode(array_keys($tickets), ','));
         } else {
             return false;
         }
         $result = $this->_db->query($sql);
-         
+
         if (!$result) {
             return false;
         }
@@ -280,8 +282,9 @@ class xhelpResponsesHandler extends xhelpBaseObjectHandler {
         while ($myrow = $this->_db->fetchArray($result)) {
             $tickets[$myrow['ticketid']] = $myrow['numresponses'];
         }
-         
+
         return $tickets;
     }
 }
+
 ?>

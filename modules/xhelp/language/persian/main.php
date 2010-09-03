@@ -312,7 +312,6 @@ define('_XHELP_ROLE_VAL2', 241);
 define('_XHELP_ROLE_VAL3', 0);
 
 
-
 // Ticket.php - Actions
 define('_XHELP_TEXT_SELECTED', 'انتخاب کن:');
 define('_XHELP_TEXT_ADD_RESPONSE', 'اضافه کردن پاسخ');
@@ -330,9 +329,9 @@ define('_XHELP_TEXT_AUTO_REFRESH1', 'هر1 دقیقه رفرش کن');
 define('_XHELP_TEXT_AUTO_REFRESH2', 'هر 5 دقیقه رفرش کن');
 define('_XHELP_TEXT_AUTO_REFRESH3', 'هر 10 دققیه رفرش کن');
 define('_XHELP_TEXT_AUTO_REFRESH4', 'هر 30 دقیقه رفرش کن');
-define('_XHELP_AUTO_REFRESH0', 0);          // Change these to
-define('_XHELP_AUTO_REFRESH1', 60);         // adjust the values
-define('_XHELP_AUTO_REFRESH2', 300);        // in the select box
+define('_XHELP_AUTO_REFRESH0', 0); // Change these to
+define('_XHELP_AUTO_REFRESH1', 60); // adjust the values
+define('_XHELP_AUTO_REFRESH2', 300); // in the select box
 define('_XHELP_AUTO_REFRESH3', 600);
 define('_XHELP_AUTO_REFRESH4', 1800);
 
@@ -418,9 +417,9 @@ define('_XHELP_NO_FILES_ERROR', 'فایلی پیدا نشد');
 
 define('_XHELP_SIG_SPACER', '<br /><br />-------------------------------<br />');
 define('_XHELP_COMMMENTS', 'نظر بدید ؟');
-define("_XHELP_ANNOUNCE_READMORE","خواندن ادامه ...");
-define("_XHELP_ANNOUNCE_ONECOMMENT","1 نظر");
-define("_XHELP_ANNOUNCE_NUMCOMMENTS","%s نظر");
+define("_XHELP_ANNOUNCE_READMORE", "خواندن ادامه ...");
+define("_XHELP_ANNOUNCE_ONECOMMENT", "1 نظر");
+define("_XHELP_ANNOUNCE_NUMCOMMENTS", "%s نظر");
 define("_XHELP_TICKET_MD5SIGNATURE", "کلید پشتیبانی (Support Key):");
 
 define('_XHELP_NO_OWNER', 'بدون مسوول رسیدگی');

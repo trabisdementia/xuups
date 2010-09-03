@@ -8,9 +8,10 @@ if (!defined('XHELP_CLASS_PATH')) {
 global $paramVals;
 
 //Include the base reportRenderer interface (required)
-require_once(XHELP_CLASS_PATH .'/reportRenderer.php');
+require_once(XHELP_CLASS_PATH . '/reportRenderer.php');
 
-class xhelpHtmlReportRenderer extends xhelpReportRenderer {
+class xhelpHtmlReportRenderer extends xhelpReportRenderer
+{
     function xhelpHtmlReportRenderer($report)
     {
         $this->report = $report;
@@ -21,15 +22,15 @@ class xhelpHtmlReportRenderer extends xhelpReportRenderer {
         global $paramVals;
         $report = $this->report;
 
-        if($report->getVar('hasResults') == 0){
+        if ($report->getVar('hasResults') == 0) {
             $report->_setResults();
         }
         $aResults = $report->getVar('results');
 
         $params = '';
-        if(!empty($paramVals)){
-            foreach($paramVals as $key=>$value){
-                if(is_array($value)){
+        if (!empty($paramVals)) {
+            foreach ($paramVals as $key => $value) {
+                if (is_array($value)) {
                     $params .= "&$key=$value[1]";
                 } else {
                     $params .= "&$key=$value";
@@ -40,9 +41,9 @@ class xhelpHtmlReportRenderer extends xhelpReportRenderer {
         // Print graph
         $myReport = '';
 
-        if($report->getVar('hasGraph')){
+        if ($report->getVar('hasGraph')) {
             $myReport .= "<div id='xhelp_graph'>";
-            $myReport .= "<img src='".XHELP_BASE_URL."/report.php?op=graph&name=".$report->name.$params."' align='center' width='".$graphWidth."' height='".$graphHeight."' />";
+            $myReport .= "<img src='" . XHELP_BASE_URL . "/report.php?op=graph&name=" . $report->name . $params . "' align='center' width='" . $graphWidth . "' height='" . $graphHeight . "' />";
             $myReport .= "</div>";
         }
 
@@ -54,13 +55,13 @@ class xhelpHtmlReportRenderer extends xhelpReportRenderer {
         $dbFields = $report->meta['dbFields'];
 
         // Fill in rest of report
-        foreach($dbFields as $dbField=>$field){
-            $myReport .= "<th>".$field."</th>";
+        foreach ($dbFields as $dbField => $field) {
+            $myReport .= "<th>" . $field . "</th>";
         }
         $myReport .= "</tr>";
 
 
-        foreach($dbFields as $dbField=>$field){
+        foreach ($dbFields as $dbField => $field) {
             ${$dbField} = '';
         }
 
@@ -83,10 +84,10 @@ class xhelpHtmlReportRenderer extends xhelpReportRenderer {
          */
 
 
-        foreach($aResults as $result){
+        foreach ($aResults as $result) {
             $myReport .= "<tr class='even'>";
-            foreach($dbFields as $dbField=>$field){
-                $myReport .= "<td>". $result[$dbField] ."</td>";
+            foreach ($dbFields as $dbField => $field) {
+                $myReport .= "<td>" . $result[$dbField] . "</td>";
             }
             $myReport .= "</tr>";
         }
@@ -96,4 +97,5 @@ class xhelpHtmlReportRenderer extends xhelpReportRenderer {
         return $myReport;
     }
 }
+
 ?>

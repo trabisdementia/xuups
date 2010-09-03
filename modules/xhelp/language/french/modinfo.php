@@ -64,7 +64,7 @@ define('_MI_XHELP_NUM_TICKET_UPLOADS', 'Nombre de fichiers max au t&eacute;l&eac
 define('_MI_XHELP_NUM_TICKET_UPLOADS_DSC', 'Ceci est le nombre maximum de fichiers qui peuvent &ecirc;tre t&eacute;l&eacute;charg&eacute;s dans un ticket &agrave; la soumission d\'un ticket (n\'inclus pas le champs customis&eacute; fichier).');
 define('_MI_XHELP_ANNOUNCEMENTS', 'Sujet des annonces');
 //define('_MI_XHELP_ANNOUNCEMENTS_DSC', 'C\'est le sujet des annonces pour xhelp. Mettez &agrave; jour le module xhelp pour voir les nouvelles cat&eacute;gories');
-define('_MI_XHELP_ANNOUNCEMENTS_DSC', "ceci est le sujet des actualités qui poussera les annonces pour xhelp. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Cliquez ici</a> pour mettre &agrave; jour les nouvelles cat&eacute;gories.");
+define('_MI_XHELP_ANNOUNCEMENTS_DSC', "ceci est le sujet des actualités qui poussera les annonces pour xhelp. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Cliquez ici</a> pour mettre &agrave; jour les nouvelles cat&eacute;gories.");
 define('_MI_XHELP_ANNOUNCEMENTS_NONE', '***D&eacute;sactiver les annonces***');
 define('_MI_XHELP_ALLOW_REOPEN', 'Autoriser la r&eacute;ouverture d\'un Ticket');
 define('_MI_XHELP_ALLOW_REOPEN_DSC', 'Autorise les utilisateurs &agrave; r&eacute;ouvrir un Ticket sold&eacute; ?');
@@ -75,7 +75,7 @@ define('_MI_XHELP_STAFF_ACTIONS_DSC', 'Quel style désirez vou appliquer aux acti
 define('_MI_XHELP_ACTION1', 'Style en ligne');
 define('_MI_XHELP_ACTION2', 'Style en Bloc');
 define('_MI_XHELP_DEFAULT_DEPT', 'Département par d&eacute;faut');
-define('_MI_XHELP_DEFAULT_DEPT_DSC', "Ceci est le département s&eacute;lectionn&eacute; par d&eacute;faut dans la liste &agrave; l'ajout de ticket. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Cliquez ici</a> pour mettre &agrave; jour les départements.");
+define('_MI_XHELP_DEFAULT_DEPT_DSC', "Ceci est le département s&eacute;lectionn&eacute; par d&eacute;faut dans la liste &agrave; l'ajout de ticket. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Cliquez ici</a> pour mettre &agrave; jour les départements.");
 define('_MI_XHELP_OVERDUE_TIME', 'Limite d\'&eacute;x&eacute;cution en temps alou&eacute; au ticket');
 define('_MI_XHELP_OVERDUE_TIME_DSC', 'Ceci d&eacute;termine le temps dont dispose l\'intervenant afin de cloturer le ticket avant qu\'il ne soit trop tard (en heures).');
 define('_MI_XHELP_ALLOW_ANON', 'Autoriser les utilisateurs anonymes &agrave; soumettre des tickets');
@@ -108,11 +108,11 @@ define('_MI_XHELP_TEXT_NOTIFICATIONS', 'Gestion de Notifications');
 define('_MI_XHELP_TEXT_MANAGE_FAQ', 'Gestion de FAQ');
 
 //NOTIFICATION vars
-define('_MI_XHELP_DEPT_NOTIFY','Département');
+define('_MI_XHELP_DEPT_NOTIFY', 'Département');
 define('_MI_XHELP_DEPT_NOTIFYDSC', 'Options de Notification s\'appliquant &agrave; un département');
 
-define('_MI_XHELP_TICKET_NOTIFY','Ticket');
-define('_MI_XHELP_TICKET_NOTIFYDSC','Option de Notification applicable pour le ticket actuel');
+define('_MI_XHELP_TICKET_NOTIFY', 'Ticket');
+define('_MI_XHELP_TICKET_NOTIFYDSC', 'Option de Notification applicable pour le ticket actuel');
 
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFY', 'Sect : Nouveau Ticket');
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFYCAP', 'Me pr&eacute;venir lors de la cr&eacute;ation d\'un nouveau ticket');

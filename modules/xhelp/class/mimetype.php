@@ -9,7 +9,7 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
 
 /**
  * xhelpMimetype class
@@ -27,7 +27,8 @@ require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
  * @package xhelp
  */
 
-class xhelpMimetype extends XoopsObject {
+class xhelpMimetype extends XoopsObject
+{
     function xhelpMimetype($id = null)
     {
         $this->initVar('mime_id', XOBJ_DTYPE_INT, null, false);
@@ -45,14 +46,15 @@ class xhelpMimetype extends XoopsObject {
             $this->setNew();
         }
     }
-}   // end of class
+} // end of class
 
-class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
+class xhelpMimetypeHandler extends xhelpBaseObjectHandler
+{
     /**
      * Name of child class
      *
-     * @var	string
-     * @access	private
+     * @var    string
+     * @access    private
      */
     var $classname = 'xhelpmimetype';
 
@@ -76,9 +78,9 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
 
     /**
      * retrieve a mimetype object from the database
-     * @param	int	$id	ID of mimetype
-     * @return	object	{@link xhelpMimetype}
-     * @access	public
+     * @param    int    $id    ID of mimetype
+     * @return    object    {@link xhelpMimetype}
+     * @access    public
      */
     function &get($id)
     {
@@ -103,13 +105,13 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
      *
      * @param object $criteria {@link CriteriaElement} conditions to be met
      * @return array array of {@link xhelpMimetype} objects
-     * @access	public
+     * @access    public
      */
     function &getObjects($criteria = null)
     {
-        $ret    = array();
-        $limit  = $start = 0;
-        $sql    = $this->_selectQuery($criteria);
+        $ret = array();
+        $limit = $start = 0;
+        $sql = $this->_selectQuery($criteria);
         if (isset($criteria)) {
             $limit = $criteria->getLimit();
             $start = $criteria->getStart();
@@ -141,16 +143,16 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
         global $xoopsUser, $xoopsModule, $xhelp_isStaff;
 
         $ret = array();
-        if ($xoopsUser && !$xhelp_isStaff){
+        if ($xoopsUser && !$xhelp_isStaff) {
             // For user uploading
-            $crit = new CriteriaCompo(new Criteria('mime_user', 1));   //$sql = sprintf("SELECT * FROM %s WHERE mime_user=1", $xoopsDB->prefix('xhelp_mimetypes'));
-        } elseif ($xoopsUser && $xhelp_isStaff){
+            $crit = new CriteriaCompo(new Criteria('mime_user', 1)); //$sql = sprintf("SELECT * FROM %s WHERE mime_user=1", $xoopsDB->prefix('xhelp_mimetypes'));
+        } elseif ($xoopsUser && $xhelp_isStaff) {
             // For staff uploading
-            $crit = new CriteriaCompo(new Criteria('mime_admin', 1));  //$sql = sprintf("SELECT * FROM %s WHERE mime_admin=1", $xoopsDB->prefix('xhelp_mimetypes'));
+            $crit = new CriteriaCompo(new Criteria('mime_admin', 1)); //$sql = sprintf("SELECT * FROM %s WHERE mime_admin=1", $xoopsDB->prefix('xhelp_mimetypes'));
         } else {
             return $ret;
         }
-        if($mime_ext){
+        if ($mime_ext) {
             $crit->add(new Criteria('mime_ext', $mime_ext));
         }
         $result =& $this->getObjects($crit);
@@ -160,14 +162,15 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
             return $ret;
         }
 
-        foreach($result as $mime){
+        foreach ($result as $mime) {
             $line = explode(" ", $mime->getVar('mime_types'));
-            foreach($line as $row){
-                $allowed_mimetypes[] = array('type'=>$row, 'ext'=>$mime->getVar('mime_ext'));
+            foreach ($line as $row) {
+                $allowed_mimetypes[] = array('type' => $row, 'ext' => $mime->getVar('mime_ext'));
             }
         }
         return $allowed_mimetypes;
     }
+
     /**
      * Checks to see if the user uploading the file has permissions to upload this mimetype
      * @param $post_field file being uploaded
@@ -178,16 +181,16 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
     {
         $fname = $_FILES[$post_field]['name'];
         $farray = explode('.', $fname);
-        $fextension = strtolower($farray[count($farray) -1]);
+        $fextension = strtolower($farray[count($farray) - 1]);
 
         $allowed_mimetypes = $this->getArray();
-        if(empty($allowed_mimetypes)){
+        if (empty($allowed_mimetypes)) {
             return false;
         }
 
-        foreach($allowed_mimetypes as $mime){
+        foreach ($allowed_mimetypes as $mime) {
             //echo $mime['type'];
-            if($mime['type'] == $_FILES[$post_field]['type']){
+            if ($mime['type'] == $_FILES[$post_field]['type']) {
                 $allowed_mimetypes = $mime['type'];
                 break;
             } else {
@@ -200,20 +203,20 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
     /**
      * Create a "select" SQL query
      * @param object $criteria {@link CriteriaElement} to match
-     * @return	string SQL query
-     * @access	private
+     * @return    string SQL query
+     * @access    private
      */
     function _selectQuery($criteria = null, $join = false)
     {
-        if(!$join){
+        if (!$join) {
             $sql = sprintf('SELECT * FROM %s', $this->_db->prefix($this->_dbtable));
         } else {
             $sql = sprintf("SELECT t.* FROM %s t INNER JOIN %s j ON t.department = j.department", $this->_db->prefix('xhelp_tickets'), $this->_db->prefix('xhelp_jStaffDept'));
         }
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' '.$criteria->renderWhere();
+            $sql .= ' ' . $criteria->renderWhere();
             if ($criteria->getSort() != '') {
-                $sql .= ' ORDER BY '.$criteria->getSort().' '.$criteria->getOrder();
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
         }
         return $sql;
@@ -228,7 +231,7 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
 
         $sql = sprintf("INSERT INTO %s (mime_id, mime_ext, mime_types, mime_name, mime_admin, mime_user) VALUES
                (%u, %s, %s, %s, %u, %u)", $this->_db->prefix($this->_dbtable), $mime_id, $this->_db->quoteString($mime_ext),
-        $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user);
+                       $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user);
         return $sql;
     }
 
@@ -241,7 +244,7 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
 
         $sql = sprintf("UPDATE %s SET mime_ext = %s, mime_types = %s, mime_name = %s, mime_admin = %u, mime_user = %u WHERE
                mime_id = %u", $this->_db->prefix($this->_dbtable), $this->_db->quoteString($mime_ext),
-        $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user, $mime_id);
+                       $this->_db->quoteString($mime_types), $this->_db->quoteString($mime_name), $mime_admin, $mime_user, $mime_id);
         return $sql;
     }
 
@@ -250,6 +253,6 @@ class xhelpMimetypeHandler extends xhelpBaseObjectHandler {
         $sql = sprintf('DELETE FROM %s WHERE mime_id = %u', $this->_db->prefix($this->_dbtable), $obj->getVar('mime_id'));
         return $sql;
     }
-}   // end class
+} // end class
 
 ?>

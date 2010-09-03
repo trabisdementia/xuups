@@ -11,16 +11,16 @@ class xhelpEmailStore
 
     function xhelpEmailStore()
     {
-        $this->_hResponse  =& xhelpGetHandler('responses');
-        $this->_hTicket    =& xhelpGetHandler('ticket');
+        $this->_hResponse =& xhelpGetHandler('responses');
+        $this->_hTicket =& xhelpGetHandler('ticket');
         $this->_hMailEvent =& xhelpGetHandler('mailEvent');
-        $this->_errors     = array();
+        $this->_errors = array();
     }
 
     function _setError($desc)
     {
-        if(is_array($desc)){
-            foreach($desc as $d) {
+        if (is_array($desc)) {
+            foreach ($desc as $d) {
                 $this->_errors[] = $d;
             }
         }
@@ -29,7 +29,7 @@ class xhelpEmailStore
 
     function _getErrors()
     {
-        if(count($this->_errors) > 0){
+        if (count($this->_errors) > 0) {
             return $this->_errors;
         } else {
             return 0;
@@ -60,7 +60,7 @@ class xhelpEmailStore
         $this->clearErrors();
 
         $type = $msg->getMsgType();
-        switch($type) {
+        switch ($type) {
             case _XHELP_MSGTYPE_TICKET:
                 $obj =& $this->_hTicket->create();
                 $obj->setVar('uid', $user->getVar('uid'));
@@ -72,7 +72,7 @@ class xhelpEmailStore
                 $obj->setVar('serverid', $mbox->getVar('id'));
                 $obj->setVar('userIP', 'via Email');
                 $obj->setVar('email', $user->getVar('email'));
-                if(!$status = xhelpGetMeta("default_status")){
+                if (!$status = xhelpGetMeta("default_status")) {
                     xhelpSetMeta("default_status", "1");
                     $status = 1;
                 }
@@ -130,36 +130,36 @@ class xhelpEmailStore
     {
         global $xoopsModuleConfig;
         $attachments = $msg->getAttachments();
-        $dir         = XOOPS_UPLOAD_PATH .'/xhelp';
-        $prefix      = ($responseid != 0? $ticketid.'_'.$responseid.'_' : $ticketid.'_');
-        $hMime       =& xhelpGetHandler('mimetype');
+        $dir = XOOPS_UPLOAD_PATH . '/xhelp';
+        $prefix = ($responseid != 0 ? $ticketid . '_' . $responseid . '_' : $ticketid . '_');
+        $hMime =& xhelpGetHandler('mimetype');
         $allowed_mimetypes = $hMime->getArray();
 
-        if(!is_dir($dir)){
+        if (!is_dir($dir)) {
             mkdir($dir, 0757);
         }
 
         $dir .= '/';
 
-        if($xoopsModuleConfig['xhelp_allowUpload']){
+        if ($xoopsModuleConfig['xhelp_allowUpload']) {
             $hFile =& xhelpGetHandler('file');
             foreach ($attachments as $attach) {
                 $validators = array();
 
                 //Create Temporary File
-                $fname = $prefix.$attach['filename'];
-                $fp = fopen($dir.$fname, 'w');
+                $fname = $prefix . $attach['filename'];
+                $fp = fopen($dir . $fname, 'w');
                 fwrite($fp, $attach['content']);
                 fclose($fp);
 
-                $validators[] = new ValidateMimeType($dir.$fname, $attach['content-type'], $allowed_mimetypes);
-                $validators[] = new ValidateFileSize($dir.$fname, $xoopsModuleConfig['xhelp_uploadSize']);
-                $validators[] = new ValidateImageSize($dir.$fname, $xoopsModuleConfig['xhelp_uploadWidth'], $xoopsModuleConfig['xhelp_uploadHeight']);
+                $validators[] = new ValidateMimeType($dir . $fname, $attach['content-type'], $allowed_mimetypes);
+                $validators[] = new ValidateFileSize($dir . $fname, $xoopsModuleConfig['xhelp_uploadSize']);
+                $validators[] = new ValidateImageSize($dir . $fname, $xoopsModuleConfig['xhelp_uploadWidth'], $xoopsModuleConfig['xhelp_uploadHeight']);
 
                 if (!xhelpCheckRules($validators, $errors)) {
                     //Remove the file
                     $this->_addAttachmentError($errors, $msg, $fname);
-                    unlink($dir.$fname);
+                    unlink($dir . $fname);
                 } else {
                     //Add attachment to ticket
 
@@ -172,16 +172,16 @@ class xhelpEmailStore
                 }
             }
         } else {
-            $this->_setError(_XHELP_MESSAGE_UPLOAD_ALLOWED_ERR);   // Error: file uploading is disabled
+            $this->_setError(_XHELP_MESSAGE_UPLOAD_ALLOWED_ERR); // Error: file uploading is disabled
         }
     }
 
     function _addAttachmentError($errors, $msg, $fname)
     {
-        if($errors <> 0){
+        if ($errors <> 0) {
             $aErrors = array();
-            foreach($errors as $err){
-                if(in_array($err, $aErrors)){
+            foreach ($errors as $err) {
+                if (in_array($err, $aErrors)) {
                     continue;
                 } else {
                     $aErrors[] = $err;
@@ -192,4 +192,5 @@ class xhelpEmailStore
         }
     }
 }
+
 ?>

@@ -22,12 +22,12 @@ class AdminButtons
 
     function AdminButtons()
     {
-         
+
     }
 
     function AddButton($linkname, $url, $key = '')
     {
-        if(!$key){
+        if (!$key) {
             $this->arrLinks[] = $linkname;
             $this->arrUrls[] = $url;
         } else {
@@ -56,18 +56,18 @@ class AdminButtons
     {
         $section = "";
         $i = 0;
-         
+
         if ($selectedtab) {
             $this->setSelectedTab($selectedtab);
         } else {
             $selectedtab = $this->getSelectedTab();
         }
-         
+
         $section .= "<style type='text/css'>@import \"../styles/admin_buttons.css\";</style>";
-         
-         
+
+
         $section .= "<div id=\"buttonNav\">\n";
-        $section .= "<h2 id=\"appTitle\">". $this->admintitle . "</h2>\n";
+        $section .= "<h2 id=\"appTitle\">" . $this->admintitle . "</h2>\n";
         $section .= "<ul id=\"linkMenu\">\n";
         for ($i = 0; $i < count($this->arrTopLinks); $i++)
         {
@@ -83,8 +83,8 @@ class AdminButtons
         $section .= "</ul>\n";
         $section .= "<ul id=\"buttonMenu\">\n";
         //Add the Tabs
-        foreach ($this->arrLinks as $key=>$value){
-            if($key == $selectedtab){
+        foreach ($this->arrLinks as $key => $value) {
+            if ($key == $selectedtab) {
                 $section .= "<li id=\"current\">";
             } else {
                 $section .= "<li>";
@@ -94,7 +94,7 @@ class AdminButtons
         $section .= "</ul>\n";
         $section .= "<br class=\"lclear\" />\n";
         $section .= "</div>\n";
-         
+
         return $section;
     }
 
@@ -108,4 +108,5 @@ class AdminButtons
         return $this->selectedtab;
     }
 }
+
 ?>

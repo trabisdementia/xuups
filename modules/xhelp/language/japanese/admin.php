@@ -1,4 +1,3 @@
-
 <?php
 
 /**
@@ -111,24 +110,24 @@ define("_AM_XHELP_MINDEX_ACTION", "ｱｸｼｮﾝ");
 define("_AM_XHELP_MINDEX_PAGE", "<b>ページ:<b> ");
 
 //image admin icon
-define("_AM_XHELP_ICO_EDIT","このアイテムを編集します");
-define("_AM_XHELP_ICO_DELETE","このアイテムを削除します");
-define("_AM_XHELP_ICO_ONLINE","ｵﾌﾗｲﾝ");
-define("_AM_XHELP_ICO_OFFLINE","ｵﾌﾗｲﾝ");
-define("_AM_XHELP_ICO_APPROVED","承認");
-define("_AM_XHELP_ICO_NOTAPPROVED","承認しません");
+define("_AM_XHELP_ICO_EDIT", "このアイテムを編集します");
+define("_AM_XHELP_ICO_DELETE", "このアイテムを削除します");
+define("_AM_XHELP_ICO_ONLINE", "ｵﾌﾗｲﾝ");
+define("_AM_XHELP_ICO_OFFLINE", "ｵﾌﾗｲﾝ");
+define("_AM_XHELP_ICO_APPROVED", "承認");
+define("_AM_XHELP_ICO_NOTAPPROVED", "承認しません");
 
-define("_AM_XHELP_ICO_LINK","関連するﾘﾝｸ");
-define("_AM_XHELP_ICO_URL","関連するURLを追加");
-define("_AM_XHELP_ICO_ADD","追加");
-define("_AM_XHELP_ICO_APPROVE","承認");
-define("_AM_XHELP_ICO_STATS","統計");
+define("_AM_XHELP_ICO_LINK", "関連するﾘﾝｸ");
+define("_AM_XHELP_ICO_URL", "関連するURLを追加");
+define("_AM_XHELP_ICO_ADD", "追加");
+define("_AM_XHELP_ICO_APPROVE", "承認");
+define("_AM_XHELP_ICO_STATS", "統計");
 
-define("_AM_XHELP_ICO_IGNORE","無視");
-define("_AM_XHELP_ICO_ACK","壊れた報告書が認められました");
-define("_AM_XHELP_ICO_REPORT","壊れた報告書を認めますか？");
-define("_AM_XHELP_ICO_CONFIRM","壊れた報告書が確認されました");
-define("_AM_XHELP_ICO_CONBROKEN","壊れた報告書を確認します");
+define("_AM_XHELP_ICO_IGNORE", "無視");
+define("_AM_XHELP_ICO_ACK", "壊れた報告書が認められました");
+define("_AM_XHELP_ICO_REPORT", "壊れた報告書を認めますか？");
+define("_AM_XHELP_ICO_CONFIRM", "壊れた報告書が確認されました");
+define("_AM_XHELP_ICO_CONBROKEN", "壊れた報告書を確認します");
 
 define("_AM_XHELP_UPLOADFILE", "ファイルのアプロードが作成されました");
 define('_AM_XHELP_TEXT_TICKET_INFO', ' 質問情報');

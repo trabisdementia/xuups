@@ -34,9 +34,9 @@ class xhelpService
     function detachEvents()
     {
 
-        foreach($this->_cookies as $event => $cookie) {
+        foreach ($this->_cookies as $event => $cookie) {
             if (is_array($cookie)) {
-                foreach($cookie as $ele) {
+                foreach ($cookie as $ele) {
                     $this->_eventSrv->unadvise($event, $ele);
                 }
             } else {
@@ -51,7 +51,7 @@ class xhelpService
         if (isset($this->_cookies[$eventName])) {
             $cookie = $this->_cookies[$eventName];
             if (is_array($cookie)) {
-                foreach($cookie as $ele) {
+                foreach ($cookie as $ele) {
                     $this->_eventSrv->unadvise($eventName, $ele);
                 }
             } else {
@@ -78,7 +78,6 @@ class xhelpService
             }
         }
     }
-
 
 
 }

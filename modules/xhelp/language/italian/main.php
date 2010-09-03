@@ -183,7 +183,6 @@ define('_XHELP_TEXT_REOPEN_REASON', 'Ragione di riapertura (opzionale)');
 define('_XHELP_TEXT_MORE_INFO2', 'Sono necessarie ulteriori informazioni per la risoluzione del problema?');
 
 
-
 // Ticket.php - Actions
 define('_XHELP_TEXT_ADD_RESPONSE', 'Aggiungi Risposta');
 define('_XHELP_TEXT_EDIT_TICKET', 'Modifica Ticket');
@@ -200,9 +199,9 @@ define('_XHELP_TEXT_AUTO_REFRESH1', 'Auto Aggiornamento ogni minuto');
 define('_XHELP_TEXT_AUTO_REFRESH2', 'Auto Aggiornamento ogni 5 minuti');
 define('_XHELP_TEXT_AUTO_REFRESH3', 'Auto Aggiornamento ogni 10 minuti');
 define('_XHELP_TEXT_AUTO_REFRESH4', 'Auto Aggiornamento ogni 30 minuti');
-define('_XHELP_AUTO_REFRESH0', 0);          // Change these to
-define('_XHELP_AUTO_REFRESH1', 60);         // adjust the values
-define('_XHELP_AUTO_REFRESH2', 300);        // in the select box
+define('_XHELP_AUTO_REFRESH0', 0); // Change these to
+define('_XHELP_AUTO_REFRESH1', 60); // adjust the values
+define('_XHELP_AUTO_REFRESH2', 300); // in the select box
 define('_XHELP_AUTO_REFRESH3', 600);
 define('_XHELP_AUTO_REFRESH4', 1800);
 
@@ -270,9 +269,9 @@ define('_XHELP_NO_FILES_ERROR', 'Nessun file trovato');
 
 define('_XHELP_SIG_SPACER', '<br /><br />-------------------------------<br />');
 define('_XHELP_COMMMENTS', 'Commenti?');
-define("_XHELP_ANNOUNCE_READMORE","leggi ancora ...");
-define("_XHELP_ANNOUNCE_ONECOMMENT","1 commento");
-define("_XHELP_ANNOUNCE_NUMCOMMENTS","%s commenti");
+define("_XHELP_ANNOUNCE_READMORE", "leggi ancora ...");
+define("_XHELP_ANNOUNCE_ONECOMMENT", "1 commento");
+define("_XHELP_ANNOUNCE_NUMCOMMENTS", "%s commenti");
 
 define('_XHELP_NO_OWNER', 'Nessun incaricato');
 define('_XHELP_RESPONSE_EDIT', 'Risposta modificata da %s a %s');
@@ -344,8 +343,6 @@ define('_XHELP_TIME_WEEK', 'settimana');
 define('_XHELP_TIME_YEAR', 'anno');
 
 
-
-
 define('_XHELP_TEXT_UPDATE_COMP', 'Aggiornamento completato!');
 define('_XHELP_TEXT_TOPICS_ADDED', 'Topics Added'); // Topics Added
 define('_XHELP_TEXT_CLOSE_WINDOW', 'Chiude Finestra');
@@ -415,7 +412,7 @@ define('_XHELP_ROLE_DSC3', 'Non puo\' modificare Solo visualizzazione');
 define('_XHELP_ROLE_VAL2', '241');
 define('_XHELP_ROLE_VAL3', '0');
 define("_XHELP_TICKET_MD5SIGNATURE", "Support Key:"); // da tradurre?
-define('_XHELP_USER_REGISTER', 'User Registration');  // da tradurre?
+define('_XHELP_USER_REGISTER', 'User Registration'); // da tradurre?
 
 
 define('_XHELP_MESSAGE_NEW_USER_ERR', 'Errore: il tuo account non e\' stato creato.');

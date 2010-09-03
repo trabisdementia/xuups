@@ -22,7 +22,7 @@ class xhelpTicketFieldDepartmentHandler
     {
         $this->_db =& $db;
         $this->_hField =& xhelpGetHandler('ticketField');
-        $this->_hDept  =& xhelpGetHandler('department');
+        $this->_hDept =& xhelpGetHandler('department');
     }
 
 
@@ -37,12 +37,12 @@ class xhelpTicketFieldDepartmentHandler
     function departmentsByField($field, $id_as_key = false)
     {
         $field = intval($field);
-        $sql   = sprintf('SELECT d.* FROM %s d INNER JOIN %s j ON d.id = j.deptid WHERE j.fieldid = %u',
-        $this->_db->prefix('xhelp_departments'), $this->_db->prefix('xhelp_ticket_field_departments'), $field);
+        $sql = sprintf('SELECT d.* FROM %s d INNER JOIN %s j ON d.id = j.deptid WHERE j.fieldid = %u',
+                       $this->_db->prefix('xhelp_departments'), $this->_db->prefix('xhelp_ticket_field_departments'), $field);
         $ret = $this->_db->query($sql);
         $arr = array();
 
-        if($ret){
+        if ($ret) {
             while ($temp = $this->_db->fetchArray($ret)) {
                 $dept =& $this->_hDept->create();
                 $dept->assignVars($temp);
@@ -71,12 +71,12 @@ class xhelpTicketFieldDepartmentHandler
     function fieldsByDepartment($dept, $id_as_key = false)
     {
         $dept = intval($dept);
-        $sql   = sprintf('SELECT f.* FROM %s f INNER JOIN %s j ON f.id = j.fieldid WHERE j.deptid = %u ORDER BY f.weight',
-        $this->_db->prefix('xhelp_ticket_fields'), $this->_db->prefix('xhelp_ticket_field_departments'), $dept);
+        $sql = sprintf('SELECT f.* FROM %s f INNER JOIN %s j ON f.id = j.fieldid WHERE j.deptid = %u ORDER BY f.weight',
+                       $this->_db->prefix('xhelp_ticket_fields'), $this->_db->prefix('xhelp_ticket_field_departments'), $dept);
         $ret = $this->_db->query($sql);
         $arr = array();
 
-        if($ret){
+        if ($ret) {
             while ($temp = $this->_db->fetchArray($ret)) {
                 $field =& $this->_hField->create();
                 $field->assignVars($temp);
@@ -215,11 +215,11 @@ class xhelpTicketFieldDepartmentHandler
     }
 
 
-    function deleteAll($criteria=null, $force=false)
+    function deleteAll($criteria = null, $force = false)
     {
-        $sql = 'DELETE FROM '.$this->_db->prefix('xhelp_ticket_field_departments');
+        $sql = 'DELETE FROM ' . $this->_db->prefix('xhelp_ticket_field_departments');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' '.$criteria->renderWhere();
+            $sql .= ' ' . $criteria->renderWhere();
         }
 
         if (!$force) {
@@ -264,7 +264,7 @@ class xhelpTicketFieldDepartmentHandler
     function _addJoinerRecord($fieldid, $deptid)
     {
         $sql = sprintf('INSERT INTO %s (fieldid, deptid) VALUES (%u, %u)',
-        $this->_db->prefix('xhelp_ticket_field_departments'), $fieldid, $deptid);
+                       $this->_db->prefix('xhelp_ticket_field_departments'), $fieldid, $deptid);
         $ret = $this->_db->query($sql);
         return $ret;
     }
@@ -291,7 +291,7 @@ class xhelpTicketFieldDepartmentHandler
     function _removeJoinerRecord($fieldid, $deptid)
     {
         $sql = sprintf('DELETE FROM %s WHERE fieldid = %u AND deptid = %u',
-        $this->_db->prefix('xhelp_ticket_field_departments'), $fieldid, $deptid);
+                       $this->_db->prefix('xhelp_ticket_field_departments'), $fieldid, $deptid);
         $ret = $this->_db->query($sql);
         return $ret;
     }

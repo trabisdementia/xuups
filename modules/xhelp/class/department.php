@@ -9,7 +9,7 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
 
 
 /**
@@ -19,7 +19,8 @@ require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
  * @access public
  * @package xhelp
  */
-class xhelpDepartment extends XoopsObject {
+class xhelpDepartment extends XoopsObject
+{
     function xhelpDepartment($id = null)
     {
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
@@ -33,7 +34,7 @@ class xhelpDepartment extends XoopsObject {
             $this->setNew();
         }
     }
-}   //end of class
+} //end of class
 
 /**
  * xhelpDepartmentHandler class
@@ -45,12 +46,13 @@ class xhelpDepartment extends XoopsObject {
  * @package xhelp
  */
 
-class xhelpDepartmentHandler extends xhelpBaseObjectHandler {
+class xhelpDepartmentHandler extends xhelpBaseObjectHandler
+{
     /**
      * Name of child class
      *
-     * @var	string
-     * @access	private
+     * @var    string
+     * @access    private
      */
     var $classname = 'xhelpdepartment';
 
@@ -65,7 +67,7 @@ class xhelpDepartmentHandler extends xhelpBaseObjectHandler {
     /**
      * Constructor
      *
-     * @param	object   $db    reference to a xoopsDB object
+     * @param    object   $db    reference to a xoopsDB object
      */
     function xhelpDepartmentHandler(&$db)
     {
@@ -90,7 +92,7 @@ class xhelpDepartmentHandler extends xhelpBaseObjectHandler {
         }
 
         $sql = sprintf("INSERT INTO %s (id, department) VALUES (%u, %s)",
-        $this->_db->prefix($this->_dbtable), $id, $this->_db->quoteString($department));
+                       $this->_db->prefix($this->_dbtable), $id, $this->_db->quoteString($department));
 
         return $sql;
 
@@ -104,7 +106,7 @@ class xhelpDepartmentHandler extends xhelpBaseObjectHandler {
         }
 
         $sql = sprintf("UPDATE %s SET department = %s WHERE id = %u",
-        $this->_db->prefix($this->_dbtable), $this->_db->quoteString($department), $id);
+                       $this->_db->prefix($this->_dbtable), $this->_db->quoteString($department), $id);
         return $sql;
     }
 
@@ -114,4 +116,5 @@ class xhelpDepartmentHandler extends xhelpBaseObjectHandler {
         return $sql;
     }
 }
+
 ?>

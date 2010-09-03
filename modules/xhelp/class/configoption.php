@@ -1,11 +1,12 @@
 <?php
 
-class xhelpConfigOptionHandler extends XoopsConfigOptionHandler {
+class xhelpConfigOptionHandler extends XoopsConfigOptionHandler
+{
     /**
      * Database connection
      *
-     * @var	object
-     * @access	private
+     * @var    object
+     * @access    private
      */
     var $_db;
 
@@ -19,9 +20,10 @@ class xhelpConfigOptionHandler extends XoopsConfigOptionHandler {
     /**
      * Constructor
      *
-     * @param	object   $db    reference to a xoopsDB object
+     * @param    object   $db    reference to a xoopsDB object
      */
-    function init(&$db) {
+    function init(&$db)
+    {
         $this->_db = $db;
     }
 
@@ -32,21 +34,21 @@ class xhelpConfigOptionHandler extends XoopsConfigOptionHandler {
      * @access private
      */
     var $_dbtable = 'configoption';
-     
+
     /**
      * delete configoption matching a set of conditions
      *
      * @param object $criteria {@link CriteriaElement}
      * @return bool FALSE if deletion failed
-     * @access	public
+     * @access    public
      */
     function deleteAll($criteria = null, $force = false)
     {
-        $sql = 'DELETE FROM '.$this->db->prefix($this->_dbtable);
+        $sql = 'DELETE FROM ' . $this->db->prefix($this->_dbtable);
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' '.$criteria->renderWhere();
+            $sql .= ' ' . $criteria->renderWhere();
         }
-        if(!$force){
+        if (!$force) {
             if (!$result = $this->db->query($sql)) {
                 return false;
             }
@@ -61,8 +63,8 @@ class xhelpConfigOptionHandler extends XoopsConfigOptionHandler {
     /**
      * Insert a new option in the database
      *
-     * @param	object  &$confoption    reference to a {@link XoopsConfigOption}
-     * @return	bool    TRUE if successfull.
+     * @param    object  &$confoption    reference to a {@link XoopsConfigOption}
+     * @return    bool    TRUE if successfull.
      */
     function insert(&$confoption, $force = false)
     {
@@ -85,12 +87,12 @@ class xhelpConfigOptionHandler extends XoopsConfigOptionHandler {
             $sql = sprintf("UPDATE %s SET confop_name = %s, confop_value = %s WHERE confop_id = %u", $this->db->prefix('configoption'), $this->db->quoteString($confop_name), $this->db->quoteString($confop_value), $confop_id);
         }
 
-        if(!$force){
+        if (!$force) {
             if (!$result = $this->db->query($sql)) {
                 return false;
             }
         } else {
-            if(!$result = $this->db->queryF($sql)){
+            if (!$result = $this->db->queryF($sql)) {
                 return false;
             }
         }

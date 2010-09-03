@@ -40,19 +40,19 @@ class xhelpTicketMailParser
     {
         //get ticket handler
         $hTicket =& xhelpGetHandler('ticket');
-        $ticket  =& $hTicket->create();
+        $ticket =& $hTicket->create();
         //
-        $ticket->setVar('uid',         $xoopsUser->uid());
-        $ticket->setVar('subject',     $mailParser->getSubject());
-        $ticket->setVar('department',  $department->getVar('id'));
+        $ticket->setVar('uid', $xoopsUser->uid());
+        $ticket->setVar('subject', $mailParser->getSubject());
+        $ticket->setVar('department', $department->getVar('id'));
         $ticket->setVar('description', $mailParser->getBody());
-        $ticket->setVar('priority',    3);
-        $ticket->setVar('posted',      time());
-        $ticket->setVar('userIP',      _XHELP_EMAIL_SCANNER_IP_COLUMN);
-        $ticket->setVar('serverid',    $server->getVar('id'));
+        $ticket->setVar('priority', 3);
+        $ticket->setVar('posted', time());
+        $ticket->setVar('userIP', _XHELP_EMAIL_SCANNER_IP_COLUMN);
+        $ticket->setVar('serverid', $server->getVar('id'));
         $ticket->createEmailHash($mailParser->getEmail());
         //
-        if ($hTicket->insert($ticket)){
+        if ($hTicket->insert($ticket)) {
             $this->_ticket = $ticket;
             return true;
         } else {
