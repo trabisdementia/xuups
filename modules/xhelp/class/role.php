@@ -8,7 +8,7 @@
 if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
-require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
 
 /**
  * xhelpRole class
@@ -20,8 +20,7 @@ require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
  * @package xhelp
  */
 
-class xhelpRole extends XoopsObject
-{
+class xhelpRole extends XoopsObject {
     function xhelpRole($id = null)
     {
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
@@ -37,30 +36,29 @@ class xhelpRole extends XoopsObject
             $this->setNew();
         }
     }
-} // end of class
+}   // end of class
 
-class xhelpRoleHandler extends xhelpBaseObjectHandler
-{
+class xhelpRoleHandler extends xhelpBaseObjectHandler{
     /**
      * Name of child class
      *
-     * @var    string
-     * @access    private
+     * @var	string
+     * @access	private
      */
     var $classname = 'xhelprole';
 
     /**
      * DB Table Name
      *
-     * @var         string
-     * @access     private
+     * @var 		string
+     * @access 	private
      */
     var $_dbtable = 'xhelp_roles';
 
     /**
      * Constructor
      *
-     * @param    object   $db    reference to a xoopsDB object
+     * @param	object   $db    reference to a xoopsDB object
      */
     function xhelpRoleHandler(&$db)
     {
@@ -75,8 +73,8 @@ class xhelpRoleHandler extends xhelpBaseObjectHandler
         }
 
         $sql = sprintf("INSERT INTO %s (id, name, description, tasks) VALUES (%u, %s, %s, %u)",
-                       $this->_db->prefix($this->_dbtable), $id, $this->_db->quoteString($name),
-                       $this->_db->quoteString($description), $tasks);
+        $this->_db->prefix($this->_dbtable), $id, $this->_db->quoteString($name),
+        $this->_db->quoteString($description), $tasks);
 
         return $sql;
 
@@ -90,8 +88,8 @@ class xhelpRoleHandler extends xhelpBaseObjectHandler
         }
 
         $sql = sprintf("UPDATE %s SET name = %s, description = %s, tasks = %u WHERE id = %u",
-                       $this->_db->prefix($this->_dbtable), $this->_db->quoteString($name),
-                       $this->_db->quoteString($description), $tasks, $id);
+        $this->_db->prefix($this->_dbtable), $this->_db->quoteString($name),
+        $this->_db->quoteString($description), $tasks, $id);
 
         return $sql;
     }
@@ -109,36 +107,35 @@ class xhelpRoleHandler extends xhelpBaseObjectHandler
      * @param object $obj reference to the {@link xhelpRole} obj to delete
      * @param bool $force
      * @return bool FALSE if failed.
-     * @access    public
+     * @access	public
      */
     function delete(&$obj, $force = false)
     {
         // Remove staff roles from db first
         $hStaffRole =& xhelpGetHandler('staffRole');
-        if (!$hStaffRole->deleteAll(new Criteria('roleid', $obj->getVar('id')))) {
+        if(!$hStaffRole->deleteAll(new Criteria('roleid', $obj->getVar('id')))){
             return false;
         }
-
+         
         $ret = parent::delete($obj, $force);
         return $ret;
-
+         
     }
 
     function getRolesByTask($task)
     {
         $task = intval($task);
-
+         
         // Get all roles
         $roles =& $this->getObjects();
-
+         
         $aRoles = array();
-        foreach ($roles as $role) {
-            if (($role->getVar('tasks') & pow(2, $task)) > 0) {
+        foreach($roles as $role){
+            if(($role->getVar('tasks') & pow(2, $task)) > 0){
                 $aRoles[$role->getVar('id')] = $role;
             }
         }
         return $aRoles;
     }
 }
-
 ?>

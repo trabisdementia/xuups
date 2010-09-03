@@ -10,6 +10,7 @@
  */
 
 
+
 define('_XHELP_CATEGORY1', '所有権割り当て');
 define('_XHELP_CATEGORY2', '回答の削除');
 define('_XHELP_CATEGORY3', '質問削除');
@@ -201,9 +202,9 @@ define('_XHELP_TEXT_AUTO_REFRESH1', '1分・１回　最新の情報に更新最新');
 define('_XHELP_TEXT_AUTO_REFRESH2', '5分・１回　最新の情報に更新最新');
 define('_XHELP_TEXT_AUTO_REFRESH3', '10分・１回　最新の情報に更新最新');
 define('_XHELP_TEXT_AUTO_REFRESH4', '30分・１回　最新の情報に更新最新');
-define('_XHELP_AUTO_REFRESH0', 0); // Change these to
-define('_XHELP_AUTO_REFRESH1', 60); // adjust the values
-define('_XHELP_AUTO_REFRESH2', 300); // in the select box
+define('_XHELP_AUTO_REFRESH0', 0);          // Change these to
+define('_XHELP_AUTO_REFRESH1', 60);         // adjust the values
+define('_XHELP_AUTO_REFRESH2', 300);        // in the select box
 define('_XHELP_AUTO_REFRESH3', 600);
 define('_XHELP_AUTO_REFRESH4', 1800);
 
@@ -271,9 +272,9 @@ define('_XHELP_NO_FILES_ERROR', 'ファイルが見つかりませんでした');
 
 define('_XHELP_SIG_SPACER', '<br /><br />-------------------------------<br />');
 define('_XHELP_COMMMENTS', 'コメント ?');
-define("_XHELP_ANNOUNCE_READMORE", "多くの読み取り...");
-define("_XHELP_ANNOUNCE_ONECOMMENT", "1 コメント");
-define("_XHELP_ANNOUNCE_NUMCOMMENTS", "%s コメント");
+define("_XHELP_ANNOUNCE_READMORE","多くの読み取り...");
+define("_XHELP_ANNOUNCE_ONECOMMENT","1 コメント");
+define("_XHELP_ANNOUNCE_NUMCOMMENTS","%s コメント");
 
 define('_XHELP_NO_OWNER', '担当者は未設定');
 define('_XHELP_RESPONSE_EDIT', 'ユーザー　%s　は　%s　の回答を変更しました');

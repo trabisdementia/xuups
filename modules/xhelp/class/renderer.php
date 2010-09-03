@@ -27,5 +27,4 @@ class xhelp_Renderer
 
 
 }
-
 ?>

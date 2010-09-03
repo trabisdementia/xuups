@@ -9,7 +9,7 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
 
 /**
  * xhelpStaffReview class
@@ -18,8 +18,7 @@ require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
  * @access public
  * @package xhelp
  */
-class xhelpStaffReview extends XoopsObject
-{
+class xhelpStaffReview extends XoopsObject {
     function xhelpStaffReview($id = null)
     {
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
@@ -62,13 +61,12 @@ class xhelpStaffReview extends XoopsObject
  * @package xhelp
  */
 
-class xhelpStaffReviewHandler extends xhelpBaseObjectHandler
-{
+class xhelpStaffReviewHandler extends xhelpBaseObjectHandler {
     /**
      * Name of child class
      *
-     * @var    string
-     * @access    private
+     * @var	string
+     * @access	private
      */
     var $classname = 'xhelpstaffreview';
 
@@ -83,7 +81,7 @@ class xhelpStaffReviewHandler extends xhelpBaseObjectHandler
     /**
      * Constructor
      *
-     * @param    object   $db    reference to a xoopsDB object
+     * @param	object   $db    reference to a xoopsDB object
      */
     function xhelpStaffReviewHandler(&$db)
     {
@@ -109,7 +107,7 @@ class xhelpStaffReviewHandler extends xhelpBaseObjectHandler
         $crit->add(new Criteria('submittedBy', $submittedBy));
         $crit->add(new Criteria('responseid', $responseid));
         $review = array();
-        if (!$review =& $this->getObjects($crit)) {
+        if(!$review =& $this->getObjects($crit)){
             return false;
         } else {
             return $review;
@@ -124,8 +122,8 @@ class xhelpStaffReviewHandler extends xhelpBaseObjectHandler
         }
 
         $sql = sprintf("INSERT INTO %s (id, staffid, rating, ticketid, responseid, comments, submittedBy, userIP)
-            VALUES (%u, %u, %u, %u, %u, %s, %u, %s)", $this->_db->prefix($this->_dbtable), $id, $staffid, $rating,
-                       $ticketid, $responseid, $this->_db->quoteString($comments), $submittedBy, $this->_db->quoteString($userIP));
+            VALUES (%u, %u, %u, %u, %u, %s, %u, %s)", $this->_db->prefix($this->_dbtable), $id, $staffid, $rating, 
+        $ticketid, $responseid, $this->_db->quoteString($comments), $submittedBy, $this->_db->quoteString($userIP));
 
 
         return $sql;
@@ -141,7 +139,7 @@ class xhelpStaffReviewHandler extends xhelpBaseObjectHandler
 
         $sql = sprintf("UPDATE %s SET staffid = %u, rating = %u, ticketid = %u, responseid = %u, comments = %s, submittedBy = %u, userIP = %s
                 WHERE id = %u", $this->_db->prefix($this->_dbtable), $staffid, $rating, $ticketid, $responseid,
-                       $this->_db->quoteString($comments), $submittedBy, $this->_db->quoteString($userIP), $id);
+        $this->_db->quoteString($comments), $submittedBy, $this->_db->quoteString($userIP), $id);
 
         return $sql;
     }
@@ -154,5 +152,4 @@ class xhelpStaffReviewHandler extends xhelpBaseObjectHandler
 
 
 }
-
 ?>

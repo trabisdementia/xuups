@@ -10,26 +10,25 @@
  * @package xhelp
  * @todo Localization of meta information
  */
-class xhelpPlugin
-{
+class xhelpPlugin {
 
     /**
      * Array of Plugin Meta Information
      * @access private
-     * @var    array
+     * @var	array
      */
-    var $_meta = array();
+    var $_meta   = array();
 
     /**
      * Array of subscribed events
-     * @var    array
+     * @var	array
      * @access private
      */
     var $_events = array();
 
     /**
      * A reference to a {@link xhelpEventService} object
-     * @var    object
+     * @var	object
      * @access private
      */
     var $_event_srv;
@@ -41,7 +40,7 @@ class xhelpPlugin
      */
     function xhelpPlugin(&$event_srv)
     {
-        $this->_event_srv =& $event_srv;
+        $this->_event_srv           =& $event_srv;
     }
 
     /**
@@ -80,8 +79,8 @@ class xhelpPlugin
     function onUnload()
     {
         //Remove any registered events
-        foreach ($this->_events as $event_ctx => $event_cookies) {
-            foreach ($event_cookies as $cookie) {
+        foreach($this->_events as $event_ctx=>$event_cookies) {
+            foreach($event_cookies as $cookie) {
                 $this->_event_srv->unadvise($event_ctx, $cookie);
             }
         }
@@ -105,7 +104,7 @@ class xhelpPlugin
     /**
      * Only have 1 instance of class used
      * @return object {@link xhelpPlugin}
-     * @access    public
+     * @access	public
      */
     function &singleton()
     {
@@ -113,10 +112,10 @@ class xhelpPlugin
         static $instance;
 
         // If the instance is not there, create one
-        if (!isset($instance)) {
+        if(!isset($instance)) {
             $instance = new $this->getMeta('classname');
         }
-        return ($instance);
+        return($instance);
     }
 }
 
@@ -133,13 +132,13 @@ class xhelpPluginHandler
     /**
      * Database connection
      *
-     * @var    object
-     * @access    private
+     * @var	object
+     * @access	private
      */
     var $_db;
     var $_active;
     var $_plugins;
-
+     
     function xhelpPluginHandler(&$db)
     {
         $this->_db = $db;
@@ -154,8 +153,8 @@ class xhelpPluginHandler
 
         if ($d) {
             while (false !== ($entry = $d->read())) {
-                if (!preg_match('|^\.+$|', $entry) && preg_match('|\.php$|', $entry)) {
-                    $plugins[] = basename(XHELP_PLUGIN_PATH . '/' . $entry, '.php');
+                if ( !preg_match('|^\.+$|', $entry) && preg_match('|\.php$|', $entry) ){
+                    $plugins[] = basename(XHELP_PLUGIN_PATH.'/'.$entry, '.php');
                 }
             }
         }
@@ -167,7 +166,7 @@ class xhelpPluginHandler
     {
         $plugin_files = $this->_pluginList();
 
-        foreach ($plugin_files as $plugin)
+        foreach($plugin_files as $plugin)
         {
             if (in_array($plugin, $this->_active)) {
             }
@@ -188,21 +187,20 @@ class xhelpPluginHandler
     function getPluginInstance($filename)
     {
         if (!isset($this->_plugins[$filename])) {
-            if (file_exists($plug_file = XHELP_PLUGIN_PATH . '/' . $filename . '.php')) {
+            if ( file_exists( $plug_file = XHELP_PLUGIN_PATH . '/' . $filename . '.php' ) ) {
                 include_once $plug_file;
             }
-            $class = strtolower(XHELP_DIRNAME) . ucfirst($filename);
+            $class = strtolower(XHELP_DIRNAME).ucfirst($filename);
             if (class_exists($class)) {
                 $this->_plugins[$filename] = new $class($GLOBALS['_eventsrv']);
             }
         }
         if (!isset($this->_plugins[$filename])) {
-            trigger_error('Plugin does not exist<br />Module: ' . XHELP_DIRNAME . '<br />Name: ' . $filename, E_USER_ERROR);
+            trigger_error('Plugin does not exist<br />Module: '.XHELP_DIRNAME.'<br />Name: '.$filename, E_USER_ERROR);
         }
         return isset($this->_plugins[$filename]) ? $this->_plugins[$filename] : false;
-
+         
     }
 
 }
-
 ?>

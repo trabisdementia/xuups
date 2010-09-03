@@ -312,6 +312,7 @@ define('_XHELP_ROLE_VAL2', 241);
 define('_XHELP_ROLE_VAL3', 0);
 
 
+
 // Ticket.php - Actions
 define('_XHELP_TEXT_SELECTED', 'Com Seleção:');
 define('_XHELP_TEXT_ADD_RESPONSE', 'Responder');
@@ -329,9 +330,9 @@ define('_XHELP_TEXT_AUTO_REFRESH1', 'Atualizar a cada 1 minuto');
 define('_XHELP_TEXT_AUTO_REFRESH2', 'Atualizar a cada 5 minutos');
 define('_XHELP_TEXT_AUTO_REFRESH3', 'Atualizar a cada 10 minutos');
 define('_XHELP_TEXT_AUTO_REFRESH4', 'Atualizar a cada 30 minutos');
-define('_XHELP_AUTO_REFRESH0', 0); // Mude estes para
-define('_XHELP_AUTO_REFRESH1', 60); // ajuste os valores
-define('_XHELP_AUTO_REFRESH2', 300); // na caixa seleta
+define('_XHELP_AUTO_REFRESH0', 0);          // Mude estes para
+define('_XHELP_AUTO_REFRESH1', 60);         // ajuste os valores
+define('_XHELP_AUTO_REFRESH2', 300);        // na caixa seleta
 define('_XHELP_AUTO_REFRESH3', 600);
 define('_XHELP_AUTO_REFRESH4', 1800);
 
@@ -417,9 +418,9 @@ define('_XHELP_NO_FILES_ERROR', 'Não há arquivos');
 
 define('_XHELP_SIG_SPACER', '<br /><br />-------------------------------<br />');
 define('_XHELP_COMMMENTS', 'Cometários?');
-define("_XHELP_ANNOUNCE_READMORE", "Ler mais...");
-define("_XHELP_ANNOUNCE_ONECOMMENT", "1 comentário");
-define("_XHELP_ANNOUNCE_NUMCOMMENTS", "%s comentários");
+define("_XHELP_ANNOUNCE_READMORE","Ler mais...");
+define("_XHELP_ANNOUNCE_ONECOMMENT","1 comentário");
+define("_XHELP_ANNOUNCE_NUMCOMMENTS","%s comentários");
 define("_XHELP_TICKET_MD5SIGNATURE", "Codigo de Suporte:");
 
 
@@ -440,10 +441,10 @@ define('_XHELP_TIME_DAY', 'dia');
 define('_XHELP_TIME_WEEK', 'semana');
 define('_XHELP_TIME_YEAR', 'anos');
 
-define('_XHELP_MAILEVENT_CLASS0', 0); // Mensagem de conexão
-define('_XHELP_MAILEVENT_CLASS1', 1); // Analise da mensagem
-define('_XHELP_MAILEVENT_CLASS2', 2); // Mensagem de armazenamento
-define('_XHELP_MAILEVENT_CLASS3', 3); // Mensagem geral
+define('_XHELP_MAILEVENT_CLASS0', 0);     // Mensagem de conexão
+define('_XHELP_MAILEVENT_CLASS1', 1);     // Analise da mensagem
+define('_XHELP_MAILEVENT_CLASS2', 2);     // Mensagem de armazenamento
+define('_XHELP_MAILEVENT_CLASS3', 3);     // Mensagem geral
 
 define('_XHELP_MAILEVENT_DESC0', 'Não pôde conectar ao servidor.');
 define('_XHELP_MAILEVENT_DESC1', 'Não pôde analisar a mensagem.');

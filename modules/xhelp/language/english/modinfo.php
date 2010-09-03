@@ -73,7 +73,7 @@ define('_MI_XHELP_NUM_TICKET_UPLOADS', 'Max Number of Files to Upload');
 define('_MI_XHELP_NUM_TICKET_UPLOADS_DSC', 'This is the maximum number of files that can be uploaded to a ticket on ticket submission (does not include file custom fields).');
 define('_MI_XHELP_ANNOUNCEMENTS', 'Announcements News Topic');
 //define('_MI_XHELP_ANNOUNCEMENTS_DSC', 'This is the news topic that pulls announcements for xhelp. Update the xHelp module to see newly added news categories');
-define('_MI_XHELP_ANNOUNCEMENTS_DSC', "This is the news topic that pulls announcements for xhelp. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the news categories.");
+define('_MI_XHELP_ANNOUNCEMENTS_DSC', "This is the news topic that pulls announcements for xhelp. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the news categories.");
 define('_MI_XHELP_ANNOUNCEMENTS_NONE', '***Disable announcements***');
 define('_MI_XHELP_ALLOW_REOPEN', 'Allow Ticket Re-open');
 define('_MI_XHELP_ALLOW_REOPEN_DSC', 'Allow users to re-open a ticket after it has been closed?');
@@ -84,7 +84,7 @@ define('_MI_XHELP_STAFF_ACTIONS_DSC', 'What style would you like the staff actio
 define('_MI_XHELP_ACTION1', 'Inline-Style');
 define('_MI_XHELP_ACTION2', 'Block-Style');
 define('_MI_XHELP_DEFAULT_DEPT', 'Default Department');
-define('_MI_XHELP_DEFAULT_DEPT_DSC', "This will be the default department that is selected in the list when adding a ticket. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the departments.");
+define('_MI_XHELP_DEFAULT_DEPT_DSC', "This will be the default department that is selected in the list when adding a ticket. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the departments.");
 define('_MI_XHELP_OVERDUE_TIME', 'Ticket Overdue Time');
 define('_MI_XHELP_OVERDUE_TIME_DSC', 'This determines how long the staff have to finish a ticket before it is late (in hours).');
 define('_MI_XHELP_ALLOW_ANON', 'Allow Anonymous User Ticket Submission');
@@ -117,11 +117,11 @@ define('_MI_XHELP_TEXT_NOTIFICATIONS', 'Manage Notifications');
 define('_MI_XHELP_TEXT_MANAGE_FAQ', 'Manage FAQ');
 
 //NOTIFICATION vars
-define('_MI_XHELP_DEPT_NOTIFY', 'Department');
-define('_MI_XHELP_DEPT_NOTIFYDSC', 'Notification options that apply to a certain department');
+define('_MI_XHELP_DEPT_NOTIFY','Department');
+define('_MI_XHELP_DEPT_NOTIFYDSC','Notification options that apply to a certain department');
 
-define('_MI_XHELP_TICKET_NOTIFY', 'Ticket');
-define('_MI_XHELP_TICKET_NOTIFYDSC', 'Notification options that apply to the current ticket');
+define('_MI_XHELP_TICKET_NOTIFY','Ticket');
+define('_MI_XHELP_TICKET_NOTIFYDSC','Notification options that apply to the current ticket');
 
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFY', 'Staff: New Ticket');
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFYCAP', 'Notify me when tickets get created');

@@ -1,6 +1,6 @@
 <?php
 
-include_once XOOPS_ROOT_PATH . "/class/xoopsform/form.php";
+include_once XOOPS_ROOT_PATH."/class/xoopsform/form.php";
 
 class xhelpForm extends XoopsForm
 {
@@ -19,28 +19,28 @@ class xhelpForm extends XoopsForm
     /**
      * create HTML to output the form as a theme-enabled table with validation.
      *
-     * @return    string
+     * @return	string
      */
     function render()
     {
-        $ret = "<form name='" . $this->getName() . "' id='" . $this->getName() . "' action='" . $this->getAction() . "' method='" . $this->getMethod() . "' " . $this->getExtra() . ">\n<table width='100%' class='outer' cellspacing='1'><tr><th colspan='2'>" . $this->getTitle() . "</th></tr>";
+        $ret = "<form name='".$this->getName()."' id='".$this->getName()."' action='".$this->getAction()."' method='".$this->getMethod()."' ".$this->getExtra().">\n<table width='100%' class='outer' cellspacing='1'><tr><th colspan='2'>".$this->getTitle()."</th></tr>";
 
-        if ($width = $this->getLabelWidth()) {
-            $labelWidth = ' width="' . $width . '"';
+        if($width = $this->getLabelWidth()){
+            $labelWidth = ' width="'.$width.'"';
         } else {
             $labelWidth = '';
         }
-        foreach ($this->getElements() as $ele) {
+        foreach ( $this->getElements() as $ele ) {
             if (!is_object($ele)) {
                 $ret .= $ele;
             } elseif (!$ele->isHidden()) {
                 $class = 'even';
-
-                $ret .= "<tr><td class='head' valign='top' $labelWidth><label for='" . $ele->getName(false) . "'>" . $ele->getCaption() . "</label>";
+                 
+                $ret .= "<tr><td class='head' valign='top' $labelWidth><label for='".$ele->getName(false)."'>".$ele->getCaption()."</label>";
                 if ($ele->getDescription() != '') {
-                    $ret .= '<br /><br /><span style="font-weight: normal;">' . $ele->getDescription() . '</span>';
+                    $ret .= '<br /><br /><span style="font-weight: normal;">'.$ele->getDescription().'</span>';
                 }
-                $ret .= "</td><td class='$class'>" . $ele->render() . "</td></tr>";
+                $ret .= "</td><td class='$class'>".$ele->render()."</td></tr>";
             } else {
                 $ret .= $ele->render();
             }
@@ -49,5 +49,4 @@ class xhelpForm extends XoopsForm
         return $ret;
     }
 }
-
 ?>

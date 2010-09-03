@@ -8,7 +8,7 @@
 if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
-require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
 
 /**
  * xhelpResponseTemplates class
@@ -17,8 +17,7 @@ require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
  * @access public
  * @package xhelp
  */
-class xhelpResponseTemplates extends XoopsObject
-{
+class xhelpResponseTemplates extends XoopsObject {
     function xhelpResponseTemplates($id = null)
     {
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
@@ -46,13 +45,12 @@ class xhelpResponseTemplates extends XoopsObject
  * @package xhelp
  */
 
-class xhelpResponseTemplatesHandler extends xhelpBaseObjectHandler
-{
+class xhelpResponseTemplatesHandler extends xhelpBaseObjectHandler {
     /**
      * Name of child class
      *
-     * @var    string
-     * @access    private
+     * @var	string
+     * @access	private
      */
     var $classname = 'xhelpresponsetemplates';
 
@@ -67,7 +65,7 @@ class xhelpResponseTemplatesHandler extends xhelpBaseObjectHandler
     /**
      * Constructor
      *
-     * @param    object   $db    reference to a xoopsDB object
+     * @param	object   $db    reference to a xoopsDB object
      */
     function xhelpResponseTemplatesHandler(&$db)
     {
@@ -83,7 +81,7 @@ class xhelpResponseTemplatesHandler extends xhelpBaseObjectHandler
 
         $sql = sprintf("INSERT INTO %s (id, uid, name, response)
                 VALUES (%u, %u, %s, %s)", $this->_db->prefix($this->_dbtable), $id, $uid, $this->_db->quoteString($name),
-                       $this->_db->quoteString($response));
+        $this->_db->quoteString($response));
 
         return $sql;
 
@@ -97,8 +95,8 @@ class xhelpResponseTemplatesHandler extends xhelpBaseObjectHandler
         }
 
         $sql = sprintf("UPDATE %s SET uid = %u, name = %s, response = %s WHERE id = %u",
-                       $this->_db->prefix($this->_dbtable), $uid, $this->_db->quoteString($name),
-                       $this->_db->quoteString($response), $id);
+        $this->_db->prefix($this->_dbtable), $uid, $this->_db->quoteString($name),
+        $this->_db->quoteString($response), $id);
 
         return $sql;
     }
@@ -110,5 +108,4 @@ class xhelpResponseTemplatesHandler extends xhelpBaseObjectHandler
     }
 
 }
-
 ?>

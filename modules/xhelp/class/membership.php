@@ -1,7 +1,6 @@
 <?php
 //$Id: membership.php,v 1.18 2005/10/12 19:43:25 eric_juden Exp $
-class xhelpMembershipHandler
-{
+class xhelpMembershipHandler {
     var $_db;
     var $_hStaff;
     var $_hDept;
@@ -13,8 +12,7 @@ class xhelpMembershipHandler
      * @param object &$db {@link XoopsDatabase}
      * @access public
      */
-    function xhelpMembershipHandler(&$db)
-    {
+    function xhelpMembershipHandler(&$db) {
         //Constructor
         $this->_db = $db;
         $this->_hStaff =& xhelpGetHandler('staff');
@@ -31,9 +29,9 @@ class xhelpMembershipHandler
      */
     function getCount($criteria = null)
     {
-        $sql = sprintf('SELECT COUNT(*) FROM %s s INNER JOIN %s j on s.uid = j.uid', $this->_db->prefix('xhelp_staff'), $this->_db->prefix('xhelp_jstaffdept'));
+        $sql = sprintf('SELECT COUNT(*) FROM %s s INNER JOIN %s j on s.uid = j.uid', $this->_db->prefix('xhelp_staff'),$this->_db->prefix('xhelp_jstaffdept'));
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' ' . $criteria->renderWhere();
+            $sql .= ' '.$criteria->renderWhere();
         }
         if (!$result =& $this->_db->query($sql)) {
             return 0;
@@ -41,7 +39,7 @@ class xhelpMembershipHandler
         list($count) = $this->_db->fetchRow($result);
         return $count;
     }
-
+     
     /**
      * Get all departments a staff user is assigned to
      *
@@ -52,7 +50,7 @@ class xhelpMembershipHandler
     function &membershipByStaff($uid, $id_as_key = false)
     {
         $uid = intval($uid);
-        $sql = sprintf("SELECT d.* FROM %s d INNER JOIN %s j ON d.id = j.department WHERE j.uid = %u", $this->_db->prefix('xhelp_departments'), $this->_db->prefix('xhelp_jstaffdept'), $uid);
+        $sql = sprintf("SELECT d.* FROM %s d INNER JOIN %s j ON d.id = j.department WHERE j.uid = %u",$this->_db->prefix('xhelp_departments'),$this->_db->prefix('xhelp_jstaffdept'),$uid);
 
         $ret = $this->_db->query($sql);
         $arr = array();
@@ -60,7 +58,7 @@ class xhelpMembershipHandler
         while ($temp = $this->_db->fetchArray($ret)) {
             $dept = $this->_hDept->create();
             $dept->assignVars($temp);
-            if ($id_as_key) {
+            if($id_as_key){
                 $arr[$dept->getVar('id')] = $dept;
             } else {
                 $arr[] = $dept;
@@ -79,7 +77,7 @@ class xhelpMembershipHandler
         $module_id = $xoopsModule->getVar('mid');
         $hMember =& xoops_gethandler('member');
         $groups =& $hMember->getGroupsByUser($uid);
-        $group_string = "(" . implode(array_values($groups), ',') . ")";
+        $group_string = "(". implode(array_values($groups), ',') .")";
 
         $sql = sprintf("SELECT d.* FROM %s d INNER JOIN %s g ON d.id = g.gperm_itemid WHERE g.gperm_name = '%s' AND g.gperm_modid = '%s' AND g.gperm_groupid IN %s", $this->_db->prefix('xhelp_departments'), $this->_db->prefix('group_permission'), _XHELP_GROUP_PERM_DEPT, $module_id, $group_string);
         $ret = $this->_db->query($sql);
@@ -110,14 +108,14 @@ class xhelpMembershipHandler
      * @return array array of {@link xhelpStaff} objects
      * @access public
      */
-    function &membershipByDept($deptid, $limit = 0, $start = 0)
+    function &membershipByDept($deptid, $limit=0, $start=0)
     {
         $limit = intval($limit);
         $start = intval($start);
         $a_depts = array();
 
         if (is_array($deptid)) {
-            foreach ($deptid as $dept) {
+            foreach($deptid as $dept) {
                 if (is_object($dept)) {
                     $a_depts[] = $dept->getVar('id');
                 } else {
@@ -132,16 +130,16 @@ class xhelpMembershipHandler
             }
         }
         if (count($a_depts) == 1) {
-            $sql = sprintf('SELECT s.* FROM %s s INNER JOIN %s j on s.uid = j.uid WHERE j.department = %u', $this->_db->prefix('xhelp_staff'), $this->_db->prefix('xhelp_jstaffdept'), $a_depts[0]);
+            $sql = sprintf('SELECT s.* FROM %s s INNER JOIN %s j on s.uid = j.uid WHERE j.department = %u', $this->_db->prefix('xhelp_staff'),$this->_db->prefix('xhelp_jstaffdept') ,$a_depts[0]);
         } else {
             $uids = $this->_uidsInDepts($a_depts);
-            $sql = sprintf('SELECT s.* FROM %s s WHERE s.uid IN (%s)', $this->_db->prefix('xhelp_staff'), implode($uids, ','));
+            $sql = sprintf('SELECT s.* FROM %s s WHERE s.uid IN (%s)', $this->_db->prefix('xhelp_staff'),implode($uids, ','));
         }
 
         $ret = $this->_db->query($sql, $limit, $start);
         $arr = array();
 
-        while ($temp = $this->_db->fetchArray($ret)) {
+        while($temp = $this->_db->fetchArray($ret)) {
             $staff = $this->_hStaff->create();
             $staff->assignVars($temp);
             $arr[$staff->getVar('uid')] = $staff;
@@ -151,7 +149,7 @@ class xhelpMembershipHandler
         return $arr;
     }
 
-    function &xoopsUsersByDept($deptid, $limit = 0, $start = 0)
+    function &xoopsUsersByDept($deptid, $limit=0, $start=0)
     {
         $limit = intval($limit);
         $start = intval($start);
@@ -159,7 +157,7 @@ class xhelpMembershipHandler
         $hUser =& xoops_gethandler('user');
 
         if (is_array($deptid)) {
-            foreach ($deptid as $dept) {
+            foreach($deptid as $dept) {
                 if (is_object($dept)) {
                     $a_depts[] = $dept->getVar('id');
                 } else {
@@ -174,16 +172,16 @@ class xhelpMembershipHandler
             }
         }
         if (count($a_depts) == 1) {
-            $sql = sprintf('SELECT u.* FROM %s u INNER JOIN %s j on u.uid = j.uid WHERE j.department = %u', $this->_db->prefix('users'), $this->_db->prefix('xhelp_jstaffdept'), $a_depts[0]);
+            $sql = sprintf('SELECT u.* FROM %s u INNER JOIN %s j on u.uid = j.uid WHERE j.department = %u', $this->_db->prefix('users'),$this->_db->prefix('xhelp_jstaffdept') ,$a_depts[0]);
         } else {
             $uids = $this->_uidsInDepts($a_depts);
-            $sql = sprintf('SELECT u.* FROM %s u WHERE u.uid IN (%s)', $this->_db->prefix('users'), implode($uids, ','));
+            $sql = sprintf('SELECT u.* FROM %s u WHERE u.uid IN (%s)', $this->_db->prefix('users'),implode($uids, ','));
         }
 
         $ret = $this->_db->query($sql, $limit, $start);
         $arr = array();
 
-        while ($temp = $this->_db->fetchArray($ret)) {
+        while($temp = $this->_db->fetchArray($ret)) {
             $staff = $hUser->create();
             $staff->assignVars($temp);
             $arr[$staff->getVar('uid')] = $staff;
@@ -200,11 +198,11 @@ class xhelpMembershipHandler
         $allDepts = $hDept->getCount();
 
         $numDepts = 0;
-        foreach ($staffDepts as $dept) {
+        foreach($staffDepts as $dept){
             $numDepts++;
         }
 
-        if ($allDepts != $numDepts) {
+        if($allDepts != $numDepts){
             return false;
         }
         return true;
@@ -225,7 +223,7 @@ class xhelpMembershipHandler
         } else {
             foreach ($staff as $member) {
                 $ret = $this->_addMembership($member, $deptid);
-                if (!$ret) {
+                if(!$ret){
                     exit;
                 }
             }
@@ -248,7 +246,7 @@ class xhelpMembershipHandler
         } else {
             foreach ($dept as $member) {
                 $ret = $this->_addMembership($uid, $member);
-                if (!$ret) {
+                if(!$ret){
                     break;
                 }
             }
@@ -271,7 +269,7 @@ class xhelpMembershipHandler
         } else {
             foreach ($staff as $member) {
                 $ret = $this->_removeMembership($member, $deptid);
-                if (!$ret) {
+                if(!$ret){
                     exit;
                 }
             }
@@ -294,7 +292,7 @@ class xhelpMembershipHandler
         } else {
             foreach ($dept as $member) {
                 $ret = $this->_removeMembership($uid, $member);
-                if (!$ret) {
+                if(!$ret){
                     exit;
                 }
             }
@@ -416,15 +414,14 @@ class xhelpMembershipHandler
         return $this->_db->queryF($sql);
     }
 
-    function &_uidsInDepts($depts)
-    {
+    function &_uidsInDepts($depts) {
         $sql = sprintf('SELECT j.uid FROM %s j WHERE j.department IN (%s) GROUP BY j.uid HAVING COUNT(*) = %u',
-                       $this->_db->prefix('xhelp_jstaffdept'), implode($depts, ','), count($depts));
+        $this->_db->prefix('xhelp_jstaffdept'), implode($depts, ','), count($depts));
 
         $ret = $this->_db->query($sql);
         $arr = array();
 
-        while ($temp = $this->_db->fetchArray($ret)) {
+        while($temp = $this->_db->fetchArray($ret)) {
             $arr[] = $temp['uid'];
             unset($temp);
         }

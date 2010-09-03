@@ -7,8 +7,8 @@ define('_MB_XHELP_TEXT_NO_TICKETS', 'Você não tem nenhum Ticket');
 define('_MB_XHELP_TRUNCATE_TITLE', 'Máximo de Carácteres no título :');
 
 // Novas
-define('_MB_XHELP_TEXT_SHOWICON', 'Mostrar ícones');
-define('_MB_XHELP_TEXT_MENUSTYLE', 'Estilo do Menu');
-define('_MB_XHELP_OPTION_MENUSTYLE1', 'Lista');
-define('_MB_XHELP_OPTION_MENUSTYLE2', 'Botões');
+define('_MB_XHELP_TEXT_SHOWICON','Mostrar ícones');
+define('_MB_XHELP_TEXT_MENUSTYLE','Estilo do Menu');
+define('_MB_XHELP_OPTION_MENUSTYLE1','Lista');
+define('_MB_XHELP_OPTION_MENUSTYLE2','Botões');
 ?>

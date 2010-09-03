@@ -54,7 +54,7 @@ define('_MI_XHELP_UPLOAD_WIDTH_DSC', 'ｱｯﾌﾟﾛｰﾄﾞ・幅制限 (ピクセル)');
 define('_MI_XHELP_UPLOAD_HEIGHT', 'ｱｯﾌﾟﾛｰﾄﾞ・高さ制限');
 define('_MI_XHELP_UPLOAD_HEIGHT_DSC', 'ｱｯﾌﾟﾛｰﾄﾞ・高さ制限 (ピクセル)');
 define('_MI_XHELP_ANNOUNCEMENTS', '発表ﾆｭｰｽ・ﾄﾋﾟｯｸ');
-define('_MI_XHELP_ANNOUNCEMENTS_DSC', "xhelpのニュース・トピックスを更新するためには、<a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>ここをクリックしてください</a>。");
+define('_MI_XHELP_ANNOUNCEMENTS_DSC', "xhelpのニュース・トピックスを更新するためには、<a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>ここをクリックしてください</a>。");
 
 define('_MI_XHELP_ANNOUNCEMENTS_NONE', '***アナウンスを無効する***');
 define('_MI_XHELP_ALLOW_REOPEN', '質問の再開許可');
@@ -73,11 +73,11 @@ define('_MI_XHELP_MENU_ADD_STAFF', 'ｽﾀｯﾌ追加');
 define('_MI_XHELP_MENU_MIMETYPES', 'Mimetype管理');
 
 //NOTIFICATION vars
-define('_MI_XHELP_DEPT_NOTIFY', 'カテゴリー名');
-define('_MI_XHELP_DEPT_NOTIFYDSC', 'あるカテゴリーに当てはまる通知オプション');
+define('_MI_XHELP_DEPT_NOTIFY','カテゴリー名');
+define('_MI_XHELP_DEPT_NOTIFYDSC','あるカテゴリーに当てはまる通知オプション');
 
-define('_MI_XHELP_TICKET_NOTIFY', '質問');
-define('_MI_XHELP_TICKET_NOTIFYDSC', '現在の質問に当てはまる通知オプション');
+define('_MI_XHELP_TICKET_NOTIFY','質問');
+define('_MI_XHELP_TICKET_NOTIFYDSC','現在の質問に当てはまる通知オプション');
 
 define('_MI_XHELP_Y', 'カテゴリー: 新質問');
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFY', 'スタッフ: 質問の追加');
@@ -216,7 +216,7 @@ define('_MI_XHELP_TEMP_ERROR', 'Template for error page');
 define('_MI_XHELP_MENU_MANAGE_ROLES', 'Manage Roles');
 
 define('_MI_XHELP_DEFAULT_DEPT', 'Default Department');
-define('_MI_XHELP_DEFAULT_DEPT_DSC', "This will be the default department that is selected in the list when adding a ticket. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the departments.");
+define('_MI_XHELP_DEFAULT_DEPT_DSC', "This will be the default department that is selected in the list when adding a ticket. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the departments.");
 define('_MI_XHELP_ACTION1', 'Inline-Style');
 define('_MI_XHELP_ACTION2', 'Block-Style');
 define('_MI_XHELP_OVERDUE_TIME', 'Ticket Overdue Time');
@@ -234,7 +234,7 @@ define('_MI_XHELP_ALLOW_ANON_DSC', 'This allows anyone to create a ticket on you
 define('_MI_XHELP_MENU_CHECK_TABLES', 'Check Tables');
 
 //MODIFIED
-define('_MI_XHELP_DEFAULT_DEPT_DSC', "This will be the default department that is selected in the list when adding a ticket. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the departments.");
+define('_MI_XHELP_DEFAULT_DEPT_DSC', "This will be the default department that is selected in the list when adding a ticket. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the departments.");
 
 define('_MI_XHELP_MENU_MAIL_EVENTS', 'Mail Events');
 define('_MI_XHELP_MENU_CHECK_EMAIL', 'Check Email');

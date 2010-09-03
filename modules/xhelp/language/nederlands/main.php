@@ -274,6 +274,7 @@ define('_XHELP_ROLE_VAL2', 241);
 define('_XHELP_ROLE_VAL3', 0);
 
 
+
 // Ticket.php - Actions
 define('_XHELP_TEXT_SELECTED', 'Met geselecteerde:');
 define('_XHELP_TEXT_ADD_RESPONSE', 'Voeg reactie toe');
@@ -291,9 +292,9 @@ define('_XHELP_TEXT_AUTO_REFRESH1', 'Auto Refresh Every 1 minute');
 define('_XHELP_TEXT_AUTO_REFRESH2', 'Auto Refresh Every 5 minutes');
 define('_XHELP_TEXT_AUTO_REFRESH3', 'Auto Refresh Every 10 minutes');
 define('_XHELP_TEXT_AUTO_REFRESH4', 'Auto Refresh Every 30 minutes');
-define('_XHELP_AUTO_REFRESH0', 0); // Change these to
-define('_XHELP_AUTO_REFRESH1', 60); // adjust the values
-define('_XHELP_AUTO_REFRESH2', 300); // in the select box
+define('_XHELP_AUTO_REFRESH0', 0);          // Change these to
+define('_XHELP_AUTO_REFRESH1', 60);         // adjust the values
+define('_XHELP_AUTO_REFRESH2', 300);        // in the select box
 define('_XHELP_AUTO_REFRESH3', 600);
 define('_XHELP_AUTO_REFRESH4', 1800);
 
@@ -369,9 +370,9 @@ define('_XHELP_NO_FILES_ERROR', 'Geen bestanden gevonden');
 
 define('_XHELP_SIG_SPACER', '<br /><br />-------------------------------<br />');
 define('_XHELP_COMMMENTS', 'Reactie?');
-define("_XHELP_ANNOUNCE_READMORE", "Lees verder...");
-define("_XHELP_ANNOUNCE_ONECOMMENT", "1 reactie");
-define("_XHELP_ANNOUNCE_NUMCOMMENTS", "%s reacties");
+define("_XHELP_ANNOUNCE_READMORE","Lees verder...");
+define("_XHELP_ANNOUNCE_ONECOMMENT","1 reactie");
+define("_XHELP_ANNOUNCE_NUMCOMMENTS","%s reacties");
 define("_XHELP_TICKET_MD5SIGNATURE", "Support Sleutel:");
 
 
@@ -392,10 +393,10 @@ define('_XHELP_TIME_DAY', 'dag');
 define('_XHELP_TIME_WEEK', 'week');
 define('_XHELP_TIME_YEAR', 'jaar');
 
-define('_XHELP_MAILEVENT_CLASS0', 0); // Connection message
-define('_XHELP_MAILEVENT_CLASS1', 1); // Parse message
-define('_XHELP_MAILEVENT_CLASS2', 2); // Storage message
-define('_XHELP_MAILEVENT_CLASS3', 3); // General message
+define('_XHELP_MAILEVENT_CLASS0', 0);     // Connection message
+define('_XHELP_MAILEVENT_CLASS1', 1);     // Parse message
+define('_XHELP_MAILEVENT_CLASS2', 2);     // Storage message
+define('_XHELP_MAILEVENT_CLASS3', 3);     // General message
 
 define('_XHELP_MAILEVENT_DESC0', 'Kon geen verbinding maken met de server.');
 define('_XHELP_MAILEVENT_DESC1', 'Kon de boodschap niet ontleden.');

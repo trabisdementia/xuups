@@ -9,7 +9,7 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
 
 /**
  * xhelpLogMessage class
@@ -19,8 +19,7 @@ require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
  * @package xhelp
  */
 
-class xhelpLogMessage extends XoopsObject
-{
+class xhelpLogMessage extends XoopsObject {
     function xhelpLogMessage($id = null)
     {
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
@@ -41,14 +40,14 @@ class xhelpLogMessage extends XoopsObject
     /**
      * determine when the log message was updated
      *
-     * @return     int    Timestamp of last update
-     * @access    public
+     * @return 	int	Timestamp of last update
+     * @access	public
      */
     function lastUpdated()
     {
         return formatTimestamp($this->getVar('lastUpdated'));
     }
-} //end of class
+}   //end of class
 
 /**
  * xhelpLogMessageHandler class
@@ -60,13 +59,12 @@ class xhelpLogMessage extends XoopsObject
  * @package xhelp
  */
 
-class xhelpLogMessageHandler extends xhelpBaseObjectHandler
-{
+class xhelpLogMessageHandler extends xhelpBaseObjectHandler {
     /**
      * Name of child class
      *
-     * @var    string
-     * @access    private
+     * @var	string
+     * @access	private
      */
     var $classname = 'xhelplogmessage';
 
@@ -81,7 +79,7 @@ class xhelpLogMessageHandler extends xhelpBaseObjectHandler
     /**
      * Constructor
      *
-     * @param    object   $db    reference to a xoopsDB object
+     * @param	object   $db    reference to a xoopsDB object
      */
     function xhelpLogMessageHandler(&$db)
     {
@@ -96,7 +94,7 @@ class xhelpLogMessageHandler extends xhelpBaseObjectHandler
         }
 
         $sql = sprintf("INSERT INTO %s (id, uid, ticketid, lastUpdated, action) VALUES (%u, %u, %u, %u, %s)",
-                       $this->_db->prefix($this->_dbtable), $id, $uid, $ticketid, time(), $this->_db->quoteString($action));
+        $this->_db->prefix($this->_dbtable), $id, $uid, $ticketid, time(), $this->_db->quoteString($action));
 
         return $sql;
 
@@ -110,7 +108,7 @@ class xhelpLogMessageHandler extends xhelpBaseObjectHandler
         }
 
         $sql = sprintf("UPDATE %s SET uid = %u, ticketid = %u, lastUpdated = %u, action = %s WHERE id = %u",
-                       $this->_db->prefix($this->_dbtable), $uid, $ticketid, time(), $this->_db->quoteString($action), $id);
+        $this->_db->prefix($this->_dbtable), $uid, $ticketid, time(), $this->_db->quoteString($action), $id);
 
         return $sql;
     }
@@ -122,5 +120,4 @@ class xhelpLogMessageHandler extends xhelpBaseObjectHandler
     }
 
 }
-
 ?>

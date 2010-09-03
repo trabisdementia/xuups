@@ -4,33 +4,33 @@ require('../../mainfile.php');
 
 
 if (!defined('XHELP_CONSTANTS_INCLUDED')) {
-    include_once(XOOPS_ROOT_PATH . '/modules/xhelp/include/constants.php');
+    include_once(XOOPS_ROOT_PATH.'/modules/xhelp/include/constants.php');
 }
 
-include_once(XHELP_BASE_PATH . '/functions.php');
+include_once(XHELP_BASE_PATH.'/functions.php');
 
-if (!$xoopsUser) {
-    redirect_header(XOOPS_URL . '/user.php?xoops_redirect=' . htmlencode($xoopsRequestUri), 3);
+if(!$xoopsUser) {
+    redirect_header(XOOPS_URL .'/user.php?xoops_redirect='.htmlencode($xoopsRequestUri), 3);
 }
 
-if (isset($_GET['id'])) {
+if(isset($_GET['id'])){
     $xhelp_id = intval($_GET['id']);
 }
 
 $viewFile = false;
 
-$hFiles =& xhelpGetHandler('file');
-$hTicket =& xhelpGetHandler('ticket');
-$hStaff =& xhelpGetHandler('staff');
-$file =& $hFiles->get($xhelp_id);
+$hFiles   =& xhelpGetHandler('file');
+$hTicket  =& xhelpGetHandler('ticket');
+$hStaff   =& xhelpGetHandler('staff');
+$file     =& $hFiles->get($xhelp_id);
 $mimeType = $file->getVar('mimetype');
-$ticket =& $hTicket->get($file->getVar('ticketid'));
+$ticket   =& $hTicket->get($file->getVar('ticketid'));
 
 $filename_full = $file->getVar('filename');
-if ($file->getVar('responseid') > 0) {
-    $removeText = $file->getVar('ticketid') . "_" . $file->getVar('responseid') . "_";
+if($file->getVar('responseid') > 0){
+    $removeText = $file->getVar('ticketid')."_".$file->getVar('responseid')."_";
 } else {
-    $removeText = $file->getVar('ticketid') . "_";
+    $removeText = $file->getVar('ticketid')."_";
 }
 $filename = str_replace($removeText, '', $filename_full);
 
@@ -45,22 +45,22 @@ if (_userAllowed($ticket, $xoopsUser)) {
 }
 
 if (!$viewFile) {
-    redirect_header(XHELP_BASE_URL . '/index.php', 3, _NOPERM);
+    redirect_header(XHELP_BASE_URL.'/index.php', 3, _NOPERM);
 }
 
 //Check if the file exists
-$fileAbsPath = XHELP_UPLOAD_PATH . '/' . $filename_full;
+$fileAbsPath = XHELP_UPLOAD_PATH . '/'. $filename_full;
 if (!file_exists($fileAbsPath)) {
-    redirect_header(XHELP_BASE_URL . '/index.php', 3, _XHELP_NO_FILES_ERROR);
+    redirect_header(XHELP_BASE_URL.'/index.php', 3, _XHELP_NO_FILES_ERROR);
     exit();
 }
 
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-header("Cache-Control: private", false);
+header("Cache-Control: private",false);
 header("Content-Transfer-Encoding: binary");
-header("Content-Length: " . filesize($fileAbsPath));
+header("Content-Length: ".filesize($fileAbsPath));
 
-if (isset($mimeType)) {
+if(isset($mimeType)) {
     header("Content-Type: " . $mimeType);
 } else {
     header("Content-Type: application/octet-stream");
@@ -70,7 +70,7 @@ if (isset($mimeType)) {
 header("Content-Disposition: attachment; filename=" . $filename);
 
 // Open the file
-if (isset($mimeType) && strstr($mimeType, "text/")) {
+if(isset($mimeType) && strstr($mimeType, "text/")) {
     $fp = fopen($fileAbsPath, "r");
 } else {
     $fp = fopen($fileAbsPath, "rb");
@@ -80,15 +80,13 @@ if (isset($mimeType) && strstr($mimeType, "text/")) {
 fpassthru($fp);
 
 
-function _userAllowed(&$ticket, &$user)
-{
+function _userAllowed(&$ticket, &$user) {
     $emails =& $ticket->getEmails(true);
-    foreach ($emails as $email) {
+    foreach($emails as $email) {
         if ($email->getVar('email') == $user->getVar('email')) {
             return true;
         }
     }
     return false;
 }
-
 ?>

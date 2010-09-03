@@ -7,18 +7,17 @@ if (!defined('XHELP_CLASS_PATH')) {
 }
 
 // ** Define any site specific variables here **
-define('XHELP_SMARTFAQ_PATH', XOOPS_ROOT_PATH . '/modules/smartfaq');
-define('XHELP_SMARTFAQ_URL', XOOPS_URL . '/modules/smartfaq');
+define('XHELP_SMARTFAQ_PATH', XOOPS_ROOT_PATH .'/modules/smartfaq');
+define('XHELP_SMARTFAQ_URL', XOOPS_URL .'/modules/smartfaq');
 // ** End site specific variables **
 
 //Include the base faqAdapter interface (required)
-require_once(XHELP_CLASS_PATH . '/faqAdapter.php');
+require_once(XHELP_CLASS_PATH .'/faqAdapter.php');
 
 //These functions are required to work with the smartfaq application directly
-@include(XHELP_SMARTFAQ_PATH . '/include/functions.php');
+@include(XHELP_SMARTFAQ_PATH .'/include/functions.php');
 
-class xhelpSmartfaqAdapter extends xhelpFaqAdapter
-{
+class xhelpSmartfaqAdapter extends xhelpFaqAdapter {
 
     /**
      * Does application support categories?
@@ -107,14 +106,14 @@ class xhelpSmartfaqAdapter extends xhelpFaqAdapter
         $hFaq =& sf_gethandler('faq');
         $hAnswer =& sf_gethandler('answer');
         $myFaq =& $hFaq->create();
-        $myAnswer =& $hAnswer->create(); // Creating the answer object
+        $myAnswer =& $hAnswer->create();            // Creating the answer object
 
 
         //$faq->getVar('categories') is an array. If your application
         //only supports single categories use the first element
         //in the array
         $categories = $faq->getVar('categories');
-        $categories = intval($categories[0]); // Change array of categories to 1 category
+        $categories = intval($categories[0]);       // Change array of categories to 1 category
 
         $myFaq->setVar('uid', $uid);
         $myFaq->setVar('question', $faq->getVar('problem'));
@@ -125,18 +124,18 @@ class xhelpSmartfaqAdapter extends xhelpFaqAdapter
         $ret = $hFaq->insert($myFaq);
         $faq->setVar('id', $myFaq->getVar('faqid'));
 
-        if ($ret) { // If faq was stored, store answer
+        if($ret){   // If faq was stored, store answer
             // Trigger event for question being stored
 
             $myAnswer->setVar('status', _SF_AN_STATUS_APPROVED);
             $myAnswer->setVar('faqid', $myFaq->faqid());
             $myAnswer->setVar('answer', $faq->getVar('solution'));
             $myAnswer->setVar('uid', $uid);
-
+             
             $ret = $hAnswer->insert($myAnswer);
         }
-
-        if ($ret) {
+         
+        if($ret){
             // Set the new url for the saved FAQ
             $faq->setVar('url', $this->makeFaqUrl($faq));
 
@@ -156,8 +155,7 @@ class xhelpSmartfaqAdapter extends xhelpFaqAdapter
      */
     function makeFaqUrl(&$faq)
     {
-        return XHELP_SMARTFAQ_URL . "/faq.php?faqid=" . $faq->getVar('id');
+        return XHELP_SMARTFAQ_URL ."/faq.php?faqid=".$faq->getVar('id');
     }
 }
-
 ?>

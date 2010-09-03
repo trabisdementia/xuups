@@ -158,11 +158,11 @@ define('_AM_XHELP_BUTTON_SEARCH', 'Cerca');
 
 
 // Mimetypes
-define("_AM_XHELP_MIME_ID", "ID"); // ID
+define("_AM_XHELP_MIME_ID", "ID");  // ID
 define("_AM_XHELP_MIME_EXT", "EXT"); //EXT
 define("_AM_XHELP_MIME_NAME", "Tipo Applicazione");
 // define("_AM_XHELP_MIME_ADMIN", "Amministratore"); // Admin
-define("_AM_XHELP_MIME_USER", "Utente"); // User
+define("_AM_XHELP_MIME_USER", "Utente");   // User
 // Mimetype Form
 define("_AM_XHELP_MIME_CREATEF", "Crea Mimetype");
 define("_AM_XHELP_MIME_MODIFYF", "Modifica Mimetype");
@@ -202,24 +202,24 @@ define("_AM_XHELP_MINDEX_ACTION", "Azione");
 define("_AM_XHELP_MINDEX_PAGE", "<b>Pagina:</b> ");
 
 //image admin icon
-define("_AM_XHELP_ICO_EDIT", "Modifica questo articolo");
-define("_AM_XHELP_ICO_DELETE", "Cancella questo articolo");
-define("_AM_XHELP_ICO_ONLINE", "Online");
-define("_AM_XHELP_ICO_OFFLINE", "Offline");
-define("_AM_XHELP_ICO_APPROVED", "Approvato");
-define("_AM_XHELP_ICO_NOTAPPROVED", "Non Approvato");
+define("_AM_XHELP_ICO_EDIT","Modifica questo articolo");
+define("_AM_XHELP_ICO_DELETE","Cancella questo articolo");
+define("_AM_XHELP_ICO_ONLINE","Online");
+define("_AM_XHELP_ICO_OFFLINE","Offline");
+define("_AM_XHELP_ICO_APPROVED","Approvato");
+define("_AM_XHELP_ICO_NOTAPPROVED","Non Approvato");
 
-define("_AM_XHELP_ICO_LINK", "Link Correlati");
-define("_AM_XHELP_ICO_URL", "Inserisci URL Correlati");
-define("_AM_XHELP_ICO_ADD", "Inserisci");
-define("_AM_XHELP_ICO_APPROVE", "Approva");
-define("_AM_XHELP_ICO_STATS", "Stato");
+define("_AM_XHELP_ICO_LINK","Link Correlati");
+define("_AM_XHELP_ICO_URL","Inserisci URL Correlati");
+define("_AM_XHELP_ICO_ADD","Inserisci");
+define("_AM_XHELP_ICO_APPROVE","Approva");
+define("_AM_XHELP_ICO_STATS","Stato");
 
-define("_AM_XHELP_ICO_IGNORE", "Ignora");
-define("_AM_XHELP_ICO_ACK", "Broken Report Acknowledged"); // *** WORKHERE ***
-define("_AM_XHELP_ICO_REPORT", "Acknowledge Broken Report?"); // *** WORKHERE ***
-define("_AM_XHELP_ICO_CONFIRM", "Broken Report Confirmed"); // *** WORKHERE ***
-define("_AM_XHELP_ICO_CONBROKEN", "Confirm Broken Report?"); // *** WORKHERE ***
+define("_AM_XHELP_ICO_IGNORE","Ignora");
+define("_AM_XHELP_ICO_ACK","Broken Report Acknowledged"); // *** WORKHERE ***
+define("_AM_XHELP_ICO_REPORT","Acknowledge Broken Report?"); // *** WORKHERE ***
+define("_AM_XHELP_ICO_CONFIRM","Broken Report Confirmed"); // *** WORKHERE ***
+define("_AM_XHELP_ICO_CONBROKEN","Confirm Broken Report?"); // *** WORKHERE ***
 
 define("_AM_XHELP_UPLOADFILE", "Upload del file completeato");
 define('_AM_XHELP_TEXT_TICKET_INFO', 'Informationi Ticket');

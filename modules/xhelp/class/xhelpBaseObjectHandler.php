@@ -9,13 +9,12 @@
  */
 
 
-Class xhelpBaseObjectHandler extends XoopsObjectHandler
-{
+Class xhelpBaseObjectHandler extends XoopsObjectHandler {
     /**
      * Database connection
      *
-     * @var    object
-     * @access    private
+     * @var	object
+     * @access	private
      */
     var $_db;
 
@@ -30,10 +29,9 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler
     /**
      * Constructor
      *
-     * @param    object   $db    reference to a xoopsDB object
+     * @param	object   $db    reference to a xoopsDB object
      */
-    function init(&$db)
-    {
+    function init(&$db) {
         $this->_db = $db;
     }
 
@@ -59,13 +57,13 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler
     {
         $ret = false;
         $id = intval($id);
-        if ($id > 0) {
+        if($id > 0) {
             $sql = $this->_selectQuery(new Criteria($this->_idfield, $id));
-            if (!$result = $this->_db->query($sql)) {
+            if(!$result = $this->_db->query($sql)) {
                 return $ret;
             }
             $numrows = $this->_db->getRowsNum($result);
-            if ($numrows == 1) {
+            if($numrows == 1) {
                 $obj = new $this->classname($this->_db->fetchArray($result));
                 return $obj;
             }
@@ -83,10 +81,10 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler
      */
     function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret = array();
-        $limit = $start = 0;
-        $sql = $this->_selectQuery($criteria);
-        $id = $this->_idfield;
+        $ret    = array();
+        $limit  = $start = 0;
+        $sql    = $this->_selectQuery($criteria);
+        $id     = $this->_idfield;
 
         if (isset($criteria)) {
             $limit = $criteria->getLimit();
@@ -135,7 +133,7 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler
         // Create query for DB update
         if ($obj->isNew()) {
             // Determine next auto-gen ID for table
-            $id = $this->_db->genId($this->_db->prefix($this->_dbtable) . '_uid_seq');
+            $id = $this->_db->genId($this->_db->prefix($this->_dbtable).'_uid_seq');
             $sql = $this->_insertQuery($obj);
         } else {
             $sql = $this->_updateQuery($obj);
@@ -168,11 +166,11 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler
     function _selectQuery($criteria = null)
     {
         $sql = sprintf('SELECT * FROM %s', $this->_db->prefix($this->_dbtable));
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' ' . $criteria->renderWhere();
-            if ($criteria->getSort() != '') {
+        if(isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+            $sql .= ' ' .$criteria->renderWhere();
+            if($criteria->getSort() != '') {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . '
-                    ' . $criteria->getOrder();
+                    ' .$criteria->getOrder();
             }
         }
         return $sql;
@@ -187,9 +185,9 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler
      */
     function getCount($criteria = null)
     {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->_db->prefix($this->_dbtable);
+        $sql = 'SELECT COUNT(*) FROM '.$this->_db->prefix($this->_dbtable);
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' ' . $criteria->renderWhere();
+            $sql .= ' '.$criteria->renderWhere();
         }
         if (!$result =& $this->_db->query($sql)) {
             return 0;
@@ -206,8 +204,7 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler
      * @return bool deletion successful?
      * @access public
      */
-    function delete(&$obj, $force = false)
-    {
+    function delete(&$obj, $force = false) {
         if (strcasecmp($this->classname, get_class($obj)) != 0) {
             return false;
         }
@@ -230,13 +227,13 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler
      *
      * @param object $criteria {@link CriteriaElement}
      * @return bool FALSE if deletion failed
-     * @access    public
+     * @access	public
      */
     function deleteAll($criteria = null)
     {
-        $sql = 'DELETE FROM ' . $this->_db->prefix($this->_dbtable);
+        $sql = 'DELETE FROM '.$this->_db->prefix($this->_dbtable);
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' ' . $criteria->renderWhere();
+            $sql .= ' '.$criteria->renderWhere();
         }
         if (!$result = $this->_db->query($sql)) {
             return false;
@@ -249,14 +246,14 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler
      *
      * @param object $criteria {@link CriteriaElement}
      * @return bool FALSE if update failed
-     * @access    public
+     * @access	public
      */
     function updateAll($fieldname, $fieldvalue, $criteria = null)
     {
-        $set_clause = is_numeric($fieldvalue) ? $fieldname . ' = ' . $fieldvalue : $fieldname . ' = ' . $this->_db->quoteString($fieldvalue);
-        $sql = 'UPDATE ' . $this->_db->prefix($this->_dbtable) . ' SET ' . $set_clause;
+        $set_clause = is_numeric($fieldvalue) ? $fieldname.' = '.$fieldvalue : $fieldname.' = '.$this->_db->quoteString($fieldvalue);
+        $sql = 'UPDATE '.$this->_db->prefix($this->_dbtable).' SET '.$set_clause;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' ' . $criteria->renderWhere();
+            $sql .= ' '.$criteria->renderWhere();
         }
         if (!$result = $this->_db->query($sql)) {
             return false;
@@ -264,19 +261,16 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler
         return true;
     }
 
-    function _insertQuery(&$obj)
-    {
+    function _insertQuery(&$obj) {
         return false;
     }
 
-    function _updateQuery(&$obj)
-    {
+    function _updateQuery(&$obj) {
         return false;
 
     }
 
-    function _deleteQuery(&$obj)
-    {
+    function _deleteQuery(&$obj) {
         return false;
     }
 
@@ -291,8 +285,8 @@ Class xhelpBaseObjectHandler extends XoopsObjectHandler
     function &getInstance(&$db)
     {
         static $instance;
-        if (!isset($instance)) {
-            $classname = $this->classname . 'Handler';
+        if(!isset($instance)) {
+            $classname = $this->classname.'Handler';
             $instance = new $classname($db);
         }
         return $instance;

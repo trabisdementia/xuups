@@ -7,6 +7,9 @@
 //
 
 
+
+
+
 define('_MB_XHELP_TEXT_VIEW_ALL_OPEN', 'Vedi Tutti i Ticket');
 define('_MB_XHELP_TEXT_PRIORITY', 'Priorita\'');
 
@@ -14,9 +17,9 @@ define('_MB_XHELP_TEXT_NO_TICKETS', 'Nessun ticket');
 
 // 0.75 news
 
-define('_MB_XHELP_TEXT_SHOWICON', 'Visualizza icone');
-define('_MB_XHELP_TEXT_MENUSTYLE', 'Stile menu');
-define('_MB_XHELP_OPTION_MENUSTYLE1', 'Lista puntata');
-define('_MB_XHELP_OPTION_MENUSTYLE2', 'Bottoni');
+define('_MB_XHELP_TEXT_SHOWICON','Visualizza icone');
+define('_MB_XHELP_TEXT_MENUSTYLE','Stile menu');
+define('_MB_XHELP_OPTION_MENUSTYLE1','Lista puntata');
+define('_MB_XHELP_OPTION_MENUSTYLE2','Bottoni');
 
 ?>

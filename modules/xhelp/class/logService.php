@@ -1,7 +1,7 @@
 <?php
 //$Id: logService.php,v 1.25 2005/12/02 23:16:09 ackbarr Exp $
 
-require_once(XHELP_CLASS_PATH . '/xhelpService.php');
+require_once(XHELP_CLASS_PATH.'/xhelpService.php');
 
 /**
  * xhelp_logService class
@@ -17,8 +17,8 @@ class xhelpLogService extends xhelpService
     /**
      * Instance of the xhelplogMessageHandler
      *
-     * @var    object
-     * @access    private
+     * @var	object
+     * @access	private
      */
     var $_hLog;
 
@@ -26,7 +26,7 @@ class xhelpLogService extends xhelpService
     /**
      * Class Constructor
      *
-     * @access    public
+     * @access	public
      */
     function xhelpLogService()
     {
@@ -59,21 +59,21 @@ class xhelpLogService extends xhelpService
 
     /**
      * Callback function for the 'new_ticket' event
-     * @param    xhelpTicket    $ticket Ticket that was added
+     * @param	xhelpTicket	$ticket Ticket that was added
      * @return  bool True on success, false on error
-     * @access    public
+     * @access	public
      */
     function new_ticket($ticket)
     {
         global $xoopsUser;
-
+         
         $logMessage =& $this->_hLog->create();
         $logMessage->setVar('uid', $ticket->getVar('uid'));
         $logMessage->setVar('ticketid', $ticket->getVar('id'));
         $logMessage->setVar('lastUpdated', $ticket->getVar('posted'));
         $logMessage->setVar('posted', $ticket->getVar('posted'));
 
-        if ($xoopsUser->getVar('uid') == $ticket->getVar('uid')) {
+        if($xoopsUser->getVar('uid') == $ticket->getVar('uid')){
             $logMessage->setVar('action', _XHELP_LOG_ADDTICKET);
         } else {
             // Will display who logged the ticket for the user
@@ -85,21 +85,21 @@ class xhelpLogService extends xhelpService
 
     /**
      * Callback function for the 'update_priority' event
-     * @param    xhelpTicket    $ticket Ticket that was modified
+     * @param	xhelpTicket	$ticket Ticket that was modified
      * @param int $oldpriority Original ticket priority
      * @return  bool True on success, false on error
-     * @access    public
+     * @access	public
      */
     function update_priority($ticket, $oldpriority)
     {
         global $xoopsUser;
-
+         
         $logMessage =& $this->_hLog->create();
         $logMessage->setVar('uid', $xoopsUser->getVar('uid'));
         $logMessage->setVar('ticketid', $ticket->getVar('id'));
         $logMessage->setVar('lastUpdated', $ticket->getVar('lastUpdated'));
         $logMessage->setVar('posted', $ticket->getVar('posted'));
-        $logMessage->setVar('action', sprintf(_XHELP_LOG_UPDATE_PRIORITY, $oldpriority, $ticket->getVar('priority')));
+        $logMessage->setVar('action', sprintf(_XHELP_LOG_UPDATE_PRIORITY,  $oldpriority, $ticket->getVar('priority')));
         return $this->_hLog->insert($logMessage);
     }
 
@@ -109,7 +109,7 @@ class xhelpLogService extends xhelpService
      * @param   xhelpStatus $oldstatus Original ticket status
      * @param   xhelpStatus $newstatus New ticket status
      * @return  bool True on success, false on error
-     * @access    public
+     * @access	public
      */
     function update_status($ticket, $oldstatus, $newstatus)
     {
@@ -123,7 +123,7 @@ class xhelpLogService extends xhelpService
         $logMessage->setVar('action', sprintf(_XHELP_LOG_UPDATE_STATUS, $oldstatus->getVar('description'), $newstatus->getVar('description')));
         return $this->_hLog->insert($logMessage, true);
     }
-
+     
     /**
      * Event: update_owner
      * Triggered after ticket ownership change (Individual)
@@ -149,8 +149,8 @@ class xhelpLogService extends xhelpService
         }
         return $this->_hLog->insert($logMessage);
     }
-
-
+     
+     
     /**
      * Callback function for the reopen_ticket event
      * @param xhelpTicket $ticket Ticket that was re-opened
@@ -160,7 +160,7 @@ class xhelpLogService extends xhelpService
     function reopen_ticket($ticket)
     {
         global $xoopsUser;
-
+         
         $logMessage =& $this->_hLog->create();
         $logMessage->setVar('uid', $xoopsUser->getVar('uid'));
         $logMessage->setVar('ticketid', $ticket->getVar('id'));
@@ -182,7 +182,7 @@ class xhelpLogService extends xhelpService
         $logMessage =& $this->_hLog->create();
         $logMessage->setVar('uid', $xoopsUser->getVar('uid'));
         $logMessage->setVar('ticketid', $ticket->getVar('id'));
-        $logMessage->setVar('lastUpdated', $ticket->getVar('lastUpdated'));
+        $logMessage->setVar('lastUpdated',$ticket->getVar('lastUpdated'));
         $logMessage->setVar('action', _XHELP_LOG_CLOSE_TICKET);
         return $this->_hLog->insert($logMessage);
     }
@@ -225,13 +225,12 @@ class xhelpLogService extends xhelpService
         $logMessage->setVar('lastUpdated', time());
         return $this->_hLog->insert($logMessage);
     }
-
     /**
      * Callback function for the 'edit_ticket' event
-     * @param    xhelpTicket    $oldTicket Original Ticket Information
+     * @param	xhelpTicket	$oldTicket Original Ticket Information
      * @param   xhelpTicket $ticketInfo New Ticket Information
      * @return  bool True on success, false on error
-     * @access    public
+     * @access	public
      */
     function edit_ticket($oldTicket, $ticketInfo)
     {
@@ -248,9 +247,9 @@ class xhelpLogService extends xhelpService
 
     /**
      * Callback function for the 'edit_response' event
-     * @param    array    $args Array of arguments passed to EventService
+     * @param	array	$args Array of arguments passed to EventService
      * @return  bool True on success, false on error
-     * @access    public
+     * @access	public
      */
     function edit_response($ticket, $response, $oldticket, $oldresponse)
     {
@@ -275,10 +274,10 @@ class xhelpLogService extends xhelpService
     {
         global $xoopsUser;
 
-        $hDept =& xhelpGetHandler('department');
+        $hDept   =& xhelpGetHandler('department');
         $deptObj =& $hDept->get($dept);
 
-        foreach ($tickets as $ticket) {
+        foreach($tickets as $ticket) {
             $logMessage =& $this->_hLog->create();
             $logMessage->setVar('uid', $xoopsUser->getVar('uid'));
             $logMessage->setVar('ticketid', $ticket->getVar('id'));
@@ -302,13 +301,13 @@ class xhelpLogService extends xhelpService
         global $xoopsUser;
 
         $priority = intval($priority);
-        foreach ($tickets as $ticket) {
+        foreach($tickets as $ticket) {
             $logMessage =& $this->_hLog->create();
             $logMessage->setVar('uid', $xoopsUser->getVar('uid'));
             $logMessage->setVar('ticketid', $ticket->getVar('id'));
             $logMessage->setVar('lastUpdated', $ticket->getVar('lastUpdated'));
             $logMessage->setVar('posted', $ticket->getVar('posted'));
-            $logMessage->setVar('action', sprintf(_XHELP_LOG_UPDATE_PRIORITY, $ticket->getVar('priority'), $priority));
+            $logMessage->setVar('action', sprintf(_XHELP_LOG_UPDATE_PRIORITY,  $ticket->getVar('priority'), $priority));
             $this->_hLog->insert($logMessage);
         }
         return true;
@@ -325,7 +324,7 @@ class xhelpLogService extends xhelpService
     {
         global $xoopsUser;
 
-        $updated = time();
+        $updated   = time();
         $ownername = ($xoopsUser->getVar('uid') == $owner ? $xoopsUser->getVar('uname') : $xoopsUser->getUnameFromId($owner));
         foreach ($tickets as $ticket) {
             $logMessage =& $this->_hLog->create();
@@ -356,7 +355,7 @@ class xhelpLogService extends xhelpService
 
         $updated = time();
         $sStatus = xhelpGetStatus($newstatus);
-        $uid = $xoopsUser->getVar('uid');
+        $uid     = $xoopsUser->getVar('uid');
         foreach ($tickets as $ticket) {
             $logMessage =& $this->_hLog->create();
             $logMessage->setVar('uid', $uid);
@@ -381,9 +380,9 @@ class xhelpLogService extends xhelpService
         global $xoopsUser;
 
         $updateTime = time();
-        $uid = $xoopsUser->getVar('uid');
+        $uid        = $xoopsUser->getVar('uid');
 
-        foreach ($tickets as $ticket) {
+        foreach($tickets as $ticket) {
             $logMessage =& $this->_hLog->create();
             $logMessage->setVar('uid', $uid);
             $logMessage->setVar('ticketid', $ticket->getVar('id'));
@@ -412,7 +411,7 @@ class xhelpLogService extends xhelpService
         $logMessage->setVar('ticketid', $ticketid);
         $logMessage->setVar('action', sprintf(_XHELP_LOG_MERGETICKETS, $mergeTicketid, $ticketid));
         $logMessage->setVar('lastUpdated', time());
-        if ($this->_hLog->insert($logMessage)) {
+        if($this->_hLog->insert($logMessage)){
             return true;
         }
         return false;
@@ -436,7 +435,7 @@ class xhelpLogService extends xhelpService
         $logMessage->setVar('action', sprintf(_XHELP_LOG_DELETEFILE, $filename));
         $logMessage->setVar('lastUpdated', time());
 
-        if ($this->_hLog->insert($logMessage, true)) {
+        if($this->_hLog->insert($logMessage, true)){
             return true;
         }
         return false;
@@ -459,11 +458,10 @@ class xhelpLogService extends xhelpService
 
         return $this->_hLog->insert($logMessage, true);
     }
-
     /**
      * Only have 1 instance of class used
      * @return object {@link xhelp_eventService}
-     * @access    public
+     * @access	public
      */
 
     function &singleton()
@@ -472,12 +470,11 @@ class xhelpLogService extends xhelpService
         static $instance;
 
         // If the instance is not there, create one
-        if (!isset($instance)) {
+        if(!isset($instance)) {
             $c = __CLASS__;
             $instance = new $c;
         }
-        return ($instance);
+        return($instance);
     }
 }
-
 ?>

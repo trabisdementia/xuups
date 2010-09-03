@@ -26,15 +26,15 @@ class xhelpEventService
     /**
      * Array of all function callbacks
      *
-     * @var    array
-     * @access    private
+     * @var	array
+     * @access	private
      */
     var $_ctx = array();
 
     /**
      * Class Constructor
      *
-     * @access    public
+     * @access	public
      */
     function xhelpEventService()
     {
@@ -43,11 +43,11 @@ class xhelpEventService
 
     /**
      * Add a new class function to be notified
-     * @param    string    $context Event used for callback
-     * @param    callback $callback Function to call when event is fired. If only object is supplied, look for function with same name as context
+     * @param	string	$context Event used for callback
+     * @param	callback $callback Function to call when event is fired. If only object is supplied, look for function with same name as context
      * @param   int $priority Order that callback should be triggered
      * @return  int Event cookie, used for unadvise
-     * @access    public
+     * @access	public
      */
     function advise($context, &$callback, $priority = 10)
     {
@@ -66,9 +66,9 @@ class xhelpEventService
 
     /**
      * Remove a class function from the notification list
-     * @param    string    $context Event used for callback
-     * @param    int    $cookie The Event ID returned by xhelp_eventService::advise()
-     * @access    public
+     * @param	string	$context Event used for callback
+     * @param	int	$cookie The Event ID returned by xhelp_eventService::advise()
+     * @access	public
      */
     function unadvise($context, $cookie, $priority = 10)
     {
@@ -78,7 +78,7 @@ class xhelpEventService
     /**
      * Only have 1 instance of class used
      * @return object {@link xhelp_eventService}
-     * @access    public
+     * @access	public
      */
     function &singleton()
     {
@@ -86,22 +86,22 @@ class xhelpEventService
         static $instance;
 
         // If the instance is not there, create one
-        if (!isset($instance)) {
+        if(!isset($instance)) {
             $instance = new xhelpEventService();
         }
-        return ($instance);
+        return($instance);
     }
 
     /**
      * Tell subscribed objects an event occurred in the system
-     * @param    string    $context Event raised by the system
-     * @param    array    $args Any arguments that need to be passed to the callback functions
-     * @access    public
+     * @param	string	$context Event raised by the system
+     * @param	array	$args Any arguments that need to be passed to the callback functions
+     * @access	public
      */
     function trigger($context, $args)
     {
         if (isset($this->_ctx[$context])) {
-            ksort($this->_ctx[$context]);
+            ksort( $this->_ctx[$context] );
             $_notlist = $this->_ctx[$context];
             foreach ($_notlist as $priority => $functions) {
                 foreach ($functions as $func) {
@@ -113,5 +113,4 @@ class xhelpEventService
         }
     }
 }
-
 ?>

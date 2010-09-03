@@ -1,7 +1,7 @@
 <?php
 
-Class xhelpBaseObject extends XoopsObject
-{
+Class xhelpBaseObject extends XoopsObject {
+
 
 
     /**
@@ -13,7 +13,6 @@ Class xhelpBaseObject extends XoopsObject
     {
         return new $this->classname();
     }
-
     /**
      * retrieve an object from the database, based on. use in child classes
      * @param int $id ID
@@ -23,13 +22,13 @@ Class xhelpBaseObject extends XoopsObject
     function &get($id)
     {
         $id = intval($id);
-        if ($id > 0) {
+        if($id > 0) {
             $sql = $this->_selectQuery(new Criteria('id', $id));
-            if (!$result = $this->_db->query($sql)) {
+            if(!$result = $this->_db->query($sql)) {
                 return false;
             }
             $numrows = $this->_db->getRowsNum($result);
-            if ($numrows == 1) {
+            if($numrows == 1) {
                 $obj = new $this->classname($this->_db->fetchArray($result));
                 return $obj;
             }
@@ -46,16 +45,15 @@ Class xhelpBaseObject extends XoopsObject
     function _selectQuery($criteria = null)
     {
         $sql = sprintf('SELECT * FROM %s', $this->_db->prefix($this->_dbtable));
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' ' . $criteria->renderWhere();
-            if ($criteria->getSort() != '') {
+        if(isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+            $sql .= ' ' .$criteria->renderWhere();
+            if($criteria->getSort() != '') {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . '
-                   ' . $criteria->getOrder();
+                   ' .$criteria->getOrder();
             }
         }
         return $sql;
     }
-
     /**
      * count objects matching a criteria
      *
@@ -65,9 +63,9 @@ Class xhelpBaseObject extends XoopsObject
      */
     function getCount($criteria = null)
     {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->_db->prefix($this->_dbtable);
+        $sql = 'SELECT COUNT(*) FROM '.$this->_db->prefix($this->_dbtable);
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            $sql .= ' ' . $criteria->renderWhere();
+            $sql .= ' '.$criteria->renderWhere();
         }
         if (!$result =& $this->_db->query($sql)) {
             return 0;
@@ -83,8 +81,7 @@ Class xhelpBaseObject extends XoopsObject
      * @return int count of objects
      * @access public
      */
-    function delete(&$obj, $force = false)
-    {
+    function delete(&$obj, $force = false) {
         if (strcasecmp($this->classname, get_class($obj)) != 0) {
             return false;
         }
