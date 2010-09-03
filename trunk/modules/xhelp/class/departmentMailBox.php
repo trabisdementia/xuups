@@ -9,9 +9,9 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
-require_once(XHELP_CLASS_PATH . '/mailbox.php');
-require_once(XHELP_CLASS_PATH . '/mailboxPOP3.php');
+require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH.'/mailbox.php');
+require_once(XHELP_CLASS_PATH.'/mailboxPOP3.php');
 /**
  * xhelpDepartmentMailBox class
  *
@@ -37,7 +37,7 @@ class xhelpDepartmentMailBox extends XoopsObject
     {
 
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('emailaddress', XOBJ_DTYPE_TXTBOX, null, false, 255);
+        $this->initVar('emailaddress',XOBJ_DTYPE_TXTBOX, null, false, 255);
         $this->initVar('departmentid', XOBJ_DTYPE_INT, null, true);
         $this->initVar('server', XOBJ_DTYPE_TXTBOX, null, false, 50);
         $this->initVar('serverport', XOBJ_DTYPE_INT, null, false);
@@ -67,7 +67,7 @@ class xhelpDepartmentMailBox extends XoopsObject
     {
         //Create an instance of the Proper xhelpMailBox object
         if (!isset($this->_mBox)) {
-            if (!$this->_mBox = $this->_getMailBox($this->getVar('mboxtype'))) {
+            if(!$this->_mBox = $this->_getMailBox($this->getVar('mboxtype'))) {
                 $this->setErrors(_XHELP_MBOX_INV_BOXTYPE);
                 return false;
             }
@@ -101,13 +101,13 @@ class xhelpDepartmentMailBox extends XoopsObject
     function &getMessage()
     {
         $msg = array();
-        $this->_curMsg++;
+        $this->_curMsg ++;
         if ($this->_curMsg > $this->_msgCount) {
             return false;
         }
-        $msg['index'] = $this->_curMsg;
+        $msg['index']   = $this->_curMsg;
         //$msg['headers'] = $this->_mBox->getHeaders($this->_curMsg);
-        $msg['msg'] = $this->_mBox->getMsg($this->_curMsg);
+        $msg['msg']     = $this->_mBox->getMsg($this->_curMsg);
 
         //$msg['body']     = $this->_mBox->getBody($this->_curMsg);
 
@@ -116,7 +116,7 @@ class xhelpDepartmentMailBox extends XoopsObject
 
     function messageCount()
     {
-        if (!isset($this->_msgCount)) {
+        if (! isset($this->_msgCount) ) {
             $this->_msgCount = $this->_mBox->messageCount();
         }
         return $this->_msgCount;
@@ -204,11 +204,11 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
         $ret = null;
         $depid = intval($depid);
         if ($depid > 0) {
-            $crit = new Criteria('departmentid', $depid);
+            $crit = new Criteria('departmentid',$depid);
             $crit->setSort('priority');
             $total = $this->getCount($crit);
             //
-            if ($total > 0) {
+            if ($total>0) {
                 $ret =& $this->getObjects($crit);
                 return $ret;
             }
@@ -262,8 +262,8 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
             ${$k} = $v;
         }
 
-        $sql = sprintf('insert into %s (id, departmentid, server, serverport, username, password, priority, emailaddress, mboxtype, active) values (%u, %u, %s, %u, %s, %s, %u, %s, %u, %u)',
-                       $this->_db->prefix($this->_dbtable), $id, $departmentid, $this->_db->quoteString($server), $serverport, $this->_db->quoteString($username), $this->_db->quoteString($password), $priority, $this->_db->quoteString($emailaddress), $mboxtype, $active);
+        $sql = sprintf( 'insert into %s (id, departmentid, server, serverport, username, password, priority, emailaddress, mboxtype, active) values (%u, %u, %s, %u, %s, %s, %u, %s, %u, %u)',
+        $this->_db->prefix($this->_dbtable), $id, $departmentid, $this->_db->quoteString($server), $serverport, $this->_db->quoteString($username), $this->_db->quoteString($password), $priority, $this->_db->quoteString($emailaddress), $mboxtype, $active);
 
         return $sql;
     }
@@ -275,8 +275,8 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
             ${$k} = $v;
         }
 
-        $sql = sprintf('UPDATE %s set departmentid = %u, server = %s, serverport = %u, username = %s, password = %s, priority = %u, emailaddress = %s, mboxtype = %u, active = %u where id = %u',
-                       $this->_db->prefix($this->_dbtable), $departmentid, $this->_db->quoteString($server), $serverport, $this->_db->quoteString($username), $this->_db->quoteString($password), $priority, $this->_db->quoteString($emailaddress), $mboxtype, $active, $id);
+        $sql = sprintf( 'UPDATE %s set departmentid = %u, server = %s, serverport = %u, username = %s, password = %s, priority = %u, emailaddress = %s, mboxtype = %u, active = %u where id = %u',
+        $this->_db->prefix($this->_dbtable), $departmentid, $this->_db->quoteString($server), $serverport, $this->_db->quoteString($username), $this->_db->quoteString($password), $priority, $this->_db->quoteString($emailaddress), $mboxtype, $active, $id);
 
         return $sql;
     }
@@ -288,5 +288,4 @@ class xhelpDepartmentMailBoxHandler extends xhelpBaseObjectHandler
     }
 
 }
-
 ?>

@@ -10,10 +10,10 @@ class xhelpFormRegex extends XoopsFormElement
 
     function xhelpFormRegex($caption, $name, $value)
     {
-        $select_js = 'onchange="' . $name . '_txtbox.value = this.options[this.selectedIndex].value"';
+        $select_js = 'onchange="'. $name.'_txtbox.value = this.options[this.selectedIndex].value"';
         $this->_tray = new XoopsFormElementTray('', '<br /><br />', $name);
-        $this->_select = new XoopsFormSelect('', $name . '_select', '');
-        $this->_txtbox = new XoopsFormText('', $name . '_txtbox', 30, 255, '');
+        $this->_select = new XoopsFormSelect('', $name.'_select', '');
+        $this->_txtbox = new XoopsFormText('', $name.'_txtbox', 30, 255, '');
         $this->_select->setExtra($select_js);
         $this->setValue($value);
         $this->setCaption($caption);
@@ -24,7 +24,7 @@ class xhelpFormRegex extends XoopsFormElement
         $this->_select->addOptionArray($regexArray);
     }
 
-    function addOption($value, $name = "")
+    function addOption($value, $name="")
     {
         $this->_select->addOption($value, $name);
     }
@@ -48,12 +48,11 @@ class xhelpFormRegex extends XoopsFormElement
     {
         return $this->_caption;
     }
-
+     
     function setCaption($caption)
     {
         $this->_caption = $caption;
     }
-
     function render()
     {
         //Determine value for selectbox
@@ -68,11 +67,10 @@ class xhelpFormRegex extends XoopsFormElement
             $this->_select->_value = array('0');
             $this->_txtbox->setValue($value);
         }
-
+         
         $this->_tray->addElement($this->_select);
         $this->_tray->addElement($this->_txtbox);
         return $this->_tray->render();
     }
 }
-
 ?>

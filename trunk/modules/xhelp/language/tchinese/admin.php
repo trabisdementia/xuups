@@ -175,7 +175,7 @@ define('_AM_XHELP_TEXT_SEARCH_TEXT', '搜索內容：');
 define('_AM_XHELP_TEXT_GO_BACK_SEARCH', '回到搜索');
 define('_AM_XHELP_TEXT_FIND_USERS', '查找會員');
 
-define('_AM_XHELP_SEARCH_BEGINEGINDATE', '開始日期');
+define('_AM_XHELP_SEARCH_BEGINEGINDATE', '開始日期');  
 define('_AM_XHELP_SEARCH_ENDDATE', '結束日期');
 
 define('_AM_XHELP_TEXT_ADD_STATUS', '增加狀態');
@@ -257,24 +257,24 @@ define("_AM_XHELP_MINDEX_ACTION", "操作");
 define("_AM_XHELP_MINDEX_PAGE", "<b>頁</b> ");
 
 //image admin icon 
-define("_AM_XHELP_ICO_EDIT", "編輯此項");
-define("_AM_XHELP_ICO_DELETE", "刪除此項");
-define("_AM_XHELP_ICO_ONLINE", "在線");
-define("_AM_XHELP_ICO_OFFLINE", "離線");
-define("_AM_XHELP_ICO_APPROVED", "批准");
-define("_AM_XHELP_ICO_NOTAPPROVED", "不批准");
+define("_AM_XHELP_ICO_EDIT","編輯此項");
+define("_AM_XHELP_ICO_DELETE","刪除此項");
+define("_AM_XHELP_ICO_ONLINE","在線");
+define("_AM_XHELP_ICO_OFFLINE","離線");
+define("_AM_XHELP_ICO_APPROVED","批准");
+define("_AM_XHELP_ICO_NOTAPPROVED","不批准");
 
-define("_AM_XHELP_ICO_LINK", "相關連接");
-define("_AM_XHELP_ICO_URL", "增加關聯URL");
-define("_AM_XHELP_ICO_ADD", "增加");
-define("_AM_XHELP_ICO_APPROVE", "批准");
-define("_AM_XHELP_ICO_STATS", "統計");
+define("_AM_XHELP_ICO_LINK","相關連接");
+define("_AM_XHELP_ICO_URL","增加關聯URL");
+define("_AM_XHELP_ICO_ADD","增加");
+define("_AM_XHELP_ICO_APPROVE","批准");
+define("_AM_XHELP_ICO_STATS","統計");
 
-define("_AM_XHELP_ICO_IGNORE", "忽略");
-define("_AM_XHELP_ICO_ACK", "Broken Report Acknowledged");
-define("_AM_XHELP_ICO_REPORT", "Acknowledge Broken Report?");
-define("_AM_XHELP_ICO_CONFIRM", "Broken Report Confirmed");
-define("_AM_XHELP_ICO_CONBROKEN", "Confirm Broken Report?");
+define("_AM_XHELP_ICO_IGNORE","忽略");
+define("_AM_XHELP_ICO_ACK","Broken Report Acknowledged");
+define("_AM_XHELP_ICO_REPORT","Acknowledge Broken Report?");
+define("_AM_XHELP_ICO_CONFIRM","Broken Report Confirmed");
+define("_AM_XHELP_ICO_CONBROKEN","Confirm Broken Report?");
 
 define("_AM_XHELP_UPLOADFILE", "檔案上傳成功");
 define('_AM_XHELP_TEXT_TICKET_INFO', '傳票訊息');
@@ -335,6 +335,10 @@ define('_AM_XHELP_MSG_UPDATE_SEARCH', '儲存的搜索 #%u 更新成功。');
 define('_AM_XHELP_MSG_UPDATE_SEARCH_ERR', '錯誤：搜索 #%u 更新失敗。');
 
 
+
+
+
+
 define('_AM_XHELP_TEXT_CONTRIB_INFO', '參與人訊息');
 define('_AM_XHELP_TEXT_DEVELOPERS', '開發者');
 define('_AM_XHELP_TEXT_TRANSLATORS', '翻譯者');
@@ -365,6 +369,7 @@ define('_AM_XHELP_PATH_TICKETATTACH', '傳票附件');
 define('_AM_XHELP_PATH_EMAILTPL', '郵件樣板');
 define('_AM_XHELP_TEXT_CREATETHEDIR', '建立目錄');
 define('_AM_XHELP_TEXT_SETPERM', '設置權限');
+
 
 
 define('_AM_XHELP_PATH_AVAILABLE', "<span style='font-weight：bold; color：green;'>Available</span>");
@@ -422,6 +427,7 @@ define('_XHELP_CONTROL_DESC_FILE', 'File');
 define('_XHELP_DATATYPE_TEXT', 'Text');
 define('_XHELP_DATATYPE_NUMBER_INT', 'Number (INTEGER)');
 define('_XHELP_DATATYPE_NUMBER_DEC', 'Number (Decimal)');
+
 
 
 define('_AM_XHELP_MSG_FIELD_DEL_CFRM', '您確認刪除此欄位 #%u？');

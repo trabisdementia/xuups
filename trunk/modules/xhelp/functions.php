@@ -18,7 +18,7 @@ function xhelpFormatTime($time)
 {
     $values = xhelpGetElapsedTime($time);
 
-    foreach ($values as $key => $value) {
+    foreach($values as $key=>$value) {
         $$key = $value;
     }
 
@@ -58,18 +58,18 @@ function xhelpFormatTime($time)
 function xhelpGetElapsedTime($time)
 {
     //Define the units of measure
-    $units = array('years' => (365 * 60 * 60 * 24) /*Value of Unit expressed in seconds*/,
-                   'weeks' => (7 * 60 * 60 * 24),
-                   'days' => (60 * 60 * 24),
-                   'hours' => (60 * 60),
-                   'minutes' => 60,
-                   'seconds' => 1);
+    $units = array('years' => (365*60*60*24) /*Value of Unit expressed in seconds*/,
+        'weeks' => (7*60*60*24),
+        'days' => (60*60*24),
+        'hours' => (60*60),
+        'minutes' => 60,
+        'seconds' => 1);
 
-    $local_time = $time;
+    $local_time   = $time;
     $elapsed_time = array();
 
     //Calculate the total for each unit measure
-    foreach ($units as $key => $single_unit) {
+    foreach($units as $key=>$single_unit) {
         $elapsed_time[$key] = floor($local_time / $single_unit);
         $local_time -= ($elapsed_time[$key] * $single_unit);
     }
@@ -90,17 +90,17 @@ function xhelpMakeURI($page, $vars = array(), $encodeAmp = true)
 {
     $joinStr = '';
 
-    $amp = ($encodeAmp ? '&amp;' : '&');
+    $amp = ($encodeAmp ? '&amp;': '&');
 
-    if (!count($vars)) {
+    if (! count($vars)) {
         return $page;
     }
     $qs = '';
-    foreach ($vars as $key => $value) {
+    foreach($vars as $key=>$value) {
         $qs .= $joinStr . $key . '=' . $value;
         $joinStr = $amp;
     }
-    return $page . '?' . $qs;
+    return $page . '?'. $qs;
 }
 
 /**
@@ -114,11 +114,11 @@ function xhelpMakeURI($page, $vars = array(), $encodeAmp = true)
 function xhelpGetPriority($priority)
 {
     $priorities = array(
-        1 => _XHELP_TEXT_PRIORITY1,
-        2 => _XHELP_TEXT_PRIORITY2,
-        3 => _XHELP_TEXT_PRIORITY3,
-        4 => _XHELP_TEXT_PRIORITY4,
-        5 => _XHELP_TEXT_PRIORITY5);
+    1 => _XHELP_TEXT_PRIORITY1,
+    2 => _XHELP_TEXT_PRIORITY2,
+    3 => _XHELP_TEXT_PRIORITY3,
+    4 => _XHELP_TEXT_PRIORITY4,
+    5 => _XHELP_TEXT_PRIORITY5);
 
     $priority = intval($priority);
     return (isset($priorities[$priority]) ? $priorities[$priority] : $priority);
@@ -137,8 +137,8 @@ function xhelpGetState($state)
 {
     $state = intval($state);
     $stateValues = array(
-        1 => _XHELP_STATE1,
-        2 => _XHELP_STATE2);
+    1 => _XHELP_STATE1,
+    2 => _XHELP_STATE2);
 
     return (isset($stateValues[$state]) ? $stateValues[$state] : $state);
 }
@@ -178,12 +178,12 @@ function xhelpGetStatus($status)
 function xhelpGetRating($rating)
 {
     $ratings = array(
-        0 => _XHELP_RATING0,
-        1 => _XHELP_RATING1,
-        2 => _XHELP_RATING2,
-        3 => _XHELP_RATING3,
-        4 => _XHELP_RATING4,
-        5 => _XHELP_RATING5);
+    0 => _XHELP_RATING0,
+    1 => _XHELP_RATING1,
+    2 => _XHELP_RATING2,
+    3 => _XHELP_RATING3,
+    4 => _XHELP_RATING4,
+    5 => _XHELP_RATING5);
     $rating = intval($rating);
     return (isset($ratings[$rating]) ? $ratings[$rating] : $rating);
 }
@@ -191,10 +191,10 @@ function xhelpGetRating($rating)
 function xhelpGetEventClass($class)
 {
     $classes = array(
-        0 => _XHELP_MAIL_CLASS0,
-        1 => _XHELP_MAIL_CLASS1,
-        2 => _XHELP_MAIL_CLASS2,
-        3 => _XHELP_MAIL_CLASS3);
+    0 => _XHELP_MAIL_CLASS0,
+    1 => _XHELP_MAIL_CLASS1,
+    2 => _XHELP_MAIL_CLASS2,
+    3 => _XHELP_MAIL_CLASS3);
     $class = intval($class);
     return (isset($classes[$class]) ? $classes[$class] : $class);
 }
@@ -211,7 +211,7 @@ function xhelpGetEventClass($class)
 function xhelpSetDept($tickets, $dept)
 {
     $hTicket =& xhelpGetHandler('ticket');
-    $crit = new Criteria('id', "(" . implode($tickets, ',') . ")", "IN");
+    $crit    = new Criteria('id', "(". implode($tickets, ',') .")", "IN");
     return $hTicket->updateAll('department', intval($dept), $crit);
 }
 
@@ -227,7 +227,7 @@ function xhelpSetDept($tickets, $dept)
 function xhelpSetPriority($tickets, $priority)
 {
     $hTicket =& xhelpGetHandler('ticket');
-    $crit = new Criteria('id', "(" . implode($tickets, ',') . ")", 'IN');
+    $crit    = new Criteria('id', "(". implode($tickets, ',') .")", 'IN');
     return $hTicket->updateAll('priority', intval($priority), $crit);
 }
 
@@ -243,7 +243,7 @@ function xhelpSetPriority($tickets, $priority)
 function xhelpSetStatus($tickets, $status)
 {
     $hTicket =& xhelpGetHandler('ticket');
-    $crit = new Criteria('id', "(" . implode($tickets, ',') . ")", 'IN');
+    $crit    = new Criteria('id', "(". implode($tickets, ',') .")", 'IN');
     return $hTicket->updateAll('status', intval($status), $crit);
 }
 
@@ -261,7 +261,7 @@ function xhelpSetStatus($tickets, $status)
 function xhelpSetOwner($tickets, $owner)
 {
     $hTicket =& xhelpGetHandler('ticket');
-    $crit = new Criteria('id', "(" . implode($tickets, ',') . ")", 'IN');
+    $crit    = new Criteria('id', "(". implode($tickets, ',') .")", 'IN');
     return $hTicket->updateAll('ownership', intval($owner), $crit);
 }
 
@@ -280,12 +280,12 @@ function xhelpSetOwner($tickets, $owner)
 function &xhelpAddResponse($tickets, $sresponse, $timespent = 0, $private = false)
 {
     global $xoopsUser;
-    $hResponse =& xhelpGetHandler('responses');
-    $hTicket =& xhelpGetHandler('ticket');
+    $hResponse  =& xhelpGetHandler('responses');
+    $hTicket    =& xhelpGetHandler('ticket');
     $updateTime = time();
-    $uid = $xoopsUser->getVar('uid');
-    $ret = true;
-    $userIP = getenv("REMOTE_ADDR");
+    $uid        = $xoopsUser->getVar('uid');
+    $ret        = true;
+    $userIP     = getenv("REMOTE_ADDR");
     $ticket_count = count($tickets);
     $i = 1;
     foreach ($tickets as $ticketid) {
@@ -298,15 +298,15 @@ function &xhelpAddResponse($tickets, $sresponse, $timespent = 0, $private = fals
         $response->setVar('userIP', $userIP);
         $response->setVar('private', $private);
         $ret = $ret && $hResponse->insert($response);
-        if ($ticket_count != $i) {
+        if($ticket_count != $i){
             unset($response);
         }
         $i++;
     }
     if ($ret) {
-        $crit = new Criteria('id', "(" . implode($tickets, ',') . ")", 'IN');
-        $ret = $hTicket->incrementAll('totalTimeSpent', $timespent, $crit);
-        $ret = $hTicket->updateAll('lastUpdated', $updateTime, $crit);
+        $crit = new Criteria('id', "(". implode($tickets, ',') .")", 'IN');
+        $ret  = $hTicket->incrementAll('totalTimeSpent', $timespent, $crit);
+        $ret  = $hTicket->updateAll('lastUpdated', $updateTime, $crit);
         $response->setVar('ticketid', 0);
         $response->setVar('id', 0);
         return $response;
@@ -326,7 +326,7 @@ function &xhelpAddResponse($tickets, $sresponse, $timespent = 0, $private = fals
 function xhelpDeleteTickets($tickets)
 {
     $hTicket =& xhelpGetHandler('ticket');
-    $crit = new Criteria('id', "(" . implode($tickets, ',') . ")", 'IN');
+    $crit    = new Criteria('id', "(". implode($tickets, ',') .")", 'IN');
     return $hTicket->deleteAll($crit);
 }
 
@@ -341,7 +341,7 @@ function xhelpDeleteTickets($tickets)
 function &xhelpGetTickets(&$tickets)
 {
     $hTicket =& xhelpGetHandler('ticket');
-    $crit = new Criteria('t.id', "(" . implode($tickets, ',') . ")", 'IN');
+    $crit    = new Criteria('t.id', "(". implode($tickets, ',') .")", 'IN');
     return $hTicket->getObjects($crit);
 }
 
@@ -358,7 +358,7 @@ function xhelpCheckRules(&$rules, &$errors)
 {
     $ret = true;
     if (is_array($rules)) {
-        foreach ($rules as $rule) {
+        foreach($rules as $rule) {
             $ret = $ret && xhelpCheckRules($rule, $error);
             $errors = array_merge($errors, $error);
         }
@@ -408,8 +408,8 @@ function xhelpTableExists($table)
     $dbname = XOOPS_DB_NAME;
     $sql = "SHOW TABLES FROM $dbname";
     $ret = $xoopsDB->queryF($sql);
-    while (list($m_table) = $xoopsDB->fetchRow($ret)) {
-        if ($m_table == $realname) {
+    while (list($m_table)=$xoopsDB->fetchRow($ret)) {
+        if ($m_table ==  $realname) {
             $bRetVal = true;
             break;
         }
@@ -453,7 +453,7 @@ function xhelpSetMeta($key, $value)
 {
     $xoopsDB =& Database::getInstance();
     $ret = xhelpGetMeta($key);
-    if ($ret != false) {
+    if($ret != false){
         $sql = sprintf("UPDATE %s SET metavalue = %s WHERE metakey = %s", $xoopsDB->prefix('xhelp_meta'), $xoopsDB->quoteString($value), $xoopsDB->quoteString($key));
     } else {
         $sql = sprintf("INSERT INTO %s (metakey, metavalue) VALUES (%s, %s)", $xoopsDB->prefix('xhelp_meta'), $xoopsDB->quoteString($key), $xoopsDB->quoteString($value));
@@ -478,7 +478,7 @@ function xhelpDeleteMeta($key)
     $xoopsDB =& Database::getInstance();
     $sql = sprintf("DELETE FROM %s WHERE metakey=%s", $xoopsDB->prefix('xhelp_meta'), $xoopsDB->quoteString($key));
     $ret = $xoopsDB->query($sql);
-    if (!$ret) {
+    if(!$ret) {
         return false;
     } else {
         return $ret;
@@ -520,14 +520,14 @@ function xhelpFieldExists($table, $field)
 {
     $xoopsDB =& Database::getInstance();
     $tblname = $xoopsDB->prefix($table);
-    $ret = $xoopsDB->query("DESCRIBE $tblname");
+    $ret     = $xoopsDB->query("DESCRIBE $tblname");
 
     if (!$ret) {
         return false;
     }
 
     while ($row = $xoopsDB->fetchRow($ret)) {
-        if (strcasecmp($row['Field'], $field) == 0) {
+        if(strcasecmp($row['Field'], $field) == 0) {
             return $row;
         }
     }
@@ -573,19 +573,19 @@ function &xhelpXoopsAccountFromEmail($email, $name, &$password, $level)
     }
 
     $xuser =& $member_handler->createUser();
-    $xuser->setVar("uname", $usernames[$i]);
+    $xuser->setVar("uname",$usernames[$i]);
     $xuser->setVar("loginname", $usernames[$i]);
-    $xuser->setVar("user_avatar", "blank.gif");
+    $xuser->setVar("user_avatar","blank.gif");
     $xuser->setVar('user_regdate', time());
     $xuser->setVar('timezone_offset', 0);
-    $xuser->setVar('actkey', substr(md5(uniqid(mt_rand(), 1)), 0, 8));
-    $xuser->setVar("email", $email);
+    $xuser->setVar('actkey',substr(md5(uniqid(mt_rand(), 1)), 0, 8));
+    $xuser->setVar("email",$email);
     $xuser->setVar("name", $name);
     $xuser->setVar("pass", md5($password));
     $xuser->setVar('notify_method', 2);
-    $xuser->setVar("level", $level);
+    $xuser->setVar("level",$level);
 
-    if ($member_handler->insertUser($xuser)) {
+    if ($member_handler->insertUser($xuser)){
         //Add the user to Registered Users group
         $member_handler->addUserToGroup(XOOPS_GROUP_USERS, $xuser->getVar('uid'));
     } else {
@@ -605,10 +605,10 @@ function &xhelpXoopsAccountFromEmail($email, $name, &$password, $level)
  *
  * @access public
  */
-function xhelpGenUserNames($email, $name, $count = 20)
+function xhelpGenUserNames($email, $name, $count=20)
 {
     $names = array();
-    $userid = explode('@', $email);
+    $userid   = explode('@',$email);
 
 
     $basename = '';
@@ -637,13 +637,13 @@ function xhelpGenUserNames($email, $name, $count = 20)
     while ($i < $count) {
         $num = xhelpGenRandNumber();
         if ($onbasename < 0 && $hasbasename) {
-            $names[] = xoops_substr($basename, 0, 58, '') . $num;
+            $names[] = xoops_substr($basename, 0, 58, '').$num;
 
         } else {
-            $names[] = xoops_substr($emailname, 0, 58, '') . $num;
+            $names[] = xoops_substr($emailname, 0, 58, ''). $num;
         }
         $i = count($names);
-        $onbasename = ~$onbasename;
+        $onbasename = ~ $onbasename;
         $num = '';
     }
 
@@ -661,7 +661,8 @@ function xhelpGenUserNames($email, $name, $count = 20)
 function xhelpInitRand()
 {
     static $randCalled = FALSE;
-    if (!$randCalled) {
+    if (!$randCalled)
+    {
         srand((double) microtime() * 1000000);
         $randCalled = TRUE;
     }
@@ -681,7 +682,7 @@ function xhelpGenRandNumber($digits = 2)
     $tmp = array();
 
     for ($i = 0; $i < $digits; $i++) {
-        $tmp[$i] = (rand() % 9);
+        $tmp[$i] = (rand()%9);
     }
     return implode('', $tmp);
 }
@@ -697,8 +698,8 @@ function xhelpGenRandNumber($digits = 2)
 function xhelpGetMBoxType($type)
 {
     $mboxTypes = array(
-        _XHELP_MAILBOXTYPE_POP3 => 'POP3',
-        _XHELP_MAILBOXTYPE_IMAP => 'IMAP');
+    _XHELP_MAILBOXTYPE_POP3 => 'POP3',
+    _XHELP_MAILBOXTYPE_IMAP => 'IMAP');
 
     return (isset($mboxTypes[$type]) ? $mboxTypes[$type] : 'NA');
 }
@@ -715,13 +716,13 @@ function &xhelpGetStaff($displayName)
     $xoopsDB =& Database::getInstance();
 
     $sql = sprintf("SELECT u.uid, u.uname, u.name FROM %s u INNER JOIN %s s ON u.uid = s.uid ORDER BY u.uname",
-                   $xoopsDB->prefix('users'), $xoopsDB->prefix('xhelp_staff'));
+    $xoopsDB->prefix('users'), $xoopsDB->prefix('xhelp_staff'));
     $ret = $xoopsDB->query($sql);
 
     $staff[-1] = _XHELP_TEXT_SELECT_ALL;
-    $staff[0] = _XHELP_NO_OWNER;
-    while ($member = $xoopsDB->fetchArray($ret)) {
-        $staff[$member['uid']] = xhelpGetDisplayName($displayName, $member['name'], $member['uname']);
+    $staff[0]  = _XHELP_NO_OWNER;
+    while($member = $xoopsDB->fetchArray($ret)){
+        $staff[$member['uid']] = xhelpGetDisplayName($displayName, $member['name'],$member['uname']);
     }
 
     return $staff;
@@ -736,14 +737,14 @@ function &xhelpGetStaff($displayName)
  */
 function xhelpCreateRoles()
 {
-    if (!defined('_XHELP_ROLE_NAME1')) {
+    if(!defined('_XHELP_ROLE_NAME1')){
         xhelpIncludeLang('main', 'english');
     }
 
     $defaultRolePermissions = array(
-        1 => array('name' => _XHELP_ROLE_NAME1, 'desc' => _XHELP_ROLE_DSC1, 'value' => XHELP_ROLE_PERM_1),
-        2 => array('name' => _XHELP_ROLE_NAME2, 'desc' => _XHELP_ROLE_DSC2, 'value' => XHELP_ROLE_PERM_2),
-        3 => array('name' => _XHELP_ROLE_NAME3, 'desc' => _XHELP_ROLE_DSC3, 'value' => XHELP_ROLE_PERM_3));
+    1 => array('name' => _XHELP_ROLE_NAME1, 'desc' => _XHELP_ROLE_DSC1, 'value' => XHELP_ROLE_PERM_1),
+    2 => array('name' => _XHELP_ROLE_NAME2, 'desc' => _XHELP_ROLE_DSC2, 'value' => XHELP_ROLE_PERM_2),
+    3 => array('name' => _XHELP_ROLE_NAME3, 'desc' => _XHELP_ROLE_DSC3, 'value' => XHELP_ROLE_PERM_3));
 
     $hRole =& xhelpGetHandler('role');
 
@@ -770,23 +771,23 @@ function xhelpCreateRoles()
  */
 function xhelpCreateStatuses()
 {
-    if (!defined('_XHELP_STATUS0')) {
+    if(!defined('_XHELP_STATUS0')){
         xhelpIncludeLang('main', 'english');
     }
 
     $statuses = array(
-        1 => array('description' => _XHELP_STATUS0, 'state' => XHELP_STATE_UNRESOLVED),
-        2 => array('description' => _XHELP_STATUS1, 'state' => XHELP_STATE_UNRESOLVED),
-        3 => array('description' => _XHELP_STATUS2, 'state' => XHELP_STATE_RESOLVED));
+    1 => array('description' => _XHELP_STATUS0, 'state' => XHELP_STATE_UNRESOLVED),
+    2 => array('description' => _XHELP_STATUS1, 'state' => XHELP_STATE_UNRESOLVED),
+    3 => array('description' => _XHELP_STATUS2, 'state' => XHELP_STATE_RESOLVED));
 
     $hStatus =& xhelpGetHandler('status');
-    foreach ($statuses as $id => $status) {
+    foreach($statuses as $id => $status){
         $newStatus =& $hStatus->create();
         $newStatus->setVar('id', $id);
         $newStatus->setVar('description', $status['description']);
         $newStatus->setVar('state', $status['state']);
 
-        if (!$hStatus->insert($newStatus)) {
+        if(!$hStatus->insert($newStatus)){
             return false;
         }
     }
@@ -830,7 +831,7 @@ function xhelpPrettyBytes($bytes)
  * @return RESOURCE SQL query resource
  * @access public
  */
-function xhelpAddDBField($table, $fieldname, $fieldtype = 'VARCHAR', $size = 0, $attr = null)
+function xhelpAddDBField($table, $fieldname, $fieldtype='VARCHAR', $size=0, $attr=null)
 {
     $xoopsDB =& Database::getInstance();
 
@@ -848,7 +849,7 @@ function xhelpAddDBField($table, $fieldname, $fieldtype = 'VARCHAR', $size = 0, 
         }
 
         if (isset($attr['default'])) {
-            $column_def .= ' DEFAULT ' . $xoopsDB->quoteString($attr['default']);
+            $column_def .= ' DEFAULT '. $xoopsDB->quoteString($attr['default']);
         }
 
         if (isset($attr['increment'])) {
@@ -860,7 +861,7 @@ function xhelpAddDBField($table, $fieldname, $fieldtype = 'VARCHAR', $size = 0, 
         }
 
         if (isset($attr['comment'])) {
-            $column_def .= 'COMMENT ' . $xoopsDB->quoteString($attr['comment']);
+            $column_def .= 'COMMENT '. $xoopsDB->quoteString($attr['comment']);
         }
     }
 
@@ -876,7 +877,7 @@ function xhelpAddDBField($table, $fieldname, $fieldtype = 'VARCHAR', $size = 0, 
  * @return RESOURCE SQL query resource
  * @access public
  */
-function xhelpRenameDBField($table, $oldcol, $newcol, $fieldtype = 'VARCHAR', $size = 0)
+function xhelpRenameDBField($table, $oldcol, $newcol, $fieldtype='VARCHAR', $size=0)
 {
     $xoopsDB =& Database::getInstance();
     $column_def = $newcol;
@@ -951,9 +952,9 @@ function &xhelpGetModuleConfig()
 
     if (!isset($_config)) {
         $hModConfig =& xoops_gethandler('config');
-        $_module =& xhelpGetModule();
+        $_module    =& xhelpGetModule();
 
-        $_config =& $hModConfig->getConfigsByCat(0, $_module->getVar('mid'));
+        $_config    =& $hModConfig->getConfigsByCat(0, $_module->getVar('mid'));
     }
     return $_config;
 }
@@ -983,7 +984,7 @@ function xhelpGetSavedSearches($users)
     $hSavedSearch =& xhelpGetHandler('savedSearch');
 
     if (is_array($users)) {
-        $crit = new Criteria('uid', "(" . implode($users, ',') . ")", 'IN');
+        $crit = new Criteria('uid', "(". implode($users, ',') .")", 'IN');
     } else {
         $crit = new Criteria('uid', intval($users));
     }
@@ -991,14 +992,14 @@ function xhelpGetSavedSearches($users)
     $savedSearches = $hSavedSearch->getObjects($crit);
 
     $ret = array();
-    foreach ($savedSearches as $obj)
+    foreach($savedSearches as $obj)
     {
         $ret[$obj->getVar('id')] = array('id' => $obj->getVar('id'),
-                                         'uid' => $obj->getVar('uid'),
-                                         'name' => $obj->getVar('name'),
-                                         'search' => unserialize($obj->getVar('search')),
-                                         'pagenav_vars' => $obj->getVar('pagenav_vars'),
-                                         'hasCustFields' => $obj->getVar('hasCustFields'));
+                                  'uid' => $obj->getVar('uid'),
+                                  'name' => $obj->getVar('name'),
+                                  'search' => unserialize($obj->getVar('search')),
+                                  'pagenav_vars' => $obj->getVar('pagenav_vars'),
+                                  'hasCustFields' => $obj->getVar('hasCustFields'));
     }
 
     return (count($ret) > 0 ? $ret : false);
@@ -1019,29 +1020,29 @@ function xhelpCreateNotifications()
     $roles =& $hRole->getObjects();
 
     $allRoles = array();
-    foreach ($roles as $role) {
+    foreach($roles as $role){
         $allRoles[$role->getVar('id')] = $role->getVar('id');
     }
 
     $notifications = array(
-        array('id' => 1, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES),
-        array('id' => 2, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES),
-        array('id' => 3, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES),
-        array('id' => 4, 'staff' => XHELP_NOTIF_STAFF_OWNER, 'user' => XHELP_NOTIF_USER_YES),
-        array('id' => 5, 'staff' => XHELP_NOTIF_STAFF_OWNER, 'user' => XHELP_NOTIF_USER_YES),
-        array('id' => 6, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES),
-        array('id' => 7, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES),
-        array('id' => 8, 'staff' => XHELP_NOTIF_STAFF_OWNER, 'user' => XHELP_NOTIF_USER_NO),
-        array('id' => 9, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES),
-        array('id' => 10, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES));
+    array('id' => 1, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES),
+    array('id' => 2, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES),
+    array('id' => 3, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES),
+    array('id' => 4, 'staff' => XHELP_NOTIF_STAFF_OWNER, 'user'=>XHELP_NOTIF_USER_YES),
+    array('id' => 5, 'staff' => XHELP_NOTIF_STAFF_OWNER, 'user'=>XHELP_NOTIF_USER_YES),
+    array('id' => 6, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user'=>XHELP_NOTIF_USER_YES),
+    array('id' => 7, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user'=>XHELP_NOTIF_USER_YES),
+    array('id' => 8, 'staff' => XHELP_NOTIF_STAFF_OWNER, 'user'=>XHELP_NOTIF_USER_NO),
+    array('id' => 9, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user'=>XHELP_NOTIF_USER_YES),
+    array('id' => 10, 'staff' => XHELP_NOTIF_STAFF_DEPT, 'user' => XHELP_NOTIF_USER_YES));
 
-    foreach ($notifications as $notif) {
+    foreach($notifications as $notif){
         $template =& $hNotification->create();
         $template->setVar('notif_id', $notif['id']);
         $template->setVar('staff_setting', $notif['staff']);
         $template->setVar('user_setting', $notif['user']);
         //Set the notification for all staff roles (if necessary)
-        if ($notif['staff'] == XHELP_NOTIF_STAFF_DEPT) {
+        if($notif['staff'] == XHELP_NOTIF_STAFF_DEPT){
             $template->setVar('staff_options', $allRoles);
         } else {
             $template->setVar('staff_options', array());
@@ -1086,16 +1087,16 @@ function xhelpGetUsername($xUser, $displayName = XHELP_DISPLAYNAME_UNAME)
     $user = false;
     $hMember =& xoops_getHandler('member');
 
-    if (is_numeric($xUser)) {
-        if ($xUser <> $xoopsUser->getVar('uid')) {
-            if ($xUser == 0) {
+    if(is_numeric($xUser)){
+        if($xUser <> $xoopsUser->getVar('uid')){
+            if($xUser == 0){
                 return $xoopsConfig['anonymous'];
             }
             $user =& $hMember->getUser($xUser);
         } else {
             $user = $xoopsUser;
         }
-    } elseif (is_object($xUser)) {
+    } elseif(is_object($xUser)){
         $user = $xUser;
     } else {
         return $xoopsConfig['anonymous'];
@@ -1161,10 +1162,10 @@ function xhelpIncludeLang($filename, $language = null)
     }
 
     if (file_exists(XHELP_BASE_PATH . "/language/$language/$filename.php")) {
-        include_once(XHELP_BASE_PATH . "/language/$language/$filename.php");
+        include_once(XHELP_BASE_PATH ."/language/$language/$filename.php");
     } else {
-        if (file_exists(XHELP_BASE_PATH . "/language/english/$filename.php")) {
-            include_once(XHELP_BASE_PATH . "/language/english/$filename.php");
+        if (file_exists(XHELP_BASE_PATH ."/language/english/$filename.php")) {
+            include_once(XHELP_BASE_PATH ."/language/english/$filename.php");
         } else {
             trigger_error("Unable to load language file $filename", E_USER_NOTICE);
         }
@@ -1176,10 +1177,10 @@ function xhelpIncludeReportLangFile($reportName)
     $language = xhelpGetSiteLanguage();
 
     if (file_exists(XHELP_BASE_PATH . "/language/$language/reports/$reportName.php")) {
-        include_once(XHELP_BASE_PATH . "/language/$language/reports/$reportName.php");
+        include_once(XHELP_BASE_PATH ."/language/$language/reports/$reportName.php");
     } else {
-        if (file_exists(XHELP_BASE_PATH . "/language/english/reports/$reportName.php")) {
-            include_once(XHELP_BASE_PATH . "/language/english/reports/$reportName.php");
+        if (file_exists(XHELP_BASE_PATH ."/language/english/reports/$reportName.php")) {
+            include_once(XHELP_BASE_PATH ."/language/english/reports/$reportName.php");
         }
     }
 }
@@ -1201,10 +1202,10 @@ function xhelpCreateDefaultTicketLists()
 
     $ticketLists = array(XHELP_QRY_STAFF_HIGHPRIORITY, XHELP_QRY_STAFF_NEW, XHELP_QRY_STAFF_MINE, XHELP_QRY_STAFF_ALL);
     $i = 1;
-    foreach ($ticketLists as $ticketList) {
+    foreach($ticketLists as $ticketList){
         $newSearch =& $hSavedSearch->create();
         $crit = new CriteriaCompo();
-        switch ($ticketList) {
+        switch($ticketList){
             case XHELP_QRY_STAFF_HIGHPRIORITY:
                 $crit->add(new Criteria('uid', XHELP_GLOBAL_UID, '=', 'j'));
                 $crit->add(new Criteria('state', 1, '=', 's'));
@@ -1230,7 +1231,7 @@ function xhelpCreateDefaultTicketLists()
                 $crit->add(new Criteria('state', 1, '=', 's'));
                 $crit->setSort('t.posted');
                 $newSearch->setVar('name', _XHELP_TEXT_MY_TICKETS);
-                $newSearch->setVar('pagenav_vars', 'limit=50&state=1&ownership=' . XHELP_GLOBAL_UID);
+                $newSearch->setVar('pagenav_vars', 'limit=50&state=1&ownership='.XHELP_GLOBAL_UID);
                 break;
 
             case XHELP_QRY_STAFF_ALL:
@@ -1238,7 +1239,7 @@ function xhelpCreateDefaultTicketLists()
                 $crit->add(new Criteria('state', 1, '=', 's'));
                 $crit->add(new Criteria('uid', XHELP_GLOBAL_UID, '=', 't'));
                 $newSearch->setVar('name', _XHELP_TEXT_SUBMITTED_TICKETS);
-                $newSearch->setVar('pagenav_vars', 'limit=50&state=1&submittedBy=' . XHELP_GLOBAL_UID);
+                $newSearch->setVar('pagenav_vars', 'limit=50&state=1&submittedBy='.XHELP_GLOBAL_UID);
                 break;
 
             default:
@@ -1252,7 +1253,7 @@ function xhelpCreateDefaultTicketLists()
         $ret = $hSavedSearch->insert($newSearch, true);
 
         $staff =& $hStaff->getObjects(null, true);
-        foreach ($staff as $stf) {
+        foreach($staff as $stf){
             $list =& $hTicketList->create();
             $list->setVar('uid', $stf->getVar('uid'));
             $list->setVar('searchid', $newSearch->getVar('id'));
@@ -1273,5 +1274,4 @@ function &xhelpNewEventService()
     }
     return $instance;
 }
-
 ?>

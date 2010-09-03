@@ -257,24 +257,24 @@ define("_AM_XHELP_MINDEX_ACTION", "عمل");
 define("_AM_XHELP_MINDEX_PAGE", "<b>صفحه</b> ");
 
 //image admin icon
-define("_AM_XHELP_ICO_EDIT", "این آیتم را ویرایش کن");
-define("_AM_XHELP_ICO_DELETE", "این آیتم را حذف کن");
-define("_AM_XHELP_ICO_ONLINE", "آنلاین");
-define("_AM_XHELP_ICO_OFFLINE", "آفلاین");
-define("_AM_XHELP_ICO_APPROVED", "تایید شده");
-define("_AM_XHELP_ICO_NOTAPPROVED", "تایید نشده");
+define("_AM_XHELP_ICO_EDIT","این آیتم را ویرایش کن");
+define("_AM_XHELP_ICO_DELETE","این آیتم را حذف کن");
+define("_AM_XHELP_ICO_ONLINE","آنلاین");
+define("_AM_XHELP_ICO_OFFLINE","آفلاین");
+define("_AM_XHELP_ICO_APPROVED","تایید شده");
+define("_AM_XHELP_ICO_NOTAPPROVED","تایید نشده");
 
-define("_AM_XHELP_ICO_LINK", "لینک مرتبط");
-define("_AM_XHELP_ICO_URL", "اضافه کردن لیتک مرتبط");
-define("_AM_XHELP_ICO_ADD", "اضافه کردن");
-define("_AM_XHELP_ICO_APPROVE", "تایید");
-define("_AM_XHELP_ICO_STATS", "آمار");
+define("_AM_XHELP_ICO_LINK","لینک مرتبط");
+define("_AM_XHELP_ICO_URL","اضافه کردن لیتک مرتبط");
+define("_AM_XHELP_ICO_ADD","اضافه کردن");
+define("_AM_XHELP_ICO_APPROVE","تایید");
+define("_AM_XHELP_ICO_STATS","آمار");
 
-define("_AM_XHELP_ICO_IGNORE", "رد کردن");
-define("_AM_XHELP_ICO_ACK", "تشکر از گزارش خرابی لینک");
-define("_AM_XHELP_ICO_REPORT", "از گزارش خرابی لینک تشکر می کنید؟");
-define("_AM_XHELP_ICO_CONFIRM", "تایید گزارش خرابی لینک");
-define("_AM_XHELP_ICO_CONBROKEN", "گزارش خرابی لینک را تایید می کنید؟");
+define("_AM_XHELP_ICO_IGNORE","رد کردن");
+define("_AM_XHELP_ICO_ACK","تشکر از گزارش خرابی لینک");
+define("_AM_XHELP_ICO_REPORT","از گزارش خرابی لینک تشکر می کنید؟");
+define("_AM_XHELP_ICO_CONFIRM","تایید گزارش خرابی لینک");
+define("_AM_XHELP_ICO_CONBROKEN","گزارش خرابی لینک را تایید می کنید؟");
 
 define("_AM_XHELP_UPLOADFILE", "فایل با موفقیت بارگزاری شد");
 define('_AM_XHELP_TEXT_TICKET_INFO', 'اطلاعات بلیت');

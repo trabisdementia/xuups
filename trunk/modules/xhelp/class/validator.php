@@ -4,8 +4,7 @@
 /**
  *  Validator superclass for form validation
  */
-class Validator
-{
+class Validator {
     /**
      * Private
      * $errorMsg stores error messages if not valid
@@ -16,9 +15,9 @@ class Validator
     /**
      * Constucts a new Validator object
      */
-    function Validator()
+    function Validator ()
     {
-        $this->errorMsg = array();
+        $this->errorMsg=array();
         $this->validate();
     }
 
@@ -26,8 +25,7 @@ class Validator
     /**
      * @return void
      */
-    function validate()
-    {
+    function validate() {
         // Superclass method does nothing
     }
 
@@ -36,9 +34,9 @@ class Validator
      * Adds an error message to the array
      * @return void
      */
-    function setError($msg)
+    function setError ($msg)
     {
-        $this->errorMsg[] = $msg;
+        $this->errorMsg[]=$msg;
     }
 
     //! An accessor
@@ -46,9 +44,9 @@ class Validator
      * Returns true is string valid, false if not
      * @return boolean
      */
-    function isValid()
+    function isValid ()
     {
-        if (count($this->errorMsg)) {
+        if ( count ($this->errorMsg) ) {
             return false;
         } else {
             return true;
@@ -60,7 +58,7 @@ class Validator
      * Pops the last error message off the array
      * @return string
      */
-    function getError()
+    function getError ()
     {
         return array_pop($this->errorMsg);
     }
@@ -75,8 +73,7 @@ class Validator
  *  ValidatorEmail subclass of Validator
  *  Validates an email address
  */
-class ValidateEmail extends Validator
-{
+class ValidateEmail extends Validator {
     /**
      * Private
      * $email the email address to validate
@@ -88,9 +85,9 @@ class ValidateEmail extends Validator
      * Constucts a new ValidateEmail object subclass or Validator
      * @param $email the string to validate
      */
-    function ValidateEmail($email)
+    function ValidateEmail ($email)
     {
-        $this->email = $email;
+        $this->email=$email;
         Validator::Validator();
     }
 
@@ -103,20 +100,19 @@ class ValidateEmail extends Validator
     {
         $pattern = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i";
         //$pattern= "/^([a-zA-Z0-9])+([.a-zA-Z0-9_-])*@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-]+)+/";
-        if (!preg_match($pattern, $this->email)) {
+        if(!preg_match($pattern,$this->email)){
             $this->setError(_XHELP_MESSAGE_INVALID);
         }
-        if (strlen($this->email) > 100) {
+        if (strlen($this->email)>100){
             $this->setError(_XHELP_MESSAGE_LONG);
         }
-        if (strlen($this->email) < 5) {
+        if (strlen($this->email)<5){
             $this->setError(_XHELP_MESSAGE_SHORT);
         }
     }
 }
 
-class ValidatePhone extends Validator
-{
+class ValidatePhone extends Validator {
     /**
      * Private
      * $phone the phone number to validate
@@ -128,9 +124,9 @@ class ValidatePhone extends Validator
      * Constucts a new ValidatePhone object subclass or Validator
      * @param $phone the string to validate
      */
-    function ValidatePhone($phone)
+    function ValidatePhone ($phone)
     {
-        $this->phone = $phone;
+        $this->phone=$phone;
         Validator::Validator();
     }
 
@@ -142,14 +138,13 @@ class ValidatePhone extends Validator
     function validate()
     {
         $pattern = "(\d{3})\D*(\d{3})\D*(\d{4})\D*(\d*)$";
-        if (!preg_match($pattern, $this->phone)) {
+        if(!preg_match($pattern, $this->phone)){
             $this->setError(_XHELP_MESSAGE_INVALID);
         }
     }
 }
 
-class ValidateTimestamp extends Validator
-{
+class ValidateTimestamp extends Validator {
     /**
      * Private
      * $timestamp the date/time to validate
@@ -161,9 +156,9 @@ class ValidateTimestamp extends Validator
      * Constucts a new ValidateTimestamp object subclass or Validator
      * @param $timestamp the string to validate
      */
-    function ValidateTimestamp($timestamp)
+    function ValidateTimestamp ($timestamp)
     {
-        $this->timestamp = $timestamp;
+        $this->timestamp=$timestamp;
         Validator::Validator();
     }
 
@@ -178,8 +173,7 @@ class ValidateTimestamp extends Validator
     }
 }
 
-class ValidateLength extends Validator
-{
+class ValidateLength extends Validator {
     /**
      * Private
      * $text the string to validate
@@ -197,18 +191,18 @@ class ValidateLength extends Validator
      * $max_length the max length of string to validate
      */
     var $max_length;
-
+     
     //! A constructor.
     /**
      * Constucts a new ValidateLength object subclass or Validator
      * @param $min_length the min string size
      * @param $max_length the max string size
      */
-    function ValidateLength($text, $min_length, $max_length = 0)
+    function ValidateLength ($text, $min_length, $max_length = 0)
     {
-        $this->text = $text;
-        $this->min_length = $min_length;
-        $this->max_length = $max_length;
+        $this->text=$text;
+        $this->min_length=$min_length;
+        $this->max_length=$max_length;
         Validator::Validator();
     }
 
@@ -219,19 +213,18 @@ class ValidateLength extends Validator
      */
     function validate()
     {
-        if (strlen($this->text) < $this->min_length) {
+        if (strlen($this->text) < $this->min_length ) {
             $this->setError(_XHELP_MESSAGE_SHORT);
         }
-        if ($this->max_length) {
-            if (strlen($this->text) > $this->max_length) {
+        if($this->max_length){
+            if (strlen($this->text) > $this->max_length ) {
                 $this->setError(_XHELP_MESSAGE_LONG);
             }
         }
     }
 }
 
-class ValidateNumber extends Validator
-{
+class ValidateNumber extends Validator {
     /**
      * Private
      * $text the string to validate
@@ -239,14 +232,14 @@ class ValidateNumber extends Validator
     var $text;
 
     var $forceeentry;
-
+     
     //! A constructor.
     /**
      * Constucts a new ValidateNumber object subclass or Validator
      */
-    function ValidateNumber($text, $forceentry = false)
+    function ValidateNumber ($text, $forceentry = false)
     {
-        $this->text = $text;
+        $this->text=$text;
         $this->forceentry = $forceentry;
         Validator::Validator();
     }
@@ -268,8 +261,7 @@ class ValidateNumber extends Validator
  *  ValidatorUname subclass of Validator
  *  Validates a username
  */
-class ValidateUname extends Validator
-{
+class ValidateUname extends Validator {
     /**
      * Private
      * $uname the username to validate
@@ -281,9 +273,9 @@ class ValidateUname extends Validator
      * Constucts a new ValidateUname object subclass or Validator
      * @param $uname the string to validate
      */
-    function ValidateUname($uname)
+    function ValidateUname ($uname)
     {
-        $this->uname = $uname;
+        $this->uname=$uname;
         Validator::Validator();
     }
 
@@ -299,12 +291,12 @@ class ValidateUname extends Validator
         $xoopsConfigUser = array();
         $crit = new Criteria('conf_catid', 2);
         $myConfigs =& $hConfig->getConfigs($crit);
-        foreach ($myConfigs as $myConf) {
+        foreach($myConfigs as $myConf){
             $xoopsConfigUser[$myConf->getVar('conf_name')] = $myConf->getVar('conf_value');
         }
         $xoopsDB =& Database::getInstance();
 
-        switch ($xoopsConfigUser['uname_test_level']) {
+        switch ( $xoopsConfigUser['uname_test_level'] ) {
             case 0:
                 // strict
                 $restriction = '/[^a-zA-Z0-9\_\-]/';
@@ -318,29 +310,29 @@ class ValidateUname extends Validator
                 $restriction = '/[\000-\040]/';
                 break;
         }
-
+         
         if (empty($this->uname) || preg_match($restriction, $this->uname)) {
             $this->setError(_XHELP_MESSAGE_INVALID);
         }
-        if (strlen($this->uname) > $xoopsConfigUser['maxuname']) {
+        if ( strlen($this->uname) > $xoopsConfigUser['maxuname'] ) {
             $this->setError(sprintf(_XHELP_MESSAGE_LONG, $xoopsConfigUser['maxuname']));
         }
-        if (strlen($this->uname) < $xoopsConfigUser['minuname']) {
+        if ( strlen($this->uname) < $xoopsConfigUser['minuname'] ) {
             $this->setError(sprintf(_XHELP_MESSAGE_SHORT, $xoopsConfigUser['minuname']));
         }
         foreach ($xoopsConfigUser['bad_unames'] as $bu) {
-            if (!empty($bu) && preg_match("/" . $bu . "/i", $this->uname)) {
+            if ( !empty($bu) && preg_match("/".$bu."/i", $this->uname) ) {
                 $this->setError(_XHELP_MESSAGE_RESERVED);
                 break;
             }
         }
-        if (strrpos($this->uname, ' ') > 0) {
+        if ( strrpos($this->uname,' ') > 0 ) {
             $this->setError(_XHELP_MESSAGE_NO_SPACES);
         }
-        $sql = "SELECT COUNT(*) FROM " . $xoopsDB->prefix('users') . " WHERE uname='" . addslashes($this->uname) . "'";
+        $sql = "SELECT COUNT(*) FROM ".$xoopsDB->prefix('users')." WHERE uname='".addslashes($this->uname)."'";
         $result = $xoopsDB->query($sql);
         list($count) = $xoopsDB->fetchRow($result);
-        if ($count > 0) {
+        if ( $count > 0 ) {
             $this->setError(_XHELP_MESSAGE_UNAME_TAKEN);
         }
     }
@@ -350,8 +342,7 @@ class ValidateUname extends Validator
  *  ValidatorPassword subclass of Validator
  *  Validates a password
  */
-class ValidatePassword extends Validator
-{
+class ValidatePassword extends Validator {
     /**
      * Private
      * $pass the password to validate
@@ -369,10 +360,10 @@ class ValidatePassword extends Validator
      * Constucts a new ValidatePassword object subclass or Validator
      * @param $pass the string to validate
      */
-    function ValidatePassword($pass, $vpass)
+    function ValidatePassword ($pass, $vpass)
     {
-        $this->pass = $pass;
-        $this->vpass = $vpass;
+        $this->pass=$pass;
+        $this->vpass=$vpass;
         Validator::Validator();
     }
 
@@ -388,18 +379,18 @@ class ValidatePassword extends Validator
         $xoopsConfigUser = array();
         $crit = new Criteria('conf_catid', 2);
         $myConfigs =& $hConfig->getConfigs($crit);
-        foreach ($myConfigs as $myConf) {
+        foreach($myConfigs as $myConf){
             $xoopsConfigUser[$myConf->getVar('conf_name')] = $myConf->getVar('conf_value');
         }
 
-        if (!isset($this->pass) || $this->pass == '' || !isset($this->vpass) || $this->vpass == '') {
+        if ( !isset($this->pass) || $this->pass == '' || !isset($this->vpass) || $this->vpass == '' ) {
             $this->setError(_XHELP_MESSAGE_NOT_SUPPLIED);
             //$stop .= _US_ENTERPWD.'<br />';
         }
-        if ((isset($this->pass)) && ($this->pass != $this->vpass)) {
+        if ( (isset($this->pass)) && ($this->pass != $this->vpass) ) {
             $this->setError(_XHELP_MESSAGE_NOT_SAME);
             //$stop .= _US_PASSNOTSAME.'<br />';
-        } elseif (($this->pass != '') && (strlen($this->pass) < $xoopsConfigUser['minpass'])) {
+        } elseif ( ($this->pass != '') && (strlen($this->pass) < $xoopsConfigUser['minpass']) ) {
             $this->setError(sprintf(_XHELP_MESSAGE_SHORT, $xoopsConfigUser['minpass']));
             //$stop .= sprintf(_US_PWDTOOSHORT,$xoopsConfigUser['minpass'])."<br />";
         }
@@ -426,11 +417,11 @@ class ValidateMimeType extends Validator
         //Check MimeType
         if (is_array($this->allowed_mimetypes)) {
             $farray = explode('.', $this->file);
-            $fextension = strtolower($farray[count($farray) - 1]);
-            foreach ($this->allowed_mimetypes as $mime) {
+            $fextension = strtolower($farray[count($farray) -1]);
+            foreach($this->allowed_mimetypes as $mime){
                 $lower_type = strtolower($mime['type']);
                 $lower_ext = strtolower($mime['ext']);
-                if ($lower_type == $this->mimetype && $lower_ext == $fextension) {
+                if($lower_type == $this->mimetype && $lower_ext == $fextension){
                     $allowed_mimetypes = $mime['type'];
                     break;
                 }
@@ -473,8 +464,8 @@ class ValidateImageSize extends Validator
 
     function ValidateImageSize($file, $maxwidth, $maxheight)
     {
-        $this->file = $file;
-        $this->maxwidth = $maxwidth;
+        $this->file      = $file;
+        $this->maxwidth  = $maxwidth;
         $this->maxheight = $maxheight;
         Validator::Validator();
     }
@@ -484,7 +475,7 @@ class ValidateImageSize extends Validator
         list($width, $height) = getimagesize($this->file);
         if ($this->maxwidth < $width) {
             $this->setError("Image Width is too large");
-
+             
         }
         if ($this->maxheight < $height) {
             $this->setError("Image Height is too large");
@@ -507,11 +498,11 @@ class ValidateRegEx extends Validator
      * Constucts a new ValidateEmail object subclass or Validator
      * @param $email the string to validate
      */
-    function ValidateRegex($checkText, $pattern, $required)
+    function ValidateRegex ($checkText, $pattern, $required)
     {
-        $this->pattern = $pattern;
-        $this->checkText = $checkText;
-        $this->required = $required;
+        $this->pattern      = $pattern;
+        $this->checkText    = $checkText;
+        $this->required     = $required;
         Validator::Validator();
     }
 
@@ -522,26 +513,26 @@ class ValidateRegEx extends Validator
      */
     function validate()
     {
-        if ($this->required == 1) { // If value is required
-            if (is_array($this->checkText) && isset($this->checkText['size'])) { // If this is a file
-                if ($this->checkText['name'] == "") {
-                    $this->setError(_XHELP_MESSAGE_REQUIRED); // Return message saying required value
+        if($this->required == 1){                                // If value is required
+            if(is_array($this->checkText) && isset($this->checkText['size'])) {     // If this is a file
+                if($this->checkText['name'] == ""){
+                    $this->setError(_XHELP_MESSAGE_REQUIRED);           // Return message saying required value
                 }
-            } else { // If not a file
-                if ($this->pattern != "") { // If regex pattern is not empty
-                    if (!preg_match("/" . $this->pattern . "/", $this->checkText)) { // Check regex against supplied text
-                        $this->setError(_XHELP_MESSAGE_INVALID); // Return message saying invalid value
+            } else {                                                    // If not a file
+                if($this->pattern != ""){                               // If regex pattern is not empty
+                    if(!preg_match("/".$this->pattern."/", $this->checkText)){  // Check regex against supplied text
+                        $this->setError(_XHELP_MESSAGE_INVALID);        // Return message saying invalid value
                     }
                 } else {
-                    if (empty($this->checkText)) { // If text is not supplied
-                        $this->setError(_XHELP_MESSAGE_REQUIRED); // Return message saying required value
+                    if(empty($this->checkText)){    // If text is not supplied
+                        $this->setError(_XHELP_MESSAGE_REQUIRED);           // Return message saying required value
                     }
                 }
             }
         } else {
-            if (empty($this->checkText)) {
-                if ($this->pattern != "") {
-                    if (!preg_match("/" . $this->pattern . "/", $this->checkText)) {
+            if(empty($this->checkText)){
+                if($this->pattern != ""){
+                    if(!preg_match("/".$this->pattern."/", $this->checkText)){
                         $this->setError(_XHELP_MESSAGE_INVALID);
                     }
                 }
@@ -549,5 +540,4 @@ class ValidateRegEx extends Validator
         }
     }
 }
-
 ?>

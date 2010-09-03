@@ -58,7 +58,7 @@ define('_MI_XHELP_UPLOAD_HEIGHT', 'Upload Hoogte');
 define('_MI_XHELP_UPLOAD_HEIGHT_DSC', 'Max hoogte van een upload (in pixels)');
 define('_MI_XHELP_ANNOUNCEMENTS', 'Mededelingen Nieuws Onderwerp');
 //define('_MI_XHELP_ANNOUNCEMENTS_DSC', 'This is the news topic that pulls announcements for xhelp. Update the xHelp module to see newly added news categories');
-define('_MI_XHELP_ANNOUNCEMENTS_DSC', "Dit is het nieuws onderwerp dat de mededelingen voor de heldesk oproept. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Klik hier</a> om de nieuws categorieen te updaten.");
+define('_MI_XHELP_ANNOUNCEMENTS_DSC', "Dit is het nieuws onderwerp dat de mededelingen voor de heldesk oproept. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Klik hier</a> om de nieuws categorieen te updaten.");
 define('_MI_XHELP_ANNOUNCEMENTS_NONE', '***Schakel mededelingen uit***');
 define('_MI_XHELP_ALLOW_REOPEN', 'Sta toe een melding te her-openen');
 define('_MI_XHELP_ALLOW_REOPEN_DSC', 'Sta gebruikers toe een melding te her-openen?');
@@ -69,7 +69,7 @@ define('_MI_XHELP_STAFF_ACTIONS_DSC', 'Welke stijl wilt u dat de parsoneels acti
 define('_MI_XHELP_ACTION1', 'Inline-Style');
 define('_MI_XHELP_ACTION2', 'Block-Style');
 define('_MI_XHELP_DEFAULT_DEPT', 'Standaard afdeling');
-define('_MI_XHELP_DEFAULT_DEPT_DSC', "Dit zal de standaard afdeling zijn die wordt geselecteerd in de lijst wanneer een melding wordt toegevoegd. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the departments.");
+define('_MI_XHELP_DEFAULT_DEPT_DSC', "Dit zal de standaard afdeling zijn die wordt geselecteerd in de lijst wanneer een melding wordt toegevoegd. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Click here</a> to update the departments.");
 define('_MI_XHELP_OVERDUE_TIME', 'Meldings tijd overschreven');
 define('_MI_XHELP_OVERDUE_TIME_DSC', 'Dit bepaald hoe lang de staff heeft om een melding af te handelen voordat de afhandeltijd is verstreken (uren).');
 define('_MI_XHELP_ALLOW_ANON', 'Sta toe dat anonieme gebruikers een melding toevoegen');
@@ -90,11 +90,11 @@ define('_MI_XHELP_MENU_MAIL_EVENTS', 'Mail Gebeurtenissen');
 define('_MI_XHELP_MENU_CHECK_EMAIL', 'Controleer Email');
 
 //NOTIFICATION vars
-define('_MI_XHELP_DEPT_NOTIFY', 'Afdeling');
-define('_MI_XHELP_DEPT_NOTIFYDSC', 'Notificatie opties die van toepassing zijn op een bepaalde afdeling');
+define('_MI_XHELP_DEPT_NOTIFY','Afdeling');
+define('_MI_XHELP_DEPT_NOTIFYDSC','Notificatie opties die van toepassing zijn op een bepaalde afdeling');
 
-define('_MI_XHELP_TICKET_NOTIFY', 'Melding');
-define('_MI_XHELP_TICKET_NOTIFYDSC', 'Notificatie opties die van toepassing zijn op de huidige melding');
+define('_MI_XHELP_TICKET_NOTIFY','Melding');
+define('_MI_XHELP_TICKET_NOTIFYDSC','Notificatie opties die van toepassing zijn op de huidige melding');
 
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFY', 'Afdeling: Nieuwe melding');
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFYCAP', 'Stel me op de hoogte als er een nieuwe melding wordt toegevoegd');

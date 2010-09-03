@@ -1,16 +1,15 @@
 <?php
 // $Id: staffRolesByDept.php,v 1.5 2006/02/06 19:58:23 eric_juden Exp $
 
-include_once(XHELP_CLASS_PATH . '/report.php');
+include_once(XHELP_CLASS_PATH .'/report.php');
 xhelpIncludeReportLangFile('staffRolesByDept');
 
-include_once(XHELP_JPGRAPH_PATH . '/jpgraph.php');
-include_once(XHELP_CLASS_PATH . '/report.php');
+include_once(XHELP_JPGRAPH_PATH .'/jpgraph.php');
+include_once(XHELP_CLASS_PATH .'/report.php');
 
 global $xoopsDB;
 
-class xhelpStaffRolesByDeptReport extends xhelpReport
-{
+class xhelpStaffRolesByDeptReport extends xhelpReport {
     function xhelpStaffRolesByDeptReport()
     {
         $this->initVar('results', XOBJ_DTYPE_ARRAY, null, false);
@@ -25,7 +24,7 @@ class xhelpStaffRolesByDeptReport extends xhelpReport
         'description' => _XHELP_SRD_DESC,
         'version' => '1.0',
         'dbFields' => array(
-            'Department' => _XHELP_SRD_DB3,
+			'Department' => _XHELP_SRD_DB3,
             'Role' => _XHELP_SRD_DB2,
             'name' => _XHELP_SRD_DB1));
 
@@ -96,7 +95,7 @@ class xhelpStaffRolesByDeptReport extends xhelpReport
         global $xoopsDB;
 
         $sSQL = sprintf("SELECT u.name, r.name AS Role, d.department AS Department FROM %s u, %s s, %s sr, %s r, %s d WHERE (u.uid = s.uid) AND (u.uid = sr.uid) AND (sr.roleid = r.id) AND (sr.deptid = d.id) AND (u.uid = sr.uid) AND (u.uid = s.uid) ORDER BY d.department, u.name",
-                        $xoopsDB->prefix('users'), $xoopsDB->prefix('xhelp_staff'), $xoopsDB->prefix('xhelp_staffroles'), $xoopsDB->prefix('xhelp_roles'), $xoopsDB->prefix('xhelp_departments'));
+        $xoopsDB->prefix('users'), $xoopsDB->prefix('xhelp_staff'), $xoopsDB->prefix('xhelp_staffroles'), $xoopsDB->prefix('xhelp_roles'), $xoopsDB->prefix('xhelp_departments'));
 
         $result = $xoopsDB->query($sSQL);
         $aResults = $this->_arrayFromData($result);
@@ -106,5 +105,4 @@ class xhelpStaffRolesByDeptReport extends xhelpReport
         return true;
     }
 }
-
 ?>

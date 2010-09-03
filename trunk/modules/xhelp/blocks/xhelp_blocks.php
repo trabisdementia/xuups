@@ -5,11 +5,11 @@ if (!defined('XOOPS_ROOT_PATH')) {
 }
 
 if (!defined('XHELP_CONSTANTS_INCLUDED')) {
-    include_once(XOOPS_ROOT_PATH . '/modules/xhelp/include/constants.php');
+    include_once(XOOPS_ROOT_PATH.'/modules/xhelp/include/constants.php');
 }
 
-include_once(XHELP_BASE_PATH . '/functions.php');
-include_once(XHELP_CLASS_PATH . '/session.php');
+include_once(XHELP_BASE_PATH.'/functions.php');
+include_once(XHELP_CLASS_PATH.'/session.php');
 xhelpIncludeLang('main');
 
 function b_xhelp_open_show($options)
@@ -18,12 +18,12 @@ function b_xhelp_open_show($options)
 
     $max_char_in_title = $options[0];
 
-    if ($xoopsUser) {
-        $uid = $xoopsUser->getVar('uid'); // Get uid
+    if($xoopsUser){
+        $uid = $xoopsUser->getVar('uid');   // Get uid
         $block = array();
-        $hTickets =& xhelpGetHandler('ticket'); // Get ticket handler
+        $hTickets =& xhelpGetHandler('ticket');  // Get ticket handler
         $hStaff =& xhelpGetHandler('staff');
-        if ($isStaff =& $hStaff->isStaff($xoopsUser->getVar('uid'))) {
+        if($isStaff =& $hStaff->isStaff($xoopsUser->getVar('uid'))){
             $crit = new CriteriaCompo(new Criteria('ownership', $uid));
             $crit->add(new Criteria('status', 2, '<'));
             $crit->setOrder('DESC');
@@ -31,27 +31,27 @@ function b_xhelp_open_show($options)
             $crit->setLimit(5);
             $tickets =& $hTickets->getObjects($crit);
 
-            foreach ($tickets as $ticket) {
+            foreach($tickets as $ticket){
                 $overdue = false;
-                if ($ticket->isOverdue()) {
+                if($ticket->isOverdue()){
                     $overdue = true;
                 }
-                $block['ticket'][] = array('id' => $ticket->getVar('id'),
-                                           'uid' => $ticket->getVar('uid'),
-                                           'subject' => $ticket->getVar('subject'),
-                                           'truncSubject' => xoops_substr($ticket->getVar('subject'), 0, $max_char_in_title),
-                                           'description' => $ticket->getVar('description'),
-                    //'department'=>$department->getVar('department'),
-                                           'priority' => $ticket->getVar('priority'),
-                                           'status' => $ticket->getVar('status'),
-                                           'posted' => $ticket->posted(),
-                    //'ownership'=>$owner->getVar('uname'),
-                                           'closedBy' => $ticket->getVar('closedBy'),
-                                           'totalTimeSpent' => $ticket->getVar('totalTimeSpent'),
-                    //'uname'=>$user->getVar('uname'),
-                                           'userinfo' => XOOPS_URL . '/userinfo.php?uid=' . $ticket->getVar('uid'),
-                    //'ownerinfo'=>XOOPS_URL . '/userinfo.php?uid=' . $ticket->getVar('ownership'),
-                                           'url' => XOOPS_URL . '/modules/xhelp/ticket.php?id=' . $ticket->getVar('id'),
+                $block['ticket'][] = array('id'=>$ticket->getVar('id'),
+                                           'uid'=>$ticket->getVar('uid'),
+                                           'subject'=>$ticket->getVar('subject'),
+                                           'truncSubject'=>xoops_substr($ticket->getVar('subject'), 0, $max_char_in_title),
+                                           'description'=>$ticket->getVar('description'),
+                //'department'=>$department->getVar('department'),
+                                           'priority'=>$ticket->getVar('priority'),
+                                           'status'=>$ticket->getVar('status'),
+                                           'posted'=>$ticket->posted(),
+                //'ownership'=>$owner->getVar('uname'),
+                                           'closedBy'=>$ticket->getVar('closedBy'),
+                                           'totalTimeSpent'=>$ticket->getVar('totalTimeSpent'),
+                //'uname'=>$user->getVar('uname'),
+                                           'userinfo'=>XOOPS_URL . '/userinfo.php?uid=' . $ticket->getVar('uid'),
+                //'ownerinfo'=>XOOPS_URL . '/userinfo.php?uid=' . $ticket->getVar('ownership'),
+                                           'url'=>XOOPS_URL . '/modules/xhelp/ticket.php?id=' . $ticket->getVar('id'),
                                            'overdue' => $overdue);
             }
 
@@ -69,24 +69,24 @@ function b_xhelp_open_show($options)
             $tickets =& $hTickets->getObjects($crit);
             $hDepartments =& xhelpGetHandler('department');
 
-            foreach ($tickets as $ticket) {
+            foreach($tickets as $ticket){
                 //$department =& $hDepartments->get($ticket->getVar('department'));
-                $block['ticket'][] = array('id' => $ticket->getVar('id'),
-                                           'uid' => $ticket->getVar('uid'),
-                                           'subject' => $ticket->getVar('subject'),
-                                           'truncSubject' => xoops_substr($ticket->getVar('subject'), 0, $max_char_in_title),
-                                           'description' => $ticket->getVar('description'),
-                    //'department'=>($department->getVar('department'),
-                                           'priority' => $ticket->getVar('priority'),
-                                           'status' => $ticket->getVar('status'),
-                                           'posted' => $ticket->posted(),
-                    //'ownership'=>$owner->getVar('uname'),
-                                           'closedBy' => $ticket->getVar('closedBy'),
-                                           'totalTimeSpent' => $ticket->getVar('totalTimeSpent'),
-                    //'uname'=>$user->getVar('uname'),
-                                           'userinfo' => XOOPS_URL . '/userinfo.php?uid=' . $ticket->getVar('uid'),
-                    //'ownerinfo'=>XOOPS_URL . '/userinfo.php?uid=' . $ticket->getVar('ownership'),
-                                           'url' => XOOPS_URL . '/modules/xhelp/ticket.php?id=' . $ticket->getVar('id'));
+                $block['ticket'][] = array('id'=>$ticket->getVar('id'),
+                                           'uid'=>$ticket->getVar('uid'),
+                                           'subject'=>$ticket->getVar('subject'),
+                                           'truncSubject'=>xoops_substr($ticket->getVar('subject'), 0, $max_char_in_title),
+                                           'description'=>$ticket->getVar('description'),
+                //'department'=>($department->getVar('department'),
+                                           'priority'=>$ticket->getVar('priority'),
+                                           'status'=>$ticket->getVar('status'),
+                                           'posted'=>$ticket->posted(),
+                //'ownership'=>$owner->getVar('uname'),
+                                           'closedBy'=>$ticket->getVar('closedBy'),
+                                           'totalTimeSpent'=>$ticket->getVar('totalTimeSpent'),
+                //'uname'=>$user->getVar('uname'),
+                                           'userinfo'=>XOOPS_URL . '/userinfo.php?uid=' . $ticket->getVar('uid'),
+                //'ownerinfo'=>XOOPS_URL . '/userinfo.php?uid=' . $ticket->getVar('ownership'),
+                                           'url'=>XOOPS_URL . '/modules/xhelp/ticket.php?id=' . $ticket->getVar('id'));
             }
         }
         $block['numTickets'] = count($tickets);
@@ -114,12 +114,12 @@ function b_xhelp_performance_show($options)
 
     if ($xoopsUser->isAdmin($xoopsModule->getVar('mid'))) {
         $sql = sprintf(
-            "SELECT COUNT(*) as TicketCount, d.department, d.id FROM %s t INNER JOIN %s d ON t.department = d.id  INNER JOIN %s s ON t.status = s.id WHERE s.state = 1 GROUP BY d.department, d.id ORDER BY d.department",
-            $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('xhelp_departments'), $xoopsDB->prefix('xhelp_status'));
+            "SELECT COUNT(*) as TicketCount, d.department, d.id FROM %s t INNER JOIN %s d ON t.department = d.id  INNER JOIN %s s ON t.status = s.id WHERE s.state = 1 GROUP BY d.department, d.id ORDER BY d.department", 
+        $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('xhelp_departments'), $xoopsDB->prefix('xhelp_status'));
     } else {
         $sql = sprintf(
-            "SELECT COUNT(*) as TicketCount, d.department, d.id FROM %s t INNER JOIN %s j on t.department = j.department INNER JOIN %s d ON t.department = d.id INNER JOIN %s s on t.status = s.id WHERE s.state = 1 AND j.uid = %u GROUP BY d.department, d.id",
-            $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('xhelp_jstaffdept'), $xoopsDB->prefix('xhelp_departments'), $xoopsDB->prefix('xhelp_status'), $xoopsUser->getVar('uid'));
+            "SELECT COUNT(*) as TicketCount, d.department, d.id FROM %s t INNER JOIN %s j on t.department = j.department INNER JOIN %s d ON t.department = d.id INNER JOIN %s s on t.status = s.id WHERE s.state = 1 AND j.uid = %u GROUP BY d.department, d.id", 
+        $xoopsDB->prefix('xhelp_tickets'), $xoopsDB->prefix('xhelp_jstaffdept'), $xoopsDB->prefix('xhelp_departments'), $xoopsDB->prefix('xhelp_status'), $xoopsUser->getVar('uid'));
     }
 
     $ret = $xoopsDB->query($sql);
@@ -127,9 +127,9 @@ function b_xhelp_performance_show($options)
     $depts = array();
     $max_open = 0;
     while ($myrow = $xoopsDB->fetchArray($ret)) {
-        $max_open = max($max_open, $myrow['TicketCount']);
-        $url = xhelpMakeURI(XHELP_BASE_URL . '/index.php', array('op' => 'staffViewAll', 'dept' => $myrow['id'], 'state' => 1));
-        $depts[] = array('id' => $myrow['id'], 'tickets' => $myrow['TicketCount'], 'name' => $myrow['department'], 'url' => $url);
+        $max_open = max($max_open,$myrow['TicketCount']);
+        $url = xhelpMakeURI(XHELP_BASE_URL.'/index.php', array('op'=>'staffViewAll', 'dept'=>$myrow['id'], 'state'=>1));
+        $depts[] = array('id'=>$myrow['id'], 'tickets'=>$myrow['TicketCount'], 'name'=>$myrow['department'], 'url'=>$url);
     }
 
     if (count($depts) == 0) {
@@ -138,7 +138,7 @@ function b_xhelp_performance_show($options)
 
     if ($block['use_img']) {
         //Retrieve the image path for each department
-        for ($i = 0; $i < count($depts); $i++) {
+        for($i = 0; $i < count($depts); $i++) {
             $depts[$i]['img'] = _xhelp_getDeptImg($depts[$i]['id'], $depts[$i]['tickets'], $max_open, $i);
         }
     }
@@ -155,22 +155,22 @@ function _xhelp_getDeptImg($dept, $tickets, $max, $counter = 0)
     $max = intval($max);
     $counter = intval($counter);
 
-    $width = 60; //Width of resulting image
+    $width = 60;   //Width of resulting image
 
-    $cachedir_local = XHELP_CACHE_PATH . '/';
-    $cachedir_www = XHELP_CACHE_URL . '/';
-    $imgdir = XHELP_IMAGE_PATH . '/';
+    $cachedir_local = XHELP_CACHE_PATH .'/';
+    $cachedir_www = XHELP_CACHE_URL .'/';
+    $imgdir = XHELP_IMAGE_PATH.'/';
     $filename = "xhelp_perf_$dept.png";
 
     $colors = array('green', 'orange', 'red', 'blue');
 
-    if (!is_file($cachedir_local . $filename)) {
+    if (!is_file($cachedir_local.$filename)) {
         //Generate Progress Image
-        $cur_color = $colors[$counter % count($colors)];
-        $bg = @imagecreatefrompng($imgdir . 'dept-bg.png');
-        $fill = @imagecreatefrompng($imgdir . "dept-$cur_color.png");
-        $bg_cap = @imagecreatefrompng($imgdir . 'dept-bg-cap.png');
-        $fill_cap = @imagecreatefrompng($imgdir . 'dept-fill-cap.png');
+        $cur_color  = $colors[$counter % count($colors)];
+        $bg         = @imagecreatefrompng($imgdir.'dept-bg.png');
+        $fill       = @imagecreatefrompng($imgdir."dept-$cur_color.png");
+        $bg_cap     = @imagecreatefrompng($imgdir.'dept-bg-cap.png');
+        $fill_cap   = @imagecreatefrompng($imgdir.'dept-fill-cap.png');
         $fill_width = round((($width - imagesx($bg_cap)) * $tickets) / $max) - imagesx($fill_cap);
 
         $image = imagecreatetruecolor($width, imagesy($bg));
@@ -179,18 +179,18 @@ function _xhelp_getDeptImg($dept, $tickets, $max, $counter = 0)
         imagecopy($image, $fill, 0, 0, 0, 0, $fill_width, imagesy($fill));
         imagecopy($image, $fill_cap, $fill_width, 0, 0, 0, imagesx($fill_cap), imagesy($fill_cap));
 
-        imagepng($image, $cachedir_local . $filename);
+        imagepng($image, $cachedir_local.$filename);
     }
 
-    return ($cachedir_www . $filename);
+    return ($cachedir_www.$filename);
 }
 
 function b_xhelp_recent_show($options)
 {
-    if (!isset($_COOKIE['xhelp_recent_tickets'])) {
+    if(!isset($_COOKIE['xhelp_recent_tickets'])){
         return false;
     } else {
-        $tmp = $_COOKIE['xhelp_recent_tickets'];
+        $tmp   = $_COOKIE['xhelp_recent_tickets'];
     }
 
     $block = array();
@@ -198,7 +198,7 @@ function b_xhelp_recent_show($options)
     if (strlen($tmp) > 0) {
         $tmp2 = explode(',', $tmp);
 
-        $crit = new Criteria('id', "(" . $tmp . ")", 'IN', 't');
+        $crit    = new Criteria('id', "(". $tmp . ")", 'IN', 't');
         $hTicket = xhelpGetHandler('ticket');
         $tickets = $hTicket->getObjects($crit, true);
 
@@ -207,15 +207,15 @@ function b_xhelp_recent_show($options)
                 $ticket =& $tickets[intval($ele)];
 
                 $overdue = false;
-                if ($ticket->isOverdue()) {
+                if($ticket->isOverdue()){
                     $overdue = true;
                 }
 
                 $block['tickets'][] = array('id' => $ticket->getVar('id'),
-                                            'trim_subject' => xoops_substr($ticket->getVar('subject'), 0, 25),
-                                            'subject' => $ticket->getVar('subject'),
-                                            'url' => XOOPS_URL . '/modules/xhelp/ticket.php?id=' . $ticket->getVar('id'),
-                                            'overdue' => $overdue);
+                            'trim_subject' => xoops_substr($ticket->getVar('subject'), 0, 25),
+                            'subject' => $ticket->getVar('subject'),
+                            'url' => XOOPS_URL . '/modules/xhelp/ticket.php?id='.$ticket->getVar('id'),
+                            'overdue' => $overdue);
             }
         }
         $block['ticketcount'] = count($tickets);
@@ -234,10 +234,10 @@ function b_xhelp_actions_show()
     $module_handler =& xoops_gethandler('module');
     $config_handler =& xoops_gethandler('config');
     $member_handler =& xoops_gethandler('member');
-    $hTickets =& xhelpGetHandler('ticket');
-    $hMembership =& xhelpGetHandler('membership');
-    $hStaff =& xhelpGetHandler('staff');
-    $hDepartment =& xhelpGetHandler('department');
+    $hTickets       =& xhelpGetHandler('ticket');
+    $hMembership    =& xhelpGetHandler('membership');
+    $hStaff         =& xhelpGetHandler('staff');
+    $hDepartment    =& xhelpGetHandler('department');
 
     //Don't show block for anonymous users or for non-staff members
     if (!$xoopsUser) {
@@ -253,11 +253,11 @@ function b_xhelp_actions_show()
 
     $myPage = $_SERVER['PHP_SELF'];
     $currentPage = substr(strrchr($myPage, "/"), 1);
-    if (($currentPage <> 'ticket.php') || ($xoopsModuleConfig['xhelp_staffTicketActions'] <> 2)) {
+    if(($currentPage <> 'ticket.php') || ($xoopsModuleConfig['xhelp_staffTicketActions'] <> 2)){
         return false;
     }
 
-    if (isset($_GET['id'])) {
+    if(isset($_GET['id'])){
         $block['ticketid'] = intval($_GET['id']);
     } else {
         return false;
@@ -269,16 +269,18 @@ function b_xhelp_actions_show()
     }
 
 
-    if ($xoopsModuleConfig['xhelp_staffTicketActions'] == 2) {
+
+
+    if($xoopsModuleConfig['xhelp_staffTicketActions'] == 2){
         $aOwnership = array();
         $aOwnership[] = array('uid' => 0,
                               'uname' => _XHELP_NO_OWNER);
-        if (isset($staff)) {
-            foreach ($staff as $stf) {
+        if(isset($staff)){
+            foreach($staff as $stf){
                 //** BTW - Need to have a way to get all XoopsUser objects for the staff in 1 shot
                 //$own =& $member_handler->getUser($stf->getVar('uid'));    // Create user object
-                $aOwnership[] = array('uid' => $stf->getVar('uid'),
-                                      'uname' => '');
+                $aOwnership[] = array('uid'=>$stf->getVar('uid'),
+                                              'uname'=>'');
                 $all_users[$stf->getVar('uid')] = '';
             }
         } else {
@@ -292,34 +294,34 @@ function b_xhelp_actions_show()
         $sql = sprintf("SELECT uid, uname, name FROM %s WHERE uid IN (%s)", $xoopsDB->prefix('users'), implode(array_keys($all_users), ','));
         $ret = $xoopsDB->query($sql);
         $displayName = $xoopsModuleConfig['xhelp_displayName'];
-        while ($member = $xoopsDB->fetchArray($ret)) {
-            if (($displayName == 2) && ($member['name'] <> '')) {
+        while($member = $xoopsDB->fetchArray($ret)){
+            if(($displayName == 2) && ($member['name'] <> '')){
                 $users[$member['uid']] = $member['name'];
             } else {
                 $users[$member['uid']] = $member['uname'];
             }
         }
 
-        for ($i = 0; $i < count($aOwnership); $i++) {
-            if (isset($users[$aOwnership[$i]['uid']])) {
+        for($i=0;$i<count($aOwnership);$i++){
+            if(isset($users[$aOwnership[$i]['uid']])){
                 $aOwnership[$i]['uname'] = $users[$aOwnership[$i]['uid']];
             }
         }
         $block['ownership'] = $aOwnership;
     }
 
-    $block['imagePath'] = XHELP_IMAGE_URL . '/';
-    $block['xhelp_priorities'] = array(1, 2, 3, 4, 5);
-    $block['xhelp_priorities_desc'] = array('5' => _XHELP_PRIORITY5, '4' => _XHELP_PRIORITY4, '3' => _XHELP_PRIORITY3, '2' => _XHELP_PRIORITY2, '1' => _XHELP_PRIORITY1);
-    $block['ticket_priority'] = $ticketInfo->getVar('priority');
-    $block['ticket_status'] = $ticketInfo->getVar('status');
-    $block['xhelp_status0'] = _XHELP_STATUS0;
-    $block['xhelp_status1'] = _XHELP_STATUS1;
-    $block['xhelp_status2'] = _XHELP_STATUS2;
+    $block['imagePath'] = XHELP_IMAGE_URL.'/';
+    $block['xhelp_priorities']      = array(1, 2, 3, 4, 5);
+    $block['xhelp_priorities_desc'] = array('5' => _XHELP_PRIORITY5, '4' => _XHELP_PRIORITY4,'3' => _XHELP_PRIORITY3, '2' => _XHELP_PRIORITY2, '1' => _XHELP_PRIORITY1);
+    $block['ticket_priority']  = $ticketInfo->getVar('priority');
+    $block['ticket_status']    = $ticketInfo->getVar('status');
+    $block['xhelp_status0']    = _XHELP_STATUS0;
+    $block['xhelp_status1']    = _XHELP_STATUS1;
+    $block['xhelp_status2']    = _XHELP_STATUS2;
     $block['ticket_ownership'] = $ticketInfo->getVar('ownership');
 
     $block['xhelp_has_changeOwner'] = false;
-    if ($ticketInfo->getVar('uid') == $xoopsUser->getVar('uid')) {
+    if($ticketInfo->getVar('uid') == $xoopsUser->getVar('uid')){
         $block['xhelp_has_addResponse'] = true;
     } else {
         $block['xhelp_has_addResponse'] = false;
@@ -332,19 +334,19 @@ function b_xhelp_actions_show()
     $block['xhelp_has_mergeTicket'] = false;
     $rowspan = 2;
     $checkRights = array(
-        XHELP_SEC_TICKET_OWNERSHIP => array('xhelp_has_changeOwner', false),
-        XHELP_SEC_RESPONSE_ADD => array('xhelp_has_addResponse', false),
-        XHELP_SEC_TICKET_EDIT => array('xhelp_has_editTicket', true),
-        XHELP_SEC_TICKET_DELETE => array('xhelp_has_deleteTicket', true),
-        XHELP_SEC_TICKET_MERGE => array('xhelp_has_mergeTicket', true),
-        XHELP_SEC_TICKET_PRIORITY => array('xhelp_has_changePriority', false),
-        XHELP_SEC_TICKET_STATUS => array('xhelp_has_changeStatus', false),
-        XHELP_SEC_RESPONSE_EDIT => array('xhelp_has_editResponse', false),
-        XHELP_SEC_FILE_DELETE => array('xhelp_has_deleteFile', false),
-        XHELP_SEC_FAQ_ADD => array('xhelp_has_addFaq', false),
-        XHELP_SEC_TICKET_TAKE_OWNERSHIP => array('xhelp_has_takeOwnership', false));
+    XHELP_SEC_TICKET_OWNERSHIP => array('xhelp_has_changeOwner', false),
+    XHELP_SEC_RESPONSE_ADD => array('xhelp_has_addResponse', false),
+    XHELP_SEC_TICKET_EDIT => array('xhelp_has_editTicket', true),
+    XHELP_SEC_TICKET_DELETE => array('xhelp_has_deleteTicket', true),
+    XHELP_SEC_TICKET_MERGE => array('xhelp_has_mergeTicket', true),
+    XHELP_SEC_TICKET_PRIORITY => array('xhelp_has_changePriority', false),
+    XHELP_SEC_TICKET_STATUS => array('xhelp_has_changeStatus', false),
+    XHELP_SEC_RESPONSE_EDIT => array('xhelp_has_editResponse', false),
+    XHELP_SEC_FILE_DELETE => array('xhelp_has_deleteFile', false),
+    XHELP_SEC_FAQ_ADD => array('xhelp_has_addFaq', false),
+    XHELP_SEC_TICKET_TAKE_OWNERSHIP => array('xhelp_has_takeOwnership', false));
 
-
+     
     $checkStaff =& $hStaff->getByUid($xoopsUser->getVar('uid'));
     // See if this user is accepted for this ticket
     $hTicketEmails =& xhelpGetHandler('ticketEmails');
@@ -353,11 +355,11 @@ function b_xhelp_actions_show()
     $ticketEmails =& $hTicketEmails->getObjects($crit);
 
     //Retrieve all departments
-    $crit = new Criteria('', '');
+    $crit = new Criteria('','');
     $crit->setSort('department');
     $alldepts = $hDepartment->getObjects($crit);
     $aDept = array();
-    foreach ($alldepts as $dept) {
+    foreach($alldepts as $dept){
         $aDept[$dept->getVar('id')] = $dept->getVar('department');
     }
     unset($alldepts);
@@ -365,19 +367,19 @@ function b_xhelp_actions_show()
     $block['departmentid'] = $ticketInfo->getVar('department');
 
 
-    foreach ($checkRights as $right => $desc) {
-        if (($right == XHELP_SEC_RESPONSE_ADD) && count($ticketEmails > 0)) {
+    foreach ($checkRights as $right=>$desc) {
+        if(($right == XHELP_SEC_RESPONSE_ADD) && count($ticketEmails > 0)){
             $block[$desc[0]] = true;
             continue;
         }
-        if (($right == XHELP_SEC_TICKET_STATUS) && count($ticketEmails > 0)) {
+        if(($right == XHELP_SEC_TICKET_STATUS) && count($ticketEmails > 0)){
             $block[$desc[0]] = true;
             continue;
         }
         if ($hasRights = $checkStaff->checkRoleRights($right, $ticketInfo->getVar('department'))) {
             $block[$desc[0]] = true;
             if ($desc[1]) {
-                $rowspan++;
+                $rowspan ++;
             }
         }
 
@@ -391,7 +393,7 @@ function b_xhelp_actions_show()
     $crit->setOrder('ASC');
     $statuses =& $hStatus->getObjects($crit);
     $aStatuses = array();
-    foreach ($statuses as $status) {
+    foreach($statuses as $status){
         $aStatuses[$status->getVar('id')] = array('id' => $status->getVar('id'),
                                                   'desc' => $status->getVar('description'),
                                                   'state' => $status->getVar('state'));
@@ -420,8 +422,8 @@ function b_xhelp_mainactions_show($options)
     global $xoopsUser, $xhelp_isStaff;
     // @todo - use the constant here if possible instead of the raw string
     $dirname = 'xhelp';
-    $block['linkPath'] = XHELP_BASE_URL . '/';
-    $block['imagePath'] = XHELP_IMAGE_URL . '/';
+    $block['linkPath'] = XHELP_BASE_URL.'/';
+    $block['imagePath'] = XHELP_IMAGE_URL.'/';
     $block['menustyle'] = $options[0];
     $block['showicon'] = !$block['menustyle'] && $options[1];
     $block['startitem'] = !$block['menustyle'] ? '<li>' : '';
@@ -429,26 +431,26 @@ function b_xhelp_mainactions_show($options)
     $block['startblock'] = !$block['menustyle'] ? '<ul>' : '<table cellspacing="0"><tr><td id="usermenu">';
     $block['endblock'] = !$block['menustyle'] ? '</ul>' : '</td></tr></table>';
     $block['savedSearches'] = false;
-    $block['items'][0] = array('link' => 'anon_addTicket.php', 'image' => 'addTicket.png', 'text' => _XHELP_MENU_LOG_TICKET);
+    $block['items'][0] = array( 'link' => 'anon_addTicket.php', 'image' => 'addTicket.png', 'text' => _XHELP_MENU_LOG_TICKET );
 
-    if ($xoopsUser) {
-        $block['items'][0] = array('link' => 'index.php', 'image' => 'main.png', 'text' => _XHELP_MENU_MAIN);
-        $block['items'][1] = array('link' => 'addTicket.php', 'image' => 'addTicket.png', 'text' => _XHELP_MENU_LOG_TICKET);
-        $block['items'][2] = array('link' => 'index.php?viewAllTickets=1&op=userViewAll', 'image' => 'ticket.png', 'text' => _XHELP_MENU_ALL_TICKETS);
+    if($xoopsUser){
+        $block['items'][0] = array( 'link' => 'index.php', 'image' => 'main.png', 'text' => _XHELP_MENU_MAIN );
+        $block['items'][1] = array( 'link' => 'addTicket.php', 'image' => 'addTicket.png', 'text' => _XHELP_MENU_LOG_TICKET );
+        $block['items'][2] = array( 'link' => 'index.php?viewAllTickets=1&op=userViewAll', 'image' => 'ticket.png', 'text' => _XHELP_MENU_ALL_TICKETS );
         $hStaff =& xhelpGetHandler('staff');
-        if ($xhelp_staff =& $hStaff->getByUid($xoopsUser->getVar('uid'))) {
+        if($xhelp_staff =& $hStaff->getByUid($xoopsUser->getVar('uid'))){
             $block['whoami'] = 'staff';
-            $block['items'][3] = array('link' => 'search.php', 'image' => 'search2.png', 'text' => _XHELP_MENU_SEARCH);
-            $block['items'][4] = array('link' => 'profile.php', 'image' => 'profile.png', 'text' => _XHELP_MENU_MY_PROFILE);
-            $block['items'][2] = array('link' => 'index.php?viewAllTickets=1&op=staffViewAll', 'image' => 'ticket.png', 'text' => _XHELP_MENU_ALL_TICKETS);
+            $block['items'][3] = array( 'link' => 'search.php', 'image' => 'search2.png', 'text' => _XHELP_MENU_SEARCH );
+            $block['items'][4] = array( 'link' => 'profile.php', 'image' => 'profile.png', 'text' => _XHELP_MENU_MY_PROFILE );
+            $block['items'][2] = array( 'link' => 'index.php?viewAllTickets=1&op=staffViewAll', 'image' => 'ticket.png', 'text' => _XHELP_MENU_ALL_TICKETS );
             $hSavedSearch =& xhelpGetHandler('savedSearch');
             $savedSearches =& $hSavedSearch->getByUid($xoopsUser->getVar('uid'));
             $aSavedSearches = array();
-            foreach ($savedSearches as $sSearch) {
+            foreach($savedSearches as $sSearch){
                 $aSavedSearches[$sSearch->getVar('id')] = array('id' => $sSearch->getVar('id'),
-                                                                'name' => $sSearch->getVar('name'),
-                                                                'search' => $sSearch->getVar('search'),
-                                                                'pagenav_vars' => $sSearch->getVar('pagenav_vars'));
+																'name' => $sSearch->getVar('name'),
+																'search' => $sSearch->getVar('search'),
+																'pagenav_vars' => $sSearch->getVar('pagenav_vars'));
             }
             $block['savedSearches'] = (count($aSavedSearches) < 1) ? false : $aSavedSearches;
         }
@@ -459,17 +461,17 @@ function b_xhelp_mainactions_show($options)
 
 function b_xhelp_mainactions_edit($options)
 {
-    $form = "<table border='0'>";
+    $form  = "<table border='0'>";
 
     // Menu style
-    $form .= "<tr><td>" . _MB_XHELP_TEXT_MENUSTYLE . "</td><td>";
-    $form .= "<input type='radio' name='options[0]' value='0'" . (($options[0] == 0) ? " checked='checked'" : "") . " />" . _MB_XHELP_OPTION_MENUSTYLE1 . "";
-    $form .= "<input type='radio' name='options[0]' value='1'" . (($options[0] == 1) ? " checked='checked'" : "") . " />" . _MB_XHELP_OPTION_MENUSTYLE2 . "</td></tr>";
+    $form .= "<tr><td>"._MB_XHELP_TEXT_MENUSTYLE."</td><td>";
+    $form .= "<input type='radio' name='options[0]' value='0'".(($options[0]==0)?" checked='checked'":"")." />"._MB_XHELP_OPTION_MENUSTYLE1."";
+    $form .= "<input type='radio' name='options[0]' value='1'".(($options[0]==1)?" checked='checked'":"")." />"._MB_XHELP_OPTION_MENUSTYLE2."</td></tr>";
 
     // Auto select last items
-    $form .= "<tr><td>" . _MB_XHELP_TEXT_SHOWICON . "</td><td>";
-    $form .= "<input type='radio' name='options[1]' value='0'" . (($options[1] == 0) ? " checked='checked'" : "") . " />" . _NO . "";
-    $form .= "<input type='radio' name='options[1]' value='1'" . (($options[1] == 1) ? " checked='checked'" : "") . " />" . _YES . "</td></tr>";
+    $form .= "<tr><td>"._MB_XHELP_TEXT_SHOWICON."</td><td>";
+    $form .= "<input type='radio' name='options[1]' value='0'".(($options[1]==0)?" checked='checked'":"")." />"._NO."";
+    $form .= "<input type='radio' name='options[1]' value='1'".(($options[1]==1)?" checked='checked'":"")." />"._YES."</td></tr>";
 
     $form .= "</table>";
     return $form;

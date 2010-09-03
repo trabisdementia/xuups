@@ -6,13 +6,13 @@ if (!defined('XHELP_CLASS_PATH')) {
 }
 
 //Include the Event Subsystem classes
-require_once(XHELP_CLASS_PATH . '/eventService.php');
-require_once(XHELP_CLASS_PATH . '/xhelpService.php');
-require_once(XHELP_CLASS_PATH . '/cacheService.php');
-require_once(XHELP_CLASS_PATH . '/logService.php');
-require_once(XHELP_CLASS_PATH . '/notificationService.php');
-require_once(XHELP_CLASS_PATH . '/staffService.php');
-require_once(XHELP_CLASS_PATH . '/firnService.php');
+require_once(XHELP_CLASS_PATH.'/eventService.php');
+require_once(XHELP_CLASS_PATH.'/xhelpService.php');
+require_once(XHELP_CLASS_PATH.'/cacheService.php');
+require_once(XHELP_CLASS_PATH.'/logService.php');
+require_once(XHELP_CLASS_PATH.'/notificationService.php');
+require_once(XHELP_CLASS_PATH.'/staffService.php');
+require_once(XHELP_CLASS_PATH.'/firnService.php');
 
 //Create an instance of each event class
 $xhelpEventSrv =& xhelpNewEventService();

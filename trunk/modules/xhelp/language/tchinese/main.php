@@ -2,10 +2,10 @@
 //$Id：main.php,v 1.114 2005/10/19 18:56:37 eric_juden Exp $
 
 //index.php
-define('XHELP_QRY_STAFF_HIGHPRIORITY', '工作團隊最高優先權');
-define('XHELP_QRY_STAFF_NEW', '新工作團隊');
-define('XHELP_QRY_STAFF_MINE', '工作團隊');
-define('XHELP_QRY_STAFF_ALL', '所有工作團隊');
+define('XHELP_QRY_STAFF_HIGHPRIORITY','工作團隊最高優先權');
+define('XHELP_QRY_STAFF_NEW','新工作團隊');
+define('XHELP_QRY_STAFF_MINE','工作團隊');
+define('XHELP_QRY_STAFF_ALL','所有工作團隊');
 
 
 define('_XHELP_CATEGORY1', '分配從屬關係');
@@ -39,6 +39,7 @@ define('_XHELP_SEC_TEXT_RESPONSE_EDIT', '編輯回覆');
 define('_XHELP_SEC_TEXT_TICKET_MERGE', '合併傳票');
 define('_XHELP_SEC_TEXT_FILE_DELETE', '刪除附加檔案');
 define('_XHELP_JSC_TEXT_DELETE', '您確認想刪除這個傳票？');
+
 
 
 define('_XHELP_MESSAGE_ADD_DEPT', '部門增加成功');
@@ -320,6 +321,7 @@ define('_XHELP_ROLE_VAL2', 241);
 define('_XHELP_ROLE_VAL3', 0);
 
 
+
 // Ticket.php - Actions
 define('_XHELP_TEXT_SELECTED', '選擇操作');
 define('_XHELP_TEXT_ADD_RESPONSE', '發表回應');
@@ -337,9 +339,9 @@ define('_XHELP_TEXT_AUTO_REFRESH1', '每1分鐘自動更新');
 define('_XHELP_TEXT_AUTO_REFRESH2', '每5分鐘自動更新');
 define('_XHELP_TEXT_AUTO_REFRESH3', '每10分鐘自動更新');
 define('_XHELP_TEXT_AUTO_REFRESH4', '每30分鐘自動更新');
-define('_XHELP_AUTO_REFRESH0', 0); // Change these to
-define('_XHELP_AUTO_REFRESH1', 60); // adjust the values
-define('_XHELP_AUTO_REFRESH2', 300); // in the select box
+define('_XHELP_AUTO_REFRESH0', 0);          // Change these to
+define('_XHELP_AUTO_REFRESH1', 60);         // adjust the values 
+define('_XHELP_AUTO_REFRESH2', 300);        // in the select box
 define('_XHELP_AUTO_REFRESH3', 600);
 define('_XHELP_AUTO_REFRESH4', 1800);
 
@@ -425,9 +427,9 @@ define('_XHELP_NO_FILES_ERROR', '沒有發現檔案');
 
 define('_XHELP_SIG_SPACER', '<br /><br />-------------------------------<br />');
 define('_XHELP_COMMMENTS', '評論？');
-define("_XHELP_ANNOUNCE_READMORE", "細節...");
-define("_XHELP_ANNOUNCE_ONECOMMENT", "1 評論");
-define("_XHELP_ANNOUNCE_NUMCOMMENTS", "%s評論");
+define("_XHELP_ANNOUNCE_READMORE","細節...");
+define("_XHELP_ANNOUNCE_ONECOMMENT","1 評論");
+define("_XHELP_ANNOUNCE_NUMCOMMENTS","%s評論");
 define("_XHELP_TICKET_MD5SIGNATURE", "支持關鍵詞");
 
 
@@ -448,10 +450,10 @@ define('_XHELP_TIME_DAY', '日');
 define('_XHELP_TIME_WEEK', '周');
 define('_XHELP_TIME_YEAR', '年');
 
-define('_XHELP_MAILEVENT_CLASS0', 0); // Connection message
-define('_XHELP_MAILEVENT_CLASS1', 1); // Parse message
-define('_XHELP_MAILEVENT_CLASS2', 2); // Storage message
-define('_XHELP_MAILEVENT_CLASS3', 3); // General message
+define('_XHELP_MAILEVENT_CLASS0', 0);     // Connection message
+define('_XHELP_MAILEVENT_CLASS1', 1);     // Parse message
+define('_XHELP_MAILEVENT_CLASS2', 2);     // Storage message
+define('_XHELP_MAILEVENT_CLASS3', 3);     // General message
 
 define('_XHELP_MAILEVENT_DESC0', '不能連接到伺服器。');
 define('_XHELP_MAILEVENT_DESC1', '不能分析消息。');

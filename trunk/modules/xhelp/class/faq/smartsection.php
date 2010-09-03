@@ -7,8 +7,8 @@ if (!defined('XHELP_CLASS_PATH')) {
 }
 
 // ** Define any site specific variables here **
-define('XHELP_SSECTION_PATH', XOOPS_ROOT_PATH . '/modules/smartsection');
-define('XHELP_SSECTION_URL', XHELP_SITE_URL . '/modules/smartsection');
+define('XHELP_SSECTION_PATH', XOOPS_ROOT_PATH .'/modules/smartsection');
+define('XHELP_SSECTION_URL', XHELP_SITE_URL .'/modules/smartsection');
 // ** End site specific variables **
 
 // What features should be enabled for new smartsection items
@@ -24,13 +24,12 @@ define('XHELP_SSECTION_FORCEAPPROVAL', 0); //Should articles be reviewed prior t
 // @todo - can this declaration be moved into the initialization sequence so
 // that each class does not need to include its interface?
 //Include the base faqAdapter interface (required)
-require_once(XHELP_CLASS_PATH . '/faqAdapter.php');
+require_once(XHELP_CLASS_PATH .'/faqAdapter.php');
 
 //These functions are required to work with the smartsection application directly
-@include(XHELP_SSECTION_PATH . '/include/functions.php');
+@include(XHELP_SSECTION_PATH .'/include/functions.php');
 
-class xhelpSmartsectionAdapter extends xhelpFaqAdapter
-{
+class xhelpSmartsectionAdapter extends xhelpFaqAdapter {
 
     /**
      * Does application support categories?
@@ -74,7 +73,7 @@ class xhelpSmartsectionAdapter extends xhelpFaqAdapter
         // variables are initialized properly.
         parent::init();
     }
-
+     
     /**
      * getCategories: retrieve the categories for the module
      * @return ARRAY Array of xhelpFaqCategory
@@ -87,7 +86,7 @@ class xhelpSmartsectionAdapter extends xhelpFaqAdapter
 
         // Get all the categories for the application
         $hSmartCategory =& smartsection_gethandler('category');
-        $categories =& $hSmartCategory->getCategories(0, 0, -1);
+        $categories =& $hSmartCategory->getCategories(0,0,-1);
 
         //Convert the module specific category to the
         //xhelpFaqCategory object for standarization
@@ -131,13 +130,13 @@ class xhelpSmartsectionAdapter extends xhelpFaqAdapter
         //only supports single categories use the first element
         //in the array
         $categories = $faq->getVar('categories');
-        $categories = intval($categories[0]); // Change array of categories to 1 category
+        $categories = intval($categories[0]);       // Change array of categories to 1 category
 
         // Putting the values about the ITEM in the ITEM object
         $itemObj->setVar('categoryid', $categories);
         $itemObj->setVar('title', $faq->getVar('subject', 'e'));
-        $itemObj->setVar('summary', '[b]' . ucfirst(_XHELP_TEXT_PROBLEM) . "[/b]\r\n" . $faq->getVar('problem', 'e'));
-        $itemObj->setVar('body', '[b]' . ucfirst(_XHELP_TEXT_SOLUTION) . "[/b]\r\n" . $faq->getVar('solution', 'e'));
+        $itemObj->setVar('summary', '[b]'. ucfirst(_XHELP_TEXT_PROBLEM) ."[/b]\r\n". $faq->getVar('problem', 'e'));
+        $itemObj->setVar('body', '[b]'. ucfirst(_XHELP_TEXT_SOLUTION) . "[/b]\r\n". $faq->getVar('solution', 'e'));
 
         $itemObj->setVar('dohtml', XHELP_SSECTION_DOHTML);
         $itemObj->setVar('dosmiley', XHELP_SSECTION_DOSMILEY);
@@ -157,11 +156,11 @@ class xhelpSmartsectionAdapter extends xhelpFaqAdapter
         }
 
         // Storing the item object in the database
-        if ($ret = $itemObj->store()) {
+        if ( $ret = $itemObj->store() ) {
             $faq->setVar('id', $itemObj->getVar('itemid'));
             $faq->setVar('url', $this->makeFaqUrl($faq));
-
-            if (!$this->_articleNeedsApproval()) {
+             
+            if (! $this->_articleNeedsApproval()) {
                 // Send notifications
                 $itemObj->sendNotifications(array(_SSECTION_NOT_ITEM_PUBLISHED));
             } else {
@@ -186,13 +185,12 @@ class xhelpSmartsectionAdapter extends xhelpFaqAdapter
      */
     function makeFaqUrl(&$faq)
     {
-        return XHELP_SSECTION_URL . "/item.php?itemid=" . $faq->getVar('id');
+        return XHELP_SSECTION_URL ."/item.php?itemid=".$faq->getVar('id');
     }
 
     function _articleNeedsApproval()
     {
-        return (XHELP_SSECTION_FORCEAPPROVAL == 2 && $ssConfig['autoapprove_submitted'] == 0) || XHELP_SSECTION_FORCEAPPROVAL == 1;
+        return (XHELP_SSECTION_FORCEAPPROVAL == 2 && $ssConfig['autoapprove_submitted'] ==  0) || XHELP_SSECTION_FORCEAPPROVAL == 1;
     }
 }
-
 ?>

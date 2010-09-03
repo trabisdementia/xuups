@@ -9,7 +9,8 @@ if (!defined('XHELP_CONSTANTS_INCLUDED')) {
     exit();
 }
 
-require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
+
 
 
 /**
@@ -24,7 +25,6 @@ require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
 class xhelpTicketField extends XoopsObject
 {
     var $_departments = array();
-
     /**
      * Class Constructor
      *
@@ -38,7 +38,7 @@ class xhelpTicketField extends XoopsObject
         $this->initVar('name', XOBJ_DTYPE_TXTBOX, null, true, 64);
         $this->initVar('description', XOBJ_DTYPE_TXTBOX, '', false, 255);
         $this->initVar('fieldname', XOBJ_DTYPE_TXTBOX, null, true, 64);
-        $this->initVar('controltype', XOBJ_DTYPE_INT, XHELP_CONTROL_TXTBOX, true);
+        $this->initVar('controltype', XOBJ_DTYPE_INT,  XHELP_CONTROL_TXTBOX, true);
         $this->initVar('datatype', XOBJ_DTYPE_TXTBOX, null, true, 64);
         $this->initVar('required', XOBJ_DTYPE_INT, false, true);
         $this->initVar('fieldlength', XOBJ_DTYPE_INT, 255, true);
@@ -56,7 +56,7 @@ class xhelpTicketField extends XoopsObject
         }
     }
 
-
+     
     /**
      * Get the array of possible values for this custom field
      * @return array A hash table of name/value pairs for the field
@@ -84,14 +84,14 @@ class xhelpTicketField extends XoopsObject
             if (!is_array($values)) {
                 $values = array();
             }
-            foreach ($val_arr as $value => $desc) {
+            foreach ($val_arr as $value=>$desc) {
                 $values[$value] = $desc;
             }
             $this->setVar('fieldvalues', $values);
         }
     }
 
-    function addValue($desc, $value = null)
+    function addValue($desc, $value=null)
     {
         //Add value to array
         $values =& $this->getVar('fieldvalues');
@@ -139,23 +139,23 @@ class xhelpTicketField extends XoopsObject
         }
 
         $aValues = array();
-        foreach ($values as $key => $value) {
+        foreach($values as $key=>$value){
             $aValues[] = array($key, $value);
         }
 
         $arr = array('id' => $this->getVar('id'),
-                     'name' => $this->getVar('name'),
-                     'desc' => $this->getVar('description'),
-                     'fieldname' => $this->getVar('fieldname'),
-                     'defaultvalue' => $this->getVar('defaultvalue'),
-                     'currentvalue' => '',
-                     'controltype' => $this->getVar('controltype'),
-                     'required' => $this->getVar('required'),
-                     'fieldlength' => $this->getVar('fieldlength'),
-                     'weight' => $this->getVar('weight'),
-                     'fieldvalues' => $aValues,
-                     'datatype' => $this->getVar('datatype'),
-                     'validation' => $this->getVar('validation'));
+                      'name' => $this->getVar('name'),
+                      'desc' => $this->getVar('description'),
+                      'fieldname' => $this->getVar('fieldname'),
+                      'defaultvalue' => $this->getVar('defaultvalue'),
+                      'currentvalue' => '',
+                      'controltype' => $this->getVar('controltype'),
+                      'required' => $this->getVar('required'),
+                      'fieldlength' => $this->getVar('fieldlength'),
+                      'weight' => $this->getVar('weight'),
+                      'fieldvalues' => $aValues,
+                      'datatype' => $this->getVar('datatype'),
+                      'validation' => $this->getVar('validation'));
         return $arr;
     }
 }
@@ -165,16 +165,16 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
     /**
      * Name of child class
      *
-     * @var    string
-     * @access    private
+     * @var	string
+     * @access	private
      */
     var $classname = 'xhelpTicketField';
 
     /**
      * DB Table Name
      *
-     * @var         string
-     * @access     private
+     * @var 		string
+     * @access 	private
      */
     var $_dbtable = 'xhelp_ticket_fields';
     var $id = 'id';
@@ -182,7 +182,7 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
     /**
      * Constructor
      *
-     * @param    object   $db    reference to a xoopsDB object
+     * @param	object   $db    reference to a xoopsDB object
      */
     function xhelpTicketFieldHandler(&$db)
     {
@@ -198,11 +198,11 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
 
         $sql = sprintf("INSERT INTO %s (id, name, description, fieldname, controltype, datatype, required, fieldlength, weight, fieldvalues, defaultvalue, validation)
             VALUES (%u, %s, %s, %s, %u, %s, %u, %u, %s, %s, %s, %s)", $this->_db->prefix($this->_dbtable), $id,
-                       $this->_db->quoteString($name), $this->_db->quoteString($description), $this->_db->quoteString($fieldname), $controltype, $this->_db->quoteString($datatype),
-                       $required, $fieldlength, $weight, $this->_db->quoteString($fieldvalues), $this->_db->quoteString($defaultvalue), $this->_db->quoteString($validation));
+        $this->_db->quoteString($name), $this->_db->quoteString($description), $this->_db->quoteString($fieldname), $controltype, $this->_db->quoteString($datatype),
+        $required, $fieldlength, $weight, $this->_db->quoteString($fieldvalues), $this->_db->quoteString($defaultvalue), $this->_db->quoteString($validation));
 
         return $sql;
-
+         
     }
 
     function _updateQuery(&$obj)
@@ -214,8 +214,8 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
 
         $sql = sprintf("UPDATE %s SET name = %s, description = %s, fieldname = %s, controltype = %u, datatype = %s, required = %u, fieldlength = %u, weight = %u, fieldvalues = %s,
             defaultvalue = %s, validation = %s WHERE id = %u", $this->_db->prefix($this->_dbtable),
-                       $this->_db->quoteString($name), $this->_db->quoteString($description), $this->_db->quoteString($fieldname), $controltype,
-                       $this->_db->quoteString($datatype), $required, $fieldlength, $weight, $this->_db->quoteString($fieldvalues), $this->_db->quoteString($defaultvalue), $this->_db->quoteString($validation), $id);
+        $this->_db->quoteString($name), $this->_db->quoteString($description), $this->_db->quoteString($fieldname), $controltype,
+        $this->_db->quoteString($datatype), $required, $fieldlength, $weight, $this->_db->quoteString($fieldvalues), $this->_db->quoteString($defaultvalue),$this->_db->quoteString($validation), $id);
 
         return $sql;
     }
@@ -230,12 +230,12 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
     function insert(&$obj, $force = false)
     {
         $hFDept =& xhelpGetHandler('ticketFieldDepartment');
-        if (!$obj->isNew()) {
+        if(!$obj->isNew()) {
             $old_obj =& $this->get($obj->getVar('id'));
 
             $old_name = $old_obj->getVar('fieldname');
             $new_name = $obj->getVar('fieldname');
-
+             
             $add_field = false;
             $alter_table = ($old_name != $new_name) || ($old_obj->getVar('fieldlength') != $obj->getVar('fieldlength')) || ($old_obj->getVar('controltype') != $obj->getVar('controltype')) || ($old_obj->getVar('datatype') != $obj->getVar('datatype'));
         } else {
@@ -266,7 +266,7 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
 
     }
 
-    function delete($obj, $force = false)
+    function delete($obj, $force=false)
     {
         //Remove FieldDepartment Records
         $hFDept =& xhelpGetHandler('ticketFieldDepartment');
@@ -295,7 +295,7 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
     {
 
         $controltype = $obj->getVar('controltype');
-        $datatype = $obj->getVar('datatype');
+        $datatype    = $obj->getVar('datatype');
         $fieldlength = $obj->getVar('fieldlength');
 
         $mysqldb = array();
@@ -304,10 +304,10 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
         {
             case XHELP_CONTROL_TXTBOX:
 
-                switch ($datatype)
+                switch($datatype)
                 {
                     case _XHELP_DATATYPE_TEXT:
-                        if ($fieldlength <= 255) {
+                        if ($fieldlength <=255) {
                             $mysqldb['fieldtype'] = 'VARCHAR';
                         } elseif ($fieldlength <= 65535) {
                             $mysqldb['fieldtype'] = 'TEXT';
@@ -335,9 +335,9 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
                 break;
 
             case XHELP_CONTROL_TXTAREA:
-                if ($fieldlength <= 255) {
+                if ($fieldlength <=255) {
                     $mysqldb['fieldtype'] = 'VARCHAR';
-                } elseif ($fieldlength <= 65535) {
+                } elseif ($fieldlength  <= 65535) {
                     $mysqldb['fieldtype'] = 'TEXT';
                     $mysqldb['length'] = 0;
                 } elseif ($fieldlength <= 16777215) {
@@ -350,10 +350,10 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
                 break;
 
             case XHELP_CONTROL_SELECT:
-                switch ($datatype)
+                switch($datatype)
                 {
                     case _XHELP_DATATYPE_TEXT:
-                        if ($fieldlength <= 255) {
+                        if ($fieldlength <=255) {
                             $mysqldb['fieldtype'] = 'VARCHAR';
                         } elseif ($fieldlength <= 65535) {
                             $mysqldb['fieldtype'] = 'TEXT';
@@ -386,10 +386,10 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
                 break;
 
             case XHELP_CONTROL_RADIOBOX:
-                switch ($datatype)
+                switch($datatype)
                 {
                     case _XHELP_DATATYPE_TEXT:
-                        if ($fieldlength <= 255) {
+                        if ($fieldlength <=255) {
                             $mysqldb['fieldtype'] = 'VARCHAR';
                         } elseif ($fieldlength <= 65535) {
                             $mysqldb['fieldtype'] = 'TEXT';
@@ -425,7 +425,7 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
                 $mysqldb['fieldtype'] = 'VARCHAR';
                 $mysqldb['length'] = 255;
                 break;
-
+                 
             default:
                 $mysqldb['fieldtype'] = 'VARCHAR';
                 $mysqldb['length'] = 255;
@@ -434,5 +434,4 @@ class xhelpTicketFieldHandler extends xhelpBaseObjectHandler
         return $mysqldb;
     }
 }
-
 ?>

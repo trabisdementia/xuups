@@ -5,13 +5,12 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-define('XHELP_XFAQ_PATH', XOOPS_ROOT_PATH . '/modules/xoopsfaq');
-define('XHELP_XFAQ_URL', XOOPS_URL . '/modules/xoopsfaq');
+define('XHELP_XFAQ_PATH', XOOPS_ROOT_PATH .'/modules/xoopsfaq');
+define('XHELP_XFAQ_URL', XOOPS_URL .'/modules/xoopsfaq');
 
-require_once(XHELP_CLASS_PATH . '/faqAdapter.php');
+require_once(XHELP_CLASS_PATH .'/faqAdapter.php');
 
-class xhelpXoopsfaqAdapter extends xhelpFaqAdapter
-{
+class xhelpXoopsfaqAdapter extends xhelpFaqAdapter {
     /**
      * Does application support categories?
      * Possible Values:
@@ -60,7 +59,7 @@ class xhelpXoopsfaqAdapter extends xhelpFaqAdapter
         $sql = sprintf("SELECT category_id, category_title FROM %s ORDER BY category_order", $xoopsDB->prefix("xoopsfaq_categories"));
         $result = $xoopsDB->query($sql);
 
-        if (!$result) {
+        if(!$result){
             return $ret;
         }
 
@@ -96,11 +95,11 @@ class xhelpXoopsfaqAdapter extends xhelpFaqAdapter
         $contents_nosmiley = 0;
         $contents_noxcode = 0;
 
-        $sql = "INSERT INTO " . $xoopsDB->prefix("xoopsfaq_contents") . " (contents_id, category_id, contents_title, contents_contents, contents_time, contents_order, contents_visible, contents_nohtml, contents_nosmiley, contents_noxcode) VALUES (" . $newid . ", " . $category_id . ", '" . $title . "', '" . $contents . "', " . time() . ", " . $contents_order . ", " . $contents_visible . ", " . $contents_nohtml . ", " . $contents_nosmiley . ", " . $contents_noxcode . ")";
+        $sql = "INSERT INTO ".$xoopsDB->prefix("xoopsfaq_contents")." (contents_id, category_id, contents_title, contents_contents, contents_time, contents_order, contents_visible, contents_nohtml, contents_nosmiley, contents_noxcode) VALUES (".$newid.", ".$category_id.", '".$title."', '".$contents."', ".time().", ".$contents_order.", ".$contents_visible.", ".$contents_nohtml.", ".$contents_nosmiley.", ".$contents_noxcode.")";
         $ret = $xoopsDB->query($sql);
 
-        $newid = $xoopsDB->getInsertId(); // Get new faq id from db
-        if ($ret) {
+        $newid = $xoopsDB->getInsertId();   // Get new faq id from db
+        if($ret){
             $faq->setVar('id', $newid);
         }
         return $ret;
@@ -108,7 +107,7 @@ class xhelpXoopsfaqAdapter extends xhelpFaqAdapter
 
     function makeFaqUrl(&$faq)
     {
-        return XHELP_XFAQ_URL . '/index.php?cat_id=' . $faq->getVar('categories') . '#q' . $faq->getVar('id');
+        return XHELP_XFAQ_URL .'/index.php?cat_id='. $faq->getVar('categories') .'#q'. $faq->getVar('id');
     }
 }
 

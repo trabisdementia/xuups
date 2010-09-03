@@ -11,7 +11,8 @@ define('_XHELP_MSGTYPE_TICKET', 1);
 define('_XHELP_MSGTYPE_RESPONSE', 2);
 
 
-require_once(XHELP_PEAR_PATH . '/Mail/mimeDecode.php');
+
+require_once(XHELP_PEAR_PATH.'/Mail/mimeDecode.php');
 
 /**
  * xhelpMessageParser class
@@ -46,23 +47,23 @@ class xhelpEmailParser
      */
     function &parseMessage(&$msg)
     {
-        $struct = $this->_parseMsg($msg);
-        $newMsg = new xhelpParsedMessage($struct);
+        $struct  = $this->_parseMsg($msg);
+        $newMsg  = new xhelpParsedMessage($struct);
 
         return $newMsg;
     }
 
-
+     
     function &_parseMsg(&$msg)
     {
         $arr = array();
         //Parse out attachments/HTML
         $this->_params['input'] = $msg['msg'];
 
-        $structure = Mail_mimeDecode::decode($this->_params);
-        $body = $this->_getBody($structure);
+        $structure   = Mail_mimeDecode::decode($this->_params);
+        $body        = $this->_getBody($structure);
         $arr['hash'] = $this->_parseTicketID($structure->headers['subject']);
-        $arr['msg'] = $this->_parseBody($body);
+        $arr['msg']  = $this->_parseBody($body);
         $arr['mime_struct'] = $structure;
         $arr = array_merge($arr, $this->_parseFrom($structure->headers['from']));
 
@@ -74,7 +75,7 @@ class xhelpEmailParser
     {
         //Extract Name & Email from supplied message
         //eregi("From: (.*)\nTo:",$headers, $addr);
-        eregi('"?([^"<@]*)"?', $from, $name);
+        eregi('"?([^"<@]*)"?',$from, $name);
         //eregi("<(.*)>",$from, $email);
 
         $arr['name'] = $name[1];
@@ -85,10 +86,11 @@ class xhelpEmailParser
         $arr['email'] = $matches[0];
 
 
+
+
         //$arr['email'] = $email[1];
         return $arr;
     }
-
     function _parseTicketID($msg)
     {
         $matches = array();
@@ -98,7 +100,7 @@ class xhelpEmailParser
             // This function assumes that the ticket id is stored in the first
             // regex subquery. If the regex needs to be changed, this logic
             // may need to be changed as well.
-            return ($matches[1]);
+            return($matches[1]);
         }
 
         return '';
@@ -117,18 +119,18 @@ class xhelpEmailParser
 
         $msg = explode("\r\n", $msg);
 
-        for ($i = 0; $i < count($msg); $i++) {
+        for($i = 0; $i < count($msg); $i++) {
             $pattern = array();
             $replace = array();
             $next = $current + 1;
             $prev = $current - 1;
-            $pattern[0] = '/^(>[\s]?){' . $next . '}(.*)/i';
+            $pattern[0] = '/^(>[\s]?){'. $next .'}(.*)/i';
             $replace[0] = '[quote]\\2';
-            $pattern[1] = '/^(>[\s]?){' . $current . '}(.*)/i';
-            $replace[1] = '\\2';
+            $pattern[1]  = '/^(>[\s]?){'.$current.'}(.*)/i';
+            $replace[1]  = '\\2';
 
-            $pattern[2] = '/^(>[\s]?){' . $prev . '}(.*)/i';
-            $replace[2] = '[/quote]\\2';
+            $pattern[2]  = '/^(>[\s]?){'.$prev.'}(.*)/i';
+            $replace[2]  = '[/quote]\\2';
 
             //Check if current line indicates a quote
             if (preg_match($pattern[0], $msg[$i])) {
@@ -146,7 +148,7 @@ class xhelpEmailParser
                     } else {
 
                         $msg[$i] = preg_replace($pattern[2], $replace[2], $msg[$i]);
-                        $current--;
+                        $current --;
                     }
                 }
 
@@ -154,12 +156,12 @@ class xhelpEmailParser
 
         }
 
-        return implode("\r\n", $msg);
+        return implode("\r\n",$msg);
     }
 
     function _stripMd5Key($msg)
     {
-        $pattern = '/^\*{4}\s' . _XHELP_TICKET_MD5SIGNATURE . '\s(.)*\*{4}/im';
+        $pattern = '/^\*{4}\s'. _XHELP_TICKET_MD5SIGNATURE . '\s(.)*\*{4}/im';
 
         return (preg_replace($pattern, '', $msg));
     }
@@ -174,7 +176,7 @@ class xhelpEmailParser
         // 2a. subarray of subparts (recursion)?
 
         if (is_array($part)) {
-            foreach ($part as $subpart) {
+            foreach($part as $subpart) {
                 if (!$body = $this->_getBody($subpart, $primary, $secondary)) {
                     continue;
                 } else {
@@ -186,7 +188,7 @@ class xhelpEmailParser
                 return $this->_getBody($part->parts, $primary, $secondary);
             } else {
                 if ($part->ctype_primary == $primary && $part->ctype_secondary == $secondary) {
-                    return ($part->body);
+                    return($part->body);
                 }
             }
         }
@@ -216,15 +218,15 @@ class xhelpParsedMessage
 
     function xhelpParsedMessage(&$msg)
     {
-        $struct =& $msg['mime_struct'];
-        $this->_email = $msg['email'];
-        $this->_name = $msg['name'];
+        $struct         =& $msg['mime_struct'];
+        $this->_email   = $msg['email'];
+        $this->_name    = $msg['name'];
         $this->_headers = $struct->headers;
-
-        $this->_hash = $msg['hash'];
-        $this->_msg = $msg['msg'];
-
-        $this->_msgtype = (strlen($msg['hash']) == 0 ? _XHELP_MSGTYPE_TICKET : _XHELP_MSGTYPE_RESPONSE);
+         
+        $this->_hash        = $msg['hash'];
+        $this->_msg         = $msg['msg'];
+         
+        $this->_msgtype     = (strlen($msg['hash']) == 0 ? _XHELP_MSGTYPE_TICKET : _XHELP_MSGTYPE_RESPONSE);
         $this->_attachments = array();
         $this->_loadAttachments($struct);
     }
@@ -238,7 +240,7 @@ class xhelpParsedMessage
     {
         $pri = $this->getHeader(HEADER_PRIORITY);
 
-        switch ($pri)
+        switch($pri)
         {
             default:
                 return $pri;
@@ -300,7 +302,8 @@ class xhelpParsedMessage
                 $this->_loadAttachments($part->parts);
             } else {
                 if ($part->ctype_primary == 'text' && $part->ctype_secondary == 'plain') {
-                    if (isset($part->disposition) && $part->disposition == 'attachment') {
+                    if (isset($part->disposition) && $part->disposition == 'attachment')
+                    {
                         $this->_addAttachment($part);
                     }
                     // Do Nothing
@@ -314,8 +317,8 @@ class xhelpParsedMessage
     function _addAttachment($part)
     {
         $_attach = array();
-        $_attach['content-type'] = $part->ctype_primary . '/' . $part->ctype_secondary;
-        $_attach['filename'] = (isset($part->d_parameters) ? $this->_cleanFilename($part->d_parameters['filename']) : 'content_' . $part->ctype_primary . '_' . $part->ctype_secondary);
+        $_attach['content-type'] = $part->ctype_primary.'/'.$part->ctype_secondary;
+        $_attach['filename'] = (isset($part->d_parameters)? $this->_cleanFilename($part->d_parameters['filename']) : 'content_'. $part->ctype_primary .'_'.$part->ctype_secondary) ;
         $_attach['content'] = $part->body;
         $this->_attachments[] =& $_attach;
         unset($_attach);
@@ -335,6 +338,7 @@ class xhelpParsedMessage
         $name = str_replace(' ', '_', $name);
         return $name;
     }
+
 
 
 }

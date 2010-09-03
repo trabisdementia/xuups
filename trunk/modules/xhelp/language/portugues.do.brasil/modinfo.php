@@ -68,7 +68,7 @@ define('_MI_XHELP_STAFF_ACTIONS_DSC', 'De que estilo você gostaria de mostar as 
 define('_MI_XHELP_ACTION1', 'Estilo-Em linha');
 define('_MI_XHELP_ACTION2', 'Estilo-Bloco');
 define('_MI_XHELP_DEFAULT_DEPT', 'Departamento Padrão');
-define('_MI_XHELP_DEFAULT_DEPT_DSC', "Este será o departamento padrão que é selecionado na lista ao adicionar um ticket. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Clique aqui</a> para atualizar os departamentos.");
+define('_MI_XHELP_DEFAULT_DEPT_DSC', "Este será o departamento padrão que é selecionado na lista ao adicionar um ticket. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Clique aqui</a> para atualizar os departamentos.");
 define('_MI_XHELP_OVERDUE_TIME', ' Tempo do Ticket vencido e não analizado');
 define('_MI_XHELP_OVERDUE_TIME_DSC', 'Isto determina quanto tempo o departamento responsável tem que terminar um ticket antes que o mesmo fique velho (em horas).');
 define('_MI_XHELP_ALLOW_ANON', 'Permita envio de Ticket por Usuários Anônimos');
@@ -100,11 +100,11 @@ define('_MI_XHELP_TEXT_MANAGE_FIELDS', 'Manage Custom Fields');
 define('_MI_XHELP_TEXT_NOTIFICATIONS', 'Manage Notifications');
 
 //NOTIFICATION vars
-define('_MI_XHELP_DEPT_NOTIFY', 'Departamento');
-define('_MI_XHELP_DEPT_NOTIFYDSC', 'Opções de notificação que aplicam a um certo departamento');
+define('_MI_XHELP_DEPT_NOTIFY','Departamento');
+define('_MI_XHELP_DEPT_NOTIFYDSC','Opções de notificação que aplicam a um certo departamento');
 
-define('_MI_XHELP_TICKET_NOTIFY', 'Ticket');
-define('_MI_XHELP_TICKET_NOTIFYDSC', 'Opções de notificação que aplicam ao ticket atual');
+define('_MI_XHELP_TICKET_NOTIFY','Ticket');
+define('_MI_XHELP_TICKET_NOTIFYDSC','Opções de notificação que aplicam ao ticket atual');
 
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFY', 'Dept: Novo Ticket');
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFYCAP', 'Notificar que um novo ticket foi enviado');

@@ -5,15 +5,14 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-require_once(XHELP_CLASS_PATH . '/faq.php');
+require_once(XHELP_CLASS_PATH .'/faq.php');
 
 
 define('XHELP_FAQ_CATEGORY_SING', 0);
 define('XHELP_FAQ_CATEGORY_MULTI', 1);
 define('XHELP_FAQ_CATEGORY_NONE', 2);
 
-class xhelpFaqAdapter
-{
+class xhelpFaqAdapter {
     var $categoryType = XHELP_FAQ_CATEGORY_SING;
 
     /**
@@ -29,13 +28,13 @@ class xhelpFaqAdapter
      * @access public
      */
     var $meta = array(
-        'name' => '',
-        'author' => '',
-        'author_email' => '',
-        'version' => '',
-        'tested_versions' => '',
-        'url' => '',
-        'module_dir' => '');
+            'name' => '', 
+            'author' => '',
+            'author_email' => '',
+            'version' => '',
+            'tested_versions' => '',
+            'url' => '',
+            'module_dir' => '');
 
     /**
      * Perform any initilization needed
@@ -81,7 +80,7 @@ class xhelpFaqAdapter
         $module_dir = $this->meta['module_dir'];
         $module_name = $this->meta['name'];
 
-        if ($module_dir == '' || $module_name == '') { // Sanity check
+        if($module_dir == '' || $module_name == ''){      // Sanity check
             return false;
         }
 
@@ -89,10 +88,10 @@ class xhelpFaqAdapter
         $hModule =& xoops_gethandler('module');
         $mod =& $hModule->getByDirname($module_dir);
 
-        if (is_object($mod)) {
-            if ($mod->getVar('isactive')) { // Module active?
+        if(is_object($mod)){
+            if($mod->getVar('isactive')){   // Module active?
                 $activeAdapter = xhelpGetMeta('faq_adapter');
-                if ($activeAdapter = $module_name) {
+                if($activeAdapter = $module_name){
                     return true;
                 } else {
                     return false;
@@ -105,5 +104,4 @@ class xhelpFaqAdapter
         }
     }
 }
-
 ?>

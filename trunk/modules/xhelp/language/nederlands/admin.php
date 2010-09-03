@@ -195,24 +195,24 @@ define("_AM_XHELP_MINDEX_ACTION", "Actie");
 define("_AM_XHELP_MINDEX_PAGE", "<b>Pagina:</b> ");
 
 //image admin icon
-define("_AM_XHELP_ICO_EDIT", "Bewerk dit item");
-define("_AM_XHELP_ICO_DELETE", "Verwijder dit Item");
-define("_AM_XHELP_ICO_ONLINE", "Online");
-define("_AM_XHELP_ICO_OFFLINE", "Offline");
-define("_AM_XHELP_ICO_APPROVED", "Goedgekeurd");
-define("_AM_XHELP_ICO_NOTAPPROVED", "Niet Goedgekeurd");
+define("_AM_XHELP_ICO_EDIT","Bewerk dit item");
+define("_AM_XHELP_ICO_DELETE","Verwijder dit Item");
+define("_AM_XHELP_ICO_ONLINE","Online");
+define("_AM_XHELP_ICO_OFFLINE","Offline");
+define("_AM_XHELP_ICO_APPROVED","Goedgekeurd");
+define("_AM_XHELP_ICO_NOTAPPROVED","Niet Goedgekeurd");
 
-define("_AM_XHELP_ICO_LINK", "Gerelateerde Link");
-define("_AM_XHELP_ICO_URL", "Voeg Gerelateerde URL toe");
-define("_AM_XHELP_ICO_ADD", "Toevoegen");
-define("_AM_XHELP_ICO_APPROVE", "Goedkeuren");
-define("_AM_XHELP_ICO_STATS", "Statistieken");
+define("_AM_XHELP_ICO_LINK","Gerelateerde Link");
+define("_AM_XHELP_ICO_URL","Voeg Gerelateerde URL toe");
+define("_AM_XHELP_ICO_ADD","Toevoegen");
+define("_AM_XHELP_ICO_APPROVE","Goedkeuren");
+define("_AM_XHELP_ICO_STATS","Statistieken");
 
-define("_AM_XHELP_ICO_IGNORE", "Negeer");
-define("_AM_XHELP_ICO_ACK", "Verbroken Rapport Bevestigd");
-define("_AM_XHELP_ICO_REPORT", "Bevestig Verbroken Rapport?");
-define("_AM_XHELP_ICO_CONFIRM", "Verbroken Rapport Bevestigd");
-define("_AM_XHELP_ICO_CONBROKEN", "Bevestig Verbroken Rapport?");
+define("_AM_XHELP_ICO_IGNORE","Negeer");
+define("_AM_XHELP_ICO_ACK","Verbroken Rapport Bevestigd");
+define("_AM_XHELP_ICO_REPORT","Bevestig Verbroken Rapport?");
+define("_AM_XHELP_ICO_CONFIRM","Verbroken Rapport Bevestigd");
+define("_AM_XHELP_ICO_CONBROKEN","Bevestig Verbroken Rapport?");
 
 define("_AM_XHELP_UPLOADFILE", "Bestand met succes geupload");
 define('_AM_XHELP_TEXT_TICKET_INFO', 'Melding informatie');

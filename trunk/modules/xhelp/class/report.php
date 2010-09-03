@@ -17,8 +17,7 @@ global $xoopsDB;
  * @access public
  * @package xhelp
  */
-class xhelpReport extends XoopsObject
-{
+class xhelpReport extends XoopsObject {
     function xhelpReport()
     {
         parent::init();
@@ -43,7 +42,7 @@ class xhelpReport extends XoopsObject
      * Generate a report
      *
      * @return string report
-     * @access    public
+     * @access	public
      */
     function generateReport()
     {
@@ -55,7 +54,7 @@ class xhelpReport extends XoopsObject
         $myReport = '';
         $myReport .= "<div id='xhelp_report'>";
         $myReport .= "<table>";
-        $myReport .= "<tr class='even'><td>" . _XHELP_TEXT_NO_RECORDS . "</td></tr>";
+        $myReport .= "<tr class='even'><td>". _XHELP_TEXT_NO_RECORDS ."</td></tr>";
         $myReport .= "</table>";
         $myReport .= "</div>";
 
@@ -66,11 +65,11 @@ class xhelpReport extends XoopsObject
      * Generate graph to go along with report
      *
      * @return mixed bool false on no graph / draw graph
-     * @access    public
+     * @access	public
      */
     function generateGraph()
     {
-        if ($this->getVar('hasGraph') == 0) {
+        if($this->getVar('hasGraph') == 0){
             return false;
         }
     }
@@ -79,7 +78,7 @@ class xhelpReport extends XoopsObject
      * Set SQL query to be run, and set results for class
      *
      * @return bool true on success / false on failure
-     * @access    public
+     * @access	public
      */
     function _setResults()
     {
@@ -90,19 +89,19 @@ class xhelpReport extends XoopsObject
      * Returns an array from db query information
      *
      * @return array
-     * @access    public
+     * @access	public
      */
     function _arrayFromData($dResult)
     {
         global $xoopsDB;
 
         $aResults = array();
-        if (count($xoopsDB->getRowsNum($dResult) > 0)) { // Has data?
+        if(count($xoopsDB->getRowsNum($dResult) > 0)){      // Has data?
 
             $i = 0;
             $dbFields = $this->meta['dbFields'];
-            while ($myrow = $xoopsDB->fetchArray($dResult)) {
-                foreach ($dbFields as $key => $fieldname) {
+            while($myrow = $xoopsDB->fetchArray($dResult)){
+                foreach($dbFields as $key=>$fieldname){
                     $aResults[$i][$key] = $myrow[$key];
                 }
                 $i++;
@@ -115,7 +114,7 @@ class xhelpReport extends XoopsObject
      * Get meta information about the report
      *
      * @return array
-     * @access    public
+     * @access	public
      */
     function getMeta()
     {
@@ -126,14 +125,14 @@ class xhelpReport extends XoopsObject
      * Get report parameters
      *
      * @return array {@link xhelpReportParameter} objects
-     * @access    public
+     * @access	public
      */
     function getParams()
     {
-        include_once(XHELP_CLASS_PATH . '/reportParameter.php');
+        include_once(XHELP_CLASS_PATH .'/reportParameter.php');
 
         $params = array();
-        foreach ($this->parameters as $name => $param) {
+        foreach($this->parameters as $name=>$param){
             $params[] = xhelpReportParameter::addParam($param['controltype'], $name, $param['fieldname'], $param['value'], $param['values'], $param['fieldlength'], $param['dbfield'], $param['dbaction']);
         }
         return $params;
@@ -143,26 +142,26 @@ class xhelpReport extends XoopsObject
      * Add additional items to where clause from report parameters for sql query string
      *
      * @return string $where (additional part of where clause)
-     * @access    public
+     * @access	public
      */
     function makeWhere($params, $includeAnd = true)
     {
         $where = '';
         $i = 0;
-        foreach ($params as $param) {
-            if ($param->value != '' && $param->value != -999) { // -999 used for all fields
-                if ($i == 0 && $includeAnd == true || $i > 0) {
+        foreach($params as $param){
+            if($param->value != '' && $param->value != -999){   // -999 used for all fields
+                if($i == 0 && $includeAnd == true || $i > 0){
                     $where .= " AND ";
                 }
 
-                switch ($param->dbaction) {
+                switch($param->dbaction){
                     case 'IN':
-                        $where .= "(" . $param->dbfield . " IN (" . ((is_array($param->value)) ? implode(array_values($param->value), ',') : $param->value) . "))";
+                        $where .= "(". $param->dbfield." IN (". ((is_array($param->value)) ? implode(array_values($param->value), ',') : $param->value) ."))";
                         break;
 
                     case '=':
                     default:
-                        $where .= "(" . $param->dbfield . " " . $param->dbaction . " '" . $param->value . "')";
+                        $where .= "(".$param->dbfield ." ". $param->dbaction ." '". $param->value ."')";
                         break;
                 }
                 $i++;
@@ -173,12 +172,12 @@ class xhelpReport extends XoopsObject
 
     function generatePie3D($data, $legend_index = 0, $chartData_index = 1, $image = false, $length = 500, $width = 300, $hasShadow = true, $fontFamily = FF_FONT1, $fontStyle = FS_BOLD, $fontSize = '', $fontColor = 'black')
     {
-        include_once(XHELP_JPGRAPH_PATH . '/jpgraph_pie.php');
-        include_once(XHELP_JPGRAPH_PATH . '/jpgraph_pie3d.php');
+        include_once(XHELP_JPGRAPH_PATH .'/jpgraph_pie.php');
+        include_once(XHELP_JPGRAPH_PATH .'/jpgraph_pie3d.php');
 
-        $graph = new PieGraph($length, $width);
+        $graph = new PieGraph($length,$width);
 
-        if ($hasShadow) { // Add a shadow to the image
+        if($hasShadow){     // Add a shadow to the image
             $graph->setShadow();
         }
 
@@ -193,16 +192,16 @@ class xhelpReport extends XoopsObject
 
         $p1->SetLegends($data[$legend_index]);
 
-        $p1->value->SetFont($fontFamily, $fontStyle, $fontSize);
+        $p1->value->SetFont($fontFamily,$fontStyle, $fontSize);
         $p1->value->SetColor($fontColor);
         $p1->SetLabelType(PIE_VALUE_PER);
 
-        $a = array_search(max($data[$chartData_index]), $data[$chartData_index]); //Find the position of maximum value.
+        $a = array_search(max($data[$chartData_index]),$data[$chartData_index]); //Find the position of maximum value.
         $p1->ExplodeSlice($a);
 
         // Set graph background image
-        if ($image != false) {
-            $graph->SetBackgroundImage($image, BGIMG_FILLFRAME);
+        if($image != false){
+            $graph->SetBackgroundImage($image,BGIMG_FILLFRAME);
         }
 
         $graph->Add($p1);
@@ -211,20 +210,20 @@ class xhelpReport extends XoopsObject
 
     function generateStackedBarGraph($data, $legend_index = 0, $image = false, $aFillColors = array('red', 'green', 'orange', 'yellow', 'aqua', 'lime', 'teal', 'purple1', 'lightblue', 'blue'), $length = 500, $width = 300, $fontFamily = FF_FONT1, $fontStyle = FS_BOLD, $fontSize = '', $fontColor = 'black', $marginColor = 'white')
     {
-        include_once(XHELP_JPGRAPH_PATH . '/jpgraph_bar.php');
+        include_once(XHELP_JPGRAPH_PATH .'/jpgraph_bar.php');
 
-        $graph = new Graph($length, $width);
+        $graph = new Graph($length,$width);
         $graph->title->Set($this->meta['name']);
         $graph->SetScale("textint");
         $graph->yaxis->scale->SetGrace(30);
 
         //$graph->ygrid->Show(true,true);
-        $graph->ygrid->SetColor('gray', 'lightgray@0.5');
+        $graph->ygrid->SetColor('gray','lightgray@0.5');
 
 
         // Setup graph colors
         $graph->SetMarginColor($marginColor);
-        $datazero = array(0, 0, 0, 0);
+        $datazero=array(0,0,0,0);
 
         // Create the "dummy" 0 bplot
         $bplotzero = new BarPlot($datazero);
@@ -234,11 +233,11 @@ class xhelpReport extends XoopsObject
 
         // for loop through data array starting with element 1
         $aPlots = array();
-        for ($i = 1; $i < count($data); $i++) {
+        for($i=1; $i < count($data); $i++){
             $ybplot1 = new BarPlot($data[$i]);
             $ybplot1->setFillColor($aFillColors[$i]);
             $ybplot1->value->Show();
-            $ybplot1->value->SetFont($fontFamily, $fontStyle, $fontSize);
+            $ybplot1->value->SetFont($fontFamily,$fontStyle, $fontSize);
             $ybplot1->value->SetColor($fontColor);
 
             $aPlots[] = $ybplot1;
@@ -248,10 +247,9 @@ class xhelpReport extends XoopsObject
         $graph->Add($ybplot);
 
         // Set graph background image
-        $graph->SetBackgroundImage($image, BGIMG_FILLFRAME);
+        $graph->SetBackgroundImage($image,BGIMG_FILLFRAME);
 
         $graph->Stroke();
     }
 }
-
 ?>

@@ -6,8 +6,7 @@
  */
 
 
-class Session
-{
+class Session {
 
     /**
      * Session constructor<br />
@@ -81,5 +80,4 @@ class Session
         return $_sess;
     }
 }
-
 ?>

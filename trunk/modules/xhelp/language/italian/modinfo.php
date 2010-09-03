@@ -63,7 +63,7 @@ define('_MI_XHELP_UPLOAD_HEIGHT', 'Altezza Upload');
 define('_MI_XHELP_UPLOAD_HEIGHT_DSC', 'Massima altezza dell\'upload (in pixels)');
 define('_MI_XHELP_ANNOUNCEMENTS', 'Announcements News Topic');
 //define('_MI_XHELP_ANNOUNCEMENTS_DSC', 'This is the news topic that pulls announcements for xhelp. Update the xHelp module to see newly added news categories');
-define('_MI_XHELP_ANNOUNCEMENTS_DSC', "Questo e' l'argomento delle news che aggiorna gli annunci per xhelp. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Clicca qui</a> per aggiornare le gaterie delle news.");
+define('_MI_XHELP_ANNOUNCEMENTS_DSC', "Questo e' l'argomento delle news che aggiorna gli annunci per xhelp. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Clicca qui</a> per aggiornare le gaterie delle news.");
 define('_MI_XHELP_ANNOUNCEMENTS_NONE', '***Disabilita annunci***');
 define('_MI_XHELP_ALLOW_REOPEN', 'Consenti riapertura ticket');
 define('_MI_XHELP_ALLOW_REOPEN_DSC', 'Consenti agli utenti di riaprire un ticket dopo la sua chiusura?');
@@ -74,7 +74,7 @@ define('_MI_XHELP_STAFF_ACTIONS_DSC', 'Come devono apparire le azioni di staff? 
 define('_MI_XHELP_ACTION1', '\'Inline-Style\'');
 define('_MI_XHELP_ACTION2', '\'Block-Style\'');
 define('_MI_XHELP_DEFAULT_DEPT', 'Dipartimento predefinito');
-define('_MI_XHELP_DEFAULT_DEPT_DSC', "Questo sara\' il dipartimento di default che sara\' selezionato quando viene aggiunto un ticket. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Clicca qui</a> per aggiornare i dipartimenti.");
+define('_MI_XHELP_DEFAULT_DEPT_DSC', "Questo sara\' il dipartimento di default che sara\' selezionato quando viene aggiunto un ticket. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Clicca qui</a> per aggiornare i dipartimenti.");
 define('_MI_XHELP_OVERDUE_TIME', 'Massimo tempo di svolgimento ticket');
 define('_MI_XHELP_OVERDUE_TIME_DSC', 'Questo parametro definisce in quanto tempo lo staff puo\' risolvere il ticket prima che sia definito in \' ritardo\' (in ore).');
 define('_MI_XHELP_ALLOW_ANON', 'Consenti l\'immissione di ticket da parte di utenti anonimi');
@@ -95,11 +95,11 @@ define('_MI_XHELP_MENU_MAIL_EVENTS', 'Mail Events');
 define('_MI_XHELP_MENU_CHECK_EMAIL', 'Controlla Email');
 
 ////NOTIFICATION vars
-define('_MI_XHELP_DEPT_NOTIFY', 'Dipartimento');
-define('_MI_XHELP_DEPT_NOTIFYDSC', 'Opzioni di notifica applicate ad un dipartimento');
+define('_MI_XHELP_DEPT_NOTIFY','Dipartimento');
+define('_MI_XHELP_DEPT_NOTIFYDSC','Opzioni di notifica applicate ad un dipartimento');
 
-define('_MI_XHELP_TICKET_NOTIFY', 'Ticket');
-define('_MI_XHELP_TICKET_NOTIFYDSC', 'Opzioni di notifica da applicare al ticket corrente');
+define('_MI_XHELP_TICKET_NOTIFY','Ticket');
+define('_MI_XHELP_TICKET_NOTIFYDSC','Opzioni di notifica da applicare al ticket corrente');
 
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFY', 'Dipartimento: Nuovo Ticket');
 define('_MI_XHELP_DEPT_NEWTICKET_NOTIFYCAP', 'Notifica per creazione nuovo ticket');
@@ -239,7 +239,7 @@ define('_MI_XHELP_TICKET_NEWUSER_ACT2_NOTIFYTPL', 'ticket_new_user_activation2.t
 // 0.75 news
 
 define('_MI_XHELP_APPLY_VISIBILITY', 'Applca visibilita\' dipartimento ai membri dello staff?');
-define('_MI_XHELP_APPLY_VISIBILITY_DSC', ''); // This determines if staff are limited to what departments they can submit tickets to. If "yes" is selected, staff members will be limited to submitting tickets to departments where the XOOPS group they belong to is selected.
+define('_MI_XHELP_APPLY_VISIBILITY_DSC', '');   // This determines if staff are limited to what departments they can submit tickets to. If "yes" is selected, staff members will be limited to submitting tickets to departments where the XOOPS group they belong to is selected.
 define('_MI_XHELP_TICKET_EMAIL_ERROR_NOTIFY', 'Ticket: Errore Email');
 define('_MI_XHELP_TICKET_EMAIL_ERROR_NOTIFYCAP', 'Notifica l\'utente che la mail di richiesta non e\' stata memorizzata');
 define('_MI_XHELP_TICKET_EMAIL_ERROR_NOTIFYDSC', 'Ricevi nofica quando una richiesta via mail non viene memorizzata');
@@ -301,7 +301,7 @@ define('_MI_XHELP_DISPLAY_NAME_DSC', 'Consente di visualizzare il nome reale dov
 define('_MI_XHELP_USERNAME', 'Nome utente ');
 define('_MI_XHELP_REALNAME', 'Nome reale');
 define('_MI_XHELP_BNAME5', 'Ticket Main Action'); // Ticket Main Actions
-define('_MI_XHELP_BNAME5_DESC', 'Visualizza le azioni per il sistema di gestione dei ticket'); // Displays main actions for ticketing system
+define('_MI_XHELP_BNAME5_DESC', 'Visualizza le azioni per il sistema di gestione dei ticket');  // Displays main actions for ticketing system
 
 define('_MI_XHELP_TICKET_NEWTICKET_EMAIL_NOTIFY', 'Utente: Nuovo Ticket da Email');
 define('_MI_XHELP_TICKET_NEWTICKET_EMAIL_NOTIFYCAP', 'Conferma la creazione del ticket via e-mail');
@@ -313,10 +313,12 @@ define('_MI_XHELP_TICKET_NEWTICKET_EMAIL_NOTIFYTPL', 'ticket_newticket_byemail_n
 // ALX051103 updated to 0.77 version
 
 
+
 define('_MI_XHELP_TEMP_EDITSEARCH', 'Template per modificare le ricerche salvate.');
 define('_MI_XHELP_NUM_TICKET_UPLOADS', 'Numero massimo di files da traferire (Upload)');
 define('_MI_XHELP_NUM_TICKET_UPLOADS_DSC', 'Questo e\' il numero massimo di files che possono essere trasferiti durante l\'immissione del ticket (Non sono inclusi i files dei campi personalizzati).'); // (This is the maximum number of files that can be uploaded to a ticket on ticket submission (does not include file custom fields).
 define('_MI_XHELP_TEMP_USER_ALL', 'Template for user view all page'); // Template for user view all page
+
 
 
 ?>

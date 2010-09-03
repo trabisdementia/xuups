@@ -64,7 +64,7 @@ define('_MI_XHELP_NUM_TICKET_UPLOADS', 'Max. Anzahl der Dateien zum Upload');
 define('_MI_XHELP_NUM_TICKET_UPLOADS_DSC', 'Dies ist die maximale Anzahl von Dateien, die bei einer Ticket Einreichung hochgeladen werden können (inkludiert nicht Datei benutzerdefinerte Felder.');
 define('_MI_XHELP_ANNOUNCEMENTS', 'Ankündigen als News Thema in');
 //define('_MI_XHELP_ANNOUNCEMENTS_DSC', 'Das ist das News Thema, das Ankündigungenen für den HelpDesk aufnimmt. <a href=\\\'javascript:openWithSelfMain(\\\\\\\"\\\".XOOPS_URL.\\\"/modules/xhelp/install.php?op=updateTopics\\\\\\\", \\\\\\\"xoops_module_install_xhelp\\\\\\\",400, 300);\\\'>Hier klicken</a> um die News Kategorien zu aktualisieren.');
-define('_MI_XHELP_ANNOUNCEMENTS_DSC', "Das ist das News Thema, das Ankündigen für den HelpDesk aufnimmt. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Hier klicken</a> um die News Kategorien zu aktualisieren.");
+define('_MI_XHELP_ANNOUNCEMENTS_DSC', "Das ist das News Thema, das Ankündigen für den HelpDesk aufnimmt. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateTopics\", \"xoops_module_install_xhelp\",400, 300);'>Hier klicken</a> um die News Kategorien zu aktualisieren.");
 define('_MI_XHELP_ANNOUNCEMENTS_NONE', '***Ankündigungen deaktivieren***');
 define('_MI_XHELP_ALLOW_REOPEN', 'Erlaube Ticket wieder zu öffnen');
 define('_MI_XHELP_ALLOW_REOPEN_DSC', 'Benutzern erlauben, ein Ticket wieder zu öffnen?');
@@ -75,7 +75,7 @@ define('_MI_XHELP_STAFF_ACTIONS_DSC', 'Wie sollen die Bearbeiter Aktionen angeze
 define('_MI_XHELP_ACTION1', 'Inline-Style');
 define('_MI_XHELP_ACTION2', 'Block-Style');
 define('_MI_XHELP_DEFAULT_DEPT', 'Standard Abteilung');
-define('_MI_XHELP_DEFAULT_DEPT_DSC', "Das ist die Standard Abteilung, die beim hinzufügen eines Tickets vorgeschlagen wird. <a href='javascript:openWithSelfMain(\"" . XOOPS_URL . "/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Hier klicken</a> zum aktualisieren der Abteilungen.");
+define('_MI_XHELP_DEFAULT_DEPT_DSC', "Das ist die Standard Abteilung, die beim hinzufügen eines Tickets vorgeschlagen wird. <a href='javascript:openWithSelfMain(\"".XOOPS_URL."/modules/xhelp/install.php?op=updateDepts\", \"xoops_module_install_xhelp\",400, 300);'>Hier klicken</a> zum aktualisieren der Abteilungen.");
 define('_MI_XHELP_OVERDUE_TIME', 'Ticket überfällig Zeit');
 define('_MI_XHELP_OVERDUE_TIME_DSC', 'Legt die Zeit fest, die ein Mitarbeiter zur Verfügung hat, bevor ein Ticket als überfällig angezeigt wird (in Stunden).');
 define('_MI_XHELP_ALLOW_ANON', 'Erlaube anonymen Benutzern Tickets einzuschicken');

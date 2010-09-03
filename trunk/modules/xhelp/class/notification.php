@@ -9,7 +9,7 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
 
 
 /**
@@ -19,8 +19,7 @@ require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
  * @access public
  * @package xhelp
  */
-class xhelpNotification extends XoopsObject
-{
+class xhelpNotification extends XoopsObject {
     function xhelpNotification($id = null)
     {
         $this->initVar('notif_id', XOBJ_DTYPE_INT, null, false);
@@ -36,7 +35,7 @@ class xhelpNotification extends XoopsObject
             $this->setNew();
         }
     }
-} //end of class
+}   //end of class
 
 /**
  * xhelpNotificationHandler class
@@ -48,13 +47,12 @@ class xhelpNotification extends XoopsObject
  * @package xhelp
  */
 
-class xhelpNotificationHandler extends xhelpBaseObjectHandler
-{
+class xhelpNotificationHandler extends xhelpBaseObjectHandler {
     /**
      * Name of child class
      *
-     * @var    string
-     * @access    private
+     * @var	string
+     * @access	private
      */
     var $classname = 'xhelpnotification';
 
@@ -65,13 +63,13 @@ class xhelpNotificationHandler extends xhelpBaseObjectHandler
      * @access private
      */
     var $_dbtable = 'xhelp_notifications';
-
+     
     var $_idfield = 'notif_id';
 
     /**
      * Constructor
      *
-     * @param    object   $db    reference to a xoopsDB object
+     * @param	object   $db    reference to a xoopsDB object
      */
     function xhelpNotificationHandler(&$db)
     {
@@ -86,7 +84,7 @@ class xhelpNotificationHandler extends xhelpBaseObjectHandler
         }
 
         $sql = sprintf("INSERT INTO %s (notif_id, staff_setting, user_setting, staff_options) VALUES (%u, %u, %u, %s)",
-                       $this->_db->prefix($this->_dbtable), $notif_id, $staff_setting, $user_setting, $this->_db->quoteString($staff_options));
+        $this->_db->prefix($this->_dbtable), $notif_id, $staff_setting, $user_setting, $this->_db->quoteString($staff_options));
 
         return $sql;
 
@@ -100,7 +98,7 @@ class xhelpNotificationHandler extends xhelpBaseObjectHandler
         }
 
         $sql = sprintf("UPDATE %s SET staff_setting = %u, user_setting = %u, staff_options = %s WHERE notif_id = %u",
-                       $this->_db->prefix($this->_dbtable), $staff_setting, $user_setting, $this->_db->quoteString($staff_options), $notif_id);
+        $this->_db->prefix($this->_dbtable), $staff_setting, $user_setting, $this->_db->quoteString($staff_options), $notif_id);
         return $sql;
     }
 
@@ -110,5 +108,4 @@ class xhelpNotificationHandler extends xhelpBaseObjectHandler
         return $sql;
     }
 }
-
 ?>

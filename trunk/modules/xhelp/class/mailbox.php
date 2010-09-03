@@ -16,45 +16,29 @@ define('_XHELP_MAILBOXTYPE_IMAP', 2);
  * @package xhelp
  */
 
-class xhelpMailBox
-{
-    function connect($server, $port = 110)
-    {
+class xhelpMailBox {
+    function connect($server, $port = 110){
     }
-
     //
-    function login($username, $password)
-    {
+    function login($username, $password){
     }
-
     //
-    function messageCount()
-    {
+    function messageCount(){
     }
-
     //
-    function getHeaders($i)
-    {
+    function getHeaders($i) {
     }
-
     //
-    function getBody($i)
-    {
+    function getBody($i) {
     }
 
-    function getMsg($i)
-    {
+    function getMsg($i) {
     }
-
     //
-    function deleteMessage($i)
-    {
+    function deleteMessage($i) {
     }
-
     //
-    function disconnect()
-    {
+    function disconnect(){
     }
 }
-
 ?>

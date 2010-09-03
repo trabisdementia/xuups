@@ -9,7 +9,7 @@ if (!defined('XHELP_CLASS_PATH')) {
     exit();
 }
 
-require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
+require_once(XHELP_CLASS_PATH.'/xhelpBaseObjectHandler.php');
 
 
 /**
@@ -19,8 +19,7 @@ require_once(XHELP_CLASS_PATH . '/xhelpBaseObjectHandler.php');
  * @access public
  * @package xhelp
  */
-class xhelpStatus extends XoopsObject
-{
+class xhelpStatus extends XoopsObject {
     function xhelpStatus($id = null)
     {
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
@@ -35,7 +34,7 @@ class xhelpStatus extends XoopsObject
             $this->setNew();
         }
     }
-} //end of class
+}   //end of class
 
 /**
  * xhelpStatusHandler class
@@ -47,13 +46,12 @@ class xhelpStatus extends XoopsObject
  * @package xhelp
  */
 
-class xhelpStatusHandler extends xhelpBaseObjectHandler
-{
+class xhelpStatusHandler extends xhelpBaseObjectHandler {
     /**
      * Name of child class
      *
-     * @var    string
-     * @access    private
+     * @var	string
+     * @access	private
      */
     var $classname = 'xhelpstatus';
 
@@ -68,7 +66,7 @@ class xhelpStatusHandler extends xhelpBaseObjectHandler
     /**
      * Constructor
      *
-     * @param    object   $db    reference to a xoopsDB object
+     * @param	object   $db    reference to a xoopsDB object
      */
     function xhelpStatusHandler(&$db)
     {
@@ -83,7 +81,7 @@ class xhelpStatusHandler extends xhelpBaseObjectHandler
         }
 
         $sql = sprintf("INSERT INTO %s (id, state, description) VALUES (%u, %u, %s)",
-                       $this->_db->prefix($this->_dbtable), $id, $state, $this->_db->quoteString($description));
+        $this->_db->prefix($this->_dbtable), $id, $state, $this->_db->quoteString($description));
 
         return $sql;
 
@@ -97,7 +95,7 @@ class xhelpStatusHandler extends xhelpBaseObjectHandler
         }
 
         $sql = sprintf("UPDATE %s SET state = %u, description = %s WHERE id = %u",
-                       $this->_db->prefix($this->_dbtable), $state, $this->_db->quoteString($description), $id);
+        $this->_db->prefix($this->_dbtable), $state, $this->_db->quoteString($description), $id);
         return $sql;
     }
 
@@ -117,5 +115,4 @@ class xhelpStatusHandler extends xhelpBaseObjectHandler
         return $aStatuses;
     }
 }
-
 ?>
