@@ -147,8 +147,8 @@ if ($op == 'go') {
 
         $newCat['newid'] = $categoryObj->categoryid();
         // Saving category permissions
-        publisher_saveCategory_Permissions($categoryObj->getGroups_read(), $categoryObj->categoryid(), 'category_read');
-        publisher_saveCategory_Permissions($categoryObj->getGroups_submit(), $categoryObj->categoryid(), 'item_submit');
+        publisher_saveCategoryPermissions($categoryObj->getGroups_read(), $categoryObj->categoryid(), 'category_read');
+        publisher_saveCategoryPermissions($categoryObj->getGroups_submit(), $categoryObj->categoryid(), 'item_submit');
 
         $cnt_imported_cat++;
 

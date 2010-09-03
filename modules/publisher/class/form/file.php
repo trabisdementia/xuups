@@ -28,8 +28,7 @@ xoops_load('XoopsFormLoader');
 //todo: move to admin?
 xoops_loadLanguage('main', 'publisher');
 
-class PublisherFileForm extends XoopsThemeForm
-{
+class PublisherFileForm extends XoopsThemeForm {
     /**
      * @var PublisherPublisher
      * @access public
@@ -38,8 +37,7 @@ class PublisherFileForm extends XoopsThemeForm
 
     var $targetObject = null;
 
-    function __construct(&$target)
-    {
+    function __construct(&$target) {
         $this->publisher =& PublisherPublisher::getInstance();
         $this->targetObject =& $target;
 
@@ -51,8 +49,7 @@ class PublisherFileForm extends XoopsThemeForm
     }
 
 
-    function createElements()
-    {
+    function createElements() {
         global $xoopsDB, $xoopsUser;
         // NAME
         $name_text = new XoopsFormText(_MD_PUBLISHER_FILENAME, 'name', 50, 255, $this->targetObject->name());
@@ -82,8 +79,7 @@ class PublisherFileForm extends XoopsThemeForm
         $this->addElement(new XoopsFormHidden('itemid', $this->targetObject->itemid()));
     }
 
-    function createButtons()
-    {
+    function createButtons() {
         $files_button_tray = new XoopsFormElementTray('', '');
         $files_hidden = new XoopsFormHidden('op', 'uploadfile');
         $files_button_tray->addElement($files_hidden);

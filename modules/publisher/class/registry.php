@@ -22,19 +22,16 @@
 
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
-class PublisherRegistry
-{
+class PublisherRegistry {
     var $_entries;
     var $_locks;
 
-    function PublisherRegistry()
-    {
+    protected function __construct() {
         $this->_entries = array();
         $this->_locks = array();
     }
 
-    function &getInstance()
-    {
+    static function &getInstance() {
         static $instance = false;
         if (!$instance) {
             $instance = new PublisherRegistry();
@@ -42,8 +39,7 @@ class PublisherRegistry
         return $instance;
     }
 
-    function setEntry($key, &$item)
-    {
+    function setEntry($key, &$item) {
         if ($this->isLocked($key) == true) {
             trigger_error('Unable to set entry `' . $key . '`. Entry is locked.', E_USER_WARNING);
             return false;
@@ -53,13 +49,11 @@ class PublisherRegistry
         return true;
     }
 
-    function unsetEntry($key)
-    {
+    function unsetEntry($key) {
         unset($this->_entries[$key]);
     }
 
-    function getEntry($key)
-    {
+    function getEntry($key) {
         if (isset($this->_entries[$key]) == false) {
             return null;
         }
@@ -67,29 +61,24 @@ class PublisherRegistry
         return $this->_entries[$key];
     }
 
-    function isEntry($key)
-    {
+    function isEntry($key) {
         return ($this->getEntry($key) !== null);
     }
 
-    function lockEntry($key)
-    {
+    function lockEntry($key) {
         $this->_locks[$key] = true;
         return true;
     }
 
-    function unlockEntry($key)
-    {
+    function unlockEntry($key) {
         unset($this->_locks[$key]);
     }
 
-    function isLocked($key)
-    {
+    function isLocked($key) {
         return (isset($this->_locks[$key]) == true);
     }
 
-    function unsetAll()
-    {
+    function unsetAll() {
         $this->_entries = array();
         $this->_locks = array();
     }

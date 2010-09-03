@@ -235,6 +235,7 @@ define("_AM_PUBLISHER_NOITEMSSEL", "Sorry. There are no articles in the selected
 define("_AM_PUBLISHER_NOPERMSSET", "Permission cannot be set : No categories created yet! Please create a category first.");
 define("_AM_PUBLISHER_NOSUBCAT", "There is no sub categories created yet");
 define("_AM_PUBLISHER_NOTAVAILABLE", "<span style='font-weight: bold; color: red;'>Not available</span>");
+define("_AM_PUBLISHER_NOTWRITABLE", "<span style='font-weight: bold; color: yellow;'>Not writeable</span>");
 define("_AM_PUBLISHER_OFFLINE_CREATED_SUCCESS", "The article has been successfully created and put offline.");
 define("_AM_PUBLISHER_OFFLINE_EXP", "<b>Offline articles</b> : Published articles that have been put offline, temporarily or not. Offline articles are not displayed in the user side.");
 define("_AM_PUBLISHER_OFFLINE_MOD_SUCCESS", "The article has been successfully put offline.");
@@ -307,7 +308,7 @@ define("_AM_PUBLISHER_YES", "Yes");
 //define("_AM_PUBLISHER_CONFIGURE_READ_PERMISSIONS_EXP", "This tool allows you to quickly configure read permissions for ALL categories and ALL articles at once. ALl permissions will first be deleted and then replaced by the options your will have selected.<br /><br /><b>Please use this tool with care !</b>");
 //define("_AM_PUBLISHER_FULLACCESS", "Categories and articles read permissions");
 //define("_AM_PUBLISHER_PERMISSIONS_UPDATED", "Permissions updated.");
-define("_AM_PUBLISHER_ITEM_TAGS", "Tags");
+define("_AM_PUBLISHER_ITEM_TAG", "Tags");
 
 //added in publisher
 define("_AM_PUBLISHER_PERMISSIONS_FORM", "Fields available in articles submission forms");

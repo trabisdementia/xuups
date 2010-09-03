@@ -24,10 +24,8 @@ defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-class PublisherFormDateTime extends XoopsFormElementTray
-{
-    function PublisherFormDateTime($caption, $name, $size = 15, $value = 0)
-    {
+class PublisherFormDateTime extends XoopsFormElementTray {
+    function PublisherFormDateTime($caption, $name, $size = 15, $value = 0) {
         $this->XoopsFormElementTray($caption, '&nbsp;');
         $value = intval($value);
         $value = ($value > 0) ? $value : time();

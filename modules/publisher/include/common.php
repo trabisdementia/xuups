@@ -22,7 +22,7 @@
  */
 
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
-
+/** @define "PUBLISHER_DIRNAME" "publisher" */
 define("PUBLISHER_DIRNAME", basename(dirname(dirname(__FILE__))));
 define("PUBLISHER_URL", XOOPS_URL . '/modules/' . PUBLISHER_DIRNAME);
 define("PUBLISHER_IMAGES_URL", PUBLISHER_URL . '/images');
@@ -32,10 +32,9 @@ define("PUBLISHER_UPLOADS_URL", XOOPS_URL . '/uploads/' . PUBLISHER_DIRNAME);
 define("PUBLISHER_ROOT_PATH", XOOPS_ROOT_PATH . '/modules/' . PUBLISHER_DIRNAME);
 define("PUBLISHER_UPLOADS_PATH", XOOPS_ROOT_PATH . '/uploads/' . PUBLISHER_DIRNAME);
 
-define("PUBLISHER_LEVEL", 10);
-
 xoops_loadLanguage('common', PUBLISHER_DIRNAME);
 
+/** @define "PUBLISHER_DIRNAME" "publisher" */
 include_once PUBLISHER_ROOT_PATH . '/include/functions.php';
 include_once PUBLISHER_ROOT_PATH . '/include/constants.php';
 include_once PUBLISHER_ROOT_PATH . '/include/seo_functions.php';
@@ -48,14 +47,8 @@ include_once PUBLISHER_ROOT_PATH . '/class/request.php';
 $debug = true;
 $publisher =& PublisherPublisher::getInstance($debug);
 
-//This is need or it will not work in blocks.
-global $xoops22, $publisher_isAdmin;
-
-// Check XOOPS version to see if we are on XOOPS 2.2.x plateform
-$xoops22 = publisher_isXoops22();
-
-// Creating the Publisher object
-//$publisher_handler = $publisher->getModule();
+//This is needed or it will not work in blocks.
+global $publisher_isAdmin;
 
 // Load only if module is installed
 if (is_object($publisher->getModule())) {

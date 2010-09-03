@@ -207,9 +207,9 @@ if ($op == 'go') {
 
         // Saving category permissions
         $groupsIds = $gperm_handler->getGroupIds('category_read', $arrCat['categoryid'], $smartsection_module_id);
-        publisher_saveCategory_Permissions($groupsIds, $categoryObj->categoryid(), 'category_read');
+        publisher_saveCategoryPermissions($groupsIds, $categoryObj->categoryid(), 'category_read');
         $groupsIds = $gperm_handler->getGroupIds('item_submit', $arrCat['categoryid'], $smartsection_module_id);
-        publisher_saveCategory_Permissions($groupsIds, $categoryObj->categoryid(), 'item_submit');
+        publisher_saveCategoryPermissions($groupsIds, $categoryObj->categoryid(), 'item_submit');
 
         // Saving items permissions
         publisher_overrideItemsPermissions($groupsIds, $categoryObj->categoryid());

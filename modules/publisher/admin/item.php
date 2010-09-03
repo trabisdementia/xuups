@@ -68,72 +68,14 @@ switch ($op) {
         // Creating the item object
         if ($itemid != 0) {
             $itemObj = $publisher->getHandler('item')->get($itemid);
-            $uid = $itemObj->getVar('uid');
-            $datesub = $itemObj->getVar('datesub');
         } else {
             $itemObj = $publisher->getHandler('item')->create();
-            $uid = $xoopsUser->uid();
-            $datesub = time();
         }
 
-        // Putting the values in the ITEM object
-        if (isset($_POST['permissions_item'])) {
-            $itemObj->setGroups_read($_POST['permissions_item']);
-        } else {
-            $itemObj->setGroups_read();
-        }
-
-        $itemObj->setVar('categoryid', PublisherRequest::getInt('categoryid'));
-        $itemObj->setVar('title', PublisherRequest::getString('title'));
-        $itemObj->setVar('subtitle', PublisherRequest::getString('subtitle'));
-        $itemObj->setVar('summary', PublisherRequest::getText('summary'));
-        $itemObj->setVar('body', PublisherRequest::getText('body'));
-
-        $itemObj->setVar('meta_keywords', PublisherRequest::getString('item_meta_keywords'));
-        $itemObj->setVar('meta_description', PublisherRequest::getString('item_meta_description'));
-        $itemObj->setVar('short_url', PublisherRequest::getString('item_short_url'));
-
-        $image_item = PublisherRequest::getArray('image_item');
-        $image_featured = PublisherRequest::getString('image_featured');
-
-        //Todo: get a better image class for xoops!
-        //Image hack
-        $image_item_ids = array();
-        global $xoopsDB;
-        $sql = 'SELECT image_id, image_name FROM ' . $xoopsDB->prefix('image');
-        $result = $xoopsDB->query($sql, 0, 0);
-        while ($myrow = $xoopsDB->fetchArray($result)) {
-            $image_name = $myrow['image_name'];
-            $id = $myrow['image_id'];
-            if ($image_name == $image_featured) {
-                $itemObj->setVar('image', $id);
-            }
-            if (in_array($image_name, $image_item)) {
-                $image_item_ids[] = $id;
-            }
-
-        }
-
-        $itemObj->setVar('images', implode('|', $image_item_ids));
-        //Image end hack
-
-        $itemObj->setVar('item_tag', PublisherRequest::getString('item_tag'));
+        $itemObj->setVarsFromRequest();
 
         $old_status = $itemObj->status();
         $new_status = PublisherRequest::getInt('status', _PUBLISHER_STATUS_PUBLISHED); //_PUBLISHER_STATUS_NOTSET;
-
-        $itemObj->setVar('uid', PublisherRequest::getInt('uid', $uid));
-        $itemObj->setVar('datesub', isset($_POST['datesub']) ? strtotime($_POST['datesub']['date']) + $_POST['datesub']['time'] : $datesub);
-
-        $itemObj->setVar('weight', PublisherRequest::getInt('weight'));
-        $itemObj->setPartial_view(PublisherRequest::getInt('partial_view', false));
-
-        $itemObj->setVar('dohtml', PublisherRequest::getInt('dohtml', $publisher->getConfig('submit_dohtml')));
-        $itemObj->setVar('dosmiley', PublisherRequest::getInt('dosmiley', $publisher->getConfig('submit_dosmiley')));
-        $itemObj->setVar('doxcode', PublisherRequest::getInt('doxcode', $publisher->getConfig('submit_doxcode')));
-        $itemObj->setVar('doimage', PublisherRequest::getInt('doimage', $publisher->getConfig('submit_doimage')));
-        $itemObj->setVar('dobr', PublisherRequest::getInt('dolinebreak', $publisher->getConfig('submit_dobr')));
-        $itemObj->setVar('cancomment', PublisherRequest::getInt('allowcomments', $publisher->getConfig('submit_allowcomments')));
 
         switch ($new_status) {
             case _PUBLISHER_STATUS_SUBMITTED:
@@ -580,8 +522,8 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
         // there's no parameter, so we're adding an item
 
         $itemObj =& $publisher->getHandler('item')->create();
-        $itemObj->setVar('uid', $xoopsUser->uid());
-        $itemObj->setVar('datesub', time());
+        $itemObj->setVarsFromRequest();
+        
         $categoryObj =& $publisher->getHandler('category')->create();
         $breadcrumb_action1 = _AM_PUBLISHER_ITEMS;
         $breadcrumb_action2 = _AM_PUBLISHER_CREATINGNEW;

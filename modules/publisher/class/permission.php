@@ -28,16 +28,14 @@ if (!defined("XOOPS_ROOT_PATH")) {
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-class PublisherPermissionHandler extends XoopsObjectHandler
-{
+class PublisherPermissionHandler extends XoopsObjectHandler {
     /**
      * @var PublisherPublisher
      * @access public
      */
     var $publisher = null;
 
-    function PublisherPermissionHandler()
-    {
+    function PublisherPermissionHandler() {
         $this->publisher =& PublisherPublisher::getInstance();
     }
 
@@ -49,8 +47,7 @@ class PublisherPermissionHandler extends XoopsObjectHandler
      *
      * @return array
      */
-    function getGrantedGroups($gperm_name, $id = null)
-    {
+    function getGrantedGroups($gperm_name, $id = null) {
         static $groups;
 
         if (!isset($groups[$gperm_name]) || ($id != null && !isset($groups[$gperm_name][$id]))) {
@@ -65,8 +62,7 @@ class PublisherPermissionHandler extends XoopsObjectHandler
         return isset($groups[$gperm_name][$id]) ? $groups[$gperm_name][$id] : array();
     }
 
-    function getGrantedGroupsForIds($item_ids_array, $gperm_name = false)
-    {
+    function getGrantedGroupsForIds($item_ids_array, $gperm_name = false) {
         static $groups;
         static $publisher_all_permissions_fetched;
 
@@ -121,8 +117,7 @@ class PublisherPermissionHandler extends XoopsObjectHandler
      *
      * @return array
      */
-    function getGrantedItems($gperm_name, $id = null)
-    {
+    function getGrantedItems($gperm_name, $id = null) {
         global $xoopsUser;
 
         static $permissions;
@@ -143,8 +138,7 @@ class PublisherPermissionHandler extends XoopsObjectHandler
         return isset($permissions[$gperm_name]) ? $permissions[$gperm_name] : array();
     }
 
-    function isGranted($gperm_name, $id = null)
-    {
+    function isGranted($gperm_name, $id = null) {
         static $permissions;
 
         if ($id == null) return false;
@@ -168,8 +162,7 @@ class PublisherPermissionHandler extends XoopsObjectHandler
      * @return boolean : TRUE if the no errors occured
      **/
 
-    function saveItem_Permissions($groups, $itemid, $perm_name)
-    {
+    function saveItem_Permissions($groups, $itemid, $perm_name) {
         $result = true;
         $module_id = $this->publisher->getModule()->getVar('mid');
         $gperm_handler =& xoops_gethandler('groupperm');
@@ -196,8 +189,7 @@ class PublisherPermissionHandler extends XoopsObjectHandler
      * @return boolean : TRUE if the no errors occured
      **/
 
-    function deletePermissions($itemid, $gperm_name)
-    {
+    function deletePermissions($itemid, $gperm_name) {
         $result = true;
 
         $gperm_handler =& xoops_gethandler('groupperm');

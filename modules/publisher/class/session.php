@@ -25,8 +25,7 @@ defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-class PublisherSession
-{
+class PublisherSession {
     /**
      * Session constructor<br />
      * Starts the session with session_start()
@@ -34,8 +33,7 @@ class PublisherSession
      * session_start() does nothing
      * @access public
      */
-    function PublisherSession()
-    {
+    protected function __construct() {
         @session_start();
     }
 
@@ -46,8 +44,7 @@ class PublisherSession
      * @return void
      * @access public
      */
-    function set($name, $value)
-    {
+    function set($name, $value) {
         $_SESSION[$name] = $value;
     }
 
@@ -57,8 +54,7 @@ class PublisherSession
      * @return mixed value of session variable
      * @access public
      */
-    function get($name)
-    {
+    function get($name) {
         if (isset($_SESSION[$name])) {
             return $_SESSION[$name];
         } else {
@@ -72,8 +68,7 @@ class PublisherSession
      * @return void
      * @access public
      */
-    function del($name)
-    {
+    function del($name) {
         unset($_SESSION[$name]);
     }
 
@@ -83,14 +78,12 @@ class PublisherSession
      * @return void
      * @access public
      */
-    function destroy()
-    {
+    function destroy() {
         $_SESSION = array();
         session_destroy();
     }
 
-    function &getInstance()
-    {
+    static function &getInstance() {
         static $_sess;
         if (!isset($_sess)) {
             $_sess = new PublisherSession();

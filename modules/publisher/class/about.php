@@ -30,8 +30,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
  * @author The SmartFactory <www.smartfactory.ca>
  */
 
-class PublisherAbout
-{
+class PublisherAbout {
     var $_lang_aboutTitle;
     var $_lang_author_info;
     var $_lang_developer_lead;
@@ -54,8 +53,7 @@ class PublisherAbout
     var $_lang_by;
     var $_tpl;
 
-    function PublisherAbout($aboutTitle = 'About')
-    {
+    function PublisherAbout($aboutTitle = 'About') {
         $this->_aboutTitle = $aboutTitle;
         $this->_lang_developer_contributor = _MI_PUBLISHER_DEVELOPER_CONTRIBUTOR;
         $this->_lang_developer_website = _MI_PUBLISHER_DEVELOPER_WEBSITE;
@@ -76,14 +74,12 @@ class PublisherAbout
 
     }
 
-    function sanitize($value)
-    {
+    function sanitize($value) {
         $myts = MyTextSanitizer::getInstance();
         return $myts->displayTarea($value, 1);
     }
 
-    function render()
-    {
+    function render() {
         /**
          * @todo move the output to a template
          * @todo make the output XHTML compliant
