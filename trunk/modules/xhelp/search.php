@@ -245,44 +245,37 @@ if($xoopsUser){
             // Start of hack by trabis/tdm
             $recieve_datemin = 0;
             $recieve_datemax = 0;
-            if (isset($_REQUEST['datemin_use'])){
-                $datemin_use = intval($_REQUEST['datemin_use']);
-            }else{
-                $datemin_use = 0;
+            $datemin_use = 0;
+            $datemax = 0;
+
+            if (isset($_REQUEST['datemin_use'])) {
+                $datemin_use = 1;
             }
-            if (isset($_REQUEST['datemax_use'])){
-                $datemax_use = intval($_REQUEST['datemax_use']);
-            }else{
-                $datemax_use = 0;
+            if (isset($_REQUEST['datemax_use'])) {
+                $datemax_use = 1;
             }
+
             $date_criteria = new CriteriaCompo();
-            if (isset($_REQUEST['recieve_datemin'])){
-                if ($_REQUEST['recieve_datemin'] != ''){
-                    if ($datemin_use == 1){
-                        $recieve_datemin = $_REQUEST['recieve_datemin'];
-                        $date_criteria->add(new Criteria('t.posted', strtotime($recieve_datemin), ">="));
-                    }
-                }
+            if (isset($_REQUEST['recieve_datemin']) && $datemin_use == 1) {
+                $recieve_datemin = strtotime($_REQUEST['recieve_datemin']);
+                $date_criteria->add(new Criteria('t.posted', $recieve_datemin, ">="));
             }
-            if (isset($_REQUEST['recieve_datemax'])){
-                if ($_REQUEST['recieve_datemax'] != ''){
-                    if ($datemain_use == 1){
-                        $recieve_datemax = $_REQUEST['recieve_datemax'];
-                        $date_criteria->add(new Criteria('t.posted', strtotime($recieve_datemax), "<="));
-                    }
-                }
+            if (isset($_REQUEST['recieve_datemax']) && $datemax_use == 1) {
+                $recieve_datemax = strtotime($_REQUEST['recieve_datemax']) + 60*60*24 - 1;
+                $date_criteria->add(new Criteria('t.posted', $recieve_datemax, "<="));
             }
 
             //recherche recieve_date
             xoops_load('XoopsFormLoader');
             $aff_date = new XoopsFormElementTray('','');
             $date_min = new XoopsFormTextDateSelect(_XHELP_TEXT_DATE_MIN, 'recieve_datemin', 10, strtotime($recieve_datemin));
+            //No request done, set default value for form
             if ($recieve_datemin == 0){
                 $datemin_use = 1;
             }
             $date_min_use = new XoopsFormCheckBox('', 'datemin_use', $datemin_use);
             $date_min_use ->addOption(1, _XHELP_TEXT_USE);
-
+            //No request done, set default value for form
             $date_max = new XoopsFormTextDateSelect(_XHELP_TEXT_DATE_MAX, 'recieve_datemax', 10, strtotime($recieve_datemax));
             if ($recieve_datemax == 0){
                 $datemax_use = 1;
