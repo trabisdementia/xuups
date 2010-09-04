@@ -943,7 +943,7 @@ class PublisherItem extends XoopsObject {
             $this->setVar('uid', is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->uid() : 0);
         }
 
-        if (isset($_REQUEST['suthor_alias'])) {
+        if (isset($_REQUEST['author_alias'])) {
             $this->setVar('author_alias', PublisherRequest::getString('author_alias'));
             if ($this->getVar('autor_alias') != '') {
                 $this->setVar('uid', 0);
