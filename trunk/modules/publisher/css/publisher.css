@@ -582,7 +582,7 @@ ul.pub_slideshow1 img {
     position: relative;
     height: 100%;
     width: 400px;
-    z-index: 3px;
+    z-index: 3;
     overflow: hidden;
 }
 
@@ -644,17 +644,17 @@ ul.lof-navigator li {
 .lof-navigator-outer {
     position: absolute;
     right: 0;
-    top: 00px;
+    top: 0;
     z-index: 100;
     height: 300px;
     width: 210px;
     overflow: hidden;
-    color: #FFF
+    color: #FFF;
 }
 
 .lof-navigator li.active {
     background: url(../images/arrow-bg.png) no-repeat scroll left center;
-    color: #FFF
+    color: #FFF;
 }
 
 .lof-navigator li:hover {
@@ -694,7 +694,7 @@ ul.lof-navigator li {
 }
 
 .lof-navigator li.active img {
-    border: # #6C8E5C solid 1px;
+    border: #6C8E5C solid 1px;
 }
 
 .lof-navigator li.active h3 {
