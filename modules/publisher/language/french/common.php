@@ -57,7 +57,7 @@ define("_CO_PUBLISHER_PRINT", "Imprimer cet article");
 define("_CO_PUBLISHER_MAIL", "Envoyer l'article");
 define("_CO_PUBLISHER_INTITEM", "Jetez un coup d'oeil à cet article à %s");
 define("_CO_PUBLISHER_INTITEMFOUND", "Voici un article intéressant que j'ai trouvé à %s");
-define("_CO_PUBLISHER_POSTEDBY", "Publié par %s sur %s");
+define("_CO_PUBLISHER_POSTEDBY", "Publié par %s le %s");
 define("_CO_PUBLISHER_BODY", "Corps");
 define("_CO_PUBLISHER_BODY_DSC", "le corps de l'article");
 
