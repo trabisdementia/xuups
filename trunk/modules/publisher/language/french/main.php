@@ -86,7 +86,7 @@ define("_MD_PUBLISHER_TOTAL_SMARTITEMS", "Total des articles");
 define("_MD_PUBLISHER_UPLOAD", "Envoyer");
 define("_MD_PUBLISHER_UPLOAD_FILE", "Envoyer un fichier");
 define("_MD_PUBLISHER_VIEW_MORE", "Lire l'article complet");
-define("_MD_PUBLISHER_WHO_WHEN", "Publié par %s sur %s");
+define("_MD_PUBLISHER_WHO_WHEN", "Publié par %s le %s");
 define('_MD_PUBLISHER_PRINT_CLOSE', 'Fermer la fenêtre');
 
 //added in publisher
