@@ -105,6 +105,14 @@ define('_MD_PUBLISHER_ITEMS_SAME_AUTHOR', "Articles du même auteur ");
 define('_MD_PUBLISHER_TOTAL_ITEMS', 'Ensemble des articles :');
 define('_MD_PUBLISHER_TOTAL_HITS', 'Total des hits :');
 define('_MD_PUBLISHER_NO_AUTHOR_ITEMS', "Il n'y a pas d'article de cet auteur ");
+define('_MD_PUBLISHER_ARCHIVES', "Archives");
+define('_MD_PUBLISHER_ACTIONS', "Actions");
+
+define('_MD_PUBLISHER_PREVIOUSIMG', "Image précédente");
+define('_MD_PUBLISHER_NEXTIMG', "Image suivante");
+define('_MD_PUBLISHER_CLOSE', "Fermer");
+define('_MD_PUBLISHER_ENLARGEIMG', "Agrandir");
+define('_MD_PUBLISHER_OF', " de ");
 
 /**
  * @translation     AFUX (Association Francophone des Utilisateurs de Xoops) <http://www.afux.org/>
