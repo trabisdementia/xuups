@@ -103,7 +103,7 @@ define("_CO_PUBLISHER_TAB_PERMISSIONS", "autorisations");
 
 define("_CO_PUBLISHER_IMAGE_UPLOAD_NEW", "Envoyer une nouvelle image");
 define("_CO_PUBLISHER_IMAGE_UPLOADING", "Transfert");
-define("_CO_PUBLISHER_IMAGE_NICENAME", "Nom de l'image");
+define("_CO_PROJETS_IMAGE_NICENAME", 'Nom de l&#39;image');
 define("_CO_PUBLISHER_IMAGE_CAT_NONE", "Avant, vous devez créer une catégorie-image dans Admin-system-Images");
 define("_CO_PUBLISHER_IMAGE_CAT_NOPERM", "Vous n'avez pas les permissions d'utiliser cette catégorie d'image");
 
