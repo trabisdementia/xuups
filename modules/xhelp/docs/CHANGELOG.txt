@@ -1,8 +1,8 @@
 Changes in 0.80
-1. Bug fix: Added support for 2.4.x when using nocommon option
-2. Bug fix: Added some php5.3 compatibility
-3. Feature: Added date range on search form
-4. Bug fix: Setting default department not working correctly
+1. Bug fix: Added support for 2.4.x when using nocommon option (trabis)
+2. Bug fix: Added some php5.3 compatibility (trabis)
+3. Feature: Added date range on search form (trabis)
+4. Bug fix: Setting default department not working correctly (trabis)
 
 Changes in 0.79
 1. Patch for some bugfixes (iconeb)
