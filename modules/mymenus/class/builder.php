@@ -139,13 +139,18 @@ class MymenusBuilder
                 $longlink = $menu['link'];
             }
         }
-        $this->output[$longidx]['selected'] = true;
 
-        $this->output[$longidx]['topselected'] = true;
+        /*
+         * When visiting site.com when XOOPS_URL is set to www.site.com
+         * longidx is not detected, this IF will prevent blank page
+         */
+        if (isset($this->output[$longidx])) {
+            $this->output[$longidx]['selected'] = true;
+            $this->output[$longidx]['topselected'] = true;
 
-        //Now turn all this menu parents to selected
-        $this->addSelectedParents($this->output[$longidx]['pid']);
-
+            //Now turn all this menu parents to selected
+            $this->addSelectedParents($this->output[$longidx]['pid']);
+        }
     }
 
     function addSelectedParents($pid)
