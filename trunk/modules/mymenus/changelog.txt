@@ -1,3 +1,7 @@
+<b><u>=> Version 1.2 (2010-09-20)</u></b>
+- bug fix : When visiting site.com when XOOPS_URL is set to www.site.com
+            we get a blank page!
+
 <b><u>=> Version 1.1 (2010-08-19)</u></b>
 - added plugin for displaying smarty variables.
 - added plugin for displaying constants.
