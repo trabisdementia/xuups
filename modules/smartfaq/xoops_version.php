@@ -11,10 +11,10 @@ if (!defined("XOOPS_ROOT_PATH")) {
 }
 
 $modversion['name'] = _MI_SF_MD_NAME;
-$modversion['version'] = 1.08;
+$modversion['version'] = 1.09;
 $modversion['description'] = _MI_SF_MD_DESC;
-$modversion['author'] = "The SmartFactory [www.smartfactory.ca]";
-$modversion['credits'] = "w4z004, hsalazar, Carnuke, Mariuss, Mithrandir, phppp, Predator, GIJOE, outch, rowdie, Xvitry, Xavier & Catzwolf";
+$modversion['author'] = "The SmartFactory [www.smartfactory.ca] | Xuups";
+$modversion['credits'] = "w4z004, hsalazar, Carnuke, Mariuss, Mithrandir, phppp, Predator, GIJOE, outch, rowdie, Xvitry, Xavier & Catzwolf, trabis";
 $modversion['help'] = "";
 $modversion['license'] = "GNU General Public License (GPL)";
 $modversion['official'] = 0;
@@ -22,23 +22,23 @@ $modversion['image'] = "images/module_logo.gif";
 $modversion['dirname'] = "smartfaq";
 
 // Added by marcan for the About page in admin section
-$modversion['developer_lead'] = "marcan [Marc-André Lanciault]";
-$modversion['developer_contributor'] = "w4z004, hsalazar, Carnuke, Mariuss, Mithrandir, phppp, Predator, GIJOE, outch, rowdie, Xvitry, Xavier & Catzwolf";
-$modversion['developer_website_url'] = "http://www.smartfactory.ca";
-$modversion['developer_website_name'] = "SmartFactory.ca";
-$modversion['developer_email'] = "marcan@smartfactory";
+$modversion['developer_lead'] = "marcan [Marc-AndrÃ© Lanciault]";
+$modversion['developer_contributor'] = "w4z004, hsalazar, Carnuke, Mariuss, Mithrandir, phppp, Predator, GIJOE, outch, rowdie, Xvitry, Xavier & Catzwolf, trabis";
+$modversion['developer_website_url'] = "http://www.xuups.com";
+$modversion['developer_website_name'] = "Xuups";
+$modversion['developer_email'] = "lusopoemas@gmail.com";
 $modversion['status_version'] = "Final";
 $modversion['status'] = "Final";
-$modversion['date'] = "2007-01-19";
+$modversion['date'] = "2010-09-20";
 
 $modversion['warning'] = _MI_SF_WARNING_FINAL;
 
-$modversion['demo_site_url'] = "http://demo.smartfactory.ca";
-$modversion['demo_site_name'] = _MI_SF_DEMO_SITE;
-$modversion['support_site_url'] = "http://www.smartfactory.ca";
-$modversion['support_site_name'] = "SmartFactory.ca";
-$modversion['submit_bug'] = "http://dev.xoops.org/modules/xfmod/tracker/?func=add&group_id=1026&atid=205";
-$modversion['submit_feature'] = "http://dev.xoops.org/modules/xfmod/tracker/?func=add&group_id=1026&atid=208";
+$modversion['demo_site_url'] = "http://www.xuups.com/modules/smartfaq";
+$modversion['demo_site_name'] = "Xuups";
+$modversion['support_site_url'] = "http://www.xuups.com";
+$modversion['support_site_name'] = "Xuups";
+$modversion['submit_bug'] = "http://www.xuups.com/modules/xhelp";
+$modversion['submit_feature'] = "http://www.xuups.com/modules/xhelp";
 
 $modversion['author_word'] = "
 <B>SmartFAQ</B> is the result of multiple ideas from multiple people and a work of outstanding
@@ -65,96 +65,11 @@ suggesting a lot of interesting improvements along the way.
 documentation for this module. You have now set up a new quality standard for XOOPS module
 documentation. I'm confident that all the Xoopsers of the world are gratefull for this :-) !
 <BR><BR>Finally, thanks to all the people who made this module possible : Herko, phppp, Solo71,
-Yoyo2021, Christian, Hervé and so many others ! Also, a final thank to Zabou who has been
+Yoyo2021, Christian, HervÃ© and so many others ! Also, a final thank to Zabou who has been
 really understanding during all the hours I spent behind my laptop developing SmartFAQ.
 <BR><BR>So I guess this is it, I could thank the Academy, my Mother and Father but that would be
 pushing it I think ! (lol)
-<BR><BR>Enjoy <b>SmartFAQ</b> !
-";
-
-$modversion['version_history'] = "<br/>
-=> Version 1.04 Final (Release Date : 2005-01-12)<br/>
-================================================<br/>
-<br/>
-- 1.04 RC 2 was considered stable<br/>
-<br/>
-=> Version 1.04 RC 2 (Release Date : 2005-01-11)<br/>
-================================================<br/>
-<br/>
-- A fatal error was found in xoops_version that prevented a fresh install of the module. Thanks to Xavier !<br/>
-- Enable HTML tags - not working #bug 1645 was fixed, thanks to Marius<br/>
-- When an admin submit a Q&A from the user side, it is now automatically published<br/>
-<br/>
-=> Version 1.04 RC 1 (Release Date : 2005-01-10)<br/>
-================================================<br/>
-<br/>
-- A preview function has been added when Submitting a Q&A from the user side<br/>
-- In the FAQ template, the question has a link to the same page. This has been fixed<br/>
-- When no Opened Questions exists or the user don't have access to any Open Questions, he does not see the Open Question link anymore<br/>
-- A new config option has been added to allow or not the submission of new answer for already published FAQ<br/>
-- The 'New answer' icon at the bottom of an FAQ is not displayed anymore when the user does not have the right to submit new answer<br/>
-- A bug was fixed regarding the get_class function used in the SmartFAQ's classes (thanks to BigDDave)<br/>
-- When Anonymous was requesting a question it was still displayed 'Requested by Admin'. This has been fixed<br/>
-- HTML entities not escaped were fixed (bug #1646) thanks to Marius<br/>
-- Setting a block to display question from a specific category was not working. It has been fixed<br/>
-<br/>
-=> Version 1.04 Beta 1 (Release Date : 2004-12-30)<br/>
-==================================================<br/>
-<br/>
-- Layout and efficiency improvments in the template<br/>
-- Add a config option to display or not the last Q&As in the index page<br/>
-- Add a config option to display or not the top categories description<br/>
-- Add a config option to display or not the sub-categories in the index page<br/>
-- Add a block for Most Viewed Q&As<br/>
-- All form now uses templates<br/>
-<br/>
-=> Version 1.03 Final (Release Date : 2004-12-17)<br/>
-==================================================<br/>
-<br/>
-- 1.03 Beta 2 was considered stable<br/>
-<br/>
-=> Version 1.03 Beta 2 (Release Date : 2004-12-13)<br/>
-==================================================<br/>
-<br/>
-- Error fixed when admin answers an Asked question<br/>
-- Characters problem fix when merging answers<br/>
-<br/>
-=> Version 1.03 Beta 1 (Release Date : 2004-12-12)<br/>
-==================================================<br/>
-<br/>
-- When a user Requests a Q&A, the moderator can now answer this question and publish it aftwerwards. The question does not transit by the Open Question section.<br/>
-- When a new answer is submited for a Published Q&A, the moderator can now edit the answer before approving it, as well as merge the new answer with the original one and then edit this new answer.<br/>
-- The form to submit a new answer now displays the original answer of the Q&A.<br/>
-- When merging a new answer, the name of the poster is now inlcuded in the text as : 'Contribution by...'<br/>
-- When moderating questions or Q&A's, the name of the poster was changed for the name of the moderator. This has been fixed.<br/>
-<br/>
-=> Version 1.02 Final (Release Date : 2004-11-20)<br/>
-=================================================<br/>
-<br/>
-- A lot of tiny bugs have been corrected.<br/>
-- When editing a category, the list of Q&A's within that category is displayed after the form.<br/>
-<br/>
-=> Version 1.02 RC 1 (Release Date : 2004-10-12)<br/>
-================================================<br/>
-<br/>
-- Addition of a config option to display or not the 'Hits' column in Summary display type<br/>
-- Addition of a config option to display or not the 'Published on' column in Summary display type<br/>
-- Addition of a config option to configure the size of the question as a title in the Q&A page<br/>
-<br/>
-=> Version 1.02 Beta 1 (Release Date : 2004-10-10)<br/>
-==================================================<br/>
-<br/>
-- Addition of a config option to let the admin display or not the last Q&A for each categories<br/>
-- Addition of a config option to set the size of the last Q&A for each category<br/>
-- Addition of a config option to let the admin display or not the sub-categories description<br/>
-- Correction of some undefined offset on index, request and category page<br/>
-- Fix of the french translation<br/>
-<br/>
-=> Version 1.01 Beta 2 (Release Date : 2004-10-08)<br/>
-==================================================<br/>
-<br/>
-- Rewrite of a great part of the code to dramatically reduce the queries count (Thank you so much Mithrandir !!!!)<br />
-- Addition of the Version History in the About page
+<BR><BR>Enjoy <b>SmartFAQ</b> (by marcan)!
 ";
 
 // Admin things
