@@ -4,6 +4,12 @@
 * Author: The SmartFactory <www.smartfactory.ca>
 * Licence: GNU
 */
+=> Version 1.09 Final (Release Date : 2010-09-25)
+=====================
+- Improved : some php5 comaptibilty
+- IMproved :Replacing deprecated methods
+- Fixed :XoopsUser not defined
+- Fixed : query not working on smartfaq
 
 => Version 1.08 Beta 3 (Private release)
 ========================================
