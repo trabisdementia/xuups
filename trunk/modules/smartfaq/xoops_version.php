@@ -18,7 +18,7 @@ $modversion['credits'] = "w4z004, hsalazar, Carnuke, Mariuss, Mithrandir, phppp,
 $modversion['help'] = "";
 $modversion['license'] = "GNU General Public License (GPL)";
 $modversion['official'] = 0;
-$modversion['image'] = "images/module_logo.gif";
+$modversion['image'] = "images/smartfaq_logo.png";
 $modversion['dirname'] = "smartfaq";
 
 // Added by marcan for the About page in admin section
