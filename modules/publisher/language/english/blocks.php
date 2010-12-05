@@ -14,6 +14,7 @@ define("_MB_PUBLISHER_CATEGORY", "Category");
 define("_MB_PUBLISHER_CHARS", "Length of the title");
 define("_MB_PUBLISHER_COMMENTS", "Comment(s)");
 define("_MB_PUBLISHER_DATE", "Published date");
+define("_MB_PUBLISHER_FIRST", "Exclude First");
 define("_MB_PUBLISHER_DISP", "Display");
 define("_MB_PUBLISHER_DISPLAY_COMMENTS", "Display comment count?");
 define("_MB_PUBLISHER_DISPLAY_TYPE", "Display type :");
