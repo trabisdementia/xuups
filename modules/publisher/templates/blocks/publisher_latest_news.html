@@ -32,10 +32,13 @@
                     <span class="itemPostDate"><{$item.posttime}><{$item.read}></span>
                 </div>
                 <{/if}>
+                <{$item.image}>
+                <{if $block.letters != 0}>
                 <div style="text-align:justify; padding:5px">
                     <{$item.text}>
                     <div style="clear:both;"></div>
                 </div>
+				<{/if}>
                 <div class="itemFoot">
                     <span class="itemPermaLink"><{$item.more}><{$item.comment}><{$item.print}><{$item.pdf}><{$item.email}></span>
                 </div>
