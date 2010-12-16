@@ -129,7 +129,7 @@ function publisher_latest_news_show($options)
             $enddiv = 'width="' . $imgwidth . '" ' . $ls_height . '/></a></div>';
             $image = $startdiv . '<img ' . $style . ' src="' . $item['image_path'] . '" alt="' . $item['image_name'] . '" ' . $enddiv;
 
-            $item['text'] = $image . $item['text'];
+            $item['image'] = $image;
         }
 
         if (is_object($xoopsUser) && $xoopsUser->isAdmin(-1)) {
@@ -233,6 +233,8 @@ function publisher_latest_news_show($options)
 
         $block['imgwidth'] = $options[11];
         $block['imgheight'] = $options[12];
+
+        $block['letters'] = $letters; 
 
         $columns[$k][] = $item;
         $k++;
