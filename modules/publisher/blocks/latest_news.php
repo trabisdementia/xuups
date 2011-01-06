@@ -187,12 +187,12 @@ function publisher_latest_news_show($options)
                 //shows 1 comment instead of 1 comm. if comments ==1
                 //langugage file modified accordingly
                 if ($comments == 1) {
-                    $item['comment'] = '&nbsp;' . _MB_PUBLISHER_ONECOMMENT . '</a>&nbsp;';
+                    $item['comment'] = '&nbsp;' . _MB_PUBLISHER_ONECOMMENT . '&nbsp;';
                 } else {
-                    $item['comment'] = '&nbsp;' . $comments . '&nbsp;' . _MB_PUBLISHER_COMMENTS . '</a>&nbsp;';
+                    $item['comment'] = '&nbsp;' . $comments . '&nbsp;' . _MB_PUBLISHER_COMMENTS . '&nbsp;';
                 }
             } else {
-                $item['comment'] = '&nbsp;' . _MB_PUBLISHER_NO_COMMENTS . '</a>&nbsp;';
+                $item['comment'] = '&nbsp;' . _MB_PUBLISHER_NO_COMMENTS . '&nbsp;';
             }
         }
 
