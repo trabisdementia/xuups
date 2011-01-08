@@ -700,3 +700,14 @@ ul.lof-navigator li {
 .lof-navigator li.active h3 {
     color: #FFF;
 }
+
+#publisher_upload_button {
+    text-align: center; 
+    font-weight: normal;
+    width:130px;
+    padding:3px;
+    margin-top:3px;
+    border:1px solid #bbb;
+    background-color:#D3D2D6;
+    color:#405A80;
+}

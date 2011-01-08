@@ -345,7 +345,7 @@ class PublisherItemForm extends XoopsThemeTabForm {
             $addbreak = new XoopsFormLabel('', "<br />");
             $closetable = new XoopsFormLabel('', "</td></tr></table>");
 
-            $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/ajaxupload.3.5.js');
+            $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/ajaxupload.3.9.js');
             $js_data = new XoopsFormLabel('', '
 <script type= "text/javascript">/*<![CDATA[*/
 $publisher(document).ready(function(){

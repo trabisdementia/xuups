@@ -34,12 +34,13 @@ function publisher_cpHeader()
     xoops_cp_header();
     //cannot use xoTheme, some conflit with admin gui
     echo '<link type="text/css" href="' . PUBLISHER_URL . '/css/jquery-ui-1.7.1.custom.css" rel="stylesheet" />
+	<link type="text/css" href="' . PUBLISHER_URL . '/css/publisher.css" rel="stylesheet" />
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/funcs.js"></script>
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/cookies.js"></script>
     <script type="text/javascript" src="' . XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js"></script>
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/ui.core.js"></script>
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/ui.tabs.js"></script>
-    <script type="text/javascript" src="' . PUBLISHER_URL . '/js/ajaxupload.3.5.js"></script>
+    <script type="text/javascript" src="' . PUBLISHER_URL . '/js/ajaxupload.3.9.js"></script>
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/publisher.js"></script>
     ';
 }
