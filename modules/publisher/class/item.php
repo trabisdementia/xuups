@@ -739,6 +739,12 @@ class PublisherItem extends XoopsObject {
             $item['image_width'] = $dimensions[0];
             $item['image_height'] = $dimensions[1];
             $item['image_path'] = XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name');
+     	    // check to see if GD function exist
+    	    if (!function_exists ('imagecreatetruecolor')) {
+            $item['image_thumb'] = XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name');
+            } else {
+            $item['image_thumb'] = PUBLISHER_URL . '/thumb.php?src=' . XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name') . '&amp;h=180';
+            }
             $item['image_name'] = $images['main']->getVar('image_nicename');
         }
         return $item;
@@ -753,6 +759,12 @@ class PublisherItem extends XoopsObject {
             $item['images'][$i]['width'] = $dimensions[0];
             $item['images'][$i]['height'] = $dimensions[1];
             $item['images'][$i]['path'] = XOOPS_URL . '/uploads/' . $image->getVar('image_name');
+     	    // check to see if GD function exist
+    	    if (!function_exists ('imagecreatetruecolor')) {
+            $item['images'][$i]['thumb'] = XOOPS_URL . '/uploads/' . $image->getVar('image_name');
+            } else {
+            $item['images'][$i]['thumb'] = PUBLISHER_URL . '/thumb.php?src=' . XOOPS_URL . '/uploads/' . $image->getVar('image_name') . '&amp;w=240';
+            } 
             $item['images'][$i]['name'] = $image->getVar('image_nicename');
             $i++;
         }
