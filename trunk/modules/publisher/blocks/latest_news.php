@@ -96,7 +96,12 @@ function publisher_latest_news_show($options)
         $item['title'] = $itemObj->getItemLink();
         $item['alt'] = strip_tags($itemObj->getItemLink());
         $mainImage = $itemObj->getMainImage();
-        $item['item_image'] = $mainImage['image_path'];
+	// check to see if GD function exist
+	if (!function_exists ('imagecreatetruecolor')) {
+        $item['item_image'] = $mainImage['image_path']; 
+	} else {
+        $item['item_image'] = PUBLISHER_URL . '/thumb.php?src='.$mainImage['image_path'].'&amp;w='.$imgwidth; // No $imgheight for autoheight option
+	}
         $item['text'] = $itemObj->getBlockSummary($letters);
 
         $item = $itemObj->getMainImage($item); //returns an array
@@ -127,7 +132,7 @@ function publisher_latest_news_show($options)
             $startdiv = '<div style="' . $imgposition . '"><a href="' . $item['itemurl'] . '">';
             $style = 'style="margin' . $ls_margin . ': 10px; padding: 2px; border: ' . $border . 'px solid #' . $bordercolor . '"';
             $enddiv = 'width="' . $imgwidth . '" ' . $ls_height . '/></a></div>';
-            $image = $startdiv . '<img ' . $style . ' src="' . $item['image_path'] . '" alt="' . $item['image_name'] . '" ' . $enddiv;
+            $image = $startdiv . '<img ' . $style . ' src="' . $item['item_image'] . '" alt="' . $item['image_name'] . '" ' . $enddiv;
 
             $item['image'] = $image;
         }

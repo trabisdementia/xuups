@@ -90,7 +90,12 @@ function publisher_items_columns_show($options)
             $mainitem['item_link'] = $thisitem->itemid();
             $mainitem['itemurl'] = $thisitem->getItemUrl();
             $mainImage = $thisitem->getMainImage();
-            $mainitem['item_image'] = $mainImage['image_path'];
+	    // check to see if GD function exist
+	    if (!function_exists ('imagecreatetruecolor')) {
+	    $mainitem['item_image'] = $mainImage['image_path']; 
+	    } else {
+	    $mainitem['item_image'] = PUBLISHER_URL . '/thumb.php?src=' . $mainImage['image_path'] . '&amp;w=100';
+	    }
             $mainitem['item_summary'] = $thisitem->getBlockSummary($opt_cat_truncate);
 
             $mainitem['item_cat_name'] = $mainitemCatObj->name();
