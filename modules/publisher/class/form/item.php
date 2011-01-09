@@ -387,7 +387,7 @@ $publisher(document).ready(function(){
 /*]]>*/</script>
 ');
             $messages = new XoopsFormLabel('', "<div id='publisher_upload_message'></div>");
-            $button = new XoopsFormLabel('', "<div id='publisher_upload_button' style='text-decoration: underline; font-weight: bold;'>" . _CO_PUBLISHER_IMAGE_UPLOAD_NEW . "</div>");
+            $button = new XoopsFormLabel('', "<div id='publisher_upload_button'>" . _CO_PUBLISHER_IMAGE_UPLOAD_NEW . "</div>");
             $nicename = new XoopsFormText('', 'image_nicename', 30, 30, _CO_PUBLISHER_IMAGE_NICENAME);
 
             $imgcat_handler =& xoops_gethandler('imagecategory');
