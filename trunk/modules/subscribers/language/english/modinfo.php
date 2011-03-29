@@ -18,5 +18,9 @@ define("_MI_SUBSCRIBERS_CONF_EMAILSPERPACK", "Emails Per Pack");
 define("_MI_SUBSCRIBERS_CONF_EMAILSPERPACK_DSC", "Number of emails to send each time");
 define("_MI_SUBSCRIBERS_CONF_TIMEBPACKS", "Time between packs");
 define("_MI_SUBSCRIBERS_CONF_TIMEBPACKS_DSC", "Interval of seconds between each pack");
-
+define("_MI_SUBSCRIBERS_CONF_CAPTCHA", "Anti Spam");
+define("_MI_SUBSCRIBERS_CONF_CAPTCHA_DSC", "");
+define("_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE1", "Activate to users and visitors");
+define("_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE2", "Activate to visitors only");
+define("_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE3", "Desactivate");
 ?>

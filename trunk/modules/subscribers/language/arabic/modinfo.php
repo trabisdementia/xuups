@@ -18,4 +18,9 @@ define("_MI_SUBSCRIBERS_CONF_EMAILSPERPACK", "ÇáÑÓÇÆá Ýí ßá ÏÝÚÉ");
 define("_MI_SUBSCRIBERS_CONF_EMAILSPERPACK_DSC", "ÚÏÏ ÇáÑÓÇÆá ÇáÊí ÓÊÑÓá Ýí ßá ãÑÉ");
 define("_MI_SUBSCRIBERS_CONF_TIMEBPACKS", "ÇáæÞÊ Èíä ÇáÏÝÚÇÊ");
 define("_MI_SUBSCRIBERS_CONF_TIMEBPACKS_DSC", "ÚÏÏ ÇáËæÇäí Èíä ßá ÏÝÚÉ æ ÃÎÑì");
+define("_MI_SUBSCRIBERS_CONF_CAPTCHA", "ÇáÑãÒ ÇáÃãäí");
+define("_MI_SUBSCRIBERS_CONF_CAPTCHA_DSC", "");
+define("_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE1", "ÊÝÚíáåÇ ááÃÚÖÇÁ æ ÇáÒæÇÑ");
+define("_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE2", "ÊÝÚíáåÇ ááÒæÇÑ ÝÞØ");
+define("_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE3", "ÊÚØíáåÇ");
 ?>

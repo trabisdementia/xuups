@@ -110,4 +110,13 @@ $modversion['config'][$i]['description'] = '_MI_SUBSCRIBERS_CONF_TIMEBPACKS_DSC'
 $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 3600;
+
+$modversion['config'][$i]['name'] = 'captcha';
+$modversion['config'][$i]['title'] = '_MI_SUBSCRIBERS_CONF__CAPTCHA';
+$modversion['config'][$i]['description'] = '_MI_SUBSCRIBERS_CONF__CAPTCHA';
+$modversion['config'][$i]['formtype'] = 'select';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 2;
+$modversion['config'][$i]['options'] = array( _MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE1 => 1, _MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE2 => 2, _MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE3 => 3 );
+$i++;
 ?>

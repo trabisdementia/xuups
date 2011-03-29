@@ -19,6 +19,13 @@
         <{/foreach}>
         </select>
     </div>
+    <{if $captcha}>
+    <div style="padding:5px;">
+    	 <strong><{$smarty.const._MD_SUBSCRIBERS_ENTER_SECURITY}></strong>
+    	 <input type="text" name="xoopscaptcha" id="xoopscaptcha" size="4" maxlength="4" value="" />
+	    <img id="xoopscaptcha" src="<{$xoops_url}>/class/captcha/image/scripts/image.php" onclick='this.src="<{$xoops_url}>/class/captcha/image/scripts/image.php?refresh="+Math.random()' style="cursor: pointer; vertical-align: middle;" alt="" />
+	 </div>
+	 <{/if}>
     <div style="padding:5px;">
         <input type="submit" name="submit" value="<{$smarty.const._MD_SUBSCRIBERS_SUBMIT}>" />
     </div>

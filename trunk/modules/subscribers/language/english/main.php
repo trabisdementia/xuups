@@ -9,5 +9,6 @@ define("_MD_SUBSCRIBERS_SUBSCRIBE", "Subscribe to our mailing list");
 define("_MD_SUBSCRIBERS_ENTER_COUNTRY", "Country : ");
 define("_MD_SUBSCRIBERS_ENTER_EMAIL", "Email : ");
 define("_MD_SUBSCRIBERS_ENTER_NAME", "Name : ");
+define("_MD_SUBSCRIBERS_ENTER_SECURITY", "AntiSpam : ");
 define("_MD_SUBSCRIBERS_SUBMIT", "Subscribe now!!!");
 ?>

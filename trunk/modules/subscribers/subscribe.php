@@ -7,6 +7,12 @@ include_once dirname(dirname(dirname(__FILE__))) . '/mainfile.php';
 
 $redirect = $_SERVER['HTTP_REFERER'];
 
+xoops_load("captcha");
+$xoopsCaptcha =& XoopsCaptcha::getInstance();
+if (! $xoopsCaptcha->verify() ) {
+	redirect_header($redirect, 2, $xoopsCaptcha->getMessage());
+}
+
 $myts =& MyTextSanitizer::getInstance();
 $country = isset($_POST['user_country']) ? $myts->stripSlashesGPC($_POST['user_country']) : '';
 $email = isset($_POST['user_email']) ? trim($myts->stripSlashesGPC($_POST['user_email'])) : '';
