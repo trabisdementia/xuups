@@ -15,6 +15,8 @@ function subscribers_add_show($options)
     $block['countries'] = XoopsLists::getCountryList();
     $block['selected'] = $config['country'];
     array_shift($block['countries']);
+    $sub_captcha = $config['captcha'];
+	if($xoopsUser) {$block['captcha'] = ($sub_captcha==2)?0:1;}else {$block['captcha'] = ($sub_captcha==3)?0:1;}
     return $block;
 }
 ?>
