@@ -4,10 +4,10 @@ if (!defined("XOOPS_ROOT_PATH")) {
 }
 
 $modversion['name'] = _MI_SUBSCRIBERS_MD_NAME;
-$modversion['version'] = 1.0;
+$modversion['version'] = 1.1;
 $modversion['description'] = _MI_SUBSCRIBERS_MD_DSC;
 $modversion['author'] = "Trabis - www.xuups.com";
-$modversion['credits'] = "Mowaffaq - www.arabxoops.com";
+$modversion['credits'] = "Mowaffaq & Mariane - www.arabxoops.com";
 $modversion['help'] = "";
 $modversion['license'] = "GNU General Public License (GPL)";
 $modversion['official'] = 0;
@@ -111,12 +111,16 @@ $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 3600;
 
+$i++;
 $modversion['config'][$i]['name'] = 'captcha';
-$modversion['config'][$i]['title'] = '_MI_SUBSCRIBERS_CONF__CAPTCHA';
-$modversion['config'][$i]['description'] = '_MI_SUBSCRIBERS_CONF__CAPTCHA';
+$modversion['config'][$i]['title'] = '_MI_SUBSCRIBERS_CONF_CAPTCHA';
+$modversion['config'][$i]['description'] = '_MI_SUBSCRIBERS_CONF_CAPTCHA';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 2;
-$modversion['config'][$i]['options'] = array( _MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE1 => 1, _MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE2 => 2, _MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE3 => 3 );
-$i++;
+$modversion['config'][$i]['options'] = array(
+    _MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE1 => 1,
+    _MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE2 => 2,
+    _MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE3 => 3
+);
 ?>

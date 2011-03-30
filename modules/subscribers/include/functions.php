@@ -16,12 +16,14 @@ function subscribers_adminMenu($currentoption = 0, $breadcrumb = '')
     xoops_loadLanguage('modinfo', 'subscribers');
 
     $tpl = new XoopsTpl();
-    $tpl->assign(array('modurl'	    => XOOPS_URL . '/modules/subscribers',
-	                   'headermenu'	=> $subscribers_headermenu,
-                       'adminmenu'	=> $subscribers_adminmenu,
-	                   'current'	=> $currentoption,
-	                   'breadcrumb'	=> $breadcrumb,
-	                   'headermenucount' => count($subscribers_headermenu)));
+    $tpl->assign(array(
+        'modurl' => XOOPS_URL . '/modules/subscribers',
+        'headermenu' => $subscribers_headermenu,
+        'adminmenu' => $subscribers_adminmenu,
+        'current' => $currentoption,
+        'breadcrumb' => $breadcrumb,
+        'headermenucount' => count($subscribers_headermenu)
+    ));
     $tpl->display(XOOPS_ROOT_PATH . '/modules/subscribers/templates/static/subscribers_admin_menu.html');
 }
 

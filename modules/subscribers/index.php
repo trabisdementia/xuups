@@ -14,7 +14,11 @@ $config =& subscribers_getModuleConfig();
 $selected = $config['country'];
 
 $sub_captcha = $config['captcha'];
-if($xoopsUser) {$captcha = ($sub_captcha==2)?0:1;}else {$captcha = ($sub_captcha==3)?0:1;}
+if (is_object($xoopsUser)) {
+    $captcha = $sub_captcha == 2 ? 0 : 1;
+} else {
+    $captcha = $sub_captcha == 3 ? 0 : 1;
+}
 
 include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 $countries = XoopsLists::getCountryList();
