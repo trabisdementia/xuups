@@ -11,4 +11,5 @@ define("_MD_SUBSCRIBERS_ENTER_EMAIL", "Email : ");
 define("_MD_SUBSCRIBERS_ENTER_NAME", "Name : ");
 define("_MD_SUBSCRIBERS_ENTER_SECURITY", "AntiSpam : ");
 define("_MD_SUBSCRIBERS_SUBMIT", "Subscribe now!!!");
+define("_MD_SUBSCRIBERS_ENTER_PHONE", "Phone Number : ");
 ?>

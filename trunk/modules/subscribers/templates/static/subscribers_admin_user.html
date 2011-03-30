@@ -33,6 +33,7 @@ function subscribers_showDiv(type, id){
       <th><{$smarty.const._AM_SUBSCRIBERS_COUNTRY}></th>
       <th><{$smarty.const._AM_SUBSCRIBERS_NAME}></th>
       <th><{$smarty.const._AM_SUBSCRIBERS_EMAIL}></th>
+      <th><{$smarty.const._AM_SUBSCRIBERS_PHONE}></th>
       <th width="15%"><{$smarty.const._OPTIONS}></th>
     </tr>
     <{if $count > 0}>
@@ -41,6 +42,7 @@ function subscribers_showDiv(type, id){
         <td align="left"><{$obj.user_country}></td>
         <td align="left"><{$obj.user_name}></td>
         <td align="left"><{$obj.user_email}></td>
+        <td align="left"><{$obj.user_phone}></td>
         <td>
       	  <a href="admin_user.php?op=edit&amp;id=<{$obj.user_id}>"><img src="<{$xoops_url}>/modules/subscribers/images/edit_big.png" title="<{$smarty.const._EDIT}>" alt="<{$smarty.const._EDIT}>" /></a>
       	  <a href="admin_user.php?op=del&amp;id=<{$obj.user_id}>"><img src="<{$xoops_url}>/modules/subscribers/images/delete_big.png" title="<{$smarty.const._DELETE}>" alt="<{$smarty.const._DELETE}>" /></a>
@@ -48,10 +50,10 @@ function subscribers_showDiv(type, id){
       </tr>
       <{/foreach}>
     <{else}>
-      <tr><td class="head" colspan="4" align="center"><{$smarty.const._AM_SUBSCRIBERS_NOTFOUND}></td></tr>
+      <tr><td class="head" colspan="5" align="center"><{$smarty.const._AM_SUBSCRIBERS_NOTFOUND}></td></tr>
     <{/if}>
     <tr>
-      <td class="head" colspan="4" align="right">
+      <td class="head" colspan="5" align="right">
         <{$pag}>
         <input type="button" onclick="subscribers_showDiv('add_form','','hiddendiv'); return false;" value="<{$smarty.const._ADD}>" />
       </td>
