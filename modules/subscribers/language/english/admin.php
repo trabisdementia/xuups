@@ -13,6 +13,7 @@ define("_AM_SUBSCRIBERS_RESULTS_FOUND", "Newsletters Subscribers : ");
 define("_AM_SUBSCRIBERS_COUNTRY", "Country");
 define("_AM_SUBSCRIBERS_EMAIL", "Email");
 define("_AM_SUBSCRIBERS_NAME", "Name");
+define("_AM_SUBSCRIBERS_PHONE", "Phone");
 define("_AM_SUBSCRIBERS_CREATED", "Created");
 define("_AM_SUBSCRIBERS_PRIORITY", "Priority");
 define("_AM_SUBSCRIBERS_SUBJECT", "Subject");

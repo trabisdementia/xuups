@@ -9,14 +9,15 @@ $redirect = $_SERVER['HTTP_REFERER'];
 
 xoops_load("captcha");
 $xoopsCaptcha =& XoopsCaptcha::getInstance();
-if (! $xoopsCaptcha->verify() ) {
-	redirect_header($redirect, 2, $xoopsCaptcha->getMessage());
+if (!$xoopsCaptcha->verify()) {
+    redirect_header($redirect, 2, $xoopsCaptcha->getMessage());
 }
 
 $myts =& MyTextSanitizer::getInstance();
 $country = isset($_POST['user_country']) ? $myts->stripSlashesGPC($_POST['user_country']) : '';
 $email = isset($_POST['user_email']) ? trim($myts->stripSlashesGPC($_POST['user_email'])) : '';
 $name = isset($_POST['user_name']) ? trim($myts->stripSlashesGPC($_POST['user_name'])) : $GLOBALS['xoopsConfig']['anonymous'];
+$phone = isset($_POST['user_phone']) ? trim($myts->stripSlashesGPC($_POST['user_phone'])) : '';
 
 $stop = false;
 
@@ -56,6 +57,7 @@ $user = $user_handler->create();
 $user->setVar('user_email', $email);
 $user->setVar('user_name', $name);
 $user->setVar('user_country', $country);
+$user->setVar('user_phone', $phone);
 $user->setVar('user_created', time());
 
 if (false == $user_handler->insert($user)) {

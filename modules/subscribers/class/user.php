@@ -18,6 +18,7 @@ class SubscribersUser extends XoopsObject
         $this->initVar("user_email", XOBJ_DTYPE_TXTAREA, null, false);
         $this->initVar("user_name", XOBJ_DTYPE_TXTAREA, null, false);
         $this->initVar("user_country", XOBJ_DTYPE_TXTAREA, null, false);
+        $this->initVar("user_phone", XOBJ_DTYPE_TXTAREA, null, false);
         $this->initVar("user_created", XOBJ_DTYPE_INT, null, false);
     }
 

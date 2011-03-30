@@ -3,6 +3,7 @@ CREATE TABLE `subscribers_user` (
   `user_email` varchar(100) NOT NULL default '',
   `user_name` varchar(100) NOT NULL default '',
   `user_country` varchar(100) NOT NULL default '',
+  `user_phone` varchar(100) NOT NULL default '',
   `user_created` int(11) NOT NULL default '0',
   PRIMARY KEY  (`user_id`)
 ) TYPE=MyISAM;

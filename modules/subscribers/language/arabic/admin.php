@@ -13,6 +13,7 @@ define("_AM_SUBSCRIBERS_RESULTS_FOUND", "„‘ —ﬂÌ «·ﬁ«∆„… «·»—ÌœÌ… : ");
 define("_AM_SUBSCRIBERS_COUNTRY", "«·»·œ");
 define("_AM_SUBSCRIBERS_EMAIL", "«·»—Ìœ «·≈·ﬂ —Ê‰Ì");
 define("_AM_SUBSCRIBERS_NAME", "«·«”„");
+define("_AM_SUBSCRIBERS_PHONE", "Phone");
 define("_AM_SUBSCRIBERS_CREATED", "» «—ÌŒ");
 define("_AM_SUBSCRIBERS_PRIORITY", "«·√Ê·ÊÌ…");
 define("_AM_SUBSCRIBERS_SUBJECT", "«·⁄‰Ê«‰");

@@ -212,10 +212,12 @@ function user_form($id = null)
         $name = $obj->getVar('user_name', 'e');
         $email = $obj->getVar('user_email', 'e');
         $country = $obj->getVar('user_country', 'e');
+        $phone = $obj->getVar('user_phone', 'e');
     } else {
         $title = _ADD;
         $name = '';
         $email = '';
+        $phone = '';
         $country = $xoopsModuleConfig['country'];
     }
 
@@ -232,6 +234,7 @@ function user_form($id = null)
 
     $form->addElement(new XoopsFormText(_AM_SUBSCRIBERS_NAME,'user_name', 50, 50, $name));
     $form->addElement(new XoopsFormText(_AM_SUBSCRIBERS_EMAIL,'user_email', 50, 50, $email));
+    $form->addElement(new XoopsFormText(_AM_SUBSCRIBERS_PHONE,'user_phone', 50, 50, $phone));
 
     $tray = new XoopsFormElementTray('' ,'');
     $tray->addElement(new XoopsFormButton('', 'submit_button', _SUBMIT, 'submit'));

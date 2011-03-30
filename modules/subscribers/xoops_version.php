@@ -25,8 +25,7 @@ $modversion['adminmenu'] = "admin/menu.php";
 $modversion['sqlfile']['mysql'] = "sql/mysql.sql";
 // Tables created by sql file (without prefix!)
 $modversion['tables'][0] = "subscribers_user";
-$modversion['tables'][1] = "subscribers_message";
-$modversion['tables'][2] = "subscribers_waiting";
+$modversion['tables'][1] = "subscribers_waiting";
 
 // Search
 $modversion['hasSearch'] = 0;
