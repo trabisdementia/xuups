@@ -2,6 +2,7 @@
 define("_AM_SUBSCRIBERS_GOMOD", "Go to Module");
 define("_AM_SUBSCRIBERS_BLOCKS", "Manage blocks");
 define("_AM_SUBSCRIBERS_UPDATE_MODULE", "Update Module");
+define("_AM_SUBSCRIBERS_EXPORT", "Export");
 define("_AM_SUBSCRIBERS_ERROR", "Sorry, an error occured!");
 define("_AM_SUBSCRIBERS_SOME_ERROR", "Hum, some requests were not performed!");
 define("_AM_SUBSCRIBERS_SUCCESS", "Done!!!");
@@ -37,5 +38,7 @@ define("_AM_SUBSCRIBERS_EMAIL_GROUPS_DSC", "Select groups of recipients");
 define("_AM_SUBSCRIBERS_DELETE_ALL", "Delete all");
 define("_AM_SUBSCRIBERS_USERS_FOUND", "Website Members : ");
 define("_AM_SUBSCRIBERS_TOTAL_FOUND", "Total : ");
+
+define("_AM_SUBSCRIBERS_MISSING_PHPEXCEL", "PHPExcel Framework was not found, please install it!");
 
 ?>

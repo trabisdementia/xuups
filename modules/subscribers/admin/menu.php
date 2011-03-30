@@ -41,5 +41,9 @@ if (isset($xoopsModule) && $xoopsModule->getVar('dirname') == basename(dirname(d
     $subscribers_headermenu[$i]['title'] = _AM_SUBSCRIBERS_UPDATE_MODULE;
     $subscribers_headermenu[$i]['link'] = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&amp;op=update&amp;module=' . $xoopsModule->getVar('dirname');
 
+    $i++;
+    $subscribers_headermenu[$i]['title'] = _AM_SUBSCRIBERS_EXPORT;
+    $subscribers_headermenu[$i]['link'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/admin_export.php';
+
 }
 ?>
