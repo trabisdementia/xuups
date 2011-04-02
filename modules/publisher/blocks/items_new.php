@@ -73,7 +73,7 @@ function publisher_items_new_show($options)
                 $item['image'] = XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name');
 		} else {
                 $item['image'] = PUBLISHER_URL . '/thumb.php?src=' . XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name') . '&amp;w=50';
-                }  
+                }
                 $item['image_name'] = $images['main']->getVar('image_nicename');
                 }
             } elseif ($image == 'category') {

@@ -32,15 +32,10 @@ function publisher_date_to_date_show($options)
     $publisher =& PublisherPublisher::getInstance();
 
     $block = array();
-    $fromArray = explode('/', $options[0]);
-    //month, day, year
-    $fromStamp = mktime(0, 0, 0, $fromArray[0], $fromArray[1], $fromArray[2]);
-    $untilArray = explode('/', $options[1]);
-    $untilStamp = mktime(0, 0, 0, $untilArray[0], $untilArray[1], $untilArray[2]);
 
     $criteria = new CriteriaCompo();
-    $criteria->add(new Criteria('datesub', $fromStamp, '>'));
-    $criteria->add(new Criteria('datesub', $untilStamp, '<'));
+    $criteria->add(new Criteria('datesub',  strtotime($options[0]), '>'));
+    $criteria->add(new Criteria('datesub',  strtotime($options[1]), '<'));
     $criteria->setSort('datesub');
     $criteria->setOrder('DESC');
 
@@ -67,7 +62,7 @@ function publisher_date_to_date_show($options)
         $block['lang_category'] = _MB_PUBLISHER_CATEGORY;
         $block['lang_poster'] = _MB_PUBLISHER_POSTEDBY;
         $block['lang_date'] = _MB_PUBLISHER_DATE;
-        $modulename = $myts->displayTarea($publisher_handler->getVar('name'));
+        $modulename = $myts->displayTarea($publisher->getModule()->getVar('name'));
         $block['lang_visitItem'] = _MB_PUBLISHER_VISITITEM . " " . $modulename;
         $block['lang_articles_from_to'] = sprintf(_MB_PUBLISHER_ARTICLES_FROM_TO, $options[0], $options[1]);
     }
@@ -78,8 +73,18 @@ function publisher_date_to_date_show($options)
 function publisher_date_to_date_edit($options)
 {
 
-    $form = _MB_PUBLISHER_FROM . "<input type='text' name='options[]' value='" . $options[0] . "' />&nbsp;<br />";
-    $form .= _MB_PUBLISHER_UNTIL . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "' /><br/>" . _MB_PUBLISHER_DATE_FORMAT;
+    include_once PUBLISHER_ROOT_PATH . '/class/blockform.php';
+    xoops_load('XoopsFormLoader');
+    xoops_load('XoopsFormCalendar');
+
+    $table = new PublisherBlockForm();
+    $fromEle = new XoopsFormCalendar(_MB_PUBLISHER_FROM,'options[0]', 15, strtotime($options[0]));
+    $fromEle->setNocolspan();
+    $untilEle = new XoopsFormCalendar(_MB_PUBLISHER_UNTIL,'options[1]', 15, strtotime($options[1]));
+    $untilEle->setNocolspan();
+    $table->addElement($fromEle);
+    $table->addElement($untilEle);
+    $form = $table->render();
 
     return $form;
 }
