@@ -48,12 +48,12 @@ function publisher_latest_news_show($options)
 
     $block['spec']['columnwidth'] = intval(1 / $column_count * 100);
 
-    $selectedcatids = explode(',', $options[29]);
-
     $allcats = false;
-    if (in_array(0, $selectedcatids)) {
+    if (!isset($options[29])) {
         $allcats = true;
-    }
+    } elseif (in_array(0, explode(',', $options[29]))) {
+        $allcats = true;
+    }  
 
     // creating the ITEM objects that belong to the selected category
     if ($allcats) {
