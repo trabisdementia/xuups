@@ -188,19 +188,6 @@ $modversion['blocks'][$i]['edit_func'] = "publisher_date_to_date_edit";
 $modversion['blocks'][$i]['options'] = formatTimeStamp(time(), 'm/j/Y') . "|" . formatTimeStamp(time(), 'm/j/Y');
 $modversion['blocks'][$i]['template'] = "publisher_date_to_date.html";
 
-/* We need to comment this out has it require a smarty plugin not present in the core...
- * We will find a solution later...
-
- $i++;
- $modversion['blocks'][6]['file'] = "items_tree.php";
- $modversion['blocks'][6]['name'] = _MI_PUBLISHER_ITEMSTREE;
- $modversion['blocks'][6]['description'] = _MI_PUBLISHER_ITEMSTREE_DSC;
- $modversion['blocks'][6]['show_func'] = "publisher_items_tree_show";
- $modversion['blocks'][6]['edit_func'] = "publisher_items_tree_edit";
- $modversion['blocks'][6]['template'] = "publisher_items_tree.html";
- $modversion['blocks'][6]['options'] = "0|weight|ASC|-1|1";
- */
-
 $i++;
 $modversion['blocks'][$i]['file'] = "items_columns.php";
 $modversion['blocks'][$i]['name'] = _MI_PUBLISHER_COLUMNS;
