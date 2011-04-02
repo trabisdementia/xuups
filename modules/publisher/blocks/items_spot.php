@@ -120,130 +120,51 @@ function publisher_items_spot_show($options)
 
 function publisher_items_spot_edit($options)
 {
+    include_once PUBLISHER_ROOT_PATH . '/class/blockform.php';
+    xoops_load('XoopsFormLoader');
+
+    $form = new PublisherBlockForm();
+    $autoEle = new XoopsFormRadioYN(_MB_PUBLISHER_AUTO_LAST_ITEMS, 'options[0]', $options[0]);
+    $countEle =  new XoopsFormText(_MB_PUBLISHER_LAST_ITEMS_COUNT, 'options[1]', 2, 255, $options[1]);
+    $catEle = new XoopsFormLabel(_MB_PUBLISHER_SELECTCAT, publisher_createCategorySelect($options[2], 0, true, 'options[2]'));
+
     $publisher =& PublisherPublisher::getInstance();
-
-    $form = "<table border='0'>";
-
-    // Auto select last items
-    $form .= "<tr><td>" . _MB_PUBLISHER_AUTO_LAST_ITEMS . "</td><td>";
-    $chk = "";
-    if ($options[0] == 0) {
-        $chk = " checked='checked'";
-    }
-    $form .= "<input type='radio' name='options[0]' value='0'" . $chk . " />" . _NO . "";
-    $chk = "";
-
-    if ($options[0] == 1) {
-        $chk = " checked='checked'";
-    }
-    $form .= "<input type='radio' name='options[0]' value='1'" . $chk . " />" . _YES . "</td></tr>";
-
-    // Number of last items...
-    $form .= "<tr><td>" . _MB_PUBLISHER_LAST_ITEMS_COUNT . "</td><td>";
-    $form .= "<input type='text' name='options[1]' size='2' value='" . $options[1] . "' /></td></tr>";
-
-    // Select 1 category
-    $form .= "<tr><td>" . _MB_PUBLISHER_SELECTCAT . "</td><td>";
-    $form .= "<select name='options[2]'> " . publisher_createCategoryOptions($options[2]) . " /></td></tr>";
-
-    // Items Select box
-    // Creating the item handler object
     $criteria = new CriteriaCompo();
     $criteria->setSort('datesub');
     $criteria->setOrder('DESC');
     $itemsObj = $publisher->getHandler('item')->getList($criteria);
+    $keys = array_keys($itemsObj);
     unset($criteria);
-
     if (empty($options[3]) || ($options[3] == 0)) {
-        $sel_items = '0';
+        $sel_items = isset($keys[0]) ? $keys[0] : 0;
     } else {
         $sel_items = explode(',', $options[3]);
     }
+    $itemEle = new XoopsFormSelect(_MB_PUBLISHER_SELECT_ITEMS, 'options[3]', $sel_items, 10, true);
+    $itemEle->addOptionArray($itemsObj);
 
-    $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_SELECT_ITEMS . "</td><td>";
-    $form .= "<select size='10' name='options[3][]' multiple='multiple'>";
+    $whoEle = new XoopsFormRadioYN(_MB_PUBLISHER_DISPLAY_WHO_AND_WHEN, 'options[4]', $options[4]);
+    $comEle = new XoopsFormRadioYN(_MB_PUBLISHER_DISPLAY_COMMENTS, 'options[5]', $options[5]);
 
-    if ($itemsObj) {
-        foreach ($itemsObj as $id => $title) {
-            $sel = "";
-            if ($sel_items == '0') {
-                $sel = " selected='selected' ";
-                $sel_items = '';
-            } else {
-                if (!empty($sel_items) && (in_array($id, $sel_items))) {
-                    $sel = " selected='selected' ";
-                }
-            }
-            $form .= "<option value='" . $id . "' " . $sel . ">" . $title . "</option>";
-        }
-    }
+    $typeEle = new XoopsFormSelect(_MB_PUBLISHER_DISPLAY_TYPE, 'options[6]', $options[6]);
+    $typeEle->addOptionArray(array(
+        'block' => _MB_PUBLISHER_DISPLAY_TYPE_BLOCK,
+        'bullet' => _MB_PUBLISHER_DISPLAY_TYPE_BULLET,
+    ));
 
-    $form .= "</select></td></tr>";
+    $truncateEle = new XoopsFormText(_MB_PUBLISHER_TRUNCATE, 'options[7]', 4, 255, $options[7]);
+    $imageEle = new XoopsFormRadioYN(_MB_PUBLISHER_DISPLAY_CATIMAGE, 'options[8]', $options[8]);
 
-    // Display Who and When
-    $form .= "<tr><td>" . _MB_PUBLISHER_DISPLAY_WHO_AND_WHEN . "</td><td>";
-    $chk = "";
-    if ($options[4] == 0) {
-        $chk = " checked='checked'";
-    }
-    $form .= "<input type='radio' name='options[4]' value='0'" . $chk . " />" . _NO . "";
-    $chk = "";
-    if ($options[4] == 1) {
-        $chk = " checked='checked'";
-    }
-    $form .= "<input type='radio' name='options[4]' value='1'" . $chk . " />" . _YES . "</td></tr>";
+    $form->addElement($autoEle);
+    $form->addElement($countEle);
+    $form->addElement($catEle);
+    $form->addElement($itemEle);
+    $form->addElement($whoEle);
+    $form->addElement($comEle);
+    $form->addElement($typeEle);
+    $form->addElement($truncateEle);
+    $form->addElement($imageEle);
 
-    // Display Comment(s)
-    $form .= "<tr><td>" . _MB_PUBLISHER_DISPLAY_COMMENTS . "</td><td>";
-    $chk = "";
-    if ($options[5] == 0) {
-        $chk = " checked='checked'";
-    }
-    $form .= "<input type='radio' name='options[5]' value='0'" . $chk . " />" . _NO . "";
-    $chk = "";
-    if ($options[5] == 1) {
-        $chk = " checked='checked'";
-    }
-    $form .= "<input type='radio' name='options[5]' value='1'" . $chk . " />" . _YES . "</td></tr>";
+    return $form->render();
 
-
-    // Display type : block or bullets
-    $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_DISPLAY_TYPE . "</td><td>";
-    $form .= "<select size='1' name='options[6]'>";
-
-    $sel = "";
-    if ($options[6] == 'block') {
-        $sel = " selected='selected' ";
-    }
-    $form .= "<option value='block' " . $sel . ">" . _MB_PUBLISHER_DISPLAY_TYPE_BLOCK . "</option>";
-
-    $sel = "";
-    if ($options[6] == 'bullet') {
-        $sel = " selected='selected' ";
-    }
-    $form .= "<option value='bullet' " . $sel . ">" . _MB_PUBLISHER_DISPLAY_TYPE_BULLET . "</option>";
-
-    $form .= "</select></td></tr>";
-
-    // Truncate
-    $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_TRUNCATE . "</td><td>";
-    $form .= "<input type='text' name='options[7]' value='" . $options[7] . "' size='4'></td></tr>";
-
-    // Display Category image
-    $form .= "<tr><td>" . _MB_PUBLISHER_DISPLAY_CATIMAGE . "</td><td>";
-    $chk = "";
-    if ($options[8] == 0) {
-        $chk = " checked='checked'";
-    }
-    $form .= "<input type='radio' name='options[8]' value='0'" . $chk . " />" . _NO . "";
-    $chk = "";
-    if ($options[8] == 1) {
-        $chk = " checked='checked'";
-    }
-    $form .= "<input type='radio' name='options[8]' value='1'" . $chk . " />" . _YES . "</td></tr>";
-
-    $form .= "</table>";
-    return $form;
 }
-
-?>
