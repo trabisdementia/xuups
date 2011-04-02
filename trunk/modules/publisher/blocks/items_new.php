@@ -121,79 +121,29 @@ function publisher_items_new_show($options)
 
 function publisher_items_new_edit($options)
 {
-    $form = "<table border='0'>";
-    $form .= '<tr><td style="vertical-align: top; width: 250px;">' . _MB_PUBLISHER_SELECTCAT . '</td>';
-    $form .= '<td>' . publisher_createCategorySelect($options[0]) . '</td></tr>';
+    include_once PUBLISHER_ROOT_PATH . '/class/blockform.php';
+    xoops_load('XoopsFormLoader');
 
-    $form .= "<tr><td>" . _MB_PUBLISHER_ORDER . "</td>";
-    $form .= "<td><select name='options[1]'>";
+    $form = new PublisherBlockForm();
 
-    $form .= "<option value='datesub'";
-    if ($options[1] == "datesub") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_DATE . "</option>";
+    $catEle = new XoopsFormLabel(_MB_PUBLISHER_SELECTCAT, publisher_createCategorySelect($options[0], 0, true, 'options[0]'));
+    $orderEle = new XoopsFormSelect(_MB_PUBLISHER_ORDER, 'options[1]', $options[1]);
+    $orderEle->addOptionArray(array(
+        'datesub' => _MB_PUBLISHER_DATE,
+        'counter' => _MB_PUBLISHER_HITS,
+        'weight'  => _MB_PUBLISHER_WEIGHT,
+    ));
 
-    $form .= "<option value='counter'";
-    if ($options[1] == "counter") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_HITS . "</option>";
-
-    $form .= "<option value='weight'";
-    if ($options[1] == "weight") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_WEIGHT . "</option>";
-
-    $form .= "</select></td>";
+    $showEle = new XoopsFormRadioYN(_MB_PUBLISHER_ORDER_SHOW, 'options[2]', $options[2]);
+    $dispEle = new XoopsFormText(_MB_PUBLISHER_DISP, 'options[3]', 10, 255, $options[3]);
+    $charsEle = new XoopsFormText(_MB_PUBLISHER_CHARS, 'options[4]', 10, 255, $options[4]);
 
 
-    $form .= "<tr><td>" . _MB_PUBLISHER_ORDER_SHOW . "</td><td>";
-    $chk = "";
-    if ($options[2] == 0) {
-        $chk = " checked='checked'";
-    }
-    $form .= "<input type='radio' name='options[2]' value='0'" . $chk . " />" . _NO . "";
-    $chk = "";
+    $form->addElement($catEle);
+    $form->addElement($orderEle);
+    $form->addElement($showEle);
+    $form->addElement($dispEle);
+    $form->addElement($charsEle);
 
-    if ($options[2] == 1) {
-        $chk = " checked='checked'";
-    }
-    $form .= "<input type='radio' name='options[2]' value='1'" . $chk . " />" . _YES . "</td></tr>";
-
-
-    $form .= "<tr><td>" . _MB_PUBLISHER_DISP . "</td><td><input type='text' name='options[3]' value='" . $options[3] . "' />&nbsp;" . _MB_PUBLISHER_ITEMS . "</td></tr>";
-    $form .= "<tr><td>" . _MB_PUBLISHER_CHARS . "</td><td><input type='text' name='options[4]' value='" . $options[4] . "' />&nbsp;chars</td></tr>";
-
-    $form .= "<tr><td>" . _MB_PUBLISHER_IMAGE_TO_DISPLAY . "</td>";
-    $form .= "<td><select name='options[5]'>";
-
-    $form .= "<option value='none'";
-    if ($options[5] == "none") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _NONE . "</option>";
-
-    $form .= "<option value='article'";
-    if ($options[5] == "article") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_IMAGE_ARTICLE . "</option>";
-
-    $form .= "<option value='category'";
-    if ($options[5] == "category") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_IMAGE_CATEGORY . "</option>";
-
-    $form .= "<option value='avatar'";
-    if ($options[5] == "avatar") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_IMAGE_AVATAR . "</option>";
-
-    $form .= "</select></td></tr>";
-    $form .= "</table>";
-    return $form;
+    return $form->render();
 }
