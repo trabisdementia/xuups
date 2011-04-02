@@ -72,7 +72,6 @@ function publisher_date_to_date_show($options)
 
 function publisher_date_to_date_edit($options)
 {
-
     include_once PUBLISHER_ROOT_PATH . '/class/blockform.php';
     xoops_load('XoopsFormLoader');
     xoops_load('XoopsFormCalendar');

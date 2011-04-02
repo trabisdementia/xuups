@@ -85,7 +85,6 @@ function publisher_items_recent_show($options)
 
 function publisher_items_recent_edit($options)
 {
-
     include_once PUBLISHER_ROOT_PATH . '/class/blockform.php';
     xoops_load('XoopsFormLoader');
 
