@@ -51,11 +51,11 @@ $modversion['developer_lead'] = "trabis";
 $modversion['developer_website_url'] = "http://www.xuups.com";
 $modversion['developer_website_name'] = "Xoops User Utilities";
 $modversion['developer_email'] = "lusopoemas@gmail.com";
-$modversion['status_version'] = "Alpha";
-$modversion['status'] = "Alpha";
-$modversion['date'] = "2009-05-17";
+$modversion['status_version'] = "Beta";
+$modversion['status'] = "Beta";
+$modversion['date'] = "2011-04-02";
 
-$modversion['warning'] = _MI_PUBLISHER_WARNING_ALPHA;
+//$modversion['warning'] = _MI_PUBLISHER_WARNING_BETA;
 
 $modversion['demo_site_url'] = "";
 $modversion['demo_site_name'] = "";
@@ -69,7 +69,7 @@ $modversion['people']['developers'][] = "Mowaffak";
 $modversion['people']['developers'][] = "Bandit-x";
 $modversion['people']['developers'][] = "Shiva";
 
-$modversion['people']['testers'][] = "urban, AEIOU, pacho";
+$modversion['people']['testers'][] = "urban, AEIOU, pacho, mariane";
 //$modversion['people']['translaters'][] = "";
 //$modversion['people']['documenters'][] = "";
 

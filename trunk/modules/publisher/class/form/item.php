@@ -31,7 +31,7 @@ include_once XOOPS_ROOT_PATH . '/class/tree.php';
 include_once PUBLISHER_ROOT_PATH . '/class/formdatetime.php';
 include_once PUBLISHER_ROOT_PATH . '/class/themetabform.php';
 
-class PublisherItemForm extends XoopsThemeTabForm {
+class PublisherItemForm extends PublisherThemeTabForm {
 
     var $checkperm = true;
     var $tabs = array(
@@ -315,6 +315,8 @@ class PublisherItemForm extends XoopsThemeTabForm {
             $image_handler = xoops_gethandler('image');
             $criteria = new CriteriaCompo(new Criteria('imgcat_id', '(' . implode(',', $catids) . ')', 'IN'));
             $criteria->add(new Criteria('image_display', 1));
+            $criteria->setSort('image_nicename');
+            $criteria->setOrder('ASC');
             $imageObjs = $image_handler->getObjects($criteria, true);
             unset($criteria);
             $image_array = array();

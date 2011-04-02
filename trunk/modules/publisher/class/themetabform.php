@@ -35,16 +35,16 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
  * @access public
  */
 
-class XoopsThemeTabForm extends XoopsForm {
+class PublisherThemeTabForm extends XoopsForm {
     var $_tabs;
 
-    function XoopsThemeTabForm($title, $name, $action, $method = "post", $addtoken = false) {
+    function __construct($title, $name, $action, $method = "post", $addtoken = false) {
         global $xoTheme;
         $xoTheme->addScript(PUBLISHER_URL . '/js/ui.core.js');
         $xoTheme->addScript(PUBLISHER_URL . '/js/ui.tabs.js');
         $xoTheme->addStylesheet(PUBLISHER_URL . '/css/jquery-ui-1.7.1.custom.css');
 
-        parent::XoopsForm($title, $name, $action, $method, $addtoken);
+        parent::__construct($title, $name, $action, $method, $addtoken);
     }
 
     /**
