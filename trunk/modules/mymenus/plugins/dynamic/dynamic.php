@@ -59,6 +59,8 @@ class DynamicMymenusPluginItem extends MymenusPluginItem
             return $ret;
         }
 
+        xoops_loadLanguage('modinfo', $module);
+
         $force = true;
         $overwrite = false;
         if ($force && (!is_object($xoopsModule) || $xoopsModule->getVar('dirname') != $module)) {

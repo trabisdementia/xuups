@@ -21,7 +21,7 @@
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 $modversion['name'] = _MI_MYMENUS_MD_NAME;
-$modversion['version'] = 1.2;
+$modversion['version'] = 1.3;
 $modversion['description'] = _MI_MYMENUS_MD_DESC;
 $modversion['credits'] = "Xuups";
 $modversion['author'] = "Xuups";
