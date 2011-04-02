@@ -55,16 +55,16 @@ class PublisherBlockForm extends XoopsForm
         foreach ($this->getElements() as $ele) {
             if (!$ele->isHidden()) {
                 if (!$ele->getNocolspan()) {
-                    $ret .= '<tr valign="top" align="left"><td>';
+                    $ret .= '<tr><td style="vertical-align: top; width: 250px;">';
                     $ret .= '<span style="font-weight: bold;">' . $ele->getCaption() . '</span>';
                     if ($ele_desc = $ele->getDescription()) {
                         $ret .= '<br /><br /><span style="font-weight: normal;">' . $ele_desc . '</span>';
                     }
                     $ret .= '</td><td>' . $ele->render() . '</td></tr>';
                 } else {
-                    $ret .= '<tr valign="top" align="left"><td colspan="2">';
+                    $ret .= '<tr><td colspan="2">';
                     $ret .= '<span style="font-weight: bold;">' . $ele->getCaption() . '</span>';
-                    $ret .= '</td></tr><tr valign="top" align="left"><td>' . $ele->render() . '</td></tr>';
+                    $ret .= '</td></tr><tr><td>' . $ele->render() . '</td></tr>';
                 }
             }
         }

@@ -77,16 +77,13 @@ function publisher_date_to_date_edit($options)
     xoops_load('XoopsFormLoader');
     xoops_load('XoopsFormCalendar');
 
-    $table = new PublisherBlockForm();
+    $form = new PublisherBlockForm();
     $fromEle = new XoopsFormCalendar(_MB_PUBLISHER_FROM,'options[0]', 15, strtotime($options[0]));
     $fromEle->setNocolspan();
     $untilEle = new XoopsFormCalendar(_MB_PUBLISHER_UNTIL,'options[1]', 15, strtotime($options[1]));
     $untilEle->setNocolspan();
-    $table->addElement($fromEle);
-    $table->addElement($untilEle);
-    $form = $table->render();
+    $form->addElement($fromEle);
+    $form->addElement($untilEle);
 
-    return $form;
+    return $form->render();
 }
-
-?>

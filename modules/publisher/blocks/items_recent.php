@@ -86,38 +86,26 @@ function publisher_items_recent_show($options)
 function publisher_items_recent_edit($options)
 {
 
-    $form = "<table border='0'>";
-    $form .= '<tr><td style="vertical-align: top; width: 250px;">' . _MB_PUBLISHER_SELECTCAT . '</td>';
-    $form .= '<td>' . publisher_createCategorySelect($options[0]) . '</td></tr>';
+    include_once PUBLISHER_ROOT_PATH . '/class/blockform.php';
+    xoops_load('XoopsFormLoader');
 
-    $form .= "<tr><td>" . _MB_PUBLISHER_ORDER . "</td>";
-    $form .= "<td><select name='options[1]'>";
+    $form = new PublisherBlockForm();
 
-    $form .= "<option value='datesub'";
-    if ($options[1] == "datesub") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_DATE . "</option>";
+    $catEle = new XoopsFormLabel(_MB_PUBLISHER_SELECTCAT, publisher_createCategorySelect($options[0]), 'options[0]');
+    $orderEle = new XoopsFormSelect(_MB_PUBLISHER_ORDER, 'options[1]', $options[1]);
+    $orderEle->addOptionArray(array(
+        'datesub' => _MB_PUBLISHER_DATE,
+        'counter' => _MB_PUBLISHER_HITS,
+        'weight'  => _MB_PUBLISHER_WEIGHT,
+    ));
+    $dispEle = new XoopsFormText(_MB_PUBLISHER_DISP, 'options[2]', 10, 255, $options[2]);
+    $charsEle = new XoopsFormText(_MB_PUBLISHER_CHARS, 'options[3]', 10, 255, $options[3]);
 
-    $form .= "<option value='counter'";
-    if ($options[1] == "counter") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_HITS . "</option>";
 
-    $form .= "<option value='weight'";
-    if ($options[1] == "weight") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_WEIGHT . "</option>";
+    $form->addElement($catEle);
+    $form->addElement($orderEle);
+    $form->addElement($dispEle);
+    $form->addElement($charsEle);
 
-    $form .= "</select></td></tr>";
-
-    $form .= "<tr><td>" . _MB_PUBLISHER_DISP . "</td><td><input type='text' name='options[2]' value='" . $options[2] . "' />&nbsp;" . _MB_PUBLISHER_ITEMS . "</td></tr>";
-    $form .= "<tr><td>" . _MB_PUBLISHER_CHARS . "</td><td><input type='text' name='options[3]' value='" . $options[3] . "' />&nbsp;chars</td></tr>";
-
-    $form .= "</table>";
-    return $form;
+    return $form->render();
 }
-
-?>
