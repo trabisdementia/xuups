@@ -167,6 +167,7 @@ $modversion['blocks'][$i]['name'] = _MI_PUBLISHER_ITEMSMENU;
 $modversion['blocks'][$i]['description'] = _MI_PUBLISHER_ITEMSMENU_DSC;
 $modversion['blocks'][$i]['show_func'] = "publisher_items_menu_show";
 $modversion['blocks'][$i]['edit_func'] = "publisher_items_menu_edit";
+$modversion['blocks'][$i]['options'] = "0|datesub|5";
 $modversion['blocks'][$i]['template'] = "publisher_items_menu.html";
 
 $i++;
