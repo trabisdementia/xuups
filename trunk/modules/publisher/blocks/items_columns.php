@@ -138,52 +138,33 @@ function publisher_items_columns_show($options)
  */
 function publisher_items_columns_edit($options)
 {
-    global $xoopsDB;
+    include_once PUBLISHER_ROOT_PATH . '/class/blockform.php';
+    xoops_load('XoopsFormLoader');
 
-    $form = "<table border='0'>";
-    $form .= "<tr><td style='vertical-align: top; width: 250px;'>" . _MB_PUBLISHER_NUMBER_COLUMN_VIEW . "</td>";
-    $form .= "<td><select size='1' name='options[0]'>";
+    $form = new PublisherBlockForm();
+    $colEle = new XoopsFormSelect(_MB_PUBLISHER_NUMBER_COLUMN_VIEW, 'options[0]', $options[0]);
+    $colEle->addOptionArray(array(
+        '1' => 1,
+        '2' => 2,
+        '3' => 3,
+        '4' => 4,
+        '5' => 5,
+    ));
+    $catEle = new XoopsFormLabel(_MB_PUBLISHER_SELECTCAT, publisher_createCategorySelect($options[1], 0, true, 'options[1]'));
+    $cItemsEle = new XoopsFormText(_MB_PUBLISHER_NUMBER_ITEMS_CAT, 'options[2]', 4, 255, $options[2]);
+    $truncateEle = new XoopsFormText(_MB_PUBLISHER_TRUNCATE, 'options[3]', 4, 255, $options[3]);
 
-    for ($i = 1; $i < 5; $i++) {
-        $form .= "<option value='{$i}'";
-        if ($options[0] == $i || ($options[0] == '' && $i == 0)) {
-            $form .= " selected='selected'";
-        }
-        //$label = ($i == 0) ? _NONE : $i;
-        $form .= ">{$i}</option>";
-    }
+    $tempEle = new XoopsFormSelect(_MB_PUBLISHER_TEMPLATE, 'options[4]', $options[4]);
+    $tempEle->addOptionArray(array(
+        'normal'   => _MB_PUBLISHER_TEMPLATE_NORMAL,
+        'extended' => _MB_PUBLISHER_TEMPLATE_EXTENDED
+    ));
 
-    $form .= "</select></td></tr>";
+    $form->addElement($colEle);
+    $form->addElement($catEle);
+    $form->addElement($cItemsEle);
+    $form->addElement($truncateEle);
+    $form->addElement($tempEle);
 
-    //Select Which Categories To Show
-    $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_SELECTCAT . "</td><td>";
-    $form .= publisher_createCategorySelect($options[1], 0, true, 'options[1]');
-    $form .= "</td></tr>";
-
-    //number of items in category
-    $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_NUMBER_ITEMS_CAT . "</td><td>";
-    $form .= "<input type='text' name='options[2]' value='" . $options[2] . "' size='4'></td></tr>";
-
-    //teaser length
-    $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_TRUNCATE . "</td><td>";
-    $form .= "<input type='text' name='options[3]' value='" . $options[3] . "' size='4'></td></tr>";
-
-
-    //template
-    $form .= "<tr><td style='vertical-align: top;'>" . _MB_PUBLISHER_TEMPLATE . "</td>";
-    $form .= "<td><select size='1' name='options[4]'>";
-
-    $templates = array('normal' => _MB_PUBLISHER_TEMPLATE_NORMAL, 'extended' => _MB_PUBLISHER_TEMPLATE_EXTENDED);
-    foreach ($templates as $key => $value) {
-        $form .= "<option value='{$key}'";
-        if ($options[4] == $key) {
-            $form .= " selected='selected'";
-        }
-        $form .= ">{$value}</option>";
-    }
-
-    $form .= "</select></td></tr>";
-
-    $form .= "</table>";
-    return $form;
+    return $form->render();
 }
