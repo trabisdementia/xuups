@@ -21,20 +21,17 @@
  * @version         $Id: latest_news.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-if (!defined('XOOPS_ROOT_PATH')) {
-    die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
 function publisher_latest_news_show($options)
 {
-    global $xoopsTpl, $xoopsUser, $xoopsConfig, $xoTheme;
+    global $xoopsUser, $xoopsConfig;
 
     $block = array();
 
     xoops_loadLanguage('main', 'publisher');
-    $myts =& MyTextSanitizer::getInstance();
     $publisher =& PublisherPublisher::getInstance();
 
     $start = $options[0]; // You can show articles from specified range
@@ -83,25 +80,20 @@ function publisher_latest_news_show($options)
 
     $k = 0;
     $columns = array();
-    $storieslist = array();
 
     foreach ($itemsObj as $itemid => $itemObj) {
-
-        $files = $itemObj->getFiles();
-        $filescount = count($files);
-
         $item = array();
 
         $item['itemurl'] = $itemObj->getItemUrl();
         $item['title'] = $itemObj->getItemLink();
         $item['alt'] = strip_tags($itemObj->getItemLink());
         $mainImage = $itemObj->getMainImage();
-	// check to see if GD function exist
-	if (!function_exists ('imagecreatetruecolor')) {
-        $item['item_image'] = $mainImage['image_path']; 
-	} else {
-        $item['item_image'] = PUBLISHER_URL . '/thumb.php?src='.$mainImage['image_path'].'&amp;w='.$imgwidth; // No $imgheight for autoheight option
-	}
+        // check to see if GD function exist
+        if (!function_exists('imagecreatetruecolor')) {
+            $item['item_image'] = $mainImage['image_path'];
+        } else {
+            $item['item_image'] = PUBLISHER_URL . '/thumb.php?src=' . $mainImage['image_path'] . '&amp;w=' . $imgwidth; // No $imgheight for autoheight option
+        }
         $item['text'] = $itemObj->getBlockSummary($letters);
 
         $item = $itemObj->getMainImage($item); //returns an array
@@ -239,7 +231,7 @@ function publisher_latest_news_show($options)
         $block['imgwidth'] = $options[11];
         $block['imgheight'] = $options[12];
 
-        $block['letters'] = $letters; 
+        $block['letters'] = $letters;
 
         $columns[$k][] = $item;
         $k++;

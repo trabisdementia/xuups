@@ -20,9 +20,7 @@
  * @version         $Id: search.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
@@ -36,8 +34,7 @@ function publisher_search_show($options)
     xoops_loadLanguage('search');
 
     $andor = isset($_POST["andor"]) ? $_POST["andor"] : (isset($_GET["andor"]) ? $_GET["andor"] : "");
-    $start = isset($_GET["start"]) ? $_GET["start"] : 0;
-    $uid = 0;
+
     $category = isset($_POST["category"]) ? $_POST["category"] : (isset($_GET["category"]) ? $_GET["category"] : null);
     $username = isset($_POST["uname"]) ? $_POST["uname"] : (isset($_GET["uname"]) ? $_GET["uname"] : null);
     $searchin = isset($_POST["searchin"]) ? $_POST["searchin"] : (isset($_GET["searchin"]) ? explode("|", $_GET["searchin"]) : array());
@@ -127,5 +124,3 @@ function publisher_search_show($options)
 
     return $block;
 }
-
-?>

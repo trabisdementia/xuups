@@ -20,9 +20,7 @@
  * @version         $Id: items_menu.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
@@ -56,9 +54,6 @@ function publisher_items_menu_show($options)
             $catlink_class = 'menuSub';
         }
     }
-
-    $array_categoryids = array_keys($block_categoriesObj);
-    $categoryids = implode(', ', $array_categoryids);
 
     foreach ($block_categoriesObj as $catid => $block_categoryObj) {
         if ($catid != $categoryid) {
@@ -99,5 +94,3 @@ function publisher_items_menu_edit($options)
 
     return $form;
 }
-
-?>
