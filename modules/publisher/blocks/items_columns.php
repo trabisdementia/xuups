@@ -20,9 +20,7 @@
  * @version         $Id: items_columns.php 77 2009-07-17 17:38:28Z trabis $
  */
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
@@ -35,7 +33,6 @@ function publisher_items_columns_show($options)
     global $xoTheme;
 
     $publisher =& PublisherPublisher::getInstance();
-    $myts =& MyTextSanitizer::getInstance();
 
     //Column Settings
     $opt_num_columns = isset($options[0]) ? intval($options[0]) : '2';
@@ -90,12 +87,12 @@ function publisher_items_columns_show($options)
             $mainitem['item_link'] = $thisitem->itemid();
             $mainitem['itemurl'] = $thisitem->getItemUrl();
             $mainImage = $thisitem->getMainImage();
-	    // check to see if GD function exist
-	    if (!function_exists ('imagecreatetruecolor')) {
-	    $mainitem['item_image'] = $mainImage['image_path']; 
-	    } else {
-	    $mainitem['item_image'] = PUBLISHER_URL . '/thumb.php?src=' . $mainImage['image_path'] . '&amp;w=100';
-	    }
+            // check to see if GD function exist
+            if (!function_exists('imagecreatetruecolor')) {
+                $mainitem['item_image'] = $mainImage['image_path'];
+            } else {
+                $mainitem['item_image'] = PUBLISHER_URL . '/thumb.php?src=' . $mainImage['image_path'] . '&amp;w=100';
+            }
             $mainitem['item_summary'] = $thisitem->getBlockSummary($opt_cat_truncate);
 
             $mainitem['item_cat_name'] = $mainitemCatObj->name();
@@ -190,5 +187,3 @@ function publisher_items_columns_edit($options)
     $form .= "</table>";
     return $form;
 }
-
-?>

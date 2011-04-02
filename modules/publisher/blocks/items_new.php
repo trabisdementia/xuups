@@ -20,9 +20,7 @@
  * @version         $Id: items_new.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
@@ -68,13 +66,13 @@ function publisher_items_new_show($options)
                 $item['image_name'] = '';
                 $images = $itemsObj[$i]->getImages();
                 if (is_object($images['main'])) {
-		// check to see if GD function exist
-		if (!function_exists ('imagecreatetruecolor')) {
-                $item['image'] = XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name');
-		} else {
-                $item['image'] = PUBLISHER_URL . '/thumb.php?src=' . XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name') . '&amp;w=50';
-                }
-                $item['image_name'] = $images['main']->getVar('image_nicename');
+                    // check to see if GD function exist
+                    if (!function_exists('imagecreatetruecolor')) {
+                        $item['image'] = XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name');
+                    } else {
+                        $item['image'] = PUBLISHER_URL . '/thumb.php?src=' . XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name') . '&amp;w=50';
+                    }
+                    $item['image_name'] = $images['main']->getVar('image_nicename');
                 }
             } elseif ($image == 'category') {
                 $item['image'] = $itemsObj[$i]->getCategoryImagePath();
@@ -84,20 +82,20 @@ function publisher_items_new_show($options)
                     $item['image'] = XOOPS_URL . '/uploads/blank.gif';
                     $images = $itemsObj[$i]->getImages();
                     if (is_object($images['main'])) {
-		    // check to see if GD function exist
-		    if (!function_exists ('imagecreatetruecolor')) {
-                    $item['image'] = XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name');
-		    } else {
-		    $item['image'] = PUBLISHER_URL . '/thumb.php?src=' . XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name') . '&amp;w=50';
-		    }
+                        // check to see if GD function exist
+                        if (!function_exists('imagecreatetruecolor')) {
+                            $item['image'] = XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name');
+                        } else {
+                            $item['image'] = PUBLISHER_URL . '/thumb.php?src=' . XOOPS_URL . '/uploads/' . $images['main']->getVar('image_name') . '&amp;w=50';
+                        }
                     }
                 } else {
-		    // check to see if GD function exist
-		    if (!function_exists ('imagecreatetruecolor')) {
-                    $item['image'] = XOOPS_URL . '/uploads/' . $itemsObj[$i]->posterAvatar();
-		    } else {
-		    $item['image'] = PUBLISHER_URL . '/thumb.php?src=' . XOOPS_URL . '/uploads/' . $itemsObj[$i]->posterAvatar() . '&amp;w=50';
-		    }
+                    // check to see if GD function exist
+                    if (!function_exists('imagecreatetruecolor')) {
+                        $item['image'] = XOOPS_URL . '/uploads/' . $itemsObj[$i]->posterAvatar();
+                    } else {
+                        $item['image'] = PUBLISHER_URL . '/thumb.php?src=' . XOOPS_URL . '/uploads/' . $itemsObj[$i]->posterAvatar() . '&amp;w=50';
+                    }
                 }
                 $item['image_name'] = $itemsObj[$i]->posterName();
             }
@@ -199,5 +197,3 @@ function publisher_items_new_edit($options)
     $form .= "</table>";
     return $form;
 }
-
-?>
