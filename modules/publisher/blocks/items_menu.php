@@ -66,31 +66,23 @@ function publisher_items_menu_show($options)
 
 function publisher_items_menu_edit($options)
 {
-    $form = publisher_createCategorySelect($options[0]);
+    include_once PUBLISHER_ROOT_PATH . '/class/blockform.php';
+    xoops_load('XoopsFormLoader');
 
-    $form .= "&nbsp;<br>" . _MB_PUBLISHER_ORDER . "&nbsp;<select name='options[]'>";
+    $form = new PublisherBlockForm();
 
-    $form .= "<option value='datesub'";
-    if ($options[1] == "datesub") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_DATE . "</option>\n";
+    $catEle = new XoopsFormLabel(_MB_PUBLISHER_SELECTCAT, publisher_createCategorySelect($options[0], 0, true, 'options[0]'));
+    $orderEle = new XoopsFormSelect(_MB_PUBLISHER_ORDER, 'options[1]', $options[1]);
+    $orderEle->addOptionArray(array(
+        'datesub' => _MB_PUBLISHER_DATE,
+        'counter' => _MB_PUBLISHER_HITS,
+        'weight'  => _MB_PUBLISHER_WEIGHT,
+    ));
+    $dispEle = new XoopsFormText(_MB_PUBLISHER_DISP, 'options[2]', 10, 255, $options[2]);
 
-    $form .= "<option value='counter'";
-    if ($options[1] == "counter") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_HITS . "</option>\n";
+    $form->addElement($catEle);
+    $form->addElement($orderEle);
+    $form->addElement($dispEle);
 
-    $form .= "<option value='weight'";
-    if ($options[1] == "weight") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_WEIGHT . "</option>\n";
-
-    $form .= "</select>\n";
-
-    $form .= "&nbsp;" . _MB_PUBLISHER_DISP . "&nbsp;<input type='text' name='options[]' value='" . $options[2] . "' />&nbsp;" . _MB_PUBLISHER_ITEMS . "";
-
-    return $form;
+    return $form->render();
 }
