@@ -77,10 +77,6 @@ class PublisherMetagen {
             $ret .= $titleTag['category'];
         }
 
-        if ($ret != '') {
-            $ret .= ' - ';
-        }
-
         if (isset($titleTag['module']) && $titleTag['module'] != '') {
             if ($ret != '') {
                 $ret .= ' - ';
