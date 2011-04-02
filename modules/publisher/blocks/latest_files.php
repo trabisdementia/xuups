@@ -60,27 +60,23 @@ function publisher_latest_files_show($options)
 
 function publisher_latest_files_edit($options)
 {
-    $form = "" . _MB_PUBLISHER_ORDER . "&nbsp;<select name='options[]'>";
+    include_once PUBLISHER_ROOT_PATH . '/class/blockform.php';
+    xoops_load('XoopsFormLoader');
 
-    $form .= "<option value='datesub'";
-    if ($options[0] == "datesub") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_DATE . "</option>\n";
+    $form = new PublisherBlockForm();
 
-    $form .= "<option value='counter'";
-    if ($options[0] == "counter") {
-        $form .= " selected='selected'";
-    }
-    $form .= ">" . _MB_PUBLISHER_HITS . "</option>\n";
+    $orderEle = new XoopsFormSelect(_MB_PUBLISHER_ORDER, 'options[0]', $options[0]);
+    $orderEle->addOptionArray(array(
+        'datesub' => _MB_PUBLISHER_DATE,
+        'counter' => _MB_PUBLISHER_HITS,
+        'weight'  => _MB_PUBLISHER_WEIGHT,
+    ));
+    $dispEle = new XoopsFormText(_MB_PUBLISHER_DISP, 'options[1]', 10, 255, $options[1]);
+    $directEle = new XoopsFormRadioYN(_MB_PUBLISHER_DIRECTDOWNLOAD, 'options[2]', $options[2]);
 
-    $form .= "</select>\n";
+    $form->addElement($orderEle);
+    $form->addElement($dispEle);
+    $form->addElement($directEle);
 
-    $form .= "&nbsp;" . _MB_PUBLISHER_DISP . "&nbsp;<input type='text' name='options[]' value='" . $options[1] . "' />&nbsp;" . _MB_PUBLISHER_FILES . "";
-
-    $yesChecked = $options[2] == true ? "checked='checked'" : '';
-    $noChecked = $options[2] == false ? "checked='checked'" : '';
-
-    $form .= "<br />" . _MB_PUBLISHER_DIRECTDOWNLOAD . "&nbsp;<input name='options[2]' value='1' type='radio' $yesChecked/>&nbsp;" . _YES . "<input name='options[2]' value='0' type='radio' $noChecked/>" . _NO;
-    return $form;
+    return $form->render();
 }
