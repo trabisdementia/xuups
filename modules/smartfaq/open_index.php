@@ -164,7 +164,7 @@ if ($xoopsModuleConfig['useimagenavpage'] == 1) {
 
 // Page Title Hack by marcan
 $module_name = $myts->htmlSpecialChars($xoopsModule->getVar('name'));
-$xoopsTpl->assign('xoops_pagetitle', $module_name . ' - ' . $category['name']);
+$xoopsTpl->assign('xoops_pagetitle', $module_name . ' - ' . $category->getVar('name'));
 // End Page Title Hack by marcan
 
 include_once(XOOPS_ROOT_PATH . "/footer.php");
