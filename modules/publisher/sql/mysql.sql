@@ -32,7 +32,7 @@ CREATE TABLE `publisher_categories` (
   `moderator` int(6) NOT NULL default '0',
   PRIMARY KEY (`categoryid`),
   KEY parentid (parentid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -75,7 +75,7 @@ CREATE TABLE `publisher_items` (
   PRIMARY KEY (`itemid`),
   KEY categoryid (categoryid),
   KEY status (status)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 
 #
@@ -98,7 +98,7 @@ CREATE TABLE `publisher_files` (
   `notifypub` tinyint(1) NOT NULL default '1',
   `counter` int(8) unsigned NOT NULL default '0',
   PRIMARY KEY (`fileid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 
 # --------------------------------------------------------
@@ -108,7 +108,7 @@ CREATE TABLE `publisher_meta` (
   `metakey` varchar(50) NOT NULL default '',
   `metavalue` varchar(255) NOT NULL default '',
   PRIMARY KEY (`metakey`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `publisher_categories`
@@ -129,7 +129,7 @@ CREATE TABLE publisher_mimetypes (
   mime_admin int(1) NOT NULL default '1',
   mime_user int(1) NOT NULL default '0',
   KEY mime_id (mime_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 # --------------------------------------------------------
 
@@ -147,7 +147,7 @@ CREATE TABLE `publisher_rating` (
   PRIMARY KEY  (`ratingid`),
   KEY uid (uid),
   KEY ip (ip)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 # --------------------------------------------------------
 
