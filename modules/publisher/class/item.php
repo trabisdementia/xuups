@@ -271,12 +271,14 @@ class PublisherItem extends XoopsObject {
         return $ret;
     }
 
-    function datesub($dateFormat = 's', $format = 'S') {
+    function datesub($dateFormat = '', $format = 'S') {
+        if (empty($dateformat)) {
+            $dateFormat = $this->publisher->getConfig('format_date');
+        }
         return formatTimestamp($this->getVar('datesub', $format), $dateFormat);
     }
 
     function posterName($realName = -1) {
-        $myts =& MyTextSanitizer::getInstance();
         xoops_load('XoopsUserUtility');
 
         if ($realName == -1) {
@@ -764,7 +766,7 @@ class PublisherItem extends XoopsObject {
             $item['images'][$i]['thumb'] = XOOPS_URL . '/uploads/' . $image->getVar('image_name');
             } else {
             $item['images'][$i]['thumb'] = PUBLISHER_URL . '/thumb.php?src=' . XOOPS_URL . '/uploads/' . $image->getVar('image_name') . '&amp;w=240';
-            } 
+            }
             $item['images'][$i]['name'] = $image->getVar('image_nicename');
             $i++;
         }
