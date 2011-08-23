@@ -38,9 +38,10 @@ define("_MI_SHOUTBOX_TITLE6", "Max Shouts");
 define("_MI_SHOUTBOX_DESC6", "How many shouts should be displayed?");
 define("_MI_SHOUTBOX_TITLE7", "Storage");
 define("_MI_SHOUTBOX_DESC7", "Define where the shouts should be stored");
+define("_MI_SHOUTBOX_TITLE8", "User Real Name");
+define("_MI_SHOUTBOX_DESC8", "Should we show user Real name? If 'NO', login name will be used");
 define("_MI_SHOUTBOX_OP7_F", "File [csv]");
 define("_MI_SHOUTBOX_OP7_D", "Database [mysql]");
-
 define("_MI_SHOUTBOX_TITLE11","Show smiley bar in block?");
 define("_MI_SHOUTBOX_TITLE12", "Shout Message Block IFrame width");
 define("_MI_SHOUTBOX_DESC12", "The width of the iframe in the block.");

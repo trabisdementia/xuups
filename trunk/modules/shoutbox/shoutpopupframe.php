@@ -25,7 +25,6 @@ include_once XOOPS_ROOT_PATH . '/modules/shoutbox/include/functions.php';
 
 $shoutbox = new Shoutbox($xoopsModuleConfig['storage_type']);
 
-
 $online_handler =& xoops_gethandler('online');
 mt_srand((double)microtime()*1000000);
 // set gc probability to 10% for now..
@@ -35,7 +34,7 @@ if (mt_rand(1, 100) < 11) {
 
 if (is_object($xoopsUser)) {
     $uid = $xoopsUser->getVar('uid');
-    $uname = $xoopsUser->getVar('uname');
+    $uname = shoutbox_getUserName($uid);
 } else {
     $uid = 0;
     $uname = '';
@@ -78,8 +77,8 @@ if ($isMessage && ($isUser || $isAnonymous)) {
          }
          }*/
     } else {
-        $uname = $xoopsUser->getVar('uname');
         $uid = $xoopsUser->getVar('uid');
+        $uname = shoutbox_getUserName($uid);
     }
     //check if it is a double post
     if ($addit && $shoutbox->shoutExists($message)) {

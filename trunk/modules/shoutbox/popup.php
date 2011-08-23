@@ -42,7 +42,7 @@ if (!is_object($xoopsUser)) {
         $xoopsTpl->assign('uname', '');
     }
 } else {
-    $xoopsTpl->assign('uname', $xoopsUser->uname());
+    $xoopsTpl->assign('uname', shoutbox_getUserName($xoopsUser->uid()));
 }
 
 ob_start();

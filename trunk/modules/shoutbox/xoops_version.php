@@ -20,7 +20,7 @@
  */
 
 $modversion['name'] = _MI_SHOUTBOX_NAME;
-$modversion['version'] = '5.0alpha';
+$modversion['version'] = '5.0';
 $modversion['description'] = _MI_SHOUTBOX_DESC;
 $modversion['credits'] = "The XOOPS Project";
 $modversion['license'] = "GPL see LICENSE";
@@ -123,6 +123,13 @@ $modversion['config'][7]['formtype'] = 'select';
 $modversion['config'][7]['valuetype'] = 'text';
 $modversion['config'][7]['options'] = array('_MI_SHOUTBOX_OP7_F' => 'file', '_MI_SHOUTBOX_OP7_D' => 'database');
 $modversion['config'][7]['default'] = 'file';
+
+$modversion['config'][8]['name'] = 'user_realname';
+$modversion['config'][8]['title'] = '_MI_SHOUTBOX_TITLE8';
+$modversion['config'][8]['description'] = '_MI_SHOUTBOX_DESC8';
+$modversion['config'][8]['formtype'] = 'yesno';
+$modversion['config'][8]['valuetype'] = 'int';
+$modversion['config'][8]['default'] = 0;
 
 // Block Settings:
 $modversion['config'][10]['name'] = 'block_settings';
