@@ -124,15 +124,30 @@ class PublisherPermissionHandler extends XoopsObjectHandler {
 
         if (!isset($permissions[$gperm_name]) || ($id != null && !isset($permissions[$gperm_name][$id]))) {
 
-            //Get group permissions handler
-            $gperm_handler =& xoops_gethandler('groupperm');
+            //Instead of calling groupperm handler and get objects, we will save some memory and do it our way
+            $criteria = new CriteriaCompo(new Criteria('gperm_name', $gperm_name));
+            $criteria->add(new Criteria('gperm_modid', $this->publisher->getModule()->getVar('mid')));
 
             //Get user's groups
             $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
+            $criteria2 = new CriteriaCompo();
+            foreach($groups as $gid) {
+                $criteria2->add(new Criteria('gperm_groupid', $gid), 'OR');
+            }
+            $criteria->add($criteria2);
 
-            //Get all allowed item ids in this module and for this user's groups
-            $userpermissions =& $gperm_handler->getItemIds($gperm_name, $groups, $this->publisher->getModule()->getVar('mid'));
-            $permissions[$gperm_name] = $userpermissions;
+            $db =& XoopsDatabaseFactory::getDatabaseConnection();
+            $sql = 'SELECT * FROM ' . $db->prefix('group_permission');
+            $sql .= ' ' . $criteria->renderWhere();
+
+            $result = $db->query($sql, 0, 0);
+
+            while ($myrow = $db->fetchArray($result)) {
+                $permissions[$gperm_name][] = $myrow['gperm_itemid'];
+            }
+
+            $permissions[$gperm_name] = array_unique($permissions[$gperm_name]);
+
         }
         //Return the permission array
         return isset($permissions[$gperm_name]) ? $permissions[$gperm_name] : array();
