@@ -50,6 +50,13 @@ function shoutbox_makeGuestName()
     return $guestname;
 }
 
+function shoutbox_getUserName($uid = 0)
+{
+    xoops_load('XoopsUserUtility');
+    $uname = XoopsUserUtility::getUnameFromId($uid, shoutbox_getOption('user_realname'));
+    return $uname;
+}
+
 /**
  * Most of these functions were written (originally)
  * by Florian Solcher <e-xoops.alphalogic.org>

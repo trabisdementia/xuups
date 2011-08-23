@@ -58,8 +58,8 @@ if ($isMessage && ($isUser || $isAnonymous)) {
             }
         }
     } else {
-        $uname = $xoopsUser->getVar('uname');
         $uid = $xoopsUser->getVar('uid');
+        $uname = shoutbox_getUserName($uid);
     }
 
     //check if it is a double post
