@@ -66,9 +66,9 @@ $criteria->add(new Criteria('status', 2), 'AND');
 $criteria->add(new Criteria('datesub', time(), '<='), 'AND');
 $criteria->setSort('datesub');
 $criteria->setOrder('DESC');
-$itemsObj = $publisher->getHandler('item')->getObjects($criteria);
-$itemsCount = count($itemsObj);
-
+//Get all articles dates as an array to save memory
+$items = $publisher->getHandler('item')->getAll($criteria, array('datesub'), false);
+$itemsCount = count($items);
 if (!($itemsCount > 0)) {
     redirect_header(XOOPS_URL, 2, _MD_PUBLISHER_NO_TOP_PERMISSIONS);
     exit;
@@ -76,8 +76,8 @@ if (!($itemsCount > 0)) {
     $years = array();
     $months = array();
     $i = 0;
-    foreach ($itemsObj as $itemObj) {
-        $time = formatTimestamp($itemObj->getVar('datesub'), 'mysql', $useroffset);
+    foreach ($items as $item) {
+        $time = formatTimestamp($item['datesub'], 'mysql', $useroffset);
         if (preg_match("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $time, $datetime)) {
             $this_year = intval($datetime[1]);
             $this_month = intval($datetime[2]);
@@ -108,6 +108,7 @@ if (!($itemsCount > 0)) {
     $years[$i]['months'] = $months;
     $xoopsTpl->assign('years', $years);
 }
+unset($items);
 
 if ($fromyear != 0 && $frommonth != 0) {
     $xoopsTpl->assign('show_articles', true);
