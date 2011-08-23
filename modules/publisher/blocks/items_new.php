@@ -138,12 +138,20 @@ function publisher_items_new_edit($options)
     $dispEle = new XoopsFormText(_MB_PUBLISHER_DISP, 'options[3]', 10, 255, $options[3]);
     $charsEle = new XoopsFormText(_MB_PUBLISHER_CHARS, 'options[4]', 10, 255, $options[4]);
 
+    $imageEle = new XoopsFormSelect(_MB_PUBLISHER_IMAGE_TO_DISPLAY, 'options[5]', $options[5]);
+    $imageEle->addOptionArray(array(
+        'none' => _NONE,
+        'article' => _MB_PUBLISHER_IMAGE_ARTICLE,
+        'category' => _MB_PUBLISHER_IMAGE_CATEGORY,
+        'avatar'  => _MB_PUBLISHER_IMAGE_AVATAR,
+    ));
 
     $form->addElement($catEle);
     $form->addElement($orderEle);
     $form->addElement($showEle);
     $form->addElement($dispEle);
     $form->addElement($charsEle);
+    $form->addElement($imageEle);
 
     return $form->render();
 }
