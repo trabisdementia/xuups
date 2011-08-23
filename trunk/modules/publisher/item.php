@@ -104,7 +104,7 @@ if ($publisher->getConfig('item_other_items_type') == "previous_next") {
     $xoopsTpl->assign('next_item_url', $next_item_url);
 }
 
-//CAREFULL!! with many items this will exaust memory
+//CAREFUL!! with many items this will exhaust memory
 if ($publisher->getConfig('item_other_items_type') == "all") {
     $itemsObj = $publisher->getHandler('item')->getAllPublished(0, 0, $categoryObj->categoryid(), $sort, $order, '', true, true);
     $items = array();
