@@ -31,7 +31,6 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 function publisher_items_columns_show($options)
 {
     global $xoTheme;
-
     $publisher =& PublisherPublisher::getInstance();
 
     //Column Settings
@@ -87,7 +86,7 @@ function publisher_items_columns_show($options)
             $mainitem['item_link'] = $thisitem->itemid();
             $mainitem['itemurl'] = $thisitem->getItemUrl();
             $mainImage = $thisitem->getMainImage();
-            
+
             // check to see if GD function exist
             $mainitem['item_image'] = $mainImage['image_path'];
             if (!empty($mainImage['image_path']) && function_exists('imagecreatetruecolor')) {
