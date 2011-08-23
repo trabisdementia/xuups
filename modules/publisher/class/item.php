@@ -1297,19 +1297,16 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
     function getItemsCount($categoryid = -1, $status = '', $notNullFields = '') {
         global $xoopsUser, $publisher_isAdmin;
 
-        $gperm_handler =& xoops_gethandler('groupperm');
-        $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-
         if (!$publisher_isAdmin) {
             $criteriaPermissions = new CriteriaCompo();
 
             // Categories for which user has access
-            $categoriesGranted = $gperm_handler->getItemIds('category_read', $groups, $this->publisher->getModule()->getVar('mid'));
+            $categoriesGranted = $this->publisher->getHandler('permission')->getGrantedItems('category_read');
             $grantedCategories = new Criteria('categoryid', "(" . implode(',', $categoriesGranted) . ")", 'IN');
             $criteriaPermissions->add($grantedCategories, 'AND');
 
             // ITEMs for which user has access
-            $itemsGranted = $gperm_handler->getItemIds('item_read', $groups, $this->publisher->getModule()->getVar('mid'));
+            $itemsGranted = $this->publisher->getHandler('permission')->getGrantedItems('item_read');
             $grantedItem = new Criteria('itemid', "(" . implode(',', $itemsGranted) . ")", 'IN');
             $criteriaPermissions->add($grantedItem, 'AND');
         }
