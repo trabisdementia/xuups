@@ -24,6 +24,27 @@ defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 include_once dirname(__FILE__) . '/common.php';
 
 
+function publisher_onCache()
+{
+    $GLOBALS['xoTheme']->addStylesheet(PUBLISHER_URL . '/css/publisher.css');
+    $GLOBALS['xoTheme']->addStylesheet(PUBLISHER_URL . '/css/jquery.popeye.style.css');
+    $GLOBALS['xoTheme']->addStylesheet(PUBLISHER_URL . '/css/jquery-ui-1.7.1.custom.css');
+
+    $GLOBALS['xoTheme']->addScript(XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js');
+
+    $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/jquery.popeye-2.0.4.js');
+
+    $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/behavior.js');
+    $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/rating.js');
+
+    $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/ui.core.js');
+    $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/ui.tabs.js');
+
+    $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/ajaxupload.3.9.js');
+    $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/jquery.easing.js');
+    $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/script.easing.js');
+    $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/publisher.js');
+}
 /**
  * Includes scripts in HTML header
  *
@@ -32,7 +53,12 @@ include_once dirname(__FILE__) . '/common.php';
 function publisher_cpHeader()
 {
     xoops_cp_header();
+    publisher_onCache();
+    $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/funcs.js');
+    $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/cookies.js');
+
     //cannot use xoTheme, some conflit with admin gui
+ /*
     echo '<link type="text/css" href="' . PUBLISHER_URL . '/css/jquery-ui-1.7.1.custom.css" rel="stylesheet" />
 	<link type="text/css" href="' . PUBLISHER_URL . '/css/publisher.css" rel="stylesheet" />
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/funcs.js"></script>
@@ -42,7 +68,7 @@ function publisher_cpHeader()
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/ui.tabs.js"></script>
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/ajaxupload.3.9.js"></script>
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/publisher.js"></script>
-    ';
+    ';    */
 }
 
 /**

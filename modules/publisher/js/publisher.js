@@ -1,9 +1,9 @@
-var $publisher = jQuery.noConflict();
+//var $publisher = jQuery.noConflict();
 
-$publisher(document).ready(function() {
+$(document).ready(function() {
     //Functions to execute on page load
-    if ($publisher.isFunction($publisher.fn.tabs)) {
-        $publisher("#tabs").tabs();
+    if ($.isFunction($.fn.tabs)) {
+        $("#tabs").tabs();
     }
     var MenuDom = xoopsGetElementById('image_item');
     if (MenuDom != null) {
