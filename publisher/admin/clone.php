@@ -21,7 +21,8 @@
 include_once dirname(__FILE__) . "/admin_header.php";
 
 publisher_cpHeader();
-publisher_adminMenu(-1, _AM_PUBLISHER_CLONE);
+$menu = new Xmf_Template_Adminmenu($xoopsModule);
+$menu->display();
 publisher_openCollapsableBar('clone', 'cloneicon', _AM_PUBLISHER_CLONE, _AM_PUBLISHER_CLONE_DSC);
 
 if (@$_POST['op'] == 'submit') {

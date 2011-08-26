@@ -19,8 +19,18 @@
  */
 
 include_once dirname(__FILE__) . '/admin_header.php';
-include_once PUBLISHER_ROOT_PATH . '/class/about.php';
+xoops_cp_header();
 
-$aboutObj = new PublisherAbout(_AM_PUBLISHER_ABOUT);
-$aboutObj->render();
+$menu = new Xmf_Template_Adminmenu($xoopsModule);
+$menu->display();
+/*
+$about = new Xmf_Template_About($xoopsModule);
+$about->display();*/
+$aboutAdmin = new Xmf_Template_Admin($xoopsModule);
+
+echo $aboutAdmin->addNavigation('index.php');
+echo $aboutAdmin->addNavigation('about.php');
+echo $aboutAdmin->renderabout('6KJ7RW5DR3VTJ', false);
+
+xoops_cp_footer();
 ?>

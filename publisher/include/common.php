@@ -52,7 +52,6 @@ include_once PUBLISHER_ROOT_PATH . '/include/constants.php';
 include_once PUBLISHER_ROOT_PATH . '/include/seo_functions.php';
 include_once PUBLISHER_ROOT_PATH . '/class/metagen.php';
 include_once PUBLISHER_ROOT_PATH . '/class/session.php';
-include_once PUBLISHER_ROOT_PATH . '/class/registry.php';
 
 $publisher = Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 $publisher->setDebug(true);

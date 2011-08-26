@@ -86,11 +86,13 @@ switch ($op)
 function add()
 {
     $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
-    global $limit, $start, $oAdminButton;
+    global $limit, $start, $xoopsModule;
 
     if (!isset($_POST['add_mime'])) {
         publisher_cpHeader();
-        publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES);
+
+        $menu = new Xmf_Template_Adminmenu($xoopsModule);
+        $menu->display();
 
         publisher_openCollapsableBar('mimemaddtable', 'mimeaddicon', _AM_PUBLISHER_MIME_ADD_TITLE);
 
@@ -246,7 +248,7 @@ function delete()
 function edit()
 {
     $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
-    global $start, $limit, $oAdminButton;
+    global $start, $limit, $xoopsModule;
 
     if (!isset($_REQUEST['id'])) {
         redirect_header(PUBLISHER_ADMIN_URL . "/mimetypes.php", 3, _AM_PUBLISHER_MESSAGE_NO_ID);
@@ -262,8 +264,9 @@ function edit()
 
         // Display header
         publisher_cpHeader();
-        publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES . " > " . _AM_PUBLISHER_BUTTON_EDIT);
-
+        $menu = new Xmf_Template_Adminmenu($xoopsModule);
+        $menu->setBreadcrumb(_AM_PUBLISHER_MIMETYPES . " > " . _AM_PUBLISHER_BUTTON_EDIT);
+        $menu->display();
         publisher_openCollapsableBar('mimemedittable', 'mimeediticon', _AM_PUBLISHER_MIME_EDIT_TITLE);
 
         //Display any form errors
@@ -385,7 +388,7 @@ function edit()
 function manage()
 {
     $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
-    global $imagearray, $start, $limit, $oAdminButton, $aSortBy, $aOrderBy, $aLimitBy, $aSearchBy;
+    global $imagearray, $start, $limit, $xoopsModule, $aSortBy, $aOrderBy, $aLimitBy, $aSearchBy;
 
     if (isset($_POST['deleteMimes'])) {
         $aMimes = $_POST['mimes'];
@@ -408,7 +411,8 @@ function manage()
     }
 
     publisher_cpHeader();
-    publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES);
+    $menu = new Xmf_Template_Adminmenu($xoopsModule);
+    $menu->display();
     publisher_openCollapsableBar('mimemanagetable', 'mimemanageicon', _AM_PUBLISHER_MIME_MANAGE_TITLE, _AM_PUBLISHER_MIME_INFOTEXT);
     $crit = new CriteriaCompo();
     if (isset($_REQUEST['order'])) {
@@ -524,7 +528,7 @@ function manage()
 function search()
 {
     $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
-    global $oAdminButton, $hMime, $limit, $start, $imagearray, $aSearchBy, $aOrderBy, $aLimitBy, $aSortBy;
+    global $xoopsModule, $limit, $start, $imagearray, $aSearchBy, $aOrderBy, $aLimitBy, $aSortBy;
 
     if (isset($_POST['deleteMimes'])) {
         $aMimes = $_POST['mimes'];
@@ -553,7 +557,9 @@ function search()
     }
 
     publisher_cpHeader();
-    publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES . " > " . _AM_PUBLISHER_BUTTON_SEARCH);
+    $menu = new Xmf_Template_Adminmenu($xoopsModule);
+    $menu->setBreadcrumb(_AM_PUBLISHER_MIMETYPES . " > " . _AM_PUBLISHER_BUTTON_SEARCH);
+    $menu->display();
 
     publisher_openCollapsableBar('mimemsearchtable', 'mimesearchicon', _AM_PUBLISHER_MIME_SEARCH);
 

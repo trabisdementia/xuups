@@ -41,7 +41,9 @@ switch ($op) {
         $importfile = 'none';
 
         publisher_cpHeader();
-        publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
+        $menu = new Xmf_Template_Adminmenu($xoopsModule);
+        $menu->setBreadcrumb(_AM_PUBLISHER_IMPORT);
+        $menu->display();
 
         publisher_openCollapsableBar('import', 'importicon', _AM_PUBLISHER_IMPORT_TITLE, _AM_PUBLISHER_IMPORT_INFO);
 
