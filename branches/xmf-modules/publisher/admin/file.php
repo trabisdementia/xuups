@@ -40,8 +40,10 @@ function publisher_editFile($showmenu = false, $fileid = 0, $itemid = 0)
         }
 
         if ($showmenu) {
-            publisher_adminMenu(2, _AM_PUBLISHER_FILE . " > " . _AM_PUBLISHER_EDITING);
-        }
+            $menu = new Xmf_Template_Adminmenu($xoopsModule);
+            $menu->setBreadcrumb(_AM_PUBLISHER_FILE . " > " . _AM_PUBLISHER_EDITING);
+            $menu->display();
+         }
 
         echo "<br />\n";
         echo "<span style='color: #2F5376; font-weight: bold; font-size: 16px; margin: 6px 06 0 0; '>" . _AM_PUBLISHER_FILE_EDITING . "</span>";
@@ -52,7 +54,9 @@ function publisher_editFile($showmenu = false, $fileid = 0, $itemid = 0)
         $fileObj =& $publisher->getHandler('file')->create();
         $fileObj->setVar('itemid', $itemid);
         if ($showmenu) {
-            publisher_adminMenu(2, _AM_PUBLISHER_FILE . " > " . _AM_PUBLISHER_FILE_ADD);
+            $menu = new Xmf_Template_Adminmenu($xoopsModule);
+            $menu->setBreadcrumb(_AM_PUBLISHER_FILE . " > " . _AM_PUBLISHER_FILE_ADD);
+            $menu->display();
         }
         echo "<span style='color: #2F5376; font-weight: bold; font-size: 16px; margin: 6px 06 0 0; '>" . _AM_PUBLISHER_FILE_ADDING . "</span>";
         echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . _AM_PUBLISHER_FILE_ADDING_DSC . "</span>";
@@ -156,7 +160,8 @@ switch ($op) {
     case "default":
     default:
         publisher_cpHeader();
-        publisher_adminMenu(2, _AM_PUBLISHER_ITEMS);
+        $menu = new Xmf_Template_Adminmenu($xoopsModule);
+        $menu->display();
         break;
 }
 xoops_cp_footer();

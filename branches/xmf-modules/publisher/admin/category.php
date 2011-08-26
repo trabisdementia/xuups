@@ -225,8 +225,8 @@ switch ($op) {
     case "default":
     default:
         publisher_cpHeader();
-        publisher_adminMenu(1, _AM_PUBLISHER_CATEGORIES);
-
+        $menu = new Xmf_Template_Adminmenu($xoopsModule);
+        $menu->display();
         echo "<br />\n";
         echo "<form><div style=\"margin-bottom: 12px;\">";
         echo "<input type='button' name='button' onclick=\"location='category.php?op=mod'\" value='" . _AM_PUBLISHER_CATEGORY_CREATE . "'>&nbsp;&nbsp;";
@@ -303,6 +303,7 @@ function publisher_displayCategory($categoryObj, $level = 0)
 
 function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryObj = null)
 {
+    global $xoopsModule;
     $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     // if there is a parameter, and the id exists, retrieve data: we're editing a category
@@ -319,19 +320,22 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
         }
     }
 
+    $menu = new Xmf_Template_Adminmenu($xoopsModule);
+
     if ($categoryid != 0) {
         if ($showmenu) {
-            publisher_adminMenu(1, _AM_PUBLISHER_CATEGORIES . " > " . _AM_PUBLISHER_EDITING);
+            $menu->setBreadcrumb(_AM_PUBLISHER_CATEGORIES . " > " . _AM_PUBLISHER_EDITING);
+            $menu->display();
         }
         echo "<br />\n";
         publisher_openCollapsableBar('edittable', 'edittableicon', _AM_PUBLISHER_EDITCOL, _AM_PUBLISHER_CATEGORY_EDIT_INFO);
     } else {
         if ($showmenu) {
-            publisher_adminMenu(1, _AM_PUBLISHER_CATEGORIES . " > " . _AM_PUBLISHER_CREATINGNEW);
+            $menu->setBreadcrumb(_AM_PUBLISHER_CATEGORIES . " > " . _AM_PUBLISHER_CREATINGNEW);
+            $menu->display();
         }
         publisher_openCollapsableBar('createtable', 'createtableicon', _AM_PUBLISHER_CATEGORY_CREATE, _AM_PUBLISHER_CATEGORY_CREATE_INFO);
     }
-
     $sform = $categoryObj->getForm($nb_subcats);
     $sform->display();
 

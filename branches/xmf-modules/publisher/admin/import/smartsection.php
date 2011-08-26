@@ -37,7 +37,8 @@ if ($op == 'start') {
     xoops_load('XoopsFormLoader');
 
     publisher_cpHeader();
-    publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
+    $menu = new Xmf_Template_Adminmenu($xoopsModule);
+    $menu->display();
     publisher_openCollapsableBar('newsimport', 'newsimporticon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_INFO);
 
     $result = $xoopsDB->query("SELECT COUNT(*) FROM " . $xoopsDB->prefix("smartsection_categories"));
@@ -98,7 +99,8 @@ if ($op == 'start') {
 
 if ($op == 'go') {
     publisher_cpHeader();
-    publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
+    $menu = new Xmf_Template_Adminmenu($xoopsModule);
+    $menu->display();
     publisher_openCollapsableBar('newsimportgo', 'newsimportgoicon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
 
     $module_handler =& xoops_gethandler('module');

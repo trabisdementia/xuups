@@ -47,7 +47,8 @@ $groups = ($xoopsUser) ? ($xoopsUser->getGroups()) : XOOPS_GROUP_ANONYMOUS;
 $startentry = isset($_GET['startentry']) ? intval($_GET['startentry']) : 0;
 
 publisher_cpHeader();
-publisher_adminMenu(0, _AM_PUBLISHER_INDEX);
+$menu = new Xmf_Template_Adminmenu($xoopsModule);
+$menu->display();
 
 // Total ITEMs -- includes everything on the table
 $totalitems = $publisher->getHandler('item')->getItemsCount();

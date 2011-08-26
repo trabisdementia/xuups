@@ -26,7 +26,8 @@ $myts =& MyTextSanitizer::getInstance();
 global $xoopsDB;
 
 publisher_cpHeader();
-publisher_adminMenu(3, _AM_PUBLISHER_PERMISSIONS);
+$menu = new Xmf_Template_Adminmenu($xoopsModule);
+$menu->display();
 
 // View Categories permissions
 $item_list_view = array();

@@ -164,7 +164,8 @@ if ($op == 'showmod') {
     }
 
     publisher_cpHeader();
-    publisher_adminMenu(5, _PREFERENCES);
+    $menu = new Xmf_Template_Adminmenu($xoopsModule);
+    $menu->display();
     foreach ($config_cats as $form_cat => $info) {
         if ($form_cat == 'others' && !$cat_others_used) continue;
         $$form_cat->addElement(new XoopsFormHidden('op', 'save'));

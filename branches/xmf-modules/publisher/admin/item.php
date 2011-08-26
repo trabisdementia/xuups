@@ -162,8 +162,8 @@ switch ($op) {
 
     case "default":
     default:
-        publisher_cpHeader();
-        publisher_adminMenu(2, _AM_PUBLISHER_ITEMS);
+        publisher_cpHeader();$menu = new Xmf_Template_Adminmenu($xoopsModule);
+        $menu->display();
         xoops_load('XoopsPageNav');
 
         echo "<br />\n";
@@ -419,7 +419,7 @@ function publisher_showFiles($itemObj)
 function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
 {
     $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
-    global $publisher_current_page, $xoopsUser;
+    global $publisher_current_page, $xoopsModule;
 
     xoops_load('XoopsFormLoader');
 
@@ -506,7 +506,9 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
         $categoryObj = $itemObj->category();
 
         if ($showmenu) {
-            publisher_adminMenu(2, $breadcrumb_action1 . " > " . $breadcrumb_action2);
+            $menu = new Xmf_Template_Adminmenu($xoopsModule);
+            $menu->setBreadcrumb($breadcrumb_action1 . " > " . $breadcrumb_action2);
+            $menu->display();
         }
 
         echo "<br />\n";
@@ -531,7 +533,9 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
         $new_status = _PUBLISHER_STATUS_PUBLISHED;
 
         if ($showmenu) {
-            publisher_adminMenu(2, $breadcrumb_action1 . " > " . $breadcrumb_action2);
+            $menu = new Xmf_Template_Adminmenu($xoopsModule);
+            $menu->setBreadcrumb($breadcrumb_action1 . " > " . $breadcrumb_action2);
+            $menu->display();
         }
 
         $sel_categoryid = isset($_GET['categoryid']) ? $_GET['categoryid'] : 0;

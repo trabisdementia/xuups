@@ -22,7 +22,9 @@
 include_once dirname(__FILE__) . '/admin_header.php';
 
 publisher_cpHeader();
-publisher_adminMenu(-1, _AM_PUBLISHER_ITEMS . " > " . _AM_PUBLISHER_PAGEWRAP);
+$menu = new Xmf_Template_Adminmenu($xoopsModule);
+$menu->setBreadcrumb(_AM_PUBLISHER_ITEMS . " > " . _AM_PUBLISHER_PAGEWRAP);
+$menu->display();
 
 publisher_openCollapsableBar('pagewraptable', 'pagewrapicon', _AM_PUBLISHER_PAGEWRAP, _AM_PUBLISHER_PAGEWRAPDSC);
 

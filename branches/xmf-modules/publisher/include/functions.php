@@ -478,32 +478,6 @@ function publisher_saveCategoryPermissions($groups, $categoryid, $perm_name)
 }
 
 /**
- * @param int $currentoption
- * @param string $breadcrumb
- * @return void
- */
-function publisher_adminMenu($currentoption = 0, $breadcrumb = '')
-{
-    include_once XOOPS_ROOT_PATH . '/class/template.php';
-
-    $publisher_headermenu = array();
-    $publisher_adminmenu = array();
-    include PUBLISHER_ROOT_PATH . '/admin/menu.php';
-
-    xoops_loadLanguage('admin', PUBLISHER_DIRNAME);
-    xoops_loadLanguage('modinfo', PUBLISHER_DIRNAME);
-
-    $tpl = new XoopsTpl();
-    $tpl->assign(array('modurl' => PUBLISHER_URL,
-                       'headermenu' => $publisher_headermenu,
-                       'adminmenu' => $publisher_adminmenu,
-                       'current' => $currentoption,
-                       'breadcrumb' => $breadcrumb,
-                       'headermenucount' => count($publisher_headermenu)));
-    $tpl->display(PUBLISHER_ROOT_PATH . '/templates/static/publisher_admin_menu.html');
-}
-
-/**
  * @param string $tablename
  * @param string $iconname
  * @param string $tabletitle
