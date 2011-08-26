@@ -23,7 +23,7 @@
 include_once dirname(__FILE__) . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/template.php';
 
-$itemid = PublisherRequest::getInt('itemid');
+$itemid = Xmf_Request::getInt('itemid');
 
 if ($itemid == 0) {
     redirect_header("javascript:history.go(-1)", 1, _MD_PUBLISHER_NOITEMSELECTED);

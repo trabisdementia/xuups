@@ -23,10 +23,10 @@
 include_once dirname(__FILE__) . '/header.php';
 
 // At which record shall we start for the Categories
-$catstart = PublisherRequest::getInt('catstart');
+$catstart = Xmf_Request::getInt('catstart');
 
 // At which record shall we start for the ITEM
-$start = PublisherRequest::getInt('start');
+$start = Xmf_Request::getInt('start');
 
 // Number of categories at the top level
 $totalCategories = $publisher->getHandler('category')->getCategoriesCount(0);
@@ -171,8 +171,8 @@ if ($publisher->getConfig('index_display_last_items')) {
 // Language constants
 $xoopsTpl->assign('title_and_welcome', $publisher->getConfig('index_title_and_welcome')); //SHINE ADDED DEBUG mainintro txt
 $xoopsTpl->assign('lang_mainintro', $myts->displayTarea($publisher->getConfig('index_welcome_msg'), 1));
-$xoopsTpl->assign('sectionname', $publisher->getModule()->getVar('name'));
-$xoopsTpl->assign('whereInSection', $publisher->getModule()->getVar('name'));
+$xoopsTpl->assign('sectionname', $publisher->getObject()->getVar('name'));
+$xoopsTpl->assign('whereInSection', $publisher->getObject()->getVar('name'));
 $xoopsTpl->assign('module_home', publisher_moduleHome(false));
 $xoopsTpl->assign('indexfooter', $myts->displayTarea($publisher->getConfig('index_footer'), 1));
 
@@ -204,7 +204,7 @@ $xoopsTpl->assign('displaylastitems', $publisher->getConfig('index_display_last_
 /**
  * Generating meta information for this page
  */
-$publisher_metagen = new PublisherMetagen($publisher->getModule()->getVar('name'));
+$publisher_metagen = new PublisherMetagen($publisher->getObject()->getVar('name'));
 $publisher_metagen->createMetaTags();
 
 // RSS Link

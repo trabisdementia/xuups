@@ -21,11 +21,11 @@
 
 include_once dirname(__FILE__) . '/admin_header.php';
 
-$op = PublisherRequest::getString('op');
+$op = Xmf_Request::getString('op');
 
 function publisher_editFile($showmenu = false, $fileid = 0, $itemid = 0)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
     // if there is a parameter, and the id exists, retrieve data: we're editing a file

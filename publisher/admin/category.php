@@ -21,7 +21,7 @@
 
 include_once dirname(__FILE__) . '/admin_header.php';
 
-$op = PublisherRequest::getString('op');
+$op = Xmf_Request::getString('op');
 
 $op = isset($_POST['editor']) ? 'mod' : $op;
 if (isset($_POST['addcategory'])) {
@@ -29,8 +29,8 @@ if (isset($_POST['addcategory'])) {
 }
 
 // Where do we start ?
-$startcategory = PublisherRequest::getInt('startcategory');
-$categoryid = PublisherRequest::getInt('categoryid');
+$startcategory = Xmf_Request::getInt('startcategory');
+$categoryid = Xmf_Request::getInt('categoryid');
 
 switch ($op) {
 
@@ -65,7 +65,7 @@ switch ($op) {
     case "addcategory":
         global $modify;
 
-        $parentid = PublisherRequest::getInt('parentid');
+        $parentid = Xmf_Request::getInt('parentid');
 
         if ($categoryid != 0) {
             $categoryObj = $publisher->getHandler('category')->get($categoryid);
@@ -270,7 +270,7 @@ xoops_cp_footer();
 
 function publisher_displayCategory($categoryObj, $level = 0)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $description = $categoryObj->description();
     if (!XOOPS_USE_MULTIBYTES) {
@@ -303,7 +303,7 @@ function publisher_displayCategory($categoryObj, $level = 0)
 
 function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryObj = null)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     // if there is a parameter, and the id exists, retrieve data: we're editing a category
     if ($categoryid != 0) {
@@ -361,11 +361,11 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
         echo "</tr>";
         if ($totalsubs > 0) {
             foreach ($subcatsObj as $subcat) {
-                $modify = "<a href='category.php?op=mod&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_MODIFY . "' alt='" . _AM_PUBLISHER_MODIFY . "' /></a>";
-                $delete = "<a href='category.php?op=del&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETE . "' alt='" . _AM_PUBLISHER_DELETE . "' /></a>";
+                $modify = "<a href='category.php?op=mod&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getObject()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_MODIFY . "' alt='" . _AM_PUBLISHER_MODIFY . "' /></a>";
+                $delete = "<a href='category.php?op=del&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getObject()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETE . "' alt='" . _AM_PUBLISHER_DELETE . "' /></a>";
                 echo "<tr>";
                 echo "<td class='head' align='left'>" . $subcat->categoryid() . "</td>";
-                echo "<td class='even' align='left'><a href='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/category.php?categoryid=" . $subcat->categoryid() . "&amp;parentid=" . $subcat->parentid() . "'>" . $subcat->name() . "</a></td>";
+                echo "<td class='even' align='left'><a href='" . XOOPS_URL . "/modules/" . $publisher->getObject()->dirname() . "/category.php?categoryid=" . $subcat->categoryid() . "&amp;parentid=" . $subcat->parentid() . "'>" . $subcat->name() . "</a></td>";
                 echo "<td class='even' align='left'>" . $subcat->description() . "</td>";
                 echo "<td class='even' align='right'> {$modify} {$delete} </td>";
                 echo "</tr>";
@@ -380,7 +380,7 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
         publisher_closeCollapsableBar('subcatstable', 'subcatsicon');
 
         publisher_openCollapsableBar('bottomtable', 'bottomtableicon', _AM_PUBLISHER_CAT_ITEMS, _AM_PUBLISHER_CAT_ITEMS_DSC);
-        $startitem = PublisherRequest::getInt('startitem');
+        $startitem = Xmf_Request::getInt('startitem');
         // Get the total number of published ITEMS
         $totalitems = $publisher->getHandler('item')->getItemsCount($sel_cat, array(_PUBLISHER_STATUS_PUBLISHED));
         // creating the items objects that are published
@@ -398,8 +398,8 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
         if ($totalitems > 0) {
             for ($i = 0; $i < $totalitemsOnPage; $i++) {
                 $categoryObj =& $allcats[$itemsObj[$i]->categoryid()];
-                $modify = "<a href='item.php?op=mod&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
-                $delete = "<a href='item.php?op=del&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
+                $modify = "<a href='item.php?op=mod&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getObject()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
+                $delete = "<a href='item.php?op=del&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getObject()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
                 echo "<tr>";
                 echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
                 echo "<td class='even' align='left'>" . $categoryObj->name() . "</td>";
@@ -416,7 +416,7 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
         }
         echo "</table>\n";
         echo "<br />\n";
-        $parentid = PublisherRequest::getInt('parentid');
+        $parentid = Xmf_Request::getInt('parentid');
         $pagenav_extra_args = "op=mod&categoryid=$sel_cat&parentid=$parentid";
         xoops_load('XoopsPageNav');
         $pagenav = new XoopsPageNav($totalitems, $publisher->getConfig('idxcat_perpage'), $startitem, 'startitem', $pagenav_extra_args);

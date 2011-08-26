@@ -22,7 +22,7 @@
 
 include_once dirname(__FILE__) . '/header.php';
 
-$categoryid = PublisherRequest::getInt('categoryid');
+$categoryid = Xmf_Request::getInt('categoryid');
 
 // Creating the category object for the selected category
 $categoryObj = $publisher->getHandler('category')->get($categoryid);
@@ -40,9 +40,9 @@ if (!$categoryObj->checkPermission()) {
 }
 
 // At which record shall we start
-$start = PublisherRequest::getInt('start');
+$start = Xmf_Request::getInt('start');
 
-$item_page_id = PublisherRequest::getInt('page', -1);
+$item_page_id = Xmf_Request::getInt('page', -1);
 
 $totalItems = $publisher->getHandler('category')->publishedItemsCount();
 
@@ -62,7 +62,7 @@ if (empty($xoopsOption['template_main'])) {
 include_once XOOPS_ROOT_PATH . '/header.php';
 include_once PUBLISHER_ROOT_PATH . '/footer.php';
 
-$module_id = $publisher->getModule()->getVar('mid');
+$module_id = $publisher->getObject()->getVar('mid');
 
 // creating the Item objects that belong to the selected category
 switch ($publisher->getConfig('format_order_by')) {
@@ -193,9 +193,9 @@ $xoopsTpl->assign('category', $category);
 $xoopsTpl->assign('categories', $categories);
 
 // Language constants
-$xoopsTpl->assign('sectionname', $publisher->getModule()->getVar('name'));
-$xoopsTpl->assign('whereInSection', $publisher->getModule()->getVar('name'));
-$xoopsTpl->assign('modulename', $publisher->getModule()->getVar('dirname'));
+$xoopsTpl->assign('sectionname', $publisher->getObject()->getVar('name'));
+$xoopsTpl->assign('whereInSection', $publisher->getObject()->getVar('name'));
+$xoopsTpl->assign('modulename', $publisher->getObject()->getVar('dirname'));
 $xoopsTpl->assign('lang_category_summary', sprintf(_MD_PUBLISHER_CATEGORY_SUMMARY, $categoryObj->name()));
 $xoopsTpl->assign('lang_category_summary_info', sprintf(_MD_PUBLISHER_CATEGORY_SUMMARY_INFO, $categoryObj->name()));
 $xoopsTpl->assign('lang_items_title', sprintf(_MD_PUBLISHER_ITEMS_TITLE, $categoryObj->name()));

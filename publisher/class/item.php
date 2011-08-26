@@ -47,7 +47,7 @@ class PublisherItem extends XoopsObject {
      */
     function PublisherItem($id = null) {
 
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
         $this->db =& Database::getInstance();
         $this->initVar("itemid", XOBJ_DTYPE_INT, 0);
@@ -374,7 +374,7 @@ class PublisherItem extends XoopsObject {
         $groups = ($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
         $gperm_handler =& xoops_gethandler('groupperm');
 
-        $module_id = $this->publisher->getModule()->getVar('mid');
+        $module_id = $this->publisher->getObject()->getVar('mid');
 
         $uploadLink = '';
 
@@ -446,13 +446,13 @@ class PublisherItem extends XoopsObject {
     }
 
     function sendNotifications($notifications = array()) {
-        $module_id = $this->publisher->getModule()->getVar('mid');
+        $module_id = $this->publisher->getObject()->getVar('mid');
 
         $notification_handler =& xoops_gethandler('notification');
         $categoryObj = $this->category();
 
         $tags = array();
-        $tags['MODULE_NAME'] = $this->publisher->getModule()->getVar('name');
+        $tags['MODULE_NAME'] = $this->publisher->getObject()->getVar('name');
         $tags['ITEM_NAME'] = $this->title();
         $tags['ITEM_NAME'] = $this->subtitle();
         $tags['CATEGORY_NAME'] = $this->getCategoryName();
@@ -464,19 +464,19 @@ class PublisherItem extends XoopsObject {
                 case _PUBLISHER_NOT_ITEM_PUBLISHED :
                     $tags['ITEM_URL'] = PUBLISHER_URL . '/item.php?itemid=' . $this->itemid();
 
-                    $notification_handler->triggerEvent('global_item', 0, 'published', $tags, array(), $this->publisher->getModule()->getVar('mid'));
-                    $notification_handler->triggerEvent('category_item', $this->categoryid(), 'published', $tags, array(), $this->publisher->getModule()->getVar('mid'));
-                    $notification_handler->triggerEvent('item', $this->itemid(), 'approved', $tags, array(), $this->publisher->getModule()->getVar('mid'));
+                    $notification_handler->triggerEvent('global_item', 0, 'published', $tags, array(), $this->publisher->getObject()->getVar('mid'));
+                    $notification_handler->triggerEvent('category_item', $this->categoryid(), 'published', $tags, array(), $this->publisher->getObject()->getVar('mid'));
+                    $notification_handler->triggerEvent('item', $this->itemid(), 'approved', $tags, array(), $this->publisher->getObject()->getVar('mid'));
                     break;
 
                 case _PUBLISHER_NOT_ITEM_SUBMITTED :
                     $tags['WAITINGFILES_URL'] = PUBLISHER_URL . '/admin/item.php?itemid=' . $this->itemid();
-                    $notification_handler->triggerEvent('global_item', 0, 'submitted', $tags, array(), $this->publisher->getModule()->getVar('mid'));
-                    $notification_handler->triggerEvent('category_item', $this->categoryid(), 'submitted', $tags, array(), $this->publisher->getModule()->getVar('mid'));
+                    $notification_handler->triggerEvent('global_item', 0, 'submitted', $tags, array(), $this->publisher->getObject()->getVar('mid'));
+                    $notification_handler->triggerEvent('category_item', $this->categoryid(), 'submitted', $tags, array(), $this->publisher->getObject()->getVar('mid'));
                     break;
 
                 case _PUBLISHER_NOT_ITEM_REJECTED :
-                    $notification_handler->triggerEvent('item', $this->itemid(), 'rejected', $tags, array(), $this->publisher->getModule()->getVar('mid'));
+                    $notification_handler->triggerEvent('item', $this->itemid(), 'rejected', $tags, array(), $this->publisher->getObject()->getVar('mid'));
                     break;
 
                 case -1 :
@@ -551,7 +551,7 @@ class PublisherItem extends XoopsObject {
         if (!empty($gr_with_no_pview)) {
             //determine if these groups can view the full article
             $gperm_handler =& xoops_gethandler('groupperm');
-            $allowed = $gperm_handler->checkRight('item_read', $this->itemid(), $gr_with_no_pview, $this->publisher->getModule()->getVar('mid'));
+            $allowed = $gperm_handler->checkRight('item_read', $this->itemid(), $gr_with_no_pview, $this->publisher->getObject()->getVar('mid'));
         }
 
         //return false if user belong to at least 1 group wich has full view
@@ -870,7 +870,7 @@ class PublisherItem extends XoopsObject {
 
         $gperm_handler =& xoops_gethandler('groupperm');
         $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-        $module_id = $this->publisher->getModule()->getVar('mid');
+        $module_id = $this->publisher->getObject()->getVar('mid');
 
         // Do we have access to the parent category
         if ($gperm_handler->checkRight('category_read', $this->categoryid(), $groups, $module_id)) {
@@ -886,46 +886,46 @@ class PublisherItem extends XoopsObject {
     function setVarsFromRequest() {
         //Required fields
         if (isset($_REQUEST['categoryid'])) {
-            $this->setVar('categoryid', PublisherRequest::getInt('categoryid'));
+            $this->setVar('categoryid', Xmf_Request::getInt('categoryid'));
         } elseif ($this->isnew()) {
 
 
         }
 
         if (isset($_REQUEST['title'])) {
-            $this->setVar('title', PublisherRequest::getString('title'));
+            $this->setVar('title', Xmf_Request::getString('title'));
         } elseif ($this->isnew()) {
 
         }
 
         if (isset($_REQUEST['body'])) {
-            $this->setVar('body', PublisherRequest::getText('body'));
+            $this->setVar('body', Xmf_Request::getText('body'));
         } elseif ($this->isnew()) {
 
         }
 
         //Not required fields
         if (isset($_REQUEST['summary'])) {
-            $this->setVar('summary', PublisherRequest::getText('summary'));
+            $this->setVar('summary', Xmf_Request::getText('summary'));
         } elseif ($this->isnew()) {
 
         }
 
         if (isset($_REQUEST['subtitle'])) {
-            $this->setVar('subtitle', PublisherRequest::getString('subtitle'));
+            $this->setVar('subtitle', Xmf_Request::getString('subtitle'));
         } elseif ($this->isnew()) {
 
         }
 
         if (isset($_REQUEST['item_tag'])) {
-            $this->setVar('item_tag', PublisherRequest::getString('item_tag'));
+            $this->setVar('item_tag', Xmf_Request::getString('item_tag'));
         } elseif ($this->isnew()) {
 
         }
 
         if (isset($_REQUEST['image_featured'])) {
-            $image_item = PublisherRequest::getArray('image_item');
-            $image_featured = PublisherRequest::getString('image_featured');
+            $image_item = Xmf_Request::getArray('image_item');
+            $image_featured = Xmf_Request::getString('image_featured');
 
             //Todo: get a better image class for xoops!
             //Image hack
@@ -952,13 +952,13 @@ class PublisherItem extends XoopsObject {
         //$item_upload_file = isset($_FILES['item_upload_file']) ? $_FILES['item_upload_file'] : '';
 
         if (isset($_REQUEST['uid'])) {
-            $this->setVar('uid', PublisherRequest::getInt('uid'));
+            $this->setVar('uid', Xmf_Request::getInt('uid'));
         } elseif ($this->isnew()) {
             $this->setVar('uid', is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->uid() : 0);
         }
 
         if (isset($_REQUEST['author_alias'])) {
-            $this->setVar('author_alias', PublisherRequest::getString('author_alias'));
+            $this->setVar('author_alias', Xmf_Request::getString('author_alias'));
             if ($this->getVar('autor_alias') != '') {
                 $this->setVar('uid', 0);
             }
@@ -973,80 +973,80 @@ class PublisherItem extends XoopsObject {
         }
 
         if (isset($_REQUEST['item_short_url'])) {
-            $this->setVar('short_url', PublisherRequest::getString('item_short_url'));
+            $this->setVar('short_url', Xmf_Request::getString('item_short_url'));
         } elseif ($this->isnew()) {
 
         }
 
 
         if (isset($_REQUEST['item_meta_keywords'])) {
-            $this->setVar('meta_keywords', PublisherRequest::getString('item_meta_keywords'));
+            $this->setVar('meta_keywords', Xmf_Request::getString('item_meta_keywords'));
         } elseif ($this->isnew()) {
 
         }
 
         if (isset($_REQUEST['item_meta_description'])) {
-            $this->setVar('meta_description', PublisherRequest::getString('item_meta_description'));
+            $this->setVar('meta_description', Xmf_Request::getString('item_meta_description'));
         } elseif ($this->isnew()) {
 
         }
 
         if (isset($_REQUEST['weight'])) {
-            $this->setVar('weight', PublisherRequest::getInt('weight'));
+            $this->setVar('weight', Xmf_Request::getInt('weight'));
         } elseif ($this->isnew()) {
 
         }
 
         if (isset($_REQUEST['allowcomments'])) {
-            $this->setVar('cancomment', PublisherRequest::getInt('allowcomments'));
+            $this->setVar('cancomment', Xmf_Request::getInt('allowcomments'));
         } elseif ($this->isnew()) {
             $this->setVar('cancoment', $this->publisher->getConfig('submit_allowcomments'));
         }
 
         if (isset($_REQUEST['status'])) {
-            $this->setVar('status', PublisherRequest::getInt('status'));
+            $this->setVar('status', Xmf_Request::getInt('status'));
         } elseif ($this->isnew()) {
             $this->setVar('status', $this->publisher->getConfig('submit_status'));
         }
 
         if (isset($_REQUEST['dohtml'])) {
-            $this->setVar('dohtml', PublisherRequest::getInt('dohtml'));
+            $this->setVar('dohtml', Xmf_Request::getInt('dohtml'));
         } elseif ($this->isnew()) {
             $this->setVar('dohtml', $this->publisher->getConfig('submit_dohtml'));
         }
 
         if (isset($_REQUEST['dosmiley'])) {
-            $this->setVar('dosmiley', PublisherRequest::getInt('dosmiley'));
+            $this->setVar('dosmiley', Xmf_Request::getInt('dosmiley'));
         } elseif ($this->isnew()) {
             $this->setVar('dosmiley', $this->publisher->getConfig('submit_dosmiley'));
         }
 
         if (isset($_REQUEST['doxcode'])) {
-            $this->setVar('doxcode', PublisherRequest::getInt('doxcode'));
+            $this->setVar('doxcode', Xmf_Request::getInt('doxcode'));
         } elseif ($this->isnew()) {
             $this->setVar('doxcode', $this->publisher->getConfig('submit_doxcode'));
         }
 
         if (isset($_REQUEST['doimage'])) {
-            $this->setVar('doimage', PublisherRequest::getInt('doimage'));
+            $this->setVar('doimage', Xmf_Request::getInt('doimage'));
         } elseif ($this->isnew()) {
             $this->setVar('doimage', $this->publisher->getConfig('submit_doimage'));
         }
 
         if (isset($_REQUEST['dolinebreak'])) {
-            $this->setVar('dobr', PublisherRequest::getInt('dolinebreak'));
+            $this->setVar('dobr', Xmf_Request::getInt('dolinebreak'));
         } elseif ($this->isnew()) {
             $this->setVar('dobr', $this->publisher->getConfig('submit_dobr'));
         }
 
         if (isset($_REQUEST['notify'])) {
-            $this->setVar('notifypub', PublisherRequest::getInt('notify'));
+            $this->setVar('notifypub', Xmf_Request::getInt('notify'));
         } elseif ($this->isnew()) {
 
         }
 
         if (isset($_REQUEST['permissions_item'])) {
-            $this->setGroups_read(PublisherRequest::getArray('permissions_item'));
+            $this->setGroups_read(Xmf_Request::getArray('permissions_item'));
         } elseif ($this->isnew()) {
             $this->setGroups_read(
                 $this->publisher
@@ -1056,7 +1056,7 @@ class PublisherItem extends XoopsObject {
         }
 
         if (isset($_REQUEST['partial_view'])) {
-            $this->setPartial_view(PublisherRequest::getArray('partial_view'));
+            $this->setPartial_view(Xmf_Request::getArray('partial_view'));
         } elseif ($this->isnew()) {
 
         }
@@ -1085,7 +1085,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
      */
     function __construct(&$db) {
         parent::__construct($db, "publisher_items", 'PublisherItem', "itemid", "title");
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     }
 
     /**
@@ -1162,7 +1162,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
      * @return bool FALSE if failed.
      */
     function delete(&$item, $force = false) {
-        $module_id = $this->publisher->getModule()->getVar('mid');
+        $module_id = $this->publisher->getObject()->getVar('mid');
 
         // Deleting the files
         if (!$this->publisher->getHandler('file')->deleteItemFiles($item)) {
@@ -1564,7 +1564,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
             $criteriaPermissions = new CriteriaCompo();
 
             // Categories for which user has access
-            $categoriesGranted = $gperm_handler->getItemIds('category_read', $groups, $this->publisher->getModule()->getVar('mid'));
+            $categoriesGranted = $gperm_handler->getItemIds('category_read', $groups, $this->publisher->getObject()->getVar('mid'));
             if (count($categories) > 0) {
                 $categoriesGranted = array_intersect($categoriesGranted, $categories);
             }
@@ -1576,7 +1576,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
             $criteriaPermissions->add($grantedCategories, 'AND');
 
             // items for which user has access
-            $itemsGranted = $gperm_handler->getItemIds('item_read', $groups, $this->publisher->getModule()->getVar('mid'));
+            $itemsGranted = $gperm_handler->getItemIds('item_read', $groups, $this->publisher->getObject()->getVar('mid'));
             if (count($itemsGranted) == 0) {
                 return $ret;
             }

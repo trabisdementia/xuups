@@ -39,7 +39,7 @@ class PublisherFile extends XoopsObject {
      * constructor
      */
     function __construct($id = null) {
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
         $this->db =& Database::getInstance();
         $this->initVar("fileid", XOBJ_DTYPE_INT, 0, false);
         $this->initVar("itemid", XOBJ_DTYPE_INT, null, true);

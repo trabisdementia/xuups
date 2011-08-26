@@ -32,7 +32,7 @@ function publisher_latest_news_show($options)
     $block = array();
 
     xoops_loadLanguage('main', 'publisher');
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $start = $options[0]; // You can show articles from specified range
     $limit = $options[1];
@@ -53,7 +53,7 @@ function publisher_latest_news_show($options)
         $allcats = true;
     } elseif (in_array(0, explode(',', $options[29]))) {
         $allcats = true;
-    }  
+    }
 
     // creating the ITEM objects that belong to the selected category
     if ($allcats) {

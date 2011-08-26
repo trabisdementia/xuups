@@ -26,7 +26,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
 function publisher_items_recent_show($options)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     $myts =& MyTextSanitizer::getInstance();
 
     $block = array();
@@ -74,7 +74,7 @@ function publisher_items_recent_show($options)
         $block['lang_category'] = _MB_PUBLISHER_CATEGORY;
         $block['lang_poster'] = _MB_PUBLISHER_POSTEDBY;
         $block['lang_date'] = _MB_PUBLISHER_DATE;
-        $modulename = $myts->displayTarea($publisher->getModule()->getVar('name'));
+        $modulename = $myts->displayTarea($publisher->getObject()->getVar('name'));
         $block['lang_visitItem'] = _MB_PUBLISHER_VISITITEM . " " . $modulename;
     }
 

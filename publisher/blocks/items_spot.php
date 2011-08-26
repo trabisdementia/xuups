@@ -26,7 +26,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
 function publisher_items_spot_show($options)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $opt_display_last = $options[0];
     $opt_items_count = $options[1];
@@ -126,7 +126,7 @@ function publisher_items_spot_edit($options)
     $countEle =  new XoopsFormText(_MB_PUBLISHER_LAST_ITEMS_COUNT, 'options[1]', 2, 255, $options[1]);
     $catEle = new XoopsFormLabel(_MB_PUBLISHER_SELECTCAT, publisher_createCategorySelect($options[2], 0, true, 'options[2]'));
 
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     $criteria = new CriteriaCompo();
     $criteria->setSort('datesub');
     $criteria->setOrder('DESC');

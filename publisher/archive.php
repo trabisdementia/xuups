@@ -34,8 +34,8 @@ xoops_loadLanguage('calendar');
 $lastyear = 0;
 $lastmonth = 0;
 $months_arr = array(1 => _CAL_JANUARY, 2 => _CAL_FEBRUARY, 3 => _CAL_MARCH, 4 => _CAL_APRIL, 5 => _CAL_MAY, 6 => _CAL_JUNE, 7 => _CAL_JULY, 8 => _CAL_AUGUST, 9 => _CAL_SEPTEMBER, 10 => _CAL_OCTOBER, 11 => _CAL_NOVEMBER, 12 => _CAL_DECEMBER);
-$fromyear = PublisherRequest::getInt('year');
-$frommonth = PublisherRequest::getInt('month');
+$fromyear = Xmf_Request::getInt('year');
+$frommonth = Xmf_Request::getInt('month');
 
 $pgtitle = '';
 if ($fromyear && $frommonth) {

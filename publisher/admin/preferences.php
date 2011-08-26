@@ -21,7 +21,7 @@
 
 include_once dirname(__FILE__) . '/admin_header.php';
 
-$module = $publisher->getModule();
+$module = $publisher->getObject();
 $mod = $module->mid();
 $modname = $module->name();
 
