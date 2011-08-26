@@ -26,7 +26,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
 function publisher_items_new_show($options)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $selectedcatids = explode(',', $options[0]);
 

@@ -64,7 +64,7 @@ function publisher_seo_title($title = '', $withExt = true)
 
 function publisher_seo_genUrl($op, $id, $short_url = "")
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     if ($publisher->getConfig('seo_url_rewrite') != 'none') {
         if (!empty($short_url)) $short_url = $short_url . '.html';
 

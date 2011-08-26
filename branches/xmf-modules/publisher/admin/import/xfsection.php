@@ -246,7 +246,7 @@ if ($op == 'go') {
     $moduleObj = $module_handler->getByDirname('xfsection');
     $news_module_id = $moduleObj->getVar('mid');
 
-    $publisher_module_id = $publisher->getModule()->mid();
+    $publisher_module_id = $publisher->getObject()->mid();
 
     $comment_handler = xoops_gethandler('comment');
     $criteria = new CriteriaCompo();

@@ -41,7 +41,7 @@ class PublisherCategoryForm extends XoopsThemeForm {
     var $userGroups = array();
 
     function __construct(&$target, $subCatsCount = 4) {
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
         $this->targetObject =& $target;
         $this->subCatsCount = $subCatsCount;
@@ -76,7 +76,7 @@ class PublisherCategoryForm extends XoopsThemeForm {
         // EDITOR
         $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
         $gperm_handler = $this->publisher->getHandler('groupperm');
-        $module_id = $this->publisher->getModule()->mid();
+        $module_id = $this->publisher->getObject()->mid();
         $allowed_editors = publisher_getEditors($gperm_handler->getItemIds('editors', $groups, $module_id));
         $nohtml = false;
         if (count($allowed_editors) > 0) {

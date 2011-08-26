@@ -28,7 +28,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 function publisher_search($queryarray, $andor, $limit, $offset, $userid, $categories = array(), $sortby = 0, $searchin = "", $extra = "")
 {
     global $myts;
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $ret = array();
 

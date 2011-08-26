@@ -29,7 +29,7 @@ function publisher_items_menu_show($options)
     global $xoopsModule;
     $block = array();
 
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     // Getting all top cats
     $block_categoriesObj = $publisher->getHandler('category')->getCategories(0, 0, 0);
@@ -37,7 +37,7 @@ function publisher_items_menu_show($options)
     if (count($block_categoriesObj) == 0) return $block;
 
     // Are we in Publisher ?
-    $block['inModule'] = (isset($xoopsModule) && $xoopsModule->getVar('dirname') == $publisher->getModule()->getVar('dirname'));
+    $block['inModule'] = (isset($xoopsModule) && $xoopsModule->getVar('dirname') == $publisher->getObject()->getVar('dirname'));
 
     $catlink_class = 'menuMain';
 

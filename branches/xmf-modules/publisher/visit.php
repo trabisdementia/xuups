@@ -22,7 +22,7 @@
 
 include_once dirname(__FILE__) . '/header.php';
 
-$fileid = PublisherRequest::getInt('fileid');
+$fileid = Xmf_Request::getInt('fileid');
 
 // Creating the item object for the selected item
 $fileObj = $publisher->getHandler('file')->get($fileid);

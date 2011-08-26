@@ -35,7 +35,7 @@ function publisher_pagewrap_upload(&$errors)
 {
     include_once PUBLISHER_ROOT_PATH . '/class/uploader.php';
 
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     $post_field = 'fileupload';
 
     $max_size = $publisher->getConfig('maximum_filesize');

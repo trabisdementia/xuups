@@ -85,7 +85,7 @@ class PublisherAbout {
          * @todo make the output XHTML compliant
          */
         $myts = &MyTextSanitizer::getInstance();
-        $publisher = PublisherPublisher::getInstance();
+        $publisher = Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
         publisher_cpHeader();
 
@@ -96,31 +96,31 @@ class PublisherAbout {
         $this->_tpl = new XoopsTpl();
 
         $this->_tpl->assign('module_url', PUBLISHER_URL);
-        $this->_tpl->assign('module_image', $publisher->getModule()->getInfo('image'));
-        $this->_tpl->assign('module_name', $publisher->getModule()->getInfo('name'));
-        $this->_tpl->assign('module_version', $publisher->getModule()->getInfo('version'));
-        $this->_tpl->assign('module_status_version', $publisher->getModule()->getInfo('status_version'));
+        $this->_tpl->assign('module_image', $publisher->getObject()->getInfo('image'));
+        $this->_tpl->assign('module_name', $publisher->getObject()->getInfo('name'));
+        $this->_tpl->assign('module_version', $publisher->getObject()->getInfo('version'));
+        $this->_tpl->assign('module_status_version', $publisher->getObject()->getInfo('status_version'));
 
         // Left headings...
-        if ($publisher->getModule()->getInfo('author_realname') != '') {
-            $author_name = $publisher->getModule()->getInfo('author') . ' (' . $publisher->getModule()->getInfo('author_realname') . ')';
+        if ($publisher->getObject()->getInfo('author_realname') != '') {
+            $author_name = $publisher->getObject()->getInfo('author') . ' (' . $publisher->getObject()->getInfo('author_realname') . ')';
         } else {
-            $author_name = $publisher->getModule()->getInfo('author');
+            $author_name = $publisher->getObject()->getInfo('author');
         }
         $this->_tpl->assign('module_author_name', $author_name);
 
-        $this->_tpl->assign('module_license', $publisher->getModule()->getInfo('license'));
+        $this->_tpl->assign('module_license', $publisher->getObject()->getInfo('license'));
 
-        $this->_tpl->assign('module_credits', $publisher->getModule()->getInfo('credits'));
+        $this->_tpl->assign('module_credits', $publisher->getObject()->getInfo('credits'));
 
         // Developers Information
-        $this->_tpl->assign('module_developer_lead', $publisher->getModule()->getInfo('developer_lead'));
-        $this->_tpl->assign('module_developer_contributor', $publisher->getModule()->getInfo('developer_contributor'));
-        $this->_tpl->assign('module_developer_website_url', $publisher->getModule()->getInfo('developer_website_url'));
-        $this->_tpl->assign('module_developer_website_name', $publisher->getModule()->getInfo('developer_website_name'));
-        $this->_tpl->assign('module_developer_email', $publisher->getModule()->getInfo('developer_email'));
+        $this->_tpl->assign('module_developer_lead', $publisher->getObject()->getInfo('developer_lead'));
+        $this->_tpl->assign('module_developer_contributor', $publisher->getObject()->getInfo('developer_contributor'));
+        $this->_tpl->assign('module_developer_website_url', $publisher->getObject()->getInfo('developer_website_url'));
+        $this->_tpl->assign('module_developer_website_name', $publisher->getObject()->getInfo('developer_website_name'));
+        $this->_tpl->assign('module_developer_email', $publisher->getObject()->getInfo('developer_email'));
 
-        $people = $publisher->getModule()->getInfo('people');
+        $people = $publisher->getObject()->getInfo('people');
         if ($people) {
 
             $this->_tpl->assign('module_people_developers', isset($people['developers']) ? array_map(array($this, 'sanitize'), $people['developers']) : false);
@@ -129,23 +129,23 @@ class PublisherAbout {
             $this->_tpl->assign('module_people_documenters', isset($people['documenters']) ? array_map(array($this, 'sanitize'), $people['documenters']) : false);
             $this->_tpl->assign('module_people_other', isset($people['other']) ? array_map(array($this, 'sanitize'), $people['other']) : false);
         }
-        //$this->_tpl->assign('module_developers', $publisher->getModule()->getInfo('developer_email'));
+        //$this->_tpl->assign('module_developers', $publisher->getObject()->getInfo('developer_email'));
 
         // Module Development information
-        $this->_tpl->assign('module_date', $publisher->getModule()->getInfo('date'));
-        $this->_tpl->assign('module_status', $publisher->getModule()->getInfo('status'));
-        $this->_tpl->assign('module_demo_site_url', $publisher->getModule()->getInfo('demo_site_url'));
-        $this->_tpl->assign('module_demo_site_name', $publisher->getModule()->getInfo('demo_site_name'));
-        $this->_tpl->assign('module_support_site_url', $publisher->getModule()->getInfo('support_site_url'));
-        $this->_tpl->assign('module_support_site_name', $publisher->getModule()->getInfo('support_site_name'));
-        $this->_tpl->assign('module_submit_bug', $publisher->getModule()->getInfo('submit_bug'));
-        $this->_tpl->assign('module_submit_feature', $publisher->getModule()->getInfo('submit_feature'));
+        $this->_tpl->assign('module_date', $publisher->getObject()->getInfo('date'));
+        $this->_tpl->assign('module_status', $publisher->getObject()->getInfo('status'));
+        $this->_tpl->assign('module_demo_site_url', $publisher->getObject()->getInfo('demo_site_url'));
+        $this->_tpl->assign('module_demo_site_name', $publisher->getObject()->getInfo('demo_site_name'));
+        $this->_tpl->assign('module_support_site_url', $publisher->getObject()->getInfo('support_site_url'));
+        $this->_tpl->assign('module_support_site_name', $publisher->getObject()->getInfo('support_site_name'));
+        $this->_tpl->assign('module_submit_bug', $publisher->getObject()->getInfo('submit_bug'));
+        $this->_tpl->assign('module_submit_feature', $publisher->getObject()->getInfo('submit_feature'));
 
         // Warning
-        $this->_tpl->assign('module_warning', $this->sanitize($publisher->getModule()->getInfo('warning')));
+        $this->_tpl->assign('module_warning', $this->sanitize($publisher->getObject()->getInfo('warning')));
 
         // Author's note
-        $this->_tpl->assign('module_author_word', $publisher->getModule()->getInfo('author_word'));
+        $this->_tpl->assign('module_author_word', $publisher->getObject()->getInfo('author_word'));
 
         // For changelog thanks to 3Dev
         $filename = PUBLISHER_ROOT_PATH . '/changelog.txt';

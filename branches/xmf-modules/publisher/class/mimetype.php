@@ -18,7 +18,7 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          The SmartFactory <www.smartfactory.ca>
- * @version         $Id: publisher.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id: mimetype.php 0 2009-06-11 18:47:04Z trabis $
  */
 
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");

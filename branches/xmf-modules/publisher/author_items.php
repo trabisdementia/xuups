@@ -21,7 +21,7 @@
 
 include_once dirname(__FILE__) . '/header.php';
 
-$uid = PublisherRequest::getInt('uid');
+$uid = Xmf_Request::getInt('uid');
 if (empty($uid)) {
     redirect_header('index.php', 2, _CO_PUBLISHER_ERROR);
     exit();

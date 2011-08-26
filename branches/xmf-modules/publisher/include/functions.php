@@ -178,16 +178,16 @@ function publisher_getAllowedImagesTypes()
  */
 function publisher_moduleHome($withLink = true)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     if (!$publisher->getConfig('format_breadcrumb_modname')) {
         return '';
     }
 
     if (!$withLink) {
-        return $publisher->getModule()->getVar('name');
+        return $publisher->getObject()->getVar('name');
     } else {
-        return '<a href="' . PUBLISHER_URL . '/">' . $publisher->getModule()->getVar('name') . '</a>';
+        return '<a href="' . PUBLISHER_URL . '/">' . $publisher->getObject()->getVar('name') . '</a>';
     }
 }
 
@@ -370,7 +370,7 @@ function publisher_formatErrors($errors = array())
 function publisher_userIsAdmin()
 {
     global $xoopsUser;
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     static $publisher_isAdmin;
 
@@ -381,7 +381,7 @@ function publisher_userIsAdmin()
     if (!$xoopsUser) {
         $publisher_isAdmin = false;
     } else {
-        $publisher_isAdmin = $xoopsUser->isAdmin($publisher->getModule()->getVar('mid'));
+        $publisher_isAdmin = $xoopsUser->isAdmin($publisher->getObject()->getVar('mid'));
     }
 
     return $publisher_isAdmin;
@@ -397,11 +397,11 @@ function publisher_userIsAdmin()
 function publisher_overrideItemsPermissions($groups, $categoryid)
 {
     global $xoopsDB;
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $result = true;
 
-    $module_id = $publisher->getModule()->getVar('mid');
+    $module_id = $publisher->getObject()->getVar('mid');
     $gperm_handler =& xoops_gethandler('groupperm');
 
     $sql = "SELECT itemid FROM " . $xoopsDB->prefix("publisher_items") . " WHERE categoryid = '$categoryid' ";
@@ -432,11 +432,11 @@ function publisher_overrideItemsPermissions($groups, $categoryid)
  */
 function publisher_saveItemPermissions($groups, $itemid)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $result = true;
 
-    $module_id = $publisher->getModule()->getVar('mid');
+    $module_id = $publisher->getObject()->getVar('mid');
     $gperm_handler =& xoops_gethandler('groupperm');
     // First, if the permissions are already there, delete them
     $gperm_handler->deleteByModule($module_id, 'item_read', $itemid);
@@ -459,11 +459,11 @@ function publisher_saveItemPermissions($groups, $itemid)
  */
 function publisher_saveCategoryPermissions($groups, $categoryid, $perm_name)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $result = true;
 
-    $module_id = $publisher->getModule()->getVar('mid');
+    $module_id = $publisher->getObject()->getVar('mid');
     $gperm_handler =& xoops_gethandler('groupperm');
     // First, if the permissions are already there, delete them
     $gperm_handler->deleteByModule($module_id, $perm_name, $categoryid);
@@ -625,7 +625,7 @@ function publisher_getCurrentPage()
  */
 function publisher_addCategoryOption($categoryObj, $selectedid = 0, $level = 0, $ret = '')
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $spaces = '';
     for ($j = 0; $j < $level; $j++) {
@@ -659,7 +659,7 @@ function publisher_addCategoryOption($categoryObj, $selectedid = 0, $level = 0, 
  */
 function publisher_createCategorySelect($selectedid = 0, $parentcategory = 0, $allCatOption = true, $selectname = 'options[0]')
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $selectedid = explode(',', $selectedid);
 
@@ -692,7 +692,7 @@ function publisher_createCategorySelect($selectedid = 0, $parentcategory = 0, $a
  */
 function publisher_createCategoryOptions($selectedid = 0, $parentcategory = 0, $allCatOption = true)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $ret = "";
     if ($allCatOption) {
@@ -796,7 +796,7 @@ function publisher_uploadFile($another = false, $withRedirect = true, &$itemObj)
     include_once PUBLISHER_ROOT_PATH . '/class/uploader.php';
 
     global $publisher_isAdmin, $xoopsUser;
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $itemid = isset($_POST['itemid']) ? intval($_POST['itemid']) : 0;
     $uid = is_object($xoopsUser) ? $xoopsUser->uid() : 0;
@@ -939,7 +939,7 @@ function publisher_closeTags($string)
 function publisher_ratingBar($itemid)
 {
     global $xoopsDB, $xoopsUser;
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     $rating_unitwidth = 30;
     $units = 5;
 
@@ -970,7 +970,7 @@ function publisher_ratingBar($itemid)
     $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
     $gperm_handler =& $publisher->getHandler('groupperm');
 
-    if (!$gperm_handler->checkRight('global', _PUBLISHER_RATE, $groups, $publisher->getModule()->getVar('mid'))) {
+    if (!$gperm_handler->checkRight('global', _PUBLISHER_RATE, $groups, $publisher->getObject()->getVar('mid'))) {
         $static_rater = array();
         $static_rater[] .= "\n" . '<div class="publisher_ratingblock">';
         $static_rater[] .= '<div id="unit_long' . $itemid . '">';

@@ -40,7 +40,7 @@ class PublisherMetagen {
     var $_minChar = 4;
 
     function PublisherMetagen($title, $keywords = '', $description = '', $categoryPath = false) {
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
         $this->_myts =& MyTextSanitizer::getInstance();
 
         $this->setCategoryPath($categoryPath);
@@ -58,7 +58,7 @@ class PublisherMetagen {
 
         $titleTag = array();
 
-        $titleTag['module'] = $this->publisher->getModule()->getVar('name');
+        $titleTag['module'] = $this->publisher->getObject()->getVar('name');
 
         if (isset($this->_title) && ($this->_title != '') && (strtoupper($this->_title) != strtoupper($titleTag['module']))) {
             $titleTag['title'] = $this->_title;

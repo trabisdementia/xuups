@@ -257,7 +257,7 @@ if ($op == 'go') {
     // Looping through the comments to link them to the new articles and module
     echo _AM_PUBLISHER_IMPORT_COMMENTS . "<br />";
 
-    $publisher_module_id = $publisher->getModule()->mid();
+    $publisher_module_id = $publisher->getObject()->mid();
 
     $comment_handler = xoops_gethandler('comment');
     $criteria = new CriteriaCompo();

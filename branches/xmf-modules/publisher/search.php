@@ -33,7 +33,7 @@ if (empty($xoopsConfigSearch["enable_search"])) {
 
 $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $gperm_handler =& xoops_getmodulehandler('groupperm', PUBLISHER_DIRNAME);
-$module_id = $publisher->getModule()->mid();
+$module_id = $publisher->getObject()->mid();
 
 //Checking permissions
 if (!$publisher->getConfig('perm_search') || !$gperm_handler->checkRight('global', _PUBLISHER_SEARCH, $groups, $module_id)) {
@@ -45,19 +45,19 @@ $xoopsConfig["module_cache"][$module_id] = 0;
 $xoopsOption["template_main"] = 'publisher_search.html';
 include XOOPS_ROOT_PATH . '/header.php';
 
-$module_info_search = $publisher->getModule()->getInfo("search");
+$module_info_search = $publisher->getObject()->getInfo("search");
 include_once PUBLISHER_ROOT_PATH . "/" . $module_info_search["file"];
 
 $limit = 10; //$publisher->getConfig('idxcat_perpage');
 $uid = 0;
 $queries = array();
-$andor = PublisherRequest::getString('andor');
-$start = PublisherRequest::getInt('start');
-$category = PublisherRequest::getArray('category');
-$username = PublisherRequest::getString('uname');
-$searchin = PublisherRequest::getArray('searchin');
-$sortby = PublisherRequest::getString('sortby');
-$term = PublisherRequest::getString('term');
+$andor = Xmf_Request::getString('andor');
+$start = Xmf_Request::getInt('start');
+$category = Xmf_Request::getArray('category');
+$username = Xmf_Request::getString('uname');
+$searchin = Xmf_Request::getArray('searchin');
+$sortby = Xmf_Request::getString('sortby');
+$term = Xmf_Request::getString('term');
 
 if (empty($category) || (is_array($category) && in_array("all", $category))) {
     $category = array();
@@ -243,7 +243,7 @@ $xoopsTpl->assign("sortby_select", $sortby_select);
 $xoopsTpl->assign("search_term", $term);
 $xoopsTpl->assign("search_user", $username);
 
-$xoopsTpl->assign("modulename", $publisher->getModule()->name());
+$xoopsTpl->assign("modulename", $publisher->getObject()->name());
 
 if ($xoopsConfigSearch["keyword_min"] > 0) {
     $xoopsTpl->assign("search_rule", sprintf(_SR_KEYIGNORE, $xoopsConfigSearch["keyword_min"]));

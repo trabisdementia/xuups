@@ -59,7 +59,7 @@ class PublisherCategory extends XoopsObject {
      * constructor
      */
     function __construct() {
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
         $this->initVar("categoryid", XOBJ_DTYPE_INT, null, false);
         $this->initVar("parentid", XOBJ_DTYPE_INT, null, false);
@@ -223,7 +223,7 @@ class PublisherCategory extends XoopsObject {
         $notification_handler =& xoops_gethandler('notification');
 
         $tags = array();
-        $tags['MODULE_NAME'] = $this->publisher->getModule()->getVar('name');
+        $tags['MODULE_NAME'] = $this->publisher->getObject()->getVar('name');
         $tags['CATEGORY_NAME'] = $this->name();
         $tags['CATEGORY_URL'] = $this->getCategoryUrl();
 
@@ -314,7 +314,7 @@ class PublisherCategoryHandler extends XoopsPersistableObjectHandler {
     var $publisher = null;
 
     function __construct(&$db) {
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
         parent::__construct($db, "publisher_categories", 'PublisherCategory', "categoryid", "name");
     }
 
@@ -387,7 +387,7 @@ class PublisherCategoryHandler extends XoopsPersistableObjectHandler {
             return false;
         }
 
-        $module_id = $this->publisher->getModule()->getVar('mid');
+        $module_id = $this->publisher->getObject()->getVar('mid');
         xoops_groupperm_deletebymoditem($module_id, "category_read", $category->categoryid());
         xoops_groupperm_deletebymoditem($module_id, "item_submit", $category->categoryid());
         //xoops_groupperm_deletebymoditem ($module_id, "category_admin", $categoryObj->categoryid());

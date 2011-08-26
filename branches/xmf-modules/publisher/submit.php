@@ -36,9 +36,9 @@ $isAdmin = publisher_userIsAdmin();
 
 $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $gperm_handler =& xoops_getmodulehandler('groupperm');
-$module_id = $publisher->getModule()->getVar('mid');
+$module_id = $publisher->getObject()->getVar('mid');
 
-$itemid = PublisherRequest::getInt('itemid');
+$itemid = Xmf_Request::getInt('itemid');
 if ($itemid != 0) {
     // We are editing an article
     $itemObj = $publisher->getHandler('item')->get($itemid);
@@ -125,7 +125,7 @@ switch ($op) {
             $xoopsTpl->assign('lang_intro_text', '');
         } else {
             $xoopsTpl->assign('categoryPath', _MD_PUBLISHER_SUB_SNEWNAME);
-            $xoopsTpl->assign('lang_intro_title', sprintf(_MD_PUBLISHER_SUB_SNEWNAME, ucwords($publisher->getModule()->name())));
+            $xoopsTpl->assign('lang_intro_title', sprintf(_MD_PUBLISHER_SUB_SNEWNAME, ucwords($publisher->getObject()->name())));
             $xoopsTpl->assign('lang_intro_text', $publisher->getConfig('submit_intro_msg'));
         }
 
@@ -206,7 +206,7 @@ switch ($op) {
             $xoopsTpl->assign('lang_intro_text', '');
         } else {
             $xoopsTpl->assign('categoryPath', _MD_PUBLISHER_SUB_SNEWNAME);
-            $xoopsTpl->assign('lang_intro_title', sprintf(_MD_PUBLISHER_SUB_SNEWNAME, ucwords($publisher->getModule()->name())));
+            $xoopsTpl->assign('lang_intro_title', sprintf(_MD_PUBLISHER_SUB_SNEWNAME, ucwords($publisher->getObject()->name())));
             $xoopsTpl->assign('lang_intro_text', $publisher->getConfig('submit_intro_msg'));
         }
         $sform = $itemObj->getForm($formtitle, true);

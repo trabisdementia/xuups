@@ -42,7 +42,7 @@ $tpl->xoops_setCaching(2);
 $tpl->xoops_setCacheTime(0);
 $myts = MyTextSanitizer::getInstance();
 if (!$tpl->is_cached('db:publisher_rss.html')) {
-    $channel_category = $publisher->getModule()->name();
+    $channel_category = $publisher->getObject()->name();
     // Check if ML Hack is installed, and if yes, parse the $content in formatForML
     if (method_exists($myts, 'formatForML')) {
         $xoopsConfig['sitename'] = $myts->formatForML($xoopsConfig['sitename']);
@@ -62,7 +62,7 @@ if (!$tpl->is_cached('db:publisher_rss.html')) {
     }
 
     $tpl->assign('channel_category', htmlspecialchars($channel_category));
-    $tpl->assign('channel_generator', $publisher->getModule()->name());
+    $tpl->assign('channel_generator', $publisher->getObject()->name());
     $tpl->assign('channel_language', _LANGCODE);
     $tpl->assign('image_url', XOOPS_URL . '/images/logo.gif');
     $dimention = getimagesize(XOOPS_ROOT_PATH . '/images/logo.gif');

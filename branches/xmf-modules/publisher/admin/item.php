@@ -22,9 +22,9 @@
 
 include_once dirname(__FILE__) . '/admin_header.php';
 
-$itemid = PublisherRequest::getInt('itemid');
+$itemid = Xmf_Request::getInt('itemid');
 $op = ($itemid > 0 || isset($_POST['editor'])) ? 'mod' : '';
-$op = PublisherRequest::getString('op', $op);
+$op = Xmf_Request::getString('op', $op);
 
 if (isset($_POST['additem'])) {
     $op = 'additem';
@@ -33,10 +33,10 @@ if (isset($_POST['additem'])) {
 }
 
 // Where shall we start ?
-$submittedstartitem = PublisherRequest::getInt('submittedstartitem');
-$publishedstartitem = PublisherRequest::getInt('publishedstartitem');
-$offlinestartitem = PublisherRequest::getInt('offlinestartitem');
-$rejectedstartitem = PublisherRequest::getInt('rejectedstartitem');
+$submittedstartitem = Xmf_Request::getInt('submittedstartitem');
+$publishedstartitem = Xmf_Request::getInt('publishedstartitem');
+$offlinestartitem = Xmf_Request::getInt('offlinestartitem');
+$rejectedstartitem = Xmf_Request::getInt('rejectedstartitem');
 
 switch ($op) {
     case "clone":
@@ -75,7 +75,7 @@ switch ($op) {
         $itemObj->setVarsFromRequest();
 
         $old_status = $itemObj->status();
-        $new_status = PublisherRequest::getInt('status', _PUBLISHER_STATUS_PUBLISHED); //_PUBLISHER_STATUS_NOTSET;
+        $new_status = Xmf_Request::getInt('status', _PUBLISHER_STATUS_PUBLISHED); //_PUBLISHER_STATUS_NOTSET;
 
         switch ($new_status) {
             case _PUBLISHER_STATUS_SUBMITTED:
@@ -372,7 +372,7 @@ xoops_cp_footer();
 function publisher_showFiles($itemObj)
 {
     // UPLOAD FILES
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     publisher_openCollapsableBar('filetable', 'filetableicon', _AM_PUBLISHER_FILES_LINKED);
     $filesObj =& $publisher->getHandler('file')->getAllFiles($itemObj->itemid());
     if (count($filesObj) > 0) {
@@ -418,7 +418,7 @@ function publisher_showFiles($itemObj)
 
 function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     global $publisher_current_page, $xoopsUser;
 
     xoops_load('XoopsFormLoader');
@@ -523,7 +523,7 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
 
         $itemObj =& $publisher->getHandler('item')->create();
         $itemObj->setVarsFromRequest();
-        
+
         $categoryObj =& $publisher->getHandler('category')->create();
         $breadcrumb_action1 = _AM_PUBLISHER_ITEMS;
         $breadcrumb_action2 = _AM_PUBLISHER_CREATINGNEW;

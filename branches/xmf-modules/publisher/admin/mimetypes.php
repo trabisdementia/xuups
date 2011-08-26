@@ -85,7 +85,7 @@ switch ($op)
 
 function add()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     global $limit, $start, $oAdminButton;
 
     if (!isset($_POST['add_mime'])) {
@@ -228,7 +228,7 @@ function add()
 
 function delete()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     global $start, $limit;
     if (!isset($_REQUEST['id'])) {
         redirect_header(PUBLISHER_ADMIN_URL . "/mimetypes.php", 3, _AM_PUBLISHER_MESSAGE_NO_ID);
@@ -245,7 +245,7 @@ function delete()
 
 function edit()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     global $start, $limit, $oAdminButton;
 
     if (!isset($_REQUEST['id'])) {
@@ -384,7 +384,7 @@ function edit()
 
 function manage()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     global $imagearray, $start, $limit, $oAdminButton, $aSortBy, $aOrderBy, $aLimitBy, $aSearchBy;
 
     if (isset($_POST['deleteMimes'])) {
@@ -523,7 +523,7 @@ function manage()
 
 function search()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     global $oAdminButton, $hMime, $limit, $start, $imagearray, $aSearchBy, $aOrderBy, $aLimitBy, $aSortBy;
 
     if (isset($_POST['deleteMimes'])) {
@@ -700,7 +700,7 @@ function search()
 
 function updateMimeValue()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
     $start = $limit = 0;
 
     if (isset($_GET['limit'])) {

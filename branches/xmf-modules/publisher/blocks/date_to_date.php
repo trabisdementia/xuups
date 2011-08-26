@@ -27,7 +27,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 function publisher_date_to_date_show($options)
 {
     $myts =& MyTextSanitizer::getInstance();
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
 
     $block = array();
 
@@ -60,7 +60,7 @@ function publisher_date_to_date_show($options)
         $block['lang_category'] = _MB_PUBLISHER_CATEGORY;
         $block['lang_poster'] = _MB_PUBLISHER_POSTEDBY;
         $block['lang_date'] = _MB_PUBLISHER_DATE;
-        $modulename = $myts->displayTarea($publisher->getModule()->getVar('name'));
+        $modulename = $myts->displayTarea($publisher->getObject()->getVar('name'));
         $block['lang_visitItem'] = _MB_PUBLISHER_VISITITEM . " " . $modulename;
         $block['lang_articles_from_to'] = sprintf(_MB_PUBLISHER_ARTICLES_FROM_TO, $options[0], $options[1]);
     }

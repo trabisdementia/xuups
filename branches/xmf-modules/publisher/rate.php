@@ -22,13 +22,13 @@
 include_once dirname(__FILE__) . '/header.php';
 
 //getting the values
-$rating = PublisherRequest::getInt('rating');
-$itemid = PublisherRequest::getInt('itemid');
+$rating = Xmf_Request::getInt('rating');
+$itemid = Xmf_Request::getInt('itemid');
 
 $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $gperm_handler =& xoops_getmodulehandler('groupperm');
 $hModConfig =& xoops_gethandler('config');
-$module_id = $publisher->getModule()->getVar('mid');
+$module_id = $publisher->getObject()->getVar('mid');
 
 //Checking permissions
 if (!$publisher->getConfig('perm_rating') || !$gperm_handler->checkRight('global', _PUBLISHER_RATE, $groups, $module_id)) {

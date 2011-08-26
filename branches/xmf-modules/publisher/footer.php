@@ -29,7 +29,7 @@ $xoTheme->addStylesheet(PUBLISHER_URL . '/css/publisher.css');
 //$xoTheme->addScript(PUBLISHER_URL . '/js/publisher.js');
 
 $xoopsTpl->assign("xoops_module_header", '<link rel="alternate" type="application/rss+xml" title="'
-                                         . $publisher->getModule()->name() . '" href="' . PUBLISHER_URL . '/backend.php" />'
+                                         . $publisher->getObject()->name() . '" href="' . PUBLISHER_URL . '/backend.php" />'
                                          . @$xoopsTpl->get_template_vars("xoops_module_header"));
 
 $xoopsTpl->assign("publisher_adminpage", "<a href='" . PUBLISHER_URL . "/admin/index.php'>" . _MD_PUBLISHER_ADMIN_PAGE . "</a>");
@@ -44,7 +44,7 @@ $xoopsTpl->assign('display_category_summary', $publisher->getConfig('cat_display
 
 $xoopsTpl->assign('displayList', $publisher->getConfig('idxcat_items_display_type') == 'list');
 $xoopsTpl->assign('displayFull', $publisher->getConfig('idxcat_items_display_type') == 'full');
-$xoopsTpl->assign('modulename', $publisher->getModule()->dirname());
+$xoopsTpl->assign('modulename', $publisher->getObject()->dirname());
 $xoopsTpl->assign('displaylastitem', $publisher->getConfig('idxcat_display_last_item'));
 $xoopsTpl->assign('displaysubcatdsc', $publisher->getConfig('idxcat_display_subcat_dsc'));
 $xoopsTpl->assign('publisher_display_breadcrumb', $publisher->getConfig('display_breadcrumb'));

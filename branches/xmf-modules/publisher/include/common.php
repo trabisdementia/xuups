@@ -22,6 +22,18 @@
  */
 
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
+
+//XMF inclusion
+if (!xoops_isActiveModule('xmf')) {
+    if (file_exists($file = dirname(dirname(dirname(__FILE__))) . '/xmf/include/bootstrap.php')) {
+        include_once $file;
+        echo 'Please install or reactivate XMF module';
+    } else {
+        redirect_header(XOOPS_URL, 5, 'Please install XMF module');
+    }
+}
+
+
 /** @define "PUBLISHER_DIRNAME" "publisher" */
 define("PUBLISHER_DIRNAME", basename(dirname(dirname(__FILE__))));
 define("PUBLISHER_URL", XOOPS_URL . '/modules/' . PUBLISHER_DIRNAME);
@@ -41,17 +53,15 @@ include_once PUBLISHER_ROOT_PATH . '/include/seo_functions.php';
 include_once PUBLISHER_ROOT_PATH . '/class/metagen.php';
 include_once PUBLISHER_ROOT_PATH . '/class/session.php';
 include_once PUBLISHER_ROOT_PATH . '/class/registry.php';
-include_once PUBLISHER_ROOT_PATH . '/class/publisher.php';
-include_once PUBLISHER_ROOT_PATH . '/class/request.php';
 
-$debug = true;
-$publisher =& PublisherPublisher::getInstance($debug);
+$publisher = Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
+$publisher->setDebug(true);
 
 //This is needed or it will not work in blocks.
 global $publisher_isAdmin;
 
 // Load only if module is installed
-if (is_object($publisher->getModule())) {
+if (is_object($publisher->getObject())) {
 
     // Find if the user is admin of the module
     $publisher_isAdmin = publisher_userIsAdmin();

@@ -22,8 +22,8 @@
 
 include_once dirname(__FILE__) . '/header.php';
 
-$itemid = PublisherRequest::getInt('itemid');
-$item_page_id = PublisherRequest::getInt('page', -1);
+$itemid = Xmf_Request::getInt('itemid');
+$item_page_id = Xmf_Request::getInt('page', -1);
 
 if ($itemid == 0) {
     redirect_header("javascript:history.go(-1)", 1, _MD_PUBLISHER_NOITEMSELECTED);
@@ -57,7 +57,7 @@ if (!$itemObj->accessGranted()) {
 }
 
 // Update the read counter of the selected item
-if (!$xoopsUser || ($xoopsUser->isAdmin($publisher->getModule()->mid()) && $publisher->getConfig('item_admin_hits') == 1) || ($xoopsUser && !$xoopsUser->isAdmin($publisher->getModule()->mid()))) {
+if (!$xoopsUser || ($xoopsUser->isAdmin($publisher->getObject()->mid()) && $publisher->getConfig('item_admin_hits') == 1) || ($xoopsUser && !$xoopsUser->isAdmin($publisher->getObject()->mid()))) {
     $itemObj->updateCounter();
 }
 
@@ -166,8 +166,8 @@ unset($file, $embeded_files, $filesObj, $fileObj);
 // Language constants
 $xoopsTpl->assign('mail_link', 'mailto:?subject=' . sprintf(_CO_PUBLISHER_INTITEM, $xoopsConfig['sitename']) . '&amp;body=' . sprintf(_CO_PUBLISHER_INTITEMFOUND, $xoopsConfig['sitename']) . ': ' . $itemObj->getItemUrl());
 $xoopsTpl->assign('itemid', $itemObj->itemid());
-$xoopsTpl->assign('sectionname', $publisher->getModule()->getVar('name'));
-$xoopsTpl->assign('modulename', $publisher->getModule()->getVar('dirname'));
+$xoopsTpl->assign('sectionname', $publisher->getObject()->getVar('name'));
+$xoopsTpl->assign('modulename', $publisher->getObject()->getVar('dirname'));
 $xoopsTpl->assign('module_home', publisher_moduleHome($publisher->getConfig('format_linked_path')));
 $xoopsTpl->assign('categoryPath', $item['categoryPath'] . " > " . $item['title']);
 $xoopsTpl->assign('commentatarticlelevel', $publisher->getConfig('perm_com_art_level'));

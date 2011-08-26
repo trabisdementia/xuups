@@ -103,6 +103,10 @@ $modversion['hasMain'] = 1;
 $modversion['onCache']['file'] = "include/functions.php";
 $modversion['onCache']['func'] = "publisher_onCache";
 
+//Callbacks install/update
+$modversion['onInstall'] = "include/install.inc.php";
+$modversion['onUpdate'] = "include/install.inc.php";
+
 global $xoopsModule;
 if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['dirname']) {
     global $xoopsModuleConfig, $xoopsUser;

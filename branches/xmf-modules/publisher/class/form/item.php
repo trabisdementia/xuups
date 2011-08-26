@@ -77,7 +77,7 @@ class PublisherItemForm extends PublisherThemeTabForm {
     }
 
     function isGranted($item) {
-        $publisher =& PublisherPublisher::getInstance();
+        $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
         $ret = false;
         if (!$this->checkperm || $publisher->getHandler('permission')->isGranted('form_view', $item)) {
             $ret = true;
@@ -105,7 +105,7 @@ class PublisherItemForm extends PublisherThemeTabForm {
 
         global $xoopsConfig, $xoopsUser;
 
-        $publisher =& PublisherPublisher::getInstance();
+        $publisher =& Xmf_Module_Helper::getInstance(PUBLISHER_DIRNAME);
         $checkperm = $this->checkperm;
 
         $allowed_editors = publisher_getEditors($publisher->getHandler('permission')->getGrantedItems('editors'));

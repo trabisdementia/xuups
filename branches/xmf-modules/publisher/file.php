@@ -36,8 +36,8 @@ if (
     exit();
 }
 
-$op = PublisherRequest::getString('op');
-$itemid = PublisherRequest::getInt('itemid');
+$op = Xmf_Request::getString('op');
+$itemid = Xmf_Request::getInt('itemid');
 
 if ($itemid == 0) {
     redirect_header("index.php", 2, _MD_PUBLISHER_NOITEMSELECTED);
@@ -71,7 +71,7 @@ switch ($op) {
 
         $xoopsTpl->assign('module_home', publisher_moduleHome());
         $xoopsTpl->assign('categoryPath', _CO_PUBLISHER_ADD_FILE);
-        $xoopsTpl->assign('lang_intro_title', sprintf(_MD_PUBLISHER_ADD_FILE_TITLE, $publisher->getModule()->getVar('name')));
+        $xoopsTpl->assign('lang_intro_title', sprintf(_MD_PUBLISHER_ADD_FILE_TITLE, $publisher->getObject()->getVar('name')));
 
         $name = $xoopsUser ? (ucwords($xoopsUser->getVar("uname"))) : $GLOBALS['xoopsConfig']['anonymous'];
         $xoopsTpl->assign('lang_intro_text', sprintf(_MD_PUBLISHER_GOODDAY, $name) . sprintf(_MD_PUBLISHER_ADD_FILE_INTRO, $itemObj->title()));
