@@ -41,7 +41,14 @@ class Xmf_Template_Adminmenu extends Xmf_Template_Abstract
         $this->submenus = false;
         $this->currentsub = -1;
         $this->headermenu = array();
-        $this->adminmenu = array();
+        $this->adminmenu = $module->loadAdminMenu();
+
+        foreach ($this->module->adminmenu as $i => $menu) {
+            if (stripos($_SERVER['REQUEST_URI'], $menu['link'] ) !== false) {
+                $this->currentoption = $i;
+                $this->breadcrumb = $menu['title'];
+            }
+        }
     }
 
     //if string is passed the key will be 0, use this for default behavior
@@ -76,10 +83,11 @@ class Xmf_Template_Adminmenu extends Xmf_Template_Abstract
     }
 
     function getAdminmenu()
-    {
+    {   /*
         $adminmenu = array();
         include XOOPS_ROOT_PATH . '/modules/' . $this->module->getVar('dirname') . '/admin/menu.php';
-        return $adminmenu;
+        return $adminmenu; */
+        return $this->module->adminmenu;
     }
 
     function getHeadermenu()
@@ -87,21 +95,26 @@ class Xmf_Template_Adminmenu extends Xmf_Template_Abstract
         Xmf_Language::load('menu', 'xmf');
 
         $headermenu = array();
-        $modurl = XOOPS_ROOT_PATH . '/modules/' . $this->module->getVar('dirname');
+        $modPath = XOOPS_ROOT_PATH . '/modules/' . $this->module->getVar('dirname');
+        $modUrl = XOOPS_URL . '/modules/' . $this->module->getVar('dirname');
 
         $i = -1;
 
         if ($this->module->getInfo('hasMain')) {
             $i++;
             $headermenu[$i]['title'] = _MENU_XMF_GOTOMOD;
-            $headermenu[$i]['link'] = XOOPS_URL . '/modules/' . $this->module->getVar('dirname');
+            $headermenu[$i]['link'] = $modUrl;
         }
 
         if (is_array($this->module->getInfo('config'))) {
             $i++;
-            $headermenu[$i]['title'] = _PREFERENCES;
+            $headermenu[$i]['title'] = _MENU_XMF_PREFERENCES;
             $headermenu[$i]['link'] = XOOPS_URL . '/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;&amp;mod=' . $this->module->getVar('mid');
         }
+
+        $i++;
+        $headermenu[$i]['title'] = _MENU_XMF_BLOCKS;
+        $headermenu[$i]['link'] = XOOPS_URL . '/modules/system/system/admin.php?fct=blocksadmin&amp;selvis=-1&amp;selmod=-2&amp;selgrp=-1&amp;selgen=' . $this->module->getVar('mid');
 
         if ($this->module->getInfo('hasComments')) {
             $i++;
@@ -113,10 +126,28 @@ class Xmf_Template_Adminmenu extends Xmf_Template_Abstract
         $headermenu[$i]['title'] = _MENU_XMF_UPDATE;
         $headermenu[$i]['link'] = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=update&module=' . $this->module->getVar('dirname');
 
-        if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $this->module->getVar('dirname') . '/admin/about.php')) {
+        if (file_exists($modPath . '/admin/import.php')) {
+            $i++;
+            $headermenu[$i]['title'] = _MENU_XMF_IMPORT;
+            $headermenu[$i]['link'] = $modUrl . '/admin/import.php';
+        }
+
+        if (file_exists($modPath . '/admin/clone.php')) {
+            $i++;
+            $headermenu[$i]['title'] = _MENU_XMF_CLONE;
+            $headermenu[$i]['link'] = $modUrl . '/admin/clone.php';
+        }
+
+        if (file_exists($modPath . '/admin/about.php')) {
             $i++;
             $headermenu[$i]['title'] = _MENU_XMF_ABOUT;
-            $headermenu[$i]['link'] = XOOPS_URL . '/modules/' . $this->module->getVar('dirname') . '/admin/about.php';
+            $headermenu[$i]['link'] = $modUrl . '/admin/about.php';
+        }
+
+        if ($this->module->getInfo('help')) {
+            $i++;
+            $headermenu[$i]['title'] = _MENU_XMF_HELP;
+            $headermenu[$i]['link'] = XOOPS_URL . '/modules/system/help.php?mid=' . $this->module->getVar('mid') . '&amp;' . $this->module->getInfo('help');
         }
 
         return $headermenu;
@@ -129,6 +160,7 @@ class Xmf_Template_Adminmenu extends Xmf_Template_Abstract
         Xmf_Language::load('admin', $this->module->getVar('dirname'));
 
         $this->tpl->assign(array(
+            'modulename' => $this->module->getVar('name'),
             'headermenu' => $this->getHeadermenu(),
             'adminmenu' => $this->getAdminmenu(),
             'current' => $this->currentoption,

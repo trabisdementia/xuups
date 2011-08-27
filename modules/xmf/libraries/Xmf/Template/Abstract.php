@@ -19,8 +19,9 @@
  */
 
 defined('XMF_EXEC') or die('Xmf was not detected');
+include_once XOOPS_ROOT_PATH . '/class/template.php';
 
-class Xmf_Template_Abstract
+abstract class Xmf_Template_Abstract
 {
     var $tpl;
     var $_template;
@@ -30,23 +31,23 @@ class Xmf_Template_Abstract
     {
         $this->_handler = $handler;
         $this->tpl = new XoopsTpl();
-
+        $this->_template = "db:system_dummy.html";
     }
 
-    function setTemplate($template = '')
+    protected function setTemplate($template = '')
     {
         $this->_template = $template;
     }
 
-    function render() {}
+    abstract protected function render();
 
-    function fetch()
+    public function fetch()
     {
         $this->_handler->render();
         return $this->tpl->fetch($this->_template);
     }
 
-    function display()
+    public function display()
     {
         echo $this->_handler->fetch();
     }

@@ -86,9 +86,9 @@
 
 	#wrap {
 		width:100%;
-		border-top: 1px solid #000000;
+		/*border-top: 1px solid #000000;
 		border-left: 1px solid #000000;
-		border-right: 1px solid #000000;
+		border-right: 1px solid #000000;*/
 		float: left;
 		margin-bottom: 15px;
 	}
@@ -104,7 +104,7 @@
 	<{/foreach}>
 	</div>
 	<div style="font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px; float:right;">
-		<{$breadcrumb}>
+		<strong><{$modulename}></strong><{if $breadcrumb}> : <{$breadcrumb}><{/if}>
 	</div>
 </div>
 </div>

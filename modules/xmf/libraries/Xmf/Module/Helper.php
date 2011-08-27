@@ -123,7 +123,7 @@ class Xmf_Module_Helper
             $this->config =& $xoopsModuleConfig;
         } else {
             $hModConfig =& xoops_gethandler('config');
-            $this->config =& $hModConfig->getConfigsByCat(0, $this->getModule()->getVar('mid'));
+            $this->config =& $hModConfig->getConfigsByCat(0, $this->getObject()->getVar('mid'));
         }
     }
 

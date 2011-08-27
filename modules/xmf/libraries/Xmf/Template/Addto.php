@@ -15,8 +15,7 @@
  * @package         Xmf
  * @since           0.1
  * @author          trabis <lusopoemas@gmail.com>
- * @author          The SmartFactory <www.smartfactory.ca>
- * @version         $Id: somefile.php 0 2010-05-03 18:47:04Z trabis $
+ * @version         $Id: Addto.php 0 2010-05-03 18:47:04Z trabis $
  */
 
 defined('XMF_EXEC') or die('Xmf was not detected');
@@ -55,9 +54,9 @@ class Xmf_Template_Addto extends Xmf_Template_Abstract
 
     function render()
     {
-        global $xoTheme;
-        $xoTheme->addStylesheet(XMF_LIBRARIES_URL . '/addto/addto.css');
-
+        if (is_object($GLOBALS['xoTheme'])) {
+            $GLOBALS['xoTheme']->addStylesheet(XMF_LIBRARIES_URL . '/addto/addto.css');
+        }
         $this->tpl->assign('xmf_addto_method', $this->method);
         $this->tpl->assign('xmf_addto_layout', $this->layout);
         $this->tpl->assign('xmf_addto_url', XMF_LIBRARIES_URL . '/addto');
