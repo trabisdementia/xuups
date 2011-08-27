@@ -21,9 +21,13 @@
 
 defined('XMF_EXEC') or die('Xmf was not detected');
 
-class Xmf_Template_About extends Xmf_Template_Abstract
+class Xmf_Template_Adminabout extends Xmf_Template_Abstract
 {
     var $module;
+    var $paypal;
+    var $logoImageUrl;
+    var $logoLinkUrl;
+
     var $_lang_aboutTitle;
     var $_lang_author_info;
     var $_lang_developer_lead;
@@ -48,19 +52,43 @@ class Xmf_Template_About extends Xmf_Template_Abstract
     function __construct(XoopsModule $module)
     {
         parent::__construct($this);
-        $this->setTemplate(XOOPS_ROOT_PATH . '/modules/xmf/templates/xmf_about.html');
+        $this->setTemplate(XOOPS_ROOT_PATH . '/modules/xmf/templates/xmf_adminabout.html');
         $this->module =& $module;
+        $this->paypal = '6KJ7RW5DR3VTJ'; //Xoops Foundation used by default
+        $this->logoLinkUrl = 'http://wwww.xoops.org';
+        $this->logoImageUrl = XMF_IMAGES_URL . '/icons/32/xoopsmicrobutton.gif';
+    }
+
+    function setPaypal($value)
+    {
+        $this->paypal = $value;
+    }
+
+    function setLogoImageUrl($value)
+    {
+        $this->logoImageUrl = $value;
+    }
+
+    function setLogoLinkUrl($value)
+    {
+        $this->logoLinkUrl = $value;
     }
 
     function render()
     {
         Xmf_Language::load('about', 'xmf');
         Xmf_Language::load('modinfo', $this->module->getVar('dirname'));
+        if (is_object($GLOBALS['xoTheme'])) {
+            $GLOBALS['xoTheme']->addStylesheet(XMF_CSS_URL . '/admin.css');
+        }
+
+        $this->tpl->assign('module_paypal', $this->paypal);
 
         $this->tpl->assign('module_url', XOOPS_URL . "/modules/" . $this->module->getVar('dirname') . "/");
         $this->tpl->assign('module_image', $this->module->getInfo('image'));
         $this->tpl->assign('module_name', $this->module->getInfo('name'));
         $this->tpl->assign('module_version', $this->module->getInfo('version'));
+        $this->tpl->assign('module_description', $this->module->getInfo('description'));
         $this->tpl->assign('module_status_version', $this->module->getInfo('status_version'));
 
         // Left headings...
@@ -114,6 +142,12 @@ class Xmf_Template_About extends Xmf_Template_Abstract
             $handle = fopen($filename, 'r');
             $this->tpl->assign('module_version_history', $this->_sanitize(fread($handle, $filesize)));
             fclose($handle);
+        }
+
+        if ($this->logoImageUrl && $this->logoLinkUrl){
+            $this->tpl->assign('logo_image_url', $this->logoImageUrl);
+            $this->tpl->assign('logo_link_url', $this->logoLinkUrl);
+
         }
     }
 

@@ -1,13 +1,15 @@
 <?php
-define('_AB_XMF_AUTHOR_INFO', 'Contributors information');
+define('_AB_XMF_AUTHOR_INFO', 'Author information');
 define('_AB_XMF_AUTHOR_WORD', "The Author's Word");
 define('_AB_XMF_BY', 'By');
-define('_AB_XMF_DEVELOPER_CONTRIBUTOR', 'Contributor(s)');
+define('_AB_XMF_DEVELOPER_CONTRIBUTOR', 'Contributor');
 define('_AB_XMF_DEVELOPER_CREDITS', 'Credits');
 define('_AB_XMF_DEVELOPER_EMAIL', 'Email');
+define('_AB_XMF_DEVELOPER_LEAD', 'Lead developer');
 define('_AB_XMF_DEVELOPER_WEBSITE', 'Website');
 define('_AB_XMF_MODULE_BUG', 'Report a bug for this module');
 define('_AB_XMF_MODULE_DEMO', 'Demo Site');
+define('_AB_XMF_MODULE_DESCRIPTION', 'Description');
 define('_AB_XMF_MODULE_DISCLAIMER', 'Disclaimer');
 define('_AB_XMF_MODULE_FEATURE', 'Suggest a new feature for this module');
 define('_AB_XMF_MODULE_INFO', 'Module Developpment Informations');
