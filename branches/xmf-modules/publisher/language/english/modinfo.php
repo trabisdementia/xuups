@@ -1,5 +1,6 @@
 <?php
-define("_MI_PUBLISHER_ADMENU1", "Index");
+define("_MI_PUBLISHER_ADMENU0", "Index");
+define("_MI_PUBLISHER_ADMENU1", "Summary");
 define("_MI_PUBLISHER_ADMENU2", "Categories");
 define("_MI_PUBLISHER_ADMENU3", "Articles");
 define("_MI_PUBLISHER_ADMENU4", "Permissions");

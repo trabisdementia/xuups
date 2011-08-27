@@ -23,14 +23,20 @@ xoops_cp_header();
 
 $menu = new Xmf_Template_Adminmenu($xoopsModule);
 $menu->display();
-/*
-$about = new Xmf_Template_About($xoopsModule);
-$about->display();*/
-$aboutAdmin = new Xmf_Template_Admin($xoopsModule);
 
-echo $aboutAdmin->addNavigation('index.php');
-echo $aboutAdmin->addNavigation('about.php');
-echo $aboutAdmin->renderabout('6KJ7RW5DR3VTJ', false);
+$nav = new Xmf_Template_Adminnav($xoopsModule);
+$nav->display();
+
+$about = new Xmf_Template_Adminabout($xoopsModule);
+$about->display();
+
+
+//echo $aboutAdmin->addNavigation('category.php');
+//echo $aboutAdmin->addNavigation('about.php');
+//echo $aboutAdmin->renderabout('6KJ7RW5DR3VTJ', false);
+//$indexAdmin = new ModuleAdmin();
+//echo $indexAdmin->addNavigation('index.php');
+//echo $aboutAdmin->renderIndex();
 
 xoops_cp_footer();
 ?>
