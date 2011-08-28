@@ -99,17 +99,17 @@ function subscribers_sendEmails()
     foreach ($objs as $obj) {
         $xoopsMailer =& xoops_getMailer();
         $xoopsMailer->multimailer->ContentType = "text/html";
+        $xoopsMailer->setTemplateDir(XOOPS_ROOT_PATH . '/modules/subscribers/language/' . $xoopsConfig['language'] . '/mail_template/');
         $xoopsMailer->setTemplate('content.tpl');
         $xoopsMailer->setFromName($fromname);
         $xoopsMailer->setFromEmail($fromemail);
         $xoopsMailer->useMail();
         $xoopsMailer->setToEmails(array($obj->getVar('wt_toemail', 'n')));
         $xoopsMailer->setSubject($obj->getVar('wt_subject'), 'n');
-        //$xoopsMailer->setBody($obj->getVar('wt_body'));
         $xoopsMailer->assign('CONTENT', $obj->getVar('wt_body'));
 
-        $key = md5($obj->getVar('wt_toemail') . XOOPS_ROOT_PATH);
-        $xoopsMailer->assign("UNSUBSCRIBE_URL", XOOPS_URL . '/modules/subscribers/unsubscribe.php?email=' . $obj->getVar('wt_toemail') . '&key=' . $key);
+        $key = md5($obj->getVar('wt_toemail', 'n') . XOOPS_ROOT_PATH);
+        $xoopsMailer->assign("UNSUBSCRIBE_URL", XOOPS_URL . '/modules/subscribers/unsubscribe.php?email=' . $obj->getVar('wt_toemail', 'n') . '&key=' . $key);
 
         $xoopsMailer->send(false);
         unset($xoopsMailer);
@@ -150,5 +150,3 @@ function subscribers_setLastTime($time = 0)
     fclose($fileHandler);
     return $time;
 }
-
-?>
