@@ -29,4 +29,3 @@ $xoopsTpl->assign('selected', $selected);
 $xoopsTpl->assign('captcha', $captcha);
 
 include_once XOOPS_ROOT_PATH . '/footer.php';
-?>
