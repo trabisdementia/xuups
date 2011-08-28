@@ -38,6 +38,7 @@ if ($truekey != $key) {
 $user_handler =& xoops_getModuleHandler('user');
 $criteria = new Criteria('user_email', $email);
 $users = $user_handler->getObjects($criteria);
+
 unset($criteria);
 if (count($users) == 0) {
     redirect_header(XOOPS_URL, 2, _MD_SUBSCRIBERS_U_NO_THANKS);
@@ -46,12 +47,12 @@ if (count($users) == 0) {
 
 //delete user from subscribers
 $user = $users[0];
-$user_handler->delete($user);
+$user_handler->delete($user, true);
 
 //delete all wating emails related to this user
 $wt_handler =& xoops_getModuleHandler('waiting');
 $criteria = new Criteria('wt_toemail', $email);
-$wt_handler->delete($criteria);
+$wt_handler->deleteAll($criteria);
 unset($criteria);
 
 
