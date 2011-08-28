@@ -12,4 +12,7 @@ define("_MD_SUBSCRIBERS_ENTER_NAME", "ÇáÇÓã : ");
 define("_MD_SUBSCRIBERS_ENTER_SECURITY", "ÇáÑãÒ ÇáÃãäí : ");
 define("_MD_SUBSCRIBERS_SUBMIT", "ÇÔÊÑß ÇáÂä");
 define("_MD_SUBSCRIBERS_ENTER_PHONE", "Phone Number : ");
-?>
+
+//UNSUBSCRIBE
+define("_MD_SUBSCRIBERS_U_NO_THANKS", "Sorry, it was not possible to unsubscribe you.");
+define("_MD_SUBSCRIBERS_U_THANKS", "You are now unsubscribed!");

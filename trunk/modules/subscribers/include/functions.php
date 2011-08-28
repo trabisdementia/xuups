@@ -95,21 +95,24 @@ function subscribers_sendEmails()
 
     include_once XOOPS_ROOT_PATH . '/kernel/user.php';
 
-    $myts =& MyTextSanitizer::getInstance();
-
     $obj_delete = array();
     foreach ($objs as $obj) {
         $xoopsMailer =& xoops_getMailer();
         $xoopsMailer->multimailer->ContentType = "text/html";
+        $xoopsMailer->setTemplate('content.tpl');
         $xoopsMailer->setFromName($fromname);
         $xoopsMailer->setFromEmail($fromemail);
         $xoopsMailer->useMail();
         $xoopsMailer->setToEmails(array($obj->getVar('wt_toemail', 'n')));
         $xoopsMailer->setSubject($obj->getVar('wt_subject'), 'n');
-        $xoopsMailer->setBody($obj->getVar('wt_body'));
+        //$xoopsMailer->setBody($obj->getVar('wt_body'));
+        $xoopsMailer->assign('CONTENT', $obj->getVar('wt_body'));
+
+        $key = md5($obj->getVar('wt_toemail') . XOOPS_ROOT_PATH);
+        $xoopsMailer->assign("UNSUBSCRIBE_URL", XOOPS_URL . '/modules/subscribers/unsubscribe.php?email=' . $obj->getVar('wt_toemail') . '&key=' . $key);
+
         $xoopsMailer->send(false);
         unset($xoopsMailer);
-
 
         $obj_delete[] = $obj->getVar('wt_id');
     }
