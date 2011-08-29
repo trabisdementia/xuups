@@ -10,10 +10,13 @@
  */
 
 /**
- * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
+ * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package         Xmf
+ * @since           0.1
+ * @author          Grégory Mage (Aka Mage)
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: $
+ * @version         $Id: somefile.php 0 2010-05-03 18:47:04Z trabis $
  */
 
 defined('XMF_EXEC') or die('Xmf was not detected');
