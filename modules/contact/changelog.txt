@@ -1,4 +1,0 @@
-Version 1.7 from 11-08-2010
-- Added 2.4.x compatibilty
-- Added php5.3 compatibilty
-- Added error checking while sending emails
