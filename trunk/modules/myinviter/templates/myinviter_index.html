@@ -13,21 +13,21 @@
 <div style="text-align:center;">
 
     <div style="padding:5px;">
-        <h2><{$smarty.const._MA_MYINV_INVITE}></h2>
+        <h2><{$smarty.const._MA_MYINVITER_INVITE}></h2>
     </div>
-    
+
     <div style="padding:5px;">
-        <strong><{$smarty.const._MA_MYINV_ENTER_EMAIL}></strong>
+        <strong><{$smarty.const._MA_MYINVITER_ENTER_EMAIL}></strong>
         <input name="email_box" type="text" maxlength="100" size="30" value="<{$email_box}>">
     </div>
 
     <div style="padding:5px;">
-        <strong><{$smarty.const._MA_MYINV_ENTER_PASSWORD}></strong>
+        <strong><{$smarty.const._MA_MYINVITER_ENTER_PASSWORD}></strong>
         <input type="password" name="password_box" maxlength="100" size="30" value="<{$password_box}>">
     </div>
 
     <div style="padding:5px;">
-        <strong><{$smarty.const._MA_MYINV_ENTER_PROVIDER}></strong>
+        <strong><{$smarty.const._MA_MYINVITER_ENTER_PROVIDER}></strong>
         <select name="provider_box" size="1" width="190" style="width:190px;">
 
         <{foreach item=service key=skey from=$services}>
@@ -36,15 +36,15 @@
                 <option value="<{$pkey}>"<{if $pkey == $selected}> selected="selected"<{/if}>><{$provider}></option>
             <{/foreach}>
         <{/foreach}>
-        
+
         </select>
     </div>
-    
+
     <div style="padding:5px;">
-        <input type="submit" name="import" value="<{$smarty.const._MA_MYINV_GETFRIENDS}>">
+        <input type="submit" name="import" value="<{$smarty.const._MA_MYINVITER_GETFRIENDS}>">
 		<input type="hidden" name="step" value="get_contacts">
     </div>
-    
+
     </div>
 </div>
 </form>
@@ -60,11 +60,11 @@
         <td bgcolor="#F2F2F2" height="27" width="27%">
           <b><font face="Arial" color="#3366CC">
           <font face="Arial" style="font-size: 9pt"><a href="javascript:checkall(true)">
-          <font color="#333333"><{$smarty.const._MA_MYINV_CHECKALL}></font></a></font></font><font face="Arial" style="font-size: 9pt"><font face="Arial" color="#333333"> | </font><font face="Arial" color="#3366CC">
-          <a href="javascript:checkall(false)"><font color="#333333"><{$smarty.const._MA_MYINV_UNCHECKALL}></font></a></font></font><font face="Arial" size="1" color="#333333">&nbsp; </font></b>
+          <font color="#333333"><{$smarty.const._MA_MYINVITER_CHECKALL}></font></a></font></font><font face="Arial" style="font-size: 9pt"><font face="Arial" color="#333333"> | </font><font face="Arial" color="#3366CC">
+          <a href="javascript:checkall(false)"><font color="#333333"><{$smarty.const._MA_MYINVITER_UNCHECKALL}></font></a></font></font><font face="Arial" size="1" color="#333333">&nbsp; </font></b>
         </td>
         <td bgcolor="#F2F2F2" height="27" width="73%">
-          <b><font face="Arial" size="2" color="#333333">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<{$smarty.const._MA_MYINV_YOURCONTACTS}></font></b>
+          <b><font face="Arial" size="2" color="#333333">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<{$smarty.const._MA_MYINVITER_YOURCONTACTS}></font></b>
         </td>
       </tr>
       <tr>
@@ -86,7 +86,7 @@
                   <font face="Arial" size="2" color="#333333"><{$contacts.email}></font></td>
                 <td bgcolor="#FFFFFF" style="width:30%;">
                   <{if $contacts.disabled}><font face="Arial" size="2" color="#333333"><{$contacts.disabled}></font></td>
-                  <{else}><{$smarty.const._MA_MYINV_READYTOINVITE}>
+                  <{else}><{$smarty.const._MA_MYINVITER_READYTOINVITE}>
                   <{/if}>
               </tr>
 <{/foreach}>
@@ -96,11 +96,11 @@
       </tr>
       <tr>
         <td height="42" style="border-left-width: 1px; border-right-width: 1px; border-top: 1px solid #D8D8D8; border-bottom-width: 1px" bgcolor="#F2F2F2" colspan="2">
-          <input type="submit" value="<{$smarty.const._MA_MYINV_INVITEFRIENDS}>" name="B1" style="font-family: Arial; font-size: 10pt; font-weight: bold; color: #5B5B5B; border: 1px solid #D8D8D8; background-color: #FFFFFF">
+          <input type="submit" value="<{$smarty.const._MA_MYINVITER_INVITEFRIENDS}>" name="B1" style="font-family: Arial; font-size: 10pt; font-weight: bold; color: #5B5B5B; border: 1px solid #D8D8D8; background-color: #FFFFFF">
           <input type='hidden' name='step' value='send_invites'>
         </td>
       </tr>
     </form>
-	</table>
+  </table>
 </div>
 <{/if}>

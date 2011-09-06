@@ -10,17 +10,17 @@
  */
 
 /**
- * @copyright       The XUUPS Project http://www.xuups.com
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         myinviter
- * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: menu.php 0 2009-11-14 18:47:04Z trabis $
+ * @version         $Id: $
  */
 
-defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
-
-$i = 0;
-$adminmenu[$i]['title'] = _MI_MYINVITER_ADMENU_INDEX;
-$adminmenu[$i]['link'] = "admin/index.php";
-$adminmenu[$i]["icon"] = '../xmf/images/icons/32/home.png';
+function xoops_module_pre_install_myinviter($module)
+{
+    if (!xoops_isActiveModule('xmf')) {
+        $module->setErrors('<b>Please install or reactivate XMF module</b>');
+        return false;
+    }
+    return true;
+}

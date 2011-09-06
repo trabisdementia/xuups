@@ -12,7 +12,7 @@
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Myinviter
+ * @package         myinviter
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: index.php 0 2009-11-14 18:47:04Z trabis $
@@ -41,13 +41,13 @@ $oi_services = $inviter->getPlugins();
 switch ($step) {
     case 'get_contacts':
         if (empty($email_box)) {
-            $ers['email'] = _MA_MYINV_ERROR_EMAILMISSING;
+            $ers['email'] = _MA_MYINVITER_ERROR_EMAILMISSING;
         }
         if (empty($password_box)) {
-            $ers['password'] = _MA_MYINV_ERROR_PASSWORDMISSING;
+            $ers['password'] = _MA_MYINVITER_ERROR_PASSWORDMISSING;
         }
         if (empty($provider_box)) {
-            $ers['provider'] = _MA_MYINV_ERROR_PROVIDERMISSING;
+            $ers['provider'] = _MA_MYINVITER_ERROR_PROVIDERMISSING;
         }
         if (count($ers) == 0) {
             $inviter->startPlugin($provider_box);
@@ -56,9 +56,9 @@ switch ($step) {
                 $ers['inviter'] = $internal;
             } else if (!$inviter->login($email_box, $password_box)) {
                 $internal = $inviter->getInternalError();
-                $ers['login'] = $internal ? $internal : _MA_MYINV_ERROR_LOGINFAILED;
+                $ers['login'] = $internal ? $internal : _MA_MYINVITER_ERROR_LOGINFAILED;
             } else if (false === $contacts = $inviter->getMyContacts()) {
-                $ers['contacts'] = _MA_MYINV_ERROR_UNABLE;
+                $ers['contacts'] = _MA_MYINVITER_ERROR_UNABLE;
             } else {
                 $import_ok = true;
             }
@@ -67,7 +67,7 @@ switch ($step) {
         break;
 
     case 'send_invites':
-        $waiting_handler = xoops_getmodulehandler('waiting');
+        $this_handler = xoops_getmodulehandler('item');
         $uid = is_object($xoopsUser) ?  $xoopsUser->getVar('uid') : intval($xoopsModuleConfig['defaultuid']);
         $list = isset($_POST['list']) ? $_POST['list'] : array();
 
@@ -88,16 +88,16 @@ switch ($step) {
                 $fname = $split[1] . ' ' . $split[0];
             }
 
-            $waiting = $waiting_handler->create();
-            $waiting->setVar('wt_userid', $uid);
-            $waiting->setVar('wt_email', $fmail);
-            $waiting->setVar('wt_name', $fname);
-            $waiting->setVar('wt_date', time());
-            $waiting_handler->insert($waiting);
+            $waiting = $this_handler->create();
+            $waiting->setVar('userid', $uid);
+            $waiting->setVar('email', $fmail);
+            $waiting->setVar('name', $fname);
+            $waiting->setVar('date', time());
+            $this_handler->insertWaiting($waiting);
             unset($waiting);
         }
 
-        redirect_header('index.php', 2, _MA_MYINV_EMAILSADDED);
+        redirect_header('index.php', 2, _MA_MYINVITER_EMAILSADDED);
         exit();
         break;
 

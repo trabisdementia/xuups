@@ -12,7 +12,7 @@ defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
  */
 class OpenInviter
 {
-    public $pluginTypes=array('email'=>_MA_MYINV_EMAILPROVIDERS,'social'=>_MA_MYINV_SOCIALNETWORKS);
+    public $pluginTypes=array('email'=>_MA_MYINVITER_EMAILPROVIDERS,'social'=>_MA_MYINVITER_SOCIALNETWORKS);
     private $ignoredFiles=array('default.php'=>'','index.php'=>'');
     private $version='1.6.7';
     public function __construct()
@@ -45,7 +45,7 @@ class OpenInviter
             $this->plugin->base_version = $this->version;
             $this->plugin->base_path = dirname(__FILE__);
         } else {
-            $this->internalError = _MA_MYINV_ERROR_INVALIDPROVIDER;
+            $this->internalError = _MA_MYINVITER_ERROR_INVALIDPROVIDER;
         }
     }
 
@@ -241,10 +241,10 @@ class OpenInviter
         $is_email=$this->plugin->isEmail($user);
         if ($this->plugin->requirement) {
             if ($this->plugin->requirement == 'email' AND !$is_email) {
-                $this->internalError=_MA_MYINV_ERROR_FULLEMAIL;
+                $this->internalError=_MA_MYINVITER_ERROR_FULLEMAIL;
                 return false;
             } else if ($this->plugin->requirement == 'user' AND $is_email) {
-                $this->internalError=_MA_MYINV_ERROR_NOTFULLEMAIL;
+                $this->internalError=_MA_MYINVITER_ERROR_NOTFULLEMAIL;
                 return false;
             }
         }
@@ -258,7 +258,7 @@ class OpenInviter
                 }
             }
             if (!$temp) {
-                $this->internalError=sprintf(_MA_MYINV_ERROR_INVALIDDOMAIN, $user_domain);
+                $this->internalError=sprintf(_MA_MYINVITER_ERROR_INVALIDDOMAIN, $user_domain);
                 return false;
             }
         }

@@ -6,6 +6,8 @@ define("_MI_MYINVITER_MD_DESC", "My inviter is a module that allows users to inv
 
 //Menu
 define("_MI_MYINVITER_ADMENU_INDEX", "Index");
+define("_MI_MYINVITER_ADMENU_WAITING", "Waiting");
+define("_MI_MYINVITER_ADMENU_BLACKLIST", "Blacklist");
 define("_MI_MYINVITER_ADMENU_ABOUT", "About");
 
 //Templates desc

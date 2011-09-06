@@ -12,7 +12,7 @@
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Myinviter
+ * @package         myinviter
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: xoops_version.php 0 2009-11-14 18:47:04Z trabis $
@@ -22,9 +22,9 @@ defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
 global $xoopsConfig, $xoopsUser;
 
-$modversion['name'] = _MI_MYINV_MD_NAME;
-$modversion['version'] = 1.00;
-$modversion['description'] = _MI_MYINV_MD_DESC;
+$modversion['name'] = _MI_MYINVITER_MD_NAME;
+$modversion['version'] = 1.1;
+$modversion['description'] = _MI_MYINVITER_MD_DESC;
 $modversion['credits'] = "Xuups, OpenInviter <a href='openinviter.com'>http://openinviter.com</a>";
 $modversion['author'] = "Xuups";
 $modversion['help'] = "";
@@ -43,8 +43,13 @@ $modversion['adminmenu'] = "admin/menu.php";
 
 // Search
 $modversion['hasSearch'] = 0;
+
 // Comments
 $modversion['hasComments'] = 0;
+
+//Callbacks install/update
+$modversion['onInstall'] = "include/install.inc.php";
+$modversion['onUpdate'] = "include/install.inc.php";
 
 // Sql
 $modversion['sqlfile']['mysql'] = "sql/mysql.sql";
@@ -52,26 +57,24 @@ $modversion['sqlfile']['mysql'] = "sql/mysql.sql";
 // Tables created by sql file (without prefix!)
 $i=0;
 $i++;
-$modversion['tables'][$i] = "myinviter_waiting";
-$i++;
-$modversion['tables'][$i] = "myinviter_blacklist";
+$modversion['tables'][$i] = "myinviter_item";
 
 // Templates
 $i=0;
 $i++;
 $modversion['templates'][$i]['file'] = "myinviter_index.html";
-$modversion['templates'][$i]['description'] = _MI_MYINV_PAGE_INDEX;
+$modversion['templates'][$i]['description'] = _MI_MYINVITER_PAGE_INDEX;
 
 $i++;
 $modversion['templates'][$i]['file'] = "myinviter_about.html";
-$modversion['templates'][$i]['description'] = _MI_MYINV_PAGE_ABOUT;
+$modversion['templates'][$i]['description'] = _MI_MYINVITER_PAGE_ABOUT;
 
 // Blocks
 $i=0;
 $i++;
 $modversion['blocks'][$i]['file'] = "myinviter_add.php";
-$modversion['blocks'][$i]['name'] = _MI_MYINV_BLK_ADD;
-$modversion['blocks'][$i]['description'] = _MI_MYINV_BLK_ADD_DSC;
+$modversion['blocks'][$i]['name'] = _MI_MYINVITER_BLK_ADD;
+$modversion['blocks'][$i]['description'] = _MI_MYINVITER_BLK_ADD_DSC;
 $modversion['blocks'][$i]['show_func'] = "myinviter_add_show";
 $modversion['blocks'][$i]['template'] = "myinviter_add.html";
 
@@ -79,86 +82,88 @@ $modversion['blocks'][$i]['template'] = "myinviter_add.html";
 $i=0;
 $i++;
 $modversion['config'][$i]['name'] = 'sandbox';
-$modversion['config'][$i]['title'] = '_MI_MYINV_CONF_SANDBOX';
-$modversion['config'][$i]['description'] = '_MI_MYINV_CONF_SANDBOX_DSC';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_SANDBOX';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_SANDBOX_DSC';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 1;
 
 $i++;
 $modversion['config'][$i]['name'] = 'sandboxemail';
-$modversion['config'][$i]['title'] = '_MI_MYINV_CONF_SANDBOXEMAIL';
-$modversion['config'][$i]['description'] = '_MI_MYINV_CONF_SANDBOXEMAIL_DSC';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_SANDBOXEMAIL';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_SANDBOXEMAIL_DSC';
 $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = $xoopsConfig['adminmail'];
 
 $i++;
 $modversion['config'][$i]['name'] = 'html';
-$modversion['config'][$i]['title'] = '_MI_MYINV_CONF_HTML';
-$modversion['config'][$i]['description'] = '_MI_MYINV_CONF_HTML_DSC';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_HTML';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_HTML_DSC';
 $modversion['config'][$i]['formtype'] = 'yesno';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 0;
 
 $i++;
 $modversion['config'][$i]['name'] = 'emailsperpack';
-$modversion['config'][$i]['title'] = '_MI_MYINV_CONF_EMAILSPERPACK';
-$modversion['config'][$i]['description'] = '_MI_MYINV_CONF_EMAILSPERPACK_DSC';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_EMAILSPERPACK';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_EMAILSPERPACK_DSC';
 $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 10;
 
 $i++;
 $modversion['config'][$i]['name'] = 'timebpacks';
-$modversion['config'][$i]['title'] = '_MI_MYINV_CONF_TIMEBPACKS';
-$modversion['config'][$i]['description'] = '_MI_MYINV_CONF_TIMEBPACKS_DSC';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_TIMEBPACKS';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_TIMEBPACKS_DSC';
 $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 3600;
 
 $i++;
 $modversion['config'][$i]['name'] = 'fromname';
-$modversion['config'][$i]['title'] = '_MI_MYINV_CONF_FROMNAME';
-$modversion['config'][$i]['description'] = '_MI_MYINV_CONF_FROMNAME_DSC';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_FROMNAME';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_FROMNAME_DSC';
 $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = $xoopsConfig['sitename'];
 
 $i++;
 $modversion['config'][$i]['name'] = 'fromemail';
-$modversion['config'][$i]['title'] = '_MI_MYINV_CONF_FROMEMAIL';
-$modversion['config'][$i]['description'] = '_MI_MYINV_CONF_FROMEMAIL_DSC';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_FROMEMAIL';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_FROMEMAIL_DSC';
 $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = $xoopsConfig['adminmail'];
 
 $i++;
 $modversion['config'][$i]['name'] = 'from';
-$modversion['config'][$i]['title'] = '_MI_MYINV_CONF_FROM';
-$modversion['config'][$i]['description'] = '_MI_MYINV_CONF_FROM_DSC';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_FROM';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_FROM_DSC';
 $modversion['config'][$i]['formtype'] = 'select';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'custom';
-$modversion['config'][$i]['options'] = array(_MI_MYINV_CONF_FROM_CUSTOM => 'custom',
-_MI_MYINV_CONF_FROM_SYSTEM => 'system',
-_MI_MYINV_CONF_FROM_USER => 'user');
+$modversion['config'][$i]['options'] = array(_MI_MYINVITER_CONF_FROM_CUSTOM => 'custom',
+_MI_MYINVITER_CONF_FROM_SYSTEM => 'system',
+_MI_MYINVITER_CONF_FROM_USER => 'user');
 
 $i++;
 $modversion['config'][$i]['name'] = 'defaultuid';
-$modversion['config'][$i]['title'] = '_MI_MYINV_CONF_DEFAULTUID';
-$modversion['config'][$i]['description'] = '_MI_MYINV_CONF_DEFAULTUID_DSC';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_DEFAULTUID';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_DEFAULTUID_DSC';
 $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = is_object($xoopsUser) ? $xoopsUser->getVar('uid') : 0;
 
 // About stuff
-$modversion['status_version'] = "Final";
+$modversion['status_version'] = "Beta";
+$modversion['status'] = "Beta";
+$modversion['date'] = "05/09/2011";
+
+$modversion['developer_lead'] = "trabis";
 $modversion['developer_website_url'] = "http://www.xuups.com";
 $modversion['developer_website_name'] = "Xuups";
 $modversion['developer_email'] = "lusopoemas@gmail.com";
-$modversion['status'] = "Final";
-$modversion['date'] = "14/11/2009";
 
 $modversion['people']['developers'][] = "Trabis";
 $modversion['people']['developers'][] = "OpenInviter - import addressbook/contacts from different email providers like Yahoo, Gmail, Hotmail, Live etc.<br />Available at <a href='openinviter.com'>http://openinviter.com</a>";
@@ -177,4 +182,5 @@ $modversion['support_site_name'] = "Xuups Support Forums";
 //$modversion['author_word'] = "";
 //$modversion['warning'] = "";
 
-?>
+$modversion['min_xoops'] = "2.5.1";
+$modversion['min_php'] = "5.2";

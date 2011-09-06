@@ -10,23 +10,16 @@
  */
 
 /**
- * @copyright       The XUUPS Project http://www.xuups.com
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Myinviter
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: admin_header.php 0 2009-11-14 18:47:04Z trabis $
+ * @version         $Id: admin_header.php 0 2009-06-11 18:47:04Z trabis $
  */
 
-include_once dirname(dirname(dirname(dirname(__FILE__)))) .'/include/cp_header.php';
-include_once dirname(dirname(__FILE__)) . '/include/functions.php';
+include_once dirname(dirname(dirname(dirname(__FILE__)))) . '/mainfile.php';
+include_once dirname(dirname(__FILE__)) . '/include/common.php';
+include_once XOOPS_ROOT_PATH . '/include/cp_header.php';
 
-$xoopsModuleConfig = myinviter_getModuleConfig(); //must come first
-$xoopsModule = myinviter_getModuleHandler();
-
-$myts = MyTextSanitizer::getInstance();
-
-xoops_loadLanguage('admin', 'myinviter');
-xoops_loadLanguage('modinfo', 'myinviter');
-
-?>
+xoops_loadLanguage('admin', MYINVITER_DIRNAME);
+xoops_loadLanguage('modinfo', MYINVITER_DIRNAME);

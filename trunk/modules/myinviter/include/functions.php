@@ -20,93 +20,46 @@
 
 defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
-function myinviter_adminMenu($currentoption = 0, $breadcrumb = '')
+function myinviter_isValidEmail($email)
 {
-    include XOOPS_ROOT_PATH . '/modules/myinviter/admin/menu.php';
-
-    xoops_loadLanguage('admin', 'myinviter');
-    xoops_loadLanguage('modinfo', 'myinviter');
-
-    $tpl = new XoopsTpl();
-    $tpl->assign(array(
-        'modurl'          => XOOPS_URL . '/modules/myinviter',
-        'headermenu'      => $myinviter_headermenu,
-        'adminmenu'       => $myinviter_adminmenu,
-        'current'         => $currentoption,
-        'breadcrumb'      => $breadcrumb,
-        'headermenucount' => count($myinviter_headermenu)));
-    $tpl->display(XOOPS_ROOT_PATH . '/modules/myinviter/templates/static/myinviter_admin_menu.html');
-}
-
-function myinviter_getModuleHandler()
-{
-    static $handler;
-
-    if (!isset($handler)) {
-        global $xoopsModule;
-        if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'myinviter') {
-            $handler = $xoopsModule;
-        } else {
-            $hModule = xoops_gethandler('module');
-            $handler = $hModule->getByDirname('myinviter');
-        }
-    }
-    return $handler;
-}
-
-function myinviter_getModuleConfig()
-{
-    static $config;
-
-    if (!$config) {
-        global $xoopsModule;
-        if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == 'myinviter') {
-            $config = $GLOBALS['xoopsModuleConfig'];
-        } else {
-            $handler = myinviter_getModuleHandler();
-            $hModConfig = xoops_gethandler('config');
-            $config = $hModConfig->getConfigsByCat(0, $handler->getVar('mid'));
-        }
-    }
-    return $config;
+        return eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email);
 }
 
 function myinviter_sendEmails($id = null, $force = false)
 {
     global $xoopsConfig;
 
-    $thisConfigs = myinviter_getModuleConfig();
     $errors = array();
+    $sent = 0;
 
-    $emailsperpack = intval($thisConfigs['emailsperpack']);
+    $emailsperpack = intval($GLOBALS['myinviter']->getConfig('emailsperpack'));
     if ($emailsperpack == 0 && $id == null) {
         $errors[] = 'No id or no pack number';
         return $errors;
     }
 
-    $timebpacks = intval($thisConfigs['timebpacks']);
+    $timebpacks = intval($GLOBALS['myinviter']->getConfig('timebpacks'));
 
     $now = time();
     $last = myinviter_getLastTime();
-
     if ((($now - $last) <= $timebpacks) && !$force) {
         $errors[] = 'Not enough time';
         return $errors;
     }
 
-    $from = $thisConfigs['from']; //custom, system, user
-    $html = $thisConfigs['html'];
-    $sandbox = $thisConfigs['sandbox'];
-    $sandboxemail = trim($thisConfigs['sandboxemail']);
-    $defaultuid = intval($thisConfigs['defaultuid']);
+    $from = $GLOBALS['myinviter']->getConfig('from'); //custom, system, user
+    $html = $GLOBALS['myinviter']->getConfig('html');
+    $sandbox = $GLOBALS['myinviter']->getConfig('sandbox');
+    $sandboxemail = trim($GLOBALS['myinviter']->getConfig('sandboxemail'));
+    $defaultuid = intval($GLOBALS['myinviter']->getConfig('defaultuid'));
 
     if (empty($sandboxemail)) {
         $sandboxemail = $xoopsConfig['adminmail'];
     }
 
     if ($from == 'custom') {
-        $fromname = trim($thisConfigs['fromname']);
-        $fromemail = trim($thisConfigs['fromemail']);
+        $fromname = trim($GLOBALS['myinviter']->getConfig('fromname'));
+        $fromemail = trim($GLOBALS['myinviter']->getConfig('fromemail'));
         if (empty($fromname) || empty($fromemail)) {
             $from = 'system';
         }
@@ -117,32 +70,18 @@ function myinviter_sendEmails($id = null, $force = false)
         $fromemail = $xoopsConfig['adminmail'];
     }
 
-    $this_handler = xoops_getModuleHandler('waiting', 'myinviter');
+    $this_handler = $GLOBALS['myinviter']->getHandler('item');
+    $objs = $this_handler->getWaitingObjects($id, 0,$emailsperpack);
 
-    if ($id != null) {
-        $id = new Criteria('wt_id', $id);
-    }
-
-    $criteria = new CriteriaCompo($id);
-    $criteria->setSort('wt_date');
-    $criteria->setOrder('ASC');
-    $criteria->setLimit($emailsperpack);
-    $objs = $this_handler->getObjects($criteria);
-    $count = count($objs);
-    unset ($criteria);
-
-    if ($count == 0) {
+    if (count($objs) == 0) {
         myinviter_setLastTime($now);
         $errors[] = 'No waiting emails';
         return $errors;
     }
 
     $member_handler = xoops_gethandler('member');
-    $myts = MyTextSanitizer::getInstance();
-
-    $obj_delete = array();
     foreach ($objs as $obj) {
-        $thisUser = $member_handler->getUser($obj->getVar('wt_userid'));
+        $thisUser = $member_handler->getUser($obj->getVar('userid'));
 
         //Was this user removed? Then get the default one!
         if (!is_object($thisUser)) {
@@ -156,7 +95,7 @@ function myinviter_sendEmails($id = null, $force = false)
 
         $xoopsMailer = xoops_getMailer();
         $xoopsMailer->useMail();
-        $xoopsMailer->setTemplateDir(XOOPS_ROOT_PATH . '/modules/myinviter/language/' . $xoopsConfig['language'] . '/mail_template/');
+        $xoopsMailer->setTemplateDir(XOOPS_ROOT_PATH . '/modules/myinviter/language/');
 
         if ($html == 1) {
             $xoopsMailer->multimailer->ContentType = "text/html";
@@ -171,35 +110,38 @@ function myinviter_sendEmails($id = null, $force = false)
         } else {
             $xoopsMailer->setTemplate('myinviter_invitation.tpl');
         }
-
         if ($sandbox == 1) {
             $xoopsMailer->setToEmails(array($sandboxemail));
         } else {
-            $xoopsMailer->setToEmails(array($obj->getVar('wt_email', 'n')));
+            $xoopsMailer->setToEmails(array($obj->getVar('email', 'n')));
         }
 
         if ($from == 'user') {
-            $fromname = $thisUser->getVar('uname' , 'n');
-            $fromemail = $thisUser->getVar('email' , 'n');
+            $fromname = $thisUser->getVar('uname', 'n');
+            $fromemail = $thisUser->getVar('email', 'n');
         }
 
         $xoopsMailer->setFromEmail($fromemail);
         $xoopsMailer->setFromName($fromname);
 
-        xoops_loadLanguage('main' , 'myinviter');
-        $xoopsMailer->setSubject(sprintf(_MA_MYINV_EMAIL_SUBJECT,  $thisUser->getVar('uname')));
+        xoops_loadLanguage('main', 'myinviter');
+        $xoopsMailer->setSubject(sprintf(_MA_MYINVITER_EMAIL_SUBJECT, $thisUser->getVar('uname')));
 
         $xoopsMailer->assign("ADMINMAIL", $xoopsConfig['adminmail']);
         $xoopsMailer->assign("USER_UNAME", $thisUser->getVar('uname'));
         $xoopsMailer->assign("USER_UID", $thisUser->getVar('uid'));
-        $xoopsMailer->assign("INVITED_NAME", $obj->getVar('wt_name'));
+        $xoopsMailer->assign("INVITED_NAME", $obj->getVar('name'));
 
-        $key = md5($obj->getVar('wt_email') . XOOPS_ROOT_PATH);
-        $xoopsMailer->assign("BLACKLIST_URL", XOOPS_URL . '/modules/myinviter/blacklist.php?email=' . $obj->getVar('wt_email') . '&key=' . $key);
+
+        $key = md5($obj->getVar('email') . XOOPS_ROOT_PATH);
+        $xoopsMailer->assign("BLACKLIST_URL", MYINVITER_URL . '/blacklist.php?email=' . $obj->getVar('email') . '&key=' . $key);
 
         if (!$xoopsMailer->send(true)) {
             $errors[] = $xoopsMailer->getErrors(false); // do not use html in error message
+            $this_handler->insertError($obj);
         } else {
+            $this_handler->insertSent($obj);
+            $sent++;
             //All Ok? Set log
             /* $log_handler =& xoops_getmodulehandler('log', 'myinviter');
              $log = $log_handler->create();
@@ -209,23 +151,18 @@ function myinviter_sendEmails($id = null, $force = false)
         }
 
         unset($xoopsMailer);
-        $obj_delete[] = $obj->getVar('wt_id');
     }
-
-    $criteria = new Criteria('wt_id', '(' . implode(',', $obj_delete). ')', 'IN');
-    $this_handler->deleteAll($criteria, true);
 
     myinviter_setLastTime($now);
     $lastcount = myinviter_getEmailsSent();
-    myinviter_setEmailsSent($lastcount + $count);
+    myinviter_setEmailsSent($lastcount + $sent);
 
     return $errors;
 }
 
 function myinviter_getLastTime()
 {
-    xoops_load('cache');
-    $ret = XoopsCache::read('myinviter_lasttime');
+    $ret = $GLOBALS['myinviter']->getHelper('cache')->read('lasttime');
     if ($ret == false) {
         $ret = time();
         myinviter_setLastTime($ret);
@@ -235,15 +172,13 @@ function myinviter_getLastTime()
 
 function myinviter_setLastTime($value = 0)
 {
-    xoops_load('cache');
-    $ret = XoopsCache::write('myinviter_lasttime', $value);
+    $ret = $GLOBALS['myinviter']->getHelper('cache')->write('lasttime', $value);
     return $ret;
 }
 
 function myinviter_getEmailsSent()
 {
-    xoops_load('cache');
-    $ret = XoopsCache::read('myinviter_emailssent');
+    $ret = $GLOBALS['myinviter']->getHelper('cache')->read('emailssent');
     if ($ret == false) {
         $ret = 0;
         myinviter_setEmailsSent($ret);
@@ -253,8 +188,7 @@ function myinviter_getEmailsSent()
 
 function myinviter_setEmailsSent($value)
 {
-    xoops_load('cache');
-    $ret = XoopsCache::write('myinviter_emailssent', $value);
+    $ret = $GLOBALS['myinviter']->getHelper('cache')->write('emailssent', $value);
     return $ret;
 }
 
@@ -268,7 +202,7 @@ function myinviter_filterRegistered($contacts)
     }
     foreach ($contacts as $key => $contact) {
         if (in_array($contact['email'], array_keys($reg_emails))) {
-            $contacts[$key]['disabled'] =  sprintf(_MA_MYINV_ISREGISTERED, $reg_emails[$contact['email']]['uname']);
+            $contacts[$key]['disabled'] = sprintf(_MA_MYINVITER_ISREGISTERED, $reg_emails[$contact['email']]['uname']);
         }
     }
     unset($reg_emails, $users);
@@ -277,11 +211,10 @@ function myinviter_filterRegistered($contacts)
 
 function myinviter_filterWaiting($contacts)
 {
-    $waiting_handler = xoops_getmodulehandler('waiting');
-    $waiting_emails = $waiting_handler->getList();
+    $waiting_emails = $GLOBALS['myinviter']->getHandler('item')->getList();
     foreach ($contacts as $key => $contact) {
         if (in_array($contact['email'], $waiting_emails)) {
-            $contacts[$key]['disabled'] = _MA_MYINV_ISWAITING;
+            $contacts[$key]['disabled'] = _MA_MYINVITER_ISWAITING;
         }
     }
     unset($waiting_emails);
@@ -290,15 +223,12 @@ function myinviter_filterWaiting($contacts)
 
 function myinviter_filterBlacklisted($contacts)
 {
-    $blacklist_handler = xoops_getmodulehandler('blacklist');
-    $blacklisted_emails = $blacklist_handler->getList();
+    $blacklisted_emails = $GLOBALS['myinviter']->getHandler('item')->getBlacklistList();
     foreach ($contacts as $key => $contact) {
         if (in_array($contact['email'], $blacklisted_emails)) {
-            $contacts[$key]['disabled'] = _MA_MYINV_ISBLACKLISTED;
+            $contacts[$key]['disabled'] = _MA_MYINVITER_ISBLACKLISTED;
         }
     }
     unset($blacklisted_emails);
     return $contacts;
 }
-
-?>

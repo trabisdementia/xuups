@@ -10,21 +10,24 @@
  */
 
 /**
- * @copyright       The XUUPS Project http://www.xuups.com
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Myinviter
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: about.php 0 2009-11-14 18:47:04Z trabis $
+ * @version         $Id: about.php 0 2009-06-11 18:47:04Z trabis $
  */
 
 include_once dirname(__FILE__) . '/admin_header.php';
-
-include_once dirname(dirname(__FILE__)) . '/class/about.php';
 xoops_cp_header();
-myinviter_adminMenu(3);
-$aboutObj = new MyinviterAbout();
-$aboutObj->render();
-xoops_cp_footer();
 
+$menu = new Xmf_Template_Adminmenu();
+$menu->display();
+
+$nav = new Xmf_Template_Adminnav();
+$nav->display();
+
+$about = new Xmf_Template_Adminabout();
+$about->display();
+
+xoops_cp_footer();
 ?>
