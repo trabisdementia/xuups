@@ -5,6 +5,6 @@ CREATE TABLE `myinviter_item` (
   `name` varchar(50) NOT NULL default '',
   `date` int(11) NOT NULL default '0',
   `status` int(1) NOT NULL default '0',
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY status (`status`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
