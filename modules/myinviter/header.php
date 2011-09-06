@@ -12,7 +12,7 @@
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Myinviter
+ * @package         myinviter
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: header.php 0 2009-11-14 18:47:04Z trabis $
@@ -20,6 +20,6 @@
 
 function_exists('curl_init') or die('Sorry, you need php curl extension to run this');
 include_once dirname(dirname(dirname(__FILE__))) . '/mainfile.php';
-include_once XOOPS_ROOT_PATH . '/modules/myinviter/include/functions.php';
+include_once XOOPS_ROOT_PATH . '/modules/myinviter/include/common.php';
 include_once XOOPS_ROOT_PATH . '/modules/myinviter/class/openinviter.php';
 ?>

@@ -12,7 +12,7 @@
 /**
  * @copyright       The XUUPS Project http://www.xuups.com
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Myinviter
+ * @package         myinviter
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: myinviter_add.php 0 2009-11-14 18:47:04Z trabis $
@@ -35,6 +35,7 @@ function myinviter_add_show($options)
     $oi_services = $inviter->getPlugins();
 
     $p_selected = '';
+    //todo, check this, not in use
     $plugType = '';
     if (!empty($provider_box)) {
         if (isset($oi_services['email'][$provider_box])) {
