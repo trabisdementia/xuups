@@ -35,7 +35,7 @@ $email_box = isset($_POST['email_box']) ?  $_POST['email_box'] : '';
 $password_box = isset($_POST['password_box']) ?  $_POST['password_box'] : '';
 $provider_box = isset($_POST['provider_box']) ?  $_POST['provider_box'] : '';
 
-$inviter = new OpenInviter();
+$inviter = xoops_getModuleHandler('inviter', 'Myinviter');
 $oi_services = $inviter->getPlugins();
 
 switch ($step) {
@@ -174,5 +174,3 @@ $xoopsTpl->assign('xoops_module_header', '
     </style>');
 
 include_once XOOPS_ROOT_PATH . '/footer.php';
-
-?>
