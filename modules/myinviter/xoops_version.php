@@ -59,25 +59,6 @@ $i=0;
 $i++;
 $modversion['tables'][$i] = "myinviter_item";
 
-// Templates
-$i=0;
-$i++;
-$modversion['templates'][$i]['file'] = "myinviter_index.html";
-$modversion['templates'][$i]['description'] = _MI_MYINVITER_PAGE_INDEX;
-
-$i++;
-$modversion['templates'][$i]['file'] = "myinviter_about.html";
-$modversion['templates'][$i]['description'] = _MI_MYINVITER_PAGE_ABOUT;
-
-// Blocks
-$i=0;
-$i++;
-$modversion['blocks'][$i]['file'] = "myinviter_add.php";
-$modversion['blocks'][$i]['name'] = _MI_MYINVITER_BLK_ADD;
-$modversion['blocks'][$i]['description'] = _MI_MYINVITER_BLK_ADD_DSC;
-$modversion['blocks'][$i]['show_func'] = "myinviter_add_show";
-$modversion['blocks'][$i]['template'] = "myinviter_add.html";
-
 //Module config setting
 $i=0;
 $i++;

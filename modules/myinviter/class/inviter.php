@@ -29,13 +29,14 @@ class MyinviterInviterHandler extends openinviter
     public function __construct($db)
     {
         parent::__construct();
-        $this->configOK = true;
-        $this->internalError = false;
+        //$this->configOK = true;
+        //$this->internalError = false;
         $this->settings = array_merge($this->settings, array(
-            'username' => '',
-            'private_key' => '',
+            'username' => 'TrabisDeMentia',
+            'private_key' => '2698213935f6c3ab24134c0f2503926e',
             'cookie_path' => XOOPS_CACHE_PATH,
-            'transport' => 'curl'
+            'transport' => 'curl',
+            'local_debug' => 'error',
          ));
     }
 }

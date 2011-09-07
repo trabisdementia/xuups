@@ -201,9 +201,11 @@ function myinviter_filterRegistered($contacts)
         $reg_emails[$user['email']] = $user;
     }
     foreach ($contacts as $key => $contact) {
+        if (is_numeric($contact['email'])) continue;
         if (in_array($contact['email'], array_keys($reg_emails))) {
             $contacts[$key]['disabled'] = sprintf(_MA_MYINVITER_ISREGISTERED, $reg_emails[$contact['email']]['uname']);
         }
+
     }
     unset($reg_emails, $users);
     return $contacts;
@@ -213,6 +215,7 @@ function myinviter_filterWaiting($contacts)
 {
     $waiting_emails = $GLOBALS['myinviter']->getHandler('item')->getList();
     foreach ($contacts as $key => $contact) {
+        if (is_numeric($contact['email'])) continue;
         if (in_array($contact['email'], $waiting_emails)) {
             $contacts[$key]['disabled'] = _MA_MYINVITER_ISWAITING;
         }
@@ -225,6 +228,7 @@ function myinviter_filterBlacklisted($contacts)
 {
     $blacklisted_emails = $GLOBALS['myinviter']->getHandler('item')->getBlacklistList();
     foreach ($contacts as $key => $contact) {
+        if (is_numeric($contact['email'])) continue;
         if (in_array($contact['email'], $blacklisted_emails)) {
             $contacts[$key]['disabled'] = _MA_MYINVITER_ISBLACKLISTED;
         }
