@@ -237,7 +237,7 @@ function index_index($start = 0)
     $grablimit = new XoopsFormText('', 'grablimit', 3, 30, $session->get('limit'));
     $xoopsTpl->assign('limitform', $grablimit->render());
 
-    return $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/myinviter/templates/static/myinviter_admin_index.html');
+    return $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/myinviter/templates/myinviter_admin_index.html');
 }
 
 function index_del($id, $redir = null)

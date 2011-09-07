@@ -20,8 +20,15 @@
 
 include_once dirname(__FILE__) . '/header.php';
 
-$xoopsOption['template_main'] = 'myinviter_index.html';
 include_once XOOPS_ROOT_PATH . '/header.php';
+
+if (isset($_SESSION['contacts_post'])) {
+    $_POST = $_SESSION['contacts_post'];
+    $_POST['step'] = 'get_contacts';
+    $_SESSION['contacts_post'] = null;
+}
+
+$template = 'list';
 
 $p_disabled = array();
 $p_provider = array();
@@ -31,9 +38,10 @@ $ers = array();
 $import_ok = false;
 
 $step = isset($_POST['step']) ? $_POST['step'] : 'form';
-$email_box = isset($_POST['email_box']) ?  $_POST['email_box'] : '';
-$password_box = isset($_POST['password_box']) ?  $_POST['password_box'] : '';
-$provider_box = isset($_POST['provider_box']) ?  $_POST['provider_box'] : '';
+$email_box = isset($_POST['email_box']) ? $_POST['email_box'] : '';
+$password_box = isset($_POST['password_box']) ? $_POST['password_box'] : '';
+$provider_box = isset($_POST['provider_box']) ? $_POST['provider_box'] : '';
+$oi_session_id = isset($_POST['oi_session_id']) ? $_POST['oi_session_id'] : '';
 
 $inviter = xoops_getModuleHandler('inviter', 'Myinviter');
 $oi_services = $inviter->getPlugins();
@@ -63,42 +71,72 @@ switch ($step) {
                 $import_ok = true;
             }
         }
-
         break;
 
     case 'send_invites':
+        $selected_contacts = array();
         $this_handler = xoops_getmodulehandler('item');
-        $uid = is_object($xoopsUser) ?  $xoopsUser->getVar('uid') : intval($xoopsModuleConfig['defaultuid']);
+        $uid = is_object($xoopsUser) ? $xoopsUser->getVar('uid') : intval($xoopsModuleConfig['defaultuid']);
         $list = isset($_POST['list']) ? $_POST['list'] : array();
 
-        foreach ($list as $name_email) {
-            if (ereg(':', $name_email)){
-                list($fname, $fmail) = explode(':', $name_email);
-            } else {
-                continue;
-            }
-
-            if (ereg('@', $fname)){
-                $split = explode('@', $fname);
-                $fname = $split[0];
-            }
-
-            if (ereg(', ', $fname)){
-                $split = explode(', ', $fname);
-                $fname = $split[1] . ' ' . $split[0];
-            }
-
-            $waiting = $this_handler->create();
-            $waiting->setVar('userid', $uid);
-            $waiting->setVar('email', $fmail);
-            $waiting->setVar('name', $fname);
-            $waiting->setVar('date', time());
-            $this_handler->insertWaiting($waiting);
-            unset($waiting);
+        $inviter->startPlugin($provider_box);
+        $internal = $inviter->getInternalError();
+        if ($internal) {
+            $ers['internal'] = $internal;
+        }
+        if (empty($provider_box)) {
+            $ers['provider'] = _MA_MYINVITER_ERROR_PROVIDERMISSING;
+        }
+        if (empty($oi_session_id)) {
+            $ers['session_id'] = 'No active session !';
         }
 
-        redirect_header('index.php', 2, _MA_MYINVITER_EMAILSADDED);
-        exit();
+        if (count($ers) == 0) {
+            foreach ($list as $name_email) {
+                if (ereg(':', $name_email)){
+                    list($fname, $fmail) = explode(':', $name_email);
+                } else {
+                    continue;
+                }
+
+                if (ereg('@', $fname)){
+                    $split = explode('@', $fname);
+                    $fname = $split[0];
+                }
+
+                if (ereg(', ', $fname)){
+                    $split = explode(', ', $fname);
+                    $fname = $split[1] . ' ' . $split[0];
+                }
+
+                //for services that don't provide email (twitter/facebook)
+                if (is_numeric($fmail)) {
+                    $selected_contacts[$fmail] = $fname;
+                } else {
+                    $waiting = $this_handler->create();
+                    $waiting->setVar('userid', $uid);
+                    $waiting->setVar('email', $fmail);
+                    $waiting->setVar('name', $fname);
+                    $waiting->setVar('date', time());
+                    $this_handler->insertWaiting($waiting);
+                    unset($waiting);
+                }
+            }
+
+            if (count($selected_contacts) > 0) {
+                $message = array('subject' => 'My invite', 'body' => 'Hi trabis!', 'attachment' => "\n\rAttached message: \n\r" . $_POST['message_box']);
+
+                $messageSent = $inviter->sendMessage($oi_session_id, $message, $selected_contacts);
+                $inviter->logout();
+                if ($messageSent === -1 || $messageSent === false) {
+                    //nviter->stopPlugin(true);
+                    redirect_header('index.php', 2, $inviter->getInternalError());
+                }
+            }
+            //nviter->stopPlugin(true);
+            redirect_header('index.php', 2, _MA_MYINVITER_EMAILSADDED);
+            exit();
+        }
         break;
 
     case 'form':
@@ -115,18 +153,15 @@ if (!empty($provider_box)) {
     }
 }
 
-$i = 0;
 foreach ($oi_services as $type => $providers) {
-    $s_list[$i] = $inviter->pluginTypes[$type];
+    $s_list[$type] = $inviter->pluginTypes[$type];
     foreach ($providers as $provider => $details) {
-        $p_list[$i][$provider] = $details['name'];
+        $p_list[$type][$provider] = $details['name'];
         if ($provider_box == $provider) {
             $p_selected = $provider;
         }
     }
-    $i++;
 }
-
 $xoopsTpl->assign('services', $s_list);
 $xoopsTpl->assign('providers', $p_list);
 $xoopsTpl->assign('selected', $p_selected);
@@ -134,12 +169,14 @@ $xoopsTpl->assign('errors', $ers);
 $xoopsTpl->assign('email_box' , $email_box);
 $xoopsTpl->assign('password_box', $password_box);
 $xoopsTpl->assign('provider_box', $provider_box);
+$xoopsTpl->assign('oi_session_id', $oi_session_id);
 
 if ($import_ok) {
+    $template = 'contacts';
     $i = 0;
     foreach ($contacts as $email => $name) {
         $con[$i]['email'] = $email;
-        $con[$i]['name'] = utf8_decode($name);
+        $con[$i]['name'] = utf8_encode($name);
         $i++;
     }
     $con = myinviter_filterRegistered($con);
@@ -148,29 +185,43 @@ if ($import_ok) {
 
     $xoopsTpl->assign('contacts_array', $con);
     unset($contacts, $con);
+    $xoopsTpl->assign('xoops_module_header', '
+        <script>
+
+        //Check all radio/check buttons script- by javascriptkit.com
+        //Visit JavaScript Kit (http://javascriptkit.com) for script
+        //Credit must stay intact for use
+
+
+        function checkall(thestate){
+        var el_collection = document.forms[\'form_results\'].elements[\'list[]\'];
+        for (var c=0;c<el_collection.length;c++)
+        el_collection[c].checked=thestate
+        }
+
+        </script>
+        <style type="text/css">
+
+        td.off {
+        background: #A4A4A4;
+        }
+
+        </style>
+    ');
+}
+switch ($template) {
+    case 'list':
+        $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
+        $xoTheme->addScript('modules/myinviter/js/jquery.mousewheel-3.0.4.pack.js');
+        $xoTheme->addScript('modules/myinviter/js/jquery.fancybox-1.3.4.pack.js');
+        $xoTheme->addStylesheet('modules/myinviter/css/jquery.fancybox-1.3.4.css');
+        $xoTheme->addStylesheet('modules/myinviter/css/style.css');
+
+        break;
 }
 
-$xoopsTpl->assign('xoops_module_header', '
-    <script>
-
-    //Check all radio/check buttons script- by javascriptkit.com
-    //Visit JavaScript Kit (http://javascriptkit.com) for script
-    //Credit must stay intact for use
 
 
-    function checkall(thestate){
-    var el_collection = document.forms[\'form_results\'].elements[\'list[]\'];
-    for (var c=0;c<el_collection.length;c++)
-    el_collection[c].checked=thestate
-    }
-
-    </script>
-    <style type="text/css">
-
-    td.off {
-    background: #A4A4A4;
-    }
-
-    </style>');
+$xoopsTpl->display(XOOPS_ROOT_PATH . "/modules/myinviter/templates/myinviter_{$template}.html");
 
 include_once XOOPS_ROOT_PATH . '/footer.php';
