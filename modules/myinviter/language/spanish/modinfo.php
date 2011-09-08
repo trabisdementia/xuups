@@ -94,7 +94,7 @@ define("_MI_MYINVITER_CONF_PRELOAD", "Preload");
 define("_MI_MYINVITER_CONF_CRON", "Cron");
 
 define("_MI_MYINVITER_CONF_CRONKEY", "GENERAL - Cron key");
-define("_MI_MYINVITER_CONF_CRONKEY_DSC", "If you choose to use cron(which you should) you need to set a unique key to avoid DOS attacks<br />The cron job should be configured to request file modules/myinviter/cron.php?key=THEFOLLOWINGKEY");
+define("_MI_MYINVITER_CONF_CRONKEY_DSC", "If you choose to use cron(which you should) you can set a unique key to avoid DOS attacks<br />The cron job should be configured as:<br /><b>wget -O - -t 1 http://www.yoursite.net/modules/myinviter/cron.php?key=THEFOLLOWINGKEY</b>");
 
 define("_MI_MYINVITER_CONF_DEBUG", "GENERAL - Add debug info on 'extra' tab");
 define("_MI_MYINVITER_CONF_DEBUG_DSC", "Allows extra debug info for developers (requires xoops debug to be active). use 'No' for better performance");
