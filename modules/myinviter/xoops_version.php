@@ -136,6 +136,115 @@ $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = is_object($xoopsUser) ? $xoopsUser->getVar('uid') : 0;
 
+$i++;
+$modversion['config'][$i]['name'] = 'subject';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_SUBJECT';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_SUBJECT_DSC';
+$modversion['config'][$i]['formtype'] = 'textbox';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] = _MI_MYINVITER_CONF_SUBJECT_DEF;;
+
+$i++;
+$modversion['config'][$i]['name'] = 'socialsubject';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_SOCIALSUBJECT';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_SOCIALSUBJECT_DSC';
+$modversion['config'][$i]['formtype'] = 'textbox';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] = _MI_MYINVITER_CONF_SOCIALSUBJECT_DEF;
+
+$i++;
+$modversion['config'][$i]['name'] = 'socialmessage';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_SOCIALMESSAGE';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_SOCIALMESSAGE_DSC';
+$modversion['config'][$i]['formtype'] = 'textbox';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] = _MI_MYINVITER_CONF_SOCIALMESSAGE_DEF;
+
+$i++;
+$modversion['config'][$i]['name'] = 'googleurl';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_GOOGLEURL';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_GOOGLEURL_DSC';
+$modversion['config'][$i]['formtype'] = 'textbox';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] = _MI_MYINVITER_CONF_GOOGLEURL_DEF;
+
+$i++;
+$modversion['config'][$i]['name'] = 'yahoourl';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_YAHOOURL';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_YAHOOURL_DSC';
+$modversion['config'][$i]['formtype'] = 'textbox';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] = _MI_MYINVITER_CONF_YAHOOURL_DEF;
+
+$i++;
+$modversion['config'][$i]['name'] = 'bingurl';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_BINGURL';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_BINGURL_DSC';
+$modversion['config'][$i]['formtype'] = 'textbox';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] = _MI_MYINVITER_CONF_BINGURL_DEF;
+
+$i++;
+$modversion['config'][$i]['name'] = 'providers';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_PROVIDERS';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_PROVIDERS_DSC';
+$modversion['config'][$i]['formtype'] = 'textbox';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] = _MI_MYINVITER_CONF_PROVIDERS_DEF;
+
+$i++;
+$modversion['config'][$i]['name'] = 'autocrawl';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_AUTOCRAWL';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_AUROCRAWL_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 0;
+
+$i++;
+$modversion['config'][$i]['name'] = 'autocrawlfolder';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_AUTOCRAWLFOLDER';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_AUTOCRAWLFOLDER_DSC';
+$modversion['config'][$i]['formtype'] = 'select';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] = 'notsent';
+$modversion['config'][$i]['options'] = array(_MI_MYINVITER_CONF_WAITING => 'waiting',
+_MI_MYINVITER_CONF_NOTSENT => 'notsent');
+
+$i++;
+$modversion['config'][$i]['name'] = 'autocrawljobs';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_AUTOCRAWLJOBS';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_AUTOCRAWLJOBS_DSC';
+$modversion['config'][$i]['formtype'] = 'textarea';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] = '';
+
+
+$i++;
+$modversion['config'][$i]['name'] = 'hook';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_HOOK';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_HOOK_DSC';
+$modversion['config'][$i]['formtype'] = 'select';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] = 'notsent';
+$modversion['config'][$i]['options'] = array(_MI_MYINVITER_CONF_PRELOAD => 'preload',
+_MI_MYINVITER_CONF_CRON => 'cron');
+
+$i++;
+$modversion['config'][$i]['name'] = 'cronkey';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_CRONKEY';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_CRONKEY_DSC';
+$modversion['config'][$i]['formtype'] = 'textbox';
+$modversion['config'][$i]['valuetype'] = 'text';
+$modversion['config'][$i]['default'] = md5(XOOPS_URL . XOOPS_ROOT_PATH . XOOPS_DB_USER);
+
+$i++;
+$modversion['config'][$i]['name'] = 'debug';
+$modversion['config'][$i]['title'] = '_MI_MYINVITER_CONF_DEBUG';
+$modversion['config'][$i]['description'] = '_MI_MYINVITER_CONF_DEBUG_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 1;
+
 // About stuff
 $modversion['status_version'] = "Beta";
 $modversion['status'] = "Beta";

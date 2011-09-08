@@ -42,7 +42,7 @@ define('MYINVITER_STATUS_NOTSENT', 3);
 define('MYINVITER_STATUS_SENT', 4);
 
 $myinviter = Xmf_Module_Helper::getInstance(MYINVITER_DIRNAME);
-$myinviter->setDebug(true);
+$myinviter->setDebug($myinviter->getConfig('debug'));
 $GLOBALS['myinviter'] =& $myinviter;
 
 include_once MYINVITER_ROOT_PATH . '/include/functions.php';

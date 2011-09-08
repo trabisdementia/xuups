@@ -49,8 +49,8 @@ define("_AM_MYINVITER_PROVIDER2", "Email provider : ");
 define("_AM_MYINVITER_START", "Page to start : ");
 define("_AM_MYINVITER_LIMIT", "Number of pages : ");
 define("_AM_MYINVITER_GRAB_EMAILS", "Grab Emails");
-define("_AM_MYINVITER_EMAILS_NOTFOUND", "Emails not found, try again!");
+define("_AM_MYINVITER_EMAILS_NOTFOUND", "Emails not found, try other domain/provider/start page!");
 define("_AM_MYINVITER_EMAILS_ADDED", "Emails Added : ");
 define("_AM_MYINVITER_EMAILS_NOTADDED", "Emails Already in DB : ");
 
-?>
+define("_AM_MYINVITER_NORESPONSE", "No response!!!");
