@@ -24,9 +24,8 @@ class MyinviterCorePreload extends XoopsPreloadItem
 {
     function eventCoreHeaderStart($args)
     {
-        if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/myinviter/include/common.php')) {
+        if (file_exists($filename = XOOPS_ROOT_PATH . '/modules/myinviter/cron.php')) {
             include_once $filename;
-            myinviter_sendEmails();
         }
     }
 

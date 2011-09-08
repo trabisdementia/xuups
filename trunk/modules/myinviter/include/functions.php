@@ -22,8 +22,187 @@ defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
 function myinviter_isValidEmail($email)
 {
-        return eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email);
+    return preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i', $email);
 }
+function myinviter_runJobs()
+{
+    $jobs = myinviter_getCachedJobs();
+    foreach ($jobs as $key => $job) {
+        if ($job['lasttime'] == 0 || (time() - $job['lasttime']) > $job['interval']) {
+             $jobs[$key] = myinviter_executeJob($job);
+             break; //do not allow more then one job at a time;
+        }
+    }
+    myinviter_setCachedJobs($jobs);
+}
+
+function myinviter_executeJob($job)
+{
+    $ret = myinviter_grabEmails($job['domain'], $job['provider'], $GLOBALS['myinviter']->getConfig('autocrawlfolder'), $job['start']);
+
+    $log = "Job Executed: " . Xmf_Debug::dump($job, false, false);
+    $GLOBALS['myinviter']->addLog($log);
+    $log = "Job Results: " . Xmf_Debug::dump($ret, false, false);
+    $GLOBALS['myinviter']->addLog($log);
+
+    $job['lasttime'] = time();
+    $job['start']++;
+    if ($job['start'] == $job['npages']) {
+        $job['start'] = 0;
+    }
+    return $job;
+}
+
+function myinviter_grabEmails($domain, $provider, $folder = 'notsent', $start = 0, $npages = 1)
+{
+    xoops_loadLanguage('admin', 'myinviter');
+    $ret['error'] = '';
+    $ret['added'] = 0;
+    $ret['notadded'] = 0;
+    $text = '';
+    $limit = $start + $npages;
+    while ($start < $limit) {
+        $b = $start * 10 + 1;
+        $url = $GLOBALS['myinviter']->getConfig('yahoourl')
+               . "/search?p=site:"
+               . $domain
+               . "+%40"
+               . $provider
+               . "&fr2=sb-top&fr=yfp-t-705&rd=r1&&pstart=1&b="
+               . $b;
+        $text .= strip_tags(myinviter_getContentsCurl($url));
+
+        $url = $GLOBALS['myinviter']->getConfig('bingurl')
+               . "/?q=site:"
+               . $domain
+               . "+%40"
+               . $provider
+               . "&go=&filt=all&first="
+               . $b;
+        $text .= strip_tags(myinviter_getContentsCurl($url));
+
+        //20 is the limit for google
+        if ($start < 20) {
+            $url = $GLOBALS['myinviter']->getConfig('googleurl')
+                   . "/?q=site:"
+                   . $domain
+                   . "+%40"
+                   . $provider
+                   . "&sa=N&start="
+                   . $b;
+            $text .= strip_tags(myinviter_getContentsCurl($url));
+        }
+        $start = $start + 1;
+        sleep(1);
+    }
+    //echo $text;
+
+    $this_handler = $GLOBALS['myinviter']->getHandler('item');
+    // parse emails
+    if (!empty($text)) {
+        $res = preg_match_all(
+            "/[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}/i",
+            $text,
+            $matches
+        );
+
+        if ($res) {
+            foreach (array_unique($matches[0]) as $email) {
+                $email = strtolower(trim($email));
+                $email = str_replace($domain, '', $email);
+                if (myinviter_isValidEmail($email)) {
+                    if (!$this_handler->emailExists($email)) {
+                        $split = explode('@', $email);
+                        $name = $split[0];
+                        $obj = $this_handler->create();
+                        $obj->setVar('name', $name);
+                        $obj->setVar('userid', $GLOBALS['xoopsUser']->getVar('uid'));
+                        $obj->setVar('email', $email);
+                        $obj->setVar('date', time());
+                        if ($folder == 'waiting') {
+                            $this_handler->insertWaiting($obj);
+                        } else {
+                            $this_handler->insertNotSent($obj);
+                        }
+                        $ret['added']++;
+                    } else {
+                        $ret['notadded']++;
+                    }
+                }
+            }
+        } else {
+            $ret['error'] = _AM_MYINVITER_EMAILS_NOTFOUND;
+        }
+    } else {
+        $ret['error'] = _AM_MYINVITER_NORESPONSE;
+    }
+    return $ret;
+}
+
+function myinviter_getContentsCurl($url)
+{
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //Set curl to return the data instead of printing it to the browser.
+    curl_setopt($ch, CURLOPT_URL, $url);
+
+    $data = curl_exec($ch);
+    curl_close($ch);
+
+    return $data;
+}
+
+function myinviter_getCachedJobs()
+{
+    $ret = $GLOBALS['myinviter']->getHelper('cache')->read('jobs');
+    if ($ret == false) {
+        $ret = myinviter_setCachedJobs();
+    }
+    return $ret;
+}
+
+function myinviter_setCachedJobs($jobs = array())
+{
+    $ret = $configJobs = myinviter_getConfigJobs();
+    $checksum = md5(serialize($configJobs));
+
+    if(!$oldcheck = $GLOBALS['myinviter']->getHelper('cache')->read('checksum')) {
+        $GLOBALS['myinviter']->getHelper('cache')->write('checksum', $checksum);
+        $GLOBALS['myinviter']->getHelper('cache')->write('jobs', $configJobs);
+    } else if ($oldcheck != $checksum) {
+        $GLOBALS['myinviter']->getHelper('cache')->write('checksum', $checksum);
+        $GLOBALS['myinviter']->getHelper('cache')->write('jobs', $configJobs);
+    } else {
+        $GLOBALS['myinviter']->getHelper('cache')->write('jobs', $jobs);
+        $ret = $jobs;
+    }
+
+    return $ret;
+}
+
+
+function myinviter_getConfigJobs()
+{
+    $ret = array();
+
+    $lines = explode("\n", $GLOBALS['myinviter']->getConfig('autocrawljobs'));
+
+    if (empty($lines[0])) return $ret;
+
+    foreach ($lines as $key => $line) {
+        list($domain, $provider, $npages, $interval) = explode('|', trim($line));
+        $ret[$key]['domain'] = $domain;
+        $ret[$key]['provider'] = $provider;
+        $ret[$key]['interval'] = intval($interval);
+        $ret[$key]['npages'] = intval($npages);
+        $ret[$key]['start'] = 0;
+        $ret[$key]['lasttime'] = 0;
+    }
+
+    return $ret;
+}
+
 
 function myinviter_sendEmails($id = null, $force = false)
 {
@@ -125,7 +304,7 @@ function myinviter_sendEmails($id = null, $force = false)
         $xoopsMailer->setFromName($fromname);
 
         xoops_loadLanguage('main', 'myinviter');
-        $xoopsMailer->setSubject(sprintf(_MA_MYINVITER_EMAIL_SUBJECT, $thisUser->getVar('uname')));
+        $xoopsMailer->setSubject(sprintf($GLOBALS['myinviter']->getConfig('subject'), $thisUser->getVar('uname')));
 
         $xoopsMailer->assign("ADMINMAIL", $xoopsConfig['adminmail']);
         $xoopsMailer->assign("USER_UNAME", $thisUser->getVar('uname'));

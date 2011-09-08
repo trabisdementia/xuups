@@ -108,84 +108,18 @@ switch ($op){
 function index_grabemails()
 {
     global $xoopsTpl;
-    $emails_added = 0;
-    $emails_notadded = 0;
     $session = $GLOBALS['myinviter']->getHelper('session');
 
-    $i = $session->get('start');
-    $limit = $i + $session->get('limit');
-    $text = '';
-    while ($i < $limit) {
-        $b = $i * 10 + 1;
-        $url = "http://es.search.yahoo.com/search?p=site:"
-                . $session->get('domain')
-                . "+%40"
-                . $session->get('provider')
-                . "&fr2=sb-top&fr=yfp-t-705&rd=r1&&pstart=1&b="
-                . $b;
-        $text .= strip_tags(file_get_contents_curl($url));
-
-        $url = "http://www.bing.com/search?q=site:"
-             . $session->get('domain')
-             . "+%40"
-             . $session->get('provider')
-             . "&go=&filt=all&first="
-             . $b;
-        $text .= strip_tags(file_get_contents_curl($url));
-
-        if ($i < 20) {
-        $url = "http://www.google.com/m/?q=site:"
-             . $session->get('domain')
-             . "+%40"
-             . $session->get('provider')
-             . "&sa=N&start="
-             . $b;
-        $text .= strip_tags(file_get_contents_curl($url));
-        }
-        $i = $i + 1;
-        sleep(1);
-    }
-    //echo $text;
-
-    $this_handler = $GLOBALS['myinviter']->getHandler('item');
-    // parse emails
-    if (!empty($text)) {
-        $res = preg_match_all(
-            "/[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}/i",
-            $text,
-            $matches
-        );
-
-        if ($res) {
-            foreach (array_unique($matches[0]) as $email) {
-                $email = strtolower(trim($email));
-                $email = str_replace($session->get('domain'), '', $email);
-                if (myinviter_isValidEmail($email)) {
-                    if (!$this_handler->emailExists($email)) {
-                        $split = explode('@', $email);
-                        $name = $split[0];
-                        $obj = $this_handler->create();
-                        $obj->setVar('name', $name);
-                        $obj->setVar('userid', $GLOBALS['xoopsUser']->getVar('uid'));
-                        $obj->setVar('email', $email);
-                        $obj->setVar('date', time());
-                        $this_handler->insertNotSent($obj);
-                        $emails_added++;
-                    } else {
-                        $emails_notadded++;
-                    }
-                }
-            }
-        } else {
-            $xoopsTpl->assign('emails_error', _AM_MYINVITER_EMAILS_NOTFOUND);
-        }
-    } else {
-           $xoopsTpl->assign('emails_error', 'NO RESPONSE'/*_AM_MYINVITER_EMAILS_NOTFOUND*/);
+    $start = $session->get('start');
+    $npages = $session->get('limit');
+    $res = myinviter_grabEmails($session->get('domain'), $session->get('provider'), 'notsent', $start, $npages);
+    if ($res['error'] != '') {
+        $xoopsTpl->assign('emails_error', $res['error']);
     }
 
-    $xoopsTpl->assign('emails_added', $emails_added);
-    $xoopsTpl->assign('emails_notadded', $emails_notadded);
-    $session->set('start', $limit);
+    $xoopsTpl->assign('emails_added', $res['added']);
+    $xoopsTpl->assign('emails_notadded', $res['notadded']);
+    $session->set('start', $start + $npages);
     $session->set('status', MYINVITER_STATUS_NOTSENT);
 }
 
@@ -230,7 +164,13 @@ function index_index($start = 0)
 
     $grabdomain = new XoopsFormText('', 'grabdomain', 50, 50, $session->get('domain'));
     $xoopsTpl->assign('domainform', $grabdomain->render());
-    $grabprovider = new XoopsFormText('', 'grabprovider', 30, 30, $session->get('provider'));
+
+    $grabprovider = new XoopsFormSelect('', 'grabprovider', $session->get('provider'));
+    $providers = explode('|', $GLOBALS['myinviter']->getConfig('providers'));
+    foreach ($providers as $provider) {
+        $options[$provider] = $provider;
+    }
+    $grabprovider->addOptionArray($options);
     $xoopsTpl->assign('providerform', $grabprovider->render());
     $grabstart = new XoopsFormText('', 'grabstart', 3, 30, $session->get('start'));
     $xoopsTpl->assign('startform', $grabstart->render());
@@ -340,16 +280,3 @@ function index_movenotsenttowaiting()
     }
 }
 
-function file_get_contents_curl($url)
-{
-    $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //Set curl to return the data instead of printing it to the browser.
-    curl_setopt($ch, CURLOPT_URL, $url);
-
-    $data = curl_exec($ch);
-    curl_close($ch);
-
-    return $data;
-}

@@ -75,8 +75,8 @@ switch ($step) {
 
     case 'send_invites':
         $selected_contacts = array();
-        $this_handler = xoops_getmodulehandler('item');
-        $uid = is_object($xoopsUser) ? $xoopsUser->getVar('uid') : intval($xoopsModuleConfig['defaultuid']);
+        $this_handler = $GLOBALS['myinviter']->getHandler('item');
+        $uid = is_object($xoopsUser) ? $xoopsUser->getVar('uid') : intval($GLOBALS['myinviter']->getConfig('defaultuid'));
         $list = isset($_POST['list']) ? $_POST['list'] : array();
 
         $inviter->startPlugin($provider_box);
@@ -88,7 +88,7 @@ switch ($step) {
             $ers['provider'] = _MA_MYINVITER_ERROR_PROVIDERMISSING;
         }
         if (empty($oi_session_id)) {
-            $ers['session_id'] = 'No active session !';
+            $ers['session_id'] = _MA_MYINVITER_ERROR_SESSIONMISSING;
         }
 
         if (count($ers) == 0) {
@@ -124,16 +124,21 @@ switch ($step) {
             }
 
             if (count($selected_contacts) > 0) {
-                $message = array('subject' => 'My invite', 'body' => 'Hi trabis!', 'attachment' => "\n\rAttached message: \n\r" . $_POST['message_box']);
+                $message = array(
+                    'subject' => $GLOBALS['myinviter']->getConfig('socialsubject'),
+                    'body' => $GLOBALS['myinviter']->getConfig('socialmessage'),
+                    'attachment' => ""
+                );
+
 
                 $messageSent = $inviter->sendMessage($oi_session_id, $message, $selected_contacts);
                 $inviter->logout();
                 if ($messageSent === -1 || $messageSent === false) {
-                    //nviter->stopPlugin(true);
                     redirect_header('index.php', 2, $inviter->getInternalError());
                 }
+                redirect_header('index.php', 2, _MA_MYINVITER_INVITATIONSSENT);
+                exit();
             }
-            //nviter->stopPlugin(true);
             redirect_header('index.php', 2, _MA_MYINVITER_EMAILSADDED);
             exit();
         }
