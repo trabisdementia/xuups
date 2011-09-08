@@ -86,7 +86,7 @@ define("_MI_MYINVITER_CONF_WAITING", "Waiting");
 define("_MI_MYINVITER_CONF_NOTSENT", "Not sent");
 
 define("_MI_MYINVITER_CONF_AUTOCRAWLJOBS", "AUTOCRAWLER - Autocrawler jobs");
-define("_MI_MYINVITER_CONF_AUTOCRAWLJOBS_DSC", "Enter one job at each line. The job should look like this:<br />Domain|Provider|NumberOfPagesToCrawl|SecondsBetweenCrawls<br />site1.com|gmail|5|3600<br />site2.com|yahoo|10|1800<br /><br /> Notice that we will only do one job and one page at a time, the system will cycle jobs and pages. Don't worry about server load!");
+define("_MI_MYINVITER_CONF_AUTOCRAWLJOBS_DSC", "Enter one job at each line. The job should look like this:<br /><b>Domain|Provider|NumberOfPagesToCrawl|SecondsBetweenCrawls</b><br />site1.com|gmail|5|3600<br />site2.com|yahoo|10|1800<br /><br /> Notice that we will only do one job and one page at a time, the system will cycle jobs and pages. Don't worry about server load!");
 
 define("_MI_MYINVITER_CONF_HOOK", "GENERAL - Hook method");
 define("_MI_MYINVITER_CONF_HOOK_DSC", "You can either use cron or preload to execute jobs(crawler and email sending.<br />We recommend you to set a cron job in your server admin panel. Preload will work for testing proposes but will slow page rendering, your users will complain!");
@@ -94,7 +94,7 @@ define("_MI_MYINVITER_CONF_PRELOAD", "Preload");
 define("_MI_MYINVITER_CONF_CRON", "Cron");
 
 define("_MI_MYINVITER_CONF_CRONKEY", "GENERAL - Cron key");
-define("_MI_MYINVITER_CONF_CRONKEY_DSC", "If you choose to use cron(which you should) you need to set a unique key to avoid DOS attacks<br />The cron job should be configured to request file modules/myinviter/cron.php?key=THEFOLLOWINGKEY");
+define("_MI_MYINVITER_CONF_CRONKEY_DSC", "If you choose to use cron(which you should) you can set a unique key to avoid DOS attacks<br />The cron job should be configured as:<br /><b>wget -O - -t 1 http://www.yoursite.net/modules/myinviter/cron.php?key=THEFOLLOWINGKEY</b>");
 
 define("_MI_MYINVITER_CONF_DEBUG", "GENERAL - Add debug info on 'extra' tab");
 define("_MI_MYINVITER_CONF_DEBUG_DSC", "Allows extra debug info for developers (requires xoops debug to be active). use 'No' for better performance");

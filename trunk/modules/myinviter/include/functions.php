@@ -59,6 +59,7 @@ function myinviter_grabEmails($domain, $provider, $folder = 'notsent', $start = 
     $ret['error'] = '';
     $ret['added'] = 0;
     $ret['notadded'] = 0;
+    $uid = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : intval($GLOBALS['myinviter']->getConfig('defaultuid'));
     $text = '';
     $limit = $start + $npages;
     while ($start < $limit) {
@@ -116,7 +117,7 @@ function myinviter_grabEmails($domain, $provider, $folder = 'notsent', $start = 
                         $name = $split[0];
                         $obj = $this_handler->create();
                         $obj->setVar('name', $name);
-                        $obj->setVar('userid', $GLOBALS['xoopsUser']->getVar('uid'));
+                        $obj->setVar('userid', $uid);
                         $obj->setVar('email', $email);
                         $obj->setVar('date', time());
                         if ($folder == 'waiting') {

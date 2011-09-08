@@ -43,7 +43,7 @@ $password_box = isset($_POST['password_box']) ? $_POST['password_box'] : '';
 $provider_box = isset($_POST['provider_box']) ? $_POST['provider_box'] : '';
 $oi_session_id = isset($_POST['oi_session_id']) ? $_POST['oi_session_id'] : '';
 
-$inviter = xoops_getModuleHandler('inviter', 'Myinviter');
+$inviter = $GLOBALS['myinviter']->getHandler('inviter');
 $oi_services = $inviter->getPlugins();
 
 switch ($step) {
