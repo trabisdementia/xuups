@@ -35,9 +35,11 @@ define ("_MA_MYINVITER_ERROR_PROVIDERMISSING", "Proveedor falta!");
 define ("_MA_MYINVITER_ERROR_INVALIDPROVIDER", "Proveedor no válido");
 define ("_MA_MYINVITER_ERROR_FULLEMAIL", "Por favor introduce el email completa, no sólo el nombre de usuario!");
 define ("_MA_MYINVITER_ERROR_NOTFULLEMAIL", "Por favor, introduzca sólo el nombre de usuario, no el email completa!");
-define ("_MA_MYINVITER_ERROR_INVALIDDOMAIN", "<strong> %s </ strong> no es un dominio válido para este proveedor!");
+define ("_MA_MYINVITER_ERROR_INVALIDDOMAIN", "<strong> %s </strong> no es un dominio válido para este proveedor!");
 
 define ("_MA_MYINVITER_EMAILPROVIDERS", "Los proveedores de email");
 define ("_MA_MYINVITER_SOCIALNETWORKS", "Redes Sociales");
 
-?>
+//07/09/2011
+define("_MA_MYINVITER_ERROR_SESSIONMISSING", "Unable to get a valid session!");
+define("_MA_MYINVITER_INVITATIONSSENT", "Your friends were invited! Thank you!");

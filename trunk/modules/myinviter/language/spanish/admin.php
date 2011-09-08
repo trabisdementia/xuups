@@ -52,4 +52,6 @@ define("_AM_MYINVITER_GRAB_EMAILS", "Grab Emails");
 define("_AM_MYINVITER_EMAILS_NOTFOUND", "Emails not found, try again!");
 define("_AM_MYINVITER_EMAILS_ADDED", "Emails Added : ");
 define("_AM_MYINVITER_EMAILS_NOTADDED", "Emails Already in DB : ");
-?>
+
+//07/09/11
+define("_AM_MYINVITER_NORESPONSE", "No response!!!");
