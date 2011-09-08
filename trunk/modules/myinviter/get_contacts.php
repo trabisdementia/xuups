@@ -82,7 +82,6 @@ if (isset($_POST['provider_box'])) {
 }
 elseif (!empty($_GET['provider_box']))
 {
-    print_R($oi_services);
     if (isset($oi_services['email'][$_GET['provider_box']])) {
         $plugType = 'email';
     }
