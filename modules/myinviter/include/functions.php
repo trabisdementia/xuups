@@ -45,6 +45,11 @@ function myinviter_executeJob($job)
     $log = "Job Results: " . Xmf_Debug::dump($ret, false, false);
     $GLOBALS['myinviter']->addLog($log);
 
+    if (xoops_isActiveModule('log')) {
+        $log = Xmf_Debug::dump($job, false) . Xmf_Debug::dump($ret, false);
+        Xmf_Module_Helper::getInstance('log')->getHandler('item')->addItem('myinviter', 'autocrawler', $log);
+    }
+
     $job['lasttime'] = time();
     $job['start']++;
     if ($job['start'] == $job['npages']) {
@@ -336,6 +341,9 @@ function myinviter_sendEmails($id = null, $force = false)
     myinviter_setLastTime($now);
     $lastcount = myinviter_getEmailsSent();
     myinviter_setEmailsSent($lastcount + $sent);
+    if (xoops_isActiveModule('log')) {
+        Xmf_Module_Helper::getInstance('log')->getHandler('item')->addItem('myinviter', 'emailssent', $sent);
+    }
 
     return $errors;
 }
