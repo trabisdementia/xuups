@@ -10,7 +10,7 @@
  */
 
 /**
- * @copyright       The XUUPS Project http://www.xuups.com
+ * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package         Subscribers
  * @since           1.0
