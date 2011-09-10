@@ -6,7 +6,8 @@ if (!defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
 
-include dirname(__FILE__) . '/include/common.php';
+//include dirname(__FILE__) . '/include/common.php';
+
 
 $modversion['dirname'] = basename(dirname(__FILE__));
 $modversion['name'] = ucfirst(basename(dirname(__FILE__)));
