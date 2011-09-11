@@ -1,36 +1,38 @@
 <?php
-//  Author: Trabis
-//  URL: http://www.xuups.com
-//  E-Mail: lusopoemas@gmail.com
-if (!defined('XOOPS_ROOT_PATH')) {
-    die('XOOPS root path not defined');
-}
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-//include dirname(__FILE__) . '/include/common.php';
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
+/**
+ * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @author          trabis <lusopoemas@gmail.com>
+ * @version         $Id: $
+ */
 
 $modversion['dirname'] = basename(dirname(__FILE__));
 $modversion['name'] = ucfirst(basename(dirname(__FILE__)));
 $modversion['version'] = '0.1';
 $modversion['description'] = '';
-$modversion['author'] = "Xuups";
-$modversion['credits'] = "Trabis(www.xuups.com)";
+$modversion['author'] = "trabis";
+$modversion['credits'] = "trabis(www.xuups.com)";
 $modversion['help'] = "";
-$modversion['license'] = "GPL see LICENSE";
+$modversion['license'] = "GNU GPL 2.0";
+$modversion['license_url'] = "http://www.gnu.org/licenses/gpl-2.0.html/";
 $modversion['official'] = 0;
-$modversion['image'] = "dummy.png";
+$modversion['image'] = "images/dummy.png";
 
 $modversion['hasMain'] = 1;
 
-$modversion['onInstall'] = "include/onupdate.inc.php";
-$modversion['onUpdate'] = "include/onupdate.inc.php";
-$modversion['object_items'][1] = 'post';
-$modversion['object_items'][2] = 'category';
-/*
- $modversion["tables"] = xmf_getTablesArray($modversion['dirname'], $modversion['object_items']);
- */
-$modversion["tables"][0] = 'xtest_post';
-$modversion["tables"][0] = 'xtest_category';
+$modversion['onInstall'] = "include/install.inc.php";
+$modversion['onUpdate'] = "include/install.inc.php";
+
 
 // Admin things
 $modversion['hasAdmin'] = 1;
@@ -54,6 +56,22 @@ $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = 'this is my test config2 value';
 
-// Templates
-$modversion['templates'][1]['file'] = 'xteste_post.html';
-$modversion['templates'][1]['description'] = '';
+// About stuff
+$modversion['module_status'] = "Alpha";
+$modversion['status'] = "Alpha";
+$modversion['release_date'] = "11/09/2011";
+
+$modversion['developer_lead'] = "trabis";
+$modversion['developer_website_url'] = "http://www.xuups.com";
+$modversion['developer_website_name'] = "Xuups";
+$modversion['developer_email'] = "lusopoemas@gmail.com";
+
+$modversion['people']['developers'][] = "trabis";
+
+$modversion['demo_site_url'] = "http://www.xuups.com";
+$modversion['demo_site_name'] = "XOOPS User Utilitites";
+$modversion['support_site_url'] = "http://www.xuups.com/modules/newbb";
+$modversion['support_site_name'] = "Xuups Support Forums";
+
+$modversion['min_xoops'] = "2.4.5";
+$modversion['min_php'] = "5.2";
