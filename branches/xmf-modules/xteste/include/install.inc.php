@@ -12,18 +12,15 @@
 /**
  * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id: $
  */
 
-defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
-
-if (!xoops_isActiveModule('xmf')) {
-    if (file_exists($file = dirname(dirname(dirname(__FILE__))) . '/xmf/include/bootstrap.php')) {
-        include_once $file;
-        echo 'Please install or reactivate XMF module';
-    } else {
-        redirect_header(XOOPS_URL, 5, 'Please install XMF module');
+function xoops_module_pre_install_log($module)
+{
+    if (!xoops_isActiveModule('xmf')) {
+        $module->setErrors('<b>Please install or reactivate XMF module</b>');
+        return false;
     }
+    return true;
 }

@@ -2,18 +2,24 @@
 include_once dirname(__FILE__) . '/admin_header.php';
 xoops_cp_header();
 
-$menu = new Xmf_Template_Adminmenu($xoopsModule);
+$menu = new Xmf_Template_Adminmenu();
+$menu->display();
 
-$submenus[0]['title'] = 'hey';
-$submenus[0]['link'] = 'somelink';
-$submenus[1]['title'] = 'hey2';
-$submenus[1]['link'] = 'somelink2';
+$nav = new Xmf_Template_Adminnav();
+$nav->display();
 
-$options['submenus'] = $submenus;
-$options['currentsub'] = 0;
-$options['currentoption'] = 1;
+$index = new Xmf_Template_Adminindex();
 
-$menu->display($options);
+$infoBox = new Xmf_Template_Infobox();
+$infoBox->setTitle('InfoBox');
+$infoBox->addItem('hello');
+$index->addInfoBox($infoBox);
 
-_e('Content goes here');
+
+$configBox = new Xmf_Template_ConfigBox();
+$configBox->addItem(XOOPS_ROOT_PATH . '/uploads/xteste', 'folder');
+$configBox->addItem(array(XOOPS_ROOT_PATH . '/modules/xteste', '0644'), 'chmod');
+$index->addConfigBox($configBox);
+
+$index->display();
 xoops_cp_footer();
