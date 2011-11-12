@@ -1,0 +1,27 @@
+version 1.23 (ZySpec) - May 11, 2011
+--------------------
+- updated standardized XOOPS Module GUI to "latest" version
+- fixed use of wfp_addslashes in ./class/category.php to use module textsanitizer addSlashes
+- updated templates to be more XHTML compliant
+- moved module css to language subdirectories so CSS can be modified for RTL/LTR, etc.
+- adjusted files so CodeSniffer would complain less when using Zend Coding Standards tests
+- added random faq block
+- added display of category for each item in ./admin/main.php for faqs
+
+version 1.22 (Mamba) - Feb. 24, 2011
+--------------------
+- changed to standardized XOOPS Module GUI
+- fixed adding comments
+- fixed deleting FAQ, when deleting Category
+
+version 1.21 (Mamba)
+--------------------
+- changed icons for Edit/Delete
+- adjusted editor entries for TinyMCE and CKeditor, and deleted Koivi
+- Aligned titles to the left
+- adjusted language definition names
+
+
+version 1.20 (Catzwolf)
+--------------------
+This module has been refactored nearly 99% and I have replaced all old code with new. Only the templates havent changed that much

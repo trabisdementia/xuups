@@ -1,0 +1,52 @@
+<div class="page_headline"><span class="itemTitle"><{$smarty.const._MD_XOOPSFAQ_FAQ}></span></div>
+<br />
+<a id="top" name="top"><a href="index.php"><{$smarty.const._MD_XOOPSFAQ_MAIN}></a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;<strong><{$category_name}></strong><br /><br />
+<table style='width: 100%; margin: 1px;' class='outer'>
+  <tr>
+    <th colspan="2" style="text-align: left;"><{$smarty.const._MD_XOOPSFAQ_TOC}></th>
+  </tr>
+  <tr>
+    <td colspan="2" class="even">
+      <ul style="list-style-image:url(images/faq.png);">
+      <!-- start question loop -->
+      <{foreach item=question from=$questions}>
+        <li style="line-height: 1.75em;">&nbsp;<a href="#q<{$question.id}>"><{$question.title}></a></li>
+      <{/foreach}>
+      <!-- end question loop -->
+      </ul>
+    </td>
+  </tr>
+</table>
+<br /><br />
+
+<table style="width: 100%; margin: 1px;" class="outer">
+<!-- start question and answer loop -->
+<{foreach item=question from=$questions}>
+  <tr>
+    <th style="text-align: left;"><a id="q<{$question.id}>" name="q<{$question.id}>"></a><{$question.title}></th>
+  </tr>
+  <tr>
+    <td class="even"><{$question.answer}><div style="text-align: right"><a href="#top"><{$smarty.const._MD_XOOPSFAQ_BACKTOTOP}></a></div></td>
+  </tr>
+<{/foreach}>
+<!-- end question and answer loop -->
+</table>
+<br /><br />
+<div style="text-align:center; font-weight: bold;">[ <a href="index.php"><{$smarty.const._MD_XOOPSFAQ_BACKTOINDEX}></a> ]</div>
+
+<div style="text-align:center; padding: 3px; margin: 3px;">
+  <{$commentsnav}>
+  <{$lang_notice}><{$smarty.const._MD_XOOPSFAQ_BACKTOINDEX}>
+</div>
+
+<div style="margin: 3px; padding: 3px;">
+<!-- start comments loop -->
+<{if $comment_mode == "flat"}>
+  <{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+  <{include file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+  <{include file="db:system_comments_nest.html"}>
+<{/if}>
+<!-- end comments loop -->
+</div>
