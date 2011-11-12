@@ -1,0 +1,24 @@
+<div class="item">
+	<div class="itemHead">
+		<span class="itemTitle">
+			<h2><{$story.topic_title}> : <{$story.news_title}></h2>
+		</span>
+	</div>
+	<div class="itemInfo">
+		<{if $story.files_attached}><{$story.attached_link}>&nbsp;<{/if}>
+		<{if $story.poster != ''}><span class="itemPoster"><{$lang_postedby}> <{$story.poster}></span><{/if}> 
+		<span class="itemPostDate"><{$lang_on}> <{$story.posttime}></span> 
+		(<span class="itemStats"><{$story.hits}> <{$lang_reads}></span>) 
+		<{$news_by_the_same_author_link}>
+	</div>
+	<div class="itemBody">
+		<{$story.imglink}>
+		<{if $articlePicture != ''}><img src="<{$articlePicture}>" alt="<{$story.news_title}>" align="left" style="margin-right: 5px; margin-bottom: 5px" /><{/if}>
+		<div class="itemText"><{$story.text}></div>
+	</div>
+	<div class="itemFoot">
+		<span class="itemAdminLink"><{$story.adminlink}></span>
+		<{if $rates}><b><{$lang_ratingc}></b> <{$story.rating}> (<{$story.votes}>) - <a title="<{$lang_ratethisnews}>" href="<{$xoops_url}>/modules/news/ratenews.php?storyid=<{$story.id}>" rel="nofollow"><{$lang_ratethisnews}></a> - <{/if}>
+		<span class="itemPermaLink"><{$story.morelink}></span>
+	</div>
+</div>
