@@ -1,0 +1,96 @@
+<!-- phppp (D.J.): http://xoopsforge.com; http://xoops.org.cn -->
+<div class="article-breadcrumbs head">
+	<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/"><{$modulename}></a>
+</div>
+
+<!-- trackback header data -->
+<div class="article-section trackback-header">
+	<h2 class="article-title">
+		<{php}>echo art_constant("MD_CPTRACKBACK");<{/php}>
+		<{if $category}>
+			: <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.category.php<{$smarty.const.URL_DELIMITER}><{$category.id}>"><{$category.title}></a>
+		<{elseif $article}>
+			: <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.article.php<{$smarty.const.URL_DELIMITER}><{$article.id}>"><{$article.title}></a>
+		<{/if}>
+	</h2>
+	
+	<div class="article-list">
+		<{if $category}>
+			<span><{php}>echo art_constant("MD_DESCRIPTION");<{/php}>: <{$category.desctiption}> </span>
+			<span><{php}>echo art_constant("MD_TRACKBACKS");<{/php}>: <{$category.trackbacks}> </span>
+		<{elseif $article}>
+			<span><{php}>echo art_constant("MD_DESCRIPTION");<{/php}>: <{$article.desctiption}> </span>
+			<span><{php}>echo art_constant("MD_TRACKBACKS");<{/php}>: <{$article.trackbacks}> </span>
+		<{/if}>
+	</div>
+	
+	<div class="article-list">
+		<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.trackback.php?category=<{$category.id}>&amp;type=pending&amp;from=<{$from}>"><{php}>echo art_constant("MD_PENDING");<{/php}></a></span>
+		<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.trackback.php?category=<{$category.id}>&amp;type=approved&amp;from=<{$from}>"><{php}>echo art_constant("MD_APPROVED");<{/php}></a></span>
+		<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.trackback.php?category=<{$category.id}>&amp;type=all&amp;from=<{$from}>"><{$smarty.const._ALL}></a></span>
+	</div>
+</div>
+
+<{if count($trackbacks)>0}>
+<div>
+<form name="form_tb_cpanel" action="am.trackback.php" method="POST">
+
+	<div class="article-section article-article">
+		<div class="article-title">
+		<{php}>echo art_constant("MD_TRACKBACKS");<{/php}> (<{$type_name}>)
+		</div>
+		
+		<div class="article-section-container">
+		
+		<ol>
+		<{foreachq item=trackback from=$trackbacks}>
+			<li style="padding-top: 10px;">
+			<div class="article-list">
+				<strong><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.article.php<{$smarty.const.URL_DELIMITER}><{$trackback.art_id}>#tb<{$trackback.id}>" title="<{$trackback.excerpt}>"><{$trackback.title}></a></strong>: <{$trackback.name}> - <{$trackback.url}>
+			</div>
+			
+			<div class="article-list" style="padding-bottom: 10px;">
+				<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/am.trackback.php?op=delete&amp;trackback=<{$trackback.id}>&amp;from=<{$from}>"><{$smarty.const._DELETE}></a></span>
+				<{if $trackback.status eq 0}>
+					<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/am.trackback.php?op=approve&amp;trackback=<{$trackback.id}>&amp;from=<{$from}>"><{php}>echo art_constant("MD_APPROVE");<{/php}></a></span>
+				<{/if}>
+				<span class="article-button"><{$smarty.const._SELECT}><input type="checkbox" name="tb_id[]" id="tb_id[<{$trackback.id}>]" value="<{$trackback.id}>" /></span>
+			</div>
+			<div class="clear"></div>
+			</li>
+		<{/foreach}>
+		</ol>
+		
+		</div>
+	</div>
+
+
+	<div class="article-section article-actions" style="float: right; text-align: right; padding-top: 10px">
+		<div class="article-list">
+			<{$smarty.const._ALL}>: <input type="checkbox" name="tb_check" id="tb_check" value="1" onclick="xoopsCheckAll('form_tb_cpanel', 'tb_check');" />
+			<{php}>echo art_constant("MD_ACTIONS");<{/php}>:
+			<select name="op">
+				<option value="approve"><{php}>echo art_constant("MD_APPROVE");<{/php}></option>
+				<option value="delete"><{$smarty.const._DELETE}></option>
+			</select>
+		</div>
+	</div>
+	
+
+	<div class="article-list" style="float: right; text-align: right; padding-top: 10px">
+		<input type="hidden" name="from" value="<{$from}>" />
+		<input type="hidden" name="category" value="<{$category.id}>" />
+		<input type="hidden" name="article" value="<{$article.id}>" />
+		<input type="hidden" name="start" value="<{$start}>" />
+		<input type="hidden" name="type" value="<{$type}>" />
+		<span><input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>"></span>
+		<span><input type="reset" value="<{$smarty.const._CANCEL}>"></span>
+	</div>
+	
+</form>
+</div>
+<{/if}>
+
+<div id="pagenav" class="article-section pagenav">
+	<{$pagenav}>
+</div>
