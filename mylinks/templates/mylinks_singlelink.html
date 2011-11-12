@@ -1,0 +1,77 @@
+<{if $mylinksadcodes.all}>
+<{$mylinksadcodes.all}>
+<{elseif $mylinksadcodes.singlelink}>
+<{$mylinksadcodes.singlelink}>
+<{/if}>
+<br /><br />
+<{if $mylinksshowlogo}>
+<div style='text-align: center;'><{$mylinkslogoimage}></div><br />
+<{/if}>
+<{if $mylinksshowsearch}>
+<{include file='db:mylinks_search_inc.html'}>
+<{/if}>
+<{if $catarray.letters}>
+<div style='text-align: center;' class='itemPermaLink'><{$catarray.letters}></div><br />
+<{/if}>
+<{if $catarray.toolbar}>
+<div class='toolbar'><{$catarray.toolbar}></div><br />
+<{/if}>
+
+<div>
+  <table style='width: 97%; margin: 2px; padding: 2px; border-width: 0px;'>
+    <tr>
+      <td class='newstitle'><{$category_path}></td>
+    </tr>
+  </table>
+</div>
+<{if $mylinksshowthemechanger}>
+<table style='margin: 0px; width: 100%;'>
+  <tr>
+   <td style='text-align: right;'>
+  <form action='<{$xoops_requesturi}>' method='post'>
+  <strong><{$lang_themechanger}></strong><{$mylinksthemeoption}>
+  </form>
+  </td>
+  </tr>
+  </table>
+<{/if}>
+<table style='width: 100%; margin: 0px; padding: 10px; border-width: 0px;'>
+  <tr>
+    <td style='text-align: center;'>
+    <{include file="db:mylinks_link.html" link=$link}>
+    </td>
+  </tr>
+</table>
+
+<table style='margin: 0px; width: 100%;'>
+  <tr><td style='text-align: right;'>
+<{$mylinksjumpbox}>
+  </td></tr>
+</table>
+
+<div style='text-align: right; margin: 2em 6px -4em 0em;'>
+<a href="javascript:mltoggleEffect('<{$mylinks_imgurl}>/icons', 'resizemlcomblock', 'mlcomsizeimage')"><img id='mlcomsizeimage' src='<{$mylinks_imgurl}>/icons/minimize.gif' alt='<{$lang_minimizeblock}>' title='<{$lang_minimizeblock}>' /></a>
+</div>
+<div id='resizemlcomblock' style='display: block;'>
+<div style='text-align: center; padding: 3px; margin:3px;'>
+<{$moremetasearch}>
+</div>
+<div style='text-align: center; padding: 3px; margin:3px;'>
+  <{$commentsnav}>
+  <{$lang_notice}>
+</div>
+
+<div style='margin:3px; padding: 3px;'>
+<!-- start comments loop -->
+<{if $comment_mode == "flat"}>
+  <{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+  <{include file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+  <{include file="db:system_comments_nest.html"}>
+<{/if}>
+<!-- end comments loop -->
+</div>
+</div>
+
+<{include file='db:system_notification_select.html'}>
