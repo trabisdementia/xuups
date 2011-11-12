@@ -1,0 +1,36 @@
+<div class="page_headline"><span class="itemTitle"><{$smarty.const._MD_XOOPSFAQ_FAQ}></span></div>
+<br />
+<table style="width: 100%; padding: 2px; margin: 1px;">
+  <tr>
+    <th style="text-align: left;"><{$smarty.const._MD_XOOPSFAQ_TOC}></th>
+  </tr>
+  <tr>
+    <td class="even">
+      <!-- start category loop -->
+      <{foreach item=category from=$categories}>&nbsp;&nbsp;<img class="page_image" src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/folder.png" width="22" height="22" border="0" alt="<{$category.name}>" title="<{$category.name}>" />&nbsp;<strong><a href="index.php?cat_id=<{$category.id}>"><{$category.name}></a></strong>
+        <ul style="list-style-image:url(images/faq.png);">
+        <!-- start question loop -->
+        <{foreach item=question from=$category.questions}>
+          <li class="limagei" style="line-height: 1.75em;">&nbsp;<a href="index.php?cat_id=<{$category.id}>#q<{$question.link}>"><{$question.title}></a></li>
+        <{/foreach}>
+        <!-- end question loop -->
+        </ul>
+      <{/foreach}>
+      <!-- end category loop -->
+    </td>
+  </tr>
+</table>
+
+
+<div style="margin-top: 10px;">
+<!-- start comments loop -->
+<{if $comment_mode == "flat"}>
+  <{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+  <{include file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+  <{include file="db:system_comments_nest.html"}>
+<{/if}>
+<!-- end comments loop -->
+</div>
+<{include file='db:system_notification_select.html'}>
