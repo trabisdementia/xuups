@@ -1,0 +1,298 @@
+/* -- style.css -- */
+
+.forum_header {
+    float:center;
+	overflow:hidden;
+    border:1px solid #aaaaaa;
+}  
+
+.forum_title {
+    float:left; 
+    text-align:left; 
+    padding:5px;    
+}
+
+.forum_title a {
+    font-weight: bold;
+}
+
+
+.forum_stats {
+    float:center;
+	overflow:hidden; 
+    text-align:left; 
+    border:1px solid #aaaaaa;
+    padding:5px; 
+}
+
+.forum_stats_left {
+    float: left; 
+    text-align: left;
+    width:49%;    
+}
+
+.forum_stats_right {
+    float: right; 
+    text-align: right;
+    width:49%;
+}
+
+.forum_body {
+    margin-top: -10px;
+    padding-top: 20px;
+    float:center;
+	width:99%;
+	overflow:hidden;
+}
+
+.forum_footer {
+    float:center;
+	width:99%;
+	overflow:hidden;
+}
+
+.index_category{
+	border: 0px;    
+	/*margin-top: -10px;
+	margin-bottom: 5px;*/
+}
+
+.ThreadUserName a {
+    font-weight: bold; 
+    margin-bottom: 2px;
+    color: #000;
+}
+
+.ThreadTitle,  .ThreadTitle a{
+    font-weight: bold; 
+    margin-bottom: 2px;
+    color: #fff;
+}
+
+.icon_left {
+    float: left; text-align: left;
+}
+
+.icon_right {
+    float: right; text-align: right;
+}
+
+div.karma
+{
+	background-color: transparent;
+	text-align: center;
+	border-top: 1px solid #DDDDFF;
+	border-left: 1px solid #DDDDFF;
+	border-right: 1px solid #AAAAAA;
+	border-bottom: 1px solid #AAAAAA;
+	padding: 10px;
+}
+
+span.digest
+{
+}
+
+span.index_title{
+	float: left;
+	border: 0px;
+}
+
+span.index_extra{
+	float: right;
+	padding: 2px;
+	border: 0px;
+}
+
+div.signature {
+	bottom: 10px;
+}
+
+div#index_welcome{
+	margin: 10px;
+	margin-bottom: 10px;
+}
+html>body div#index_welcome {
+	margin-bottom: 15px; 
+}
+
+#index_welcome div.title{
+	font-size: 18px;
+	font-weight: bold;
+	border-bottom: dashed 1px;
+	padding: 5px;
+}
+
+#index_welcome div.desc{
+	padding: 5px;
+	font-size: 12px;
+	color: #000;
+}
+
+#index_welcome div.visit{
+	padding: 10px 5px;
+}
+
+.left { text-align: left; }
+.right { text-align: right; }
+.floatleft { float: left;}
+.floatright { float: right;} 
+
+#index_forum a{
+	font-weight: bold;
+}
+
+table.index_category{
+	border: 0px;
+	margin-top: -10px;
+	margin-bottom: 5px;
+}
+
+table.index_category td{
+	padding: 2px;
+}
+
+table.index_category td a:first-letter{}
+
+table.index_category .desc, table.index_category .desc a{
+	font-weight: normal !important;
+	padding-left: 0;
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+
+table.index_category .desc:first-letter, table.index_category .desc a:first-letter{}
+
+#index_forum span.item{
+	padding: 0px 0px 0px 0px;
+	margin: 0px;
+	border: 0px;
+}
+
+#index_forum span.extra{
+	float: right;
+	text-align: left;
+	margin: 0px;
+}
+
+div#forum_header{
+	margin: 5px;
+}
+#forum_header div{
+	padding-top: 5px;
+}
+
+
+
+/* -- dropdown menu -- */
+
+div.dropdown{
+	float: left;
+}
+
+div.dropdown .menu, div.dropdown .userbar{
+	font-weight: bold;
+	float: left;
+	margin: 0px 1px;
+	border: 0px !important;
+	padding: 0px;
+}
+
+div.dropdown .item{
+	font-weight: bold;
+	padding: 2px 5px;
+  	white-space: nowrap;
+  	border: 0px !important;
+}
+
+div.dropdown ul, div.dropdown table {
+	width: 135px;
+}
+/* -- dropdown menu -- */
+
+/* -- user level -- */
+table.userlevel{
+	width: 90%;
+	border: 0px;
+	padding: 0px;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+table.userlevel td{
+	height: 13px;
+	padding: 0px;
+}
+
+table.userlevel td.end{
+	width: 3px;
+}
+
+table.userlevel td.end img{
+	width: 3px;
+	height: 13px;
+}
+
+table.userlevel td.center{
+	width: 100%;
+}
+
+table.userlevel td.center img{
+	height: 12px;
+}
+/* -- user level -- */
+
+span.online_admin{
+    color:#FFA34F;
+}
+
+span.online_moderator{
+    color:#006600;
+}
+
+
+/*
+ * From http://www.positioniseverything.net/easyclearing.html
+ */
+.clear:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.clear {display: inline-table;}
+/* Hides from IE-mac \*/
+* html .clear {height: 1%;}
+.clear {display: block;}
+/* End hide from IE-mac */
+
+/* color -- dropdown menu for Forum */
+div.dropdown a, div.dropdown .menubar a{
+    color:#FFF;
+}
+
+div.dropdown .menu, div.dropdown .menubar, div.dropdown .item, div.dropdown .separator{
+    background-color: #436792; /* same color set as in your theme/style.ss .th{} is recommended */
+    color:#FFF;
+}
+
+div.dropdown .separator{
+    border: 1px inset #e0e0e0;
+}
+
+div.dropdown .menu a:hover, div.dropdown .userbar a:hover{
+    color: #333;
+}
+/* color - end */
+
+ /*bleekk*/
+.forum-head-topic{
+	height: 30px;
+	line-height: 28px;
+	background: url(../images/head-list.gif) top left repeat-x transparent; 
+	-moz-border-radius:4px 4px 0 0 !important;
+	margin: 10px 0 0 0;
+	border: 1px solid #E1E1DF;
+}
+.forum-head-topic a{color: #505050; font-size: 14px; font-weight: bolder;}
+/********/

@@ -1,0 +1,53 @@
+<table class="outer" cellspacing="1">
+
+  <{if $block.disp_mode == 0}>
+  <tr>
+    <th class="head" nowrap="nowrap"><{$smarty.const._MB_NEWBB_FORUM}></th>
+    <th class="head" nowrap="nowrap"><{$smarty.const._MB_NEWBB_TITLE}></th>
+    <th class="head" align="center" nowrap="nowrap"><{$smarty.const._MB_NEWBB_RPLS}></th>
+    <th class="head" align="center" nowrap="nowrap"><{$smarty.const._MB_NEWBB_VIEWS}></th>
+    <th class="head" align="center" nowrap="nowrap"><{$smarty.const._MB_NEWBB_AUTHOR}></th>
+  </tr>
+
+  <{foreachq item=topic from=$block.topics}>
+  <tr class="<{cycle values="even,odd"}>">
+    <td><{$topic.seo_forum_url}></td>
+    <td><{$topic.seo_url}></td>    
+    <td align="center"><{$topic.replies}></td>
+    <td align="center"><{$topic.views}></td>
+    <td align="right"><{$topic.time}><br /><{$topic.topic_poster}></td>
+  </tr>
+  <{/foreach}>
+
+  <{elseif $block.disp_mode == 1}>
+
+  <tr>
+    <th class="head" nowrap="nowrap"><{$smarty.const._MB_NEWBB_TOPIC}></th>
+    <th class="head" align="center" nowrap="nowrap"><{$smarty.const._MB_NEWBB_AUTHOR}></th>
+  </tr>
+
+  <{foreachq item=topic from=$block.topics}>
+  <tr class="<{cycle values="even,odd"}>">
+    <td><{$topic.seo_url}></td>
+    <td align="right"><{$topic.time}><br /><{$topic.topic_poster}></td>
+  </tr>
+  <{/foreach}>
+
+  <{elseif $block.disp_mode == 2}>
+
+  <{foreachq item=topic from=$block.topics}>
+  <tr class="<{cycle values="even,odd"}>">
+    <td><{$topic.seo_url}></td>
+  </tr>
+  <{/foreach}>
+
+  <{/if}>
+
+</table>
+
+<{if $block.indexNav}>
+    <div style="text-align:right; padding: 5px;">
+        <{$block.seo_top_allposts}> |
+        <{$block.seo_top_allforums}>  
+    </div>
+<{/if}>
