@@ -19,7 +19,7 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: defacer.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 defined('ICMS_ROOT_PATH') or die("ICMS root path not defined");
