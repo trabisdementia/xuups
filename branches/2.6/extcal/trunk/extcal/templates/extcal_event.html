@@ -1,0 +1,128 @@
+<table class="outer">
+    <tr>
+        <th colspan="3" style="font-size:1.2em;">
+            <div style="float:left;">
+                <{$event.event_title}>
+            </div>
+            <!--			<div style="text-align:right;">
+                            <a href="<{$xoops_url}>/modules/extcal/print.php?event=<{$event.event_id}>"><img src="images/icons/printer.png" /></a> <{if $isAdmin || $canEdit}><a href="edit_event.php?event=<{$event.event_id}>"><img src="images/icons/edit.png" /></a><{/if}> <{if $isAdmin}><a href="admin/event.php?op=delete&event_id=<{$event.event_id}>"><img src="images/icons/delete.png" /></a><{/if}>
+                        </div>
+            -->
+        </th>
+    </tr>
+    <tr class="head">
+        <td style="background-color:#<{$event.cat.cat_color}>; width:5px;"></td>
+        <td style="width:50%;">
+            <{$event.cat.cat_name}><br/>
+            <span style="font-weight:normal;"><{$event.cat.cat_desc}></span>
+        </td>
+        <td>
+            <{if $event.event_isrecur}>
+            <{$smarty.const._MD_EXTCAL_RECCUR_RULE}> : <span style="font-weight:normal;"><{$event.formated_reccur_rule}></span>
+            <{else}>
+            <{$smarty.const._MD_EXTCAL_START}> : <span style="font-weight:normal;"><{$event.formated_event_start}></span><br/>
+            <{$smarty.const._MD_EXTCAL_END}> : <span style="font-weight:normal;"><{$event.formated_event_end}></span>
+            <{/if}>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="even">
+            <b><{$smarty.const._MD_EXTCAL_CONTACT_INFO}> :</b><br/>
+			<span style="font-weight:normal;"><{$event.event_contact}><br/>
+			<{$event.event_address}></span>
+        </td>
+        <td class="even">
+            <b><{$smarty.const._MD_EXTCAL_EMAIL}> :</b> <a href="mailto:<{$event.event_email}>"><{$event.event_email}></a><br/>
+            <b><{$smarty.const._MD_EXTCAL_URL}> :</b> <a href="<{$event.event_url}>"><{$event.event_url}></a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" class="odd">
+            <span style="font-size:0.8em;"><{$smarty.const._MD_EXTCAL_POSTED_BY}> <a
+                    href="<{$xoops_url}>/userinfo.php?uid=<{$event.user.uid}>"><{$event.user.uname}></a> <{$smarty.const._MD_EXTCAL_ON}> <{$event.formated_event_submitdate}></span>
+
+            <p>
+                <{$event.event_desc}>
+            </p>
+
+            <p style="text-align:right;">
+                <{foreach item=eventFile from=$event_attachement}>
+                <a href="download_attachement.php?file=<{$eventFile.file_id}>"><{$eventFile.file_nicename}>
+                    (<i><{$eventFile.file_mimetype}></i>)
+                    <{$eventFile.formated_file_size}></a><br/>
+                <{/foreach}>
+            </p>
+        </td>
+    </tr>
+    <{if $whosGoing}>
+    <tr>
+        <td colspan="3" class="even">
+            <b><{$smarty.const._MD_EXTCAL_WHOS_GOING}> (<{$eventmember.member.nbUser}>) :</b>
+            <{foreach name=eventMemberList from=$eventmember.member.userList
+            item=member}><{if $smarty.foreach.eventMemberList.first != 1}>,
+            <{/if}><a href="<{$xoops_url}>/userinfo.php?uid=<{$member.uid}>"><{$member.uname}></a><{/foreach}>
+            <{if $eventmember.member.show_button}>
+            <form style="display:inline;" method="post"
+                  action="event_member.php">
+                <input type="hidden" name="mode"
+                       value="<{$eventmember.member.joinevent_mode}>"/>
+                <input type="hidden" name="event" value="<{$event.event_id}>"/>
+                <{$token}>
+                <input type="submit" value="<{$eventmember.member.button_text}>"<{$eventmember.member.button_disabled}>
+                />
+            </form>
+            <{/if}>
+        </td>
+    </tr>
+    <{/if}>
+    <{if $whosNotGoing}>
+    <tr>
+        <td colspan="3" class="even">
+            <b><{$smarty.const._MD_EXTCAL_WHOSNOT_GOING}> (<{$eventmember.notmember.nbUser}>) :</b>
+            <{foreach name=eventMemberList from=$eventmember.notmember.userList
+            item=member}><{if $smarty.foreach.eventMemberList.first != 1}>,
+            <{/if}><a href="<{$xoops_url}>/userinfo.php?uid=<{$member.uid}>"><{$member.uname}></a><{/foreach}>
+            <{if $eventmember.notmember.show_button}>
+            <form style="display:inline;" method="post"
+                  action="event_notmember.php">
+                <input type="hidden" name="mode"
+                       value="<{$eventmember.notmember.joinevent_mode}>"/>
+                <input type="hidden" name="event" value="<{$event.event_id}>"/>
+                <{$token}>
+                <input type="submit"
+                       value="<{$eventmember.notmember.button_text}>"<{$eventmember.notmember.button_disabled}>
+                />
+            </form>
+            <{/if}>
+        </td>
+    </tr>
+    <{/if}>
+</table>
+<br/>
+<div style="text-align:left;">
+    <a href="<{$xoops_url}>/modules/extcal/print.php?event=<{$event.event_id}>"><img src="<{$pathImageIcon}>/printer.png"/></a>     
+    <{if $isAdmin || $canEdit}>  <a href="edit_event.php?event=<{$event.event_id}>"><img src="<{$pathImageIcon}>/edit.png"/></a><{/if}> 
+    <{if $isAdmin}> <a href="admin/event.php?op=delete&event_id=<{$event.event_id}>"><img src="<{$pathImageIcon}>/delete.png"/></a><{/if}>
+       
+        
+       
+        
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+    <{$commentsnav}>
+    <{$lang_notice}>
+</div>
+
+<div style="margin-top: 10px;">
+    <!-- start comments loop -->
+    <{if $comment_mode == "flat"}>
+    <{include file="db:system_comments_flat.html"}>
+    <{elseif $comment_mode == "thread"}>
+    <{include file="db:system_comments_thread.html"}>
+    <{elseif $comment_mode == "nest"}>
+    <{include file="db:system_comments_nest.html"}>
+    <{/if}>
+    <!-- end comments loop -->
+</div>
+<{include file='db:system_notification_select.html'}>
