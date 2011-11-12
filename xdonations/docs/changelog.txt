@@ -1,0 +1,77 @@
+  ver 1.97
+
+  RC
+  =====================================================================
+  - updated to ModuleAdmin Class 1.1 (mamba)  
+  - updated table in "Treasury Register" to standard GUI, with actions on the right side (mamba) 
+
+  BETA  
+  =================================
+- added new Admin Menu Class (Mage, mamba)
+- updated GUI to XOOPS Standard  (mamba)
+- updated currencies accepted to match PAYPAL
+
+  ver 1.96
+  FINAL
+  =====================================================================
+  - updated INSTALL.TXT information
+  - removed BETA.TXT file
+
+  BETA 2
+  =====================================================================
+  - fixed english language typo in _AD_DON_USERNAME_REQUEST_NO constant
+  - fixed 'donators' to 'donors' in _AD_DON_PP_GROUP & _AD_DON_PP_RANK
+  - added _AD_DON_T_don_forceadd_ & _AD_DON_V_don_forceadd_ constants
+  - fixed typo on line 785 from 'sprint' to sprintf' in /admin/index.php
+    causing PHP error
+  - refactored code in ipnppd.php to add/remove user from special
+    group based on admin config option
+  - added option to be able let admin choose whether to add user to
+    group/rank even if user selects to remain anonymous
+  - removed debug message (dumped sql statements) in
+    ./include/installscript.php
+  - added eval for install function to allow module to be relocatable
+  - New file added - ./include/onupdate.php
+
+  BETA 1
+  =====================================================================
+  - reverted to use XOOPS common.php in XOOPS 2.4.5 instead of using a
+    'custom' ./include/common.php - removed file
+  - Added additional language constants to improve translation
+    capability (Admin help titles still not changed)
+  - Added new constant definitions for error tracking
+  - Added ability to display/clear IPN log in Admin
+  - Added ability to search/display by Transaction ID in Admin
+  - Added variable sanitation in various places
+  - Added Australian dollar (AUD / AU$) support
+  - Added support for xdonations_ipn.log file in XOOPS upload directory
+  - Changed 'edit' and 'delete' icons in Admin to use Crystal graphics
+  - Changed html code in Admin pages to improve W3C compliance and
+    readability
+  - Changed date entry in Admin Treasury to use XOOPS javascript calendar
+    - removed requirement for FormSolution class (Daniel Convissor)
+  - Changed mysql file to use 'ENGINE' instead of 'TYPE'
+  - Changed mysql to add table indexes to improve performance
+  - Changed mysql queries in various places to reduce number of db calls
+
+- Previous versions
+  - Added language constants to all files to allow for alternate languages
+  - Added constant definitions to languages/english/main.php
+  - Fixed IPN Debug mode
+  - Added include/functions.php for redundant function code and for a bugfix
+  - Added success.php and cancel.php for Donation success and cancel pages
+  - Added include/installscript.php to set up success and cancel pages in DB
+  - Added language include in header.php
+  - Changed default monthly donation goals to lower values
+  - Changed default "Yes" and "No" options for index.php donation form
+  - Added "Left to go" and "Surplus" line to bottom of blocks/Donat-o-meter.php output
+  - Changed default block name for blocks/Donat-o-meter.php to "Donations"
+  - Changed templates/donations_main.htm to make it look prettier ;-) ("Visual Optimization")
+  - Added include/common.php for IPN include (prevents inaccessibility of ipnppd.php in certain cases)
+  ... and a mess of other small things.
+
+-- Modification du module pour supporter les traductions, dans le panneau d'administration et dans les javascript.
+
+-- The language traduce is set to the admin panel and the javascript (fait par J°J°D : jjd@kiolo.com).
+-- Correction of javascript bugs ans replacement of "HTTP_GET_VARS"
+   and "HTTP_POST_VARS" by "_GET" et "_POST" in "admin/index.php.  (fait par J°J°D : jjd@kiolo.com)
