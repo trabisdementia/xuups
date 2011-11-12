@@ -1,0 +1,98 @@
+/**
+* $Id: module.css,v 1.1 2006/11/02 17:25:04 marcan Exp $
+* Module: SmartFAQ
+* Author: marcan <marcan@notrevie.ca>
+* Licence: GNU
+*/
+.smartclone_intro {
+	margin-bottom: 8px;
+	line-height: 130%;
+	display: block;
+}
+
+.smartclone_helptitle {
+	margin-left: 2px;
+	margin-top: 2px;
+	margin-bottom: 6px;
+	font-size: 16px;
+	line-height: 18px;
+	font-weight: bold;
+	display: block;
+}
+
+.smartclone_helpsummary {
+	margin-left: 2px;
+	text-align: justify;
+}
+
+.smartclone_readmore {
+	margin-top: 2px;
+	font-size: 10px;
+	text-align: left;
+	line-height: 18px;
+}
+
+.smartclone_headertable {
+	padding: 0;
+	margin: 0;
+	border-bottom: 1px solid #2F5376;
+}
+
+.smartclone_modulename {
+	font-size: 18px;
+	text-align: right;
+	font-weight: bold;
+	letter-spacing: -1.5px;
+	margin: 0;
+	line-height: 18px;
+}
+
+.smartclone_collaps_title {
+	margin: 6px 0 0 0;
+}
+
+.smartclone_collaps_info {
+	margin: 3px 0 12px 0;
+	font-size: small;
+	display: block;
+}
+
+.smartclone_category_dsc {
+	margin: 3px 0 10px 0;
+	font-size: small;
+	display: block;
+}
+
+.smartclone_adminlinks {
+	display: block;
+	padding-top: 100px;
+	font-size: 10px;
+	text-align: center;
+	line-height: 18px;
+}
+
+.smartclone_backlink {
+	font-size: 10px;
+	text-align: right;
+	line-height: 12px;
+}
+
+.smartclone_leftcol {
+	font-size: 90%;
+	padding: 10px;
+	vertical-align: middle;
+}
+
+.itemFoot {
+	text-align: right;
+	padding: 3px;
+	border: 1px solid #808080;
+	background-color: #fff;
+}
+
+.modfooter {
+	text-align: center;
+	padding-top: 6px;
+	font-size: 9px;
+	border-top: 0px solid #ccc;
+}

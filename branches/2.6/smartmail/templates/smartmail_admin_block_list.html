@@ -1,0 +1,46 @@
+<{if $confirmMsg}>
+    <div class="confirmMsg"><{$confirmMsg}></div>
+    <br />
+<{/if}>
+<{if $msg}>
+    <div class="errorMsg"><{$msg}></div>
+    <br />
+<{/if}>
+<{$form.javascript}>
+<form name="<{$blockform.name}>" id="<{$blockform.name}>" action="<{$blockform.action}>" method="<{$blockform.method}>" <{$blockform.extra}> >
+    <table id="<{$blockform.name}>table" cellspacing="1">
+        <tr>
+            <th colspan="2"><{$blockform.title}></th>
+        </tr>
+        <!-- start of form elements loop -->
+        <{foreach item=element from=$blockform.elements}>
+            <{if $element.hidden != true}>
+                <tr valign="top">
+                    <td class="" id="<{$element.caption}>" style="padding: 3px;">
+                        <{$element.caption}>
+                        <{if $element.description != ""}>
+                            <br /><br /><span style="font-weight: normal;"><{$element.description}></span>
+                        <{/if}>
+                    </td>
+                    <td class=""><{$element.body}></td>
+                </tr>
+            <{else}>
+                <{$element.body}>
+            <{/if}>
+        <{/foreach}>
+        <!-- end of form elements loop -->
+    </table>
+</form>
+
+<{foreach item=position from=$blocks key=position_key}>
+    <h3>Position <{$position_key}></h3>
+    <{foreach item=block from=$position}>
+        <div class="odd">
+            <b><{$block.title}></b>
+            <a href="blocks.php?op=block&amp;id=<{$newsletterid}>&amp;nb=<{$block.id}>"><{$smarty.const._EDIT}></a>&nbsp;
+            <a href="blocks.php?op=block_delete&amp;id=<{$newsletterid}>&amp;block_id=<{$block.id}>"><{$smarty.const._DELETE}></a>
+            <div><{$block.content}></div>
+            <br />
+        </div>
+    <{/foreach}>
+<{/foreach}>

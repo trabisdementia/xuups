@@ -1,0 +1,29 @@
+<h4 style="text-align:center;"><{$smarty.const._MA_MSHIP_MRANK}></h4><br>
+<table width="100%" class="head" cellpadding="4" cellspacing="1">
+    <tr align="center">
+        <td><font color=#666666><{$smarty.const._MA_MSHIP_RANK}></font></td>
+        <td><font color=#666666><{$smarty.const._MA_MSHIP_MINPOST}></td>
+        <td><font color=#666666><{$smarty.const._MA_MSHIP_MAXPOST}></font></td>
+        <td><font color=#666666><{$smarty.const._MA_MSHIP_IMAGE}></font></td>
+    </tr>
+    <{foreach item=rank from=$ranks}>
+    <tr align ="center" class="<{cycle values="even,odd"}>">
+        <td><{$rank.title}></td>
+        <td><{$rank.min}></td>
+        <td><{$rank.max}></td>
+        <td><{$rank.image}></td>
+    </tr>
+    <{/foreach}>
+</table>
+<table width="100%" class="head" cellpadding="4" cellspacing="1">
+    <tr align="center">
+        <td><font color=#666666><{$smarty.const._MA_MSHIP_SRANK}></font></td>
+        <td><font color=#666666><{$smarty.const._MA_MSHIP_IMAGE}></font></td>
+    </tr>
+    <{foreach item=rank from=$sranks}>
+    <tr align ="center" class="<{cycle values="even,odd"}>">
+        <td><{$rank.title}></td>
+        <td><{$rank.image}></td>
+    </tr>
+    <{/foreach}>
+</table>

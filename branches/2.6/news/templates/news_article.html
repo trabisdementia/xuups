@@ -1,0 +1,76 @@
+<{if $pagenav}><div style="text-align: left; margin: 10px;"><{$smarty.const._NW_PAGE}> <{$pagenav}></div><{/if}>
+
+<div style="padding: 3px; margin-right:3px;"><{include file="db:news_item.html" story=$story}></div>
+
+<{if $attached_files_count>0}>
+	<div class="itemInfo"><{$lang_attached_files}>
+		<{foreach item=onefile from=$attached_files}>
+			<a href='<{$onefile.visitlink}>' target='_blank'><{$onefile.file_realname}></a>&nbsp;
+		<{/foreach}>
+	</div>
+<{/if}>
+
+<{if $pagenav}><div style="text-align: left; margin: 10px;"><{$smarty.const._NW_PAGE}> <{$pagenav}></div><{/if}>
+
+<{if $tags}>
+	<br /><{include file="db:tag_bar.html"}>
+<{/if}>
+
+<div style="padding: 5px; text-align: right; margin-right:3px;">
+	<{if $nav_links}><{if $previous_story_id != -1}><a href='<{$xoops_url}>/modules/news/article.php?storyid=<{$previous_story_id}>' title="<{$previous_story_title}>"><{$lang_previous_story}></a> - <{/if}><{if $next_story_id!= -1}><a href='<{$xoops_url}>/modules/news/article.php?storyid=<{$next_story_id}>' title="<{$next_story_title}>"><{$lang_next_story}></a><{/if}><{/if}>	<a href="<{$xoops_url}>/modules/news/print.php?storyid=<{$story.id}>" rel="nofollow" title="<{$lang_printerpage}>"><img src="<{$xoops_url}>/modules/news/images/print.gif" border="0" alt="<{$lang_printerpage}>" /></a> <a target="_top" href="<{$mail_link}>" title="<{$lang_sendstory}>" rel="nofollow"><img src="<{$xoops_url}>/modules/news/images/friend.gif" border="0" alt="<{$lang_sendstory}>" /></a>  <a target="_blank" href="<{$xoops_url}>/modules/news/makepdf.php?storyid=<{$story.id}>" rel="nofollow" title="<{$lang_pdfstory}>"><img src="<{$xoops_url}>/modules/news/images/acrobat.gif" border="0" alt="<{$lang_pdfstory}>" /></a>
+</div>
+
+<{if $showsummary == true && $summary_count>0}>
+<br /><br />
+<table width='50%' cellspacing='0' cellpadding='1'>
+<tr>
+	<th><{$lang_other_story}></th>
+</tr>
+<{foreach item=onesummary from=$summary}>
+<tr class="<{cycle values="even,odd}>">
+	<td align='left'><{$onesummary.story_published}> - <a href='<{$xoops_url}>/modules/news/article.php?storyid=<{$onesummary.story_id}>'<{$onesummary.htmltitle}>><{$onesummary.story_title}></a></td>
+</tr>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{if $bookmarkme == true}>
+<br /><br />
+<table width='50%' cellspacing='0' cellpadding='1'>
+<tr>
+	<th><{$smarty.const._NW_BOOKMARK_ME}></th>
+</tr>
+<tr>
+	<td><br />
+		<a target="_blank" title="<{$smarty.const._NW_BOOKMARK_TO_BLINKLIST}>" href="http://www.blinklist.com/index.php?Action=Blink/addblink.php&Description=&Url=<{$xoops_url}>/modules/news/article.php?storyid=<{$story.id}>&Title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$xoops_url}>/modules/news/images/blinklist.gif" /></a>&nbsp;
+		<a target="_blank" title="<{$smarty.const._NW_BOOKMARK_TO_DELICIOUS}>" href="http://del.icio.us/post?url=<{$xoops_url}>/modules/news/article.php?storyid=<{$story.id}>&title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$xoops_url}>/modules/news/images/delicious.gif" /></a>&nbsp;
+		<a target="_blank" title="<{$smarty.const._NW_BOOKMARK_TO_DIGG}>" href="http://digg.com/submit?phase=2&url=<{$xoops_url}>/modules/news/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$xoops_url}>/modules/news/images/diggman.gif" /></a>&nbsp;
+		<a target="_blank" title="<{$smarty.const._NW_BOOKMARK_TO_FARK}>" href="http://cgi.fark.com/cgi/fark/edit.pl?new_url=<{$xoops_url}>/modules/news/article.php?storyid=<{$story.id}>&new_comment=<{$encoded_title}>&new_link_other=<{$encoded_title}>&linktype=Misc" title=""><img border="0" alt="" src="<{$xoops_url}>/modules/news/images/fark.gif" /></a>&nbsp;
+		<a target="_blank" title="<{$smarty.const._NW_BOOKMARK_TO_FURL}>" href="http://www.furl.net/storeIt.jsp?t=<{$encoded_title}>&u=<{$xoops_url}>/modules/news/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$xoops_url}>/modules/news/images/furl.gif" /></a>&nbsp;
+		<a target="_blank" title="<{$smarty.const._NW_BOOKMARK_TO_NEWSVINE}>" href="http://www.newsvine.com/_tools/seed&save?u=<{$xoops_url}>/modules/news/article.php?storyid=<{$story.id}>&h=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$xoops_url}>/modules/news/images/newsvine.gif" /></a>&nbsp;
+		<a target="_blank" title="<{$smarty.const._NW_BOOKMARK_TO_REDDIT}>" href="http://reddit.com/submit?url=<{$xoops_url}>/modules/news/article.php?storyid=<{$story.id}>&title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$xoops_url}>/modules/news/images/reddit.gif" /></a>&nbsp;
+		<a target="_blank" title="<{$smarty.const._NW_BOOKMARK_TO_SIMPY}>" href="http://www.simpy.com/simpy/LinkAdd.do?href=<{$xoops_url}>/modules/news/article.php?storyid=<{$story.id}>&title=<{$encoded_title}>" title=""><img border="0" alt="" src="<{$xoops_url}>/modules/news/images/simpy.png" /></a>&nbsp;
+		<a target="_blank" title="<{$smarty.const._NW_BOOKMARK_TO_SPURL}>" href="http://www.spurl.net/spurl.php?title=<{$encoded_title}>&url=<{$xoops_url}>/modules/news/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$xoops_url}>/modules/news/images/spurl.gif" /></a>&nbsp;
+		<a target="_blank" title="<{$smarty.const._NW_BOOKMARK_TO_YAHOO}>" href="http://myweb2.search.yahoo.com/myresults/bookmarklet?t=<{$encoded_title}>&u=<{$xoops_url}>/modules/news/article.php?storyid=<{$story.id}>" title=""><img border="0" alt="" src="<{$xoops_url}>/modules/news/images/yahoomyweb.gif" /></a>&nbsp;
+	</td>
+</tr>
+</table>
+<br />
+<{/if}>
+
+<div style="text-align: center; padding: 3px; margin:3px;">
+	<{$commentsnav}>
+	<{$lang_notice}>
+</div>
+
+<div style="margin:3px; padding: 3px;">
+<{if $comment_mode == "flat"}>
+	<{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+	<{include file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+	<{include file="db:system_comments_nest.html"}>
+<{/if}>
+</div>
+<{include file='db:system_notification_select.html'}>

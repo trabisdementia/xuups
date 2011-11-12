@@ -1,0 +1,52 @@
+<h2><{$smarty.const._NL_MA_NEWSLETTERS}></h2>
+<p><{$smarty.const._NL_MA_NEWSLETTERSDESC}></p>
+<p><{$smarty.const._NL_MA_NEWSLETTERSUBSCRIBE}></p>
+<form action="<{$xoops_url}>/newsletter" method="post" name="form">
+    <{if !$xoops_isuser}>
+        <{$smarty.const._NL_MA_EMAIL}>&nbsp;<input type="text" name="email" value="<{$email}>" size="20" maxlength="120" /><br /><br />
+    <{/if}>
+
+    <{if $errors}>
+        <{foreach item=error from=$errors}>
+            <div class="errorMsg"><{$error}></div>
+            <br clear="all" />
+        <{/foreach}>
+    <{/if}>
+    <{if $feedback}>
+        <{foreach item=item from=$feedback}>
+            <div class="confirmMsg"><{$item}></div>
+            <br clear="all" />
+        <{/foreach}>
+    <{/if}>
+
+    <{foreach item=newsletter from=$newsletters}>
+        <div>
+            <input type="hidden" name="availlists[]" value="<{$newsletter.newsletter_id}>" />
+            <input type="checkbox" name="newsletterid[]" value="<{$newsletter.newsletter_id}>" <{if isset($selected[$newsletter.newsletter_id]) && $selected[$newsletter.newsletter_id]==1 }> checked="checked"<{/if}> />
+            <{if $selected[$newsletter.newsletter_id] == 2}>
+                (Afmeldt)
+            <{/if}>
+            <span class="newsletter-name"><{$newsletter.newsletter_name}></span>
+        </div>
+        <div class="newsletter-description">
+            <{$newsletter.newsletter_description}>
+        </div>
+    <{/foreach}>
+    <br />
+    <{if !$xoops_isuser}>
+        <input class="formButton" type="submit" name="subscribe" value="<{$smarty.const._NL_MA_SUBSCRIBE}>" />
+        <input class="formButton" type="submit" name="unsubscribe" value="<{$smarty.const._NL_MA_UNSUBSCRIBE}>" />
+    <{else}>
+        <input type="hidden" name="op" value="update" /><br />
+        <input class="formButton" type="submit" name="update" value="<{$smarty.const._NL_MA_SAVECHANGES}>" />
+    <{/if}>
+</form>
+<{if !$xoops_isuser}>
+    <h3><{$smarty.const._NL_MA_CREATEACCOUNT}></h3>
+    <ul>
+        <li class="dot"><{$smarty.const._NL_MA_FORUMDESC}></li>
+    </ul>
+    <br />
+    <a href="<{$xoops_url}>/bruger/ny" ><{$smarty.const._NL_MA_CREATEUSER}></a><br />
+    <a href="<{$xoops_url}>/bruger/login" ><{$smarty.const._NL_MA_LOGIN}></a>
+<{/if}>

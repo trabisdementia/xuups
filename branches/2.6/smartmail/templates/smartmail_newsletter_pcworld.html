@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=<{$xoops_charset}>">
+<TITLE></TITLE>
+<style>
+    body, div, td {	font-family : verdana, arial; font-size : 11px;	}
+    a {color:#000000; text-decoration:none; }
+    a:hover {color:#FF0000; text-decoration:none; }
+
+    a.article {color:#0000aa; text-decoration:none; text-decoration:underline; }
+    a.article:hover {color:#FF0000; text-decoration:none; text-decoration:underline;}
+</style>
+</HEAD>
+<BODY bgcolor="#FFFFFF" topmargin="0">
+
+<div align="center">
+  <center>
+  <table border="0" cellpadding="0" cellspacing="0" width="780">
+  	<tr>
+  		<td>
+  			<{$newsletter.newsletter_name}> <{$date.weekday}> <{$date.day}>. <{$date.month}>
+  		</td>
+  	</tr>
+  </table>
+  </center>
+</div>
+
+<div align="center">
+  <center>
+  <table border="0" cellpadding="0" cellspacing="0" width="780">
+    <{foreach item=block from=$blocks.1}>
+        <tr>
+          <td valign="middle" style="border-right: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-bottom: 1px solid black; padding: 5px;">
+          	<h3><{$block.title}> <{if $newsletterblock_edit}><a href="blocks.php?op=block&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._EDIT}></a> | <a href="blocks.php?op=block_delete&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._DELETE}></a><{/if}></h3>
+            <font face="verdana" size="2"><{$block.content}></font>
+          </td>
+        </tr>
+    <{/foreach}>
+  </table>
+  </center>
+</div>
+
+<div align="center">
+  <center>
+  <table border="0" cellpadding="0" cellspacing="0" width="780">
+    <{foreach item=block from=$blocks.2}>
+        <tr>
+          <td valign="middle" style="border-right: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-bottom: 1px solid black; padding: 5px;">
+          	<h3><{$block.title}> <{if $newsletterblock_edit}><a href="blocks.php?op=block&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._EDIT}></a> | <a href="blocks.php?op=block_delete&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._DELETE}></a><{/if}></h3>
+            <font face="verdana" size="2"><{$block.content}></font>
+          </td>
+        </tr>
+    <{/foreach}>
+  </table>
+  </center>
+</div>
+
+<div align="center">
+  <center>
+  <table border="0" cellpadding="0" cellspacing="0" width="780">
+    <tr>
+      <td valign="middle" style="border-top: 1px solid black;border-left: 1px solid black;border-bottom: 1px solid black; padding: 5px; width: 389px">
+      	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<{foreach item=block from=$blocks.3}>
+    			<tr>
+      				<td valign="middle" style="padding: 5px;">
+      					<h3><{$block.title}> <{if $newsletterblock_edit}><a href="blocks.php?op=block&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._EDIT}></a> | <a href="blocks.php?op=block_delete&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._DELETE}></a><{/if}></h3>
+      					<font face="verdana" size="2"><{$block.content}></font>
+      				</td>
+      			</tr>
+      		<{/foreach}>
+      	</table>
+      </td>
+      <td valign="middle" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black; padding: 5px; width: 389px">
+      	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<{foreach item=block from=$blocks.4}>
+    			<tr>
+      				<td valign="middle" style="padding: 5px;">
+      					<h3><{$block.title}> <{if $newsletterblock_edit}><a href="blocks.php?op=block&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._EDIT}></a> | <a href="blocks.php?op=block_delete&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._DELETE}></a><{/if}></h3>
+      					<font face="verdana" size="2"><{$block.content}></font>
+      				</td>
+      			</tr>
+      		<{/foreach}>
+      	</table>
+      </td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+<div align="center">
+  <center>
+  <table border="0" cellpadding="0" cellspacing="0" width="780">
+    <{foreach item=block from=$blocks.5}>
+        <tr>
+          <td valign="middle" style="border-right: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-bottom: 1px solid black; padding: 5px;">
+          	<h3><{$block.title}> <{if $newsletterblock_edit}><a href="blocks.php?op=block&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._EDIT}></a> | <a href="blocks.php?op=block_delete&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._DELETE}></a><{/if}></h3>
+            <font face="verdana" size="2"><{$block.content}></font>
+          </td>
+        </tr>
+    <{/foreach}>
+  </table>
+  </center>
+</div>
+
+<div align="center">
+  <center>
+  <table border="0" cellpadding="0" cellspacing="0" width="780">
+    <{foreach item=block from=$blocks.6}>
+        <tr>
+          <td valign="middle" style="border-right: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-bottom: 1px solid black; padding: 5px;">
+          	<h3><{$block.title}> <{if $newsletterblock_edit}><a href="blocks.php?op=block&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._EDIT}></a> | <a href="blocks.php?op=block_delete&amp;id=<{$newsletter.newsletter_id}>&amp;nb=<{$block.id}>"><{$smarty.const._DELETE}></a><{/if}></h3>
+            <font face="verdana" size="2"><{$block.content}></font>
+          </td>
+        </tr>
+    <{/foreach}>
+  </table>
+  </center>
+</div>
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,14 @@
+<{foreach item=thisblock from=$block.blocks}>
+    <div>
+		<{if $thisblock.title != ""}>
+        <h2 id="title_<{$thisblock.blockid}>" class="smartblock_title">
+            <{$thisblock.title}>
+        </h2>
+		<{/if}>
+
+        <div id="content_<{$thisblock.blockid}>" class="smartblock_content">
+            <{$thisblock.content}>
+        </div>
+
+    </div>
+<{/foreach}>

@@ -1,0 +1,76 @@
+<div id="breadcrump"><a href="index.php"><{$nome_modulo}></a></div>
+<hr />
+<div id="Titulo">
+<h2><{$lang_albumtitle}></h2>
+</div>
+
+<{if $pagenav}>
+<div id="album_nav"><{$pagenav}></div>
+<{/if}>
+
+<h2><{$lang_nopicyet}></h2>
+<ul id="album_photos">
+    <{section name=i loop=$pics_array}>
+    <li>
+        <div class="photo_in_album">
+            <p>
+                <a href="<{$path_mypics_uploads}>/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
+                    <img class="thumb" src="<{$path_mypics_uploads}>/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
+                </a>
+            </p>
+            <p id="desc"><{$pics_array[i].desc}></p>
+            <{ if ($isOwner) }>
+            <form action="delpicture.php" method="post" id="deleteform" class="lado">
+                <input type="hidden" value="<{$pics_array[i].id}>" name="id" />
+                <{$campo_token}>
+                <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="images/dele.gif"/>
+               
+            </form> 
+            <form action="editdesc.php" method="post" id="editform" class="lado">
+                <input type="hidden" value="<{$pics_array[i].id}>" name="id" />
+                <{$campo_token}>
+                <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="images/edit.gif"/>
+            </form>
+            <form action="avatar.php" method="post" id="setavatar" class="lado">
+                <input type="hidden" value="<{$pics_array[i].id}>" name="id" />
+                <{$campo_token}>
+                <input name="submit" type="image" alt="<{$lang_avatarchange}>" title="<{$lang_avatarchange}>" src="images/avatar.gif"/>
+            </form>
+            <{/if}>
+        </div>
+    </li>
+    <{/section}>
+</ul> 
+<{ if ($isOwner) }>
+<p><{$lang_nb_pict}><{$lang_max_nb_pict}></p>
+
+<h3><{$form_picture.title}></h3>
+<form name="<{$form_picture.name}>" action="<{$form_picture.action}>" method="<{$form_picture.method}>" <{$form_picture.extra}> id="submitpicture">
+
+<{$form_picture.elements.XOOPS_TOKEN_REQUEST.body}>
+<p><strong><{$form_picture.elements.1.caption}></strong></p>
+<p><strong><{$form_picture.elements.sel_photo.caption}></strong>
+<{$form_picture.elements.sel_photo.body}></p>
+
+<p><strong><{$form_picture.elements.caption.caption}></strong>
+<{$form_picture.elements.caption.body}></p>
+
+<{$form_picture.elements.submit_button.body}>
+</form><{$form_picture.javascript}><{ /if }>
+
+<div style="text-align: center; padding: 3px; margin: 3px;">
+  <{$commentsnav}>
+  <{$lang_notice}>
+</div>
+
+<div style="margin: 3px; padding: 3px;">
+<!-- start comments loop -->
+<{if $comment_mode == "flat"}>
+  <{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+  <{include file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+  <{include file="db:system_comments_nest.html"}>
+<{/if}>
+<!-- end comments loop -->
+</div>

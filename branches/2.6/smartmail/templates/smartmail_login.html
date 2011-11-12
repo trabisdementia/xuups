@@ -1,0 +1,13 @@
+<div id="subscription_login_form">
+	<fieldset style="padding: 10px;">
+  		<legend style="font-weight: bold;"><{$smarty.const._LOGIN}></legend>
+  		<form action="<{$xoops_url}>/user.php" method="post">
+    	<{$smarty.const._USERNAME}> <br /><input type="text" name="uname" size="26" maxlength="32" value="<{$usercookie}>" /><br />
+   		<{$smarty.const._PASSWORD}><br /> <input type="password" name="pass" size="26" maxlength="32" />
+	    <input type="hidden" name="op" value="login" />
+	    <input type="hidden" name="xoops_redirect" value="<{$redirect_page}>" /><br />
+	    <input type="hidden" name="subscription_newsletters" value="<{$subscription_newsletters}>" /><br />
+    	<input type="submit" value="<{$smarty.const._LOGIN}>" />
+  		</form>
+	</fieldset>
+</div>

@@ -1,0 +1,29 @@
+<form action="<{$xoops_url}>/modules/smartmail/subscription.php" method="post">
+	<{if $block.subscribedNewsletters}>
+		<div style="padding-bottom: 3px; font-weight: bold;"><{$smarty.const._NL_MB_SUBSCRIBED_NEWSLETTERS}></div>
+		<{foreach item=newsletter key=id from=$block.subscribedNewsletters}>
+			<input name="subscription_block_subscribed_newsletters[]" value="<{$id}>" type="checkbox" checked="checked"/><{$newsletter}><br />
+		<{/foreach}>
+		<br />
+	<{/if}>
+
+	<{if $block.newsletters}>
+		<div style="padding-bottom: 3px; font-weight: bold;"><{$smarty.const._NL_MB_AVAILABLE_NEWSLETTERS}></div>
+		<{foreach item=newsletter key=id from=$block.newsletters}>
+			<input name="subscription_block_submit_newsletters[]" value="<{$id}>" type="checkbox" /><{$newsletter}><br />
+		<{/foreach}>
+
+		<{if !$xoops_userid}>
+			<div style="padding-top: 10px;">
+				<{$smarty.const._NL_MB_EMAIL}> : <input name="subscription_block_email" id="subscription_block_email" size="20" maxlength="255" value="" type="text">
+				<input type="hidden" name="op" value="subscription_form_post" />
+			</div>
+		<{/if}>
+	<{/if}>
+	<{if $xoops_userid}>
+		<input type="hidden" name="op" value="logedin" />
+	<{/if}>
+	<div style="padding-top: 10px; padding-bottom: 5px;">
+		<input class="formButton" name="subscription_block_submit" id="subscription_block_submit" value="<{$smarty.const._SUBMIT}>" type="submit">
+	</div>
+</form>
