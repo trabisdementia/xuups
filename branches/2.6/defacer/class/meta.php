@@ -20,18 +20,13 @@
 
 defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
-if (!class_exists('XoopsPersistableObjectHandler')) {
-    include dirname(__FILE__) . '/object.php';
-}
-
 class DefacerMeta extends XoopsObject
 {
     /**
      * constructor
      */
-    function DefacerMeta()
+    public function __construct()
     {
-        $this->XoopsObject();
         $this->initVar("meta_id", XOBJ_DTYPE_INT, 0, true);
         $this->initVar("meta_sitename", XOBJ_DTYPE_TXTBOX, null, false, 100);
         $this->initVar("meta_pagetitle", XOBJ_DTYPE_TXTBOX, null, false, 100);
@@ -43,35 +38,24 @@ class DefacerMeta extends XoopsObject
 
 class DefacerMetaHandler extends XoopsPersistableObjectHandler
 {
-    function DefacerMetaHandler(&$db)
+    /**
+     * @param null|XoopsDatabase $db
+     */
+    public function __construct(XoopsDatabase $db = null)
     {
-        $this->XoopsPersistableObjectHandler($db, 'defacer_meta', 'DefacerMeta', 'meta_id', 'meta_sitename');
+        parent::__construct($db, 'defacer_meta', 'DefacerMeta', 'meta_id', 'meta_sitename');
     }
 
-    function &get($id)
-    {
-        $id = intval($id);
-        if ($id > 0) {
-            $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_meta') . ' WHERE meta_id=' . $id;
-            if ($result = $this->db->query($sql)) {
-                $numrows = $this->db->getRowsNum($result);
-                if ($numrows == 1) {
-                    $obj = new DefacerMeta();
-                    $obj->assignVars($this->db->fetchArray($result));
-                    return $obj;
-                }
-            }
-        }
-
-        $obj = $this->create();
-        return $obj;
-    }
-
-    function updateByField(&$obj, $field_name, $field_value)
+    /**
+     * @param DefacerMeta $obj
+     * @param string $field_name
+     * @param string $field_value
+     * @return mixed
+     */
+    public function updateByField(DefacerMeta &$obj, $field_name, $field_value)
     {
         $obj->unsetNew();
         $obj->setVar($field_name, $field_value);
         return $this->insert($obj);
     }
 }
-?>

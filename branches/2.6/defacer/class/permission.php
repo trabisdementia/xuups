@@ -20,18 +20,13 @@
 
 defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
 
-if (!class_exists('XoopsPersistableObjectHandler')) {
-    include dirname(__FILE__) . '/object.php';
-}
-
 class DefacerPermission extends XoopsObject
 {
     /**
      * constructor
      */
-    function DefacerPermission()
+    public function __construct()
     {
-        $this->XoopsObject();
         $this->initVar("permission_id", XOBJ_DTYPE_INT, 0, true);
         $this->initVar('permission_groups', XOBJ_DTYPE_ARRAY, serialize(array(XOOPS_GROUP_ANONYMOUS, XOOPS_GROUP_USERS)));
     }
@@ -39,35 +34,24 @@ class DefacerPermission extends XoopsObject
 
 class DefacerPermissionHandler extends XoopsPersistableObjectHandler
 {
-    function DefacerPermissionHandler(&$db)
+    /**
+     * @param null|XoopsDatabase $db
+     */
+    public function __construct(XoopsDatabase $db = null)
     {
-        $this->XoopsPersistableObjectHandler($db, 'defacer_permission', 'DefacerPermission', 'permission_id', 'permission_groups');
+        parent::__construct($db, 'defacer_permission', 'DefacerPermission', 'permission_id', 'permission_groups');
     }
 
-    function &get($id)
-    {
-        $id = intval($id);
-        if ($id > 0) {
-            $sql = 'SELECT * FROM ' . $this->db->prefix('defacer_permission') . ' WHERE permission_id=' . $id;
-            if ($result = $this->db->query($sql)) {
-                $numrows = $this->db->getRowsNum($result);
-                if ($numrows == 1) {
-                    $obj = new DefacerPermission();
-                    $obj->assignVars($this->db->fetchArray($result));
-                    return $obj;
-                }
-            }
-        }
-
-        $obj = $this->create();
-        return $obj;
-    }
-
-    function updateByField(&$obj, $field_name, $field_value)
+    /**
+     * @param DefacerPermission $obj
+     * @param string $field_name
+     * @param string $field_value
+     * @return mixed
+     */
+    public function updateByField(DefacerPermission &$obj, $field_name, $field_value)
     {
         $obj->unsetNew();
         $obj->setVar($field_name, $field_value);
         return $this->insert($obj);
     }
 }
-?>
