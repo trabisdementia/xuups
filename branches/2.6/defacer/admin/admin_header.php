@@ -15,7 +15,7 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: admin_header.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/include/cp_header.php';

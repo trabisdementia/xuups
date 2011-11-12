@@ -15,7 +15,7 @@
  * @package         Defacer
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: admin_about.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 include_once dirname(__FILE__) . '/admin_header.php';
