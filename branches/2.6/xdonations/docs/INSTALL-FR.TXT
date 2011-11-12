@@ -1,0 +1,97 @@
+/************************************************************************/
+/* xDonations - Paypal financial management module for Xoops 2          */
+/* Copyright (c) 2004 by Xoops2 Donations Module Dev Team		*/
+/* http://dev.xoops.org/modules/xfmod/project/?group_id=1060		*/
+/* $Id: INSTALL.txt,v 1.7 2004/11/04 15:32:50 blackdeath_csmc Exp $     */
+/************************************************************************/
+/*                                                                      */
+/* Based on NukeTreasury for PHP-Nuke - by Dave Lawrence AKA Thrash     */
+/* NukeTreasury - Financial management for PHP-Nuke                     */
+/* Copyright (c) 2004 by Dave Lawrence AKA Thrash                       */
+/*                       thrash@fragnastika.com                         */
+/*                       thrashn8r@hotmail.com                          */
+/*                                                                      */
+/************************************************************************/
+/*                                                                      */
+/* Ce programme est un logiciel libre, vous pouvez le redistribuer      */
+/* et / ou le modifier                                                  */
+/* Selon les termes de la GNU General Public License telle que publiée  */
+/* par The Free Software Foundation, soit la version 2 de la licence.   */
+/*                                                                      */
+/* Ce programme est distribué dans l'espoir qu'il sera utile, mais      */
+/* SANS AUCUNE GARANTIE; sans même la garantie implicite de             */
+/* MARCHANDE ou D'ADAPTATION A UN OBJET PARTICULIER. Voyez la GNU       */
+/* General Public License pour plus de détails.                         */
+/*                                                                      */
+/* Vous devriez avoir reçu une copie de la GNU General Public License   */
+/* Avec ce programme; sinon, écrivez à la Free Software                 */
+/* Foundation, Inc, 59 Temple Place, Suite 330, Boston, MA 02111-1307   */
+/* USA                                                                  */
+/************************************************************************/
+
+
+** Ce module à été écrit pour Xoops2 CMS seulement! **
+** Raporter tous les bugs à http://dev.xoops.org/modules/xfmod/tracker/?group_id=1060&atid=346 **
+
+
+**** REQUIREMENTS ****
+Paypal account with IPN enabled
+Xoops 2.0.x
+
+>>>UPGRADING FROM DONATIONS VERSION 1.4 IS NOT CURRENTLY SUPPORTED<<<
+
+
+**** INSTALLATION ****
+Pour installer ce module, télécharger le contenu du dossier 'html' folder
+dans le répertoire racine de votre site.
+Installez ce module comme tout autre module Xoops, à partir du menu d'administration des module.
+
+Un fois proprement installé, vous pourrez voir l'icone du module sur la gauche de la fenêtre d'administration de Xoops. Naviguez jusqu'à la fenêtre popup du module Donations, cliquer sur "configuration".
+Vous avez maintenant tous les éléments de configuration du module dont vous avez besoin.
+
+ **** IMPORTANT ****
+ N'oubliez pas de changer l'email du bénéficiaire par votre propre email enregistrée dans votre compte chez payPal.
+Vérifiez bien cette adresse, sinon les transaction échuoueront et aucun montant ne sera crédité.
+Pour vérifier votre courriel, connectez vous à votre compte PayPal et dans le panneau de configuration des préférences personneles optins "emails" vous devez voir la liste des courriel valide.
+
+**** EQUALLY IMPORTANT :P ****
+Assurez vous que votre compte paPal est configuré pour recevoir les notification IPN
+Si ce n'est pas le cas vous pourrez croire que le module ne reçois pas les notifications de donation.
+POUR ACTIVER LES NOTIFICATION IPN, connectez à votre compte puis allez dnas les "préférences de notification instannées" et activée l'option. Vous devez spécifier l'URL de notification de votre site. C'est l'adresse suivante aprs avoir changer "<{VOTRE8SITE}>" par le nom de votre site:
+    http://<{VOTRE8SITE}>/modules/xdonations/ipnppd.php
+Sauvegarder les préférences, vous maintenant utiliser le modules Donations. :)
+
+**** EQUALLY IMPORTANT :P ****
+Vous pouvez aussi indiquer l'adresse de remrciement de votre site. Pratique pour rediriger les utilisateur vers votre site tout en les remerciant.
+
+
+
+
+*** HISTORIQUE ***
+-- Ajout des ficher de constantes de langue pour permettre d'autres langues
+-- Ajout de définitions de constante des langues / Anglais / main.php
+-- Correction IPN mode Debug
+-- Ajouté include / functions.php pour redondant code de fonction et corrections de bugs pour une
+-- Ajouté success.php et cancel.php succès pour le don et d'annuler les pages
+-- Ajouté include / installscript.php de mettre en place succès et d'annuler les pages dans le PB
+-- Ajout de la langue inclut dans header.php
+-- Changement de don mensuel par défaut objectifs à des valeurs inférieures
+-- Changement par défaut "Oui" et "Non" pour les options index.php formulaire de don
+-- Ajout de "Left to go» et «l'excédent» à la ligne en bas de blocs / Donat-o-meter.php sortie
+-- Changement de nom de bloc par défaut pour les blocs / Donat-o-meter.php de "dons"
+-- Changement de templates / donations_main.htm à lui donner l'air joli ;-) ( "Visual optimisation")
+-- Ajouté include / common.php pour IPN include (inaccessibilité empêche de ipnppd.php dans certains cas)
+... et un mess d'autres petites choses.
+
+-- Modification du module pour supporter les traductions, dans le panneau d'administration et dans les javascript. (fait par J°J°D : jjd@kiolo.com).
+-- Correction de divers bug javascript, et remplacement de "HTTP_GET_VARS" "HTTP_POST_VARS" par "_GET" et "_POST" dans le fichier "admin/index.php".  (fait par J°J°D : jjd@kiolo.com)
+
+
+*** L'EQUIPE DE xDonations ***
+Nous espérons que vous apprécierez notre module! Assurez-vous de nous donner votre feedback sur les modules, et, comme toujours,
+nous vous invitons à rapporter les bogues et à écrire demande de fonctionnalité billets sur notre site à
+http://dev.xoops.org/modules/xfmod/project/?group_id=1060
+
+Enjoy, et soyez à l'affût de la prochaine version!
+
+-- La xDonations Dev Team + J°J°D --

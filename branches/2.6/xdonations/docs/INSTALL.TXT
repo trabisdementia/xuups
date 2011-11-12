@@ -1,0 +1,182 @@
+/************************************************************************/
+/* xDonations - Paypal financial management module for Xoops 2          */
+/* Copyright (c) 2004 by Xoops2 Donations Module Dev Team               */
+/* http://dev.xoops.org/modules/xfmod/project/?group_id=1060            */
+/* $Id: INSTALL.txt,v 1.7 2004/11/04 15:32:50 blackdeath_csmc Exp $     */
+/************************************************************************/
+/*                                                                      */
+/* Based on NukeTreasury for PHP-Nuke - by Dave Lawrence AKA Thrash     */
+/* NukeTreasury - Financial management for PHP-Nuke                     */
+/* Copyright (c) 2004 by Dave Lawrence AKA Thrash                       */
+/*                       thrash@fragnastika.com                         */
+/*                       thrashn8r@hotmail.com                          */
+/*                                                                      */
+/************************************************************************/
+/*                                                                      */
+/* This program is free software; you can redistribute it and/or modify */
+/* it under the terms of the GNU General Public License as published by */
+/* the Free Software Foundation; either version 2 of the License.       */
+/*                                                                      */
+/* This program is distributed in the hope that it will be useful, but  */
+/* WITHOUT ANY WARRANTY; without even the implied warranty of           */
+/* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU     */
+/* General Public License for more details.                             */
+/*                                                                      */
+/* You should have received a copy of the GNU General Public License    */
+/* along with this program; if not, write to the Free Software          */
+/* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  */
+/* USA                                                                  */
+/************************************************************************/
+
+** This module is written for Xoops2 CMS only! **
+>>>UPGRADING FROM DONATIONS VERSION 1.4 IS NOT SUPPORTED<<<
+*******************************************************************************
+Bug Reporting - https://code.google.com/p/zyspec/issues/entry
+*******************************************************************************
+Please report all bugs using our Google code issue tracking system at:
+    https://code.google.com/p/zyspec/issues/entry
+This will help give a common repository to track issues to ensure we do not
+miss any critical items before final release. You may also find a temporary
+solution to the issue you're having by browsing previously reported issues.
+
+Please include as much information on your configuration and how to duplicate
+the problem you're seeing.  The more information you can supply the less time
+it will take to isolate and fix the issue.
+
+*******************************************************************************
+Translations
+*******************************************************************************
+Please send any translations you may have for xdonations to owners@zyspec.com.
+Even if the translation is incomplete it can be used as a starting point for
+the new translation file.
+
+
+*******************************************************************************
+Requirements
+*******************************************************************************
+ - Paypal account with IPN enabled
+
+Tested with:
+ - Xoops 2.4.5
+ - MySQL 5.0.91
+ - PHP 5.2.9
+
+*******************************************************************************
+Installation
+*******************************************************************************
+To install this module:
+1) Upload the contents of the 'xdonations' folder into your site root.
+2) Rename the directory to something else if you'd like.
+3) Install this module just like any other Xoops module, from
+   the Modules Administration menu. Once properly installed, you
+   should see the xdonations icon on your Xoops Admin screen.
+4) Navigate to the xdonations dropdown menu, click on 'Preferences'.
+5) You must now set all of the Configuration settings to match your
+   needs.
+
+**** IMPORTANT ****
+Change Paypal Receiver Email's value to your OWN master paypal email!!
+i.e.- webmaster@yoursite.com
+
+Your account must be at a 'Verified' status with PayPal.
+
+Also, you must make sure you enter the master paypal email account,
+otherwise the xDonation module's IPN script will fail, and no records
+will be logged. To determine your master Paypal email, log in to your
+Paypal account, and in the Paypal 'dashboard', you'll see something
+like this:
+
+  Name: WebHostingParadise.com (Jonathan Langevin)
+  Email: webmaster@webhostingparadise.com
+
+**** EQUALLY IMPORTANT :P ****
+Be sure to set up your PayPal account to receive IPN notification!
+If you do not turn this feature on, you will find that the donations
+module will be unable to track donations at all.
+
+TO TURN ON IPN NOTIFICATION, go to this page:
+https://www.paypal.com/us/cgi-bin/webscr?cmd=_profile-ipn-notify
+
+You will want to turn IPN notification to "On" and specify the default
+page to be http://<{YOUR SITE HERE}>/modules/xdonations/ipnppd.php
+
+Save these preferences and you should be good to go!  Enjoy the
+donations module :-)
+
+*******************************************************************************
+Changelog
+*******************************************************************************
+- ver 1.96
+  FINAL
+  =====================================================================
+  - updated INSTALL.TXT information
+  - removed BETA.TXT file
+
+  BETA 2
+  =====================================================================
+  - fixed english language typo in _AD_DON_USERNAME_REQUEST_NO constant
+  - fixed 'donators' to 'donors' in _AD_DON_PP_GROUP & _AD_DON_PP_RANK
+  - added _AD_DON_T_don_forceadd_ & _AD_DON_V_don_forceadd_ constants
+  - fixed typo on line 785 from 'sprint' to sprintf' in /admin/index.php
+    causing PHP error
+  - refactored code in ipnppd.php to add/remove user from special
+    group based on admin config option
+  - added option to be able let admin choose whether to add user to
+    group/rank even if user selects to remain anonymous
+  - removed debug message (dumped sql statements) in
+    ./include/installscript.php
+  - added eval for install function to allow module to be relocatable
+  - New file added - ./include/onupdate.php
+
+  BETA 1
+  =====================================================================
+  - reverted to use XOOPS common.php in XOOPS 2.4.5 instead of using a
+    'custom' ./include/common.php - removed file
+  - Added additional language constants to improve translation
+    capability (Admin help titles still not changed)
+  - Added new constant definitions for error tracking
+  - Added ability to display/clear IPN log in Admin
+  - Added ability to search/display by Transaction ID in Admin
+  - Added variable sanitation in various places
+  - Added Australian dollar (AUD / AU$) support
+  - Added support for xdonations_ipn.log file in XOOPS upload directory
+  - Changed 'edit' and 'delete' icons in Admin to use Crystal graphics
+  - Changed html code in Admin pages to improve W3C compliance and
+    readability
+  - Changed date entry in Admin Treasury to use XOOPS javascript calendar
+    - removed requirement for FormSolution class (Daniel Convissor)
+  - Changed mysql file to use 'ENGINE' instead of 'TYPE'
+  - Changed mysql to add table indexes to improve performance
+  - Changed mysql queries in various places to reduce number of db calls
+
+- Previous versions
+  - Added language constants to all files to allow for alternate languages
+  - Added constant definitions to languages/english/main.php
+  - Fixed IPN Debug mode
+  - Added include/functions.php for redundant function code and for a bugfix
+  - Added success.php and cancel.php for Donation success and cancel pages
+  - Added include/installscript.php to set up success and cancel pages in DB
+  - Added language include in header.php
+  - Changed default monthly donation goals to lower values
+  - Changed default "Yes" and "No" options for index.php donation form
+  - Added "Left to go" and "Surplus" line to bottom of blocks/Donat-o-meter.php output
+  - Changed default block name for blocks/Donat-o-meter.php to "Donations"
+  - Changed templates/donations_main.htm to make it look prettier ;-) ("Visual Optimization")
+  - Added include/common.php for IPN include (prevents inaccessibility of ipnppd.php in certain cases)
+  ... and a mess of other small things.
+
+-- Modification du module pour supporter les traductions, dans le panneau d'administration et dans les javascript.
+
+-- The language traduce is set to the admin panel and the javascript (fait par J°J°D : jjd@kiolo.com).
+-- Correction of javascript bugs ans replacement of "HTTP_GET_VARS"
+   and "HTTP_POST_VARS" by "_GET" et "_POST" in "admin/index.php.  (fait par J°J°D : jjd@kiolo.com)
+
+*******************************************************************************
+From The Team
+*******************************************************************************
+We hope you enjoy the module!  This module was developed and tracked at
+http://dev.xoops.org/modules/xfmod/project/?group_id=1060.  Since version 1.96
+development is being carried forward by ZySpec. Be sure to give us your feedback
+on the module and, as always, we encourage you to report bugs and write feature
+request tickets on our project site at
+http://code.google.com/p/zyspec/issues/list
