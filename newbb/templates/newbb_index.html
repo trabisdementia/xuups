@@ -1,0 +1,233 @@
+<div class="forum_header">
+    <div class="forum_title">
+        <h2><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php"><{$index_title}></a></h2>
+        <hr align="left" width="50%" size="1" />
+    	<{$index_desc}>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+<br />
+<div class="forum_stats">
+    <div class="forum_stats_left">
+        <{$currenttime}><br />
+        <{$smarty.const._MD_TOTALTOPICSC}>
+        <strong><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/list.topic.php" title="<{$smarty.const._MD_ALL}>"><{$stats[0].topic.total}></a></strong>
+        | <{$smarty.const._MD_TOTALPOSTSC}><strong><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/viewpost.php" title="<{$smarty.const._MD_ALLPOSTS}>"><{$stats[0].post.total}></a></strong>
+        <{if $stats[0].digest.total}>
+            | <{$smarty.const._MD_TOTALDIGESTSC}><strong><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/list.topic.php?status=digest" title="<{$smarty.const._MD_TOTALDIGESTSC}>"><{$stats[0].digest.total}></a></strong>
+        <{/if}>
+    </div>
+    <!-- today topics; today posts; -->
+    <div class="forum_stats_right">
+        <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/viewpost.php?status=new" title="<{$smarty.const._MD_VIEW_NEWPOSTS}>"><{$smarty.const._MD_VIEW_NEWPOSTS}></a><br />
+        <{$smarty.const._MD_TODAYTOPICSC}><strong><{$stats[0].topic.day|default:0}></strong>
+        | <{$smarty.const._MD_TODAYPOSTSC}><strong><{$stats[0].post.day|default:0}></strong>
+    </div>
+    <div style="clear:both;"></div>    
+    <{if $userstats}> 
+        <br />    
+        <!-- current time; user's last visit; user's last post -->
+        <div class="forum_stats_left">
+            <{$userstats.lastvisit}><br /><{$userstats.lastpost}>
+        </div>
+        <!-- user's topics; user's posts; user's digests -->
+        <div class="forum_stats_right">
+            <{$userstats.topics}> | <{$userstats.posts}><{if $userstats.digests}><br /><{$userstats.digests}><{/if}>
+        </div>
+        <div style="clear:both;"></div>
+    <{/if}>    
+    <{if $viewer_level gt 1}> 
+        <br />    
+        <div class="forum_stats_left">
+            <{if $report_post}>
+	      <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/admin_report.php" target="_self"><{$report_post}></a>
+	    <{/if}>             
+            <br /><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/moderate.php" target="_self" title="<{$smarty.const._MD_TYPE_SUSPEND}>"><{$smarty.const._MD_TYPE_SUSPEND}></a> | 
+            <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/index.php" target="_self" title="<{$smarty.const._MD_ADMINCP}>"><{$smarty.const._MD_ADMINCP}></a>
+        </div>
+        <div class="forum_stats_right">
+            <{$smarty.const._MD_TOPIC}>: 
+            <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/list.topic.php?status=active#admin" target="_self" title="<{$smarty.const._MD_TYPE_ADMIN}>"><{$smarty.const._MD_TYPE_ADMIN}></a> | 
+            <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/list.topic.php?status=pending#admin" target="_self" title="<{$smarty.const._MD_TYPE_PENDING}>"><{if $wait_new_topic}>(<font color="red"><b><{$wait_new_topic}></b></font>) <{/if}><{$smarty.const._MD_TYPE_PENDING}></a> | 
+            <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/list.topic.php?status=deleted#admin" target="_self" title="<{$smarty.const._MD_TYPE_DELETED}>"><{if $delete_topic}>(<font color="red"><b><{$delete_topic}></b></font>) <{/if}><{$smarty.const._MD_TYPE_DELETED}></a><br />
+            <{$smarty.const._MD_POST2}>: 
+            <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/viewpost.php?status=active#admin" target="_self" title="<{$smarty.const._MD_TYPE_ADMIN}>"><{$smarty.const._MD_TYPE_ADMIN}></a> | 
+            <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/viewpost.php?status=pending#admin" target="_self" title="<{$smarty.const._MD_TYPE_PENDING}>"><{if $wait_new_post}>(<font color="red"><b><{$wait_new_post}></b></font>) <{/if}><{$smarty.const._MD_TYPE_PENDING}></a> | 
+            <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/viewpost.php?status=deleted#admin" target="_self" title="<{$smarty.const._MD_TYPE_DELETED}>"><{if $delete_post}>(<font color="red"><b><{$delete_post}></b></font>) <{/if}><{$smarty.const._MD_TYPE_DELETED}></a>
+        </div>
+        <div style="clear:both;"></div>
+    <{/if}>
+    <div style="clear:both;"></div>
+</div>
+<br style="clear:both;"/>
+
+<!-- start forum categories -->
+<div class="index_category"> 
+    <table border="0" cellspacing="1" cellpadding="2" width="100%">
+        <{foreachq item=category from=$categories}>
+            <tr class="odd">  
+                <!--
+                <td width="3%" valign="middle" align="center">
+                    <img onclick="ToggleBlock2('cat_<{$category.cat_id}>', this)" src="<{$category.cat_icon_display}>" alt="" />
+                </td>
+		        //-->
+                <{if $category.cat_image}>	
+                    <td colspan="2" align="left" width="5%">				
+                        <img src="<{$category.cat_image}>" alt="<{$category.cat_title}>" />
+                    </td>    
+                    <td colspan="2" align="left">
+                <{else}>
+                    <td colspan="4" align="left">
+                <{/if}>				    
+                    <strong><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php?cat=<{$category.cat_id}>"><{$category.cat_title}></a></strong>
+                    <{if $category.cat_description}>
+                        <div class="desc"><{$category.cat_description}></div>
+                    <{/if}>
+                </td>
+                <td align="right">
+                    <{if $category.cat_sponsor}>                
+                        <div class="desc">
+                            <a href="<{$category.cat_sponsor.link}>" title="<{$category.cat_sponsor.title}>" target="_blank"><{$category.cat_sponsor.title}></a>
+                        </div>
+                    <{/if}>
+                </td>   
+            </tr> 
+            
+            <{foreachq item=forum from=$category.forums}>
+                <tr id="cat_<{$category.cat_id}>" class="<{cycle values="even,odd"}>">  
+                    <td align="center" valign="middle" width="5%">                    
+                        <{$forum.forum_folder}>
+                    </td>
+                    <td colspan="2">
+                        <div id="index_forum">
+                            <span class="item"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/viewforum.php?forum=<{$forum.forum_id}>"><{$forum.forum_name}></a>
+                            <{if $rss_enable}>
+                                &nbsp;(<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/rss.php?f=<{$forum.forum_id}>" target="_blank" title="RSS feed">RSS</a>)
+                            <{/if}>
+                            <br /><{$forum.forum_desc}>
+                            </span>
+                            <{if $forum.forum_moderators}>
+                                <span class="extra">
+                                    <{$smarty.const._MD_MODERATOR}>: <{$forum.forum_moderators}>
+                                </span>
+                            <{/if}>
+                        </div>
+                    </td>
+                    <td align="center" valign="middle"  width="10%">
+                        <{$forum.forum_topics}> <{$smarty.const._MD_TOPICS}>
+                        <br />                                
+                        <{$forum.forum_posts}> <{$smarty.const._MD_POSTS}>
+                    </td>
+                    <td align="right" valign="middle"  width="25%">
+                        <{if $forum.forum_lastpost_time}>
+                            <{$smarty.const._MD_LASTPOST}>: <{$forum.forum_lastpost_time}> <br />
+                            <{$smarty.const._MD_BY}> <{$forum.forum_lastpost_user}>
+                            <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/viewtopic.php?post_id=<{$forum.forum_lastpost_id}>">
+                            <img src="<{$xoops_url}>/images/subject/<{$forum.forum_lastpost_icon}>" alt="<{$smarty.const._MD_NEWBB_GOTOLASTPOST}>" title="<{$smarty.const._MD_NEWBB_GOTOLASTPOST}>" />
+                            <{if $forum.forum_lastpost_subject}>
+                                <br /><{$forum.forum_lastpost_subject}>
+                            <{/if}>
+                            </a>   
+                        <{else}>
+                            <{$smarty.const._MD_NONEWPOSTS}>
+                        <{/if}>
+                    </td>
+                </tr>
+                <{if $forum.subforum}>
+                    <{if $subforum_display == "expand"}>  
+                        <tr class="<{cycle values="even,odd"}>"> 
+                            <td width="5%">&nbsp;</td>
+                            <td width="5%" align="center"><{$img_subforum}>&nbsp;</td>
+                            <td colspan="3" nowrap="nowrap" align="left"><{$smarty.const._MD_SUBFORUMS}></td>
+                        </tr>
+                        <{foreachq item=subforum from=$forum.subforum}>
+                            <tr class="<{cycle values="even,odd"}>">
+                                <td width="5%">&nbsp;</td>
+                                <td align="center" valign="middle" width="5%"><{$subforum.forum_folder}></td>
+                                <td width="52%">
+                                    <div id="index_forum">
+                                        <span class="item"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/viewforum.php?forum=<{$subforum.forum_id}>"><strong><{$subforum.forum_name}></strong></a>
+                                        <{if $rss_enable}>
+                                            &nbsp;(<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/rss.php?f=<{$subforum.forum_id}>" target="_blank" title="RSS feed">RSS</a>)
+                                        <{/if}>
+                                        <br /><{$subforum.forum_desc}>
+                                        </span>
+                                        <{if $subforum.forum_moderators}>
+                                            <span class="extra">
+                                                <{$smarty.const._MD_MODERATOR}>: <{$subforum.forum_moderators}>
+                                            </span>
+                                        <{/if}>
+                                    </div>
+                                </td>
+                                <td width="18%" align="center" valign="middle">
+                                    <{$subforum.forum_topics}> <{$smarty.const._MD_TOPICS}>
+                                    <br /> 
+                                    <{$subforum.forum_posts}>  <{$smarty.const._MD_POSTS}>
+                                </td>
+                                <td width="20%" align="right" valign="middle" nowrap="nowrap">
+                                    <{if $subforum.forum_lastpost_time}>
+                                        <{$smarty.const._MD_LASTPOST}>: <{$subforum.forum_lastpost_time}> <br />
+                                        <{$smarty.const._MD_BY}> <{$subforum.forum_lastpost_user}>
+                                        <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/viewtopic.php?post_id=<{$subforum.forum_lastpost_id}>">
+                                            <img src="<{$xoops_url}>/images/subject/<{$subforum.forum_lastpost_icon}>" alt="<{$smarty.const._MD_NEWBB_GOTOLASTPOST}>" title="<{$smarty.const._MD_NEWBB_GOTOLASTPOST}>" />
+                                            <{if $subforum.forum_lastpost_subject}>
+                                                <br /><{$subforum.forum_lastpost_subject}>
+                                            <{/if}>
+                                        </a>  
+                                    <{else}>
+                                        <{$smarty.const._MD_NONEWPOSTS}>
+                                    <{/if}>
+                                </td>
+                            </tr>
+                        <{/foreach}>
+                    <{elseif $subforum_display == "collapse"}>
+                        <tr class="<{cycle values="even,odd"}>"> 
+                            <td width="5%">&nbsp;</td>
+                            <td colspan="4" align="left">
+                                <{$smarty.const._MD_SUBFORUMS}>&nbsp;<{$img_subforum}>&nbsp;
+                                <{foreachq item=subforum from=$forum.subforum}>
+                                    &nbsp;[<a href="viewforum.php?forum=<{$subforum.forum_id}>"><{$subforum.forum_name}></a>]
+                                <{/foreach}>
+                            </td>
+                        </tr>    
+                    <{/if}>                    
+                <{/if}>
+            <{/foreach}>            
+            <tr class="item">
+                <td colspan="4">&nbsp;</td>
+            </tr>
+        <{/foreach}> 
+    </table>
+    <div style="clear:both;"></div>
+</div>
+<!-- end forum categories -->
+<br style="clear:both;"/>
+<div class="forum_footer">
+    <div class="icon_left">
+        <{$img_forum_new}> = <{$smarty.const._MD_NEWPOSTS}><br />
+        <{$img_forum}> = <{$smarty.const._MD_NONEWPOSTS}><br />
+    </div>
+    <div class="icon_right">
+        <form action="search.php" method="post" name="search" id="search">
+        <input name="term" id="term" type="text" size="20" />
+        <input type="hidden" name="forum" id="forum" value="all" />
+        <input type="hidden" name="sortby" id="sortby" value="p.post_time desc" />
+        <input type="hidden" name="searchin" id="searchin" value="both" />
+        <input type="submit" name="submit" id="submit" value="<{$smarty.const._MD_SEARCH}>" />
+        <br />
+        [ <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/search.php"><{$smarty.const._MD_ADVSEARCH}></a> ]
+        </form>
+    </div>
+    <div class="clear"></div>
+    <div class="icon_right" style="padding-top: 5px;">
+        <{if $rss_button}>
+            <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/rss.php?c=<{$viewcat}>" target="_blank" title="RSS FEED"><{$rss_button}></a>
+            <br />
+        <{/if}>
+        <a href="http://www.myxoops.org" target="_blank" title="Powered by German XOOPS Support v<{$version}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/cbb.png" alt="Powered by German XOOPS Support v<{$version}>" title="Powered by German XOOPS Support v<{$version}>" /></a>
+    </div>
+</div> 
+<br style="clear:both;"/>
+
+<{if $online}><{includeq file="db:newbb_online.html"}><{/if}>
+<{includeq file='db:system_notification_select.html'}>

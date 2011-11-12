@@ -1,0 +1,5 @@
+Install the following two lines in .htaccess [root of your xoops installation] - BEFORE the simplified URLs hack - if you have it.
+
+RewriteRule     ^forum/([a-z]+)/([0-9]+)(/(.+))?  modules/newbb/seo.php?seoOp=$1&seoArg=$2&seoOther=$4&%{QUERY_STRING} [L]
+RewriteRule     ^forum(.*)$ modules/newbb$1 [L]
+
