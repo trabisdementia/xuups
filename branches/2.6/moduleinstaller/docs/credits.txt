@@ -1,0 +1,7 @@
+Credits
+===============
+
+Originally developed by Michael Beck (Mamba) 
+
+Utilizing code from the XOOPS Install script developed by:  Haruki Setoyama, Kazumi Ono, Skalpa Keo, Taiwen Jiang,  DuGris
+
