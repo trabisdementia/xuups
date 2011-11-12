@@ -1,0 +1,68 @@
+<{if $mylinksadcodes.all}>
+<{$mylinksadcodes.all}>
+<{elseif $mylinksadcodes.modlink}>
+<{$mylinksadcodes.modlink}>
+<{/if}>
+<br /><br />
+<{if $mylinksshowlogo}>
+<div style='text-align: center;'><{$mylinkslogoimage}></div><br />
+<{/if}>
+<{if $mylinksshowsearch}>
+<{include file='db:mylinks_search_inc.html'}>
+<{/if}>
+<{if $catarray.toolbar}>
+<div class='toolbar'><{$catarray.toolbar}></div><br />
+<{/if}>
+<{if $mylinksshowthemechanger}>
+<table style='margin: 0px; width: 100%;'>
+  <tr>
+    <td style='text-align: right;'>
+      <form action='<{$xoops_requesturi}>' method='post'>
+        <strong><{$lang_themechanger}></strong><{$mylinksthemeoption}>
+      </form>
+    </td>
+  </tr>
+</table>
+<{/if}>
+
+<form action='modlink.php' method='post'>
+<table style='width: 80%; margin: auto;'>
+  <tr>
+    <td class='itemHead' style='text-align: right;' nowrap='nowrap' colspan='2'>
+      <div style='text-align: left; font-weight: bold;'><{$lang_requestmod}></div>
+    </td>
+  </tr>
+  <tr>
+    <td class='head' style='text-align: right;'><{$lang_linkid}></td>
+    <td class='even' style='font-weight: bold;'><{$link.id}></td>
+  </tr>
+  <tr>
+    <td class='head' style='text-align: right;'><{$lang_sitetitle}></td>
+    <td class='odd'><input type='text' name='title' size='50' maxlength='100' value='<{$link.title}>' /></td>
+  </tr>
+  <tr>
+    <td class='head' style='text-align: right;'><{$lang_siteurl}></td>
+    <td class='even'><input type='text' name='url' size='50' maxlength='100' value='<{$link.url}>' /></td>
+  </tr>
+  <tr>
+    <td class='head' style='text-align: right;'><{$lang_category}></td>
+    <td class='odd'><{$category_selbox}></td>
+  </tr>
+  <tr>
+    <td class='even' colspan='2'>&nbsp;</td>
+  </tr>
+  <tr>
+    <td class='head' style='text-align: right; vertical-align: top;'><{$lang_description}></td>
+    <td class='odd'><textarea name='description' cols='60' rows='5'><{$link.description}></textarea></td>
+  </tr>
+  <tr>
+    <td class='even' colspan='2' style='text-align: center;'>
+      <br />
+      <input type='hidden' name='logourl' value='<{$link.logourl}>' />
+      <input type='hidden' name='lid' value='<{$link.id}>' />
+      <input type='submit' name='submit' value='<{$lang_sendrequest}>' />&nbsp;
+      <input type=button value='<{$lang_cancel}>' onclick='javascript:history.go(-1)' />
+    </td>
+  </tr>
+</table>
+</form>
