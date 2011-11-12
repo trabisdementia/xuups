@@ -1,0 +1,7 @@
+<b><u>=> Version 1.0 Final (2009-11-15)</u></b>
+- Making use of xoops cache folder instead of cookies.
+- Making code compatible with 2.4
+- Using preload to trigger the sending of emails
+
+<b><u>=> Version 1.0 Beta (2009-04-24)</u></b>
+- First public release of the module.

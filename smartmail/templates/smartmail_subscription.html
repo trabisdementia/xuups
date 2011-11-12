@@ -1,0 +1,74 @@
+<{include file='db:smartmail_header.html'}>
+
+<{if $infoMessages}>
+	<div class="smart_infoMessage">
+		<{foreach item=message key=id from=$infoMessages}>
+			<div><{$message}></div>
+		<{/foreach}>
+	</div>
+<{/if}>
+
+<{if $errorMessages}>
+	<div class="smart_errorMessage">
+		<{foreach item=message key=id from=$errorMessages}>
+			<div><{$message}></div>
+		<{/foreach}>
+	</div>
+<{/if}>
+
+<{if $subscription_action == 'default'}>
+	<form action="<{$xoops_url}>/modules/smartmail/subscription.php" method="post">
+		<{if $subscribedNewsletters}>
+			<h2><{$smarty.const._NL_MA_SUBSCRIBED_NEWSLETTERS}></h2>
+			<{foreach item=newsletter key=id from=$subscribedNewsletters}>
+				<input name="subscription_block_subscribed_newsletters[]" value="<{$id}>" type="checkbox" checked="checked"/><{$newsletter.newsletter_name}><br />
+				<div class="smartmail_newsletter_description"><{$newsletter.newsletter_description}></div>
+			<{/foreach}>
+			<br />
+		<{/if}>
+
+		<{if $newsletters}>
+			<h2><{$smarty.const._NL_MA_AVAILABLE_NEWSLETTERS}></h2>
+			<{foreach item=newsletter key=id from=$newsletters}>
+				<input name="subscription_block_submit_newsletters[]" value="<{$id}>" type="checkbox" /><{$newsletter.newsletter_name}><br />
+				<div class="smartmail_newsletter_description"><{$newsletter.newsletter_description}></div>
+			<{/foreach}>
+		<{/if}>
+		<{if $xoops_userid}>
+			<input type="hidden" name="op" value="logedin" />
+		<{else}>
+			<div style="padding-top: 10px;">
+				<{$smarty.const._NL_MA_EMAIL}> : <input name="subscription_block_email" id="subscription_block_email" size="20" maxlength="255" value="" type="text">
+				<input type="hidden" name="op" value="subscription_form_post" />
+			</div>
+		<{/if}>
+		<div style="padding-top: 10px; padding-bottom: 5px;">
+
+			<input class="formButton" name="subscription_block_submit" id="subscription_block_submit" value="<{$smarty.const._SUBMIT}>" type="submit">
+		</div>
+	</form>
+<{/if}>
+
+<{if $subscription_action == 'typo'}>
+	<h2><{$smarty.const._NL_MA_CONTINUE_USER_CREATION}></h2>
+	<form action="subscription.php" method="post">
+		<!-- <{$smarty.const._USERNAME}> <br /><input type="text" name="uname" size="26" maxlength="32" value="<{$usercookie}>" /><br />
+		<{$smarty.const._PASSWORD}><br /> <input type="password" name="pass" size="26" maxlength="32" /> //-->
+		<input type="hidden" name="op" value="newuser" />
+		<input type="hidden" name="subscription_user_email" value="<{$subscription_user_email}>" />
+		<input type="hidden" name="xoops_redirect" value="<{$redirect_page}>" />
+		<input type="hidden" name="subscription_newsletters" value="<{$subscription_newsletters}>" />
+		<{foreach item=newsletter key=id from=$subscription_newsletters}>
+			<input type="hidden" name="subscription_newsletters[]" value="<{$newsletter}>" />
+		<{/foreach}>
+		<input type="submit" value="<{$smarty.const._NL_MA_CONTINUE}>" />
+	</form>
+	<h3><{$smarty.const._NL_MA_WAIT_LOGIN}></h3>
+	<{include file='db:smartmail_login.html'}>
+<{/if}>
+
+<{if $subscription_action == 'login'}>
+	<{include file='db:smartmail_login.html'}>
+<{/if}>
+
+<{include file='db:smartmail_footer.html'}>

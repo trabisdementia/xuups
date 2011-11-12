@@ -1,0 +1,111 @@
+<a href="index.php"><{$smarty.const._SMARTBLOCKS_SMARTBLOCKS}></a>
+
+<{foreach item=crumb from=$bread}>
+    &raquo;&nbsp;
+    <a href="page.php?moduleid=<{$moduleid}>&amp;location=<{$crumb.location}>"><{$crumb.locationname}></a>&nbsp;
+<{/foreach}>
+
+<form action="page.php" method="post" onsubmit="return confirmIfDelete(this);">
+<p>
+	<table width="100%" cellspacing="0" cellpadding="4" style="border: 1px solid black; border-collapse: collapse;">
+	<tr>
+		<td width="25%" style="border: 1px solid black;" valign="top"><{include file="db:smartblocks_admin_blocks.html" blocks=$blocks.1}></td>
+		<td width="50%" style="border: 1px solid black;" valign="top"><{include file="db:smartblocks_admin_blocks.html" blocks=$blocks.3}>
+
+		<table width="100%" cellspacing="2" cellpadding="4" style="border: 1px solid silver; border-collapse: collapse;">
+		<tr>
+			<td width="50%" style="border: 1px solid black;" valign="top"><{include file="db:smartblocks_admin_blocks.html" blocks=$blocks.4}></td>
+			<td width="50%" style="border: 1px solid black;" valign="top"><{include file="db:smartblocks_admin_blocks.html" blocks=$blocks.5}></td>
+		</tr>
+		</table>
+		<table width="100%" cellspacing="2" cellpadding="4" style="border: 1px solid silver; border-collapse: collapse;">
+		<tr>
+			<td width="50%" style="border: 1px solid black;" valign="top"><{include file="db:smartblocks_admin_blocks.html" blocks=$blocks.6}></td>
+			<td width="50%" style="border: 1px solid black;" valign="top"><{include file="db:smartblocks_admin_blocks.html" blocks=$blocks.7}></td>
+		</tr>
+		</table>
+		<{include file="db:smartblocks_admin_blocks.html" blocks=$blocks.8}>
+
+		</td>
+
+		<td width="25%" style="border: 1px solid black;" valign="top"><{include file="db:smartblocks_admin_blocks.html" blocks=$blocks.2}></td>
+	</tr>
+	</table>
+	<p>
+		<select name="doaction">
+			<option value="setpriorities"><{$smarty.const._SMARTBLOCKS_ACTION_SETPRIORITIES}></option>
+			<option value="delete"><{$smarty.const._SMARTBLOCKS_DELETE}></option>
+		</select>
+		<input type="submit" value="<{$smarty.const._SMARTBLOCKS_GO}>" />
+		<input type="button" onclick="document.location='index.php?moduleid=<{$moduleid}>';" value="<{$smarty.const._SMARTBLOCKS_CANCEL}>" />
+	</p>
+	<input type="hidden" name="moduleid" value="<{$moduleid}>" />
+	<input type="hidden" name="location" value="<{$location}>" />
+	</form>
+</p>
+<fieldset style="float: right;">
+	<legend><{$smarty.const._SMARTBLOCKS_COLOR_LEGEND}></legend>
+	<table>
+		<tr>
+			<td style="background: #eee; border: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td><{$smarty.const._SMARTBLOCKS_COLOR_LEGEND_THISPAGE}></td>
+		</tr>
+		<tr>
+			<td style="background: #ddf; border: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td><{$smarty.const._SMARTBLOCKS_COLOR_LEGEND_THISPAGE_FALLDOWN}></td>
+		</tr>
+		<tr>
+			<td style="background: #aaf; border: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td><{$smarty.const._SMARTBLOCKS_COLOR_LEGEND_FALLENDOWN}></td>
+		</tr>
+		<tr>
+			<td style="background: #aaa; border: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td><{$smarty.const._SMARTBLOCKS_COLOR_LEGEND_NOT_VISIBLE}></td>
+		</tr>
+	</table>
+</fieldset>
+
+<p>
+	<h3><{$smarty.const._SMARTBLOCKS_CREATE_BLOCK}></h3>
+
+	<form method="post" action="block.php" id="newblocksubmit">
+	<input type="hidden" name="op" value="new" />
+	<select name="blockid" id="blockid">
+
+
+    <{foreach item=name from=$blocklist key=value }>
+        <option value="<{$value}>"><{$name}></option>
+    <{/foreach}>
+	</select>&nbsp;
+	<select name="placement">
+		<option value="1"><{$smarty.const._SMARTBLOCKS_LEFT}></option>
+		<option value="2"><{$smarty.const._SMARTBLOCKS_RIGHT}></option>
+		<option value="3"><{$smarty.const._SMARTBLOCKS_CENTER}></option>
+		<option value="4"><{$smarty.const._SMARTBLOCKS_CENTER_LEFT}></option>
+		<option value="5"><{$smarty.const._SMARTBLOCKS_CENTER_RIGHT}></option>
+	    <option value="6"><{$smarty.const._SMARTBLOCKS_BCENTER}></option>
+		<option value="7"><{$smarty.const._SMARTBLOCKS_BCENTER_LEFT}></option>
+		<option value="8"><{$smarty.const._SMARTBLOCKS_BCENTER_RIGHT}></option>
+	</select>&nbsp;
+	<input type="submit" value="<{$smarty.const._SMARTBLOCKS_GO}>">
+	<input type="hidden" name="moduleid" value="<{$moduleid}>">
+	<input type="hidden" name="location" value="<{$location}>">
+	</form>
+</p>
+
+<div id="flexblock_infoblock" style="margin-top: 20px;"></div>
+
+<script type="text/javascript">
+function toggleCb(id) {
+    var checkbox=document.getElementById('cb_'+id);
+    checkbox.checked=!checkbox.checked;
+    document.getElementById('hl_'+id).style.backgroundColor=checkbox.checked?'#fa0':'#ccc';
+}
+
+function confirmIfDelete(form) {
+    if(form.doaction.value=='delete')
+    return confirm('<{$smarty.const._SMARTBLOCKS_CONFIRM_DELETE}>');
+    return true;
+}
+
+</script>

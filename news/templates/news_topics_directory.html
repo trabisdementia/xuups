@@ -1,0 +1,7 @@
+<h2><{$smarty.const._AM_NEWS_TOPICS_DIRECTORY}></h2>
+<br />
+<ul>
+<{foreach item=topic from=$topics}>
+	<li><{$topic.prefix}><a href="<{$xoops_url}>/modules/news/index.php?storytopic=<{$topic.id}>"><{$topic.title}></a> (<{$topic.news_count}>)</li>
+<{/foreach}>
+</ul>

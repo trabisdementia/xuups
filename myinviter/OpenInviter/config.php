@@ -1,0 +1,20 @@
+<?php
+$openinviter_settings=array(
+'username'=>"yourusername",
+'private_key'=>"yourprivatekey",
+'message_body'=>"",
+'message_subject'=>"",
+'plugins_cache_time'=>"1800",
+'plugins_cache_file'=>"oi_plugins.php",
+'cookie_path'=>'tmp',
+'local_debug'=>false,
+'remote_debug'=>false,
+'hosted'=>false,
+'proxies'=>array(),
+'stats'=>false,
+'stats_user'=>"",
+'stats_password'=>"",
+'transport' => 'curl',
+'update_files'=>true
+);
+?>

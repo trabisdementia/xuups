@@ -1,0 +1,91 @@
+<div class="centerdiv">
+    <{if $confirmMsg}>
+        <div class="confirmMsg"><{$confirmMsg}></div>
+        <br />
+    <{/if}>
+    <{if $msg}>
+        <div class="errorMsg"><{$msg}></div>
+        <br />
+    <{/if}>
+    <{if $helpmsg}>
+    	<div class="helpMsg"><{$helpmsg}></div>
+    	<br />
+    <{/if}>
+    <{$form.javascript}>
+    <form name="<{$form.name}>" id="<{$form.name}>" action="<{$form.action}>" method="<{$form.method}>" <{$form.extra}> >
+        <table id="<{$form.name}>table" cellspacing="1">
+            <tr>
+                <th colspan="2"><{$form.title}></th>
+            </tr>
+            <!-- start of form elements loop -->
+            <tr valign="top">
+                <td class="head" id="dispatch_time" style="padding: 3px;">
+                    <{$form.elements.nid.body}>
+                    <{$form.elements.id.body}>
+                    <{$form.elements.op.body}>
+
+                    <{$form.elements.dispatch_time.caption}>
+                    <{if $form.elements.dispatch_time.description != ""}>
+                        <br /><br /><span style="font-weight: normal;"><{$form.elements.dispatch_time.description}></span>
+                    <{/if}>
+                </td>
+                <td class="even"><{$form.elements.dispatch_time.body}></td>
+            </tr>
+            <tr valign="top">
+                <td class="head" id="dispatch_subject" style="padding: 3px;">
+                    <{$form.elements.dispatch_subject.caption}>
+                    <{if $form.elements.dispatch_subject.description != ""}>
+                        <br /><br /><span style="font-weight: normal;"><{$form.elements.dispatch_subject.description}></span>
+                    <{/if}>
+                </td>
+                <td class="even"><{$form.elements.dispatch_subject.body}></td>
+            </tr>
+            <tr valign="top">
+                <td class="head" id="dispatch_status" style="padding: 3px;">
+                    <{$form.elements.dispatch_status.caption}>
+                    <{if $form.elements.dispatch_status.description != ""}>
+                        <br /><br /><span style="font-weight: normal;"><{$form.elements.dispatch_status.description}></span>
+                    <{/if}>
+                </td>
+                <td class="even"><{$form.elements.dispatch_status.body}></td>
+            </tr>
+            <tr valign="top">
+                <td class="head" id="submit" style="padding: 3px;">
+
+                </td>
+                <td class="even"><{$form.elements.submit.body}></td>
+            </tr>
+            <!-- end of form elements loop -->
+        </table>
+    </form>
+
+    
+	<{$form.javascript}>
+	<form name="<{$blockform.name}>" id="<{$blockform.name}>" action="<{$blockform.action}>" method="<{$blockform.method}>" <{$blockform.extra}> >
+	    <table id="<{$blockform.name}>table" cellspacing="1">
+	        <tr>
+	            <th colspan="2"><{$blockform.title}></th>
+	        </tr>
+	        <!-- start of form elements loop -->
+	        <{foreach item=element from=$blockform.elements}>
+	            <{if $element.hidden != true}>
+	                <tr valign="top">
+	                    <td class="" id="<{$element.caption}>" style="padding: 3px;">
+	                        <{$element.caption}>
+	                        <{if $element.description != ""}>
+	                            <br /><br /><span style="font-weight: normal;"><{$element.description}></span>
+	                        <{/if}>
+	                    </td>
+	                    <td class=""><{$element.body}></td>
+	                </tr>
+	            <{else}>
+	                <{$element.body}>
+	            <{/if}>
+	        <{/foreach}>
+	        <!-- end of form elements loop -->
+	    </table>
+	</form>
+	<div>
+		<{$output.html}>
+	</div>
+</div>
