@@ -10,7 +10,7 @@
  */
 
 /**
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package         Mymenus
  * @since           1.0
@@ -57,13 +57,16 @@ function mymenus_getModuleConfig($dirname = 'mymenus')
     return $config;
 }
 
-function mymenus_getSkinInfo($skin, $skin_from_theme)
+function mymenus_getSkinInfo($skin, $skin_from_theme, $skin_theme)
 {
     $error = false;
     if ($skin_from_theme) {
         $path = "themes/" . $GLOBALS['xoopsConfig']['theme_set'] . "/menu";
-        if (!file_exists($GLOBALS['xoops']->path("{$path}/skin_version.php"))) {
-            $error = true;
+        if (!file_exists($GLOBALS['xoops']->path("{$path}/skin_version.php"))) { 
+            $path = "themes/" . $GLOBALS['xoopsConfig']['theme_set'] . "/modules/mymenus/skins/{$skin_theme}";
+            if (!file_exists($GLOBALS['xoops']->path("{$path}/skin_version.php"))) {
+                $error = true;
+            }
         }
     }
 

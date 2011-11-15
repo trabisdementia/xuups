@@ -10,7 +10,7 @@
  */
 
 /**
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package         Mymenus
  * @since           1.0
@@ -82,7 +82,7 @@ function mymenus_block_show($options)
 
     //get extra files from skins
     $skin = $options[1];
-    $skin_info = mymenus_getSkinInfo($skin, $options[2]);
+    $skin_info = mymenus_getSkinInfo($skin, $options[2], $options[3]);
 
     if (isset($skin_info['css'])) {
         $css = array_merge($css, $skin_info['css']);
@@ -131,8 +131,8 @@ function mymenus_block_show($options)
 
     $block['content'] = $blockTpl->fetch($skin_info['template']);
 
-    if ($options[3] == 'template') {
-        $xoopsTpl->assign('xoops_menu_' . $options[4] , $block['content']);
+    if ($options[4] == 'template') {
+        $xoopsTpl->assign('xoops_menu_' . $options[5] , $block['content']);
         $block = array();
     }
 
@@ -186,11 +186,28 @@ function mymenus_block_edit($options)
     $form .= $element->render();
     $form .= "</select>\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_SELECT_SKIN_DSC . "</i><br /><br />";
 
-    //Use skin from,theme
+    //Use skin from theme
     $form .= "<b>" . _MB_MYMENUS_USE_THEME_SKIN . "</b>&nbsp;";
     $element = new XoopsFormRadioYN('', 'options[2]', $options[2]);
     $form .= $element->render();
     $form .= "</select>\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_USE_THEME_SKIN_DSC . "</i><br /><br />";
+
+    //Choose skin from theme
+    xoops_load('XoopsLists');
+    $temp_theme_skins = XoopsLists::getDirListAsArray(XOOPS_ROOT_PATH . "/themes/" . $GLOBALS['xoopsConfig']['theme_set'] . "/modules/mymenus/skins/", "");
+    $theme_skins_options = array();
+    foreach ($temp_theme_skins as $key => $theme_skin) {
+        if (file_exists(XOOPS_ROOT_PATH . '/themes/' . $GLOBALS['xoopsConfig']['theme_set'] . '/modules/mymenus/skins/' . $theme_skin . '/skin_version.php')) {
+            $theme_skins_options[$theme_skin] = '/themes/' . $GLOBALS['xoopsConfig']['theme_set'] . '/modules/mymenus/skins/' . $theme_skin . '';
+        }
+    }
+
+    $form .= "<b>" . _MB_MYMENUS_SELECT_SKIN . "</b>&nbsp;";
+    $element = new XoopsFormSelect('', 'options[3]', $options[3], 1);
+    $element->addOption('', '/themes/' . $GLOBALS['xoopsConfig']['theme_set'] . '/menu');
+    $element->addOptionArray($theme_skins_options);
+    $form .= $element->render();
+    $form .= "</select>\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_SELECT_SKIN_DSC . "</i><br /><br />";
 
     //Display method
     $display_options = array(
@@ -198,14 +215,14 @@ function mymenus_block_edit($options)
         'template' => _MB_MYMENUS_DISPLAY_METHOD_TEMPLATE
     );
     $form .= "<b>" . _MB_MYMENUS_DISPLAY_METHOD . "</b>&nbsp;";
-    $element = new XoopsFormSelect('', 'options[3]', $options[3], 1);
+    $element = new XoopsFormSelect('', 'options[4]', $options[4], 1);
     $element->addOptionArray($display_options);
     $form .= $element->render();
     $form .= "</select>\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_DISPLAY_METHOD_DSC . "</i><br /><br />";
 
     //Unique ID
     $form .= "<b>" . _MB_MYMENUS_UNIQUEID . "</b>&nbsp;";
-    $element = new XoopsFormText('', 'options[4]', 10, 50, $options[4]);
+    $element = new XoopsFormText('', 'options[5]', 10, 50, $options[5]);
     $form .= $element->render();
     $form .= "\n&nbsp;&nbsp;<i>" . _MB_MYMENUS_UNIQUEID_DSC . "</i><br /><br />";
 
