@@ -1,3 +1,8 @@
+<b><u>=> Version 1.4 (2011-11-15)</u></b>
+- added possibility to choose more than one skin from theme 
+  directory <{$xoops_url}>/themes/<{$xoops_theme}>/modules/mymenus/skins 
+- changed in mysql files TYPE=MyISAM in ENGINE=MyISAM
+
 <b><u>=> Version 1.3 (2011-04-02)</u></b>
 - bug fix : Dynamic.php plugin not loading module modinfo language.
 

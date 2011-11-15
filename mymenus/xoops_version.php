@@ -10,7 +10,7 @@
  */
 
 /**
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package         Mymenus
  * @since           1.0
@@ -21,7 +21,7 @@
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 $modversion['name'] = _MI_MYMENUS_MD_NAME;
-$modversion['version'] = 1.3;
+$modversion['version'] = 1.4;
 $modversion['description'] = _MI_MYMENUS_MD_DESC;
 $modversion['credits'] = "Xuups";
 $modversion['author'] = "Xuups";
@@ -75,5 +75,5 @@ $modversion['blocks'][$i]['name'] = _MI_MYMENUS_BLK;
 $modversion['blocks'][$i]['description'] = _MI_MYMENUS_BLK_DSC;
 $modversion['blocks'][$i]['show_func'] = "mymenus_block_show";
 $modversion['blocks'][$i]['edit_func'] = "mymenus_block_edit";
-$modversion['blocks'][$i]['options'] = "0|default|0|block|0";
+$modversion['blocks'][$i]['options'] = "0|default|0||block|0";
 $modversion['blocks'][$i]['template'] = "mymenus_block.html";
