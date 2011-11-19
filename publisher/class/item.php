@@ -1724,7 +1724,6 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler
 
         if ($totalItems > 0) {
             $totalItems = $totalItems - 1;
-            mt_srand((double)microtime() * 1000000);
             $entrynumber = mt_rand(0, $totalItems);
             $item =& $this->getItems(1, $entrynumber, $status, $categoryId, $sort = 'datesub', $order = 'DESC', $notNullFields);
             if ($item) {

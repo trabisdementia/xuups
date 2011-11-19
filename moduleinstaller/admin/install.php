@@ -65,10 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $content = "<div class='x2-note confirmMsg'>" . NO_INSTALLED_MODULES . "</div>";
     }
 
-    // Flush cache files for cpanel GUIs
-    xoops_load("cpanel", "system");
-    XoopsSystemCpanel::flush();
-
     //Set active modules in cache folder
     xoops_setActiveModules();
 } else {

@@ -46,8 +46,8 @@ xoops_cp_header();
 
 // Define Stylesheet and JScript
 $xoTheme->addStylesheet(XOOPS_URL . "/modules/" . $xoopsModule->getVar("dirname") . "/css/admin.css");
-//$xoTheme->addScript("browse.php?Frameworks/jquery/jquery.js");
-//$xoTheme->addScript("browse.php?modules/" . $xoopsModule->getVar("dirname") . "/js/admin.js");
+//$xoTheme->addScript("media/jquery/jquery.js");
+//$xoTheme->addScript("modules/" . $xoopsModule->getVar("dirname") . "/js/admin.js");
 
 // Load language files
 if (!@include_once(XOOPS_ROOT_PATH."/modules/".$xoopsModule->getVar("dirname")."/language/" . $xoopsConfig['language'] . "/admin.php")) {

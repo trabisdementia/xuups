@@ -51,7 +51,7 @@ class DefacerCorePreload extends XoopsPreloadItem
         if (DefacerCorePreload::isActive() && DefacerCorePreload::isRedirectActive()) {
             if(!empty($_SESSION['redirect_message'])){
                 global $xoTheme;
-                $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
+                $xoTheme->addScript('media/jquery/jquery.js');
                 $xoTheme->addScript('modules/defacer/js/jgrowl.js');
                 $xoTheme->addStylesheet('modules/defacer/js/jgrowl.css', array('media' => 'screen'));
 
