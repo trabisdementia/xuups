@@ -30,7 +30,7 @@ function publisher_onCache()
     $GLOBALS['xoTheme']->addStylesheet(PUBLISHER_URL . '/css/jquery.popeye.style.css');
     $GLOBALS['xoTheme']->addStylesheet(PUBLISHER_URL . '/css/jquery-ui-1.7.1.custom.css');
 
-    $GLOBALS['xoTheme']->addScript(XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js');
+    $GLOBALS['xoTheme']->addScript(XOOPS_URL . '/media/jquery/jquery.js');
 
     $GLOBALS['xoTheme']->addScript(PUBLISHER_URL . '/js/jquery.popeye-2.0.4.js');
 
@@ -63,7 +63,7 @@ function publisher_cpHeader()
 	<link type="text/css" href="' . PUBLISHER_URL . '/css/publisher.css" rel="stylesheet" />
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/funcs.js"></script>
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/cookies.js"></script>
-    <script type="text/javascript" src="' . XOOPS_URL . '/browse.php?Frameworks/jquery/jquery.js"></script>
+    <script type="text/javascript" src="' . XOOPS_URL . '/media/jquery/jquery.js"></script>
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/ui.core.js"></script>
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/ui.tabs.js"></script>
     <script type="text/javascript" src="' . PUBLISHER_URL . '/js/ajaxupload.3.9.js"></script>
