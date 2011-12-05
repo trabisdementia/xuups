@@ -331,4 +331,6 @@ define("_MI_PUBLISHER_AUTHOR_ITEMS_DSC", "Afficher les articles du même auteur"
  *
  * @version         $Id: modinfo.php 836 2009-09-14 23:29:42Z Dugris $
  **/
-?>
+
+define("_MI_PUBLISHER_DISP_BLOCK_SUM", "Display block summary on items page?");
+define("_MI_PUBLISHER_DISP_BLOCK_SUM_DSC", "");

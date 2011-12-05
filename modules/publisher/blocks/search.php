@@ -27,7 +27,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 function publisher_search_show($options)
 {
     $block = array();
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     $categories = $publisher->getHandler('category')->getCategoriesForSearch();
     if (count($categories) == 0) return $block;
 

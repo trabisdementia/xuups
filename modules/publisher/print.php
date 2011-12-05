@@ -46,10 +46,10 @@ if (!$itemObj->accessGranted()) {
 }
 
 // Creating the category object that holds the selected ITEM
-$categoryObj =& $itemObj->category();
+$categoryObj = $itemObj->category();
 
 $xoopsTpl = new XoopsTpl();
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 $item['title'] = $itemObj->title();
 $item['body'] = $itemObj->body();

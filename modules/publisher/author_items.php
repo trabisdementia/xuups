@@ -27,7 +27,7 @@ if (empty($uid)) {
     exit();
 }
 
-$member_handler =& xoops_gethandler('member');
+$member_handler = xoops_gethandler('member');
 $thisuser = $member_handler->getUser($uid);
 if (!is_object($thisuser)) {
     redirect_header('index.php', 2, _CO_PUBLISHER_ERROR);
@@ -39,7 +39,7 @@ if (!$publisher->getConfig('perm_author_items')) {
     exit();
 }
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 $xoopsOption['template_main'] = 'publisher_author_items.html';
 include_once XOOPS_ROOT_PATH . '/header.php';

@@ -40,8 +40,8 @@ class PublisherMetagen {
     var $_minChar = 4;
 
     function PublisherMetagen($title, $keywords = '', $description = '', $categoryPath = false) {
-        $this->publisher =& PublisherPublisher::getInstance();
-        $this->_myts =& MyTextSanitizer::getInstance();
+        $this->publisher = PublisherPublisher::getInstance();
+        $this->_myts = MyTextSanitizer::getInstance();
 
         $this->setCategoryPath($categoryPath);
         $this->setTitle($title);

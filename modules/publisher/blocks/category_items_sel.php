@@ -27,7 +27,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
 function publisher_category_items_sel_show($options)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     $block = array();
 

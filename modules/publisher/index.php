@@ -41,7 +41,7 @@ $xoopsOption['template_main'] = 'publisher_display' . '_' . $publisher->getConfi
 include_once XOOPS_ROOT_PATH . '/header.php';
 include_once PUBLISHER_ROOT_PATH . '/footer.php';
 
-$gperm_handler =& xoops_gethandler('groupperm');
+$gperm_handler = xoops_gethandler('groupperm');
 
 // Creating the top categories objects
 $categoriesObj = $publisher->getHandler('category')->getCategories($publisher->getConfig('idxcat_cat_perpage'), $catstart);

@@ -21,7 +21,7 @@
  */
 
 include_once dirname(dirname(__FILE__)) . '/admin_header.php';
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 $importFromModuleName = "Smartsection " . @$_POST['smartsection_version'];
 
@@ -101,11 +101,11 @@ if ($op == 'go') {
     publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
     publisher_openCollapsableBar('newsimportgo', 'newsimportgoicon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
 
-    $module_handler =& xoops_gethandler('module');
+    $module_handler = xoops_gethandler('module');
     $moduleObj = $module_handler->getByDirname('smartsection');
     $smartsection_module_id = $moduleObj->getVar('mid');
 
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $gperm_handler = xoops_gethandler('groupperm');
 
     $cnt_imported_cat = 0;
     $cnt_imported_articles = 0;
@@ -126,7 +126,7 @@ if ($op == 'go') {
         $newCat['oldid'] = $arrCat['categoryid'];
         $newCat['oldpid'] = $arrCat['parentid'];
 
-        $categoryObj =& $publisher->getHandler('category')->create();
+        $categoryObj = $publisher->getHandler('category')->create();
 
         $categoryObj->setVars($arrCat);
         $categoryObj->setVar('categoryid', 0);
@@ -151,7 +151,7 @@ if ($op == 'go') {
 
         while ($arrArticle = $xoopsDB->fetchArray($resultArticles)) {
             // insert article
-            $itemObj =& $publisher->getHandler('item')->create();
+            $itemObj = $publisher->getHandler('item')->create();
 
             $itemObj->setVars($arrArticle);
             $itemObj->setVar('itemid', 0);

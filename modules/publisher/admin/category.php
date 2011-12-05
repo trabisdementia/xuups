@@ -202,7 +202,7 @@ switch ($op) {
         $categoryid = 0;
         $nb_subcats = intval($_POST['nb_subcats']) + $_POST['nb_sub_yet'];
 
-        $categoryObj =& $publisher->getHandler('category')->create();
+        $categoryObj = $publisher->getHandler('category')->create();
         $categoryObj->setVar('name', $_POST['name']);
         $categoryObj->setVar('description', $_POST['description']);
         $categoryObj->setVar('weight', $_POST['weight']);
@@ -240,9 +240,9 @@ switch ($op) {
 
         echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
         echo "<tr>";
-        echo "<td class='bg3' align='left'><b>" . _AM_PUBLISHER_ITEMCATEGORYNAME . "</b></td>";
-        echo "<td width='60' class='bg3' width='65' align='center'><b>" . _CO_PUBLISHER_WEIGHT . "</b></td>";
-        echo "<td width='60' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+        echo "<td class='bg3' align='left'><strong>" . _AM_PUBLISHER_ITEMCATEGORYNAME . "</strong></td>";
+        echo "<td width='60' class='bg3' width='65' align='center'><strong>" . _CO_PUBLISHER_WEIGHT . "</strong></td>";
+        echo "<td width='60' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ACTION . "</strong></td>";
         echo "</tr>";
         $totalCategories = $publisher->getHandler('category')->getCategoriesCount(0);
         if (count($categoriesObj) > 0) {
@@ -270,7 +270,7 @@ xoops_cp_footer();
 
 function publisher_displayCategory($categoryObj, $level = 0)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     $description = $categoryObj->description();
     if (!XOOPS_USE_MULTIBYTES) {
@@ -303,7 +303,7 @@ function publisher_displayCategory($categoryObj, $level = 0)
 
 function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, $categoryObj = null)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     // if there is a parameter, and the id exists, retrieve data: we're editing a category
     if ($categoryid != 0) {
@@ -354,10 +354,10 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
         $totalSCOnPage = count($subcatsObj);
         echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
         echo "<tr>";
-        echo "<td width='60' class='bg3' align='left'><b>" . _AM_PUBLISHER_CATID . "</b></td>";
-        echo "<td width='20%' class='bg3' align='left'><b>" . _AM_PUBLISHER_CATCOLNAME . "</b></td>";
-        echo "<td class='bg3' align='left'><b>" . _AM_PUBLISHER_SUBDESCRIPT . "</b></td>";
-        echo "<td width='60' class='bg3' align='right'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+        echo "<td width='60' class='bg3' align='left'><strong>" . _AM_PUBLISHER_CATID . "</strong></td>";
+        echo "<td width='20%' class='bg3' align='left'><strong>" . _AM_PUBLISHER_CATCOLNAME . "</strong></td>";
+        echo "<td class='bg3' align='left'><strong>" . _AM_PUBLISHER_SUBDESCRIPT . "</strong></td>";
+        echo "<td width='60' class='bg3' align='right'><strong>" . _AM_PUBLISHER_ACTION . "</strong></td>";
         echo "</tr>";
         if ($totalsubs > 0) {
             foreach ($subcatsObj as $subcat) {
@@ -389,11 +389,11 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
         $allcats = $publisher->getHandler('category')->getObjects(null, true);
         echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
         echo "<tr>";
-        echo "<td width='40' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMID . "</b></td>";
-        echo "<td width='20%' class='bg3' align='left'><b>" . _AM_PUBLISHER_ITEMCOLNAME . "</b></td>";
-        echo "<td class='bg3' align='left'><b>" . _AM_PUBLISHER_ITEMDESC . "</b></td>";
-        echo "<td width='90' class='bg3' align='center'><b>" . _AM_PUBLISHER_CREATED . "</b></td>";
-        echo "<td width='60' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+        echo "<td width='40' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ITEMID . "</strong></td>";
+        echo "<td width='20%' class='bg3' align='left'><strong>" . _AM_PUBLISHER_ITEMCOLNAME . "</strong></td>";
+        echo "<td class='bg3' align='left'><strong>" . _AM_PUBLISHER_ITEMDESC . "</strong></td>";
+        echo "<td width='90' class='bg3' align='center'><strong>" . _AM_PUBLISHER_CREATED . "</strong></td>";
+        echo "<td width='60' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ACTION . "</strong></td>";
         echo "</tr>";
         if ($totalitems > 0) {
             for ($i = 0; $i < $totalitemsOnPage; $i++) {

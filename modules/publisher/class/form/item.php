@@ -77,7 +77,7 @@ class PublisherItemForm extends PublisherThemeTabForm {
     }
 
     function isGranted($item) {
-        $publisher =& PublisherPublisher::getInstance();
+        $publisher = PublisherPublisher::getInstance();
         $ret = false;
         if (!$this->checkperm || $publisher->getHandler('permission')->isGranted('form_view', $item)) {
             $ret = true;
@@ -105,7 +105,7 @@ class PublisherItemForm extends PublisherThemeTabForm {
 
         global $xoopsConfig, $xoopsUser;
 
-        $publisher =& PublisherPublisher::getInstance();
+        $publisher = PublisherPublisher::getInstance();
         $checkperm = $this->checkperm;
 
         $allowed_editors = publisher_getEditors($publisher->getHandler('permission')->getGrantedItems('editors'));
@@ -149,17 +149,6 @@ class PublisherItemForm extends PublisherThemeTabForm {
             $this->addElement($text_tags);
         }
 
-        // SUMMARY
-        if ($this->isGranted(_PUBLISHER_SUMMARY)) {
-            // Description
-            $summary_text = new XoopsFormTextArea(_CO_PUBLISHER_SUMMARY, 'summary', $obj->getVar('summary', 'e'), 7, 60);
-            /*$editor_configs["name"] = "summary";
-             $editor_configs["value"] = $obj->getVar('summary', 'e');
-             $summary_text = new XoopsFormEditor(_CO_PUBLISHER_SUMMARY, $editor, $editor_configs, $nohtml, $onfailure = null);   */
-            $summary_text->setDescription(_CO_PUBLISHER_SUMMARY_DSC);
-            $this->addElement($summary_text);
-        }
-
         // SELECT EDITOR
         $nohtml = false;
         if (count($allowed_editors) > 0) {
@@ -185,6 +174,17 @@ class PublisherItemForm extends PublisherThemeTabForm {
         $editor_configs["cols"] = !$publisher->getConfig('submit_editor_cols') ? 60 : $publisher->getConfig('submit_editor_cols');
         $editor_configs["width"] = !$publisher->getConfig('submit_editor_width') ? "100%" : $publisher->getConfig('submit_editor_width');
         $editor_configs["height"] = !$publisher->getConfig('submit_editor_height') ? "400px" : $publisher->getConfig('submit_editor_height');
+
+         // SUMMARY
+        if ($this->isGranted(_PUBLISHER_SUMMARY)) {
+            // Description
+            //$summary_text = new XoopsFormTextArea(_CO_PUBLISHER_SUMMARY, 'summary', $obj->getVar('summary', 'e'), 7, 60);
+            $editor_configs["name"] = "summary";
+            $editor_configs["value"] = $obj->getVar('summary', 'e');
+            $summary_text = new XoopsFormEditor(_CO_PUBLISHER_SUMMARY, $editor, $editor_configs, $nohtml, $onfailure = null);
+            $summary_text->setDescription(_CO_PUBLISHER_SUMMARY_DSC);
+            $this->addElement($summary_text);
+        }
 
         // BODY
         $editor_configs["name"] = "body";
@@ -308,8 +308,8 @@ class PublisherItemForm extends PublisherThemeTabForm {
                 $objimage_array[$imageObj->getVar('image_name')] = $imageObj->getVar('image_nicename');
             }
 
-            $imgcat_handler =& xoops_gethandler('imagecategory');
-            $catlist =& $imgcat_handler->getList($group, 'imgcat_read', 1);
+            $imgcat_handler = xoops_gethandler('imagecategory');
+            $catlist = $imgcat_handler->getList($group, 'imgcat_read', 1);
             $catids = array_keys($catlist);
 
             $image_handler = xoops_gethandler('image');
@@ -392,8 +392,8 @@ $publisher(document).ready(function(){
             $button = new XoopsFormLabel('', "<div id='publisher_upload_button'>" . _CO_PUBLISHER_IMAGE_UPLOAD_NEW . "</div>");
             $nicename = new XoopsFormText('', 'image_nicename', 30, 30, _CO_PUBLISHER_IMAGE_NICENAME);
 
-            $imgcat_handler =& xoops_gethandler('imagecategory');
-            $catlist =& $imgcat_handler->getList($group, 'imgcat_write', 1);
+            $imgcat_handler = xoops_gethandler('imagecategory');
+            $catlist = $imgcat_handler->getList($group, 'imgcat_write', 1);
             $imagecat = new XoopsFormSelect('', 'imgcat_id', '', 1);
             $imagecat->addOptionArray($catlist);
 

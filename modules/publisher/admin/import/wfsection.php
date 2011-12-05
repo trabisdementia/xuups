@@ -21,7 +21,7 @@
  */
 
 include_once dirname(dirname(__FILE__)) . '/admin_header.php';
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 $importFromModuleName = "WF-Section " . @$_POST['wfs_version'];
 
@@ -158,7 +158,7 @@ if ($op == 'go') {
         $resultArticles = $xoopsDB->query($sql);
         while ($arrArticle = $xoopsDB->fetchArray($resultArticles)) {
             // insert article
-            $itemObj =& $publisher->getHandler('item')->create();
+            $itemObj = $publisher->getHandler('item')->create();
 
             $itemObj->setVar('categoryid', $categoryObj->categoryid());
             $itemObj->setVar('title', $arrArticle['title']);
@@ -243,7 +243,7 @@ if ($op == 'go') {
     // Looping through the comments to link them to the new articles and module
     echo _AM_PUBLISHER_IMPORT_COMMENTS . "<br />";
 
-    $module_handler =& xoops_gethandler('module');
+    $module_handler = xoops_gethandler('module');
     $moduleObj = $module_handler->getByDirname('wfsection');
     $news_module_id = $moduleObj->getVar('mid');
 

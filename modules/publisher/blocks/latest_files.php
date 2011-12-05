@@ -26,7 +26,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
 function publisher_latest_files_show($options)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     /**
      * $options[0] : Sort order - datesub | counter
      * $options[1] : Number of files to display

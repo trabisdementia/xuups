@@ -26,8 +26,8 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
 function publisher_date_to_date_show($options)
 {
-    $myts =& MyTextSanitizer::getInstance();
-    $publisher =& PublisherPublisher::getInstance();
+    $myts = MyTextSanitizer::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     $block = array();
 

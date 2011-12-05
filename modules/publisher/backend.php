@@ -21,6 +21,7 @@
  */
 
 include_once dirname(__FILE__) . '/header.php';
+xoops_load('XoopsLocal');
 
 error_reporting(0);
 $GLOBALS['xoopsLogger']->activated = false;
@@ -53,7 +54,7 @@ if (!$tpl->is_cached('db:publisher_rss.html')) {
     $tpl->assign('channel_title', htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES));
     $tpl->assign('channel_link', PUBLISHER_URL);
     $tpl->assign('channel_desc', htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES));
-    $tpl->assign('channel_lastbuild', formatTimestamp(time(), 'rss'));
+    $tpl->assign('channel_lastbuild', XoopsLocal::formatTimestamp(time(), 'rss'));
     $tpl->assign('channel_webmaster', $xoopsConfig['adminmail']);
     $tpl->assign('channel_editor', $xoopsConfig['adminmail']);
 
@@ -84,10 +85,9 @@ if (!$tpl->is_cached('db:publisher_rss.html')) {
                          array('title' => htmlspecialchars($item->title(), ENT_QUOTES),
                                'link' => $item->getItemUrl(),
                                'guid' => $item->getItemUrl(),
-                               'pubdate' => formatTimestamp($item->getVar('datesub'), 'rss'),
+                               'pubdate' => XoopsLocal::formatTimestamp($item->getVar('datesub'), 'rss'),
                                'description' => htmlspecialchars($item->getBlockSummary(300, true), ENT_QUOTES)));
         }
     }
 }
 $tpl->display('db:publisher_rss.html');
-?>

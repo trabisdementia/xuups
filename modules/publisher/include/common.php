@@ -45,7 +45,7 @@ include_once PUBLISHER_ROOT_PATH . '/class/publisher.php';
 include_once PUBLISHER_ROOT_PATH . '/class/request.php';
 
 $debug = true;
-$publisher =& PublisherPublisher::getInstance($debug);
+$publisher = PublisherPublisher::getInstance($debug);
 
 //This is needed or it will not work in blocks.
 global $publisher_isAdmin;

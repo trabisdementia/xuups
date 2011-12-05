@@ -1,10 +1,10 @@
-<b><u>=> Version 1.0 Beta (2010-04-02)</u></b>
+<strong><u>=> Version 1.0 Beta (2010-04-02)</u></strong>
 - Improved : Images sorted by Name in submit form (trabis)
 - Added : Class for handling block forms (trabis)
 - Fixed : Date to date block blank page (trabis)
 - Fixed : Extra '-' in page title (trabis/mboyden)
 
-<b><u>=> Version 1.0 Alpha (2009-08-24)</u></b>
+<strong><u>=> Version 1.0 Alpha (2009-08-24)</u></strong>
 - Imported : smartsection Version 2.14 Final (trabis)
 - Removed : dependecy from smartobject (trabis)
 - Removed : unused files (trabis)

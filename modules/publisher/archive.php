@@ -30,6 +30,7 @@ $xoopsOption['template_main'] = 'publisher_archive.html';
 include_once XOOPS_ROOT_PATH . '/header.php';
 include_once PUBLISHER_ROOT_PATH . '/footer.php';
 xoops_loadLanguage('calendar');
+xoops_load('XoopsLocal');
 
 $lastyear = 0;
 $lastmonth = 0;
@@ -48,7 +49,7 @@ if ($dateformat == '') {
     $dateformat = 'm';
 }
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_MD_PUBLISHER_ARCHIVES) . $pgtitle . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
 
 $useroffset = '';
@@ -77,7 +78,7 @@ if (!($itemsCount > 0)) {
     $months = array();
     $i = 0;
     foreach ($items as $item) {
-        $time = formatTimestamp($item['datesub'], 'mysql', $useroffset);
+        $time = XoopsLocal::formatTimestamp($item['datesub'], 'mysql', $useroffset);
         if (preg_match("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $time, $datetime)) {
             $this_year = intval($datetime[1]);
             $this_month = intval($datetime[2]);
@@ -175,6 +176,4 @@ if ($fromyear != 0 && $frommonth != 0) {
 
 $xoopsTpl->assign('lang_newsarchives', _MD_PUBLISHER_ARCHIVES);
 
-
 include_once XOOPS_ROOT_PATH . '/footer.php';
-?>

@@ -29,7 +29,7 @@ class PublisherSession {
     /**
      * Session constructor<br />
      * Starts the session with session_start()
-     * <b>Note:</b> that if the session has already started,
+     * <strong>Note:</strong> that if the session has already started,
      * session_start() does nothing
      * @access public
      */

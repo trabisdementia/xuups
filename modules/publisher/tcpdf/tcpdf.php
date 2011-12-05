@@ -545,7 +545,7 @@ if(!class_exists('TCPDF', false)) {
          * @since 1.53.0.TC013
          */
         protected $original_rMargin;
-        	
+
         /**
          * @var Header font.
          * @access protected
@@ -1001,20 +1001,20 @@ if(!class_exists('TCPDF', false)) {
          * @param String $encoding charset encoding; default is UTF-8
          */
         public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding="UTF-8") {
-            	
+
             /* Set internal character encoding to ASCII */
             if (function_exists("mb_internal_encoding") AND mb_internal_encoding()) {
                 $this->internal_encoding = mb_internal_encoding();
                 mb_internal_encoding("ASCII");
             }
-            	
+
             // set language direction
             $this->rtl = $this->l['a_meta_dir']=='rtl' ? true : false;
             $this->tmprtl = false;
-            	
+
             //Some checks
             $this->_dochecks();
-            	
+
             //Initialization of properties
             $this->isunicode=$unicode;
             $this->page=0;
@@ -1044,7 +1044,7 @@ if(!class_exists('TCPDF', false)) {
             $this->encrypted=false;
             $this->last_rc4_key='';
             $this->padding="\x28\xBF\x4E\x5E\x4E\x75\x8A\x41\x64\x00\x4E\x56\xFF\xFA\x01\x08\x2E\x2E\x00\xB6\xD0\x68\x3E\x80\x2F\x0C\xA9\xFE\x64\x53\x69\x7A";
-            	
+
             //Standard Unicode fonts
             $this->CoreFonts=array(
 			'courier'=>'Courier',
@@ -1062,13 +1062,13 @@ if(!class_exists('TCPDF', false)) {
 			'symbol'=>'Symbol',
 			'zapfdingbats'=>'ZapfDingbats'
 			);
-				
+
 			//Set scale factor
 			$this->setPageUnit($unit);
-				
+
 			// set page format and orientation
 			$this->setPageFormat($format, $orientation);
-				
+
 			//Page margins (1 cm)
 			$margin = 28.35 / $this->k;
 			$this->SetMargins($margin,$margin);
@@ -1078,14 +1078,14 @@ if(!class_exists('TCPDF', false)) {
 			$this->LineWidth = 0.567/$this->k;
 			//Automatic page break
 			$this->SetAutoPageBreak(true, 2*$margin);
-				
+
 			//Full width display mode
 			$this->SetDisplayMode('fullwidth');
 			//Compression
 			$this->SetCompression(true);
 			//Set default PDF version number
 			$this->PDFVersion = "1.5";
-				
+
 			$this->encoding = $encoding;
 			$this->b = 0;
 			$this->i = 0;
@@ -1108,17 +1108,17 @@ if(!class_exists('TCPDF', false)) {
 			}
 			$this->SetFillColor(200, 200, 200, true);
 			$this->SetTextColor(0, 0, 0, true);
-				
+
 			// user's rights
 			$this->ur = false;
 			$this->ur_document = "/FullSave";
 			$this->ur_annots = "/Create/Delete/Modify/Copy/Import/Export";
 			$this->ur_form = "/Add/Delete/FillIn/Import/Export/SubmitStandalone/SpawnTemplate";
 			$this->ur_signature = "/Modify";
-				
+
 			// set default JPEG quality
 			$this->jpeg_quality = 75;
-				
+
 			// initialize some settings
 			$this->utf8Bidi(array(""));
         }
@@ -1546,7 +1546,7 @@ if(!class_exists('TCPDF', false)) {
 
         /**
          * Defines an alias for the total number of pages. It will be substituted as the document is closed.<br />
-         * <b>Example:</b><br />
+         * <strong>Example:</strong><br />
          * <pre>
          * class PDF extends TCPDF {
          * 	public function Footer() {
@@ -1670,14 +1670,14 @@ if(!class_exists('TCPDF', false)) {
             // store current margin values
             $lMargin = $this->lMargin;
             $rMargin = $this->rMargin;
-            	
+
             if (!isset($this->original_lMargin)) {
                 $this->original_lMargin = $this->lMargin;
             }
             if (!isset($this->original_rMargin)) {
                 $this->original_rMargin = $this->rMargin;
             }
-            	
+
             if (count($this->pages) > $this->page) {
                 // this page has been already added
                 $this->page++;
@@ -1748,7 +1748,7 @@ if(!class_exists('TCPDF', false)) {
             }
             $this->TextColor = $tc;
             $this->ColorFlag = $cf;
-            	
+
             // restore previous margin values
             $this->SetLeftMargin($lMargin);
             $this->SetRightMargin($rMargin);
@@ -2168,7 +2168,7 @@ if(!class_exists('TCPDF', false)) {
         /**
          * Imports a TrueType or Type1 font and makes it available. It is necessary to generate a font definition file first with the makefont.php utility. The definition file (and the font file itself when embedding) must be present either in the current directory or in the one indicated by K_PATH_FONTS if the constant is defined. If it could not be found, the error "Could not include font definition file" is generated.
          * Support UTF-8 Unicode [Nicola Asuni, 2005-01-02].
-         * <b>Example</b>:<br />
+         * <strong>Example</strong>:<br />
          * <pre>
          * $pdf->AddFont('Comic','I');
          * // is equivalent to:
@@ -2326,14 +2326,14 @@ if(!class_exists('TCPDF', false)) {
             if($this->isunicode) {
                 $this->AddFont($family, $style);
             }
-            	
+
             //Test if font is already selected
             if(($this->FontFamily == $family) AND ($this->FontStyle == $style) AND ($this->FontSizePt == $size)) {
                 return;
             }
-            	
+
             $fontkey = $family.$style;
-            	
+
 
             //Test if used for the first time
             if(!isset($this->fonts[$fontkey])) {
@@ -2490,7 +2490,7 @@ if(!class_exists('TCPDF', false)) {
         /**
          * Whenever a page break condition is met, the method is called, and the break is issued or not depending on the returned value. The default implementation returns a value according to the mode selected by SetAutoPageBreak().<br />
          * This method is called automatically and should not be called directly by the application.<br />
-         * <b>Example:</b><br />
+         * <strong>Example:</strong><br />
          * The method is overriden in an inherited class in order to obtain a 3 column layout:<br />
          * <pre>
          * class PDF extends TCPDF {
@@ -2554,15 +2554,15 @@ if(!class_exists('TCPDF', false)) {
          * @see SetFont(), SetDrawColor(), SetFillColor(), SetTextColor(), SetLineWidth(), AddLink(), Ln(), MultiCell(), Write(), SetAutoPageBreak()
          */
         public function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=0, $link='', $stretch=0) {
-            	
+
             $k = $this->k;
-            	
+
             //$min_cell_height = $this->FontAscent + $this->FontDescent;
             $min_cell_height = $this->FontSize * $this->cell_height_ratio;
             if ($h < $min_cell_height) {
                 $h = $min_cell_height;
             }
-            	
+
             if((($this->y + $h) > $this->PageBreakTrigger) AND empty($this->InFooter) AND $this->AcceptPageBreak()) {
                 //Automatic page break
                 $x = $this->x;
@@ -2744,7 +2744,7 @@ if(!class_exists('TCPDF', false)) {
                     $this->Link($xdx, $this->y + (($h - $this->FontSize)/2), $width, $this->FontSize, $link);
                 }
             }
-            	
+
             // output cell
             if($s) {
                 // output cell
@@ -2758,14 +2758,14 @@ if(!class_exists('TCPDF', false)) {
                     $this->_out('BT 100 Tz ET');
                 }
             }
-            	
+
             // reset word spacing
             if ((!$this->isunicode) AND ($align == 'J')) {
                 $this->_out('BT 0 Tw ET');
             }
-            	
+
             $this->lasth = $h;
-            	
+
             if($ln>0) {
                 //Go to the beginning of the next line
                 $this->y += $h;
@@ -2806,15 +2806,15 @@ if(!class_exists('TCPDF', false)) {
          * @see SetFont(), SetDrawColor(), SetFillColor(), SetTextColor(), SetLineWidth(), Cell(), Write(), SetAutoPageBreak()
          */
         public function MultiCell($w, $h, $txt, $border=0, $align='J', $fill=0, $ln=1, $x='', $y='', $reseth=true, $stretch=0, $ishtml=false) {
-            	
+
             if ((empty($this->lasth))OR ($reseth)) {
                 //set row height
                 $this->lasth = $this->FontSize * $this->cell_height_ratio;
             }
-            	
+
             // get current page number
             $startpage = $this->page;
-            	
+
             if (!empty($y)) {
                 $this->SetY($y);
             } else {
@@ -2825,7 +2825,7 @@ if(!class_exists('TCPDF', false)) {
             } else {
                 $x = $this->GetX();
             }
-            	
+
             if(empty($w) OR ($w <= 0)) {
                 if ($this->rtl) {
                     $w = $this->x - $this->lMargin;
@@ -2833,11 +2833,11 @@ if(!class_exists('TCPDF', false)) {
                     $w = $this->w - $this->rMargin - $this->x;
                 }
             }
-            	
+
             // store original margin values
             $lMargin = $this->lMargin;
             $rMargin = $this->rMargin;
-            	
+
             if ($this->rtl) {
                 $this->SetRightMargin($this->w - $this->x);
                 $this->SetLeftMargin($this->x - $w);
@@ -2845,7 +2845,7 @@ if(!class_exists('TCPDF', false)) {
                 $this->SetLeftMargin($this->x);
                 $this->SetRightMargin($this->w - $this->x - $w);
             }
-            	
+
             // set special margins for html alignment
             if ($ishtml) {
                 // HTML mode requires special alignment
@@ -2871,20 +2871,20 @@ if(!class_exists('TCPDF', false)) {
                     $this->SetLeftMargin($this->x - $w);
                 }
             }
-            	
+
             // calculate remaining vertical space on first page ($startpage)
             $restspace = $this->getPageHeight() - $this->GetY() - $this->getBreakMargin();
-            	
+
             // Adjust internal padding
             if ($this->cMargin < ($this->LineWidth/2)) {
                 $this->cMargin = ($this->LineWidth/2);
             }
-            	
+
             // Add top space if needed
             if (($this->lasth - $this->FontSize) < $this->LineWidth) {
                 $this->y += $this->LineWidth/2;
             }
-            	
+
             if ($ishtml) {
                 // Write HTML text
                 $this->writeHTML($txt, true, $fill, $reseth, true);
@@ -2893,18 +2893,18 @@ if(!class_exists('TCPDF', false)) {
                 // Write text
                 $nl = $this->Write($this->lasth, $txt, '', $fill, $align, true, $stretch);
             }
-            	
+
             // Add bottom space if needed
             if (($this->lasth - $this->FontSize) < $this->LineWidth) {
                 $this->y += $this->LineWidth/2;
             }
-            	
+
             // Get end-of-text Y position
             $currentY = $this->GetY();
-            	
+
             // get latest page number
             $endpage = $this->page;
-            	
+
             // calculate last page
             $rh = $y + $h;
             while ($rh > $this->PageBreakTrigger) {
@@ -2914,7 +2914,7 @@ if(!class_exists('TCPDF', false)) {
                 $endpage++;
                 $rh -= $this->PageBreakTrigger;
             }
-            	
+
             // check if a new page has been created
             if ($endpage > $startpage) {
                 // design borders around HTML cells.
@@ -2940,14 +2940,14 @@ if(!class_exists('TCPDF', false)) {
                 // design a cell around the text
                 $this->Cell($w, $h, "", $border, 1, '', 0);
             }
-            	
+
             // Get end-of-text Y position
             $currentY = $this->GetY();
-            	
+
             // restore original margin values
             $this->SetLeftMargin($lMargin);
             $this->SetRightMargin($rMargin);
-            	
+
             if($ln>0) {
                 //Go to the beginning of the next line
                 $this->SetY($currentY);
@@ -2960,7 +2960,7 @@ if(!class_exists('TCPDF', false)) {
                 $this->y = $y;
                 $this->SetX($x + $w);
             }
-            	
+
             return $nl;
         }
 
@@ -2978,23 +2978,23 @@ if(!class_exists('TCPDF', false)) {
          */
         public function Write($h, $txt, $link='', $fill=0, $align='', $ln=false, $stretch=0) {
             require_once(dirname(__FILE__).'/unicode_data.php');
-            	
+
             // remove carriage returns
             $s = str_replace("\r", '', $txt);
-            	
+
             // check if string contains arabic text
             if (preg_match(K_RE_PATTERN_ARABIC, $s)) {
                 $arabic = true;
             } else {
                 $arabic = false;
             }
-            	
+
             // get array of chars
             $chars = $this->UTF8StringToArray($s);
 
             // get the number of characters
             $nb = count($chars);
-            	
+
             // handle single space character
             if(($nb==1) AND preg_match("/[\s]/u", $s)) {
                 if ($this->rtl) {
@@ -3004,28 +3004,28 @@ if(!class_exists('TCPDF', false)) {
                 }
                 return;
             }
-            	
+
             // store current position
             $prevx = $this->x;
             $prevy = $this->y;
-            	
+
             // calculate remaining line width ($w)
             if ($this->rtl) {
                 $w = $this->x - $this->lMargin;
             } else {
                 $w = $this->w - $this->rMargin - $this->x;
             }
-            	
+
             // max column width
             $wmax = $w - (2 * $this->cMargin);
-            	
+
             $i = 0; // character position
             $j = 0; // current starting position
             $sep = -1; // position of the last blank space
             $l = 0; // current string lenght
             $nl = 0; //number of lines
             $linebreak = false;
-            	
+
             // for each character
             while($i < $nb) {
                 //Get the current character
@@ -3102,7 +3102,7 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $i++;
             } // end while i < nb
-            	
+
             // print last substring (if any)
             if($l > 0) {
                 switch ($align) {
@@ -3299,7 +3299,7 @@ if(!class_exists('TCPDF', false)) {
             } else {
                 $info = $this->images[$file];
             }
-            	
+
             // 2007-10-19 Warren Sherliker
             // Check whether we need a new page first as this does not fit
             // Copied from Cell()
@@ -3311,7 +3311,7 @@ if(!class_exists('TCPDF', false)) {
                 $y = $this->GetY();
             }
             // 2007-10-19 Warren Sherliker: End Edit
-            	
+
             // set bottomcoordinates
             $this->img_rb_y = $y + $h;
             if ($this->rtl) {
@@ -3325,11 +3325,11 @@ if(!class_exists('TCPDF', false)) {
             }
             $xkimg = $ximg * $this->k;
             $this->_out(sprintf('q %.2f 0 0 %.2f %.2f %.2f cm /I%d Do Q', $w*$this->k, $h*$this->k, $xkimg, ($this->h-($y+$h))*$this->k, $info['i']));
-            	
+
             if($link) {
                 $this->Link($ximg, $y, $w, $h, $link);
             }
-            	
+
             // set pointer to align the successive text/objects
             switch($align) {
                 case 'T':{
@@ -4021,7 +4021,7 @@ if(!class_exists('TCPDF', false)) {
                 $this->_out('/GS'.$k.' '.$extgstate['n'].' 0 R');
             }
             $this->_out('>>');
-            	
+
         }
 
         /**
@@ -4401,7 +4401,7 @@ if(!class_exists('TCPDF', false)) {
             $this->_out('/ToUnicode '.($this->n + 2).' 0 R');
             $this->_out('>>');
             $this->_out('endobj');
-            	
+
             // CIDFontType2
             // A CIDFont whose glyph descriptions are based on TrueType font technology
             $this->_newobj();
@@ -4421,7 +4421,7 @@ if(!class_exists('TCPDF', false)) {
             $this->_out('/CIDToGIDMap '.($this->n + 4).' 0 R');
             $this->_out('>>');
             $this->_out('endobj');
-            	
+
             // ToUnicode
             // is a stream object that contains the definition of the CMap
             // (PDF Reference 1.3 chap. 5.9)
@@ -4450,7 +4450,7 @@ if(!class_exists('TCPDF', false)) {
             $this->_out('end');
             $this->_out('endstream');
             $this->_out('endobj');
-            	
+
             // CIDSystemInfo dictionary
             // A dictionary containing entries that define the character collection of the CIDFont.
             $this->_newobj();
@@ -4459,7 +4459,7 @@ if(!class_exists('TCPDF', false)) {
             $this->_out('/Supplement 0'); // The supplement number of the character collection.
             $this->_out('>>');
             $this->_out('endobj');
-            	
+
             // Font descriptor
             // A font descriptor describing the CIDFont default metrics other than its glyph widths
             $this->_newobj();
@@ -4542,10 +4542,10 @@ if(!class_exists('TCPDF', false)) {
             $unicode = array(); // array containing unicode values
             $bytes  = array(); // array containing single character byte sequences
             $numbytes  = 1; // number of octetc needed to represent the UTF-8 character
-            	
+
             $str .= ""; // force $str to be a string
             $length = strlen($str);
-            	
+
             for($i = 0; $i < $length; $i++) {
                 $char = ord($str{$i}); // get one string character at time
                 if(count($bytes) == 0) { // get starting octect
@@ -4735,11 +4735,11 @@ if(!class_exists('TCPDF', false)) {
             require_once(dirname(__FILE__)."/barcode/c128aobject.php");
             require_once(dirname(__FILE__)."/barcode/c128bobject.php");
             require_once(dirname(__FILE__)."/barcode/c128cobject.php");
-            	
+
             if (empty($code)) {
                 return;
             }
-            	
+
             if (empty($style)) {
                 $style  = BCS_ALIGN_LEFT;
                 $style |= BCS_IMAGE_PNG;
@@ -4751,11 +4751,11 @@ if(!class_exists('TCPDF', false)) {
             }
             if (empty($font)) {$font = BCD_DEFAULT_FONT;}
             if (empty($xres)) {$xres = BCD_DEFAULT_XRES;}
-            	
+
             $scale_factor = $xres * $this->k;
             $bc_w = round($w * $scale_factor); //width in points
             $bc_h = round($h * $scale_factor); //height in points
-            	
+
             switch (strtoupper($type)) {
                 case "I25": {
                     $obj = new I25Object($bc_w, $bc_h, $style, $code);
@@ -4779,10 +4779,10 @@ if(!class_exists('TCPDF', false)) {
                     break;
                 }
             }
-            	
+
             $obj->SetFont($font);
             $obj->DrawObject(1);
-            	
+
             //use a temporary file....
             $tmpName = tempnam(K_PATH_CACHE,'img');
             imagepng($obj->getImage(), $tmpName);
@@ -4819,33 +4819,33 @@ if(!class_exists('TCPDF', false)) {
             unset($this->fgcolor);
             $this->fgcolor = array();
             $this->fgcolor[] = $tmp;
-            	
+
             // reset background color stack
             $tmp = $this->bgcolor[0];
             unset($this->bgcolor);
             $this->bgcolor = array();
             $this->bgcolor[] = $tmp;
-            	
+
             unset($this->bgtag);
             $this->bgtag = array();
-            	
+
             // store some variables
-            $html=strip_tags($html,"<a><b><blockquote><br><br/><dd><del><div><dl><dt><em><font><h1><h2><h3><h4><h5><h6><hr><i><img><li><ol><p><small><span><strong><sub><sup><table><td><th><tr><u><ul>"); //remove all unsupported tags
+            $html=strip_tags($html,"<a><strong><blockquote><br><br/><dd><del><div><dl><dt><em><font><h1><h2><h3><h4><h5><h6><hr><i><img><li><ol><p><small><span><strong><sub><sup><table><td><th><tr><u><ul>"); //remove all unsupported tags
             //replace carriage returns, newlines and tabs
             $repTable = array("\t" => " ", "\n" => " ", "\r" => " ", "\0" => " ", "\x0B" => " ", "\\" => "\\\\");
             $html = strtr($html, $repTable);
             $pattern = '/(<[^>]+>)/Uu';
             $a = preg_split($pattern, $html, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY); //explodes the string
-            	
+
             if ((empty($this->lasth))OR ($reseth)) {
                 //set row height
                 $this->lasth = $this->FontSize * $this->cell_height_ratio;
             }
-            	
+
             // count elements
             $maxel = count($a);
             $key = 0;
-            	
+
             while($key < $maxel) {
                 $element = $a[$key];
                 $cfill = (count($this->bgtag) > 0);
@@ -4950,7 +4950,7 @@ if(!class_exists('TCPDF', false)) {
             } else {
                 $this->tmprtl = false;
             }
-            	
+
             if (($tag != 'br') AND ($tag != 'hr') AND ($tag != 'img') ) {
                 // set foreground color attribute
                 if (isset($attr['color']) AND $attr['color']!='') {
@@ -4969,7 +4969,7 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $this->SetFillColor($col['R'], $col['G'], $col['B'], true);
             }
-            	
+
             //Opening tag
             switch($tag) {
                 case 'table': {
@@ -5253,7 +5253,7 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $this->SetFillColor($this->bgcolor[$nbg-2]['R'], $this->bgcolor[$nbg-2]['G'], $this->bgcolor[$nbg-2]['B'], false);
             }
-            	
+
             //Closing tag
             switch($tag) {
                 case 'td':
@@ -5465,7 +5465,7 @@ if(!class_exists('TCPDF', false)) {
         public function pixelsToUnits($px){
             return $px / $this->k;
         }
-        	
+
         /**
          * Reverse function for htmlentities.
          * Convert entities in UTF-8.
@@ -6709,32 +6709,32 @@ if(!class_exists('TCPDF', false)) {
          */
         protected function utf8Bidi($ta, $forcertl=false) {
             global $unicode, $unicode_mirror, $unicode_arlet, $laa_array, $diacritics;
-            	
+
             require_once(dirname(__FILE__).'/unicode_data.php');
-            	
+
             // paragraph embedding level
             $pel = 0;
             // max level
             $maxlevel = 0;
-            	
+
             // create string from array
             $str = $this->UTF8ArrSubString($ta);
-            	
+
             // check if string contains arabic text
             if (preg_match(K_RE_PATTERN_ARABIC, $str)) {
                 $arabic = true;
             } else {
                 $arabic = false;
             }
-            	
+
             // check if string contains RTL text
             if (!($forcertl OR $arabic OR preg_match(K_RE_PATTERN_RTL, $str))) {
                 return $ta;
             }
-            	
+
             // get number of chars
             $numchars = count($ta);
-            	
+
             if ($forcertl == 'R') {
                 $pel = 1;
             } elseif ($forcertl == 'L') {
@@ -6753,7 +6753,7 @@ if(!class_exists('TCPDF', false)) {
                     }
                 }
             }
-            	
+
             // Current Embedding Level
             $cel = $pel;
             // directional override status
@@ -6762,13 +6762,13 @@ if(!class_exists('TCPDF', false)) {
             // start-of-level-run
             $sor = $pel % 2 ? 'R' : 'L';
             $eor = $sor;
-            	
+
             //$levels = array(array('level' => $cel, 'sor' => $sor, 'eor' => '', 'chars' => array()));
             //$current_level = &$levels[count( $levels )-1];
-            	
+
             // Array of characters data
             $chardata = Array();
-            	
+
             // X1. Begin by setting the current embedding level to the paragraph embedding level. Set the directional override status to neutral. Process each character iteratively, applying rules X2 through X9. Only embedding levels from 0 to 61 are valid in this phase.
             // 	In the resolution of levels in rules I1 and I2, the maximum embedding level of 62 can be reached.
             for ($i=0; $i < $numchars; $i++) {
@@ -6852,16 +6852,16 @@ if(!class_exists('TCPDF', false)) {
                     $chardata[] = array('char' => $ta[$i], 'level' => $cel, 'type' => $chardir, 'sor' => $sor, 'eor' => $eor);
                 }
             } // end for each char
-            	
+
             // X8. All explicit directional embeddings and overrides are completely terminated at the end of each paragraph. Paragraph separators are not included in the embedding.
             // X9. Remove all RLE, LRE, RLO, LRO, PDF, and BN codes.
             // X10. The remaining rules are applied to each run of characters at the same level. For each run, determine the start-of-level-run (sor) and end-of-level-run (eor) type, either L or R. This depends on the higher of the two levels on either side of the boundary (at the start or end of the paragraph, the level of the “other” run is the base embedding level). If the higher level is odd, the type is R; otherwise, it is L.
-            	
+
             // 3.3.3 Resolving Weak Types
             // Weak types are now resolved one level run at a time. At level run boundaries where the type of the character on the other side of the boundary is required, the type assigned to sor or eor is used.
             // Nonspacing marks are now resolved based on the previous characters.
             $numchars = count($chardata);
-            	
+
             // W1. Examine each nonspacing mark (NSM) in the level run, and change the type of the NSM to the type of the previous character. If the NSM is at the start of the level run, it will get the type of sor.
             $prevlevel = -1; // track level changes
             $levcount = 0; // counts consecutive chars at the same level
@@ -6880,7 +6880,7 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $prevlevel = $chardata[$i]['level'];
             }
-            	
+
             // W2. Search backward from each instance of a European number until the first strong type (R, L, AL, or sor) is found. If an AL is found, change the type of the European number to Arabic number.
             $prevlevel = -1;
             $levcount = 0;
@@ -6901,14 +6901,14 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $prevlevel = $chardata[$i]['level'];
             }
-            	
+
             // W3. Change all ALs to R.
             for ($i=0; $i < $numchars; $i++) {
                 if ($chardata[$i]['type'] == 'AL') {
                     $chardata[$i]['type'] = 'R';
                 }
             }
-            	
+
             // W4. A single European separator between two European numbers changes to a European number. A single common separator between two numbers of the same type changes to that type.
             $prevlevel = -1;
             $levcount = 0;
@@ -6929,7 +6929,7 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $prevlevel = $chardata[$i]['level'];
             }
-            	
+
             // W5. A sequence of European terminators adjacent to European numbers changes to all European numbers.
             $prevlevel = -1;
             $levcount = 0;
@@ -6957,7 +6957,7 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $prevlevel = $chardata[$i]['level'];
             }
-            	
+
             // W6. Otherwise, separators and terminators change to Other Neutral.
             $prevlevel = -1;
             $levcount = 0;
@@ -6972,7 +6972,7 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $prevlevel = $chardata[$i]['level'];
             }
-            	
+
             //W7. Search backward from each instance of a European number until the first strong type (R, L, or sor) is found. If an L is found, then change the type of the European number to L.
             $prevlevel = -1;
             $levcount = 0;
@@ -6993,7 +6993,7 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $prevlevel = $chardata[$i]['level'];
             }
-            	
+
             // N1. A sequence of neutrals takes the direction of the surrounding strong text if the text on both sides has the same direction. European and Arabic numbers act as if they were R in terms of their influence on neutrals. Start-of-level-run (sor) and end-of-level-run (eor) are used at level run boundaries.
             $prevlevel = -1;
             $levcount = 0;
@@ -7044,7 +7044,7 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $prevlevel = $chardata[$i]['level'];
             }
-            	
+
             // I1. For all characters with an even (left-to-right) embedding direction, those of type R go up one level and those of type AN or EN go up two levels.
             // I2. For all characters with an odd (right-to-left) embedding direction, those of type L, EN or AN go up one level.
             for ($i=0; $i < $numchars; $i++) {
@@ -7062,7 +7062,7 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $maxlevel = max($chardata[$i]['level'],$maxlevel);
             }
-            	
+
             // L1. On each line, reset the embedding level of the following characters to the paragraph embedding level:
             //	1. Segment separators,
             //	2. Paragraph separators,
@@ -7085,7 +7085,7 @@ if(!class_exists('TCPDF', false)) {
                     }
                 }
             }
-            	
+
             // Arabic Shaping
             // Cursively connected scripts, such as Arabic or Syriac, require the selection of positional character shapes that depend on adjacent characters. Shaping is logically applied after the Bidirectional Algorithm is used and is limited to characters within the same directional run.
             if ($arabic) {
@@ -7230,7 +7230,7 @@ if(!class_exists('TCPDF', false)) {
                 unset($laaletter);
                 unset($charAL);
             }
-            	
+
             // L2. From the highest level found in the text to the lowest odd level on each line, including intermediate levels not actually present in the text, reverse any contiguous sequence of characters that are at that level or higher.
             for ($j=$maxlevel; $j > 0; $j--) {
                 $ordarray = Array();
@@ -7260,12 +7260,12 @@ if(!class_exists('TCPDF', false)) {
                 }
                 $chardata = $ordarray;
             }
-            	
+
             $ordarray = array();
             for ($i=0; $i < $numchars; $i++) {
                 $ordarray[] = $chardata[$i]['char'];
             }
-            	
+
             return $ordarray;
         }
 

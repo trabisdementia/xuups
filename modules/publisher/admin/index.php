@@ -39,7 +39,7 @@ $ordersel = isset($_GET['ordersel']) ? $_GET['ordersel'] : 'DESC';
 $ordersel = isset($_POST['ordersel']) ? $_POST['ordersel'] : $ordersel;
 
 $module_id = $publisher->getModule()->mid();
-$gperm_handler =& xoops_gethandler('groupperm');
+$gperm_handler = xoops_gethandler('groupperm');
 $groups = ($xoopsUser) ? ($xoopsUser->getGroups()) : XOOPS_GROUP_ANONYMOUS;
 
 // Code for the page
@@ -365,12 +365,12 @@ function buildTable()
 {
     echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'>";
     echo "<tr>";
-    echo "<td width='40px' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMID . "</b></td>";
-    echo "<td width='100px' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMCAT . "</b></td>";
-    echo "<td class='bg3' align='center'><b>" . _AM_PUBLISHER_TITLE . "</b></td>";
-    echo "<td width='90px' class='bg3' align='center'><b>" . _AM_PUBLISHER_CREATED . "</b></td>";
-    echo "<td width='90px' class='bg3' align='center'><b>" . _CO_PUBLISHER_STATUS . "</b></td>";
-    echo "<td width='90px' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+    echo "<td width='40px' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ITEMID . "</strong></td>";
+    echo "<td width='100px' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ITEMCAT . "</strong></td>";
+    echo "<td class='bg3' align='center'><strong>" . _AM_PUBLISHER_TITLE . "</strong></td>";
+    echo "<td width='90px' class='bg3' align='center'><strong>" . _AM_PUBLISHER_CREATED . "</strong></td>";
+    echo "<td width='90px' class='bg3' align='center'><strong>" . _CO_PUBLISHER_STATUS . "</strong></td>";
+    echo "<td width='90px' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ACTION . "</strong></td>";
     echo "</tr>";
 }
 

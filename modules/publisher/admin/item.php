@@ -186,11 +186,11 @@ switch ($op) {
 
         echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
         echo "<tr>";
-        echo "<td width='40' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMID . "</b></td>";
-        echo "<td width='20%' class='bg3' align='left'><b>" . _AM_PUBLISHER_ITEMCATEGORYNAME . "</b></td>";
-        echo "<td class='bg3' align='left'><b>" . _AM_PUBLISHER_TITLE . "</b></td>";
-        echo "<td width='90' class='bg3' align='center'><b>" . _AM_PUBLISHER_CREATED . "</b></td>";
-        echo "<td width='80' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+        echo "<td width='40' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ITEMID . "</strong></td>";
+        echo "<td width='20%' class='bg3' align='left'><strong>" . _AM_PUBLISHER_ITEMCATEGORYNAME . "</strong></td>";
+        echo "<td class='bg3' align='left'><strong>" . _AM_PUBLISHER_TITLE . "</strong></td>";
+        echo "<td width='90' class='bg3' align='center'><strong>" . _AM_PUBLISHER_CREATED . "</strong></td>";
+        echo "<td width='80' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ACTION . "</strong></td>";
         echo "</tr>";
         if ($totalitems > 0) {
             for ($i = 0; $i < $totalItemsOnPage; $i++) {
@@ -235,11 +235,11 @@ switch ($op) {
 
         echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
         echo "<tr>";
-        echo "<td width='40' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMID . "</b></td>";
-        echo "<td width='20%' class='bg3' align='left'><b>" . _AM_PUBLISHER_ITEMCATEGORYNAME . "</b></td>";
-        echo "<td class='bg3' align='left'><b>" . _AM_PUBLISHER_TITLE . "</b></td>";
-        echo "<td width='90' class='bg3' align='center'><b>" . _AM_PUBLISHER_CREATED . "</b></td>";
-        echo "<td width='80' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+        echo "<td width='40' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ITEMID . "</strong></td>";
+        echo "<td width='20%' class='bg3' align='left'><strong>" . _AM_PUBLISHER_ITEMCATEGORYNAME . "</strong></td>";
+        echo "<td class='bg3' align='left'><strong>" . _AM_PUBLISHER_TITLE . "</strong></td>";
+        echo "<td width='90' class='bg3' align='center'><strong>" . _AM_PUBLISHER_CREATED . "</strong></td>";
+        echo "<td width='80' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ACTION . "</strong></td>";
         echo "</tr>";
         if ($totalitems > 0) {
             for ($i = 0; $i < $totalItemsOnPage; $i++) {
@@ -282,11 +282,11 @@ switch ($op) {
 
         echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
         echo "<tr>";
-        echo "<td width='40' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMID . "</b></td>";
-        echo "<td width='20%' class='bg3' align='left'><b>" . _AM_PUBLISHER_ITEMCATEGORYNAME . "</b></td>";
-        echo "<td class='bg3' align='left'><b>" . _AM_PUBLISHER_TITLE . "</b></td>";
-        echo "<td width='90' class='bg3' align='center'><b>" . _AM_PUBLISHER_CREATED . "</b></td>";
-        echo "<td width='80' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+        echo "<td width='40' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ITEMID . "</strong></td>";
+        echo "<td width='20%' class='bg3' align='left'><strong>" . _AM_PUBLISHER_ITEMCATEGORYNAME . "</strong></td>";
+        echo "<td class='bg3' align='left'><strong>" . _AM_PUBLISHER_TITLE . "</strong></td>";
+        echo "<td width='90' class='bg3' align='center'><strong>" . _AM_PUBLISHER_CREATED . "</strong></td>";
+        echo "<td width='80' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ACTION . "</strong></td>";
         echo "</tr>";
         if ($totalitems > 0) {
             for ($i = 0; $i < $totalItemsOnPage; $i++) {
@@ -330,11 +330,11 @@ switch ($op) {
 
         echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
         echo "<tr>";
-        echo "<td width='40' class='bg3' align='center'><b>" . _AM_PUBLISHER_ITEMID . "</b></td>";
-        echo "<td width='20%' class='bg3' align='left'><b>" . _AM_PUBLISHER_ITEMCATEGORYNAME . "</b></td>";
-        echo "<td class='bg3' align='left'><b>" . _AM_PUBLISHER_TITLE . "</b></td>";
-        echo "<td width='90' class='bg3' align='center'><b>" . _AM_PUBLISHER_CREATED . "</b></td>";
-        echo "<td width='80' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+        echo "<td width='40' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ITEMID . "</strong></td>";
+        echo "<td width='20%' class='bg3' align='left'><strong>" . _AM_PUBLISHER_ITEMCATEGORYNAME . "</strong></td>";
+        echo "<td class='bg3' align='left'><strong>" . _AM_PUBLISHER_TITLE . "</strong></td>";
+        echo "<td width='90' class='bg3' align='center'><strong>" . _AM_PUBLISHER_CREATED . "</strong></td>";
+        echo "<td width='80' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ACTION . "</strong></td>";
         echo "</tr>";
         if ($totalitems > 0) {
             for ($i = 0; $i < $totalItemsOnPage; $i++) {
@@ -372,18 +372,18 @@ xoops_cp_footer();
 function publisher_showFiles($itemObj)
 {
     // UPLOAD FILES
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     publisher_openCollapsableBar('filetable', 'filetableicon', _AM_PUBLISHER_FILES_LINKED);
-    $filesObj =& $publisher->getHandler('file')->getAllFiles($itemObj->itemid());
+    $filesObj = $publisher->getHandler('file')->getAllFiles($itemObj->itemid());
     if (count($filesObj) > 0) {
         echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
         echo "<tr>";
-        echo "<td width='50' class='bg3' align='center'><b>ID</b></td>";
-        echo "<td width='150' class='bg3' align='left'><b>" . _AM_PUBLISHER_FILENAME . "</b></td>";
-        echo "<td class='bg3' align='left'><b>" . _AM_PUBLISHER_DESCRIPTION . "</b></td>";
-        echo "<td width='60' class='bg3' align='center'><b>" . _AM_PUBLISHER_HITS . "</b></td>";
-        echo "<td width='100' class='bg3' align='center'><b>" . _AM_PUBLISHER_UPLOADED_DATE . "</b></td>";
-        echo "<td width='60' class='bg3' align='center'><b>" . _AM_PUBLISHER_ACTION . "</b></td>";
+        echo "<td width='50' class='bg3' align='center'><strong>ID</strong></td>";
+        echo "<td width='150' class='bg3' align='left'><strong>" . _AM_PUBLISHER_FILENAME . "</strong></td>";
+        echo "<td class='bg3' align='left'><strong>" . _AM_PUBLISHER_DESCRIPTION . "</strong></td>";
+        echo "<td width='60' class='bg3' align='center'><strong>" . _AM_PUBLISHER_HITS . "</strong></td>";
+        echo "<td width='100' class='bg3' align='center'><strong>" . _AM_PUBLISHER_UPLOADED_DATE . "</strong></td>";
+        echo "<td width='60' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ACTION . "</strong></td>";
         echo "</tr>";
 
         for ($i = 0; $i < count($filesObj); $i++) {
@@ -418,7 +418,7 @@ function publisher_showFiles($itemObj)
 
 function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     global $publisher_current_page, $xoopsUser;
 
     xoops_load('XoopsFormLoader');
@@ -521,10 +521,10 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
     } else {
         // there's no parameter, so we're adding an item
 
-        $itemObj =& $publisher->getHandler('item')->create();
+        $itemObj = $publisher->getHandler('item')->create();
         $itemObj->setVarsFromRequest();
-        
-        $categoryObj =& $publisher->getHandler('category')->create();
+
+        $categoryObj = $publisher->getHandler('category')->create();
         $breadcrumb_action1 = _AM_PUBLISHER_ITEMS;
         $breadcrumb_action2 = _AM_PUBLISHER_CREATINGNEW;
         $button_caption = _AM_PUBLISHER_CREATE;

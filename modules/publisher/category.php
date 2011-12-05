@@ -169,7 +169,7 @@ if (count($itemsObj) > 0) {
             $userids[$thisitem->uid()] = 1;
         }
     }
-    $member_handler =& xoops_gethandler('member');
+    $member_handler = xoops_gethandler('member');
     $users = $member_handler->getUsers(new Criteria('uid', "(" . implode(',', array_keys($userids)) . ")", "IN"), true);
     // Adding the items of the selected category
 

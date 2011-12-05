@@ -77,7 +77,7 @@ switch ($op) {
         $xoopsTpl->assign('lang_intro_text', sprintf(_MD_PUBLISHER_GOODDAY, $name) . sprintf(_MD_PUBLISHER_ADD_FILE_INTRO, $itemObj->title()));
 
         xoops_loadLanguage('admin', 'publisher');
-        $fileObj =& $publisher->getHandler('file')->create();
+        $fileObj = $publisher->getHandler('file')->create();
         $fileObj->setVar('itemid', $itemid);
         $form = $fileObj->getForm();
         $form->assign($xoopsTpl);

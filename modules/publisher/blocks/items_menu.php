@@ -29,7 +29,7 @@ function publisher_items_menu_show($options)
     global $xoopsModule;
     $block = array();
 
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     // Getting all top cats
     $block_categoriesObj = $publisher->getHandler('category')->getCategories(0, 0, 0);

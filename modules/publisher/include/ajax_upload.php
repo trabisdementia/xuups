@@ -47,14 +47,14 @@ if ($image_nicename == '' || $image_nicename == _CO_PUBLISHER_IMAGE_NICENAME) {
 $imgcat_id = isset($_POST['imgcat_id']) ? intval($_POST['imgcat_id']) : 0;
 
 include_once XOOPS_ROOT_PATH . '/class/uploader.php';
-$imgcat_handler =& xoops_gethandler('imagecategory');
-$imgcat =& $imgcat_handler->get($imgcat_id);
+$imgcat_handler = xoops_gethandler('imagecategory');
+$imgcat = $imgcat_handler->get($imgcat_id);
 
 $error = false;
 if (!is_object($imgcat)) {
     $error = _CO_PUBLISHER_IMAGE_CAT_NONE;
 } else {
-    $imgcatperm_handler =& xoops_gethandler('groupperm');
+    $imgcatperm_handler = xoops_gethandler('groupperm');
     if (is_object($xoopsUser)) {
         if (!$imgcatperm_handler->checkRight('imgcat_write', $imgcat_id, $xoopsUser->getGroups())) {
             $error = _CO_PUBLISHER_IMAGE_CAT_NONE;
@@ -74,8 +74,8 @@ if ($error == false) {
             $error = implode("<br />", $uploader->getErrors(false));
 
         } else {
-            $image_handler =& xoops_gethandler('image');
-            $image =& $image_handler->create();
+            $image_handler = xoops_gethandler('image');
+            $image = $image_handler->create();
             $image->setVar('image_name', $uploader->getSavedFileName());
             $image->setVar('image_nicename', $image_nicename);
             $image->setVar('image_mimetype', $uploader->getMediaType());
