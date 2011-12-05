@@ -17,7 +17,7 @@
  * @author          Bandit-X
  * @author          trabis <lusopoemas@gmail.com>
  * @author          Xoops Modules Dev Team
- * @version         $Id: item.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 ######################################################################
 # Original version:

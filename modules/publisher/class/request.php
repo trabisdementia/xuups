@@ -23,7 +23,7 @@
  * @package         Publisher
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: request.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 /**

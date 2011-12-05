@@ -16,7 +16,7 @@
  * @subpackage      Comments
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: comment_edit.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 include_once '../../mainfile.php';

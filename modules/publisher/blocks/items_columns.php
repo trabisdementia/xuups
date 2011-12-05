@@ -17,7 +17,7 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          Bandit-x
- * @version         $Id: items_columns.php 77 2009-07-17 17:38:28Z trabis $
+ * @version         $Id$
  */
 
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");

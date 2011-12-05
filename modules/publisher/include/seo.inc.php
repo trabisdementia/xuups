@@ -17,7 +17,7 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          Sudhaker Raj <http://xoops.biz>
- * @version         $Id: notification.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 if (!defined("XOOPS_ROOT_PATH")) {

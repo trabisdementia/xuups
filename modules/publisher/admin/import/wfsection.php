@@ -17,7 +17,7 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @author          The SmartFactory <www.smartfactory.ca>
  * @author          Marius Scurtescu <mariuss@romanians.bc.ca>
- * @version         $Id: wfsection.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 include_once dirname(dirname(__FILE__)) . '/admin_header.php';

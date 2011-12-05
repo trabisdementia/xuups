@@ -16,7 +16,7 @@
  * @subpackage      Include
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: search.inc.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 if (!defined("XOOPS_ROOT_PATH")) {

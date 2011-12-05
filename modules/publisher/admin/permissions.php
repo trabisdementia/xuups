@@ -16,7 +16,7 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          The SmartFactory <www.smartfactory.ca>
- * @version         $Id: permissions.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 include_once dirname(__FILE__) . '/admin_header.php';
