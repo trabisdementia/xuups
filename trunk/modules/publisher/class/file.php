@@ -39,8 +39,8 @@ class PublisherFile extends XoopsObject {
      * constructor
      */
     function __construct($id = null) {
-        $this->publisher =& PublisherPublisher::getInstance();
-        $this->db =& Database::getInstance();
+        $this->publisher = PublisherPublisher::getInstance();
+        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar("fileid", XOBJ_DTYPE_INT, 0, false);
         $this->initVar("itemid", XOBJ_DTYPE_INT, null, true);
         $this->initVar("name", XOBJ_DTYPE_TXTBOX, null, true, 255);
@@ -54,7 +54,7 @@ class PublisherFile extends XoopsObject {
         $this->initVar("counter", XOBJ_DTYPE_INT, null, false);
 
         if (isset($id)) {
-            $file =& $this->publisher->getHandler('file')->get($id);
+            $file = $this->publisher->getHandler('file')->get($id);
             foreach ($file->vars as $k => $v) {
                 $this->assignVar($k, $v['value']);
             }
@@ -150,7 +150,8 @@ class PublisherFile extends XoopsObject {
 
 
     function datesub($dateFormat = 's', $format = "S") {
-        return formatTimestamp($this->getVar('datesub', $format), $dateFormat);
+        xoops_load('XoopsLocal');
+        return XoopsLocal::formatTimestamp($this->getVar('datesub', $format), $dateFormat);
     }
 
     function notLoaded() {
@@ -240,7 +241,7 @@ class PublisherFileHandler extends XoopsPersistableObjectHandler {
         if (strtolower(get_class($itemObj)) != 'publisheritem') {
             return false;
         }
-        $files =& $this->getAllFiles($itemObj->itemid());
+        $files = $this->getAllFiles($itemObj->itemid());
         $result = true;
         foreach ($files as $file) {
             if (!$this->delete($file)) {
@@ -285,7 +286,7 @@ class PublisherFileHandler extends XoopsPersistableObjectHandler {
         $criteria->setOrder($order);
         $criteria->setLimit($limit);
         $criteria->setStart($start);
-        $files =& $this->getObjects($criteria);
+        $files = $this->getObjects($criteria);
 
         return $files;
     }

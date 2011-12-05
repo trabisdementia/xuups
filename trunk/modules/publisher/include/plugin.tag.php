@@ -36,13 +36,13 @@ function publisher_tag_iteminfo(&$items)
             $items_id[] = intval($item_id);
         }
     }
-    $item_handler =& xoops_getmodulehandler("item", "publisher");
+    $item_handler = xoops_getmodulehandler("item", "publisher");
     $criteria = new Criteria("itemid", "(" . implode(", ", $items_id) . ")", "IN");
     $items_obj = $item_handler->getObjects($criteria, 'itemid');
 
     foreach (array_keys($items) as $cat_id) {
         foreach (array_keys($items[$cat_id]) as $item_id) {
-            $item_obj =& $items_obj[$item_id];
+            $item_obj = $items_obj[$item_id];
             $items[$cat_id][$item_id] = array(
                 "title" => $item_obj->getVar("title"),
                 "uid" => $item_obj->getVar("uid"),

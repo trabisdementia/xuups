@@ -445,7 +445,7 @@ class PublisherRequest {
             // PHP Zend_Hash_Del_Key_Or_Index bug
             $failed |= is_numeric($key);
             if ($failed) {
-                exit('Illegal variable <b>' . implode('</b> or <b>', $banned) . '</b> passed to script.');
+                exit('Illegal variable <strong>' . implode('</strong> or <strong>', $banned) . '</strong> passed to script.');
             }
             if ($globalise) {
                 $GLOBALS[$key] = $value;
@@ -482,13 +482,13 @@ class PublisherRequest {
         } else if ($mask & 4) {
             // If the allow html flag is set, apply a safe html filter to the variable
             if (is_null($safeHtmlFilter)) {
-                $safeHtmlFilter =& PublisherFilterInput::getInstance(null, null, 1, 1);
+                $safeHtmlFilter = PublisherFilterInput::getInstance(null, null, 1, 1);
             }
             $var = $safeHtmlFilter->clean($var, $type);
         } else {
             // Since no allow flags were set, we will apply the most strict filter to the variable
             if (is_null($noHtmlFilter)) {
-                $noHtmlFilter =& PublisherFilterInput::getInstance( /* $tags, $attr, $tag_method, $attr_method, $xss_auto */);
+                $noHtmlFilter = PublisherFilterInput::getInstance( /* $tags, $attr, $tag_method, $attr_method, $xss_auto */);
             }
             $var = $noHtmlFilter->clean($var, $type);
         }
@@ -635,7 +635,7 @@ class PublisherFilterInput {
                 if (isset($this) && is_a($this, 'PublisherFilterInput')) {
                     $filter =& $this;
                 } else {
-                    $filter =& PublisherFilterInput::getInstance();
+                    $filter = PublisherFilterInput::getInstance();
                 }
                 $result = (string) $filter->_remove($filter->_decode((string) $source));
                 break;
@@ -659,7 +659,7 @@ class PublisherFilterInput {
                 if (is_object($this) && get_class($this) == 'PublisherFilterInput') {
                     $filter =& $this;
                 } else {
-                    $filter =& PublisherFilterInput::getInstance();
+                    $filter = PublisherFilterInput::getInstance();
                 }
                 // Are we dealing with an array?
                 if (is_array($source)) {

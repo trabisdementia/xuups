@@ -94,22 +94,22 @@
 <table border="0" width="90%" cellspacing="1" cellpadding="0" align="center" class="outer">
     <tr>
         <td colspan="4" class="itemHead">
-            <b><{$smarty.const._MD_PUBLISHER_FILES_LINKED}></b></td>
+            <strong><{$smarty.const._MD_PUBLISHER_FILES_LINKED}></strong></td>
     </tr>
     <tr class="even">
         <td align="left" class="itemTitle">
-            <b><{$smarty.const._MD_PUBLISHER_FILENAME}></b></td>
+            <strong><{$smarty.const._MD_PUBLISHER_FILENAME}></strong></td>
         <td align="center" width="100" class="itemTitle">
-            <b><{$smarty.const._MD_PUBLISHER_DATESUB}></b></td>
+            <strong><{$smarty.const._MD_PUBLISHER_DATESUB}></strong></td>
         <td align="center" width="50" class="itemTitle">
-            <b><{$smarty.const._MD_PUBLISHER_HITS}></b></td>
+            <strong><{$smarty.const._MD_PUBLISHER_HITS}></strong></td>
     </tr>
 
     <!-- BEGIN DYNAMIC BLOCK --><{foreach item=file from=$item.files}>
     <tr>
         <td class="odd" align="left">
             <a href="<{$publisher_url}>/visit.php?fileid=<{$file.fileid}>" target="_blank">
-                <img src="<{$publisher_url}>/images/icon/file.gif" title="<{$lang_download_file}>" alt="<{$smarty.const._MD_PUBLISHER_DOWNLOAD_FILE}>" />&nbsp;<b><{$file.name}></b>
+                <img src="<{$publisher_url}>/images/icon/file.gif" title="<{$lang_download_file}>" alt="<{$smarty.const._MD_PUBLISHER_DOWNLOAD_FILE}>" />&nbsp;<strong><{$file.name}></strong>
             </a>
 
             <div><{$file.description}></div>
@@ -124,7 +124,7 @@
 <table class="outer">
     <tr>
         <td class="itemHead" colspan="2">
-            <b><{$smarty.const._MD_PUBLISHER_ITEMS_LINKS}></b></td>
+            <strong><{$smarty.const._MD_PUBLISHER_ITEMS_LINKS}></strong></td>
     </tr>
     <tr style="vertical-align: middle;">
         <td class="odd" width="50%" align="left">
@@ -141,13 +141,13 @@
 <table border="0" width="90%" cellspacing="1" cellpadding="3" align="center" class="outer">
     <tr>
         <td align="left" class="itemHead" width='65%'>
-            <b><{$smarty.const._MD_PUBLISHER_OTHER_ITEMS}></b></td>
+            <strong><{$smarty.const._MD_PUBLISHER_OTHER_ITEMS}></strong></td>
         <{if $display_date_col == 1}>
         <td align="center" class="itemHead" width="25%">
-            <b><{$smarty.const._MD_PUBLISHER_DATESUB}></b></td>
+            <strong><{$smarty.const._MD_PUBLISHER_DATESUB}></strong></td>
         <{/if}> <{if $display_hits_col == 1}>
         <td align="center" class="itemHead" width="10%">
-            <b><{$smarty.const._MD_PUBLISHER_HITS}></b></td>
+            <strong><{$smarty.const._MD_PUBLISHER_HITS}></strong></td>
         <{/if}>
     </tr>
     <!-- Start item loop --><{foreach item=item from=$items}>

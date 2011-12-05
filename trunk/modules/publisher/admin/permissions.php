@@ -21,7 +21,7 @@
 
 include_once dirname(__FILE__) . '/admin_header.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 global $xoopsDB;
 

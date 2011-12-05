@@ -41,7 +41,7 @@ if (!$itemObj) {
 }
 
 // Creating the category object that holds the selected item
-$categoryObj =& $publisher->getHandler('category')->get($itemObj->categoryid());
+$categoryObj = $publisher->getHandler('category')->get($itemObj->categoryid());
 
 // Check user permissions to access that category of the selected item
 if (!$itemObj->accessGranted()) {
@@ -60,11 +60,11 @@ $content = '';
 if ($mainImage['image_path'] != '') {
     $content .= '<img src="' . $mainImage['image_path'] . '" alt="' . $myts->undoHtmlSpecialChars($mainImage['image_name']) . '"/>';
 }
-$content .= '<b><i><u><a href="' . PUBLISHER_URL . '/item.php?itemid=' . $itemid . '" title="' . $myts->undoHtmlSpecialChars($itemObj->title()) . '">' . $myts->undoHtmlSpecialChars($itemObj->title()) . '</a></u></i></b>';
+$content .= '<strong><i><u><a href="' . PUBLISHER_URL . '/item.php?itemid=' . $itemid . '" title="' . $myts->undoHtmlSpecialChars($itemObj->title()) . '">' . $myts->undoHtmlSpecialChars($itemObj->title()) . '</a></u></i></strong>';
 $content .= '<br />';
-$content .= '<b>' . _CO_PUBLISHER_CATEGORY . ' : <a href="' . PUBLISHER_URL . '/category.php?categoryid=' . $itemObj->categoryid() . '" title="' . $myts->undoHtmlSpecialChars($categoryObj->name()) . '">' . $myts->undoHtmlSpecialChars($categoryObj->name()) . '</a></b>';
+$content .= '<strong>' . _CO_PUBLISHER_CATEGORY . ' : <a href="' . PUBLISHER_URL . '/category.php?categoryid=' . $itemObj->categoryid() . '" title="' . $myts->undoHtmlSpecialChars($categoryObj->name()) . '">' . $myts->undoHtmlSpecialChars($categoryObj->name()) . '</a></strong>';
 $content .= '<br />';
-$content .= '<b>' . $sender_inform . '</b>';
+$content .= '<strong>' . $sender_inform . '</strong>';
 $content .= '<br /><br />';
 $content .= $myts->undoHtmlSpecialChars($itemObj->plain_maintext());
 $content = publisher_convertCharset($content);

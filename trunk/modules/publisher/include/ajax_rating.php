@@ -31,8 +31,8 @@ $itemid = intval($_REQUEST['itemid']);
 
 xoops_loadLanguage('main', PUBLISHER_DIRNAME);
 $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-$gperm_handler =& $publisher->getHandler('groupperm');
-$hModConfig =& xoops_gethandler('config');
+$gperm_handler = $publisher->getHandler('groupperm');
+$hModConfig = xoops_gethandler('config');
 $module_id = $publisher->getModule()->getVar('mid');
 
 //Checking permissions

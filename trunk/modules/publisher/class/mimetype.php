@@ -124,9 +124,9 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
         while ($myrow = $this->_db->fetchArray($result)) {
             $obj = new $this->classname($myrow);
             if (!$id_as_key) {
-                $ret[] =& $obj;
+                $ret[] = $obj;
             } else {
-                $ret[$obj->getVar($id)] =& $obj;
+                $ret[$obj->getVar($id)] = $obj;
             }
             unset($obj);
         }
@@ -207,7 +207,7 @@ class PublisherBaseObjectHandler extends XoopsObjectHandler {
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
-        if (!$result =& $this->_db->query($sql)) {
+        if (!$result = $this->_db->query($sql)) {
             return 0;
         }
         list($count) = $this->_db->fetchRow($result);
@@ -408,7 +408,7 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler {
         // Add each returned record to the result array
         while ($myrow = $this->_db->fetchArray($result)) {
             $obj = new $this->classname($myrow);
-            $ret[] =& $obj;
+            $ret[] = $obj;
             unset($obj);
         }
         return $ret;
@@ -436,7 +436,7 @@ class PublisherMimetypeHandler extends PublisherBaseObjectHandler {
         if ($mime_ext) {
             $crit->add(new Criteria('mime_ext', $mime_ext));
         }
-        $result =& $this->getObjects($crit);
+        $result = $this->getObjects($crit);
 
         // if no records from db, return empty array
         if (!$result) {

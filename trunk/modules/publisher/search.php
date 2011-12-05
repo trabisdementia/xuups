@@ -24,15 +24,15 @@ include_once dirname(__FILE__) . '/header.php';
 xoops_loadLanguage('search');
 
 //Checking general permissions
-$config_handler =& xoops_gethandler("config");
-$xoopsConfigSearch =& $config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
+$config_handler = xoops_gethandler("config");
+$xoopsConfigSearch = $config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
 if (empty($xoopsConfigSearch["enable_search"])) {
     redirect_header(PUBLISHER_URL . "/index.php", 2, _NOPERM);
     exit();
 }
 
 $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-$gperm_handler =& xoops_getmodulehandler('groupperm', PUBLISHER_DIRNAME);
+$gperm_handler = xoops_getmodulehandler('groupperm', PUBLISHER_DIRNAME);
 $module_id = $publisher->getModule()->mid();
 
 //Checking permissions

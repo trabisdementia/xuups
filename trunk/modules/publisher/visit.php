@@ -39,7 +39,7 @@ if (!$itemObj->accessGranted()) {
     exit();
 }
 // Creating the category object that holds the selected ITEM
-$categoryObj =& $itemObj->category();
+$categoryObj = $itemObj->category();
 
 $fileObj->updateCounter();
 

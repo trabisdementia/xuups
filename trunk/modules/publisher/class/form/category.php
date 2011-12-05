@@ -41,12 +41,12 @@ class PublisherCategoryForm extends XoopsThemeForm {
     var $userGroups = array();
 
     function __construct(&$target, $subCatsCount = 4) {
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher = PublisherPublisher::getInstance();
 
-        $this->targetObject =& $target;
+        $this->targetObject = $target;
         $this->subCatsCount = $subCatsCount;
 
-        $member_handler =& xoops_gethandler('member');
+        $member_handler = xoops_gethandler('member');
         $this->userGroups = $member_handler->getGroupList();
 
         parent::__construct(_AM_PUBLISHER_CATEGORY, "form", xoops_getenv('PHP_SELF'));

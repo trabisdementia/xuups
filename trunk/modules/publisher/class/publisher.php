@@ -33,7 +33,7 @@ class PublisherPublisher {
 
     protected function __construct($debug) {
         $this->debug = $debug;
-        $this->registry =& PublisherRegistry::getInstance();
+        $this->registry = PublisherRegistry::getInstance();
         $this->registry->setEntry('dirname', basename(dirname(dirname(__FILE__))));
     }
 
@@ -92,10 +92,10 @@ class PublisherPublisher {
     function initModule() {
         global $xoopsModule;
         if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $this->registry->getEntry('dirname')) {
-            $this->module =& $xoopsModule;
+            $this->module = $xoopsModule;
         } else {
-            $hModule =& xoops_gethandler('module');
-            $this->module =& $hModule->getByDirname($this->registry->getEntry('dirname'));
+            $hModule = xoops_gethandler('module');
+            $this->module = $hModule->getByDirname($this->registry->getEntry('dirname'));
         }
         $this->addLog('INIT MODULE');
     }
@@ -105,10 +105,10 @@ class PublisherPublisher {
         global $xoopsModule;
         if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $this->registry->getEntry('dirname')) {
             global $xoopsModuleConfig;
-            $this->config =& $xoopsModuleConfig;
+            $this->config = $xoopsModuleConfig;
         } else {
-            $hModConfig =& xoops_gethandler('config');
-            $this->config =& $hModConfig->getConfigsByCat(0, $this->getModule()->getVar('mid'));
+            $hModConfig = xoops_gethandler('config');
+            $this->config = $hModConfig->getConfigsByCat(0, $this->getModule()->getVar('mid'));
         }
     }
 

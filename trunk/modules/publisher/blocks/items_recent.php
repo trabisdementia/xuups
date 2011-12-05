@@ -26,8 +26,8 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
 function publisher_items_recent_show($options)
 {
-    $publisher =& PublisherPublisher::getInstance();
-    $myts =& MyTextSanitizer::getInstance();
+    $publisher = PublisherPublisher::getInstance();
+    $myts = MyTextSanitizer::getInstance();
 
     $block = array();
 

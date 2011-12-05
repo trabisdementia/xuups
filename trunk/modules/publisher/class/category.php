@@ -59,7 +59,7 @@ class PublisherCategory extends XoopsObject {
      * constructor
      */
     function __construct() {
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher = PublisherPublisher::getInstance();
 
         $this->initVar("categoryid", XOBJ_DTYPE_INT, null, false);
         $this->initVar("parentid", XOBJ_DTYPE_INT, null, false);
@@ -140,7 +140,7 @@ class PublisherCategory extends XoopsObject {
             $parentid = $this->parentid();
 
             if ($parentid != 0) {
-                $parentObj =& $this->publisher->getHandler('category')->get($parentid);
+                $parentObj = $this->publisher->getHandler('category')->get($parentid);
                 if ($parentObj->notLoaded()) {
                     exit;
                 }
@@ -157,7 +157,7 @@ class PublisherCategory extends XoopsObject {
         $parentid = $this->parentid();
 
         if ($parentid != 0) {
-            $parentObj =& $this->publisher->getHandler('category')->get($parentid);
+            $parentObj = $this->publisher->getHandler('category')->get($parentid);
             if ($parentObj->notLoaded()) {
                 exit('NOT LOADED');
             }
@@ -220,14 +220,14 @@ class PublisherCategory extends XoopsObject {
     }
 
     function sendNotifications() {
-        $notification_handler =& xoops_gethandler('notification');
+        $notification_handler = xoops_gethandler('notification');
 
         $tags = array();
         $tags['MODULE_NAME'] = $this->publisher->getModule()->getVar('name');
         $tags['CATEGORY_NAME'] = $this->name();
         $tags['CATEGORY_URL'] = $this->getCategoryUrl();
 
-        $notification_handler =& xoops_gethandler('notification');
+        $notification_handler = xoops_gethandler('notification');
         $notification_handler->triggerEvent('global_item', 0, 'category_created', $tags);
     }
 
@@ -314,7 +314,7 @@ class PublisherCategoryHandler extends XoopsPersistableObjectHandler {
     var $publisher = null;
 
     function __construct(&$db) {
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher = PublisherPublisher::getInstance();
         parent::__construct($db, "publisher_categories", 'PublisherCategory', "categoryid", "name");
     }
 
@@ -377,7 +377,7 @@ class PublisherCategoryHandler extends XoopsPersistableObjectHandler {
 
 
         // Deleting the sub categories
-        $subcats =& $this->getCategories(0, 0, $category->categoryid());
+        $subcats = $this->getCategories(0, 0, $category->categoryid());
         foreach ($subcats as $subcat) {
             $this->delete($subcat);
         }
@@ -416,9 +416,9 @@ class PublisherCategoryHandler extends XoopsPersistableObjectHandler {
             $theObject->_groups_submit = isset($publisher_category_group['item_submit'][$theObject->categoryid()]) ? $publisher_category_group['item_submit'][$theObject->categoryid()] : array();
 
             if (!$id_as_key) {
-                $ret[] =& $theObject;
+                $ret[] = $theObject;
             } else {
-                $ret[$theObject->categoryid()] =& $theObject;
+                $ret[$theObject->categoryid()] = $theObject;
             }
             unset($theObject);
         }

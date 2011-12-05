@@ -152,7 +152,7 @@ function publisher_getAllowedImagesTypes()
  */
 function publisher_moduleHome($withLink = true)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     if (!$publisher->getConfig('format_breadcrumb_modname')) {
         return '';
@@ -344,7 +344,7 @@ function publisher_formatErrors($errors = array())
 function publisher_userIsAdmin()
 {
     global $xoopsUser;
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     static $publisher_isAdmin;
 
@@ -371,12 +371,12 @@ function publisher_userIsAdmin()
 function publisher_overrideItemsPermissions($groups, $categoryid)
 {
     global $xoopsDB;
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     $result = true;
 
     $module_id = $publisher->getModule()->getVar('mid');
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $gperm_handler = xoops_gethandler('groupperm');
 
     $sql = "SELECT itemid FROM " . $xoopsDB->prefix("publisher_items") . " WHERE categoryid = '$categoryid' ";
     $result = $xoopsDB->query($sql);
@@ -406,12 +406,12 @@ function publisher_overrideItemsPermissions($groups, $categoryid)
  */
 function publisher_saveItemPermissions($groups, $itemid)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     $result = true;
 
     $module_id = $publisher->getModule()->getVar('mid');
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $gperm_handler = xoops_gethandler('groupperm');
     // First, if the permissions are already there, delete them
     $gperm_handler->deleteByModule($module_id, 'item_read', $itemid);
     // Save the new permissions
@@ -433,12 +433,12 @@ function publisher_saveItemPermissions($groups, $itemid)
  */
 function publisher_saveCategoryPermissions($groups, $categoryid, $perm_name)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     $result = true;
 
     $module_id = $publisher->getModule()->getVar('mid');
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $gperm_handler = xoops_gethandler('groupperm');
     // First, if the permissions are already there, delete them
     $gperm_handler->deleteByModule($module_id, $perm_name, $categoryid);
 
@@ -599,7 +599,7 @@ function publisher_getCurrentPage()
  */
 function publisher_addCategoryOption($categoryObj, $selectedid = 0, $level = 0, $ret = '')
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     $spaces = '';
     for ($j = 0; $j < $level; $j++) {
@@ -633,7 +633,7 @@ function publisher_addCategoryOption($categoryObj, $selectedid = 0, $level = 0, 
  */
 function publisher_createCategorySelect($selectedid = 0, $parentcategory = 0, $allCatOption = true, $selectname = 'options[0]')
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     $selectedid = explode(',', $selectedid);
 
@@ -666,7 +666,7 @@ function publisher_createCategorySelect($selectedid = 0, $parentcategory = 0, $a
  */
 function publisher_createCategoryOptions($selectedid = 0, $parentcategory = 0, $allCatOption = true)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     $ret = "";
     if ($allCatOption) {
@@ -770,11 +770,11 @@ function publisher_uploadFile($another = false, $withRedirect = true, &$itemObj)
     include_once PUBLISHER_ROOT_PATH . '/class/uploader.php';
 
     global $publisher_isAdmin, $xoopsUser;
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     $itemid = isset($_POST['itemid']) ? intval($_POST['itemid']) : 0;
     $uid = is_object($xoopsUser) ? $xoopsUser->uid() : 0;
-    $session =& PublisherSession::getInstance();
+    $session = PublisherSession::getInstance();
     $session->set('publisher_file_filename', isset($_POST['name']) ? $_POST['name'] : '');
     $session->set('publisher_file_description', isset($_POST['description']) ? $_POST['description'] : '');
     $session->set('publisher_file_status', isset($_POST['file_status']) ? intval($_POST['file_status']) : 1);
@@ -794,7 +794,7 @@ function publisher_uploadFile($another = false, $withRedirect = true, &$itemObj)
     $fileObj->setVar('datesub', time());
 
     // Get available mimetypes for file uploading
-    $allowed_mimetypes =& $publisher->getHandler('mimetype')->getArrayByType();
+    $allowed_mimetypes = $publisher->getHandler('mimetype')->getArrayByType();
     // TODO : display the available mimetypes to the user
     $errors = array();
     if ($publisher->getConfig('perm_upload') && is_uploaded_file($_FILES['item_upload_file']['tmp_name'])) {
@@ -913,7 +913,7 @@ function publisher_closeTags($string)
 function publisher_ratingBar($itemid)
 {
     global $xoopsDB, $xoopsUser;
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     $rating_unitwidth = 30;
     $units = 5;
 
@@ -942,7 +942,7 @@ function publisher_ratingBar($itemid)
     $rating2 = @number_format($current_rating / $count, 2);
 
     $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gperm_handler =& $publisher->getHandler('groupperm');
+    $gperm_handler = $publisher->getHandler('groupperm');
 
     if (!$gperm_handler->checkRight('global', _PUBLISHER_RATE, $groups, $publisher->getModule()->getVar('mid'))) {
         $static_rater = array();

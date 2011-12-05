@@ -117,7 +117,7 @@ class XoopsMediaUploader {
      */
     function XoopsMediaUploader($uploadDir, $allowedMimeTypes = 0, $maxFileSize, $maxWidth = 0, $maxHeight = 0) {
         if (is_array($allowedMimeTypes)) {
-            $this->allowedMimeTypes =& $allowedMimeTypes;
+            $this->allowedMimeTypes = $allowedMimeTypes;
         }
         $this->uploadDir = $uploadDir;
         $this->maxFileSize = intval($maxFileSize);

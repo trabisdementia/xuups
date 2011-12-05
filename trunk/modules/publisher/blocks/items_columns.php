@@ -31,7 +31,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 function publisher_items_columns_show($options)
 {
     global $xoTheme;
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
 
     //Column Settings
     $opt_num_columns = isset($options[0]) ? intval($options[0]) : '2';

@@ -25,7 +25,7 @@ $op = PublisherRequest::getString('op');
 
 function publisher_editFile($showmenu = false, $fileid = 0, $itemid = 0)
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
     // if there is a parameter, and the id exists, retrieve data: we're editing a file
@@ -49,7 +49,7 @@ function publisher_editFile($showmenu = false, $fileid = 0, $itemid = 0)
         publisher_openCollapsableBar('editfile', 'editfileicon', _AM_PUBLISHER_FILE_INFORMATIONS);
     } else {
         // there's no parameter, so we're adding an item
-        $fileObj =& $publisher->getHandler('file')->create();
+        $fileObj = $publisher->getHandler('file')->create();
         $fileObj->setVar('itemid', $itemid);
         if ($showmenu) {
             publisher_adminMenu(2, _AM_PUBLISHER_FILE . " > " . _AM_PUBLISHER_FILE_ADD);

@@ -21,6 +21,7 @@
  */
 
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
+xoops_load('XoopsLocal');
 
 $modversion['name'] = _MI_PUBLISHER_MD_NAME;
 $modversion['version'] = 1.0;
@@ -31,8 +32,6 @@ $modversion['help'] = "";
 $modversion['license'] = "GNU General Public License (GPL)";
 $modversion['official'] = 0;
 $modversion['dirname'] = basename(dirname(__FILE__));
-$modversion['iconsmall'] = "images/icon_small.gif";
-$modversion['iconbig'] = "images/icon_big.gif";
 
 include_once XOOPS_ROOT_PATH . "/modules/" . $modversion['dirname'] . "/include/constants.php";
 
@@ -185,7 +184,7 @@ $modversion['blocks'][$i]['name'] = _MI_PUBLISHER_DATE_TO_DATE;
 $modversion['blocks'][$i]['description'] = _MI_PUBLISHER_DATE_TO_DATE_DSC;
 $modversion['blocks'][$i]['show_func'] = "publisher_date_to_date_show";
 $modversion['blocks'][$i]['edit_func'] = "publisher_date_to_date_edit";
-$modversion['blocks'][$i]['options'] = formatTimeStamp(time(), 'm/j/Y') . "|" . formatTimeStamp(time(), 'm/j/Y');
+$modversion['blocks'][$i]['options'] = XoopsLocal::formatTimestamp(time(), 'm/j/Y') . "|" . XoopsLocal::formatTimestamp(time(), 'm/j/Y');
 $modversion['blocks'][$i]['template'] = "publisher_date_to_date.html";
 
 $i++;
@@ -988,6 +987,16 @@ $modversion['config'][$i]['description'] = '_MI_PUBLISHER_MAX_HEIGHTDSC';
 $modversion['config'][$i]['formtype'] = 'textbox';
 $modversion['config'][$i]['valuetype'] = 'text';
 $modversion['config'][$i]['default'] = '800';
+
+########### ADDED in final #############
+$i++;
+$modversion['config'][$i]['name'] = 'item_disp_blocks_summary';
+$modversion['config'][$i]['title'] = '_MI_PUBLISHER_DISP_BLOCK_SUM';
+$modversion['config'][$i]['description'] = '_MI_PUBLISHER_DISP_BLOCK_SUM_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['category'] = 'item';
 
 
 // Comments

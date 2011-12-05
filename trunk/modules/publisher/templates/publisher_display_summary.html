@@ -23,18 +23,18 @@
     <table border="0" width="90%" cellspacing="1" cellpadding="3" align="center" class="outer">
         <tr>
             <td align="left" class="itemHead" width='60%'>
-                <b><{$smarty.const._CO_PUBLISHER_TITLE}></b></td>
+                <strong><{$smarty.const._CO_PUBLISHER_TITLE}></strong></td>
             <{if $display_date_col == 1}>
             <td align="center" class="itemHead" width="30%">
-                <b><{$smarty.const._MD_PUBLISHER_DATESUB}></b></td>
+                <strong><{$smarty.const._MD_PUBLISHER_DATESUB}></strong></td>
             <{/if}> <{if $display_hits_col == 1}>
             <td align="center" class="itemHead" width="10%">
-                <b><{$smarty.const._MD_PUBLISHER_HITS}></b></td>
+                <strong><{$smarty.const._MD_PUBLISHER_HITS}></strong></td>
             <{/if}>
         </tr>
         <!-- Start item loop -->            <{foreach item=item from=$items}>
         <tr>
-            <td class="even" align="left"><b><{$item.titlelink}></b></td>
+            <td class="even" align="left"><strong><{$item.titlelink}></strong></td>
             <{if $display_date_col == 1}>
             <td class="odd" align="left">
                 <div align="center"><{$item.datesub}></div>

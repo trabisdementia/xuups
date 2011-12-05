@@ -47,9 +47,9 @@ class PublisherItem extends XoopsObject {
      */
     function PublisherItem($id = null) {
 
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher = PublisherPublisher::getInstance();
 
-        $this->db =& Database::getInstance();
+        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar("itemid", XOBJ_DTYPE_INT, 0);
         $this->initVar("categoryid", XOBJ_DTYPE_INT, 0, false);
         $this->initVar("title", XOBJ_DTYPE_TXTBOX, '', true, 255);
@@ -85,7 +85,7 @@ class PublisherItem extends XoopsObject {
         $this->initVar("pagescount", XOBJ_DTYPE_INT, 0, false);
 
         if (isset($id)) {
-            $item =& $this->publisher->getHandler('item')->get($id);
+            $item = $this->publisher->getHandler('item')->get($id);
             foreach ($item->vars as $k => $v) {
                 $this->assignVar($k, $v['value']);
             }
@@ -171,7 +171,6 @@ class PublisherItem extends XoopsObject {
         $ret = $this->getVar("summary", $format);
 
         if (!empty($stripTags)) {
-            $myts =& MyTextSanitizer::getInstance();
             $ret = strip_tags($ret, $stripTags);
         }
 
@@ -254,8 +253,11 @@ class PublisherItem extends XoopsObject {
             }
         }
 
+        if ($this->publisher->getConfig('item_disp_blocks_summary')) {
+            $ret = $this->summary() . '<br /><br />' . $ret;
+        }
+
         if (!empty($stripTags)) {
-            $myts =& MyTextSanitizer::getInstance();
             $ret = strip_tags($ret, $stripTags);
         }
 
@@ -275,7 +277,8 @@ class PublisherItem extends XoopsObject {
         if (empty($dateformat)) {
             $dateFormat = $this->publisher->getConfig('format_date');
         }
-        return formatTimestamp($this->getVar('datesub', $format), $dateFormat);
+        xoops_load('XoopsLocal');
+        return XoopsLocal::formatTimestamp($this->getVar('datesub', $format), $dateFormat);
     }
 
     function posterName($realName = -1) {
@@ -295,8 +298,8 @@ class PublisherItem extends XoopsObject {
 
     function posterAvatar() {
         $ret = 'blank.gif';
-        $member_handler =& xoops_gethandler('member');
-        $thisUser =& $member_handler->getUser($this->uid());
+        $member_handler = xoops_gethandler('member');
+        $thisUser = $member_handler->getUser($this->uid());
         if (is_object($thisUser)) {
             $ret = $thisUser->getVar('user_avatar');
         }
@@ -372,7 +375,7 @@ class PublisherItem extends XoopsObject {
         $adminLinks = '';
 
         $groups = ($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-        $gperm_handler =& xoops_gethandler('groupperm');
+        $gperm_handler = xoops_gethandler('groupperm');
 
         $module_id = $this->publisher->getModule()->getVar('mid');
 
@@ -448,7 +451,7 @@ class PublisherItem extends XoopsObject {
     function sendNotifications($notifications = array()) {
         $module_id = $this->publisher->getModule()->getVar('mid');
 
-        $notification_handler =& xoops_gethandler('notification');
+        $notification_handler = xoops_gethandler('notification');
         $categoryObj = $this->category();
 
         $tags = array();
@@ -487,7 +490,7 @@ class PublisherItem extends XoopsObject {
     }
 
     function setDefaultPermissions() {
-        $member_handler =& xoops_gethandler('member');
+        $member_handler = xoops_gethandler('member');
         $groups = $member_handler->getGroupList();
 
         $j = 0;
@@ -502,8 +505,8 @@ class PublisherItem extends XoopsObject {
 
     function setPermissions($group_ids) {
         if (!isset($group_ids)) {
-            $member_handler =& xoops_gethandler('member');
-            $groups =& $member_handler->getGroupList();
+            $member_handler = xoops_gethandler('member');
+            $groups = $member_handler->getGroupList();
 
             $j = 0;
             $group_ids = array();
@@ -550,7 +553,7 @@ class PublisherItem extends XoopsObject {
 
         if (!empty($gr_with_no_pview)) {
             //determine if these groups can view the full article
-            $gperm_handler =& xoops_gethandler('groupperm');
+            $gperm_handler = xoops_gethandler('groupperm');
             $allowed = $gperm_handler->checkRight('item_read', $this->itemid(), $gr_with_no_pview, $this->publisher->getModule()->getVar('mid'));
         }
 
@@ -626,7 +629,7 @@ class PublisherItem extends XoopsObject {
             }
             $imageObjs = array();
             if (count($images_ids) > 0) {
-                $image_handler =& xoops_gethandler('image');
+                $image_handler = xoops_gethandler('image');
                 $criteria = new CriteriaCompo(new Criteria('image_id', '(' . implode(',', $images_ids) . ')', 'IN'));
                 $imageObjs = $image_handler->getObjects($criteria, true);
                 unset($criteria);
@@ -679,7 +682,7 @@ class PublisherItem extends XoopsObject {
         // Hightlighting searched words
         $highlight = true;
         if ($highlight && isset($_GET['keywords'])) {
-            $myts =& MyTextSanitizer::getInstance();
+            $myts = MyTextSanitizer::getInstance();
             $keywords = $myts->htmlSpecialChars(trim(urldecode($_GET['keywords'])));
             $fields = array('title', 'maintext', 'summary');
             foreach ($fields as $field) {
@@ -868,7 +871,7 @@ class PublisherItem extends XoopsObject {
         }
 
 
-        $gperm_handler =& xoops_gethandler('groupperm');
+        $gperm_handler = xoops_gethandler('groupperm');
         $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
         $module_id = $this->publisher->getModule()->getVar('mid');
 
@@ -1085,7 +1088,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
      */
     function __construct(&$db) {
         parent::__construct($db, "publisher_items", 'PublisherItem', "itemid", "title");
-        $this->publisher =& PublisherPublisher::getInstance();
+        $this->publisher = PublisherPublisher::getInstance();
     }
 
     /**
@@ -1144,7 +1147,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
 
         if (xoops_isActiveModule('tag')) {
             // Storing tags information
-            $tag_handler =& xoops_getmodulehandler('tag', 'tag');
+            $tag_handler = xoops_getmodulehandler('tag', 'tag');
             $tag_handler->updateByItem($item->getVar('item_tag'), $item->getVar('itemid'), PUBLISHER_DIRNAME, 0);
         }
 
@@ -1176,7 +1179,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
 
         // Removing tags information
         if (xoops_isActiveModule('tag')) {
-            $tag_handler =& xoops_getmodulehandler('tag', 'tag');
+            $tag_handler = xoops_getmodulehandler('tag', 'tag');
             $tag_handler->updateByItem('', $item->getVar('itemid'), PUBLISHER_DIRNAME, 0);
         }
         // Removing item permissions
@@ -1229,7 +1232,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
             $item->assignVars($myrow);
             //$item->assignOtherProperties();
 
-            $theObjects[$myrow['itemid']] =& $item;
+            $theObjects[$myrow['itemid']] = $item;
             unset($item);
         }
 
@@ -1245,11 +1248,11 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
             $theObject->_groups_read = isset($publisher_items_read_group[$theObject->itemid()]) ? $publisher_items_read_group[$theObject->itemid()] : array();
 
             if ($id_key == 'none') {
-                $ret[] =& $theObject;
+                $ret[] = $theObject;
             } elseif ($id_key == 'itemid') {
-                $ret[$theObject->itemid()] =& $theObject;
+                $ret[$theObject->itemid()] = $theObject;
             } else {
-                $ret[$theObject->getVar($id_key)][$theObject->itemid()] =& $theObject;
+                $ret[$theObject->getVar($id_key)][$theObject->itemid()] = $theObject;
             }
             unset($theObject);
         }
@@ -1443,7 +1446,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
         $criteria->setSort($sort);
         $criteria->setOrder($order);
 
-        $ret =& $this->getObjects($criteria, $id_key, $notNullFields);
+        $ret = $this->getObjects($criteria, $id_key, $notNullFields);
 
         return $ret;
     }
@@ -1460,9 +1463,9 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
             $totalItems = $totalItems - 1;
             mt_srand((double) microtime() * 1000000);
             $entrynumber = mt_rand(0, $totalItems);
-            $item =& $this->getItems(1, $entrynumber, $status, $categoryId, $sort = 'datesub', $order = 'DESC', $notNullFields);
+            $item = $this->getItems(1, $entrynumber, $status, $categoryId, $sort = 'datesub', $order = 'DESC', $notNullFields);
             if ($item) {
-                $ret =& $item[0];
+                $ret = $item[0];
             }
         }
         return $ret;
@@ -1623,7 +1626,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
         }
         $criteria->setOrder($order);
 
-        $ret =& $this->getObjects($criteria);
+        $ret = $this->getObjects($criteria);
 
         return $ret;
     }
@@ -1660,7 +1663,7 @@ class PublisherItemHandler extends XoopsPersistableObjectHandler {
         while ($row = $this->db->fetchArray($result)) {
             $item = new PublisherItem();
             $item->assignVars($row);
-            $ret[$row['categoryid']] =& $item;
+            $ret[$row['categoryid']] = $item;
             unset($item);
         }
         return $ret;

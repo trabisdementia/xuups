@@ -85,7 +85,7 @@ switch ($op)
 
 function add()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     global $limit, $start, $oAdminButton;
 
     if (!isset($_POST['add_mime'])) {
@@ -94,7 +94,7 @@ function add()
 
         publisher_openCollapsableBar('mimemaddtable', 'mimeaddicon', _AM_PUBLISHER_MIME_ADD_TITLE);
 
-        $session =& PublisherSession::getInstance();
+        $session = PublisherSession::getInstance();
         $mime_type = $session->get('publisher_addMime');
         $mime_errors = $session->get('publisher_addMimeErr');
 
@@ -198,7 +198,7 @@ function add()
         }
 
         if ($has_errors) {
-            $session =& PublisherSession::getInstance();
+            $session = PublisherSession::getInstance();
             $mime = array();
             $mime['mime_ext'] = $mime_ext;
             $mime['mime_name'] = $mime_name;
@@ -210,7 +210,7 @@ function add()
             header('Location: ' . publisher_makeURI(PUBLISHER_ADMIN_URL . 'mimetypes.php', array('op' => 'add'), false));
         }
 
-        $mimetype =& $publisher->getHandler('mimetype')->create();
+        $mimetype = $publisher->getHandler('mimetype')->create();
         $mimetype->setVar('mime_ext', $mime_ext);
         $mimetype->setVar('mime_name', $mime_name);
         $mimetype->setVar('mime_types', $mime_types);
@@ -228,14 +228,14 @@ function add()
 
 function delete()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     global $start, $limit;
     if (!isset($_REQUEST['id'])) {
         redirect_header(PUBLISHER_ADMIN_URL . "/mimetypes.php", 3, _AM_PUBLISHER_MESSAGE_NO_ID);
     } else {
         $mime_id = intval($_REQUEST['id']);
     }
-    $mimetype =& $publisher->getHandler('mimetype')->get($mime_id); // Retrieve mimetype object
+    $mimetype = $publisher->getHandler('mimetype')->get($mime_id); // Retrieve mimetype object
     if (!$publisher->getHandler('mimetype')->delete($mimetype, true)) {
         redirect_header(PUBLISHER_ADMIN_URL . "/mimetypes.php?op=manage&id=$mime_id&limit=$limit&start=$start", 3, _AM_PUBLISHER_MESSAGE_DELETE_MIME_ERROR);
     } else {
@@ -245,7 +245,7 @@ function delete()
 
 function edit()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     global $start, $limit, $oAdminButton;
 
     if (!isset($_REQUEST['id'])) {
@@ -253,10 +253,10 @@ function edit()
     } else {
         $mime_id = intval($_REQUEST['id']);
     }
-    $mimetype =& $publisher->getHandler('mimetype')->get($mime_id); // Retrieve mimetype object
+    $mimetype = $publisher->getHandler('mimetype')->get($mime_id); // Retrieve mimetype object
 
     if (!isset($_POST['edit_mime'])) {
-        $session =& PublisherSession::getInstance();
+        $session = PublisherSession::getInstance();
         $mime_type = $session->get("publisher_editMime_$mime_id");
         $mime_errors = $session->get("publisher_editMimeErr_$mime_id");
 
@@ -355,7 +355,7 @@ function edit()
         }
 
         if ($has_errors) {
-            $session =& PublisherSession::getInstance();
+            $session = PublisherSession::getInstance();
             $mime = array();
             $mime['mime_ext'] = $_POST['mime_ext'];
             $mime['mime_name'] = $_POST['mime_name'];
@@ -384,7 +384,7 @@ function edit()
 
 function manage()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     global $imagearray, $start, $limit, $oAdminButton, $aSortBy, $aOrderBy, $aLimitBy, $aSearchBy;
 
     if (isset($_POST['deleteMimes'])) {
@@ -425,8 +425,8 @@ function manage()
     $crit->setStart($start);
     $crit->setLimit($limit);
     $crit->setSort($sort);
-    $mimetypes =& $publisher->getHandler('mimetype')->getObjects($crit); // Retrieve a list of all mimetypes
-    $mime_count =& $publisher->getHandler('mimetype')->getCount();
+    $mimetypes = $publisher->getHandler('mimetype')->getObjects($crit); // Retrieve a list of all mimetypes
+    $mime_count = $publisher->getHandler('mimetype')->getCount();
     $nav = new XoopsPageNav($mime_count, $limit, $start, 'start', "op=manage&amp;limit=$limit");
 
     echo "<table width='100%' cellspacing='1' class='outer'>";
@@ -523,7 +523,7 @@ function manage()
 
 function search()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     global $oAdminButton, $hMime, $limit, $start, $imagearray, $aSearchBy, $aOrderBy, $aLimitBy, $aSortBy;
 
     if (isset($_POST['deleteMimes'])) {
@@ -591,8 +591,8 @@ function search()
         $crit->setOrder($order);
         $crit->setLimit($limit);
         $crit->setStart($start);
-        $mime_count =& $publisher->getHandler('mimetype')->getCount($crit);
-        $mimetypes =& $publisher->getHandler('mimetype')->getObjects($crit);
+        $mime_count = $publisher->getHandler('mimetype')->getCount($crit);
+        $mimetypes = $publisher->getHandler('mimetype')->getObjects($crit);
         $nav = new XoopsPageNav($mime_count, $limit, $start, 'start', "op=search&amp;limit=$limit&amp;order=$order&amp;sort=$sort&amp;mime_search=1&amp;search_by=$search_field&amp;search_text=$search_text");
         // Display results
         echo '<script type="text/javascript" src="' . PUBLISHER_URL . '/include/functions.js"></script>';
@@ -700,7 +700,7 @@ function search()
 
 function updateMimeValue()
 {
-    $publisher =& PublisherPublisher::getInstance();
+    $publisher = PublisherPublisher::getInstance();
     $start = $limit = 0;
 
     if (isset($_GET['limit'])) {
@@ -716,7 +716,7 @@ function updateMimeValue()
         $mime_id = intval($_REQUEST['id']);
     }
 
-    $mimetype =& $publisher->getHandler('mimetype')->get($mime_id);
+    $mimetype = $publisher->getHandler('mimetype')->get($mime_id);
 
     if (isset($_REQUEST['mime_admin'])) {
         $mime_admin = intval($_REQUEST['mime_admin']);
@@ -747,7 +747,7 @@ function _changeMimeValue($mime_value)
 
 function _clearAddSessionVars()
 {
-    $session =& PublisherSession::getInstance();
+    $session = PublisherSession::getInstance();
     $session->del('publisher_addMime');
     $session->del('publisher_addMimeErr');
 }
@@ -761,7 +761,7 @@ function clearAddSession()
 function _clearEditSessionVars($id)
 {
     $id = intval($id);
-    $session =& PublisherSession::getInstance();
+    $session = PublisherSession::getInstance();
     $session->del("publisher_editMime_$id");
     $session->del("publisher_editMimeErr_$id");
 }

@@ -35,7 +35,7 @@ if (!$categoriesArray) {
 $isAdmin = publisher_userIsAdmin();
 
 $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-$gperm_handler =& xoops_getmodulehandler('groupperm');
+$gperm_handler = xoops_getmodulehandler('groupperm');
 $module_id = $publisher->getModule()->getVar('mid');
 
 $itemid = PublisherRequest::getInt('itemid');
@@ -169,7 +169,7 @@ switch ($op) {
                 // Subscribe the user to On Published notification, if requested
                 if ($itemObj->getVar('notifypub')) {
                     include_once XOOPS_ROOT_PATH . '/include/notification_constants.php';
-                    $notification_handler =& xoops_gethandler('notification');
+                    $notification_handler = xoops_gethandler('notification');
                     $notification_handler->subscribe('item', $itemObj->itemid(), 'approved', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE);
                 }
                 // Send notifications

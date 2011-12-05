@@ -48,7 +48,7 @@ $xoTheme->addScript(PUBLISHER_URL . '/js/publisher.js');
 include_once PUBLISHER_ROOT_PATH . '/footer.php';
 
 // Creating the category object that holds the selected item
-$categoryObj =& $publisher->getHandler('category')->get($itemObj->categoryid());
+$categoryObj = $publisher->getHandler('category')->get($itemObj->categoryid());
 
 // Check user permissions to access that category of the selected item
 if (!$itemObj->accessGranted()) {
