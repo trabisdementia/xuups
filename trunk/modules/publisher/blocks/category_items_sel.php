@@ -16,7 +16,7 @@
  * @subpackage      Blocks
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: category_items_sel.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 if (!defined("XOOPS_ROOT_PATH")) {

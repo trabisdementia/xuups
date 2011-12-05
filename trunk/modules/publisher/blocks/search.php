@@ -17,7 +17,7 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          phppp
- * @version         $Id: search.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");

@@ -1,5 +1,5 @@
 <?php
-// $Id: imagemanager.php 2208 2008-10-01 04:33:58Z phppp $
+// $Id$
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //

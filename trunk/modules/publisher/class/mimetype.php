@@ -18,7 +18,7 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          The SmartFactory <www.smartfactory.ca>
- * @version         $Id: publisher.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
@@ -34,7 +34,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          Nazar Aziz <nazar@panthersoftware.com>
- * @version         $Id: baseObjectHandler.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 class PublisherBaseObjectHandler extends XoopsObjectHandler {

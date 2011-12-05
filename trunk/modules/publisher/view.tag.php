@@ -16,7 +16,7 @@
  * @subpackage      Action
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: view.tag.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 //todo: check this file

@@ -16,7 +16,7 @@
  * @subpackage      Include
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
- * @version         $Id: comment_functions.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 function publisher_com_update($item_id, $total_num)

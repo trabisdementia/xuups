@@ -17,7 +17,7 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author            Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
- * @version         $Id: media.textsanitizer.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 define("MYTEXTSANITIZER_EXTENDED_MEDIA", 1);

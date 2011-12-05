@@ -16,7 +16,7 @@
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          The SmartFactory <www.smartfactory.ca>
- * @version         $Id: menu.php 0 2009-06-11 18:47:04Z trabis $
+ * @version         $Id$
  */
 
 global $xoopsModule;
