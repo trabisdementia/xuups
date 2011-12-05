@@ -254,7 +254,10 @@ class PublisherItem extends XoopsObject {
         }
 
         if ($this->publisher->getConfig('item_disp_blocks_summary')) {
-            $ret = $this->summary() . '<br /><br />' . $ret;
+            $summary = $this->summary($maxLength, $format, $stripTags);
+            if ($summary) {
+                $ret = $this->summary() . '<br /><br />' . $ret;
+            }
         }
 
         if (!empty($stripTags)) {
@@ -669,7 +672,11 @@ class PublisherItem extends XoopsObject {
             case 'full':
             case 'wfsection':
             case 'default':
-                $item['summary'] = $this->getBlockSummary($max_char_summary, $full_summary);
+                $summary = $this->summary($max_char_summary);
+                if (!$summary)  {
+                    $summary = $this->body($max_char_summary);
+                }
+                $item['summary'] = $summary;
                 $item = $this->toArrayFull($item);
                 break;
 
