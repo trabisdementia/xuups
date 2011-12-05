@@ -99,10 +99,6 @@ $modversion['search']['func'] = "publisher_search";
 // Menu
 $modversion['hasMain'] = 1;
 
-//Cache
-$modversion['onCache']['file'] = "include/functions.php";
-$modversion['onCache']['func'] = "publisher_onCache";
-
 global $xoopsModule;
 if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['dirname']) {
     global $xoopsModuleConfig, $xoopsUser;
