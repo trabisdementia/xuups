@@ -19,9 +19,14 @@
  * @version         $Id$
  */
 
-global $xoopsModule;
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
-$pathIcon32 = $xoopsModule->getInfo('icons32');
+$dirname = basename(dirname(dirname(__FILE__)));
+$module_handler = xoops_gethandler('module');
+$module = $module_handler->getByDirname($dirname);
+$pathIcon32 = $module->getInfo('icons32');
+
+xoops_loadLanguage('admin', $dirname);
 
 $i = 0;
 
@@ -67,7 +72,7 @@ $adminmenu[$i]["icon"] = '../../' . $pathIcon32 . '/administration.png';
 $i++;
 
 $adminmenu[$i]['title'] = _AM_PUBLISHER_COMMENTS;
-$adminmenu[$i]['link'] = '../../modules/system/admin.php?fct=comments&amp;module=' . $xoopsModule->getVar('mid');
+$adminmenu[$i]['link'] = '../../modules/system/admin.php?fct=comments&amp;module=' . $module->getVar('mid');
 $adminmenu[$i]["icon"] = './images/icon32/folder_txt.png';
 $i++;
 
