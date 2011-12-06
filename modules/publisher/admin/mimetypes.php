@@ -90,7 +90,7 @@ function add()
 
     if (!isset($_POST['add_mime'])) {
         publisher_cpHeader();
-        publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES);
+        //publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES);
 
         publisher_openCollapsableBar('mimemaddtable', 'mimeaddicon', _AM_PUBLISHER_MIME_ADD_TITLE);
 
@@ -262,7 +262,7 @@ function edit()
 
         // Display header
         publisher_cpHeader();
-        publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES . " > " . _AM_PUBLISHER_BUTTON_EDIT);
+        //publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES . " > " . _AM_PUBLISHER_BUTTON_EDIT);
 
         publisher_openCollapsableBar('mimemedittable', 'mimeediticon', _AM_PUBLISHER_MIME_EDIT_TITLE);
 
@@ -408,7 +408,7 @@ function manage()
     }
 
     publisher_cpHeader();
-    publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES);
+    ////publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES);
     publisher_openCollapsableBar('mimemanagetable', 'mimemanageicon', _AM_PUBLISHER_MIME_MANAGE_TITLE, _AM_PUBLISHER_MIME_INFOTEXT);
     $crit = new CriteriaCompo();
     if (isset($_REQUEST['order'])) {
@@ -553,7 +553,7 @@ function search()
     }
 
     publisher_cpHeader();
-    publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES . " > " . _AM_PUBLISHER_BUTTON_SEARCH);
+    //publisher_adminMenu(4, _AM_PUBLISHER_MIMETYPES . " > " . _AM_PUBLISHER_BUTTON_SEARCH);
 
     publisher_openCollapsableBar('mimemsearchtable', 'mimesearchicon', _AM_PUBLISHER_MIME_SEARCH);
 

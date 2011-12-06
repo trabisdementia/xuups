@@ -225,7 +225,7 @@ switch ($op) {
     case "default":
     default:
         publisher_cpHeader();
-        publisher_adminMenu(1, _AM_PUBLISHER_CATEGORIES);
+        //publisher_adminMenu(1, _AM_PUBLISHER_CATEGORIES);
 
         echo "<br />\n";
         echo "<form><div style=\"margin-bottom: 12px;\">";
@@ -278,8 +278,8 @@ function publisher_displayCategory($categoryObj, $level = 0)
             $description = substr($description, 0, (100 - 1)) . "...";
         }
     }
-    $modify = "<a href='category.php?op=mod&amp;categoryid=" . $categoryObj->categoryid() . "&amp;parentid=" . $categoryObj->parentid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITCOL . "' alt='" . _AM_PUBLISHER_EDITCOL . "' /></a>";
-    $delete = "<a href='category.php?op=del&amp;categoryid=" . $categoryObj->categoryid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETECOL . "' alt='" . _AM_PUBLISHER_DELETECOL . "' /></a>";
+    $modify = "<a href='category.php?op=mod&amp;categoryid=" . $categoryObj->categoryid() . "&amp;parentid=" . $categoryObj->parentid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.png' title='" . _AM_PUBLISHER_EDITCOL . "' alt='" . _AM_PUBLISHER_EDITCOL . "' /></a>";
+    $delete = "<a href='category.php?op=del&amp;categoryid=" . $categoryObj->categoryid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.png' title='" . _AM_PUBLISHER_DELETECOL . "' alt='" . _AM_PUBLISHER_DELETECOL . "' /></a>";
 
     $spaces = '';
     for ($j = 0; $j < $level; $j++) {
@@ -321,13 +321,13 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
 
     if ($categoryid != 0) {
         if ($showmenu) {
-            publisher_adminMenu(1, _AM_PUBLISHER_CATEGORIES . " > " . _AM_PUBLISHER_EDITING);
+            //publisher_adminMenu(1, _AM_PUBLISHER_CATEGORIES . " > " . _AM_PUBLISHER_EDITING);
         }
         echo "<br />\n";
         publisher_openCollapsableBar('edittable', 'edittableicon', _AM_PUBLISHER_EDITCOL, _AM_PUBLISHER_CATEGORY_EDIT_INFO);
     } else {
         if ($showmenu) {
-            publisher_adminMenu(1, _AM_PUBLISHER_CATEGORIES . " > " . _AM_PUBLISHER_CREATINGNEW);
+            //publisher_adminMenu(1, _AM_PUBLISHER_CATEGORIES . " > " . _AM_PUBLISHER_CREATINGNEW);
         }
         publisher_openCollapsableBar('createtable', 'createtableicon', _AM_PUBLISHER_CATEGORY_CREATE, _AM_PUBLISHER_CATEGORY_CREATE_INFO);
     }
@@ -361,8 +361,8 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
         echo "</tr>";
         if ($totalsubs > 0) {
             foreach ($subcatsObj as $subcat) {
-                $modify = "<a href='category.php?op=mod&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_MODIFY . "' alt='" . _AM_PUBLISHER_MODIFY . "' /></a>";
-                $delete = "<a href='category.php?op=del&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETE . "' alt='" . _AM_PUBLISHER_DELETE . "' /></a>";
+                $modify = "<a href='category.php?op=mod&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.png' title='" . _AM_PUBLISHER_MODIFY . "' alt='" . _AM_PUBLISHER_MODIFY . "' /></a>";
+                $delete = "<a href='category.php?op=del&amp;categoryid=" . $subcat->categoryid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.png' title='" . _AM_PUBLISHER_DELETE . "' alt='" . _AM_PUBLISHER_DELETE . "' /></a>";
                 echo "<tr>";
                 echo "<td class='head' align='left'>" . $subcat->categoryid() . "</td>";
                 echo "<td class='even' align='left'><a href='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/category.php?categoryid=" . $subcat->categoryid() . "&amp;parentid=" . $subcat->parentid() . "'>" . $subcat->name() . "</a></td>";
@@ -398,8 +398,8 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
         if ($totalitems > 0) {
             for ($i = 0; $i < $totalitemsOnPage; $i++) {
                 $categoryObj =& $allcats[$itemsObj[$i]->categoryid()];
-                $modify = "<a href='item.php?op=mod&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
-                $delete = "<a href='item.php?op=del&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
+                $modify = "<a href='item.php?op=mod&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/edit.png' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
+                $delete = "<a href='item.php?op=del&amp;itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . XOOPS_URL . "/modules/" . $publisher->getModule()->dirname() . "/images/icon/delete.png' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
                 echo "<tr>";
                 echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
                 echo "<td class='even' align='left'>" . $categoryObj->name() . "</td>";

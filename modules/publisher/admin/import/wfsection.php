@@ -37,7 +37,7 @@ if ($op == 'start') {
     xoops_load('XoopsFormLoader');
 
     publisher_cpHeader();
-    publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
+    //publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
     publisher_openCollapsableBar('wfsectionimport', 'wfsectionimporticon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_INFO);
 
     $result = $xoopsDB->query("SELECT COUNT(*) FROM " . $xoopsDB->prefix("wfs_category"));
@@ -96,7 +96,7 @@ if ($op == 'start') {
 
 if ($op == 'go') {
     publisher_cpHeader();
-    publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
+    //publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
     publisher_openCollapsableBar('wfsectionimportgo', 'wfsectionimportgoicon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
 
     $cnt_imported_cat = 0;

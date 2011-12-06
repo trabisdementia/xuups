@@ -21,63 +21,66 @@
 
 global $xoopsModule;
 
+$pathIcon32 = $xoopsModule->getInfo('icons32');
+
 $i = 0;
 
 // Index
-$adminmenu[$i]['title'] = _MI_PUBLISHER_ADMENU1;
+$adminmenu[$i]['title'] = _MI_PUBLISHER_ADMENU0;
 $adminmenu[$i]['link'] = "admin/index.php";
+$adminmenu[$i]["icon"] = '../../' . $pathIcon32 . '/home.png';
 $i++;
+
+$adminmenu[$i]['title'] = _MI_PUBLISHER_ADMENU1;
+$adminmenu[$i]['link'] = "admin/main.php";
+$adminmenu[$i]["icon"] = '../../' . $pathIcon32 . '/manage.png';
+$i++;
+
 // Category
 $adminmenu[$i]['title'] = _MI_PUBLISHER_ADMENU2;
 $adminmenu[$i]['link'] = "admin/category.php";
+$adminmenu[$i]["icon"] = '../../' . $pathIcon32 . '/category.png';
 $i++;
+
 // Items
 $adminmenu[$i]['title'] = _MI_PUBLISHER_ADMENU3;
 $adminmenu[$i]['link'] = "admin/item.php";
+$adminmenu[$i]["icon"] = '../../' . $pathIcon32 . '/content.png';
 $i++;
+
 // Permissions
 $adminmenu[$i]['title'] = _MI_PUBLISHER_ADMENU4;
 $adminmenu[$i]['link'] = "admin/permissions.php";
+$adminmenu[$i]["icon"] = '../../' . $pathIcon32 . '/permissions.png';
 $i++;
+
 // Mimetypes
 $adminmenu[$i]['title'] = _MI_PUBLISHER_ADMENU6;
 $adminmenu[$i]['link'] = "admin/mimetypes.php";
+$adminmenu[$i]["icon"] = '../../' . $pathIcon32 . '/type.png';
 $i++;
 
 // Preferences
 $adminmenu[$i]['title'] = _PREFERENCES;
 $adminmenu[$i]['link'] = "admin/preferences.php";
+$adminmenu[$i]["icon"] = '../../' . $pathIcon32 . '/administration.png';
+$i++;
 
-$publisher_adminmenu = $adminmenu;
+$adminmenu[$i]['title'] = _AM_PUBLISHER_COMMENTS;
+$adminmenu[$i]['link'] = '../../modules/system/admin.php?fct=comments&amp;module=' . $xoopsModule->getVar('mid');
+$adminmenu[$i]["icon"] = './images/icon32/folder_txt.png';
+$i++;
 
-if (isset($xoopsModule) && $xoopsModule->getVar('dirname') == basename(dirname(dirname(__FILE__)))) {
-    $i = 0;
+$adminmenu[$i]['title'] = _AM_PUBLISHER_IMPORT;
+$adminmenu[$i]['link'] = "admin/import.php";
+$adminmenu[$i]["icon"] = '../../' . $pathIcon32 . '/download.png';
+$i++;
 
-    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_BLOCKS;
-    $publisher_headermenu[$i]['link'] = '../../system/admin.php?fct=blocksadmin&amp;selvis=-1&amp;selmod=-2&amp;selgrp=-1&amp;selgen=' . $xoopsModule->getVar('mid');
-    $i++;
+$adminmenu[$i]['title'] = _AM_PUBLISHER_CLONE;
+$adminmenu[$i]['link'] = "admin/clone.php";
+$adminmenu[$i]["icon"] = './images/icon32/editcopy.png';
+$i++;
 
-    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_COMMENTS;
-    $publisher_headermenu[$i]['link'] = '../../system/admin.php?fct=comments&amp;module=' . $xoopsModule->getVar('mid');
-    $i++;
-
-    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_GOMOD;
-    $publisher_headermenu[$i]['link'] = PUBLISHER_URL;
-    $i++;
-
-    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_UPDATE_MODULE;
-    $publisher_headermenu[$i]['link'] = XOOPS_URL . "/modules/system/admin.php?fct=modulesadmin&op=update&module=" . $xoopsModule->getVar('dirname');
-    $i++;
-
-    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_IMPORT;
-    $publisher_headermenu[$i]['link'] = PUBLISHER_URL . "/admin/import.php";
-    $i++;
-
-    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_CLONE;
-    $publisher_headermenu[$i]['link'] = PUBLISHER_URL . "/admin/clone.php";
-    $i++;
-
-    $publisher_headermenu[$i]['title'] = _AM_PUBLISHER_ABOUT;
-    $publisher_headermenu[$i]['link'] = PUBLISHER_URL . "/admin/about.php";
-}
-?>
+$adminmenu[$i]['title'] = _AM_PUBLISHER_ABOUT;
+$adminmenu[$i]['link'] = "admin/about.php";
+$adminmenu[$i]["icon"] = '../../' . $pathIcon32 . '/about.png';

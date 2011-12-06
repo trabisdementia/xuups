@@ -37,7 +37,7 @@ if ($op == 'start') {
     xoops_load('XoopsFormLoader');
 
     publisher_cpHeader();
-    publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
+    //publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
     publisher_openCollapsableBar('newsimport', 'newsimporticon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_INFO);
 
     $result = $xoopsDB->query("SELECT COUNT(*) FROM " . $xoopsDB->prefix("topics"));
@@ -98,7 +98,7 @@ if ($op == 'start') {
 
 if ($op == 'go') {
     publisher_cpHeader();
-    publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
+    //publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
     publisher_openCollapsableBar('newsimportgo', 'newsimportgoicon', sprintf(_AM_PUBLISHER_IMPORT_FROM, $importFromModuleName), _AM_PUBLISHER_IMPORT_RESULT);
 
     $module_handler = xoops_gethandler('module');

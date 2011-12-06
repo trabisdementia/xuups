@@ -130,8 +130,8 @@ function publisher_latest_news_show($options)
         }
 
         if (is_object($xoopsUser) && $xoopsUser->isAdmin(-1)) {
-            $item['admin'] = "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $itemObj->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "' /></a>&nbsp;";
-            $item['admin'] .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=del&amp;itemid=" . $itemObj->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/delete.gif'" . " title='" . _CO_PUBLISHER_DELETE . "' alt='" . _CO_PUBLISHER_DELETE . "' /></a>";
+            $item['admin'] = "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $itemObj->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.png'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "' /></a>&nbsp;";
+            $item['admin'] .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=del&amp;itemid=" . $itemObj->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/delete.png'" . " title='" . _CO_PUBLISHER_DELETE . "' alt='" . _CO_PUBLISHER_DELETE . "' /></a>";
         } else {
             $item['admin'] = '';
         }

@@ -41,7 +41,7 @@ switch ($op) {
         $importfile = 'none';
 
         publisher_cpHeader();
-        publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
+        //publisher_adminMenu(-1, _AM_PUBLISHER_IMPORT);
 
         publisher_openCollapsableBar('import', 'importicon', _AM_PUBLISHER_IMPORT_TITLE, _AM_PUBLISHER_IMPORT_INFO);
 

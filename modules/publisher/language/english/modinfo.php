@@ -1,5 +1,5 @@
 <?php
-define("_MI_PUBLISHER_ADMENU1", "Index");
+define("_MI_PUBLISHER_ADMENU1", "Summary");
 define("_MI_PUBLISHER_ADMENU2", "Categories");
 define("_MI_PUBLISHER_ADMENU3", "Articles");
 define("_MI_PUBLISHER_ADMENU4", "Permissions");
@@ -324,3 +324,5 @@ define("_MI_PUBLISHER_AUTHOR_ITEMS_DSC", "Show items from the same author");
 
 define("_MI_PUBLISHER_DISP_BLOCK_SUM", "Display block summary on items page?");
 define("_MI_PUBLISHER_DISP_BLOCK_SUM_DSC", "");
+
+define("_MI_PUBLISHER_ADMENU0", "Home");

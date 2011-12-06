@@ -163,7 +163,7 @@ switch ($op) {
     case "default":
     default:
         publisher_cpHeader();
-        publisher_adminMenu(2, _AM_PUBLISHER_ITEMS);
+        //publisher_adminMenu(2, _AM_PUBLISHER_ITEMS);
         xoops_load('XoopsPageNav');
 
         echo "<br />\n";
@@ -198,7 +198,7 @@ switch ($op) {
 
                 $approve = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/approve.gif' title='" . _AM_PUBLISHER_SUBMISSION_MODERATE . "' alt='" . _AM_PUBLISHER_SUBMISSION_MODERATE . "' /></a>&nbsp;";
                 $clone = '';
-                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
+                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.png' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "' /></a>";
                 $modify = "";
 
                 echo "<tr>";
@@ -245,9 +245,9 @@ switch ($op) {
             for ($i = 0; $i < $totalItemsOnPage; $i++) {
                 $categoryObj =& $itemsObj[$i]->category();
 
-                $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
-                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
-                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" . _AM_PUBLISHER_CLONE_ITEM . "' /></a>";
+                $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.png' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
+                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.png' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
+                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/editcopy.png' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" . _AM_PUBLISHER_CLONE_ITEM . "' /></a>";
 
                 echo "<tr>";
                 echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
@@ -292,9 +292,9 @@ switch ($op) {
             for ($i = 0; $i < $totalItemsOnPage; $i++) {
                 $categoryObj =& $itemsObj[$i]->category();
 
-                $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
-                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
-                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" . _AM_PUBLISHER_CLONE_ITEM . "' /></a>";
+                $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.png' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
+                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.png' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
+                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/editcopy.png' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" . _AM_PUBLISHER_CLONE_ITEM . "' /></a>";
 
                 echo "<tr>";
                 echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
@@ -340,9 +340,9 @@ switch ($op) {
             for ($i = 0; $i < $totalItemsOnPage; $i++) {
                 $categoryObj =& $itemsObj[$i]->category();
 
-                $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
-                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
-                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/clone.gif' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" . _AM_PUBLISHER_CLONE_ITEM . "' /></a>";
+                $modify = "<a href='item.php?op=mod&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.png' title='" . _AM_PUBLISHER_EDITITEM . "' alt='" . _AM_PUBLISHER_EDITITEM . "' /></a>";
+                $delete = "<a href='item.php?op=del&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.png' title='" . _AM_PUBLISHER_DELETEITEM . "' alt='" . _AM_PUBLISHER_DELETEITEM . "'/></a>";
+                $clone = "<a href='item.php?op=clone&itemid=" . $itemsObj[$i]->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/editcopy.png' title='" . _AM_PUBLISHER_CLONE_ITEM . "' alt='" . _AM_PUBLISHER_CLONE_ITEM . "' /></a>";
 
                 echo "<tr>";
                 echo "<td class='head' align='center'>" . $itemsObj[$i]->itemid() . "</td>";
@@ -387,8 +387,8 @@ function publisher_showFiles($itemObj)
         echo "</tr>";
 
         for ($i = 0; $i < count($filesObj); $i++) {
-            $modify = "<a href='file.php?op=mod&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.gif' title='" . _AM_PUBLISHER_EDITFILE . "' alt='" . _AM_PUBLISHER_EDITFILE . "' /></a>";
-            $delete = "<a href='file.php?op=del&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.gif' title='" . _AM_PUBLISHER_DELETEFILE . "' alt='" . _AM_PUBLISHER_DELETEFILE . "'/></a>";
+            $modify = "<a href='file.php?op=mod&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . PUBLISHER_URL . "/images/icon/edit.png' title='" . _AM_PUBLISHER_EDITFILE . "' alt='" . _AM_PUBLISHER_EDITFILE . "' /></a>";
+            $delete = "<a href='file.php?op=del&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . PUBLISHER_URL . "/images/icon/delete.png' title='" . _AM_PUBLISHER_DELETEFILE . "' alt='" . _AM_PUBLISHER_DELETEFILE . "'/></a>";
             if ($filesObj[$i]->status() == 0) {
                 $not_visible = "<img src='" . PUBLISHER_URL . "/images/no.gif'/>";
             } else {
@@ -506,7 +506,7 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
         $categoryObj = $itemObj->category();
 
         if ($showmenu) {
-            publisher_adminMenu(2, $breadcrumb_action1 . " > " . $breadcrumb_action2);
+            //publisher_adminMenu(2, $breadcrumb_action1 . " > " . $breadcrumb_action2);
         }
 
         echo "<br />\n";
@@ -531,7 +531,7 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
         $new_status = _PUBLISHER_STATUS_PUBLISHED;
 
         if ($showmenu) {
-            publisher_adminMenu(2, $breadcrumb_action1 . " > " . $breadcrumb_action2);
+            //publisher_adminMenu(2, $breadcrumb_action1 . " > " . $breadcrumb_action2);
         }
 
         $sel_categoryid = isset($_GET['categoryid']) ? $_GET['categoryid'] : 0;

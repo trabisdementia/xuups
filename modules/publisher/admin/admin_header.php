@@ -23,7 +23,7 @@ include_once dirname(dirname(dirname(dirname(__FILE__)))) . '/mainfile.php';
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 include_once XOOPS_ROOT_PATH . '/include/cp_header.php';
 
-xoops_loadLanguage('admin', PUBLISHER_DIRNAME);
+//xoops_loadLanguage('admin', PUBLISHER_DIRNAME);
 xoops_loadLanguage('modinfo', PUBLISHER_DIRNAME);
 
 $imagearray = array(
@@ -32,4 +32,15 @@ $imagearray = array(
     'online' => "<img src='" . PUBLISHER_IMAGES_URL . "/on.png' alt='" . _AM_PUBLISHER_ICO_ONLINE . "' align='middle' />",
     'offline' => "<img src='" . PUBLISHER_IMAGES_URL . "/off.png' alt='" . _AM_PUBLISHER_ICO_OFFLINE . "' align='middle' />",
 );
-?>
+if ( file_exists($GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php'))){
+    include_once $GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php');
+}else{
+    echo xoops_error('/Frameworks/moduleclasses/moduleadmin/ is required!!!');
+}
+/*
+$myts =& MyTextSanitizer::getInstance();
+
+if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
+  include_once(XOOPS_ROOT_PATH."/class/template.php");
+  $xoopsTpl = new XoopsTpl();
+} */
