@@ -333,5 +333,3 @@ define("_AM_PUBLISHER_COMMENTS", "Comments");
 
 define("_AM_PUBLISHER_CATEGORY_MODERATOR", "Moderator");
 define("_AM_PUBLISHER_CATEGORY_MODERATOR_DSC", "A moderator can access and submit in this category even if he does not have groups permissions.<br />To moderate a sub category the user must have permissions to submit in the parent category.<br />Set to 'anonymous' if you do not need a moderator.");
-
-?>

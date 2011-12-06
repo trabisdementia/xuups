@@ -390,13 +390,13 @@ class PublisherItem extends XoopsObject {
             if (!$publisher_isAdmin) {
                 if ($xoopsUser->uid() == $this->uid()) {
                     // Edit button
-                    $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "'/></a>";
+                    $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.png'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "'/></a>";
                     $adminLinks .= " ";
                 }
 
                 if ($this->publisher->getConfig('perm_clone')) {
                     // Dupplicate button
-                    $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?op=clone&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/clone.gif'" . " title='" . _CO_PUBLISHER_CLONE . "' alt='" . _CO_PUBLISHER_CLONE . "' /></a>";
+                    $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?op=clone&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/editcopy.png'" . " title='" . _CO_PUBLISHER_CLONE . "' alt='" . _CO_PUBLISHER_CLONE . "' /></a>";
                     $adminLinks .= " ";
                 }
 
@@ -407,15 +407,15 @@ class PublisherItem extends XoopsObject {
 
             } else {
                 // Edit button
-                $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "' /></a>";
+                $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.png'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "' /></a>";
                 $adminLinks .= " ";
 
                 // Dupplicate button
-                $adminLinks .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=clone&amp;itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/clone.gif'" . " title='" . _CO_PUBLISHER_CLONE . "' alt='" . _CO_PUBLISHER_CLONE . "' /></a>";
+                $adminLinks .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=clone&amp;itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/editcopy.png'" . " title='" . _CO_PUBLISHER_CLONE . "' alt='" . _CO_PUBLISHER_CLONE . "' /></a>";
                 $adminLinks .= " ";
 
                 // Delete button
-                $adminLinks .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=del&amp;itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/delete.gif'" . " title='" . _CO_PUBLISHER_DELETE . "' alt='" . _CO_PUBLISHER_DELETE . "' /></a>";
+                $adminLinks .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=del&amp;itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/delete.png'" . " title='" . _CO_PUBLISHER_DELETE . "' alt='" . _CO_PUBLISHER_DELETE . "' /></a>";
                 $adminLinks .= " ";
 
                 // upload a file linked this article

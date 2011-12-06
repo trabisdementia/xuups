@@ -334,3 +334,5 @@ define("_MI_PUBLISHER_AUTHOR_ITEMS_DSC", "Afficher les articles du même auteur"
 
 define("_MI_PUBLISHER_DISP_BLOCK_SUM", "Display block summary on items page?");
 define("_MI_PUBLISHER_DISP_BLOCK_SUM_DSC", "");
+
+define("_MI_PUBLISHER_ADMENU0", "Home");

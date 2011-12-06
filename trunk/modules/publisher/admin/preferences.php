@@ -164,7 +164,7 @@ if ($op == 'showmod') {
     }
 
     publisher_cpHeader();
-    publisher_adminMenu(5, _PREFERENCES);
+    //publisher_adminMenu(5, _PREFERENCES);
     foreach ($config_cats as $form_cat => $info) {
         if ($form_cat == 'others' && !$cat_others_used) continue;
         $$form_cat->addElement(new XoopsFormHidden('op', 'save'));
