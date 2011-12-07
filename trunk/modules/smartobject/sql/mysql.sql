@@ -2,7 +2,7 @@ CREATE TABLE `smartobject_meta` (
   `metakey` varchar(50) NOT NULL default '',
   `metavalue` varchar(255) NOT NULL default '',
   PRIMARY KEY (`metakey`)
-) TYPE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' ;
+) ENGINE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' ;
 
 INSERT INTO `smartobject_meta` VALUES ('version','2');
 
@@ -22,21 +22,21 @@ CREATE TABLE `smartobject_link` (
   `mid_name` varchar(255) NOT NULL default '',
 
   PRIMARY KEY  (`linkid`)
-) TYPE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 
 CREATE TABLE `smartobject_tag` (
   `tagid` int(11) NOT NULL auto_increment,
   `name` varchar(255) NOT NULL default '',
   `description` TEXT NOT NULL,
   PRIMARY KEY  (`tagid`)
-) TYPE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 
 CREATE TABLE `smartobject_tag_text` (
   `tagid` int(11) NOT NULL default 0,
   `language` varchar(255) NOT NULL default '',
   `value` TEXT NOT NULL,
   PRIMARY KEY  (`tagid`, `language`)
-) TYPE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 
 CREATE TABLE `smartobject_adsense` (
   `adsenseid` int(11) NOT NULL auto_increment,
@@ -51,7 +51,7 @@ CREATE TABLE `smartobject_adsense` (
   `client_id` varchar(100) NOT NULL default '',
   `tag` varchar(50) NOT NULL default '',
   PRIMARY KEY  (`adsenseid`)
-) TYPE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 
 CREATE TABLE `smartobject_rating` (
   `ratingid` int(11) NOT NULL auto_increment,
@@ -62,7 +62,7 @@ CREATE TABLE `smartobject_rating` (
   `rate` int(1) NOT NULL,
   `date` int(11) NOT NULL,
   PRIMARY KEY  (`ratingid`)
-) TYPE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 
 CREATE TABLE `smartobject_currency` (
   `currencyid` int(11) NOT NULL auto_increment,
@@ -72,7 +72,7 @@ CREATE TABLE `smartobject_currency` (
   `rate` float NOT NULL,
   `default_currency` int(1) NOT NULL,
   PRIMARY KEY  (`currencyid`)
-) TYPE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 
 INSERT INTO `smartobject_currency` VALUES (2, 'EUR', 'Euro', '€', 0.65, 0);
 INSERT INTO `smartobject_currency` VALUES (3, 'USD', 'American dollar', '$', 0.9, 0);
@@ -88,7 +88,7 @@ INSERT INTO `smartobject_currency` VALUES (1, 'CAD', 'Canadian dollar', '$', 1, 
 `itemid` INT( 11 ) NOT NULL ,
 `item` VARCHAR( 255 ) NOT NULL ,
 PRIMARY KEY  (`fileid`)
-)  TYPE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+)  ENGINE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 
 CREATE TABLE `smartobject_urllink` (
 `urllinkid` INT( 11 ) NOT NULL auto_increment,

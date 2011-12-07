@@ -3,7 +3,7 @@ CREATE TABLE `yogurt_friendpetition` (
   `petitioner_uid` int(11) NOT NULL,
   `petioned_uid` int(11) NOT NULL,
   PRIMARY KEY  (`friendpet_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 
 CREATE TABLE `yogurt_friendship` (
@@ -16,7 +16,7 @@ CREATE TABLE `yogurt_friendship` (
   `cool` tinyint(4) NOT NULL,
   `fan` tinyint(4) NOT NULL,
   PRIMARY KEY  (`friendship_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `yogurt_images` (
   `cod_img` int(11) NOT NULL auto_increment,
@@ -27,7 +27,7 @@ CREATE TABLE `yogurt_images` (
   `url` text NOT NULL,
   `private` varchar(1) NOT NULL,
   PRIMARY KEY  (`cod_img`)
-) TYPE=MyISAM  ;
+) ENGINE=MyISAM  ;
 
 CREATE TABLE `yogurt_visitors` (
   `cod_visit` int(11) NOT NULL auto_increment,
@@ -36,7 +36,7 @@ CREATE TABLE `yogurt_visitors` (
   `uname_visitor` varchar(30) NOT NULL,
 `datetime` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`cod_visit`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `yogurt_seutubo` (
   `video_id` int(11) NOT NULL auto_increment,
@@ -45,7 +45,7 @@ CREATE TABLE `yogurt_seutubo` (
   `youtube_code` varchar(11) NOT NULL,
   `main_video` varchar(1) NOT NULL,
   PRIMARY KEY  (`video_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 
 CREATE TABLE `yogurt_reltribeuser` (
@@ -53,7 +53,7 @@ CREATE TABLE `yogurt_reltribeuser` (
   `rel_tribe_id` int(11) NOT NULL,
   `rel_user_uid` int(11) NOT NULL,
   PRIMARY KEY  (`rel_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 
 CREATE TABLE `yogurt_tribes` (
@@ -64,7 +64,7 @@ CREATE TABLE `yogurt_tribes` (
   `tribe_img` varchar(255) NOT NULL,
 
   PRIMARY KEY  (`tribe_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `yogurt_scraps` (
   `scrap_id` int(11) NOT NULL auto_increment,
@@ -74,7 +74,7 @@ CREATE TABLE `yogurt_scraps` (
   `private` tinyint(1) NOT NULL,
   `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`scrap_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `yogurt_configs` (
   `config_id` int(11) NOT NULL auto_increment,
@@ -94,7 +94,7 @@ CREATE TABLE `yogurt_configs` (
   `end_suspension` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`config_id`),
   KEY `config_uid` (`config_uid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `yogurt_suspensions` (
   `uid` int(11) NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE `yogurt_suspensions` (
   `old_enc_type` int(2) NOT NULL,
   `old_pass_expired` int(1) NOT NULL,
   PRIMARY KEY  (`uid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `yogurt_audio` (
   `audio_id` int(11) NOT NULL auto_increment,
@@ -116,4 +116,4 @@ CREATE TABLE `yogurt_audio` (
   `data_creation` date NOT NULL,
   `data_update` date NOT NULL,
   PRIMARY KEY  (`audio_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

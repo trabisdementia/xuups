@@ -29,7 +29,7 @@ function update_tables_to_300()
         						metakey varchar(50) NOT NULL default '',
         						metavalue varchar(255) NOT NULL default '',
         						PRIMARY KEY (metakey))
-        						TYPE=MyISAM;");
+        						ENGINE=MyISAM;");
 
         $table->setData(sprintf("'version', %s", round($GLOBALS['xoopsModule']->getVar('version') / 100, 2)));
         if ($dbupdater->updateTable($table)) {

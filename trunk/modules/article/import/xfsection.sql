@@ -62,7 +62,7 @@ CREATE TABLE xfs_article (
   KEY categoryid (categoryid),
   KEY uid (uid),
   KEY changed (changed)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 
 #
@@ -78,7 +78,7 @@ CREATE TABLE xfs_broken (
   KEY lid (lid),
   KEY sender (sender),
   KEY ip (ip)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `xfs_category`
@@ -98,7 +98,7 @@ CREATE TABLE xfs_category (
   editaccess varchar(255) NOT NULL default '1 2 3',
   PRIMARY KEY  (id),
   KEY pid (pid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `xfs_config`
@@ -157,7 +157,7 @@ CREATE TABLE xfs_config (
   filesize int(10) NOT NULL default '2097152',
   picon int(10) NOT NULL default '1',
   PRIMARY KEY  (articlesapage)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `xfs_config`
@@ -187,7 +187,7 @@ CREATE TABLE xfs_files (
   groupid varchar(255) NOT NULL default '1 2 3',
   PRIMARY KEY  (fileid),
   KEY articleid (articleid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `xfs_votedata`
@@ -204,5 +204,5 @@ CREATE TABLE xfs_votedata (
   KEY ratinguser (ratinguser),
   KEY ratinghostname (ratinghostname),
   KEY lid (lid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 

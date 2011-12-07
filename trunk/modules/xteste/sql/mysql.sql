@@ -7,10 +7,10 @@ CREATE TABLE `xteste_post` (
   `published` int(11) NOT NULL default '0',
   `uid` int(11) NOT NULL default '0',
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `xteste_category` (
   `id` int(11) NOT NULL auto_increment,
   `title` varchar(255) NOT NULL default '',
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

@@ -35,7 +35,7 @@ CREATE TABLE stories (
   KEY title (title(40)),
   KEY created (created),
   FULLTEXT KEY search (title,hometext,bodytext)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `stories_files`
@@ -51,7 +51,7 @@ CREATE TABLE stories_files (
   counter int(8) unsigned NOT NULL default '0',
   PRIMARY KEY  (fileid),
   KEY storyid (storyid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `topics`
@@ -71,7 +71,7 @@ CREATE TABLE topics (
   KEY pid (topic_pid),
   KEY topic_title (topic_title),
   KEY menu (menu)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 
 
@@ -93,4 +93,4 @@ CREATE TABLE stories_votedata (
   KEY ratinguser (ratinguser),
   KEY ratinghostname (ratinghostname),
   KEY storyid (storyid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

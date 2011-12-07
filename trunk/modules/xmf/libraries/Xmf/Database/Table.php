@@ -357,7 +357,7 @@ class Xmf_Database_Table
     function createTable()
     {
         $query = $this->getStructure();
-        $query = "CREATE TABLE `" . $this->name() . "` (" . $query . ") TYPE=MyISAM COMMENT='Xmf <www.xmf.com>'";
+        $query = "CREATE TABLE `" . $this->name() . "` (" . $query . ") ENGINE=MyISAM COMMENT='Xmf <www.xmf.com>'";
         //xoops_debug($query);
         $ret = $this->db->query($query);
         if (!$ret) {

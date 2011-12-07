@@ -23,7 +23,7 @@ CREATE TABLE `smartmedia_categories` (
   `image` varchar(50) NOT NULL default '',
   `default_languageid` varchar(50) NOT NULL default 'english',
   PRIMARY KEY  (`categoryid`)
-) TYPE=MyISAM ;
+) ENGINE=MyISAM ;
 
 # 
 # Dumping data for table `smartmedia_categories`
@@ -42,7 +42,7 @@ CREATE TABLE `smartmedia_categories_text` (
   `description` text NOT NULL,
   `meta_description` text NOT NULL,
   PRIMARY KEY  (`categoryid`,`languageid`)
-) TYPE=MyISAM ;
+) ENGINE=MyISAM ;
 
 # 
 # Dumping data for table `smartmedia_categories_text`
@@ -76,7 +76,7 @@ CREATE TABLE `smartmedia_clips` (
   `counter` int(11) NOT NULL default '0',
   `default_languageid` varchar(50) NOT NULL default 'english',
   PRIMARY KEY  (`clipid`)
-) TYPE=MyISAM ;
+) ENGINE=MyISAM ;
 
 # --------------------------------------------------------
 
@@ -97,7 +97,7 @@ CREATE TABLE `smartmedia_clips_text` (
   `tab_caption_3` varchar(50) NOT NULL default '',
   `tab_text_3` text NOT NULL,
   PRIMARY KEY  (`clipid`,`languageid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 # 
 # Dumping data for table `smartmedia_clips_text`
@@ -122,7 +122,7 @@ CREATE TABLE `smartmedia_folders` (
   `counter` int(11) NOT NULL default '0',
   `default_languageid` varchar(50) NOT NULL default 'english',
   PRIMARY KEY  (`folderid`)
-) TYPE=MyISAM ;
+) ENGINE=MyISAM ;
 
 # 
 # Dumping data for table `smartmedia_folders`
@@ -138,7 +138,7 @@ CREATE TABLE `smartmedia_folders_categories` (
   `categoryid` int(11) NOT NULL default '0',
   `folderid` int(11) NOT NULL default '0',
   PRIMARY KEY  (`categoryid`,`folderid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 # 
 # Dumping data for table `smartmedia_folders_categories`
@@ -159,7 +159,7 @@ CREATE TABLE `smartmedia_folders_text` (
   `description` text NOT NULL,
   `meta_description` text NOT NULL,
   PRIMARY KEY  (`folderid`,`languageid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 # 
 # Dumping data for table `smartmedia_folders_text`
@@ -177,7 +177,7 @@ CREATE TABLE `smartmedia_formats` (
   `format` varchar(50) NOT NULL default '',
   `ext` char(3) NOT NULL default '',
   PRIMARY KEY  (`formatid`)
-) TYPE=MyISAM AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM AUTO_INCREMENT=8 ;
 
 # 
 # Dumping data for table `smartmedia_formats`
@@ -201,7 +201,7 @@ CREATE TABLE `smartmedia_status` (
   `statusid` int(11) NOT NULL auto_increment,
   `status` varchar(50) NOT NULL default '',
   PRIMARY KEY  (`statusid`)
-) TYPE=MyISAM AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM AUTO_INCREMENT=3 ;
 
 # 
 # Dumping data for table `smartmedia_status`
@@ -218,7 +218,7 @@ CREATE TABLE `smartmedia_meta` (
   `metakey` varchar(50) NOT NULL default '',
   `metavalue` varchar(255) NOT NULL default '',
   PRIMARY KEY (`metakey`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 INSERT INTO smartmedia_meta VALUES ('version', '0.85');
 

@@ -39,7 +39,7 @@ CREATE TABLE `smartpartner_partner` (
   `showsummary` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `status` (`status`)
-) TYPE=MyISAM COMMENT='SmartPartner by marcan' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartPartner by marcan' AUTO_INCREMENT=1 ;
 
 CREATE TABLE `smartpartner_categories` (
   `categoryid` int(11) NOT NULL auto_increment,
@@ -51,14 +51,14 @@ CREATE TABLE `smartpartner_categories` (
   `weight` int(11) NOT NULL default '1',
   `created` int(11) NOT NULL default '0',
   PRIMARY KEY  (`categoryid`)
-) TYPE=MyISAM COMMENT='SmartPartner by The SmartFactory <www.smartfactory.ca>';
+) ENGINE=MyISAM COMMENT='SmartPartner by The SmartFactory <www.smartfactory.ca>';
 
 CREATE TABLE `smartpartner_partner_cat_link` (
   `partner_cat_linkid` int(11) NOT NULL auto_increment,
   `categoryid` int(11) NOT NULL default '0',
   `partnerid` int(11) NOT NULL default '0',
      PRIMARY KEY  (`partner_cat_linkid`)
-) TYPE=MyISAM COMMENT='SmartPartner by The SmartFactory <www.smartfactory.ca>';
+) ENGINE=MyISAM COMMENT='SmartPartner by The SmartFactory <www.smartfactory.ca>';
 
 CREATE TABLE `smartpartner_offer` (
   `offerid` int(11) NOT NULL auto_increment,
@@ -74,7 +74,7 @@ CREATE TABLE `smartpartner_offer` (
   `weight` int(1) NOT NULL default '0',
   `dohtml` int(1) NOT NULL default '1',
   PRIMARY KEY  (`offerid`)
-) TYPE=MyISAM COMMENT='SmartPartner by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartPartner by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 
 CREATE TABLE `smartpartner_files` (
   `fileid` int(11) NOT NULL auto_increment,
@@ -89,7 +89,7 @@ CREATE TABLE `smartpartner_files` (
   `notifypub` tinyint(1) NOT NULL default '1',
   `counter` int(8) unsigned NOT NULL default '0',
   PRIMARY KEY  (`fileid`)
-) TYPE=MyISAM COMMENT='SmartPartner by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartPartner by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 
 
 # --------------------------------------------------------
@@ -98,7 +98,7 @@ CREATE TABLE `smartpartner_meta` (
   `metakey` varchar(50) NOT NULL default '',
   `metavalue` varchar(255) NOT NULL default '',
   PRIMARY KEY (`metakey`)
-) TYPE=MyISAM COMMENT='SmartPartner by The SmartFactory <www.smartfactory.ca>' ;
+) ENGINE=MyISAM COMMENT='SmartPartner by The SmartFactory <www.smartfactory.ca>' ;
 
 #
 # Dumping data for table `smartpartner_meta`
@@ -118,7 +118,7 @@ CREATE TABLE smartpartner_mimetypes (
   mime_admin int(1) NOT NULL default '1',
   mime_user int(1) NOT NULL default '0',
   KEY mime_id (mime_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 # --------------------------------------------------------
 

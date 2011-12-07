@@ -6,7 +6,7 @@ CREATE TABLE `subscribers_user` (
   `user_phone` varchar(100) NOT NULL default '',
   `user_created` int(11) NOT NULL default '0',
   PRIMARY KEY  (`user_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `subscribers_waiting` (
   `wt_id` int(11) unsigned NOT NULL auto_increment,
@@ -17,4 +17,4 @@ CREATE TABLE `subscribers_waiting` (
   `wt_created` int(11) NOT NULL default '0',
   `wt_priority` int(5) NOT NULL default '0',
   PRIMARY KEY  (`wt_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

@@ -31,7 +31,7 @@ CREATE TABLE `art_artcat` (
   PRIMARY KEY  		(`ac_id`),
   KEY `cat_id` 		(`cat_id`),
   KEY `art_id` 		(`art_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -68,7 +68,7 @@ CREATE TABLE `art_article` (
   KEY `cat_id` 			(`cat_id`),
   KEY `art_title` 		(`art_title`),
   KEY `uid` 			(`uid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -85,7 +85,7 @@ CREATE TABLE `art_arttop` (
   `at_time` 		int(10) 		unsigned NOT NULL default '0',		# time for added to the topic
   PRIMARY KEY  		(`at_id`),
   KEY `art_id` 		(`art_id`,`top_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,7 @@ CREATE TABLE `art_category` (
   KEY `cat_order` 		(`cat_order`),
   KEY `cat_pid` 		(`cat_pid`),
   KEY `cat_title` 		(`cat_title`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -126,7 +126,7 @@ CREATE TABLE `art_file` (
   `file_name` 		varchar(255) 	NOT NULL default '',
   PRIMARY KEY  		(`file_id`),
   KEY `art_id` 		(`art_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -143,7 +143,7 @@ CREATE TABLE `art_pingback` (
   `pb_url` 			varchar(255) 	NOT NULL default '',				# pinged url
   PRIMARY KEY  		(`pb_id`),
   KEY `art_id` 		(`art_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -162,7 +162,7 @@ CREATE TABLE `art_rate` (
   PRIMARY KEY  		(`rate_id`),
   KEY `art_id` 		(`art_id`),
   KEY `uid` 		(`uid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -180,7 +180,7 @@ CREATE TABLE `art_spotlight` (
   `sp_note` 		text,												# editor's notes
   PRIMARY KEY  		(`sp_id`),
   KEY `art_id` 		(`art_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -201,7 +201,7 @@ CREATE TABLE `art_text` (
   `dobr` 			tinyint(1) 		NOT NULL default '0',			# allow line break
   PRIMARY KEY  		(`text_id`),
   KEY `art_id` 		(`art_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -224,7 +224,7 @@ CREATE TABLE `art_topic` (
   KEY `cat_id` 		(`cat_id`),
   KEY `top_order` 	(`top_order`),
   KEY `top_title` 	(`top_title`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -245,7 +245,7 @@ CREATE TABLE `art_trackback` (
   `tb_ip` 			int(11) 		NOT NULL default '0',				# sender's IP
   PRIMARY KEY  		(`tb_id`),
   KEY `art_id` 		(`art_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -261,7 +261,7 @@ CREATE TABLE `art_tracked` (
   `td_url` 			varchar(255) 	NOT NULL default '',				# tracked URL
   PRIMARY KEY  		(`td_id`),
   KEY `art_id` 		(`art_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -279,4 +279,4 @@ CREATE TABLE `art_writer` (
   `uid` 			mediumint(8) 	unsigned NOT NULL default '0',		# UID of user who adds the writer
   PRIMARY KEY  		(`writer_id`),
   KEY `writer_name`	(`writer_name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

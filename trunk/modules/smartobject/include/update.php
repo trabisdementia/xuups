@@ -66,7 +66,7 @@ function xoops_module_update_smartobject($module) {
 			  `mid_name` varchar(255) NOT NULL default '',
 
 			  PRIMARY KEY  (`linkid`)
-			) TYPE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;");
+			) ENGINE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;");
 
             if (!$dbupdater->updateTable($table)) {
                 /**
@@ -96,7 +96,7 @@ function xoops_module_update_smartobject($module) {
 			  `name` varchar(255) NOT NULL default '',
 			  `description` TEXT NOT NULL,
 			  PRIMARY KEY  (`id`)
-			) TYPE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;");
+			) ENGINE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;");
 
             if (!$dbupdater->updateTable($table)) {
                 /**
@@ -113,7 +113,7 @@ function xoops_module_update_smartobject($module) {
 			  `language` varchar(255) NOT NULL default '',
 			  `value` TEXT NOT NULL,
 			  PRIMARY KEY  (`id`, `language`)
-			) TYPE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;");
+			) ENGINE=MyISAM COMMENT='SmartObject by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;");
 
             if (!$dbupdater->updateTable($table)) {
                 /**

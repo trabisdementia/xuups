@@ -23,7 +23,7 @@ CREATE TABLE `bb_archive` (
   `topic_id`		int(8)			unsigned NOT NULL default '0',
   `post_id`			int(10)			unsigned NOT NULL default '0',
   `post_text`		text			NOT NULL
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -43,7 +43,7 @@ CREATE TABLE `bb_attachments` (
   
   PRIMARY KEY		(`attach_id`),
   KEY `post_id`		(`post_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -61,7 +61,7 @@ CREATE TABLE `bb_categories` (
   
   PRIMARY KEY  		(`cat_id`),
   KEY `cat_order` 	(`cat_order`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE `bb_digest` (
   
   PRIMARY KEY  		(`digest_id`),
   KEY `digest_time` (`digest_time`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,7 @@ CREATE TABLE `bb_forums` (
   KEY `cat_forum` 			(`cat_id`,`forum_order`),
   KEY `forum_order` 		(`forum_order`),
   KEY `cat_id` 				(`cat_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -129,7 +129,7 @@ CREATE TABLE `bb_moderates` (
   KEY `uid` 		(`uid`),
   KEY `mod_end` 	(`mod_end`),
   KEY `forum_id` 	(`forum_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -148,7 +148,7 @@ CREATE TABLE `bb_online` (
   KEY `online_forum`	(`online_forum`),
   KEY `online_topic` 	(`online_topic`),
   KEY `online_updated` 	(`online_updated`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -186,7 +186,7 @@ CREATE TABLE `bb_posts` (
   KEY `approved` 			(`approved`),
   KEY `topicid_postid_pid`	(`topic_id`,`post_id`,`pid`),
   FULLTEXT KEY `search` 	(`subject`(64))
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -207,7 +207,7 @@ CREATE TABLE `bb_posts_text` (
   
   PRIMARY KEY  			(`post_id`),
   FULLTEXT KEY `search` (`post_text`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -226,7 +226,7 @@ CREATE TABLE `bb_reads_forum` (
   KEY `uid` 			(`uid`),
   KEY `read_item` 		(`read_item`),
   KEY `post_id` 		(`post_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -245,7 +245,7 @@ CREATE TABLE `bb_reads_topic` (
   KEY `uid` 			(`uid`),
   KEY `read_item` 		(`read_item`),
   KEY `post_id` 		(`post_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -265,7 +265,7 @@ CREATE TABLE `bb_report` (
   
   PRIMARY KEY  			(`report_id`),
   KEY `post_id` 		(`post_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -307,7 +307,7 @@ CREATE TABLE `bb_topics` (
   KEY `topic_time` 		(`topic_time`),
   KEY `approved` 		(`approved`),
   KEY `type_id` 		(`type_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -327,7 +327,7 @@ CREATE TABLE `bb_votedata` (
   KEY `ratinguser` 		(`ratinguser`),
   KEY `ratinghostname`	(`ratinghostname`),
   KEY `topic_id`		(`topic_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -342,7 +342,7 @@ CREATE TABLE `bb_type` (
   `type_description` 	varchar(255) 		NOT NULL default '',
   
   PRIMARY KEY  			(`type_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -359,7 +359,7 @@ CREATE TABLE `bb_type_forum` (
   PRIMARY KEY  			(`tf_id`),
   KEY `forum_id`		(`forum_id`),
   KEY `type_order`		(`type_order`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 
 CREATE TABLE `bb_user_stats` (
@@ -370,7 +370,7 @@ CREATE TABLE `bb_user_stats` (
   `user_lastpost` 		int(10) 		unsigned NOT NULL default '0',
   
   UNIQUE KEY  			(`uid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `bb_stats` (
   `stats_id` 			smallint(4) 	NOT NULL default '0',
@@ -383,4 +383,4 @@ CREATE TABLE `bb_stats` (
 	
   KEY `stats_id`		(`stats_id`),
   KEY `stats_type`		(`stats_type`, `stats_period`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

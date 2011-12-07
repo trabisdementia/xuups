@@ -12,7 +12,7 @@ CREATE TABLE `xlanguage_base` (
   `lang_image` 		varchar(255) 	NOT NULL default '',
   PRIMARY KEY  		(`lang_id`),
   KEY `lang_name` 	(`lang_name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `xlanguage_ext` (
   `lang_id` 		int(8) 			unsigned NOT NULL auto_increment,
@@ -26,4 +26,4 @@ CREATE TABLE `xlanguage_ext` (
   PRIMARY KEY  		(`lang_id`),
   KEY `lang_name` 	(`lang_name`),
   KEY `lang_base` 	(`lang_base`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

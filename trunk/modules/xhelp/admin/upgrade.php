@@ -130,7 +130,7 @@ function upgradeDB()
             printf("<h3>". _AM_XHELP_UPDATE_TO."</h3>", '0.6' );
             echo "<ul>";
             //Create meta table
-            $ret = $ret && _runQuery(sprintf("CREATE TABLE %s (metakey varchar(50) NOT NULL default '', metavalue varchar(255) NOT NULL default '', PRIMARY KEY (metakey)) TYPE=MyISAM;", $xoopsDB->prefix('xhelp_meta')), sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_meta'), sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_meta'));
+            $ret = $ret && _runQuery(sprintf("CREATE TABLE %s (metakey varchar(50) NOT NULL default '', metavalue varchar(255) NOT NULL default '', PRIMARY KEY (metakey)) ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_meta')), sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_meta'), sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_meta'));
 
             //Insert Current Version into table
             $qry = $xoopsDB->query(sprintf("INSERT INTO %s values('version', %s)", $xoopsDB->prefix('xhelp_meta'), $xoopsDB->quoteString($ver)));
@@ -232,7 +232,7 @@ function upgradeDB()
                                                           KEY departmentid (departmentid),
                                                           KEY emailaddress (emailaddress),
                                                           KEY mboxtype (mboxtype)
-                                                         )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_department_mailbox')),
+                                                         )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_department_mailbox')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_department_mailbox'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_department_mailbox'));
 
@@ -243,7 +243,7 @@ function upgradeDB()
                                                            event_class int(11) NOT NULL default '0',
                                                            posted int(11) NOT NULL default '0',
                                                            PRIMARY KEY(id)
-                                                          )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_mailevent')),
+                                                          )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_mailevent')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_mailevent'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_mailevent'));
 
@@ -253,7 +253,7 @@ function upgradeDB()
                                                           description mediumtext,
                                                           tasks int(11) NOT NULL default '0',
                                                           PRIMARY KEY(id)
-                                                         )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_roles')),
+                                                         )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_roles')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_roles'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_roles'));
 
@@ -262,7 +262,7 @@ function upgradeDB()
                                                          roleid int(11) NOT NULL default '0',
                                                          deptid int(11) NOT NULL default '0',
                                                          PRIMARY KEY(uid, roleid, deptid)
-                                                        )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_staffroles')),
+                                                        )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_staffroles')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_staffroles'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_staffroles'));
 
@@ -329,7 +329,7 @@ function upgradeDB()
                                                            user_setting int(11) NOT NULL default '0',
                                                            staff_options mediumtext NOT NULL,
                                                            PRIMARY KEY (notif_id)
-                                                          )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_notifications')),
+                                                          )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_notifications')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_notifications'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_notifications'));
 
@@ -339,7 +339,7 @@ function upgradeDB()
                                                            description varchar(50) NOT NULL default '',
                                                            PRIMARY KEY(id),
                                                            KEY state (state)
-                                                          )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_status')),
+                                                          )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_status')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_status'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_status'));
 
@@ -381,7 +381,7 @@ function upgradeDB()
                                                            email varchar(100) NOT NULL default '',
                                                            suppress int(11) NOT NULL default '0',
                                                            PRIMARY KEY(ticketid, email)
-                                                          )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_ticket_submit_emails')),
+                                                          )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_ticket_submit_emails')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_ticket_submit_emails'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_ticket_submit_emails'));
 
@@ -452,7 +452,7 @@ function upgradeDB()
                                                            search mediumtext NOT NULL,
                                                            pagenav_vars mediumtext NOT NULL,
                                                            PRIMARY KEY(id)
-                                                          )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_saved_searches')),
+                                                          )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_saved_searches')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_saved_searches'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_saved_searches'));
 
@@ -460,13 +460,13 @@ function upgradeDB()
             $ret = $ret && _runQuery(sprintf("CREATE TABLE %s (fieldid int(11) NOT NULL default '0',
                                                            deptid int(11) NOT NULL default '0',
                                                            PRIMARY KEY  (fieldid, deptid)
-                                                          )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_ticket_field_departments')),
+                                                          )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_ticket_field_departments')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_ticket_field_departments'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_ticket_field_departments'));
 
             $ret = $ret && _runQuery(sprintf("CREATE TABLE %s (ticketid int(11) NOT NULL default '0',
                                                            PRIMARY KEY  (ticketid)
-                                                          )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_ticket_values')),
+                                                          )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_ticket_values')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_ticket_values'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_ticket_values'));
 
@@ -485,7 +485,7 @@ function upgradeDB()
                                                            validation mediumtext NOT NULL,
                                                            PRIMARY KEY (id),
                                                            KEY weight (weight)
-                                                          )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_ticket_fields')),
+                                                          )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_ticket_fields')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_ticket_fields'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_ticket_fields'));
 
@@ -569,7 +569,7 @@ function upgradeDB()
                                                            weight int(11) NOT NULL default '0',
                                                            PRIMARY KEY (id),
                                                            KEY ticketList (uid, searchid)
-                                                          )TYPE=MyISAM;", $xoopsDB->prefix('xhelp_ticket_lists')),
+                                                          )ENGINE=MyISAM;", $xoopsDB->prefix('xhelp_ticket_lists')),
             sprintf(_AM_XHELP_MSG_ADDTABLE, 'xhelp_ticket_lists'),
             sprintf(_AM_XHELP_MSG_ADDTABLE_ERR, 'xhelp_ticket_lists'));
              

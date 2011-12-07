@@ -30,7 +30,7 @@ CREATE TABLE `smartsection_categories` (
   `meta_description` TEXT NOT NULL,
   `short_url` VARCHAR(255) NOT NULL,
   PRIMARY KEY  (`categoryid`)
-) TYPE=MyISAM COMMENT='SmartSection by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartSection by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 # --------------------------------------------------------
 
 #
@@ -65,7 +65,7 @@ CREATE TABLE `smartsection_items` (
   `meta_description` TEXT NOT NULL,
   `short_url` VARCHAR(255) NOT NULL,
   PRIMARY KEY  (`itemid`)
-) TYPE=MyISAM COMMENT='SmartSection by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartSection by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 
 
 #
@@ -88,7 +88,7 @@ CREATE TABLE `smartsection_files` (
   `notifypub` tinyint(1) NOT NULL default '1',
   `counter` int(8) unsigned NOT NULL default '0',
   PRIMARY KEY  (`fileid`)
-) TYPE=MyISAM COMMENT='SmartSection by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartSection by The SmartFactory <www.smartfactory.ca>' AUTO_INCREMENT=1 ;
 
 
 # --------------------------------------------------------
@@ -98,7 +98,7 @@ CREATE TABLE `smartsection_meta` (
   `metakey` varchar(50) NOT NULL default '',
   `metavalue` varchar(255) NOT NULL default '',
   PRIMARY KEY (`metakey`)
-) TYPE=MyISAM COMMENT='SmartDoc by The SmartFactory <www.smartfactory.ca>' ;
+) ENGINE=MyISAM COMMENT='SmartDoc by The SmartFactory <www.smartfactory.ca>' ;
 
 # 
 # Dumping data for table `smartsection_categories`
@@ -119,7 +119,7 @@ CREATE TABLE smartsection_mimetypes (
   mime_admin int(1) NOT NULL default '1',
   mime_user int(1) NOT NULL default '0',
   KEY mime_id (mime_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 # --------------------------------------------------------
 

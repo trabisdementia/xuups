@@ -11,4 +11,4 @@ CREATE TABLE `art_writer` (
   `uid` mediumint(8) unsigned NOT NULL default '0',
   PRIMARY KEY  (`writer_id`),
   KEY `writer_name` (`writer_name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
