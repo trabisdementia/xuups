@@ -2,7 +2,7 @@
 
 <div class="item">
     <h2><{$item.title}></h2>
-    <{if $item.subtitle}>
+    <{if $show_subtitle && $item.subtitle}>
     <h3><{$item.subtitle}></h3>
     <{/if}> <{if $display_whowhen_link}>
     <small><{$item.who_when}> (<{$item.counter}> <{$smarty.const._MD_PUBLISHER_READS}>)</small>
@@ -109,7 +109,7 @@
     <tr>
         <td class="odd" align="left">
             <a href="<{$publisher_url}>/visit.php?fileid=<{$file.fileid}>" target="_blank">
-                <img src="<{$publisher_url}>/images/icon/file.gif" title="<{$lang_download_file}>" alt="<{$smarty.const._MD_PUBLISHER_DOWNLOAD_FILE}>" />&nbsp;<strong><{$file.name}></strong>
+                <img src="<{$publisher_url}>/images/links/file.gif" title="<{$lang_download_file}>" alt="<{$smarty.const._MD_PUBLISHER_DOWNLOAD_FILE}>" />&nbsp;<strong><{$file.name}></strong>
             </a>
 
             <div><{$file.description}></div>

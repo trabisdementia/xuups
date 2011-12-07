@@ -1,9 +1,9 @@
-function selectAll(formObj, fieldname, isInverse) 
+function selectAll(formObj, fieldname, isInverse)
 {
     if (fieldname.length == 0) {
         for (var i=0;i < formObj.length;i++) {
             fldObj = formObj.elements[i];
-            if (fldObj.type == 'checkbox') { 
+            if (fldObj.type == 'checkbox') {
                 fldObj.checked = isInverse;
             }
         }
@@ -16,7 +16,7 @@ function selectAll(formObj, fieldname, isInverse)
                 }
             }
         }
-    }                
+    }
 }
 
 
@@ -35,12 +35,12 @@ function addSelectedItemsToParent() {
 
 // Fill the selcted item list with the items already present in parent.
 function fillInitialDestList() {
-	var destList = window.document.forms[0].destList; 
+	var destList = window.document.forms[0].destList;
 	var srcList = self.opener.window.document.forms[0].elements['moderators[]'];
 	for (var count = destList.options.length - 1; count >= 0; count--) {
 		destList.options[count] = null;
 	}
-	for(var i = 0; i < srcList.options.length; i++) { 
+	for(var i = 0; i < srcList.options.length; i++) {
 		if (srcList.options[i] != null)
 		destList.options[i] = new Option(srcList.options[i].text);
    }
@@ -49,7 +49,7 @@ function fillInitialDestList() {
 // Add the selected items from the source to destination list
 function addSrcToDestList() {
 	destList = window.document.forms[0].destList;
-	srcList = window.document.forms[0].srcList; 
+	srcList = window.document.forms[0].srcList;
 	var len = destList.length;
 	for(var i = 0; i < srcList.length; i++) {
 		if ((srcList.options[i] != null) && (srcList.options[i].selected)) {
@@ -65,7 +65,7 @@ function addSrcToDestList() {
 				}
 			}
 			if (found != true) {
-				destList.options[len] = new Option(srcList.options[i].text); 
+				destList.options[len] = new Option(srcList.options[i].text);
 				len++;
 			}
 		}
@@ -93,7 +93,7 @@ function small_window(myurl, w, h) {
 }
 
 // Adds the list of selected items selected in the child
-// window to its list. It is called by child window to do so.  
+// window to its list. It is called by child window to do so.
 function addToParentList(sourceList) {
 	destinationList = window.document.forms[0].elements['moderators[]'];
 	for(var count = destinationList.options.length - 1; count >= 0; count--) {
@@ -105,7 +105,7 @@ function addToParentList(sourceList) {
 	}
 }
 
-// Marks all the items as selected for the submit button.  
+// Marks all the items as selected for the submit button.
 function selectList(sourceList) {
 	sourceList = window.document.forms[0].elements['moderators[]'];
 	for(var i = 0; i < sourceList.options.length; i++) {
@@ -142,20 +142,20 @@ function toggle(id)
 			obj.style.display = "none";
 		}
 	}
-	
+
 	var expDays = 365;
 	var exp = new Date();
-	exp.setTime(exp.getTime() + (expDays*24*60*60*1000)); 
-	
+	exp.setTime(exp.getTime() + (expDays*24*60*60*1000));
+
 	setCookie(window.location.pathname+"_publisher_collaps_" + obj.id , obj.style.display, exp);
-	
+
 	return false;
 }
 
 var iconClose = new Image();
-iconClose.src = '../images/icon/close12.gif';
+iconClose.src = '../images/links/close12.gif';
 var iconOpen = new Image();
-iconOpen.src = '../images/icon/open12.gif';
+iconOpen.src = '../images/links/open12.gif';
 
 function toggleIcon ( iconName )
 {

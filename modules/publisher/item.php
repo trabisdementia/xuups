@@ -124,6 +124,7 @@ if ($publisher->getConfig('item_other_items_type') == "all") {
 
 // Populating the smarty variables with informations related to the selected item
 $item = $itemObj->toArray($item_page_id);
+$xoopsTpl->assign('show_subtitle', $publisher->getConfig('item_disp_subtitle'));
 
 if ($itemObj->pagescount() > 0) {
     if ($item_page_id == -1) {

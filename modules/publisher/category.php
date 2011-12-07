@@ -185,6 +185,8 @@ if (count($itemsObj) > 0) {
         $category['last_itemid'] = $last_itemObj[$categoryObj->getVar('categoryid')]->getVar('itemid');
         $category['last_title_link'] = $last_itemObj[$categoryObj->getVar('categoryid')]->getItemLink(false, $lastitemsize);
     }
+
+    $xoopsTpl->assign('show_subtitle', $publisher->getConfig('cat_disp_subtitle'));
 }
 
 $categories = array();

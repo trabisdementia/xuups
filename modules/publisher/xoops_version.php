@@ -1013,6 +1013,33 @@ $modversion['config'][$i]['valuetype'] = 'int';
 $modversion['config'][$i]['default'] = 0;
 $modversion['config'][$i]['category'] = 'item';
 
+$i++;
+$modversion['config'][$i]['name'] = 'index_disp_subtitle';
+$modversion['config'][$i]['title'] = '_MI_PUBLISHER_DISP_INDEX_SUB';
+$modversion['config'][$i]['description'] = '_MI_PUBLISHER_DISP_INDEX_SUB_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['category'] = 'index';
+
+$i++;
+$modversion['config'][$i]['name'] = 'cat_disp_subtitle';
+$modversion['config'][$i]['title'] = '_MI_PUBLISHER_DISP_CAT_SUB';
+$modversion['config'][$i]['description'] = '_MI_PUBLISHER_DISP_CAT_SUB_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['category'] = 'category';
+
+$i++;
+$modversion['config'][$i]['name'] = 'item_disp_subtitle';
+$modversion['config'][$i]['title'] = '_MI_PUBLISHER_DISP_ITEM_SUB';
+$modversion['config'][$i]['description'] = '_MI_PUBLISHER_DISP_ITEM_SUB_DSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 1;
+$modversion['config'][$i]['category'] = 'item';
+
 
 // Comments
 $modversion['hasComments'] = 1;
@@ -1107,4 +1134,3 @@ $modversion['notification']['event'][7]['caption'] = _MI_PUBLISHER_ITEM_APPROVED
 $modversion['notification']['event'][7]['description'] = _MI_PUBLISHER_ITEM_APPROVED_NOTIFY_DSC;
 $modversion['notification']['event'][7]['mail_template'] = 'item_approved';
 $modversion['notification']['event'][7]['mail_subject'] = _MI_PUBLISHER_ITEM_APPROVED_NOTIFY_SBJ;
-?>
