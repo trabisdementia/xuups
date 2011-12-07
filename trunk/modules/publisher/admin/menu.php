@@ -83,7 +83,7 @@ $i++;
 
 $adminmenu[$i]['title'] = _AM_PUBLISHER_CLONE;
 $adminmenu[$i]['link'] = "admin/clone.php";
-$adminmenu[$i]["icon"] = './images/icon32/clone.gif';
+$adminmenu[$i]["icon"] = './images/icon32/editcopy.png';
 $i++;
 
 $adminmenu[$i]['title'] = _AM_PUBLISHER_ABOUT;
