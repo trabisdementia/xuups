@@ -33,5 +33,5 @@ CREATE TABLE `smartclient_client` (
   `status` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id`),
   KEY `status` (`status`)
-) TYPE=MyISAM COMMENT='SmartClient by marcan' AUTO_INCREMENT=1 ;    
+) ENGINE=MyISAM COMMENT='SmartClient by marcan' AUTO_INCREMENT=1 ;    
 

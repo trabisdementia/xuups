@@ -18,7 +18,7 @@ CREATE TABLE seccont (
   PRIMARY KEY  (artid),
   KEY idxseccontsecid (secid),
   KEY idxseccontcounterdesc (counter)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -31,4 +31,4 @@ CREATE TABLE sections (
   image varchar(50) NOT NULL default '',
   PRIMARY KEY  (secid),
   KEY idxsectionssecname (secname)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

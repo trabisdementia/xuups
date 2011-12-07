@@ -59,7 +59,7 @@ CREATE TABLE wfs_article (
   KEY categoryid (categoryid),
   KEY uid (uid),
   KEY CHANGED (changed)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_article`
@@ -84,7 +84,7 @@ CREATE TABLE wfs_article_mod (
   requested int(10) NOT NULL default '0',
   modifysubmitter int(11) NOT NULL default '0',
   PRIMARY KEY  (requestid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_article_mod`
@@ -142,7 +142,7 @@ CREATE TABLE wfs_article_restore (
   KEY categoryid (categoryid),
   KEY uid (uid),
   KEY CHANGED (changed)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_article_restore`
@@ -167,7 +167,7 @@ CREATE TABLE wfs_broken (
   KEY lid (lid),
   KEY sender (sender),
   KEY ip (ip)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_broken`
@@ -204,7 +204,7 @@ CREATE TABLE wfs_category (
   PRIMARY KEY  (id),
   KEY pid (pid),
   KEY id (id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_category`
@@ -224,7 +224,7 @@ CREATE TABLE wfs_checkin (
   c_out_time int(8) NOT NULL default '0',
   c_edit int(1) NOT NULL default '0',
   PRIMARY KEY  (ci_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_checkin`
@@ -243,7 +243,7 @@ CREATE TABLE wfs_config (
   filebasepathtemp varchar(255) NOT NULL default '',
   htmlpath varchar(255) NOT NULL default '',
   logopath varchar(255) NOT NULL default ''
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_config`
@@ -274,7 +274,7 @@ CREATE TABLE wfs_files (
   uid int(11) NOT NULL default '1',
   PRIMARY KEY  (fileid),
   KEY articleid (articleid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_files`
@@ -305,7 +305,7 @@ CREATE TABLE wfs_indexpage (
   FULLTEXT KEY indexheading (indexheading),
   FULLTEXT KEY indexheader (indexheader),
   FULLTEXT KEY indexfooter (indexfooter)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_indexpage`
@@ -332,7 +332,7 @@ CREATE TABLE wfs_mainmenu (
   weight int(11) NOT NULL default '0',
   PRIMARY KEY  (mm_id),
   KEY ca_id (ca_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_mainmenu`
@@ -353,7 +353,7 @@ CREATE TABLE wfs_mimetypes (
   mime_admin int(1) NOT NULL default '1',
   mime_user int(1) NOT NULL default '0',
   KEY mime_id (mime_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_mimetypes`
@@ -513,7 +513,7 @@ CREATE TABLE wfs_permissions (
   indexpage varchar(255) NOT NULL default '1',
   importdoc varchar(255) NOT NULL default '1',
   uploads varchar(255) NOT NULL default '1'
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_permissions`
@@ -537,7 +537,7 @@ CREATE TABLE wfs_related (
   related_mod int(11) NOT NULL default '1',
   PRIMARY KEY  (related_id),
   KEY itemid (related_topicid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_related`
@@ -559,7 +559,7 @@ CREATE TABLE wfs_relatedlink (
   relatedlink_lid int(11) NOT NULL default '0',
   PRIMARY KEY  (relatedlink_id),
   KEY itemid (relatedlink_topicid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_relatedlink`
@@ -603,7 +603,7 @@ CREATE TABLE wfs_reviews (
   display int(11) NOT NULL default '0',
   PRIMARY KEY  (review_id),
   KEY categoryid (article_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_reviews`
@@ -624,7 +624,7 @@ CREATE TABLE wfs_spotlightblock (
   imagewidth int(5) unsigned NOT NULL default '150',
   imageheight int(5) unsigned NOT NULL default '150',
   sum_type tinyint(1) NOT NULL default '0'
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_spotlightblock`
@@ -655,7 +655,7 @@ CREATE TABLE wfs_templates (
   topicsblock varchar(255) NOT NULL default '',
   authorblock varchar(255) NOT NULL default '',
   spotlightblock varchar(255) NOT NULL default ''
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_templates`
@@ -680,7 +680,7 @@ CREATE TABLE wfs_votedata (
   KEY ratinguser (ratinguser),
   KEY ratinghostname (ratinghostname),
   KEY lid (lid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Dumping data for table `wfs_votedata`

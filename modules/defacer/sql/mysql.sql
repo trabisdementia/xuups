@@ -5,13 +5,13 @@ CREATE TABLE defacer_page (
   page_url varchar(255) NOT NULL default '',
   page_status tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`page_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE defacer_theme (
   theme_id int(10) unsigned NOT NULL default '0',
   theme_name varchar(100) NOT NULL default '',
   PRIMARY KEY  (`theme_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE defacer_meta (
   meta_id int(10) unsigned NOT NULL default '0',
@@ -21,10 +21,10 @@ CREATE TABLE defacer_meta (
   meta_keywords text NOT NULL,
   meta_description text NOT NULL,
   PRIMARY KEY  (`meta_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE defacer_permission (
   permission_id int(10) unsigned NOT NULL auto_increment,
   permission_groups varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`permission_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

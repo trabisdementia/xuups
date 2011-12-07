@@ -8,7 +8,7 @@ CREATE TABLE mypoints_user (
   userpoints int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (useruid),
   KEY uuname (useruname)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `mypoints_plugins`
@@ -23,7 +23,7 @@ CREATE TABLE mypoints_plugin (
   pluginisactive int(10) unsigned NOT NULL default '1',
   PRIMARY KEY  (pluginid),
   KEY pmid (pluginmid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `mypoints_plugins`
@@ -36,4 +36,4 @@ CREATE TABLE mypoints_relation (
   relationpoints int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (relationid),
   KEY ruid (relationuid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

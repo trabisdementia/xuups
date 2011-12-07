@@ -42,7 +42,7 @@ if (! $GLOBALS['xoopsDB']->queryF("
           `type_description`    varchar(255)        NOT NULL default '',
           
           PRIMARY KEY           (`type_id`)
-        ) TYPE=MyISAM;
+        ) ENGINE=MyISAM;
     ") 
 ) {
     die("Can not create tmp table for `bb_type_tmp`");
@@ -59,7 +59,7 @@ if (! $GLOBALS['xoopsDB']->queryF("
           PRIMARY KEY           (`tf_id`),
           KEY `forum_id`        (`forum_id`),
           KEY `type_order`      (`type_order`)
-        ) TYPE=MyISAM;
+        ) ENGINE=MyISAM;
     ")
 ) {
     $GLOBALS['xoopsDB']->queryF("DROP TABLE " . $GLOBALS['xoopsDB']->prefix("bb_type_tmp"));

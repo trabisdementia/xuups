@@ -2,7 +2,7 @@ CREATE TABLE `mytabs_page` (
   `pageid` int(10) unsigned NOT NULL auto_increment,
   `pagetitle` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`pageid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `mytabs_tab` (
   `tabid` int(10) unsigned NOT NULL auto_increment,
@@ -17,7 +17,7 @@ CREATE TABLE `mytabs_tab` (
   `tabnote` varchar(255) NOT NULL default '',
   `tabgroups` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`tabid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `mytabs_pageblock` (
   `pageblockid` int(10) unsigned NOT NULL auto_increment,
@@ -38,5 +38,5 @@ CREATE TABLE `mytabs_pageblock` (
   PRIMARY KEY  (`pageblockid`),
   KEY `page` (`pageid`, `tabid`, `blockid`, `priority`),
   KEY `showalways` (`showalways`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 

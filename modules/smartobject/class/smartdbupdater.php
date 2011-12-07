@@ -322,7 +322,7 @@ class SmartDbTable {
     function createTable() {
         global $xoopsDB;
         $query = $this->getStructure();
-        $query = "CREATE TABLE `" . $this->name() . "` (" . $query . ") TYPE=MyISAM COMMENT='The SmartFactory <www.smartfactory.ca>'";
+        $query = "CREATE TABLE `" . $this->name() . "` (" . $query . ") ENGINE=MyISAM COMMENT='The SmartFactory <www.smartfactory.ca>'";
         //xoops_debug($query);
         $ret = $xoopsDB->query($query);
         if (!$ret) {

@@ -31,7 +31,7 @@ CREATE TABLE `bb_type` (
   `type_description` 	varchar(255) 		NOT NULL default '',
   
   PRIMARY KEY  			(`type_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -48,7 +48,7 @@ CREATE TABLE `bb_type_forum` (
   PRIMARY KEY  			(`tf_id`),
   KEY `forum_id`		(`forum_id`),
   KEY `type_order`		(`type_order`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `bb_user_stats` (
   `uid` 				int(10) 		unsigned NOT NULL default '0',
@@ -58,7 +58,7 @@ CREATE TABLE `bb_user_stats` (
   `user_lastpost` 		int(10) 		unsigned NOT NULL default '0',
   
   UNIQUE KEY  			(`uid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 
 CREATE TABLE `bb_stats` (
@@ -72,4 +72,4 @@ CREATE TABLE `bb_stats` (
 	
   KEY `stats_id`		(`stats_id`),
   KEY `stats_type`		(`stats_type`, `stats_period`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

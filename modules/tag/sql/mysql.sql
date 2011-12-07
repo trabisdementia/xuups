@@ -12,7 +12,7 @@ CREATE TABLE `tag_tag` (
   PRIMARY KEY           (`tag_id`),
   KEY `tag_term`        (`tag_term`),
   KEY `tag_status`      (`tag_status`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -32,7 +32,7 @@ CREATE TABLE `tag_link` (
   KEY `tag_id`            (`tag_id`),
   KEY `tag_time`        (`tag_time`),
   KEY `tag_item`        (`tag_modid`, `tag_catid`, `tag_itemid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -51,4 +51,4 @@ CREATE TABLE `tag_stats` (
   KEY `tag_id`            (`tag_id`),
   KEY `tag_modid`        (`tag_modid`),
   KEY `tag_count`        (`tag_count`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

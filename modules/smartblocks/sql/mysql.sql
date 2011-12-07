@@ -3,7 +3,7 @@ CREATE TABLE `smartblocks_fallback_location` (
   `fallback_pattern` text NOT NULL,
   `fallback_name` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`fallback_location`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `smartblocks_pageblock` (
   `pageblockid` int(10) unsigned NOT NULL auto_increment,
@@ -25,4 +25,4 @@ CREATE TABLE `smartblocks_pageblock` (
   PRIMARY KEY  (`pageblockid`),
   KEY `page` (`placement`, `moduleid`,`location`, `falldown`, `blockid`, `priority`),
   KEY `showalways` (`showalways`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

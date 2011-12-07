@@ -8,4 +8,4 @@ CREATE TABLE `bb_moderates` (
   `forum_id` smallint(4) NOT NULL default '0',
   PRIMARY KEY  (`mod_id`),
   KEY `uid` (`uid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;

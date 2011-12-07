@@ -25,7 +25,7 @@ CREATE TABLE `smartfaq_categories` (
   `created` int(11) NOT NULL default '1033141070',
   PRIMARY KEY  (`categoryID`),
   UNIQUE KEY `categoryID` (`categoryID`)
-) TYPE=MyISAM COMMENT='SmartFAQ by marcan' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartFAQ by marcan' AUTO_INCREMENT=1 ;
 # --------------------------------------------------------
 
 #
@@ -60,7 +60,7 @@ CREATE TABLE `smartfaq_faq` (
   `partialview` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`faqid`),
   UNIQUE KEY `faqid` (`faqid`)
-) TYPE=MyISAM COMMENT='SmartFAQ by marcan' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartFAQ by marcan' AUTO_INCREMENT=1 ;
 
 
 #
@@ -81,5 +81,5 @@ CREATE TABLE `smartfaq_answers` (
   PRIMARY KEY  (`answerid`),
   UNIQUE KEY `answerid` (`answerid`),
   FULLTEXT KEY `answer` (`answer`)
-) TYPE=MyISAM COMMENT='SmartFAQ by marcan' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM COMMENT='SmartFAQ by marcan' AUTO_INCREMENT=1 ;
 

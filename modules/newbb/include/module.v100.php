@@ -23,7 +23,7 @@ function xoops_module_update_newbb_v100(&$module)
         `topic_id` tinyint(8) NOT NULL default '0',
         `post_id` tinyint(8) NOT NULL default '0',
           `post_text` text NOT NULL
-        ) TYPE=MyISAM");
+        ) ENGINE=MyISAM");
     if (!$result) {
         $module->setErrors("Could not create bb_archive");
     }
@@ -39,7 +39,7 @@ function xoops_module_update_newbb_v100(&$module)
         `download` int(10) NOT NULL default '0',
         PRIMARY KEY  (`attach_id`),
         KEY `post_id` (`post_id`)
-        ) TYPE=MyISAM");
+        ) ENGINE=MyISAM");
     if (!$result) {
         $module->setErrors("Could not create bb_attachments");
     }
@@ -50,7 +50,7 @@ function xoops_module_update_newbb_v100(&$module)
         `digest_content` text,
         PRIMARY KEY  (`digest_id`),
         KEY `digest_time` (`digest_time`)
-        ) TYPE=MyISAM");
+        ) ENGINE=MyISAM");
     if (!$result) {
         $module->setErrors("Could not create bb_digest");
     }
@@ -62,7 +62,7 @@ function xoops_module_update_newbb_v100(&$module)
         `online_uname` varchar(255) default NULL,
         `online_ip` varchar(32) default NULL,
         `online_updated` int(14) default NULL
-        ) TYPE=MyISAM");
+        ) ENGINE=MyISAM");
     if (!$result) {
         $module->setErrors("Could not create bb_online");
     }
@@ -78,7 +78,7 @@ function xoops_module_update_newbb_v100(&$module)
         `report_memo` varchar(255) default NULL,
         PRIMARY KEY  (`report_id`),
         KEY `post_id` (`post_id`)
-        ) TYPE=MyISAM");
+        ) ENGINE=MyISAM");
     if (!$result) {
         $module->setErrors("Could not create bb_report");
     }
@@ -94,7 +94,7 @@ function xoops_module_update_newbb_v100(&$module)
         KEY ratinguser (ratinguser),
         KEY ratinghostname (ratinghostname),
         KEY topic_id (topic_id)
-        ) TYPE=MyISAM");
+        ) ENGINE=MyISAM");
     if (!$result) {
         $module->setErrors("Could not create bb_votedata");
     }

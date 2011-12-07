@@ -98,7 +98,7 @@ CREATE TABLE `ratings` (
   `total_value` int(11) NOT NULL default 0,
   `used_ips` longtext,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM AUTO_INCREMENT=3;
+) ENGINE=MyISAM AUTO_INCREMENT=3;
 
 
 =============================================================================

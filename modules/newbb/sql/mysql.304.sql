@@ -132,7 +132,7 @@ CREATE TABLE `bb_reads_topic` (
   KEY `uid` (`uid`),
   KEY `read_item` (`read_item`),
   KEY `post_id` (`post_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 CREATE TABLE `bb_reads_forum` (
   `read_id` int(10) unsigned NOT NULL auto_increment,
@@ -144,4 +144,4 @@ CREATE TABLE `bb_reads_forum` (
   KEY `uid` (`uid`),
   KEY `read_item` (`read_item`),
   KEY `post_id` (`post_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
