@@ -336,3 +336,12 @@ define("_MI_PUBLISHER_DISP_BLOCK_SUM", "Display block summary on items page?");
 define("_MI_PUBLISHER_DISP_BLOCK_SUM_DSC", "");
 
 define("_MI_PUBLISHER_ADMENU0", "Home");
+
+define("_MI_PUBLISHER_DISP_INDEX_SUB", "Display items subtitles in index page?");
+define("_MI_PUBLISHER_DISP_INDEX_SUB_DSC", "");
+
+define("_MI_PUBLISHER_DISP_CAT_SUB", "Display items subtitles in categories pages?");
+define("_MI_PUBLISHER_DISP_CAT_SUB_DSC", "");
+
+define("_MI_PUBLISHER_DISP_ITEM_SUB", "Display item subtitle in item page");
+define("_MI_PUBLISHER_DISP_ITEM_SUB_DSC", "");

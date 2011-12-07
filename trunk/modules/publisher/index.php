@@ -162,6 +162,7 @@ if ($publisher->getConfig('index_display_last_items')) {
         foreach ($itemsObj as $itemObj) {
             $xoopsTpl->append('items', $itemObj->toArray($publisher->getConfig('idxcat_items_display_type'), $publisher->getConfig('item_title_size'), 300, true)); //if no summary truncate body to 300
         }
+        $xoopsTpl->assign('show_subtitle', $publisher->getConfig('index_disp_subtitle'));
         unset($allcategories);
     }
     unset($itemsObj);

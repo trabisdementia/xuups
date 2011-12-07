@@ -390,28 +390,28 @@ class PublisherItem extends XoopsObject {
             if (!$publisher_isAdmin) {
                 if ($xoopsUser->uid() == $this->uid()) {
                     // Edit button
-                    $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.png'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "'/></a>";
+                    $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "'/></a>";
                     $adminLinks .= " ";
                 }
 
                 if ($this->publisher->getConfig('perm_clone')) {
                     // Dupplicate button
-                    $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?op=clone&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/editcopy.png'" . " title='" . _CO_PUBLISHER_CLONE . "' alt='" . _CO_PUBLISHER_CLONE . "' /></a>";
+                    $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?op=clone&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/clone.gif'" . " title='" . _CO_PUBLISHER_CLONE . "' alt='" . _CO_PUBLISHER_CLONE . "' /></a>";
                     $adminLinks .= " ";
                 }
 
                 // upload a file linked this article
                 if ($this->publisher->getConfig('perm_upload')) {
-                    $uploadLink = "<a href='" . PUBLISHER_URL . "/file.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/file.gif' title='" . _CO_PUBLISHER_ADD_FILE . "' alt='" . _CO_PUBLISHER_ADD_FILE . "' /></a>";
+                    $uploadLink = "<a href='" . PUBLISHER_URL . "/file.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/file.gif' title='" . _CO_PUBLISHER_ADD_FILE . "' alt='" . _CO_PUBLISHER_ADD_FILE . "' /></a>";
                 }
 
             } else {
                 // Edit button
-                $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.png'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "' /></a>";
+                $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "' /></a>";
                 $adminLinks .= " ";
 
                 // Dupplicate button
-                $adminLinks .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=clone&amp;itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/editcopy.png'" . " title='" . _CO_PUBLISHER_CLONE . "' alt='" . _CO_PUBLISHER_CLONE . "' /></a>";
+                $adminLinks .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=clone&amp;itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/clone.gif'" . " title='" . _CO_PUBLISHER_CLONE . "' alt='" . _CO_PUBLISHER_CLONE . "' /></a>";
                 $adminLinks .= " ";
 
                 // Delete button
@@ -419,7 +419,7 @@ class PublisherItem extends XoopsObject {
                 $adminLinks .= " ";
 
                 // upload a file linked this article
-                $uploadLink = "<a href='" . PUBLISHER_URL . "/file.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/icon/file.gif' title='" . _CO_PUBLISHER_ADD_FILE . "' alt='" . _CO_PUBLISHER_ADD_FILE . "' /></a>";
+                $uploadLink = "<a href='" . PUBLISHER_URL . "/file.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/file.gif' title='" . _CO_PUBLISHER_ADD_FILE . "' alt='" . _CO_PUBLISHER_ADD_FILE . "' /></a>";
 
             }
         }

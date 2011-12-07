@@ -3,7 +3,7 @@
         <span class="itemTitle"><{$item.titlelink}></span>
     </div>
 
-    <{if $op <> 'preview'}> <{if $display_whowhen_link}>
+    <{if $op != 'preview'}> <{if $display_whowhen_link}>
     <div class="itemInfo">
 	    <span class="itemPoster">
       	  <div class="publisher_item_head_who">
@@ -15,11 +15,12 @@
 
     <div class="itemBody">
         <{if $item.image_path}>
-        <a href="<{$item.itemurl}>" title="<{$item.title}>"><img class="publisher_item_image" src="<{$item.image_path}>" align="right" alt="<{$item.title}>" width="100" /></a> <{/if}>
+        <a href="<{$item.itemurl}>" title="<{$item.title}>"><img class="publisher_item_image" src="<{$item.image_path}>" align="right" alt="<{$item.title}>" width="100" /></a>
+        <{/if}>
         <div class="itemText"><{$item.summary}></div>
     </div>
 
-    <{if $op <> 'preview' && $item.body}>
+    <{if $op != 'preview' && $item.body}>
     <div align="right">
         <a href="<{$item.itemurl}>"> <{$smarty.const._MD_PUBLISHER_VIEW_MORE}></a>&nbsp;
     </div>
