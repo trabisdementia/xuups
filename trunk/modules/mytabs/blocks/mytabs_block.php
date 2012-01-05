@@ -53,7 +53,7 @@ function b_mytabs_block_show($options)
     }
 
     $tabsmenu = '<ul class="tabs-nav">';
-    $selected = 'class="tabs-selected"';
+    $selected = ' class="tabs-selected"';
     $hascontent = false;
     $hasmenu = false;
     $i = 0;
