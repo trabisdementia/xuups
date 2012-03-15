@@ -14,6 +14,7 @@ define("_MB_PUBLISHER_CATEGORY", "Catégories");
 define("_MB_PUBLISHER_CHARS", "Longueur du titre");
 define("_MB_PUBLISHER_COMMENTS", "Commentaire (s)");
 define("_MB_PUBLISHER_DATE", "Date de publication");
+define("_MB_PUBLISHER_FIRST", "Exclure d'abord");
 define("_MB_PUBLISHER_DISP", "Afficher");
 define("_MB_PUBLISHER_DISPLAY_COMMENTS", "Afficher le compte des commentaires");
 define("_MB_PUBLISHER_DISPLAY_TYPE", "Type d'affichage:");
@@ -25,6 +26,7 @@ define("_MB_PUBLISHER_HITS", "Nombre de clics");
 define("_MB_PUBLISHER_ITEMS", "Articles");
 define("_MB_PUBLISHER_LAST_ITEMS_COUNT", "Si oui, en afficher combien ?");
 define("_MB_PUBLISHER_ORDER", "Afficher l'ordre");
+define("_MB_PUBLISHER_ORDER_SHOW", "Afficher l'ordre dans le bloc");
 define("_MB_PUBLISHER_POSTEDBY", "Affiché par");
 define("_MB_PUBLISHER_READMORE", "Lire la suite...");
 define("_MB_PUBLISHER_READS", "Lus");
@@ -88,17 +90,29 @@ define("_MB_PUBLISHER_TOPICSDISPLAY", "Thèmes d'affichage");
 define("_MB_PUBLISHER_SCROLL", "Activer le défilement des nouveaux articles");
 define("_MB_PUBLISHER_SCROLLHEIGHT", "Hauteur de la fenêtre;");
 define("_MB_PUBLISHER_SCROLLSPEED", "Vitesse de défilement");
+define("_MB_PUBLISHER_SCROLLDIR", "Direction de défilement");
+define("_MB_PUBLISHER_SCROLL_RIGHT", "Droite");
+define("_MB_PUBLISHER_SCROLL_LEFT", "Gauche");
+define("_MB_PUBLISHER_SCROLL_UP", "Haut");
+define("_MB_PUBLISHER_SCROLL_DOWN", "Bas");
 define("_MB_PUBLISHER_SELECTEDSTORIES", "Régler les identifiants des articles (par exemple: 3,8,23,46) note: régler à 0 pour tout montrer ");
 define("_MB_PUBLISHER_IMGDISPLAY", "Voir l'image de l'article");
 define("_MB_PUBLISHER_GENERALCONFIG", "<strong> Options générales </ strong>");
 define("_MB_PUBLISHER_PHOTOSCONFIG", "Images <strong> Options </ strong>");
 define("_MB_PUBLISHER_LINKSCONFIG", "Options <strong> Liens </ strong>");
 define("_MB_PUBLISHER_TOPICSCONFIG", "Options <strong> thème </ strong>");
+define("_MB_PUBLISHER_TEMPLATESCONFIG", "<strong>Options de Template </strong>");
+
 define("_MB_PUBLISHER_SUBMITNEWS", "Soumettre un article");
 
 define("_MB_PUBLISHER_TEMPLATE", "Template");
 define("_MB_PUBLISHER_TEMPLATE_NORMAL", "Normal");
 define("_MB_PUBLISHER_TEMPLATE_EXTENDED", "Etendu");
+define("_MB_PUBLISHER_TEMPLATE_TICKER", "Ticker");
+define("_MB_PUBLISHER_TEMPLATE_SLIDER1", "Fade-in Slider");
+define("_MB_PUBLISHER_TEMPLATE_SLIDER2", "Tabbed Slider");
+
+define("_MB_PUBLISHER_ARCHIVE", "Archive");
 
 /**
  * @translation     AFUX (Association Francophone des Utilisateurs de Xoops) <http://www.afux.org/>
