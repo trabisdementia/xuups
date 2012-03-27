@@ -521,7 +521,7 @@ $publisher(document).ready(function(){
         $button_tray = new XoopsFormElementTray('', '');
 
         if (!$obj->isNew()) {
-            $button_tray->addElement(new XoopsFormButton('', 'additem', _CO_PUBLISHER_EDIT, 'submit')); //orclone
+            $button_tray->addElement(new XoopsFormButton('', 'additem', _SUBMIT, 'submit')); //orclone
 
         } else {
             $button_tray->addElement(new XoopsFormButton('', 'additem', _CO_PUBLISHER_CREATE, 'submit'));
