@@ -40,9 +40,18 @@ $module_id = $publisher->getModule()->getVar('mid');
 
 $itemid = PublisherRequest::getInt('itemid');
 if ($itemid != 0) {
-    // We are editing an article
+    // We are editing or deleting an article
     $itemObj = $publisher->getHandler('item')->get($itemid);
     if (!($isAdmin || (is_object($xoopsUser) && $itemObj && ($xoopsUser->uid() == $itemObj->uid())))) {
+        redirect_header("index.php", 1, _NOPERM);
+        exit();
+    }
+    if (isset($_GET['op']) && $_GET['op']  == 'del') {
+        if (!$publisher->getConfig('perm_delete')) {
+            redirect_header("index.php", 1, _NOPERM);
+            exit();
+        }
+    } else if (!$publisher->getConfig('perm_edit')) {
         redirect_header("index.php", 1, _NOPERM);
         exit();
     }
@@ -75,6 +84,10 @@ if (isset($_POST['additem'])) {
     $op = 'add';
 }
 
+if (isset($_REQUEST['op']) && $_REQUEST['op'] == 'del') {
+    $op = 'del';
+}
+
 $allowed_editors = publisher_getEditors($gperm_handler->getItemIds('editors', $groups, $module_id));
 $form_view = $gperm_handler->getItemIds('form_view', $groups, $module_id);
 
@@ -97,6 +110,23 @@ $item_upload_file = isset($_FILES['item_upload_file']) ? $_FILES['item_upload_fi
 
 //stripcslashes
 switch ($op) {
+    case 'del':
+        $confirm = isset($_POST['confirm']) ? $_POST['confirm'] : 0;
+
+        if ($confirm) {
+            if (!$publisher->getHandler('item')->delete($itemObj)) {
+                redirect_header("index.php", 2, _AM_PUBLISHER_ITEM_DELETE_ERROR . publisher_formatErrors($itemObj->getErrors()));
+                exit();
+            }
+            redirect_header("index.php", 2, sprintf(_AM_PUBLISHER_ITEMISDELETED, $itemObj->title()));
+            exit();
+        } else {
+            include_once XOOPS_ROOT_PATH . '/header.php';
+            xoops_confirm(array('op' => 'del', 'itemid' => $itemObj->itemid(), 'confirm' => 1, 'name' => $itemObj->title()), 'submit.php', _AM_PUBLISHER_DELETETHISITEM . " <br />'" . $itemObj->title() . "'. <br /> <br />", _AM_PUBLISHER_DELETE);
+            include_once XOOPS_ROOT_PATH . '/footer.php';
+        }
+        exit();
+        break;
     case 'preview':
         // Putting the values about the ITEM in the ITEM object
         $itemObj->setVarsFromRequest();
@@ -138,7 +168,11 @@ switch ($op) {
 
     case 'post':
         // Putting the values about the ITEM in the ITEM object
+       // print_r($itemObj->getVars());
         $itemObj->setVarsFromRequest();
+        //print_r($_POST);
+       //print_r($itemObj->getVars());
+        //exit;
 
         // Storing the item object in the database
         if (!$itemObj->store()) {
