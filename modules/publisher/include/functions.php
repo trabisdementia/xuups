@@ -749,9 +749,9 @@ function publisher_uploadFile($another = false, $withRedirect = true, &$itemObj)
     $itemid = isset($_POST['itemid']) ? intval($_POST['itemid']) : 0;
     $uid = is_object($xoopsUser) ? $xoopsUser->uid() : 0;
     $session = PublisherSession::getInstance();
-    $session->set('publisher_file_filename', isset($_POST['name']) ? $_POST['name'] : '');
-    $session->set('publisher_file_description', isset($_POST['description']) ? $_POST['description'] : '');
-    $session->set('publisher_file_status', isset($_POST['file_status']) ? intval($_POST['file_status']) : 1);
+    $session->set('publisher_file_filename', isset($_POST['item_file_name']) ? $_POST['item_file_name'] : '');
+    $session->set('publisher_file_description', isset($_POST['item_file_description']) ? $_POST['item_file_description'] : '');
+    $session->set('publisher_file_status', isset($_POST['item_file_status']) ? intval($_POST['item_file_status']) : 1);
     $session->set('publisher_file_uid', $uid);
     $session->set('publisher_file_itemid', $itemid);
 
@@ -760,9 +760,9 @@ function publisher_uploadFile($another = false, $withRedirect = true, &$itemObj)
     }
 
     $fileObj = $publisher->getHandler('file')->create();
-    $fileObj->setVar('name', isset($_POST['name']) ? $_POST['name'] : '');
-    $fileObj->setVar('description', isset($_POST['description']) ? $_POST['description'] : '');
-    $fileObj->setVar('status', isset($_POST['file_status']) ? intval($_POST['file_status']) : 1);
+    $fileObj->setVar('name', isset($_POST['item_file_name']) ? $_POST['item_file_name'] : '');
+    $fileObj->setVar('description', isset($_POST['item_file_description']) ? $_POST['item_file_description'] : '');
+    $fileObj->setVar('status', isset($_POST['item_file_status']) ? intval($_POST['item_file_status']) : 1);
     $fileObj->setVar('uid', $uid);
     $fileObj->setVar('itemid', $itemObj->getVar('itemid'));
     $fileObj->setVar('datesub', time());

@@ -369,53 +369,6 @@ switch ($op) {
 }
 xoops_cp_footer();
 
-function publisher_showFiles($itemObj)
-{
-    // UPLOAD FILES
-    $publisher = PublisherPublisher::getInstance();
-    publisher_openCollapsableBar('filetable', 'filetableicon', _AM_PUBLISHER_FILES_LINKED);
-    $filesObj = $publisher->getHandler('file')->getAllFiles($itemObj->itemid());
-    if (count($filesObj) > 0) {
-        echo "<table width='100%' cellspacing=1 cellpadding=3 border=0 class = outer>";
-        echo "<tr>";
-        echo "<td width='50' class='bg3' align='center'><strong>ID</strong></td>";
-        echo "<td width='150' class='bg3' align='left'><strong>" . _AM_PUBLISHER_FILENAME . "</strong></td>";
-        echo "<td class='bg3' align='left'><strong>" . _AM_PUBLISHER_DESCRIPTION . "</strong></td>";
-        echo "<td width='60' class='bg3' align='center'><strong>" . _AM_PUBLISHER_HITS . "</strong></td>";
-        echo "<td width='100' class='bg3' align='center'><strong>" . _AM_PUBLISHER_UPLOADED_DATE . "</strong></td>";
-        echo "<td width='60' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ACTION . "</strong></td>";
-        echo "</tr>";
-
-        for ($i = 0; $i < count($filesObj); $i++) {
-            $modify = "<a href='file.php?op=mod&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif' title='" . _AM_PUBLISHER_EDITFILE . "' alt='" . _AM_PUBLISHER_EDITFILE . "' /></a>";
-            $delete = "<a href='file.php?op=del&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . PUBLISHER_URL . "/images/links/delete.png' title='" . _AM_PUBLISHER_DELETEFILE . "' alt='" . _AM_PUBLISHER_DELETEFILE . "'/></a>";
-            if ($filesObj[$i]->status() == 0) {
-                $not_visible = "<img src='" . PUBLISHER_URL . "/images/no.gif'/>";
-            } else {
-                $not_visible = '';
-            }
-            echo "<tr>";
-            echo "<td class='head' align='center'>" . $filesObj[$i]->getVar('fileid') . "</td>";
-            echo "<td class='odd' align='left'>" . $not_visible . $filesObj[$i]->getFileLink() . "</td>";
-            echo "<td class='even' align='left'>" . $filesObj[$i]->description() . "</td>";
-            echo "<td class='even' align='center'>" . $filesObj[$i]->counter() . "";
-            echo "<td class='even' align='center'>" . $filesObj[$i]->datesub() . "</td>";
-            echo "<td class='even' align='center'> $modify $delete </td>";
-            echo "</tr>";
-        }
-        echo "</table>";
-        echo "<br >";
-    } else {
-        echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . _AM_PUBLISHER_NOFILE . "</span>";
-    }
-
-    echo "<form><div style=\"margin-bottom: 24px;\">";
-    echo "<input type='button' name='button' onclick=\"location='file.php?op=mod&amp;itemid=" . $itemObj->itemid() . "'\" value='" . _AM_PUBLISHER_UPLOAD_FILE_NEW . "'>&nbsp;&nbsp;";
-    echo "</div></form>";
-
-    publisher_closeCollapsableBar('filetable', 'filetableicon');
-}
-
 function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
 {
     $publisher = PublisherPublisher::getInstance();
@@ -587,9 +540,4 @@ function publisher_editItem($showmenu = false, $itemid = 0, $clone = false)
 
     publisher_closeCollapsableBar('pagewraptable', 'pagewrapicon');
 
-    if ($itemObj->getVar('itemid') != 0) {
-        publisher_showFiles($itemObj);
-    }
 }
-
-?>

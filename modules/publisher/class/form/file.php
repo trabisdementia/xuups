@@ -52,24 +52,24 @@ class PublisherFileForm extends XoopsThemeForm {
     function createElements() {
         global $xoopsDB, $xoopsUser;
         // NAME
-        $name_text = new XoopsFormText(_MD_PUBLISHER_FILENAME, 'name', 50, 255, $this->targetObject->name());
-        $name_text->setDescription(_MD_PUBLISHER_FILE_NAME_DSC);
+        $name_text = new XoopsFormText(_CO_PUBLISHER_FILENAME, 'name', 50, 255, $this->targetObject->name());
+        $name_text->setDescription(_CO_PUBLISHER_FILE_NAME_DSC);
         $this->addElement($name_text, true);
 
         // DESCRIPTION
-        $description_text = new XoopsFormTextArea(_MD_PUBLISHER_FILE_DESCRIPTION, 'description', $this->targetObject->description());
-        $description_text->setDescription(_MD_PUBLISHER_FILE_DESCRIPTION_DSC);
+        $description_text = new XoopsFormTextArea(_CO_PUBLISHER_FILE_DESCRIPTION, 'description', $this->targetObject->description());
+        $description_text->setDescription(_CO_PUBLISHER_FILE_DESCRIPTION_DSC);
         $this->addElement($description_text, 7, 60);
 
         // FILE TO UPLOAD
         if (!$this->targetObject->fileid()) {
-            $file_box = new XoopsFormFile(_MD_PUBLISHER_FILE_TO_UPLOAD, "item_upload_file", 0);
+            $file_box = new XoopsFormFile(_CO_PUBLISHER_FILE_TO_UPLOAD, "item_upload_file", 0);
             $file_box->setExtra("size ='50'");
             $this->addElement($file_box);
         }
 
-        $status_select = new XoopsFormRadioYN(_MD_PUBLISHER_FILE_STATUS, 'file_status', _PUBLISHER_STATUS_FILE_ACTIVE);
-        $status_select->setDescription(_MD_PUBLISHER_FILE_STATUS_DSC);
+        $status_select = new XoopsFormRadioYN(_CO_PUBLISHER_FILE_STATUS, 'file_status', _PUBLISHER_STATUS_FILE_ACTIVE);
+        $status_select->setDescription(_CO_PUBLISHER_FILE_STATUS_DSC);
         $this->addElement($status_select);
 
         // fileid
@@ -89,7 +89,7 @@ class PublisherFileForm extends XoopsThemeForm {
             $files_butt_create->setExtra('onclick="this.form.elements.op.value=\'uploadfile\'"');
             $files_button_tray->addElement($files_butt_create);
 
-            $files_butt_another = new XoopsFormButton('', '', _MD_PUBLISHER_FILE_UPLOAD_ANOTHER, 'submit');
+            $files_butt_another = new XoopsFormButton('', '', _CO_PUBLISHER_FILE_UPLOAD_ANOTHER, 'submit');
             $files_butt_another->setExtra('onclick="this.form.elements.op.value=\'uploadanother\'"');
             $files_button_tray->addElement($files_butt_another);
         } else {

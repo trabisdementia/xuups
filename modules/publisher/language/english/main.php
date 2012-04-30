@@ -26,17 +26,7 @@ define("_MD_PUBLISHER_DOWNLOAD_FILE", "Download this file");
 
 define("_MD_PUBLISHER_EDIT_ARTICLE", "Edit an article");
 define("_MD_PUBLISHER_EMPTY", "This category currently has no article or sub-category");
-define("_MD_PUBLISHER_FILE", "Files");
-define("_MD_PUBLISHER_FILE_DESCRIPTION", "Description");
-define("_MD_PUBLISHER_FILE_DESCRIPTION_DSC", "Description of the file to be uploaded.");
-define("_MD_PUBLISHER_FILE_NAME_DSC", "Name that will be used to identify the file.");
-define("_MD_PUBLISHER_FILE_STATUS", "File visible ?");
-define("_MD_PUBLISHER_FILE_STATUS_DSC", "if you select no, the file will not be visible from the user side.");
-define("_MD_PUBLISHER_FILE_TO_UPLOAD", "File to upload :");
-define("_MD_PUBLISHER_FILE_TYPE", "File type");
-define("_MD_PUBLISHER_FILE_UPLOAD_ANOTHER", "Upload again");
-define("_MD_PUBLISHER_FILENAME", "File name");
-define("_MD_PUBLISHER_FILES_LINKED", "Files linked to this article");
+
 define("_MD_PUBLISHER_GOODDAY", "Hello <strong>%s</strong>! ");
 define("_MD_PUBLISHER_HITS", "Hits");
 define("_MD_PUBLISHER_HITSDETAIL", "This article has been read");

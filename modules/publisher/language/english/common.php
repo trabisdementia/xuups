@@ -75,7 +75,7 @@ define("_CO_PUBLISHER_SUMMARY_DSC", "This summary is used for blocks, index and 
 define("_CO_PUBLISHER_TITLE", "Title");
 define("_CO_PUBLISHER_SUBTITLE", "Sub title");
 
-define("_CO_PUBLISHER_ERROR", "Sorry, some error occured!");
+define("_CO_PUBLISHER_ERROR", "Sorry, some error occurred!");
 define("_CO_PUBLISHER_SORTBY", "Sort by");
 
 define("_CO_PUBLISHER_ADD", "Add");
@@ -109,3 +109,15 @@ define("_CO_PUBLISHER_IMAGE_CAT_NOPERM", "You have no permissions to use this im
 
 //30/04/2012
 define("_CO_PUBLISHER_TAB_FILES", "Files");
+
+define("_CO_PUBLISHER_FILE", "Files");
+define("_CO_PUBLISHER_FILE_DESCRIPTION", "Description");
+define("_CO_PUBLISHER_FILE_DESCRIPTION_DSC", "Description of the file to be uploaded.");
+define("_CO_PUBLISHER_FILE_NAME_DSC", "Name that will be used to identify the file.");
+define("_CO_PUBLISHER_FILE_STATUS", "File visible ?");
+define("_CO_PUBLISHER_FILE_STATUS_DSC", "if you select no, the file will not be visible from the user side.");
+define("_CO_PUBLISHER_FILE_TO_UPLOAD", "File to upload :");
+define("_CO_PUBLISHER_FILE_TYPE", "File type");
+define("_CO_PUBLISHER_FILE_UPLOAD_ANOTHER", "Upload again");
+define("_CO_PUBLISHER_FILENAME", "File name");
+define("_CO_PUBLISHER_FILES_LINKED", "Files linked to this article");

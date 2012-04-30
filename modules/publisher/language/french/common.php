@@ -118,3 +118,15 @@ define("_CO_PUBLISHER_IMAGE_CAT_NOPERM", "Vous n'avez pas les permissions d'util
 
 //30/04/2012
 define("_CO_PUBLISHER_TAB_FILES", "Files");
+
+define("_CO_PUBLISHER_FILE", "Fichiers");
+define("_CO_PUBLISHER_FILE_DESCRIPTION", "Description");
+define("_CO_PUBLISHER_FILE_DESCRIPTION_DSC", "Description du fichier à télécharger.");
+define("_CO_PUBLISHER_FILE_NAME_DSC", "nom qui sera utilisé pour identifier le fichier.");
+define("_CO_PUBLISHER_FILE_STATUS", "Dossier visible?");
+define("_CO_PUBLISHER_FILE_STATUS_DSC", "Si vous sélectionnez Non, le fichier ne sera pas visible de l'utilisateur.");
+define("_CO_PUBLISHER_FILE_TO_UPLOAD", "Fichier à télécharger:");
+define("_CO_PUBLISHER_FILE_TYPE", "Type de fichier");
+define("_CO_PUBLISHER_FILE_UPLOAD_ANOTHER", "Envoyer de nouveau");
+define("_CO_PUBLISHER_FILENAME", "Nom de fichier");
+define("_CO_PUBLISHER_FILES_LINKED", "Fichiers liés à cet article");
