@@ -80,7 +80,7 @@ switch ($publisher->getConfig('format_order_by')) {
 }
 
 if ($publisher->getConfig('item_other_items_type') == "previous_next") {
-    // Retreiving the next and previous object
+    // Retrieving the next and previous object
     $previous_item_link = '';
     $previous_item_url = '';
     $next_item_link = '';

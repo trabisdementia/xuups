@@ -343,5 +343,11 @@ define("_MI_PUBLISHER_DISP_INDEX_SUB_DSC", "");
 define("_MI_PUBLISHER_DISP_CAT_SUB", "Display items subtitles in categories pages?");
 define("_MI_PUBLISHER_DISP_CAT_SUB_DSC", "");
 
-define("_MI_PUBLISHER_DISP_ITEM_SUB", "Display item subtitle in item page");
+define("_MI_PUBLISHER_DISP_ITEM_SUB", "Display item subtitle in item page?");
 define("_MI_PUBLISHER_DISP_ITEM_SUB_DSC", "");
+
+//30/04/2012
+define("_MI_PUBLISHER_ALLOWEDIT", "User article edit?");
+define("_MI_PUBLISHER_ALLOWEDITDSC", "Allow users to edit their own articles?");
+define("_MI_PUBLISHER_ALLOWDELETE", "User article delete?");
+define("_MI_PUBLISHER_ALLOWDELETEDSC", "Allow users to delete their own articles?");

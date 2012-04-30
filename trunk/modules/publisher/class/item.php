@@ -388,15 +388,24 @@ class PublisherItem extends XoopsObject {
         if (is_object($xoopsUser) && ($publisher_isAdmin || ($xoopsUser->uid() == $this->uid()) || $gperm_handler->checkRight('item_submit', $this->categoryid(), $groups, $module_id))) {
 
             if (!$publisher_isAdmin) {
+                //If user article is owner
                 if ($xoopsUser->uid() == $this->uid()) {
-                    // Edit button
-                    $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "'/></a>";
-                    $adminLinks .= " ";
+                    if ($this->publisher->getConfig('perm_edit')) {
+                        // Edit button
+                        $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "'/></a>";
+                        $adminLinks .= " ";
+                    }
+
+                    if ($this->publisher->getConfig('perm_delete')) {
+                        // Delete button
+                        $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?op=del&amp;itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/delete.png'" . " title='" . _CO_PUBLISHER_DELETE . "' alt='" . _CO_PUBLISHER_DELETE . "' /></a>";
+                        $adminLinks .= " ";
+                    }
                 }
 
                 if ($this->publisher->getConfig('perm_clone')) {
-                    // Dupplicate button
-                    $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?op=clone&itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/clone.gif'" . " title='" . _CO_PUBLISHER_CLONE . "' alt='" . _CO_PUBLISHER_CLONE . "' /></a>";
+                    // Duplicate button
+                    $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?op=clone&amp;itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/clone.gif'" . " title='" . _CO_PUBLISHER_CLONE . "' alt='" . _CO_PUBLISHER_CLONE . "' /></a>";
                     $adminLinks .= " ";
                 }
 
@@ -410,7 +419,7 @@ class PublisherItem extends XoopsObject {
                 $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "' /></a>";
                 $adminLinks .= " ";
 
-                // Dupplicate button
+                // Duplicate button
                 $adminLinks .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=clone&amp;itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/clone.gif'" . " title='" . _CO_PUBLISHER_CLONE . "' alt='" . _CO_PUBLISHER_CLONE . "' /></a>";
                 $adminLinks .= " ";
 

@@ -898,6 +898,24 @@ $modversion['config'][$i]['default'] = 0;
 $modversion['config'][$i]['category'] = 'permissions';
 
 $i++;
+$modversion['config'][$i]['name'] = 'perm_edit';
+$modversion['config'][$i]['title'] = '_MI_PUBLISHER_ALLOWEDIT';
+$modversion['config'][$i]['description'] = '_MI_PUBLISHER_ALLOWEDITDSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['category'] = 'permissions';
+
+$i++;
+$modversion['config'][$i]['name'] = 'perm_delete';
+$modversion['config'][$i]['title'] = '_MI_PUBLISHER_ALLOWDELETE';
+$modversion['config'][$i]['description'] = '_MI_PUBLISHER_ALLOWDELETEDSC';
+$modversion['config'][$i]['formtype'] = 'yesno';
+$modversion['config'][$i]['valuetype'] = 'int';
+$modversion['config'][$i]['default'] = 0;
+$modversion['config'][$i]['category'] = 'permissions';
+
+$i++;
 $modversion['config'][$i]['name'] = 'perm_anon_submit';
 $modversion['config'][$i]['title'] = '_MI_PUBLISHER_ANONPOST';
 $modversion['config'][$i]['description'] = '_MI_PUBLISHER_ANONPOSTDSC';
