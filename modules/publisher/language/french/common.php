@@ -115,4 +115,6 @@ define("_CO_PUBLISHER_IMAGE_CAT_NOPERM", "Vous n'avez pas les permissions d'util
  *
  * @version         $Id: common.php 836 2009-09-14 23:29:42Z Dugris $
  **/
-?>
+
+//30/04/2012
+define("_CO_PUBLISHER_TAB_FILES", "Files");
