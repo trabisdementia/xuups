@@ -37,6 +37,7 @@ class PublisherItemForm extends PublisherThemeTabForm {
     var $tabs = array(
         _CO_PUBLISHER_TAB_MAIN => 'mainTab',
         _CO_PUBLISHER_TAB_IMAGES => 'imagesTab',
+        _CO_PUBLISHER_TAB_FILES => 'filesTab',
         _CO_PUBLISHER_TAB_OTHERS => 'othersTab'
     );
 
@@ -62,8 +63,11 @@ class PublisherItemForm extends PublisherThemeTabForm {
         _PUBLISHER_IMAGE_ITEM
     );
 
+    var $filesTab = array(
+        _PUBLISHER_ITEM_UPLOAD_FILE
+    );
+
     var $othersTab = array(
-        _PUBLISHER_ITEM_UPLOAD_FILE,
         _PUBLISHER_ITEM_META_KEYWORDS,
         _PUBLISHER_ITEM_META_DESCRIPTION,
         _PUBLISHER_WEIGHT,
@@ -446,6 +450,18 @@ $publisher(document).ready(function(){
             $this->addElement($image_preview);
         }
 
+        if ($this->hasTab(_CO_PUBLISHER_TAB_FILES)) {
+            $this->startTab(_CO_PUBLISHER_TAB_FILES);
+        }
+        // File upload UPLOAD
+        if ($this->isGranted(_PUBLISHER_ITEM_UPLOAD_FILE)) {
+            $file_box = new XoopsFormFile(_CO_PUBLISHER_ITEM_UPLOAD_FILE, "item_upload_file", 0);
+            $file_box->setDescription(_CO_PUBLISHER_ITEM_UPLOAD_FILE_DSC);
+            $file_box->setExtra("size ='50'");
+            $this->addElement($file_box);
+            unset($file_box);
+        }
+
         if ($this->hasTab(_CO_PUBLISHER_TAB_OTHERS)) {
             $this->startTab(_CO_PUBLISHER_TAB_OTHERS);
         }
@@ -498,15 +514,6 @@ $publisher(document).ready(function(){
                 }
             }
             $this->addElement($p_view_checkbox);
-        }
-
-        // File upload UPLOAD
-        if ($this->isGranted(_PUBLISHER_ITEM_UPLOAD_FILE)) {
-            $file_box = new XoopsFormFile(publisher_newFeatureTag() . _CO_PUBLISHER_ITEM_UPLOAD_FILE, "item_upload_file", 0);
-            $file_box->setDescription(_CO_PUBLISHER_ITEM_UPLOAD_FILE_DSC . publisher_newFeatureTag());
-            $file_box->setExtra("size ='50'");
-            $this->addElement($file_box);
-            unset($file_box);
         }
 
         // WEIGHT

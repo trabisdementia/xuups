@@ -46,12 +46,12 @@ if ($itemid != 0) {
         redirect_header("index.php", 1, _NOPERM);
         exit();
     }
-    if (isset($_GET['op']) && $_GET['op']  == 'del') {
+    if (!$isAdmin && isset($_GET['op']) && $_GET['op']  == 'del') {
         if (!$publisher->getConfig('perm_delete')) {
             redirect_header("index.php", 1, _NOPERM);
             exit();
         }
-    } else if (!$publisher->getConfig('perm_edit')) {
+    } else if (!$isAdmin && !$publisher->getConfig('perm_edit')) {
         redirect_header("index.php", 1, _NOPERM);
         exit();
     }

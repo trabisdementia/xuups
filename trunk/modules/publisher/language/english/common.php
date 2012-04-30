@@ -38,7 +38,7 @@ define("_CO_PUBLISHER_WEIGHT", "Weight");
 
 define("_CO_PUBLISHER_PARTIAL_VIEW", "Give partial view access to these groups");
 define("_CO_PUBLISHER_PARTIAL_VIEW_DSC", "if a group does not have read permission for this article, you can still give to that group partial view access by checking its checkbox here. Please note that these groups also needs to have module access permission as well as parent category read permission.");
-define("_CO_PUBLISHER_ITEM_UPLOAD_FILE", "Link a file to this article");
+define("_CO_PUBLISHER_ITEM_UPLOAD_FILE", "File upload");
 define("_CO_PUBLISHER_ITEM_UPLOAD_FILE_DSC", "Select a file from your computer to attach it to this article. You will be able to add more files once the article has been created. Simply edit the article and scroll at the bottom of the page to see the Add file button.<br /><br /> For example, you could add a Word document or an Excel document. You can even upload a Flash file and it will be directly embeded into your article ! ");
 //define("_CO_PUBLISHER_OPTIONS", "Options");
 define("_CO_PUBLISHER_DISPLAY_SUMMARY", "Display summary on the item page ?");
@@ -107,4 +107,5 @@ define("_CO_PUBLISHER_IMAGE_NICENAME", "Enter image name");
 define("_CO_PUBLISHER_IMAGE_CAT_NONE", "No image category found");
 define("_CO_PUBLISHER_IMAGE_CAT_NOPERM", "You have no permissions to use this image category");
 
-?>
+//30/04/2012
+define("_CO_PUBLISHER_TAB_FILES", "Files");
