@@ -28,20 +28,21 @@ function publisher_latest_files_show($options)
 {
     $publisher = PublisherPublisher::getInstance();
     /**
-     * $options[0] : Sort order - datesub | counter
-     * $options[1] : Number of files to display
-     * $oprions[2] : bool TRUE to link to the file download, FALSE to link to the article
+     * $options[0] : Category
+     * $options[1] : Sort order - datesub | counter
+     * $options[2] : Number of files to display
+     * $oprions[3] : bool TRUE to link to the file download, FALSE to link to the article
      */
 
     $block = array();
 
-    $sort = $options[0];
+    $sort = $options[1];
     $order = publisher_getOrderBy($sort);
-    $limit = $options[1];
-    $directDownload = $options[2];
+    $limit = $options[2];
+    $directDownload = $options[3];
 
     // creating the files objects
-    $filesObj = $publisher->getHandler('file')->getAllFiles(0, _PUBLISHER_STATUS_FILE_ACTIVE, $limit, 0, $sort, $order);
+    $filesObj = $publisher->getHandler('file')->getAllFiles(0, _PUBLISHER_STATUS_FILE_ACTIVE, $limit, 0, $sort, $order, explode(',', $options[0]));
     foreach ($filesObj as $fileObj) {
         $aFile = array();
         $aFile['link'] = $directDownload ? $fileObj->getFileLink() : $fileObj->getItemLink();
@@ -65,15 +66,17 @@ function publisher_latest_files_edit($options)
 
     $form = new PublisherBlockForm();
 
-    $orderEle = new XoopsFormSelect(_MB_PUBLISHER_ORDER, 'options[0]', $options[0]);
+    $catEle = new XoopsFormLabel(_MB_PUBLISHER_SELECTCAT, publisher_createCategorySelect($options[0], 0, true, 'options[0]'));
+    $orderEle = new XoopsFormSelect(_MB_PUBLISHER_ORDER, 'options[1]', $options[1]);
     $orderEle->addOptionArray(array(
         'datesub' => _MB_PUBLISHER_DATE,
         'counter' => _MB_PUBLISHER_HITS,
         'weight'  => _MB_PUBLISHER_WEIGHT,
     ));
-    $dispEle = new XoopsFormText(_MB_PUBLISHER_DISP, 'options[1]', 10, 255, $options[1]);
-    $directEle = new XoopsFormRadioYN(_MB_PUBLISHER_DIRECTDOWNLOAD, 'options[2]', $options[2]);
+    $dispEle = new XoopsFormText(_MB_PUBLISHER_DISP, 'options[2]', 10, 255, $options[2]);
+    $directEle = new XoopsFormRadioYN(_MB_PUBLISHER_DIRECTDOWNLOAD, 'options[3]', $options[3]);
 
+    $form->addElement($catEle);
     $form->addElement($orderEle);
     $form->addElement($dispEle);
     $form->addElement($directEle);
