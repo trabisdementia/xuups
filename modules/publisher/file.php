@@ -13,7 +13,6 @@
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package         Publisher
- * @subpackage      Action
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
  * @author          The SmartFactory <www.smartfactory.ca>
@@ -21,66 +20,92 @@
  */
 
 include_once dirname(__FILE__) . '/header.php';
+xoops_loadLanguage('admin', PUBLISHER_DIRNAME);
 
-// if the user is not admin AND we don't allow user submission, exit
-if (
-        !$publisher_isAdmin || (
-                $publisher->getConfig('perm_submit') &&
-                $publisher->getConfig('perm_submit') == 1 && (
-                        is_object($xoopsUser) || (
-                                $publisher->getConfig('perm_anon_submit') && $publisher->getConfig('perm_anon_submit') == 1)
-                )
-        )
-) {
-    redirect_header("index.php", 1, _NOPERM);
-    exit();
-}
+// Find if the user is admin of the module
+$isAdmin = publisher_userIsAdmin();
 
 $op = PublisherRequest::getString('op');
-$itemid = PublisherRequest::getInt('itemid');
+$fileid = PublisherRequest::getInt('fileid');
 
-if ($itemid == 0) {
+if ($fileid == 0) {
     redirect_header("index.php", 2, _MD_PUBLISHER_NOITEMSELECTED);
     exit();
 }
 
-$itemObj = $publisher->getHandler('item')->get($itemid);
+$fileObj = $publisher->getHandler('file')->get($fileid);
+
 // if the selected item was not found, exit
-if (!$itemObj || !(is_object($xoopsUser)) || $itemObj->getVar('uid') != $xoopsUser->getVar('uid')) {
-    redirect_header("javascript:history.go(-1)", 1, _NOPERM);
+if (!$fileObj) {
+    redirect_header("index.php", 1, _NOPERM);
     exit();
 }
 
-$false = false;
+// if the user does not have permission to modify this file, exit
+if (!$isAdmin && !(is_object($xoopsUser)) || $fileObj->getVar('uid') != $xoopsUser->getVar('uid')) {
+    redirect_header("index.php", 1, _NOPERM);
+    exit();
+}
+
+
+/* -- Available operations -- */
 switch ($op) {
-    case "uploadfile" :
-        publisher_uploadFile(false, true, $false);
-        exit();
-        break;
+    case "default":
+    case "mod":
 
-    case "uploadanother" :
-        publisher_uploadFile(true, true, $false);
-        exit();
-        break;
-
-    case 'form':
-    default:
-        $xoopsOption['template_main'] = 'publisher_addfile.html';
         include_once XOOPS_ROOT_PATH . '/header.php';
-        include_once PUBLISHER_ROOT_PATH . '/footer.php';
+        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-        $xoopsTpl->assign('module_home', publisher_moduleHome());
-        $xoopsTpl->assign('categoryPath', _CO_PUBLISHER_ADD_FILE);
-        $xoopsTpl->assign('lang_intro_title', sprintf(_MD_PUBLISHER_ADD_FILE_TITLE, $publisher->getModule()->getVar('name')));
+        // FILES UPLOAD FORM
+        $files_form = $fileObj->getForm();
+        $files_form->display();
+        break;
 
-        $name = $xoopsUser ? (ucwords($xoopsUser->getVar("uname"))) : $GLOBALS['xoopsConfig']['anonymous'];
-        $xoopsTpl->assign('lang_intro_text', sprintf(_MD_PUBLISHER_GOODDAY, $name) . sprintf(_MD_PUBLISHER_ADD_FILE_INTRO, $itemObj->title()));
+    case "modify":
+        $fileid = isset($_POST['fileid']) ? intval($_POST['fileid']) : 0;
 
-        xoops_loadLanguage('admin', 'publisher');
-        $fileObj = $publisher->getHandler('file')->create();
-        $fileObj->setVar('itemid', $itemid);
-        $form = $fileObj->getForm();
-        $form->assign($xoopsTpl);
-        include_once XOOPS_ROOT_PATH . '/footer.php';
+        // Creating the file object
+        if ($fileid != 0) {
+            $fileObj = $publisher->getHandler('file')->get($fileid);
+        } else {
+            redirect_header("index.php", 1, _NOPERM);
+            exit();
+        }
+
+        // Putting the values in the file object
+        $fileObj->setVar('name', PublisherRequest::getString('name'));
+        $fileObj->setVar('description', PublisherRequest::getString('description'));
+        $fileObj->setVar('status', PublisherRequest::getInt('file_status'));
+
+        // Storing the file
+        if (!$fileObj->store()) {
+            redirect_header('item.php?itemid=' . $fileObj->itemid(), 3, _AM_PUBLISHER_FILE_EDITING_ERROR . publisher_formatErrors($fileObj->getErrors()));
+            exit;
+        }
+
+        redirect_header('item.php?itemid=' . $fileObj->itemid(), 2, _AM_PUBLISHER_FILE_EDITING_SUCCESS);
+        exit();
+        break;
+
+    case "del":
+        $confirm = isset($_POST['confirm']) ? $_POST['confirm'] : 0;
+
+        if ($confirm) {
+            if (!$publisher->getHandler('file')->delete($fileObj)) {
+                redirect_header('item.php?itemid=' . $fileObj->itemid(), 2, _AM_PUBLISHER_FILE_DELETE_ERROR);
+                exit;
+            }
+
+            redirect_header('item.php?itemid=' . $fileObj->itemid(), 2, sprintf(_AM_PUBLISHER_FILEISDELETED, $fileObj->name()));
+            exit();
+        } else {
+            // no confirm: show deletion condition
+
+            include_once XOOPS_ROOT_PATH . '/header.php';
+            xoops_confirm(array('op' => 'del', 'fileid' => $fileObj->fileid(), 'confirm' => 1, 'name' => $fileObj->name()), 'file.php', _AM_PUBLISHER_DELETETHISFILE . " <br />" . $fileObj->name() . " <br /> <br />", _AM_PUBLISHER_DELETE);
+            include_once XOOPS_ROOT_PATH . '/footer.php';
+        }
+        exit();
         break;
 }
+include_once XOOPS_ROOT_PATH . '/footer.php';
