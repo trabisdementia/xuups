@@ -258,19 +258,34 @@ class PublisherFileHandler extends XoopsPersistableObjectHandler {
      * @param int $itemid
      * @return array array of {@link PublisherFile} objects
      */
-    function &getAllFiles($itemid = 0, $status = -1, $limit = 0, $start = 0, $sort = 'datesub', $order = 'DESC') {
+    function &getAllFiles($itemid = 0, $status = -1, $limit = 0, $start = 0, $sort = 'datesub', $order = 'DESC', $category = array()) {
+        $this->table_link = $this->db->prefix('publisher_items');
+        $this->field_object = 'itemid';
+        $this->field_link = 'itemid';
+
         $hasStatusCriteria = false;
         $criteriaStatus = new CriteriaCompo();
         if (is_array($status)) {
             $hasStatusCriteria = true;
             foreach ($status as $v) {
-                $criteriaStatus->add(new Criteria('status', $v), 'OR');
+                $criteriaStatus->add(new Criteria('o.status', $v), 'OR');
             }
         } elseif ($status != -1) {
             $hasStatusCriteria = true;
-            $criteriaStatus->add(new Criteria('status', $status), 'OR');
+            $criteriaStatus->add(new Criteria('o.status', $status), 'OR');
         }
-        $criteriaItemid = new Criteria('itemid', $itemid);
+
+        $hasCategoryCriteria = false;
+        $criteriaCategory = new CriteriaCompo();
+        $category = (array)$category;
+        if (count($category) > 0 && $category[0] != 0) {
+            $hasCategoryCriteria = true;
+            foreach ($category as $cat) {
+                $criteriaCategory->add(new Criteria('l.categoryid', $cat), 'OR');
+            }
+        }
+
+        $criteriaItemid = new Criteria('o.itemid', $itemid);
 
         $criteria = new CriteriaCompo();
 
@@ -282,11 +297,15 @@ class PublisherFileHandler extends XoopsPersistableObjectHandler {
             $criteria->add($criteriaStatus);
         }
 
+        if ($hasCategoryCriteria) {
+            $criteria->add($criteriaCategory);
+        }
+
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setLimit($limit);
         $criteria->setStart($start);
-        $files = $this->getObjects($criteria);
+        $files = $this->getByLink($criteria, array('o.*'), true);
 
         return $files;
     }

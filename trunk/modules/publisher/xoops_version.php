@@ -190,7 +190,7 @@ $modversion['blocks'][$i]['name'] = _MI_PUBLISHER_LATESTFILES;
 $modversion['blocks'][$i]['description'] = _MI_PUBLISHER_LATESTFILES_DSC;
 $modversion['blocks'][$i]['show_func'] = "publisher_latest_files_show";
 $modversion['blocks'][$i]['edit_func'] = "publisher_latest_files_edit";
-$modversion['blocks'][$i]['options'] = "datesub|5|0";
+$modversion['blocks'][$i]['options'] = "0|datesub|5|0";
 $modversion['blocks'][$i]['template'] = "publisher_latest_files.html";
 
 $i++;

@@ -31,7 +31,7 @@ define("_MB_PUBLISHER_POSTEDBY", "Published by");
 define("_MB_PUBLISHER_READMORE", "Read more...");
 define("_MB_PUBLISHER_READS", "reads");
 define("_MB_PUBLISHER_SELECT_ITEMS", "if no, select the articles to be displayed :");
-define("_MB_PUBLISHER_SELECTCAT", "Display the articles of :");
+define("_MB_PUBLISHER_SELECTCAT", "Display category :");
 define("_MB_PUBLISHER_VISITITEM", "Visit the");
 define("_MB_PUBLISHER_WEIGHT", "List by weight");
 define("_MB_PUBLISHER_WHO_WHEN", "Published by %s on %s");
