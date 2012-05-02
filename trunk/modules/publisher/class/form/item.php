@@ -287,6 +287,7 @@ class PublisherItemForm extends PublisherThemeTabForm
             $status_select->addOptionArray($options);
             $status_select->setDescription(_CO_PUBLISHER_STATUS_DSC);
             $this->addElement($status_select);
+            unset($status_select);
         }
 
         // Datesub
