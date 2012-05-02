@@ -497,20 +497,20 @@ $publisher(document).ready(function(){
                     $table .= "<td width='60' class='bg3' align='center'><strong>" . _AM_PUBLISHER_ACTION . "</strong></td>";
                     $table .= "</tr>";
 
-                    for ($i = 0; $i < count($filesObj); $i++) {
-                        $modify = "<a href='file.php?op=mod&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif' title='" . _AM_PUBLISHER_EDITFILE . "' alt='" . _AM_PUBLISHER_EDITFILE . "' /></a>";
-                        $delete = "<a href='file.php?op=del&fileid=" . $filesObj[$i]->fileid() . "'><img src='" . PUBLISHER_URL . "/images/links/delete.png' title='" . _AM_PUBLISHER_DELETEFILE . "' alt='" . _AM_PUBLISHER_DELETEFILE . "'/></a>";
-                        if ($filesObj[$i]->status() == 0) {
+                    foreach($filesObj as $fileObj) {
+                        $modify = "<a href='file.php?op=mod&fileid=" . $fileObj->fileid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif' title='" . _AM_PUBLISHER_EDITFILE . "' alt='" . _AM_PUBLISHER_EDITFILE . "' /></a>";
+                        $delete = "<a href='file.php?op=del&fileid=" . $fileObj->fileid() . "'><img src='" . PUBLISHER_URL . "/images/links/delete.png' title='" . _AM_PUBLISHER_DELETEFILE . "' alt='" . _AM_PUBLISHER_DELETEFILE . "'/></a>";
+                        if ($fileObj->status() == 0) {
                             $not_visible = "<img src='" . PUBLISHER_URL . "/images/no.gif'/>";
                         } else {
                             $not_visible = '';
                         }
                         $table .= "<tr>";
-                        $table .= "<td class='head' align='center'>" . $filesObj[$i]->getVar('fileid') . "</td>";
-                        $table .= "<td class='odd' align='left'>" . $not_visible . $filesObj[$i]->getFileLink() . "</td>";
-                        $table .= "<td class='even' align='left'>" . $filesObj[$i]->description() . "</td>";
-                        $table .= "<td class='even' align='center'>" . $filesObj[$i]->counter() . "";
-                        $table .= "<td class='even' align='center'>" . $filesObj[$i]->datesub() . "</td>";
+                        $table .= "<td class='head' align='center'>" . $fileObj->getVar('fileid') . "</td>";
+                        $table .= "<td class='odd' align='left'>" . $not_visible . $fileObj->getFileLink() . "</td>";
+                        $table .= "<td class='even' align='left'>" . $fileObj->description() . "</td>";
+                        $table .= "<td class='even' align='center'>" . $fileObj->counter() . "";
+                        $table .= "<td class='even' align='center'>" . $fileObj->datesub() . "</td>";
                         $table .= "<td class='even' align='center'> $modify $delete </td>";
                         $table .= "</tr>";
                     }
@@ -518,7 +518,7 @@ $publisher(document).ready(function(){
 
                     $files_box = new XoopsFormLabel(_CO_PUBLISHER_FILES_LINKED, $table);
                     $this->addElement($files_box);
-                    unset($files_box);
+                    unset($files_box, $filesObj, $fileObj);
                 }
 
             }
