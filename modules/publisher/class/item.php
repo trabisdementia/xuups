@@ -409,11 +409,6 @@ class PublisherItem extends XoopsObject {
                     $adminLinks .= " ";
                 }
 
-                // upload a file linked this article
-                if ($this->publisher->getConfig('perm_upload')) {
-                    $uploadLink = "<a href='" . PUBLISHER_URL . "/file.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/file.gif' title='" . _CO_PUBLISHER_ADD_FILE . "' alt='" . _CO_PUBLISHER_ADD_FILE . "' /></a>";
-                }
-
             } else {
                 // Edit button
                 $adminLinks .= "<a href='" . PUBLISHER_URL . "/submit.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/edit.gif'" . " title='" . _CO_PUBLISHER_EDIT . "' alt='" . _CO_PUBLISHER_EDIT . "' /></a>";
@@ -427,8 +422,6 @@ class PublisherItem extends XoopsObject {
                 $adminLinks .= "<a href='" . PUBLISHER_URL . "/admin/item.php?op=del&amp;itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/delete.png'" . " title='" . _CO_PUBLISHER_DELETE . "' alt='" . _CO_PUBLISHER_DELETE . "' /></a>";
                 $adminLinks .= " ";
 
-                // upload a file linked this article
-                $uploadLink = "<a href='" . PUBLISHER_URL . "/file.php?itemid=" . $this->itemid() . "'><img src='" . PUBLISHER_URL . "/images/links/file.gif' title='" . _CO_PUBLISHER_ADD_FILE . "' alt='" . _CO_PUBLISHER_ADD_FILE . "' /></a>";
 
             }
         }
@@ -451,11 +444,6 @@ class PublisherItem extends XoopsObject {
             $adminLinks .= '<a href="' . $maillink . '"><img src="' . PUBLISHER_URL . '/images/links/friend.gif" title="' . _CO_PUBLISHER_MAIL . '" alt="' . _CO_PUBLISHER_MAIL . '" /></a>';
             $adminLinks .= " ";
         }
-
-        // upload a file linked this article
-        // Add a file button
-        $adminLinks .= $uploadLink;
-        $adminLinks .= " ";
 
         return $adminLinks;
     }
