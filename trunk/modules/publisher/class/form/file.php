@@ -59,7 +59,7 @@ class PublisherFileForm extends XoopsThemeForm {
         // DESCRIPTION
         $description_text = new XoopsFormTextArea(_CO_PUBLISHER_FILE_DESCRIPTION, 'description', $this->targetObject->description());
         $description_text->setDescription(_CO_PUBLISHER_FILE_DESCRIPTION_DSC);
-        $this->addElement($description_text, 7, 60);
+        $this->addElement($description_text);
 
         // FILE TO UPLOAD
         if (!$this->targetObject->fileid()) {

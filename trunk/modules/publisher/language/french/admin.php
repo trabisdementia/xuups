@@ -341,4 +341,7 @@ define("_AM_PUBLISHER_CATEGORY_MODERATOR_DSC", "Un modérateur peut accéder et 
  *
  * @version         $Id: admin.php 836 2009-09-14 23:29:42Z Dugris $
  **/
-?>
+
+//03/05/2012
+define("_AM_PUBLISHER_PERMISSIONS_CAT_MODERATOR", "Permissions to moderate categories");
+define("_AM_PUBLISHER_PERMISSIONS_CAT_MODERATOR_DSC", "Groups that will be allowed to moderate articles within this category. Users on this groups will be able to edit/delete/clone articles. Don't forget to also set submit permissions on this groups!");
