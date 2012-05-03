@@ -31,9 +31,6 @@ if (!$categoriesArray) {
     exit();
 }
 
-// Find if the user is admin of the module
-$isAdmin = publisher_userIsAdmin();
-
 $groups = $xoopsUser ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $gperm_handler = xoops_getmodulehandler('groupperm');
 $module_id = $publisher->getModule()->getVar('mid');
@@ -42,24 +39,25 @@ $itemid = PublisherRequest::getInt('itemid');
 if ($itemid != 0) {
     // We are editing or deleting an article
     $itemObj = $publisher->getHandler('item')->get($itemid);
-    if (!($isAdmin || (is_object($xoopsUser) && $itemObj && ($xoopsUser->uid() == $itemObj->uid())))) {
+    if (!(publisher_userIsAdmin() || publisher_userIsAuthor($itemObj) || publisher_userIsModerator($itemObj))) {
         redirect_header("index.php", 1, _NOPERM);
         exit();
     }
-    if (!$isAdmin && isset($_GET['op']) && $_GET['op']  == 'del') {
-        if (!$publisher->getConfig('perm_delete')) {
+    if (!publisher_userIsAdmin() || !publisher_userIsModerator($itemObj)) {
+        if (isset($_GET['op']) && $_GET['op']  == 'del' && !$publisher->getConfig('perm_delete')) {
+            redirect_header("index.php", 1, _NOPERM);
+            exit();
+        } else if (!$publisher->getConfig('perm_edit')) {
             redirect_header("index.php", 1, _NOPERM);
             exit();
         }
-    } else if (!$isAdmin && !$publisher->getConfig('perm_edit')) {
-        redirect_header("index.php", 1, _NOPERM);
-        exit();
     }
+
     $categoryObj = $itemObj->category();
 } else {
     // we are submitting a new article
     // if the user is not admin AND we don't allow user submission, exit
-    if (!($isAdmin || ($publisher->getConfig('perm_submit') == 1 && (is_object($xoopsUser) || ($publisher->getConfig('perm_anon_submit') == 1))))) {
+    if (!(publisher_userIsAdmin() || ($publisher->getConfig('perm_submit') == 1 && (is_object($xoopsUser) || ($publisher->getConfig('perm_anon_submit') == 1))))) {
         redirect_header("index.php", 1, _NOPERM);
         exit();
     }

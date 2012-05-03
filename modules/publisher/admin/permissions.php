@@ -60,6 +60,21 @@ if ($xoopsDB->getRowsNum($result_view)) {
 }
 publisher_closeCollapsableBar('permissionstable_submit', 'permissionsicon_submit');
 
+// Moderators Categories permissions
+echo "<br />\n";
+publisher_openCollapsableBar('permissionstable_moderation', 'permissionsicon_moderation', _AM_PUBLISHER_PERMISSIONS_CAT_MODERATOR, _AM_PUBLISHER_PERMISSIONS_CAT_MODERATOR_DSC);
+$result_view = $xoopsDB->query("SELECT categoryid, name FROM " . $xoopsDB->prefix("publisher_categories") . " ");
+if ($xoopsDB->getRowsNum($result_view)) {
+    $form_submit = new XoopsGroupPermForm("", $publisher->getModule()->mid(), "category_moderation", "", 'admin/permissions.php');
+    while ($myrow_view = $xoopsDB->fetcharray($result_view)) {
+        $form_submit->addItem($myrow_view['categoryid'], $myts->displayTarea($myrow_view['name']));
+    }
+    echo $form_submit->render();
+} else {
+    echo _AM_PUBLISHER_NOPERMSSET;
+}
+publisher_closeCollapsableBar('permissionstable_moderation', 'permissionsicon_moderation');
+
 // Form permissions
 echo "<br />\n";
 publisher_openCollapsableBar('permissionstable_form', 'permissionsicon_form', _AM_PUBLISHER_PERMISSIONS_FORM, _AM_PUBLISHER_PERMISSIONS_FORM_DSC);

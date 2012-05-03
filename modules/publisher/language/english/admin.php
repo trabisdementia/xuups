@@ -328,8 +328,12 @@ define("_AM_PUBLISHER_CLONE_INVALIDNAME", "ERROR: Invalid module name, please tr
 define("_AM_PUBLISHER_CLONE_EXISTS", "ERROR: Module name already taken, please try another one!");
 define("_AM_PUBLISHER_CLONE_CONGRAT", "Congratulations! %s was sucessfuly created!<br />You may want to make changes in language files.");
 define("_AM_PUBLISHER_CLONE_IMAGEFAIL", "Atention, we failed creating the new module logo. Please consider modifying images/module_logo.png manually!");
-define("_AM_PUBLISHER_CLONE_FAIL", "Sorry, we failed in creating the new clone. Maybe you need to temporarlly set write permissions(CHMOD 777) to 'modules' folder and try again.");
+define("_AM_PUBLISHER_CLONE_FAIL", "Sorry, we failed in creating the new clone. Maybe you need to temporarly set write permissions(CHMOD 777) to 'modules' folder and try again.");
 define("_AM_PUBLISHER_COMMENTS", "Comments");
 
 define("_AM_PUBLISHER_CATEGORY_MODERATOR", "Moderator");
 define("_AM_PUBLISHER_CATEGORY_MODERATOR_DSC", "A moderator can access and submit in this category even if he does not have groups permissions.<br />To moderate a sub category the user must have permissions to submit in the parent category.<br />Set to 'anonymous' if you do not need a moderator.");
+
+//03/05/2012
+define("_AM_PUBLISHER_PERMISSIONS_CAT_MODERATOR", "Permissions to moderate categories");
+define("_AM_PUBLISHER_PERMISSIONS_CAT_MODERATOR_DSC", "Groups that will be allowed to moderate articles within this category. Users on this groups will be able to edit/delete/clone articles. Don't forget to also set submit permissions on this groups!");

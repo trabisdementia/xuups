@@ -362,6 +362,31 @@ function publisher_userIsAdmin()
 }
 
 /**
+ * Check is current user is author of a given article
+ *
+ * @param object $itemObj
+ * @return bool
+ */
+function publisher_userIsAuthor($itemObj)
+{
+    global $xoopsUser;
+    return (is_object($xoopsUser) && is_object($itemObj) && ($xoopsUser->uid() == $itemObj->uid()));
+}
+
+/**
+ * Check is current user is moderator of a given article
+ *
+ * @param object $itemObj
+ * @return bool
+ */
+function publisher_userIsModerator($itemObj)
+{
+    $publisher = PublisherPublisher::getInstance();
+    $categoriesGranted = $publisher->getHandler('permission')->getGrantedItems('category_moderation');
+    return (is_object($itemObj) && in_array($itemObj->categoryid(), $categoriesGranted));
+}
+
+/**
  * Override ITEMs permissions of a category by the category read permissions
  *
  * @param array $groups : group with granted permission
@@ -372,8 +397,6 @@ function publisher_overrideItemsPermissions($groups, $categoryid)
 {
     global $xoopsDB;
     $publisher = PublisherPublisher::getInstance();
-
-    $result = true;
 
     $module_id = $publisher->getModule()->getVar('mid');
     $gperm_handler = xoops_gethandler('groupperm');
