@@ -34,6 +34,7 @@ if ($fileid == 0) {
 }
 
 $fileObj = $publisher->getHandler('file')->get($fileid);
+$itemObj = $publisher->getHandler('file')->get($fileid);
 
 // if the selected item was not found, exit
 if (!$fileObj) {
@@ -41,8 +42,10 @@ if (!$fileObj) {
     exit();
 }
 
+$itemObj = $publisher->getHandler('item')->get($fileObj->getVar('itemid'));
+
 // if the user does not have permission to modify this file, exit
-if (!$isAdmin && !(is_object($xoopsUser)) || $fileObj->getVar('uid') != $xoopsUser->getVar('uid')) {
+if (!(publisher_userIsAdmin() || publisher_userIsModerator($itemObj) || (is_object($xoopsUser) && $fileObj->getVar('uid') == $xoopsUser->getVar('uid')))) {
     redirect_header("index.php", 1, _NOPERM);
     exit();
 }
