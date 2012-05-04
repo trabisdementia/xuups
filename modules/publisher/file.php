@@ -22,9 +22,6 @@
 include_once dirname(__FILE__) . '/header.php';
 xoops_loadLanguage('admin', PUBLISHER_DIRNAME);
 
-// Find if the user is admin of the module
-$isAdmin = publisher_userIsAdmin();
-
 $op = PublisherRequest::getString('op');
 $fileid = PublisherRequest::getInt('fileid');
 
@@ -34,7 +31,6 @@ if ($fileid == 0) {
 }
 
 $fileObj = $publisher->getHandler('file')->get($fileid);
-$itemObj = $publisher->getHandler('file')->get($fileid);
 
 // if the selected item was not found, exit
 if (!$fileObj) {
