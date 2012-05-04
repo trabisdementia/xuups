@@ -172,7 +172,6 @@ class PublisherItemForm extends PublisherThemeTabForm
                     $editor = @ $xoopsUser->getVar('publisher_editor'); // Need set through user profile
                 }
             }
-            echo $editor;
             $editor = (empty($editor) || !in_array($editor, $allowed_editors)) ? $publisher->getConfig('submit_editor') : $editor;
 
             $form_editor = new XoopsFormSelectEditor($this, 'editor', $editor, $nohtml, $allowed_editors);
