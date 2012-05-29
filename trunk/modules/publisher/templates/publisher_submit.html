@@ -24,10 +24,12 @@
                     <{if $element.caption != ''}>
                     <div class='xoops-form-element-caption<{if $element.required}>-required<{/if}>'>
                         <span class='caption-text'><{$element.caption}></span>
+						<{if $element.required}>
                         <span class='caption-marker'>*</span>
+						<{/if}>
                     </div>
                     <{/if}> <{if $element.description}>
-                    <div style="font-weight: normal"><{$element.description}></div>
+                    <div style="font-weight: normal;font-size:small"><{$element.description}></div>
                     <{/if}>
                 </td>
                 <td class="<{cycle values=" even
