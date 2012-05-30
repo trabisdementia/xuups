@@ -76,8 +76,26 @@ switch ($op) {
         $fileObj->setVar('description', PublisherRequest::getString('description'));
         $fileObj->setVar('status', PublisherRequest::getInt('file_status'));
 
-        // Storing the file
-        if (!$fileObj->store()) {
+
+        // attach file if any
+        if (isset($_FILES['item_upload_file']) && $_FILES['item_upload_file']['name'] != "") {
+            $oldfile = $fileObj->getFilePath();
+
+            // Get available mimetypes for file uploading
+            $allowed_mimetypes = $publisher->getHandler('mimetype')->getArrayByType();
+            // TODO : display the available mimetypes to the user
+            $errors = array();
+
+            if ($publisher->getConfig('perm_upload') && is_uploaded_file($_FILES['item_upload_file']['tmp_name'])) {
+                if ($fileObj->checkUpload('item_upload_file', $allowed_mimetypes, $errors)) {
+                    if ($fileObj->storeUpload('item_upload_file', $allowed_mimetypes, $errors)) {
+                        unlink($oldfile);
+                    }
+                }
+            }
+        }
+
+        if (!$publisher->getHandler('file')->insert($fileObj)) {
             redirect_header('item.php?itemid=' . $fileObj->itemid(), 3, _AM_PUBLISHER_FILE_EDITING_ERROR . publisher_formatErrors($fileObj->getErrors()));
             exit;
         }

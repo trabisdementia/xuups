@@ -62,11 +62,11 @@ class PublisherFileForm extends XoopsThemeForm {
         $this->addElement($description_text);
 
         // FILE TO UPLOAD
-        if (!$this->targetObject->fileid()) {
+        //if (!$this->targetObject->fileid()) {
             $file_box = new XoopsFormFile(_CO_PUBLISHER_FILE_TO_UPLOAD, "item_upload_file", 0);
             $file_box->setExtra("size ='50'");
             $this->addElement($file_box);
-        }
+        //}
 
         $status_select = new XoopsFormRadioYN(_CO_PUBLISHER_FILE_STATUS, 'file_status', _PUBLISHER_STATUS_FILE_ACTIVE);
         $status_select->setDescription(_CO_PUBLISHER_FILE_STATUS_DSC);
