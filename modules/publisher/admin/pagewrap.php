@@ -42,7 +42,7 @@ echo "</table>";
 echo "</form>";
 
 // Delete File
-$form = new XoopsThemeForm(_AM_PUBLISHER_DELETEFILE, "form_name", "pw_delete_file.php");
+$form = new XoopsThemeForm(_CO_PUBLISHER_DELETEFILE, "form_name", "pw_delete_file.php");
 
 $pWrap_select = new XoopsFormSelect(publisher_getUploadDir(true, 'content'), "address");
 $folder = dir($dir);

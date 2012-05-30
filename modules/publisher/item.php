@@ -140,7 +140,20 @@ $file = array();
 $files = array();
 $embeded_files = array();
 $filesObj = $itemObj->getFiles();
+
+// check if user has permission to modify files
+$hasFilePermissions = true;
+if (!(publisher_userIsAdmin() || publisher_userIsModerator($itemObj))) {
+    $hasFilePermissions = false;
+}
+
 foreach ($filesObj as $fileObj) {
+    $file = array();
+    $file['mod'] = false;
+    if ($hasFilePermissions || (is_object($xoopsUser) && $fileObj->getVar('uid') == $xoopsUser->getVar('uid') )) {
+        $file['mod'] = true;
+    }
+
     if ($fileObj->mimetype() == 'application/x-shockwave-flash') {
         $file['content'] = $fileObj->displayFlash();
         if (strpos($item['maintext'], '[flash-' . $fileObj->getVar('fileid') . ']')) {

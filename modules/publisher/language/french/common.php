@@ -130,3 +130,7 @@ define("_CO_PUBLISHER_FILE_TYPE", "Type de fichier");
 define("_CO_PUBLISHER_FILE_UPLOAD_ANOTHER", "Envoyer de nouveau");
 define("_CO_PUBLISHER_FILENAME", "Nom de fichier");
 define("_CO_PUBLISHER_FILES_LINKED", "Fichiers liés à cet article");
+
+//Added 30/05/2012
+define("_CO_PUBLISHER_EDITFILE", "Modifier le fichier");
+define("_CO_PUBLISHER_DELETEFILE", "Effacer le fichier");
