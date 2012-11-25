@@ -232,9 +232,6 @@ if ($op == 'go') {
         $groupsIds = $gperm_handler->getGroupIds('news_submit', $arrCat['topic_id'], $news_module_id);
         publisher_saveCategoryPermissions($groupsIds, $categoryObj->categoryid(), 'item_submit');
 
-        // Saving items permissions
-        publisher_overrideItemsPermissions($groupsIds, $categoryObj->categoryid());
-
         $newCatArray[$newCat['oldid']] = $newCat;
         unset($newCat);
         echo "<br/>";

@@ -57,7 +57,7 @@ class PublisherCategoryForm extends XoopsThemeForm {
     }
 
     function createElements() {
-        global $xoopsDB, $xoopsUser;
+        global $xoopsUser;
 
         // Category
         $criteria = new Criteria(null);
@@ -147,32 +147,31 @@ class PublisherCategoryForm extends XoopsThemeForm {
         $this->addElement(new XoopsFormText(_AM_PUBLISHER_COLPOSIT, 'weight', 4, 4, $this->targetObject->weight()));
 
         // Added by skalpa: custom template support
+        //todo, check this
         $this->addElement(new XoopsFormText("Custom template", 'template', 50, 255, $this->targetObject->template('e')), false);
 
         // READ PERMISSIONS
         $groups_read_checkbox = new XoopsFormCheckBox(_AM_PUBLISHER_PERMISSIONS_CAT_READ, 'groups_read[]', $this->targetObject->getGroups_read());
         foreach ($this->userGroups as $group_id => $group_name) {
-            //if ($group_id != XOOPS_GROUP_ADMIN) {
             $groups_read_checkbox->addOption($group_id, $group_name);
-            //}
         }
         $this->addElement($groups_read_checkbox);
-        // Apply permissions on all items
-        $apply = isset($_POST['applyall']) ? intval($_POST['applyall']) : 0;
-
-        $addapplyall_radio = new XoopsFormRadioYN(_AM_PUBLISHER_PERMISSIONS_APPLY_ON_ITEMS, 'applyall', $apply, ' ' . _AM_PUBLISHER_YES . '', ' ' . _AM_PUBLISHER_NO . '');
-        $this->addElement($addapplyall_radio);
-
 
         // SUBMIT PERMISSIONS
         $groups_submit_checkbox = new XoopsFormCheckBox(_AM_PUBLISHER_PERMISSIONS_CAT_SUBMIT, 'groups_submit[]', $this->targetObject->getGroups_submit());
         $groups_submit_checkbox->setDescription(_AM_PUBLISHER_PERMISSIONS_CAT_SUBMIT_DSC);
         foreach ($this->userGroups as $group_id => $group_name) {
-            //if ($group_id != XOOPS_GROUP_ADMIN) {
             $groups_submit_checkbox->addOption($group_id, $group_name);
-            //}
         }
         $this->addElement($groups_submit_checkbox);
+
+        // MODERATION PERMISSIONS
+        $groups_moderation_checkbox = new XoopsFormCheckBox(_AM_PUBLISHER_PERMISSIONS_CAT_MODERATOR, 'groups_moderation[]', $this->targetObject->getGroups_moderation());
+        $groups_moderation_checkbox->setDescription(_AM_PUBLISHER_PERMISSIONS_CAT_MODERATOR_DSC);
+        foreach ($this->userGroups as $group_id => $group_name) {
+            $groups_moderation_checkbox->addOption($group_id, $group_name);
+        }
+        $this->addElement($groups_moderation_checkbox);
 
         $moderator = new XoopsFormSelectUser(_AM_PUBLISHER_CATEGORY_MODERATOR, 'moderator', true, $this->targetObject->moderator('e'), 1, false);
         $moderator->setDescription(_AM_PUBLISHER_CATEGORY_MODERATOR_DSC);

@@ -333,5 +333,5 @@ define("_AM_PUBLISHER_CATEGORY_MODERATOR", "Moderator");
 define("_AM_PUBLISHER_CATEGORY_MODERATOR_DSC", "A moderator can access and submit in this category even if he does not have groups permissions.<br />To moderate a sub category the user must have permissions to submit in the parent category.<br />Set to 'anonymous' if you do not need a moderator.");
 
 //03/05/2012
-define("_AM_PUBLISHER_PERMISSIONS_CAT_MODERATOR", "Permissions to moderate categories");
+define("_AM_PUBLISHER_PERMISSIONS_CAT_MODERATOR", "Moderation permissions");
 define("_AM_PUBLISHER_PERMISSIONS_CAT_MODERATOR_DSC", "Groups that will be allowed to moderate articles within this category. Users on this groups will be able to edit/delete/clone articles. Don't forget to also set submit permissions on this groups!");
