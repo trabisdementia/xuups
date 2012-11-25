@@ -321,18 +321,25 @@ class PublisherItemForm extends PublisherThemeTabForm
             }
 
             $imgcat_handler = xoops_gethandler('imagecategory');
-            $catlist = $imgcat_handler->getList($group, 'imgcat_read', 1);
+            if (method_exists($imgcat_handler, 'getListByPermission')) {
+                $catlist = $imgcat_handler->getListByPermission($group, 'imgcat_read', 1);
+            } else {
+                $catlist = $imgcat_handler->getList($group, 'imgcat_read', 1);
+            }
             $catids = array_keys($catlist);
 
-            $image_handler = xoops_gethandler('image');
-            $criteria = new CriteriaCompo(new Criteria('imgcat_id', '(' . implode(',', $catids) . ')', 'IN'));
-            $criteria->add(new Criteria('image_display', 1));
-            $criteria->setSort('image_nicename');
-            $criteria->setOrder('ASC');
-            $imageObjs = $image_handler->getObjects($criteria, true);
-            unset($criteria);
+            $imageObjs = array();
+            if (!empty($catids)) {
+                $image_handler = xoops_gethandler('image');
+                $criteria = new CriteriaCompo(new Criteria('imgcat_id', '(' . implode(',', $catids) . ')', 'IN'));
+                $criteria->add(new Criteria('image_display', 1));
+                $criteria->setSort('image_nicename');
+                $criteria->setOrder('ASC');
+                $imageObjs = $image_handler->getObjects($criteria, true);
+                unset($criteria);
+            }
             $image_array = array();
-            foreach ($imageObjs as $id => $imageObj) {
+            foreach ($imageObjs as $imageObj) {
                 $image_array[$imageObj->getVar('image_name')] = $imageObj->getVar('image_nicename');
             }
 
@@ -405,7 +412,11 @@ $publisher(document).ready(function(){
             $nicename = new XoopsFormText('', 'image_nicename', 30, 30, _CO_PUBLISHER_IMAGE_NICENAME);
 
             $imgcat_handler = xoops_gethandler('imagecategory');
-            $catlist = $imgcat_handler->getList($group, 'imgcat_write', 1);
+            if (method_exists($imgcat_handler, 'getListByPermission')) {
+                $catlist = $imgcat_handler->getListByPermission($group, 'imgcat_read', 1);
+            } else {
+                $catlist = $imgcat_handler->getList($group, 'imgcat_read', 1);
+            }
             $imagecat = new XoopsFormSelect('', 'imgcat_id', '', 1);
             $imagecat->addOptionArray($catlist);
 
@@ -614,5 +625,3 @@ $publisher(document).ready(function(){
         return $this;
     }
 }
-
-?>

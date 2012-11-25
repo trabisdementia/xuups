@@ -182,6 +182,7 @@ if ($op == 'save') {
         redirect_header($module->getInfo('adminindex'), 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
     }
     $count = count($conf_ids);
+    $config_handler = xoops_gethandler('config');
     if ($count > 0) {
         for ($i = 0; $i < $count; $i++) {
             $config = $config_handler->getConfig($conf_ids[$i]);

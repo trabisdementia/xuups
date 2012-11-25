@@ -37,6 +37,7 @@ if ($totalCategories == 0) {
     exit;
 }
 
+
 $xoopsOption['template_main'] = 'publisher_display' . '_' . $publisher->getConfig('idxcat_items_display_type') . '.html';
 include_once XOOPS_ROOT_PATH . '/header.php';
 include_once PUBLISHER_ROOT_PATH . '/footer.php';
@@ -52,7 +53,7 @@ if ($totalCategoriesOnPage == 0) {
     redirect_header("javascript:history.go(-1)", 2, _MD_PUBLISHER_NO_CAT_EXISTS);
     exit;
 }
-
+        //exit('here');
 // Get subcats of the top categories
 $subcats = $publisher->getHandler('category')->getSubCats($categoriesObj);
 
@@ -128,7 +129,7 @@ foreach ($categoriesObj as $cat_id => $category) {
 unset($categoriesObj);
 
 if (isset($categories[$cat_id])) {
-    $categories[$cat_id] = $category->toArray($categories[$cat_id]);
+    $categories[$cat_id] = $category->ToArraySimple($categories[$cat_id]);
     $categories[$cat_id]['categoryPath'] = $category->getCategoryPath($publisher->getConfig('format_linked_path'));
 }
 
@@ -160,7 +161,7 @@ if ($publisher->getConfig('index_display_last_items')) {
     //todo: make config for summary size
     if ($itemsCount > 0) {
         foreach ($itemsObj as $itemObj) {
-            $xoopsTpl->append('items', $itemObj->toArray($publisher->getConfig('idxcat_items_display_type'), $publisher->getConfig('item_title_size'), 300, true)); //if no summary truncate body to 300
+            $xoopsTpl->append('items', $itemObj->ToArraySimple($publisher->getConfig('idxcat_items_display_type'), $publisher->getConfig('item_title_size'), 300, true)); //if no summary truncate body to 300
         }
         $xoopsTpl->assign('show_subtitle', $publisher->getConfig('index_disp_subtitle'));
         unset($allcategories);

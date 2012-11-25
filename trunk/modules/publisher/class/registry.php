@@ -39,7 +39,7 @@ class PublisherRegistry {
         return $instance;
     }
 
-    function setEntry($key, &$item) {
+    function setEntry($key, $item) {
         if ($this->isLocked($key) == true) {
             trigger_error('Unable to set entry `' . $key . '`. Entry is locked.', E_USER_WARNING);
             return false;

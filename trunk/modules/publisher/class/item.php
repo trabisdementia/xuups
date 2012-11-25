@@ -667,7 +667,7 @@ class PublisherItem extends XoopsObject
         return $ret[$itemid];
     }
 
-    function toArray($display = 'default', $max_char_title = 0, $max_char_summary = 0, $full_summary = false)
+    function ToArraySimple($display = 'default', $max_char_title = 0, $max_char_summary = 0, $full_summary = false)
     {
         $item_page_id = -1;
         if (is_numeric($display)) {
