@@ -388,66 +388,6 @@ function publisher_userIsModerator($itemObj)
 }
 
 /**
- * Override ITEMs permissions of a category by the category read permissions
- *
- * @param array $groups : group with granted permission
- * @param integer $categoryid :
- * @return boolean : TRUE if no errors occurred
- */
-function publisher_overrideItemsPermissions($groups, $categoryid)
-{
-    global $xoopsDB;
-    $publisher = PublisherPublisher::getInstance();
-
-    $module_id = $publisher->getModule()->getVar('mid');
-    $gperm_handler = xoops_gethandler('groupperm');
-
-    $sql = "SELECT itemid FROM " . $xoopsDB->prefix("publisher_items") . " WHERE categoryid = '$categoryid' ";
-    $result = $xoopsDB->query($sql);
-
-    if (count($result) > 0) {
-        while (list($itemid) = $xoopsDB->fetchrow($result)) {
-            // First, if the permissions are already there, delete them
-            $gperm_handler->deleteByModule($module_id, 'item_read', $itemid);
-            // Save the new permissions
-            if (count($groups) > 0) {
-                foreach ($groups as $group_id) {
-                    $gperm_handler->addRight('item_read', $itemid, $group_id, $module_id);
-                }
-            }
-        }
-    }
-
-    return $result;
-}
-
-/**
- * Saves permissions for the selected item
- *
- * @param array $groups : group with granted permission
- * @param integer $itemID : itemid on which we are setting permissions
- * @return boolean : TRUE if the no errors occured
- */
-function publisher_saveItemPermissions($groups, $itemid)
-{
-    $publisher = PublisherPublisher::getInstance();
-
-    $result = true;
-
-    $module_id = $publisher->getModule()->getVar('mid');
-    $gperm_handler = xoops_gethandler('groupperm');
-    // First, if the permissions are already there, delete them
-    $gperm_handler->deleteByModule($module_id, 'item_read', $itemid);
-    // Save the new permissions
-    if (count($groups) > 0) {
-        foreach ($groups as $group_id) {
-            $gperm_handler->addRight('item_read', $itemid, $group_id, $module_id);
-        }
-    }
-    return $result;
-}
-
-/**
  * Saves permissions for the selected category
  *
  * @param array $groups : group with granted permission

@@ -36,8 +36,6 @@ define("_CO_PUBLISHER_UID", "Affiche le nom");
 define("_CO_PUBLISHER_UID_DSC", "Sélectionnez le nom du soumetteur");
 define("_CO_PUBLISHER_WEIGHT", "Poids");
 
-define("_CO_PUBLISHER_PARTIAL_VIEW", "Donnez un accès avec vue partielle à ces groupes");
-define("_CO_PUBLISHER_PARTIAL_VIEW_DSC", "si un groupe n'a pas la permission de lire cet article, vous pouvez toujours donner à ce groupe un accès en vue partielle en cochant la case à cocher ici. s'il vous plaît notez que ces groupes ont aussi besoin d'avoir un droit d'accès au module, ainsi qu'une permission de lecture à la catégorie parente.");
 define("_CO_PUBLISHER_ITEM_UPLOAD_FILE", "lier un fichier à cet article");
 define("_CO_PUBLISHER_ITEM_UPLOAD_FILE_DSC", "Sélectionnez un fichier à partir de votre ordinateur pour le lier à cet article. Vous serez en mesure d'ajouter plus de fichiers, une fois que l'article aura été créé. Il suffit d'éditer l'article et de faire défiler jusqu'au bas de la page pour voir le bouton Ajouter un fichier. <br /> <br /> Par exemple, vous pouvez ajouter un document Word ou un document Excel. Vous pouvez même télécharger un fichier Flash et il sera incorporé directement dans votre article! ");
 define("_CO_PUBLISHER_OPTIONS", "Options");

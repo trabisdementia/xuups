@@ -94,7 +94,7 @@ $elements = array(
     'summary', 'available_page_wrap', 'item_tag', 'image_item',
     'item_upload_file', 'uid', 'datesub', 'status', 'item_short_url',
     'item_meta_keywords', 'item_meta_description', 'weight',
-    'allowcomments', 'permissions_item', 'partial_view',
+    'allowcomments',
     'dohtml', 'dosmiley', 'doxcode', 'doimage', 'dolinebreak',
     'notify', 'subtitle', 'author_alias');
 foreach ($elements as $element) {

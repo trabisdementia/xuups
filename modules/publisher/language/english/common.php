@@ -36,8 +36,6 @@ define("_CO_PUBLISHER_UID", "Poster name");
 define("_CO_PUBLISHER_UID_DSC", "Select the name of the poster");
 define("_CO_PUBLISHER_WEIGHT", "Weight");
 
-define("_CO_PUBLISHER_PARTIAL_VIEW", "Give partial view access to these groups");
-define("_CO_PUBLISHER_PARTIAL_VIEW_DSC", "if a group does not have read permission for this article, you can still give to that group partial view access by checking its checkbox here. Please note that these groups also needs to have module access permission as well as parent category read permission.");
 define("_CO_PUBLISHER_ITEM_UPLOAD_FILE", "File upload");
 define("_CO_PUBLISHER_ITEM_UPLOAD_FILE_DSC", "Select a file from your computer to attach it to this article. You will be able to add more files once the article has been created. Simply edit the article and scroll at the bottom of the page to see the Add file button.<br /><br /> For example, you could add a Word document or an Excel document. You can even upload a Flash file and it will be directly embeded into your article ! ");
 //define("_CO_PUBLISHER_OPTIONS", "Options");

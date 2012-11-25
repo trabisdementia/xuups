@@ -72,9 +72,7 @@ class PublisherItemForm extends PublisherThemeTabForm
         _PUBLISHER_ITEM_META_KEYWORDS,
         _PUBLISHER_ITEM_META_DESCRIPTION,
         _PUBLISHER_WEIGHT,
-        _PUBLISHER_ALLOWCOMMENTS,
-        _PUBLISHER_PERMISSIONS_ITEM,
-        _PUBLISHER_PARTIAL_VIEW
+        _PUBLISHER_ALLOWCOMMENTS
     );
 
     function setCheckPermissions($checkperm)
@@ -562,34 +560,6 @@ $publisher(document).ready(function(){
         if ($this->isGranted(_PUBLISHER_ALLOWCOMMENTS)) {
             $addcomments_radio = new XoopsFormRadioYN(_CO_PUBLISHER_ALLOWCOMMENTS, 'allowcomments', $obj->cancomment(), _YES, _NO);
             $this->addElement($addcomments_radio);
-        }
-
-        // PER ITEM PERMISSIONS
-        if ($this->isGranted(_PUBLISHER_PERMISSIONS_ITEM)) {
-            $member_handler = &xoops_gethandler('member');
-            $group_list = $member_handler->getGroupList();
-            $groups_checkbox = new XoopsFormCheckBox(_CO_PUBLISHER_PERMISSIONS_ITEM, 'permissions_item[]', $obj->getGroups_read());
-            $groups_checkbox->setDescription(_CO_PUBLISHER_PERMISSIONS_ITEM_DSC);
-            foreach ($group_list as $group_id => $group_name) {
-                //if ($group_id != XOOPS_GROUP_ADMIN) {
-                $groups_checkbox->addOption($group_id, $group_name);
-                //}
-            }
-            $this->addElement($groups_checkbox);
-        }
-
-        // partial_view
-        if ($this->isGranted(_PUBLISHER_PARTIAL_VIEW)) {
-            $p_view_checkbox = new XoopsFormCheckBox(_CO_PUBLISHER_PARTIAL_VIEW, 'partial_view[]', $obj->partial_view());
-            $p_view_checkbox->setDescription(_CO_PUBLISHER_PARTIAL_VIEW_DSC);
-            $member_handler = &xoops_gethandler('member');
-            $group_list = $member_handler->getGroupList();
-            foreach ($group_list as $group_id => $group_name) {
-                if ($group_id != XOOPS_GROUP_ADMIN) {
-                    $p_view_checkbox->addOption($group_id, $group_name);
-                }
-            }
-            $this->addElement($p_view_checkbox);
         }
 
         // WEIGHT

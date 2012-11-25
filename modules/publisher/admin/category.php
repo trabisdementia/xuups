@@ -123,6 +123,14 @@ switch ($op) {
         }
         $grpsubmit = isset($_POST['groups_submit']) ? $_POST['groups_submit'] : array();
 
+        if (isset($_POST['groups_moderation'])) {
+            $categoryObj->setGroups_moderation($_POST['groups_moderation']);
+        } else {
+            $categoryObj->setGroups_moderation();
+        }
+        $grpmoderation = isset($_POST['groups_moderation']) ? $_POST['groups_moderation'] : array();
+
+
         $categoryObj->setVar('name', $_POST['name']);
 
         //Added by skalpa: custom template support
@@ -161,11 +169,9 @@ switch ($op) {
         // TODO : put this function in the category class
         publisher_saveCategoryPermissions($categoryObj->getGroups_read(), $categoryObj->categoryid(), 'category_read');
         publisher_saveCategoryPermissions($categoryObj->getGroups_submit(), $categoryObj->categoryid(), 'item_submit');
-        //publisher_saveCategory_Permissions($groups_admin, $categoriesObj->categoryid(), 'category_admin');
-        if ($applyall) {
-            // TODO : put this function in the category class
-            publisher_overrideItemsPermissions($categoryObj->getGroups_read(), $categoryObj->categoryid());
-        }
+        publisher_saveCategoryPermissions($categoryObj->getGroups_moderation(), $categoryObj->categoryid(), 'category_moderation');
+
+
         //Added by fx2024
         $parentCat = $categoryObj->categoryid();
         $sizeof = sizeof($_POST['scname']);
@@ -176,6 +182,7 @@ switch ($op) {
                 $categoryObj->setVar('parentid', $parentCat);
                 $categoryObj->setGroups_read($grpread);
                 $categoryObj->setGroups_submit($grpsubmit);
+                $categoryObj->setGroups_moderation($grpmoderation);
 
                 if (!$categoryObj->store()) {
                     redirect_header("javascript:history.go(-1)", 3, _AM_PUBLISHER_SUBCATEGORY_SAVE_ERROR . publisher_formatErrors($categoryObj->getErrors()));
@@ -184,11 +191,7 @@ switch ($op) {
                 // TODO : put this function in the category class
                 publisher_saveCategoryPermissions($categoryObj->getGroups_read(), $categoryObj->categoryid(), 'category_read');
                 publisher_saveCategoryPermissions($categoryObj->getGroups_submit(), $categoryObj->categoryid(), 'item_submit');
-                //publisher_saveCategory_Permissions($groups_admin, $categoriesObj->categoryid(), 'category_admin');
-                if ($applyall) {
-                    // TODO : put this function in the category class
-                    publisher_overrideItemsPermissions($categoryObj->getGroups_read(), $categoryObj->categoryid());
-                }
+                publisher_saveCategoryPermissions($categoryObj->getGroups_moderation(), $categoryObj->categoryid(), 'category_moderation');
             }
         }
         //end of fx2024 code
@@ -426,5 +429,3 @@ function publisher_editCat($showmenu = false, $categoryid = 0, $nb_subcats = 4, 
     }
     //end of fx2024 code
 }
-
-?>
