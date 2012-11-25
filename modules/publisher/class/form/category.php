@@ -185,7 +185,7 @@ class PublisherCategoryForm extends XoopsThemeForm {
             } else {
                 $subname = '';
             }
-            $cat_tray->addElement(new XoopsFormText('', 'scname[' . $i . ']', 50, 255, $subname), true);
+            $cat_tray->addElement(new XoopsFormText('', 'scname[' . $i . ']', 50, 255, $subname));
 
         }
         $t = new XoopsFormText('', 'nb_subcats', 3, 2);

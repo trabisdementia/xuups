@@ -26,7 +26,7 @@ include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
 class PublisherFormDateTime extends XoopsFormElementTray {
     function PublisherFormDateTime($caption, $name, $size = 15, $value = 0) {
-        $this->XoopsFormElementTray($caption, '&nbsp;');
+        parent::__construct($caption, '&nbsp;');
         $value = intval($value);
         $value = ($value > 0) ? $value : time();
         $datetime = getDate($value);
@@ -44,5 +44,3 @@ class PublisherFormDateTime extends XoopsFormElementTray {
         $this->addElement($timeselect);
     }
 }
-
-?>

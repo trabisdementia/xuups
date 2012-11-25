@@ -103,13 +103,13 @@ class PublisherPublisher {
     function initConfig() {
         $this->addLog('INIT CONFIG');
         global $xoopsModule;
-        if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $this->registry->getEntry('dirname')) {
+        /*if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $this->registry->getEntry('dirname')) {
             global $xoopsModuleConfig;
             $this->config = $xoopsModuleConfig;
-        } else {
+        } else {  */
             $hModConfig = xoops_gethandler('config');
             $this->config = $hModConfig->getConfigsByCat(0, $this->getModule()->getVar('mid'));
-        }
+        /*}  */
     }
 
     function initHandler($name) {

@@ -63,7 +63,7 @@ function publisher_items_spot_show($options)
             foreach ($itemsObj as $key => $thisitem) {
                 $item = array();
 
-                $item = $thisitem->toArray('default', 0, $opt_truncate);
+                $item = $thisitem->ToArraySimple('default', 0, $opt_truncate);
 
                 if ($i < $itemsCount) {
                     $item['showline'] = true;
@@ -85,7 +85,7 @@ function publisher_items_spot_show($options)
             if (!$itemObj->notLoaded() && $itemObj->checkPermission()) {
                 $categoryObj = $itemObj->category();
                 $item = array();
-                $item = $itemObj->toArray();
+                $item = $itemObj->ToArraySimple();
                 $item['who_when'] = sprintf(_MB_PUBLISHER_WHO_WHEN, $itemObj->posterName(), $itemObj->datesub());
                 if ($i < $itemsCount) {
                     $item['showline'] = true;

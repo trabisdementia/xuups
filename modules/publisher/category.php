@@ -95,7 +95,7 @@ $category = array();
 $items = array();
 
 // Populating the smarty variables with informations related to the selected category
-$category = $categoryObj->toArray(null, true);
+$category = $categoryObj->ToArraySimple(null, true);
 $category['categoryPath'] = $categoryObj->getCategoryPath($publisher->getConfig('format_linked_path'));
 
 //$totalItems = $publisher_category_handler->publishedItemsCount($publisher->getConfig('idxcat_display_last_item'));
@@ -133,7 +133,7 @@ if ($publisher->getConfig('idxcat_show_subcats') != 'no') {
                 $numItems = isset($totalItems[$subcat_id]) ? $totalItems[$key] : 0;
                 $subcat->setVar('itemcount', $numItems);
                 // Put this subcat in the smarty variable
-                $subcategories[$key] = $subcat->toArray();
+                $subcategories[$key] = $subcat->ToArraySimple();
                 //$total += $numItems;
             }
 
@@ -148,7 +148,7 @@ if ($publisher->getConfig('idxcat_show_subcats') != 'no') {
                 $numItems = isset($totalItems[$subcat_id]) ? $totalItems[$key] : 0;
                 $subcat->setVar('itemcount', $numItems);
                 // Put this subcat in the smarty variable
-                $subcategories[$key] = $subcat->toArray();
+                $subcategories[$key] = $subcat->ToArraySimple();
                 //$total += $numItems;
             }
         }
@@ -174,7 +174,7 @@ if (count($itemsObj) > 0) {
     // Adding the items of the selected category
 
     for ($i = 0; $i < $totalItemOnPage; $i++) {
-        $item = $itemsObj[$i]->toArray('default', $publisher->getConfig('item_title_size'));
+        $item = $itemsObj[$i]->ToArraySimple('default', $publisher->getConfig('item_title_size'));
         $item['categoryname'] = $categoryObj->name();
         $item['categorylink'] = "<a href='" . publisher_seo_genUrl('category', $itemsObj[$i]->categoryid(), $categoryObj->short_url()) . "'>" . $categoryObj->name() . "</a>";
         $item['who_when'] = $itemsObj[$i]->getWhoAndWhen();

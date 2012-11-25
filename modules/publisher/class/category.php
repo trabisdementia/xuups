@@ -231,7 +231,7 @@ class PublisherCategory extends XoopsObject {
         $notification_handler->triggerEvent('global_item', 0, 'category_created', $tags);
     }
 
-    function toArray($category = array()) {
+    function ToArraySimple($category = array()) {
         $category['categoryid'] = $this->categoryid();
         $category['name'] = $this->name();
         $category['categorylink'] = $this->getCategoryLink();
@@ -506,7 +506,6 @@ class PublisherCategoryHandler extends XoopsPersistableObjectHandler {
         }
 
         $cat_array = array();
-
         foreach ($categories as $cat) {
             $cat_array[$cat['parentid']][$cat['categoryid']] = $cat;
         }
@@ -595,7 +594,7 @@ class PublisherCategoryHandler extends XoopsPersistableObjectHandler {
     function getSubCats(&$categories) {
         global $publisher_isAdmin, $xoopsUser;
 
-        $criteria = new CriteriaCompo('parentid', "(" . implode(',', array_keys($categories)) . ")", 'IN');
+        $criteria = new CriteriaCompo(new Criteria('parentid', "(" . implode(',', array_keys($categories)) . ")", 'IN'));
         $ret = array();
         if (!$publisher_isAdmin) {
             $categoriesGranted = $this->publisher->getHandler('permission')->getGrantedItems('category_read');

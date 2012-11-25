@@ -137,7 +137,7 @@ switch ($op) {
 
         $categoryObj = $publisher->getHandler('category')->get($_POST['categoryid']);
 
-        $item = $itemObj->toArray();
+        $item = $itemObj->ToArraySimple();
         $item['summary'] = $itemObj->body();
         $item['categoryPath'] = $categoryObj->getCategoryPath(true);
         $item['who_when'] = $itemObj->getWhoAndWhen();
