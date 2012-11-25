@@ -77,13 +77,11 @@ function publisher_latest_news_show($options)
     if ($scount == 0) {
         return false;
     }
-
     $k = 0;
     $columns = array();
 
     foreach ($itemsObj as $itemid => $itemObj) {
         $item = array();
-
         $item['itemurl'] = $itemObj->getItemUrl();
         $item['title'] = $itemObj->getItemLink();
         $item['alt'] = strip_tags($itemObj->getItemLink());
@@ -243,6 +241,8 @@ function publisher_latest_news_show($options)
 
     unset($item);
     $block['columns'] = $columns;
+
+        xmf_debug::dump($block);
     return $block;
 }
 

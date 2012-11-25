@@ -122,4 +122,6 @@ define("_MB_PUBLISHER_ARCHIVE", "Archive");
  *
  * @version         $Id: blocks.php 836 2009-09-14 23:29:42Z Dugris $
  **/
-?>
+
+//25-11-2012
+define("_MB_PUBLISHER_ONECOMMENT", "1 comment");

@@ -114,4 +114,5 @@ define("_MB_PUBLISHER_TEMPLATE_SLIDER2", "Tabbed Slider");
 
 define("_MB_PUBLISHER_ARCHIVE", "Archive");
 
-?>
+//25-11-2012
+define("_MB_PUBLISHER_ONECOMMENT", "1 comment");
