@@ -20,9 +20,8 @@
  * @author          The SmartFactory <www.smartfactory.ca>
  * @version         $Id$
  */
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
+
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
 class PublisherPermissionHandler extends XoopsObjectHandler
@@ -31,9 +30,9 @@ class PublisherPermissionHandler extends XoopsObjectHandler
      * @var PublisherPublisher
      * @access public
      */
-    var $publisher = null;
+    public $publisher = null;
 
-    function PublisherPermissionHandler()
+    public function __construct()
     {
         $this->publisher = PublisherPublisher::getInstance();
     }
@@ -41,19 +40,23 @@ class PublisherPermissionHandler extends XoopsObjectHandler
     /**
      * Returns permissions for a certain type
      *
-     * @param string $type "global", "forum" or "topic" (should perhaps have "post" as well - but I don't know)
-     * @param int    $id   id of the item (forum, topic or possibly post) to get permissions for
+     * @param string $gperm_name "global", "forum" or "topic" (should perhaps have "post" as well - but I don't know)
+     * @param int    $id         id of the item (forum, topic or possibly post) to get permissions for
      *
      * @return array
      */
-    function getGrantedGroupsById($gperm_name, $id)
+    public function getGrantedGroupsById($gperm_name, $id)
     {
         $groups = $this->getGrantedGroups($gperm_name);
         return isset($groups[$id]) ? $groups[$id] : array();
-
     }
 
-    function getGrantedGroups($gperm_name = false)
+    /**
+     * @param string $gperm_name
+     *
+     * @return array
+     */
+    public function getGrantedGroups($gperm_name = '')
     {
         static $groups;
         static $publisher_all_permissions_fetched;
@@ -65,12 +68,11 @@ class PublisherPermissionHandler extends XoopsObjectHandler
                 return array();
             }
         } else if (true === $publisher_all_permissions_fetched) {
-             return $groups;
+            return $groups;
         }
         $publisher_all_permissions_fetched = true;
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('gperm_modid', $this->publisher->getModule()->getVar('mid')));
-
         //Instead of calling groupperm handler and get objects, we will save some memory and do it our way
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         $limit = $start = 0;
@@ -91,12 +93,12 @@ class PublisherPermissionHandler extends XoopsObjectHandler
     /**
      * Returns permissions for a certain type
      *
-     * @param string $type "global", "forum" or "topic" (should perhaps have "post" as well - but I don't know)
-     * @param int    $id   id of the item (forum, topic or possibly post) to get permissions for
+     * @param string $gperm_name "global", "forum" or "topic" (should perhaps have "post" as well - but I don't know)
+     * @param int    $id         id of the item (forum, topic or possibly post) to get permissions for
      *
      * @return array
      */
-    function getGrantedItems($gperm_name, $id = null)
+    public function getGrantedItems($gperm_name, $id = null)
     {
         global $xoopsUser;
         static $permissions;
@@ -125,7 +127,13 @@ class PublisherPermissionHandler extends XoopsObjectHandler
         return isset($permissions[$gperm_name]) ? $permissions[$gperm_name] : array();
     }
 
-    function isGranted($gperm_name, $id = null)
+    /**
+     * @param string   $gperm_name
+     * @param int|null $id
+     *
+     * @return bool
+     */
+    public function isGranted($gperm_name, $id = null)
     {
         static $permissions;
         if ($id == null) return false;
@@ -141,12 +149,12 @@ class PublisherPermissionHandler extends XoopsObjectHandler
      *  saveCategory_Permissions()
      *
      * @param array   $groups     : group with granted permission
-     * @param integer $categoryID : categoryID on which we are setting permissions for Categories and Forums
+     * @param integer $itemid     : itemid on which we are setting permissions for Categories and Forums
      * @param string  $perm_name  : name of the permission
      *
      * @return boolean : TRUE if the no errors occured
      */
-    function saveItem_Permissions($groups, $itemid, $perm_name)
+    public function saveItem_Permissions($groups, $itemid, $perm_name)
     {
         $result = true;
         $module_id = $this->publisher->getModule()->getVar('mid');
@@ -168,10 +176,11 @@ class PublisherPermissionHandler extends XoopsObjectHandler
      *  deletePermissions()
      *
      * @param integer $itemid : id of the item for which to delete the permissions
+     * @param string  $gperm_name
      *
      * @return boolean : TRUE if the no errors occured
      */
-    function deletePermissions($itemid, $gperm_name)
+    public function deletePermissions($itemid, $gperm_name)
     {
         $result = true;
         $gperm_handler = xoops_gethandler('groupperm');

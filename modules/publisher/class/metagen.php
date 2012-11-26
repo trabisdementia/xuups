@@ -8,7 +8,6 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 /**
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
@@ -18,31 +17,64 @@
  * @author          The SmartFactory <www.smartfactory.ca>
  * @version         $Id$
  */
-
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-class PublisherMetagen {
+class PublisherMetagen
+{
     /**
      * @var PublisherPublisher
      * @access public
      */
-    var $publisher = null;
+    public $publisher = null;
 
-    var $_myts;
+    /**
+     * @var MyTextSanitizer
+     */
+    public $_myts;
 
-    var $_title;
-    var $_original_title;
-    var $_keywords;
-    var $_categoryPath;
-    var $_description;
-    var $_minChar = 4;
+    /**
+     * @var string
+     */
+    public $_title;
 
-    function PublisherMetagen($title, $keywords = '', $description = '', $categoryPath = false) {
+    /**
+     * @var string
+     */
+    public $_original_title;
+
+    /**
+     * @var string
+     */
+    public $_keywords;
+
+    /**
+     * @var string
+     */
+    public $_categoryPath;
+
+    /**
+     * @var string
+     */
+    public $_description;
+
+    /**
+     * @var int
+     *
+     */
+    public $_minChar = 4;
+
+    /**
+     * @param string       $title
+     * @param string       $keywords
+     * @param string       $description
+     * @param bool         $categoryPath
+     */
+    public function __construct($title, $keywords = '', $description = '', $categoryPath = false)
+    {
         $this->publisher = PublisherPublisher::getInstance();
         $this->_myts = MyTextSanitizer::getInstance();
-
         $this->setCategoryPath($categoryPath);
         $this->setTitle($title);
         $this->setDescription($description);
@@ -52,66 +84,81 @@ class PublisherMetagen {
         $this->setKeywords($keywords);
     }
 
-    function setTitle($title) {
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
         $this->_title = $this->html2text($title);
         $this->_original_title = $this->_title;
-
         $titleTag = array();
-
         $titleTag['module'] = $this->publisher->getModule()->getVar('name');
-
         if (isset($this->_title) && ($this->_title != '') && (strtoupper($this->_title) != strtoupper($titleTag['module']))) {
             $titleTag['title'] = $this->_title;
         }
-
         if (isset($this->_categoryPath) && ($this->_categoryPath != '')) {
             $titleTag['category'] = $this->_categoryPath;
         }
-
         $ret = isset($titleTag['title']) ? $titleTag['title'] : '';
-
         if (isset($titleTag['category']) && $titleTag['category'] != '') {
             if ($ret != '') {
                 $ret .= ' - ';
             }
             $ret .= $titleTag['category'];
         }
-
         if (isset($titleTag['module']) && $titleTag['module'] != '') {
             if ($ret != '') {
                 $ret .= ' - ';
             }
             $ret .= $titleTag['module'];
         }
-
         $this->_title = $ret;
     }
 
-    function setKeywords($keywords) {
+    /**
+     * @param string $keywords
+     */
+    public function setKeywords($keywords)
+    {
         $this->_keywords = $keywords;
     }
 
-    function setCategoryPath($categoryPath) {
+    /**
+     * @param string $categoryPath
+     */
+    public function setCategoryPath($categoryPath)
+    {
         $categoryPath = $this->html2text($categoryPath);
         $this->_categoryPath = $categoryPath;
     }
 
-    function setDescription($description) {
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
         $description = $this->html2text($description);
         $description = $this->purifyText($description);
         $this->_description = $description;
     }
 
-    function createTitleTag() {
+    /**
+     * Does nothing
+     */
+    public function createTitleTag()
+    {
     }
 
-    function createMetaDescription($maxWords = 30) {
+    /**
+     * @param int $maxWords
+     *
+     * @return string
+     */
+    public function createMetaDescription($maxWords = 30)
+    {
         $description = $this->purifyText($this->_description);
         $description = $this->html2text($description);
-
-        $words = array();
         $words = explode(" ", $description);
-
         $ret = '';
         $i = 1;
         $wordCount = count($words);
@@ -122,16 +169,20 @@ class PublisherMetagen {
             }
             $i++;
         }
-
         return $ret;
     }
 
-    function findMetaKeywords($text, $minChar) {
+    /**
+     * @param string $text
+     * @param int    $minChar
+     *
+     * @return array
+     */
+    public function findMetaKeywords($text, $minChar)
+    {
         $keywords = array();
-
         $text = $this->purifyText($text);
         $text = $this->html2text($text);
-
         $originalKeywords = explode(" ", $text);
         foreach ($originalKeywords as $originalKeyword) {
             $secondRoundKeywords = explode("'", $originalKeyword);
@@ -146,30 +197,43 @@ class PublisherMetagen {
         return $keywords;
     }
 
-    function createMetaKeywords() {
+    /**
+     * @return string
+     */
+    public function createMetaKeywords()
+    {
         $keywords = $this->findMetaKeywords($this->_original_title . " " . $this->_description, $this->_minChar);
         $moduleKeywords = $this->publisher->getConfig('seo_meta_keywords');
         if ($moduleKeywords != '') {
             $moduleKeywords = explode(",", $moduleKeywords);
             $keywords = array_merge($keywords, array_map('trim', $moduleKeywords));
         }
-
         $ret = implode(',', $keywords);
-
         return $ret;
     }
 
-    function autoBuildMeta_keywords() {
+    /**
+     * Does nothing
+     */
+    public function autoBuildMeta_keywords()
+    {
     }
 
-    function buildAutoMetaTags() {
+    /**
+     * Build Metatags
+     */
+    public function buildAutoMetaTags()
+    {
         $this->_keywords = $this->createMetaKeywords();
         $this->_description = $this->createMetaDescription();
-        $this->_title = $this->createTitleTag();
-
+        //$this->_title = $this->createTitleTag();
     }
 
-    function createMetaTags() {
+    /**
+     * Creates meta tags
+     */
+    public function createMetaTags()
+    {
         global $xoopsTpl, $xoTheme;
         if ($this->_keywords != '') {
             $xoTheme->addMeta('meta', 'keywords', $this->_keywords);
@@ -186,11 +250,11 @@ class PublisherMetagen {
      * Return true if the string is length > 0
      *
      * @credit psylove
-     *
      * @var string $string Chaine de caractère
      * @return boolean
      */
-    function emptyString($var) {
+    public function emptyString($var)
+    {
         return (strlen($var) > 0);
     }
 
@@ -199,42 +263,46 @@ class PublisherMetagen {
      *
      * @credit psylove
      *
-     * @var string $title title of the article
-     * @var string $withExt do we add an html extension or not
-     * @return string sort_url for the article
+     * @param string $title    title of the article
+     * @param bool   $withExt  do we add an html extension or not
+     *
+     * @return string short url for article
      */
-    function generateSeoTitle($title = '', $withExt = true) {
+    public function generateSeoTitle($title = '', $withExt = true)
+    {
         // Transformation de la chaine en minuscule
         // Codage de la chaine afin d'éviter les erreurs 500 en cas de caractères imprévus
         $title = rawurlencode(strtolower($title));
-
         // Transformation des ponctuations
         //                 Tab     Space      !        "        #        %        &        '        (        )        ,        /        :        ;        <        =        >        ?        @        [        \        ]        ^        {        |        }        ~       .
         $pattern = array("/%09/", "/%20/", "/%21/", "/%22/", "/%23/", "/%25/", "/%26/", "/%27/", "/%28/", "/%29/", "/%2C/", "/%2F/", "/%3A/", "/%3B/", "/%3C/", "/%3D/", "/%3E/", "/%3F/", "/%40/", "/%5B/", "/%5C/", "/%5D/", "/%5E/", "/%7B/", "/%7C/", "/%7D/", "/%7E/", "/\./");
         $rep_pat = array("-", "-", "-", "-", "-", "-100", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-at-", "-", "-", "-", "-", "-", "-", "-", "-", "-");
         $title = preg_replace($pattern, $rep_pat, $title);
-
         // Transformation des caractères accentués
         //                  °        è        é        ê        ë        ç        à        â        ä        î        ï        ù        ü        û        ô        ö
         $pattern = array("/%B0/", "/%E8/", "/%E9/", "/%EA/", "/%EB/", "/%E7/", "/%E0/", "/%E2/", "/%E4/", "/%EE/", "/%EF/", "/%F9/", "/%FC/", "/%FB/", "/%F4/", "/%F6/");
         $rep_pat = array("-", "e", "e", "e", "e", "c", "a", "a", "a", "i", "i", "u", "u", "u", "o", "o");
         $title = preg_replace($pattern, $rep_pat, $title);
-
         $tableau = explode("-", $title); // Transforme la chaine de caractères en tableau
         $tableau = array_filter($tableau, array('PublisherMetagen', 'emptyString')); // Supprime les chaines vides du tableau
         $title = implode("-", $tableau); // Transforme un tableau en chaine de caractères séparé par un tiret
-
         if (sizeof($title) > 0) {
             if ($withExt) {
                 $title .= '.html';
             }
             return $title;
         }
-
         return '';
     }
 
-    function purifyText($text, $keyword = false) {
+    /**
+     * @param      $text
+     * @param bool $keyword
+     *
+     * @return mixed
+     */
+    public function purifyText($text, $keyword = false)
+    {
         $text = str_replace('&nbsp;', ' ', $text);
         $text = str_replace('<br />', ' ', $text);
         $text = strip_tags($text);
@@ -257,12 +325,16 @@ class PublisherMetagen {
             $text = str_replace('\'', ' ', $text);
         }
         $text = str_replace(';', ' ', $text);
-
         return $text;
     }
 
-
-    function html2text($document) {
+    /**
+     * @param string $document
+     *
+     * @return mixed
+     */
+    public function html2text($document)
+    {
         // PHP Manual:: function preg_replace
         // $document should contain an HTML document.
         // This will remove HTML tags, javascript sections
@@ -286,7 +358,6 @@ class PublisherMetagen {
             //"'&#(\d+);'e"
         );
         // evaluate as php
-
         $replace = array(
             "",
             "",
@@ -303,10 +374,7 @@ class PublisherMetagen {
             chr(169),
             //"chr(\\1)"
         );
-
         $text = preg_replace($search, $replace, $document);
         return $text;
     }
 }
-
-?>

@@ -70,7 +70,6 @@ CREATE TABLE `publisher_items` (
   `meta_keywords` TEXT NOT NULL,
   `meta_description` TEXT NOT NULL,
   `short_url` VARCHAR(255) NOT NULL,
-  `partial_view` int(1) NOT NULL default '0',
   `item_tag` TEXT NOT NULL,
   PRIMARY KEY (`itemid`),
   KEY categoryid (categoryid),

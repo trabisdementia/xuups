@@ -8,7 +8,6 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 /**
  *  Publisher class
  *
@@ -19,16 +18,17 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id$
  */
-
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-class PublisherRating extends XoopsObject {
+class PublisherRating extends XoopsObject
+{
     /**
      * constructor
      */
-    function __construct() {
+    public function __construct()
+    {
         $this->initVar("ratingid", XOBJ_DTYPE_INT, null, false);
         $this->initVar("itemid", XOBJ_DTYPE_INT, null, false);
         $this->initVar("uid", XOBJ_DTYPE_INT, null, false);
@@ -36,13 +36,15 @@ class PublisherRating extends XoopsObject {
         $this->initVar("ip", XOBJ_DTYPE_TXTAREA, null, false);
         $this->initVar("date", XOBJ_DTYPE_INT, null, false);
     }
-
 }
 
-class PublisherRatingHandler extends XoopsPersistableObjectHandler {
-    function __construct($db) {
+class PublisherRatingHandler extends XoopsPersistableObjectHandler
+{
+    /**
+     * @param null|XoopsDatabase $db
+     */
+    public function __construct($db)
+    {
         parent::__construct($db, 'publisher_rating', 'PublisherRating', 'ratingid', 'itemid');
     }
 }
-
-?>
