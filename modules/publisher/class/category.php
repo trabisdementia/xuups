@@ -404,7 +404,7 @@ class PublisherCategoryHandler extends XoopsPersistableObjectHandler
         $module_id = $this->publisher->getModule()->getVar('mid');
         xoops_groupperm_deletebymoditem($module_id, "category_read", $category->categoryid());
         xoops_groupperm_deletebymoditem($module_id, "item_submit", $category->categoryid());
-        xoops_groupperm_deletebymoditem ($module_id, "category_moderation", $category->categoryid());
+        xoops_groupperm_deletebymoditem($module_id, "category_moderation", $category->categoryid());
         return true;
     }
 
