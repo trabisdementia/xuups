@@ -8,7 +8,6 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 /**
  *  Publisher class
  *
@@ -20,41 +19,49 @@
  * @author          Harry Fuecks (PHP Anthology Volume II)
  * @version         $Id$
  */
-
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-class PublisherSession {
+class PublisherSession
+{
     /**
      * Session constructor<br />
      * Starts the session with session_start()
      * <strong>Note:</strong> that if the session has already started,
      * session_start() does nothing
+     *
      * @access public
      */
-    protected function __construct() {
+    protected function __construct()
+    {
         @session_start();
     }
 
     /**
      * Sets a session variable
-     * @param string name of variable
-     * @param mixed value of variable
+     *
+     * @param string $name  name of variable
+     * @param mixed  $value value of variable
+     *
      * @return void
      * @access public
      */
-    function set($name, $value) {
+    public function set($name, $value)
+    {
         $_SESSION[$name] = $value;
     }
 
     /**
      * Fetches a session variable
-     * @param string name of variable
+     *
+     * @param string $name name of variable
+     *
      * @return mixed value of session variable
      * @access public
      */
-    function get($name) {
+    public function get($name)
+    {
         if (isset($_SESSION[$name])) {
             return $_SESSION[$name];
         } else {
@@ -64,26 +71,31 @@ class PublisherSession {
 
     /**
      * Deletes a session variable
-     * @param string name of variable
+     *
+     * @param string $name name of variable
+     *
      * @return void
      * @access public
      */
-    function del($name) {
+    public function del($name)
+    {
         unset($_SESSION[$name]);
     }
 
-
     /**
      * Destroys the whole session
+     *
      * @return void
      * @access public
      */
-    function destroy() {
+    public function destroy()
+    {
         $_SESSION = array();
         session_destroy();
     }
 
-    static function &getInstance() {
+    static function &getInstance()
+    {
         static $_sess;
         if (!isset($_sess)) {
             $_sess = new PublisherSession();
@@ -91,5 +103,3 @@ class PublisherSession {
         return $_sess;
     }
 }
-
-?>

@@ -31,7 +31,7 @@ xoops_load('XoopsForm');
  */
 class PublisherBlockForm extends XoopsForm
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct('', '', '');
     }
@@ -49,7 +49,7 @@ class PublisherBlockForm extends XoopsForm
      *
      * @return string
      */
-    function render()
+    public function render()
     {
         $ret = '<table border="0" width="100%">' . NWLINE;
         foreach ($this->getElements() as $ele) {
@@ -72,5 +72,3 @@ class PublisherBlockForm extends XoopsForm
         return $ret;
     }
 }
-
-?>

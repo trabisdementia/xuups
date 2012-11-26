@@ -8,7 +8,6 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 /**
  *  Publisher class
  *
@@ -19,13 +18,14 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id$
  */
-
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 include_once dirname(dirname(__FILE__)) . '/include/common.php';
 
-class PublisherFormDateTime extends XoopsFormElementTray {
-    function PublisherFormDateTime($caption, $name, $size = 15, $value = 0) {
+class PublisherFormDateTime extends XoopsFormElementTray
+{
+    public function __construct($caption, $name, $size = 15, $value = 0)
+    {
         parent::__construct($caption, '&nbsp;');
         $value = intval($value);
         $value = ($value > 0) ? $value : time();

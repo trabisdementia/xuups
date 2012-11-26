@@ -8,7 +8,6 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 /**
  *  Publisher class
  *
@@ -20,10 +19,10 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id$
  */
-
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
-class PublisherPublisher {
+class PublisherPublisher
+{
     var $registry;
     var $module;
     var $handler;
@@ -31,13 +30,15 @@ class PublisherPublisher {
     var $debug;
     var $debugArray = array();
 
-    protected function __construct($debug) {
+    protected function __construct($debug)
+    {
         $this->debug = $debug;
         $this->registry = PublisherRegistry::getInstance();
         $this->registry->setEntry('dirname', basename(dirname(dirname(__FILE__))));
     }
 
-    static function &getInstance($debug = false) {
+    static function &getInstance($debug = false)
+    {
         static $instance = false;
         if (!$instance) {
             $instance = new PublisherPublisher($debug);
@@ -45,14 +46,16 @@ class PublisherPublisher {
         return $instance;
     }
 
-    function &getModule() {
+    function &getModule()
+    {
         if ($this->module == null) {
             $this->initModule();
         }
         return $this->module;
     }
 
-    function getConfig($name = null) {
+    function getConfig($name = null)
+    {
         if ($this->config == null) {
             $this->initConfig();
         }
@@ -60,28 +63,26 @@ class PublisherPublisher {
             $this->addLog("Getting all config");
             return $this->config;
         }
-
         if (!isset($this->config[$name])) {
             $this->addLog("ERROR :: CONFIG '{$name}' does not exist");
             return null;
         }
-
         $this->addLog("Getting config '{$name}' : " . $this->config[$name]);
         return $this->config[$name];
     }
 
-    function setConfig($name = null, $value = null) {
+    function setConfig($name = null, $value = null)
+    {
         if ($this->config == null) {
             $this->initConfig();
         }
-
         $this->config[$name] = $value;
-
         $this->addLog("Setting config '{$name}' : " . $this->config[$name]);
         return $this->config[$name];
     }
 
-    function &getHandler($name) {
+    function &getHandler($name)
+    {
         if (!isset($this->handler[$name . '_handler'])) {
             $this->initHandler($name);
         }
@@ -89,7 +90,8 @@ class PublisherPublisher {
         return $this->handler[$name . '_handler'];
     }
 
-    function initModule() {
+    function initModule()
+    {
         global $xoopsModule;
         if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $this->registry->getEntry('dirname')) {
             $this->module = $xoopsModule;
@@ -100,24 +102,27 @@ class PublisherPublisher {
         $this->addLog('INIT MODULE');
     }
 
-    function initConfig() {
+    function initConfig()
+    {
         $this->addLog('INIT CONFIG');
         global $xoopsModule;
         /*if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $this->registry->getEntry('dirname')) {
             global $xoopsModuleConfig;
             $this->config = $xoopsModuleConfig;
         } else {  */
-            $hModConfig = xoops_gethandler('config');
-            $this->config = $hModConfig->getConfigsByCat(0, $this->getModule()->getVar('mid'));
+        $hModConfig = xoops_gethandler('config');
+        $this->config = $hModConfig->getConfigsByCat(0, $this->getModule()->getVar('mid'));
         /*}  */
     }
 
-    function initHandler($name) {
+    function initHandler($name)
+    {
         $this->addLog('INIT ' . $name . ' HANDLER');
         $this->handler[$name . '_handler'] = xoops_getModuleHandler($name, $this->registry->getEntry('dirname'));
     }
 
-    function addLog($log) {
+    function addLog($log)
+    {
         if ($this->debug) {
             //$this->debugArray[] = $log /*. ' -  ' . sprintf( "%.03f", $dif)*/;
             if (is_object($GLOBALS['xoopsLogger'])) {
@@ -125,7 +130,6 @@ class PublisherPublisher {
             }
         }
     }
-
     /*
      function __destruct()
      {
