@@ -23,7 +23,7 @@ defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
 class PublisherPublisher
 {
-    var $registry;
+    var $dirname;
     var $module;
     var $handler;
     var $config;
@@ -33,15 +33,14 @@ class PublisherPublisher
     protected function __construct($debug)
     {
         $this->debug = $debug;
-        $this->registry = PublisherRegistry::getInstance();
-        $this->registry->setEntry('dirname', basename(dirname(dirname(__FILE__))));
+        $this->dirname =  basename(dirname(dirname(__FILE__)));
     }
 
     static function &getInstance($debug = false)
     {
         static $instance = false;
         if (!$instance) {
-            $instance = new PublisherPublisher($debug);
+            $instance = new self($debug);
         }
         return $instance;
     }
@@ -93,11 +92,11 @@ class PublisherPublisher
     function initModule()
     {
         global $xoopsModule;
-        if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $this->registry->getEntry('dirname')) {
+        if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $this->dirname) {
             $this->module = $xoopsModule;
         } else {
             $hModule = xoops_gethandler('module');
-            $this->module = $hModule->getByDirname($this->registry->getEntry('dirname'));
+            $this->module = $hModule->getByDirname($this->dirname);
         }
         $this->addLog('INIT MODULE');
     }
@@ -105,42 +104,22 @@ class PublisherPublisher
     function initConfig()
     {
         $this->addLog('INIT CONFIG');
-        global $xoopsModule;
-        /*if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $this->registry->getEntry('dirname')) {
-            global $xoopsModuleConfig;
-            $this->config = $xoopsModuleConfig;
-        } else {  */
         $hModConfig = xoops_gethandler('config');
         $this->config = $hModConfig->getConfigsByCat(0, $this->getModule()->getVar('mid'));
-        /*}  */
     }
 
     function initHandler($name)
     {
         $this->addLog('INIT ' . $name . ' HANDLER');
-        $this->handler[$name . '_handler'] = xoops_getModuleHandler($name, $this->registry->getEntry('dirname'));
+        $this->handler[$name . '_handler'] = xoops_getModuleHandler($name, $this->dirname);
     }
 
     function addLog($log)
     {
         if ($this->debug) {
-            //$this->debugArray[] = $log /*. ' -  ' . sprintf( "%.03f", $dif)*/;
             if (is_object($GLOBALS['xoopsLogger'])) {
                 $GLOBALS['xoopsLogger']->addExtra($this->module->name(), $log);
             }
         }
     }
-    /*
-     function __destruct()
-     {
-     if ($this->debug) {
-     $dump = '';
-     foreach ($this->debugArray as $msg) {
-     $dump .= $msg . '<br>';
-     }
-     echo $dump;
-     }
-     } */
 }
-
-?>
