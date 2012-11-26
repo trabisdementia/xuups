@@ -42,6 +42,8 @@ if (file_exists(XOOPS_ROOT_PATH . "/modules/" . $modversion['dirname'] . "/image
 } else {
     $modversion['image'] = "images/module_logo.png";
 }
+// Update
+$modversion['onUpdate'] = 'include/update.php';
 
 // Added by marcan for the About page in admin section
 $modversion['adminMenu'] = "publisher_adminMenu";
