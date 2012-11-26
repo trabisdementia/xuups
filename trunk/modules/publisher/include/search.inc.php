@@ -70,7 +70,8 @@ function publisher_search($queryarray, $andor, $limit, $offset, $userid, $catego
                 $pos = strpos($text_i, strtolower($query)); //xoops_local("strpos", $text_i, strtolower($query));
                 $start = max(($pos - 100), 0);
                 $length = strlen($query) + 200; //xoops_local("strlen", $query) + 200;
-                $context = preg_replace_callback("/(" . preg_quote($query) . ")/si", array($obj, 'highlighter'), xoops_substr($text, $start, $length, " [...]"));
+
+                $context = $obj->highlight(xoops_substr($text, $start, $length, " [...]"), $query);
                 $sanitized_text .= "<p>[...] " . $context . "</p>";
             }
         }

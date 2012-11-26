@@ -649,27 +649,14 @@ class PublisherItem extends XoopsObject
 
     function highlight($content, $keywords)
     {
-        $keywords = explode(' ', $keywords);
-        foreach ($keywords as $keyword) {
-            $content = preg_replace_callback("/(" . preg_quote($keyword) . ")/si", array($this, 'highlighter'), $content);
-        }
-        return $content;
-    }
-
-    /**
-     * Callback function for highlighting search results
-     *
-     * @param unknown_type $matches
-     *
-     * @return unknown
-     */
-    function highlighter($matches)
-    {
         $color = $this->publisher->getConfig('format_highlight_color');
         if (substr($color, 0, 1) != '#') {
             $color = '#' . $color;
         }
-        return '<span style="font-weight: bolder; background-color: ' . $color . ';">' . $matches[0] . '</span>';
+        include_once dirname(__FILE__) . '/highlighter.php';
+        $highlighter = new PublisherHighlighter();
+        $highlighter->setReplacementString('<span style="font-weight: bolder; background-color: ' . $color . ';">\1</span>');
+        return $highlighter->highlight($content, $keywords);
     }
 
     function createMetaTags()
