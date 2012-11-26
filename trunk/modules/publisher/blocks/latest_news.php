@@ -242,7 +242,6 @@ function publisher_latest_news_show($options)
     unset($item);
     $block['columns'] = $columns;
 
-        xmf_debug::dump($block);
     return $block;
 }
 
